@@ -5,7 +5,6 @@
 library( nlme )
 options( width = 65, digits = 5 )
 options( contrasts = c(unordered = "contr.helmert", ordered = "contr.poly") )
-postscript( file = "ch04.ps" )
 
 # Chapter 4    Fitting Linear Mixed-Effects Models
 
@@ -15,12 +14,13 @@ data( Orthodont )
 fm1Orth.lm <- lm( distance ~ age, Orthodont )
 fm1Orth.lm
 par( mfrow=c(2,2) )
-plot( fm1Orth.lm )
+plot( fm1Orth.lm )                               # Figure 4.1
+library( lattice )
 fm2Orth.lm <- update( fm1Orth.lm, formula = distance ~ Sex*age )
 summary( fm2Orth.lm )
 fm3Orth.lm <- update( fm2Orth.lm, formula = . ~ . - Sex )
 summary( fm3Orth.lm )
-# bwplot( getGroups(Orthodont)~resid(fm2Orth.lm) )
+bwplot( getGroups(Orthodont)~resid(fm2Orth.lm) ) # Figure 4.2
 fm1Orth.lis <- lmList( distance ~ age | Subject, Orthodont )
 getGroupsFormula( Orthodont )
 fm1Orth.lis <- lmList( distance ~ age, Orthodont )
@@ -28,15 +28,16 @@ formula( Orthodont )
 fm1Orth.lis <- lmList( Orthodont )
 fm1Orth.lis
 summary( fm1Orth.lis )
-# pairs( fm1Orth.lis, id = 0.01, adj = -0.5 )
+pairs( fm1Orth.lis, id = 0.01, adj = -0.5 )      # Figure 4.3
 fm2Orth.lis <- update( fm1Orth.lis, distance ~ I(age-11) )
 intervals( fm2Orth.lis )
-# plot( intervals(fm2Orth.lis) )
+plot( intervals(fm2Orth.lis) )                   # Figure 4.5
 data( IGF )
 IGF
+plot( IGF )                                      # Figure 4.6
 fm1IGF.lis <- lmList( IGF )
 coef( fm1IGF.lis )
-# plot( intervals(fm1IGF.lis) )
+plot( intervals(fm1IGF.lis) )                    # Figure 4.7
 fm1IGF.lm <- lm( conc ~ age, data = IGF )
 summary( fm1IGF.lm )
 
@@ -62,11 +63,11 @@ summary( fm2Orth.lmeM )
 compOrth <-
       compareFits( coef(fm2Orth.lis), coef(fm1Orth.lme) )
 compOrth
-# plot( compOrth, mark = fixef(fm1Orth.lme) )
-# plot( comparePred(fm2Orth.lis, fm1Orth.lme, length.out = 2),
-#  layout = c(8,4), between = list(y = c(0, 0.5)) )
-# plot( compareFits(ranef(fm2Orth.lme), ranef(fm2Orth.lmeM)),
-#       mark = c(0, 0) )
+plot( compOrth, mark = fixef(fm1Orth.lme) )      # Figure 4.8
+plot( comparePred(fm2Orth.lis, fm1Orth.lme, length.out = 2),
+  layout = c(8,4), between = list(y = c(0, 0.5)) ) # Figure 4.9
+plot( compareFits(ranef(fm2Orth.lme), ranef(fm2Orth.lmeM)),
+       mark = c(0, 0) )
 fm4Orth.lm <- lm( distance ~ Sex * I(age-11), Orthodont )
 summary( fm4Orth.lm )
 anova( fm2Orth.lme, fm4Orth.lm )
@@ -128,30 +129,30 @@ predict( fm1Wafer, newWafer2, level = 0:2 )
 
 # 4.3 Examining a Fitted Model
 
-# plot( fm2Orth.lme, Subject~resid(.), abline = 0 )
-# plot( fm2Orth.lme, resid(., type = "p") ~ fitted(.) | Sex,
-#        id = 0.05, adj = -0.3 )
+plot( fm2Orth.lme, Subject~resid(.), abline = 0 )
+plot( fm2Orth.lme, resid(., type = "p") ~ fitted(.) | Sex,
+      id = 0.05, adj = -0.3 )
 fm3Orth.lme <-
   update( fm2Orth.lme, weights = varIdent(form = ~ 1 | Sex) )
 fm3Orth.lme
-# plot( fm3Orth.lme, distance ~ fitted(.),
-#        id = 0.05, adj = -0.3 )
+plot( fm3Orth.lme, distance ~ fitted(.),
+      id = 0.05, adj = -0.3 )
 anova( fm2Orth.lme, fm3Orth.lme )
-# qqnorm( fm3Orth.lme, ~resid(.) | Sex )
-# plot( fm2IGF.lme, resid(., type = "p") ~ fitted(.) | Lot,
-#      layout = c(5,2) )
-# qqnorm( fm2IGF.lme, ~ resid(.),
-#          id = 0.05, adj = -0.75 )
-# plot( fm1Oxide )
-# qqnorm( fm1Oxide )
-# plot( fm1Wafer, resid(.) ~ voltage | Wafer )
-# plot( fm1Wafer, resid(.) ~ voltage | Wafer,
-#       panel = function(x, y, ...) {
-#                  panel.grid()
-#                  panel.xyplot(x, y)
-#                  panel.loess(x, y, lty = 2)
-#                  panel.abline(0, 0)
-#               } )
+qqnorm( fm3Orth.lme, ~resid(.) | Sex )
+plot( fm2IGF.lme, resid(., type = "p") ~ fitted(.) | Lot,
+      layout = c(5,2) )
+qqnorm( fm2IGF.lme, ~ resid(.),
+        id = 0.05, adj = -0.75 )
+plot( fm1Oxide )
+qqnorm( fm1Oxide )
+plot( fm1Wafer, resid(.) ~ voltage | Wafer )
+plot( fm1Wafer, resid(.) ~ voltage | Wafer,
+      panel = function(x, y, ...) {
+                 panel.grid()
+                 panel.xyplot(x, y)
+                 panel.loess(x, y, lty = 2)
+                 panel.abline(0, 0)
+              } )
 attach( Wafer )
 coef(lm(resid(fm1Wafer) ~ cos(4.19*voltage)+sin(4.19*voltage)-1))
 nls( resid(fm1Wafer) ~ b3*cos(w*voltage) + b4*sin(w*voltage),
@@ -163,17 +164,17 @@ fm2Wafer <- update( fm1Wafer,
              Site=pdDiag(~voltage+I(voltage^2))) )
 summary( fm2Wafer )
 intervals( fm2Wafer )
-# qqnorm( fm2Wafer )
-# qqnorm( fm2Orth.lme, ~ranef(.),
-#           id = 0.10, cex = 0.7 )
-# pairs( fm2Orth.lme, ~ranef(.) | Sex,
-#         id = ~ Subject == "M13", adj = -0.3 )
+qqnorm( fm2Wafer )
+qqnorm( fm2Orth.lme, ~ranef(.),
+         id = 0.10, cex = 0.7 )
+pairs( fm2Orth.lme, ~ranef(.) | Sex,
+        id = ~ Subject == "M13", adj = -0.3 )
 fm2IGF.lme
 c( 0.00031074, 0.0053722 )/abs( fixef(fm2IGF.lme) )
 fm3IGF.lme <- update( fm2IGF.lme, random = ~ age - 1 )
 anova( fm2IGF.lme, fm3IGF.lme )
-# qqnorm( fm1Oxide, ~ranef(., level = 1), id=0.10 )
-# qqnorm( fm1Oxide, ~ranef(., level = 2), id=0.10 )
+qqnorm( fm1Oxide, ~ranef(., level = 1), id=0.10 )
+qqnorm( fm1Oxide, ~ranef(., level = 2), id=0.10 )
 fm3Wafer <- update( fm2Wafer,
               random = list(Wafer = ~voltage+I(voltage^2),
                             Site = pdDiag(~voltage+I(voltage^2))))
@@ -184,8 +185,8 @@ fm4Wafer <- update( fm3Wafer,
             Site = pdBlocked(list(~1, ~voltage+I(voltage^2) - 1))))
 fm4Wafer
 anova( fm3Wafer, fm4Wafer )
-# qqnorm( fm4Wafer, ~ranef(., level = 2), id = 0.05,
-#          cex = 0.7, layout = c(3, 1) )
+qqnorm( fm4Wafer, ~ranef(., level = 2), id = 0.05,
+        cex = 0.7, layout = c(3, 1) )
 data( Machines )
 
 # The next line is not in the book but is needed to get fm1Machine
@@ -198,4 +199,4 @@ fm3Machine <- update(fm1Machine, random = ~Machine-1|Worker)
 # cleanup
 
 proc.time()
-q()
+q("no")

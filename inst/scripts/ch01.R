@@ -1,6 +1,7 @@
 #-*- R -*-
 
 library( nlme )
+library( lattice )
 options( width = 65, digits = 5 )
 options( contrasts = c(unordered = "contr.helmert", ordered = "contr.poly") )
 
@@ -18,7 +19,7 @@ fm1Rail.lme <- lme(travel ~ 1, data = Rail, random = ~ 1 | Rail)
 summary( fm1Rail.lme )
 fm1Rail.lmeML <- update( fm1Rail.lme, method = "ML" )
 summary( fm1Rail.lmeML )
-#plot( fm1Rail.lme )   # produces Figure 1.4
+plot( fm1Rail.lme )   # produces Figure 1.4
 intervals( fm1Rail.lme )
 anova( fm1Rail.lme )
 
@@ -46,16 +47,16 @@ fm3Stool <-
 summary( fm3Stool )
 anova( fm3Stool )
 intervals( fm1Stool )
-#plot( fm1Stool,   # produces Figure 1.8
-#      form = resid(., type = "p") ~ fitted(.) | Subject,
-#      abline = 0 )
+plot( fm1Stool,   # produces Figure 1.8
+      form = resid(., type = "p") ~ fitted(.) | Subject,
+      abline = 0 )
 
 # 1.3  Mixed-effects Models for Replicated, Blocked Designs
 
 data( Machines )
-#attach( Machines )   # make variables in Machines available by name
-#interaction.plot( Machine, Worker, score, las = 1)   # Figure 1.10
-#detach()                # undo the effect of `attach( Machines )'
+attach( Machines )      # make variables in Machines available by name
+interaction.plot( Machine, Worker, score, las = 1)   # Figure 1.10
+detach()                # undo the effect of `attach( Machines )'
 fm1Machine <-
   lme( score ~ Machine, data = Machines, random = ~ 1 | Worker )
 fm1Machine
@@ -90,9 +91,9 @@ OrthoFem <- Orthodont[ Orthodont$Sex == "Female", ]
 fm1OrthF.lis <- lmList( distance ~ age, data = OrthoFem )
 coef( fm1OrthF.lis )
 intervals( fm1OrthF.lis )
-#plot( intervals ( fm1OrthF.lis ) )   # produces Figure 1.12
+plot( intervals ( fm1OrthF.lis ) )   # produces Figure 1.12
 fm2OrthF.lis <- update( fm1OrthF.lis, distance ~ I( age - 11 ) )
-#plot( intervals( fm2OrthF.lis ) )    # produces Figure 1.13
+plot( intervals( fm2OrthF.lis ) )    # produces Figure 1.13
 fm1OrthF <-
   lme( distance ~ age, data = OrthoFem, random = ~ 1 | Subject )
 summary( fm1OrthF )
@@ -103,16 +104,16 @@ anova( fm1OrthF, fm2OrthF )
 random.effects( fm1OrthF )
 ranef( fm1OrthFM )
 coef( fm1OrthF )
-#plot(compareFits(coef(fm1OrthF), coef(fm1OrthFM)))   # Figure 1.15
-#plot( augPred(fm1OrthF), aspect = "xy", grid = T )   # Figure 1.16
+plot(compareFits(coef(fm1OrthF), coef(fm1OrthFM)))   # Figure 1.15
+plot( augPred(fm1OrthF), aspect = "xy", grid = T )   # Figure 1.16
 
 # 1.5  Models for Nested Classification Factors
 
 data(Pixel)
-fm1Pixel <- lme( pixel ~ day + day^2, data = Pixel,
+fm1Pixel <- lme( pixel ~ day + I(day^2), data = Pixel,
   random = list( Dog = ~ day, Side = ~ 1 ) )
 intervals( fm1Pixel )
-#plot( augPred( fm1Pixel ) )   # produces Figure 1.18
+plot( augPred( fm1Pixel ) )   # produces Figure 1.18
 VarCorr( fm1Pixel )
 summary( fm1Pixel )
 fm2Pixel <- update( fm1Pixel, random = ~ day | Dog)
@@ -138,11 +139,11 @@ fm4Oats <-
 summary( fm4Oats )
 VarCorr( fm4Oats )
 intervals( fm4Oats )
-#plot( augPred( fm4Oats ), aspect = 2.5, layout = c(6, 3),
-#      between = list( x = c(0, 0, 0.5) ) )   # produces Figure 1.21
+plot( augPred( fm4Oats ), aspect = 2.5, layout = c(6, 3),
+      between = list( x = c(0, 0, 0.5) ) )   # produces Figure 1.21
 
 # cleanup
 
 proc.time()
-q()
+q("no")
 

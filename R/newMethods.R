@@ -480,11 +480,10 @@ plot.nls <-
                       dots <- list(...)
 		      if (grid) panel.grid()
 		      panel.xyplot(x, y, ...)
-                      if (!all(is.na(aux <- id[subscripts])) &&
-                          !is.null(aux) && any(aux)) {
-			ltext(x[aux], y[aux], idLabels[subscripts][aux],
-                              cex = dots$cex, adj = dots$adj)
-		      }
+                      if (any(ids <- id[subscripts])){
+                          text(x[ids], y[ids], idLabels[subscripts][ids],
+                               cex = dots$cex, adj = dots$adj)
+                      }
 		      if (!is.null(abl)) {
 			panel.abline(abl, ...)
 		      }
@@ -551,8 +550,7 @@ plot.ACF <-
 {
   ylim <- range(object$ACF)
   if (alpha) {
-    assign("stdv",  qnorm(1-alpha/2)/sqrt(attr(object,"n.used")),
-           frame = 1)
+    assign("stdv",  qnorm(1-alpha/2)/sqrt(attr(object,"n.used")))
     stMax <- max(stdv)
     ylim <- c(min(c(-stMax, ylim[1])), max(c(ylim[2], stMax)))
   }
@@ -837,8 +835,9 @@ qqnorm.nls <-
       }
     }
   }
-  assign("id", if (is.null(id)) NULL else as.logical(as.character(id)),
-         frame = 1)
+#  assign("id", if (is.null(id)) NULL else as.logical(as.character(id)),
+#         frame = 1)
+  assign("id", if (is.null(id)) NULL else as.logical(as.character(id)))
   assign("idLabels", as.character(idLabels))
   assign("grid", grid)
   assign("abl", abline)
@@ -856,10 +855,9 @@ qqnorm.nls <-
       dots <- list(...)
       if (grid) panel.grid()
       panel.xyplot(x, y, ...)
-      if (!all(is.na(aux <- id[subscripts])) &&
-          !is.null(aux) && any(aux)) {
-        text(x[aux], y[aux], idLabels[subscripts][aux],
-             cex = dots$cex, adj = dots$adj)
+      if (any(ids <- id[subscripts])){
+          text(x[ids], y[ids], idLabels[subscripts][ids],
+               cex = dots$cex, adj = dots$adj)
       }
       if (!is.null(abl)) panel.abline(abl, ...)
     }), args)

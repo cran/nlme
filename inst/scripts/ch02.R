@@ -2,6 +2,7 @@
 
 library( nlme )
 library( SASmixed )   # needed for the PBIB data
+library( lattice )
 options( width = 65, digits = 5 )
 options( contrasts = c(unordered = "contr.helmert", ordered = "contr.poly") )
 
@@ -68,4 +69,4 @@ anova( fm2Machine )
 # cleanup
 
 proc.time()
-q()
+q("no")

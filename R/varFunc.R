@@ -122,7 +122,12 @@ initialize.varFunc <-
 }
 
 logLik.varFunc <-
-  function(object, data) attr(object, "logLik")
+  function(object, data) {
+      if (is.null(ll <- attr(object, "logLik"))) return(NULL)
+      attr(ll, "df") <- length(object)
+      class(ll) <- "logLik"
+      ll
+  }
 
 print.summary.varFunc <-
   function(x, header = TRUE, ...)
@@ -1216,7 +1221,13 @@ initialize.varComb <-
 }
 
 logLik.varComb <-
-  function(object) sum(unlist(lapply(object, logLik)))
+  function(object) {
+      lls <- lapply(object, logLik)
+      val <- sum(unlist(lls))
+      attr(val, "df") <- sum(unlist(lapply(lls, attr, "df")))
+      class(val) <- "logLik"
+      val
+  }
 
 needUpdate.varComb <-
   function(object) any(unlist(lapply(object, needUpdate)))

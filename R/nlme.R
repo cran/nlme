@@ -870,8 +870,18 @@ nlme.formula <-
         stop("Step halving factor reduced below minimum in PNLS step")
       }
     }
-    dim(work$pdFactor) <- dim(pdMatrix(nlmeSt$reStruct[[1]]))
-    matrix(nlmeSt$reStruct[[1]]) <- crossprod(work$pdFactor)
+    # dim(work$pdFactor) <- dim(pdMatrix(nlmeSt$reStruct[[1]]))
+    # matrix(nlmeSt$reStruct[[1]]) <- crossprod(work$pdFactor)
+    # fix from Setzer.Woodrow@epamail.epa.gov for nested grouping factors
+    pdFacStart <- 1
+    for (i in seq(along=nlmeSt$reStruct)) {
+      tmppdFactor <- work$pdFactor[pdFacStart:
+                                   (pdFacStart -1 +
+                                    prod(dim(pdMatrix(nlmeSt$reStruct[[i]]))))]
+      dim(tmppdFactor) <- dim(pdMatrix(nlmeSt$reStruct[[i]]))
+      matrix(nlmeSt$reStruct[[i]]) <- crossprod(tmppdFactor)
+      pdFacStart <- pdFacStart + prod(dim(pdMatrix(nlmeSt$reStruct[[i]])))
+    }
     oldPars <- c(sfix, oldPars)
     for(i in 1:Q) sran[[i]][] <- work$thetaPNLS[(bmap[i]+1):bmap[i+1]]
     sfix[] <- work$thetaPNLS[nPars + 1 - (fLen:1)]

@@ -354,7 +354,7 @@ logLik.lmList <-
 		     }
 		   }
 		   c(n, sum(w * res^2), p, sum(log(w)),
-		     sum(log(abs(diag(el$R)[1:p]))))
+		     sum(log(abs(diag(el$qr$qr)[1:p]))))
 		 }), 1, sum)
     N <- aux[1] - REML * aux[3]
     val <- (aux[4] - N * (log(2 * pi) + 1 - log(N) + log(aux[2])))/2 -
@@ -541,10 +541,9 @@ pairs.lmList <-
                     dots <- list(...)
 		    if (grid) panel.grid()
 		    panel.xyplot(x, y)
-                    if (!all(is.na(aux <- id[subscripts])) &&
-                        !is.null(aux) && any(aux)) {
-		      text(x[aux], y[aux], idLabels[subscripts][aux],
-                           cex = dots$cex, adj = dots$adj)
+                    if (any(ids <- id[subscripts])) {
+                        text(x[ids], y[ids], idLabels[subscripts][ids],
+                             cex = dots$cex, adj = dots$adj)
 		    }
 		  }))
   } else {				# splom
@@ -555,10 +554,9 @@ pairs.lmList <-
                     dots <- list(...)
 		    if (grid) panel.grid()
 		    panel.xyplot(x, y)
-                    if (!all(is.na(aux <- id[subscripts])) &&
-                        !is.null(aux) && any(aux)) {
-		      text(x[aux], y[aux], idLabels[subscripts][aux],
-                           cex = dots$cex, adj = dots$adj)
+                    if (any(ids <- id[subscripts])) {
+                        text(x[ids], y[ids], idLabels[subscripts][ids],
+                             cex = dots$cex, adj = dots$adj)
 		    }
 		  }))
   }
@@ -613,7 +611,7 @@ plot.intervals.lmList <-
                       if (dot.line$lwd) {
                         dot.line$lwd
                       } else {
-                        1
+                        2
                       })
 	  }, ...)
 }
@@ -773,11 +771,10 @@ plot.lmList <-
                       dots <- list(...)
 		      if (grid) panel.grid()
 		      panel.xyplot(x, y)
-                      if (!all(is.na(aux <- id[subscripts])) &&
-                          !is.null(aux) && any(aux)) {
-			ltext(x[aux], y[aux], idLabels[subscripts][aux],
-                              cex = dots$cex, adj = dots$adj)
-		      }
+                      if (any(ids <- id[subscripts])) {
+                          text(x[ids], y[ids], idLabels[subscripts][ids],
+                               cex = dots$cex, adj = dots$adj)
+                      }
 		      if (!is.null(abl)) {
 			panel.abline(abl, ...)
 		      }
@@ -1186,10 +1183,9 @@ qqnorm.lmList <-
                    dots <- list(...)
                    if (grid) panel.grid()
                    panel.xyplot(x, y, ...)
-                   if (!all(is.na(aux <- id[subscripts])) &&
-                       !is.null(aux) && any(aux)) {
-                     text(x[aux], y[aux], idLabels[subscripts][aux],
-                          cex = dots$cex, adj = dots$adj)
+                   if (any(ids <- id[subscripts])) {
+                       text(x[ids], y[ids], idLabels[subscripts][ids],
+                            cex = dots$cex, adj = dots$adj)
                    }
                    if (!is.null(abl)) panel.abline(abl, ...)
                  }), args)

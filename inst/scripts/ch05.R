@@ -3,6 +3,7 @@
 # initialization
 
 library( nlme )
+library( lattice )
 options( width = 65, digits = 5 )
 options( contrasts = c(unordered = "contr.helmert", ordered = "contr.poly") )
 # postscript( file = "ch05.ps" )
@@ -41,15 +42,15 @@ fm1Dial.lme <-
   lme(rate ~(pressure + I(pressure^2) + I(pressure^3) + I(pressure^4))*QB,
       Dialyzer, ~ pressure + I(pressure^2))
 fm1Dial.lme
-# plot( fm1Dial.lme, resid(.) ~ pressure, abline = 0 )
+plot( fm1Dial.lme, resid(.) ~ pressure, abline = 0 )
 fm2Dial.lme <- update( fm1Dial.lme,
                         weights = varPower(form = ~ pressure) )
 fm2Dial.lme
 anova( fm1Dial.lme, fm2Dial.lme )
-# plot( fm2Dial.lme, resid(., type = "p") ~ pressure,
-#        abline = 0 )
+plot( fm2Dial.lme, resid(., type = "p") ~ pressure,
+       abline = 0 )
 intervals( fm2Dial.lme )
-# plot(fm2Dial.lme, resid(.) ~ pressure|QB, abline = 0)
+plot(fm2Dial.lme, resid(.) ~ pressure|QB, abline = 0)
 fm3Dial.lme <- update(fm2Dial.lme,
                    weights=varPower(form = ~ pressure | QB))
 fm3Dial.lme
@@ -57,7 +58,7 @@ anova( fm2Dial.lme, fm3Dial.lme )
 fm4Dial.lme <- update(fm2Dial.lme,
                        weights = varConstPower(form = ~ pressure))
 anova( fm2Dial.lme, fm4Dial.lme )
-# plot( augPred(fm2Dial.lme), grid = T )
+plot( augPred(fm2Dial.lme), grid = T )
 anova( fm2Dial.lme )
 anova( fm2Dial.lme, Terms = 8:10 )
 options( contrasts = c("contr.treatment", "contr.poly") )
@@ -103,10 +104,10 @@ fm1Ovar.lme <- lme( follicles ~ sin(2*pi*Time) + cos(2*pi*Time),
                  data = Ovary, random = pdDiag(~sin(2*pi*Time)) )
 fm1Ovar.lme
 ACF( fm1Ovar.lme )
-# plot(ACF(fm1Ovar.lme,  maxLag = 10), alpha = 0.01)
+plot(ACF(fm1Ovar.lme,  maxLag = 10), alpha = 0.01)
 fm2Ovar.lme <- update( fm1Ovar.lme, correlation = corAR1() )
 anova( fm1Ovar.lme, fm2Ovar.lme )
-# intervals( fm2Ovar.lme )
+if (interactive()) intervals( fm2Ovar.lme )
 fm3Ovar.lme <- update(fm1Ovar.lme, correlation = corARMA(q = 2))
 fm3Ovar.lme
 anova( fm2Ovar.lme, fm3Ovar.lme, test = F )
@@ -121,22 +122,22 @@ anova( fm2Ovar.lme, fm4Ovar.lme, test = F )
 Variogram( fm2BW.lme, form = ~ Time )
 # plot( Variogram(fm2BW.lme, form = ~ Time,
 #                 maxDist = 42) )
-fm3BW.lme <- update( fm2BW.lme, corr = corExp(form = ~ Time) )
-fm3BW.lme
-intervals( fm3BW.lme )
-anova( fm2BW.lme, fm3BW.lme )
-fm4BW.lme <- update( fm3BW.lme,
-                      corr = corExp(form =  ~ Time, nugget = T) )
-anova( fm3BW.lme, fm4BW.lme )
+# fm3BW.lme <- update( fm2BW.lme, corr = corExp(form = ~ Time) )
+# fm3BW.lme
+# intervals( fm3BW.lme )
+# anova( fm2BW.lme, fm3BW.lme )
+# fm4BW.lme <- update( fm3BW.lme,
+#                      corr = corExp(form =  ~ Time, nugget = T) )
+# anova( fm3BW.lme, fm4BW.lme )
 # plot( Variogram(fm3BW.lme, form = ~ Time,
-#                  maxDist = 42) )
+#                 maxDist = 42) )
 # plot( Variogram(fm3BW.lme, form = ~ Time, maxDist = 42,
-#                  resType = "n", robust = T) )
-fm5BW.lme <- update( fm3BW.lme, corr = corRatio(form = ~ Time) )
-fm6BW.lme <- update( fm3BW.lme, corr = corSpher(form = ~ Time) )
-fm7BW.lme <- update( fm3BW.lme, corr = corLin(form = ~ Time) )
-fm8BW.lme <- update( fm3BW.lme, corr = corGaus(form = ~ Time) )
-anova( fm3BW.lme, fm5BW.lme, fm6BW.lme, fm7BW.lme, fm8BW.lme )
+#                 resType = "n", robust = T) )
+# fm5BW.lme <- update( fm3BW.lme, corr = corRatio(form = ~ Time) )
+# fm6BW.lme <- update( fm3BW.lme, corr = corSpher(form = ~ Time) )
+# nfm7BW.lme <- update( fm3BW.lme, corr = corLin(form = ~ Time) )
+# fm8BW.lme <- update( fm3BW.lme, corr = corGaus(form = ~ Time) )
+# anova( fm3BW.lme, fm5BW.lme, fm6BW.lme, fm7BW.lme, fm8BW.lme )
 fm1Orth.gls <- gls( distance ~ Sex * I(age - 11), Orthodont,
                      correlation = corSymm(form = ~ 1 | Subject),
                      weights = varIdent(form = ~ 1 | age) )
@@ -148,11 +149,11 @@ anova( fm1Orth.gls, fm2Orth.gls )
 intervals( fm2Orth.gls )
 fm3Orth.gls <- update( fm2Orth.gls, weights = NULL )
 anova( fm2Orth.gls, fm3Orth.gls )
-# plot( fm3Orth.gls, resid(., type = "n") ~ age | Sex )
+plot( fm3Orth.gls, resid(., type = "n") ~ age | Sex )
 fm4Orth.gls <- update( fm3Orth.gls,
                         weights = varIdent(form = ~ 1 | Sex) )
 anova( fm3Orth.gls, fm4Orth.gls )
-# qqnorm( fm4Orth.gls, ~resid(., type = "n") )
+qqnorm( fm4Orth.gls, ~resid(., type = "n") )
 anova( fm3Orth.lme, fm4Orth.gls, test = F )
 fm1Dial.gls <-
   gls(rate ~(pressure + I(pressure^2) + I(pressure^3) + I(pressure^4))*QB,

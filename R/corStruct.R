@@ -530,10 +530,11 @@ print.summary.corSymm <-
     cat("Correlation Structure: General\n")
     cat(paste(" Formula:", deparse(as.vector(formula(x))),"\n"))
     cat(" Parameter estimate(s):\n")
-    aux <- coef(x, FALSE)
+#    aux <- coef(x, FALSE)
     val <- diag(mC)
     dimnames(val) <- list(1:mC, 1:mC)
-    val[lower.tri(val)] <- aux
+#    val[lower.tri(val)] <- aux
+    val[lower.tri(val)] <- x
     class(val) <- "correlation"
     print(val, ...)
   } else cat("Unitialized correlation structure of class corSymm\n")

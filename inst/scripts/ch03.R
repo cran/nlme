@@ -3,6 +3,7 @@
 # initialization
 
 library( nlme )
+library( lattice )
 options( width = 65, digits = 5 )
 options( contrasts = c(unordered = "contr.helmert", ordered = "contr.poly") )
 
@@ -58,13 +59,13 @@ Oxboys <- groupedData( height ~ age | Subject,
 Oxboys                     # display the object
 unique( getGroups( Oxboys ) )
 data( BodyWeight )
-#plot( BodyWeight, outer = ~ Diet, aspect = 3 )  # Figure 3.3
-#plot( BodyWeight, outer = TRUE, aspect = 3 )
+plot( BodyWeight, outer = ~ Diet, aspect = 3 )  # Figure 3.3
+plot( BodyWeight, outer = TRUE, aspect = 3 )
 data( Soybean )
-#plot( Soybean, outer = ~ Year * Variety )       # Figure 6.10
-#plot( Soybean, outer = ~ Variety * Year )
+plot( Soybean, outer = ~ Year * Variety )       # Figure 6.10
+plot( Soybean, outer = ~ Variety * Year )
 gsummary( BodyWeight, invar = TRUE )
-#plot( PBG, inner = ~ Treatment, scales = list(x = list(log = 2)))
+plot( PBG, inner = ~ Treatment, scales = list(x = list(log = 2)))
 ergoStool.mat <- asTable( ergoStool )
 ergoStool.mat
 ergoStool.new <- balancedGrouped( effort ~ Type | Subject,
@@ -74,23 +75,24 @@ ergoStool.new
 # 3.3 Controlling Trellis Graphics Presentations of Grouped Data
 
 data( CO2 )
-#plot(CO2, layout=c(6,2), between=list(x=c(0,0,0.5,0,0)))
+plot(CO2, layout=c(6,2), between=list(x=c(0,0,0.5,0,0)))
 data( Spruce )
-#plot( Spruce, layout = c(7, 4, 3),
-#       skip = c(rep(FALSE, 27), TRUE, rep(FALSE, 27), TRUE,
-#                rep(FALSE, 12), rep(TRUE, 2), rep(FALSE,13)) )
-#plot( Spruce, layout = c(9, 3, 3),
-#       skip = c(rep(FALSE, 66), TRUE, TRUE, rep(FALSE, 13)) )
+plot( Spruce, layout = c(7, 4, 3),
+       skip = c(rep(FALSE, 27), TRUE, rep(FALSE, 27), TRUE,
+                rep(FALSE, 12), rep(TRUE, 2), rep(FALSE,13)) )
+plot( Spruce, layout = c(9, 3, 3),
+       skip = c(rep(FALSE, 66), TRUE, TRUE, rep(FALSE, 13)) )
 data( DNase )
 unique( getCovariate(DNase) )
 log( unique(getCovariate(DNase)), 2 )
-#plot( DNase, layout=c(6,2), scales = list(x=list(log=2)) )
-#plot( Pixel, layout = c(4,5),
-#       between = list(x = c(0, 0.5), y = 0.5) )
-#plot( Pixel, displayLevel = 1 )
-#plot( Wafer, display = 1, collapse = 1 )
-#plot( Wafer, display = 1, collapse = 1,
-#       FUN = function(x) sqrt(var(x)), layout = c(10,1) )
+plot( DNase, layout=c(6,2), scales = list(x=list(log=2)) )
+plot( Pixel, layout = c(4,5),
+       between = list(x = c(0, 0.5), y = 0.5) )
+plot( Pixel, displayLevel = 1 )
+data( Wafer )
+plot( Wafer, display = 1, collapse = 1 )
+plot( Wafer, display = 1, collapse = 1,
+       FUN = function(x) sqrt(var(x)), layout = c(10,1) )
 
 # 3.4 Summaries
 
@@ -126,5 +128,5 @@ Quinidine[Quinidine[["Subject"]] == 4, ]
 # cleanup
 
 proc.time()
-q()
+q("no")
 

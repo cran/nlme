@@ -1,3 +1,23 @@
+2001-10-08  Douglas Bates  <bates@stat.wisc.edu>
+
+	* R/lmList.R: Fixed definition of logLik.lmList to work with R
+	(but it is still rather ugly).
+
+	* R/varFunc.R: Changed definition of logLik.varComb to return a
+	logLik object.
+
+2001-10-05  Douglas Bates  <bates@stat.wisc.edu>
+
+	* R/lmList.R: Fixed selection of id[subscripts] in the panel
+	function of pairs.lmList (and several other functions) so it does
+	not produce a warning from evaluating is.na(NULL).
+
+2001-09-17  Douglas Bates  <bates@stat.wisc.edu>
+
+	* R/nlme.R: Incorporated a change from
+	Setzer.Woodrow@epamail.epa.gov for using nested grouping factors
+	in nlme.
+
 2001-06-20  Douglas Bates  <bates@stat.wisc.edu>
 
 	* R/varFunc.R: Changes in calling sequences and in documentation

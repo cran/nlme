@@ -943,7 +943,7 @@ print.summary.gls <-
   if (!is.null(mCall$subset)) {
     cat("  Subset:", deparse(asOneSidedFormula(mCall$subset)[[2]]),"\n")
   }
-  print( data.frame(AIC=x$AIC,BIC=x$BIC,logLik=x$logLik,row.names = " "))
+  print( data.frame(AIC=x$AIC,BIC=x$BIC,logLik=as.vector(x$logLik),row.names = " "))
   if (verbose) { cat("Convergence at iteration:",x$numIter,"\n") }
   if (length(x$modelStruct)) {
     cat("\n")

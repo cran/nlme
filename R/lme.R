@@ -1540,29 +1540,27 @@ pairs.lme <-
                     dots <- list(...)
 		    if (grid) panel.grid()
 		    panel.xyplot(x, y, ...)
-                    if (!all(is.na(aux <- id[subscripts])) &&
-                        !is.null(aux) && any(aux)) {
-		      text(x[aux], y[aux], idLabels[subscripts][aux],
-                           cex = dots$cex, adj = dots$adj)
-		    }
-		  }))
-    }
-  } else {				# splom
-    plotFun <- "splom"
-    if (is.null(args$panel)) {
-      args <- c(args,
-                panel = list(function(x, y, subscripts, ...)
-		  {
-                    dots <- list(...)
-		    if (grid) panel.grid()
-		    panel.xyplot(x, y, ...)
-                    if (!all(is.na(aux <- id[subscripts])) &&
-                        !is.null(aux) && any(aux)) {
-		      text(x[aux], y[aux], idLabels[subscripts][aux],
-                           cex = dots$cex, adj = dots$adj)
+                    if (any(ids <- id[subscripts])){
+                        text(x[ids], y[ids], idLabels[subscripts][ids],
+                             cex = dots$cex, adj = dots$adj)
                     }
 		  }))
     }
+  } else {				# splom
+      plotFun <- "splom"
+      if (is.null(args$panel)) {
+          args <- c(args,
+                    panel = list(function(x, y, subscripts, ...)
+                {
+                    dots <- list(...)
+		    if (grid) panel.grid()
+		    panel.xyplot(x, y, ...)
+                    if (any(ids <- id[subscripts])){
+                        text(x[ids], y[ids], idLabels[subscripts][ids],
+                             cex = dots$cex, adj = dots$adj)
+                    }
+                }))
+      }
   }
   do.call(plotFun, as.list(args))
 }
@@ -1678,8 +1676,8 @@ plot.ranef.lme <-
   if (is.null(form) || (inherits(form, "formula") && length(form) == 2)) {
     eLen <- length(eNames)
     argData <- data.frame(.pars = as.vector(unlist(object[, eNames])),
-                      .enames = ordered(rep(eNames, rep(nrow(object), eLen)),
-                        level = eNames))
+                          .enames = ordered(rep(eNames, rep(nrow(object), eLen)),
+                          level = eNames), check.names = FALSE)
     for(i in names(object)[is.na(match(names(object), eNames))]) {
       argData[[i]] <- rep(object[[i]], eLen)
     }
@@ -2286,7 +2284,7 @@ qqnorm.lme <-
     fData <- data.frame(.x = unlist(lapply(fData, function(x) x[["y"]])),
 			.y = unlist(lapply(fData, function(x) x[["x"]])),
 			.g = ordered(rep(names(fData),rep(nr, nc)),
-                          levels = names(fData)))
+                        levels = names(fData)), check.names = FALSE)
     dform <- ".y ~ .x | .g"
     if (!is.null(grp <- getGroupsFormula(form))) {
       dform <- paste(dform, deparse(grp[[2]]), sep = "*")
@@ -2370,10 +2368,9 @@ qqnorm.lme <-
       dots <- list(...)
       if (grid) panel.grid()
       panel.xyplot(x, y, ...)
-      if (!all(is.na(aux <- id[subscripts])) &&
-          !is.null(aux) && any(aux)) {
-        text(x[aux], y[aux], idLabels[subscripts][aux],
-             cex = dots$cex, adj = dots$adj)
+      if (any(ids <- id[subscripts])){
+          text(x[ids], y[ids], idLabels[subscripts][ids],
+               cex = dots$cex, adj = dots$adj)
       }
       if (!is.null(abl)) panel.abline(abl, ...)
     }), args)
