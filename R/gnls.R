@@ -1,4 +1,4 @@
-### $Id: gnls.R,v 1.5 2001/10/30 20:51:14 bates Exp $
+### $Id: gnls.R,v 1.6 2002/01/27 23:27:10 bates Exp $
 ###
 ###  Fit a general nonlinear regression model with correlated and/or
 ###  heteroscedastic errors
@@ -593,42 +593,6 @@ gnlsApVar <-
     NULL
   }
 }
-
-#gnlsApVar <-
-#  function(gnlsSt, conLin = attr(gnlsSt, "conLin"),
-#           .relStep = (.Machine$double.eps)^(1/3))
-#{
-#  ## calculate approximate variance-covariance matrix of all parameters
-#  ## except the coefficients
-#  fullGnlsLogLik <-
-#    function(Pars, object, conLin, N) {
-#      ## logLik as a function of sigma and coef(glsSt)
-#      coef(object) <- Pars
-#      conLin <- recalc(object, conLin)
-#      conLin[["logLik"]] - N * log(sum(conLin$Xy^2)) / 2
-#    }
-#  if (length(gnlsCoef <- coef(gnlsSt)) > 0) {
-#    dims <- conLin$dims
-#    N <- dims$N
-#    conLin[["logLik"]] <- 0               # making sure
-#    val <- fdHess(gnlsCoef, fullGnlsLogLik, gnlsSt, conLin, N,
-#		  .relStep = .relStep)[["Hessian"]]
-#    if (all(eigen(val)$values < 0)) {
-#      ## negative definite - OK
-#      val <- solve(-val)
-#      nP <- names(gnlsCoef)
-#      dimnames(val) <- list(nP, nP)
-#      attr(val, "Pars") <- gnlsCoef
-#      val
-#    } else {
-#      ## problem - solution is not a maximum
-#      "Non-positive definite approximate variance-covariance"
-#    }
-#  } else {
-#    NULL
-#  }
-#}
-
 
 ###
 ### function used to calculate the parameters from

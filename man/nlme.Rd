@@ -1,13 +1,19 @@
-% $Id: nlme.Rd,v 1.6 2001/01/10 19:21:05 bates Exp $
+% $Id: nlme.Rd,v 1.7 2002/01/28 03:44:17 bates Exp $
 \name{nlme}
 \title{Nonlinear Mixed-Effects Models}
 \usage{
 nlme(model, data, fixed, random, groups, start, correlation, weights,
      subset, method, na.action, naPattern, control, verbose)
+\method{update}{nlme}(object, model, data, fixed, random, groups, start,
+       correlation, weights, subset, method, na.action, naPattern,
+       control, verbose, \dots)
 }
 \alias{nlme}
 \alias{nlme.formula}
+\alias{update.nlme}
 \arguments{
+ \item{object}{an object inheriting from class \code{nlme}, representing
+   a fitted nonlinear mixed-effects model.}
   \item{model}{a nonlinear model formula, with the response on the left
     of a \code{~} operator and an expression involving parameters and
     covariates on the right, or an \code{nlsList} object.  If
@@ -107,6 +113,8 @@ nlme(model, data, fixed, random, groups, start, correlation, weights,
  \item{verbose}{an optional logical value. If \code{TRUE} information on
    the evolution of the iterative algorithm is printed. Default is
    \code{FALSE}.}
+ \item{\dots}{some methods for this generic require additional
+    arguments.  None are used in this method.} 
 }
 \description{
   This generic function fits a nonlinear mixed-effects model in the
@@ -157,7 +165,7 @@ nlme(model, data, fixed, random, groups, start, correlation, weights,
  S-plus", 2nd Edition, Springer-Verlag.
 }
 
-\author{Jose Pinheiro and Douglas Bates}
+\author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 \seealso{
   \code{\link{nlmeControl}}, \code{\link{nlme.nlsList}},
   \code{\link{nlmeObject}}, \code{\link{nlsList}},
@@ -172,5 +180,7 @@ fm1 <- nlme(height ~ SSasymp(age, Asym, R0, lrc),
             random = Asym ~ 1,
             start = c(Asym = 103, R0 = -8.5, lrc = -3.3))
 summary(fm1)
+fm2 <- update(fm1, random = pdDiag(Asym + lrc ~ 1))
+summary(fm2)
 }
 \keyword{models}

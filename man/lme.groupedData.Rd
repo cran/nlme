@@ -1,17 +1,64 @@
-% $Id: lme.groupedData.Rd,v 1.6 2001/06/18 21:16:50 bates Exp $
+% $Id: lme.groupedData.Rd,v 1.7 2002/01/28 03:44:17 bates Exp $
 \name{lme.groupedData}
 \title{LME fit from groupedData Object}
 \usage{
-\method{lme}{groupedData}(fixed, data, random, correlation, weights, subset, method,
-    na.action, control)
+\method{lme}{groupedData}(fixed, data, random, correlation, weights, 
+    subset, method, na.action, control)
 }
 \alias{lme.groupedData}
 \arguments{
   \item{fixed}{a data frame inheriting from class \code{groupedData}.}
   \item{data}{this argument is included for consistency with the generic
     function. It is ignored in this method function.}
- \item{other arguments}{identical to the arguments in the generic
-   function call. See the documentation on \code{\link{lme}}.}
+ \item{random}{optionally, any of the following: (i) a one-sided formula
+   of the form \code{~x1+...+xn | g1/.../gm}, with \code{x1+...+xn}
+   specifying the model for the random effects and \code{g1/.../gm} the
+   grouping structure (\code{m} may be equal to 1, in which case no
+   \code{/} is required). The random effects formula will be repeated
+   for all levels of grouping, in the case of multiple levels of
+   grouping; (ii) a list of one-sided formulas of the form
+   \code{~x1+...+xn | g}, with possibly different random effects models
+   for each grouping level. The order of nesting will be assumed the
+   same as the order of the elements in the list; (iii) a one-sided
+   formula of the form \code{~x1+...+xn}, or a \code{pdMat} object with
+   a formula (i.e. a non-\code{NULL} value for \code{formula(object)}),
+   or a list of such formulas or \code{pdMat} objects. In this case, the
+   grouping structure formula will be derived from the data used to
+   fit the linear mixed-effects model, which should inherit from class
+   \code{groupedData}; (iv) a named list of formulas or \code{pdMat}
+   objects as in (iii), with the grouping factors as names. The order of
+   nesting will be assumed the same as the order of the order of the
+   elements in the list; (v) an \code{reStruct} object. See the
+   documentation on \code{pdClasses} for a description of the available
+   \code{pdMat} classes. Defaults to a formula consisting of the right
+   hand side of \code{fixed}.}  
+ \item{correlation}{an optional \code{corStruct} object describing the
+   within-group correlation structure. See the documentation of
+   \code{corClasses} for a description of the available \code{corStruct}
+   classes. Defaults to \code{NULL},
+   corresponding to no within-group correlations.}
+ \item{weights}{an optional \code{varFunc} object or one-sided formula
+   describing the within-group heteroscedasticity structure. If given as
+   a formula, it is used as the argument to \code{varFixed},
+   corresponding to fixed variance weights. See the documentation on
+   \code{varClasses} for a description of the available \code{varFunc}
+   classes. Defaults to \code{NULL}, corresponding to homocesdatic
+   within-group errors.} 
+ \item{subset}{an optional expression indicating the subset of the rows of
+   \code{data} that should be used in the fit. This can be a logical
+   vector, or a numeric vector indicating which observation numbers are
+   to be included, or a  character  vector of the row names to be
+   included.  All observations are included by default.}
+ \item{method}{a character string.  If \code{"REML"} the model is fit by
+   maximizing the restricted log-likelihood.  If \code{"ML"} the
+   log-likelihood is maximized.  Defaults to \code{"REML"}.}
+ \item{na.action}{a function that indicates what should happen when the
+   data contain \code{NA}s.  The default action (\code{na.fail}) causes
+   \code{lme} to print an error message and terminate if there are any
+   incomplete observations.}
+ \item{control}{a list of control values for the estimation algorithm to
+   replace the default values returned by the function \code{lmeControl}.
+   Defaults to an empty list.}
 }
 \description{
   The response variable and primary covariate in \code{formula(fixed)}
@@ -71,7 +118,7 @@
  S-plus", 2nd Edition, Springer-Verlag.
 }
 
-\author{Jose Pinheiro and Douglas Bates}
+\author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 
 \seealso{\code{\link{lme}}, \code{\link{groupedData}},
   \code{\link{lmeObject}} } 

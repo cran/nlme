@@ -1,12 +1,17 @@
-% $Id: gnls.Rd,v 1.6 2001/01/10 19:21:04 bates Exp $
+% $Id: gnls.Rd,v 1.7 2002/01/28 03:44:17 bates Exp $
 \name{gnls}
 \title{Fit Nonlinear Model Using Generalized Least Squares}
 \usage{
 gnls(model, data, params, start, correlation, weights, subset,
      na.action, naPattern, control, verbose)
+\method{update}{gnls}(object, model, data, params, start, correlation, 
+       weights, subset, na.action, naPattern, control, verbose, \dots) 
 }
 \alias{gnls}
+\alias{update.gnls}
 \arguments{
+ \item{object}{an object inheriting from class \code{gnls}, representing
+   a generalized nonlinear least squares fitted model.}
   \item{model}{a two-sided formula object describing the
     model, with the response on the left of a \code{~} operator and 
     a nonlinear expression involving parameters and covariates on the
@@ -63,6 +68,8 @@ gnls(model, data, params, start, correlation, weights, subset,
  \item{verbose}{an optional logical value. If \code{TRUE} information on
    the evolution of the iterative algorithm is printed. Default is
    \code{FALSE}.}
+ \item{\dots}{some methods for this generic require additional
+    arguments.  None are used in this method.} 
 }
 \description{
   This function fits a nonlinear model using generalized least
@@ -101,8 +108,7 @@ gnls(model, data, params, start, correlation, weights, subset,
  Venables, W.N. and Ripley, B.D. (1997) "Modern Applied Statistics with
  S-plus", 2nd Edition, Springer-Verlag.
 }
-
-\author{Jose Pinheiro and Douglas Bates}
+\author{Jose Pinheiro \email{jose.pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 \seealso{
   \code{\link{gnlsControl}}, \code{\link{gnlsObject}},
   \code{\link{varFunc}}, \code{\link{corClasses}}, \code{\link{varClasses}}
@@ -113,10 +119,7 @@ data(Soybean)
 fm1 <- gnls(weight ~ SSlogis(Time, Asym, xmid, scal), Soybean,
             weights = varPower())
 summary(fm1)
-\dontrun{
-# errors follow an auto-regressive process of order 1 
-fm2 <- gnls(weight ~ SSlogis(Time, Asym, xmid, scal), Soybean,
-            correlation = corAR1())
-}
+# errors follow an auto-regressive process of order 1
+fm2 <- update(fm1, correlation = corAR1())
 }
 \keyword{models}

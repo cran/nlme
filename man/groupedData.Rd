@@ -1,16 +1,20 @@
-% $Id: groupedData.Rd,v 1.7 2001/06/18 21:16:50 bates Exp $
+% $Id: groupedData.Rd,v 1.8 2002/01/28 03:44:17 bates Exp $
 \name{groupedData}
 \title{Construct a groupedData Object}
 \usage{
 groupedData(formula, data, order.groups, FUN, outer, inner,
  labels, units)
+\method{update}{groupedData}(object, formula, data, order.groups, FUN,
+outer, inner, labels, units, \dots)
 }
 \alias{groupedData}
 \alias{nfGroupedData}
 \alias{nmGroupedData}
 \alias{[.groupedData}
 \alias{as.data.frame.groupedData}
+\alias{update.groupedData}
 \arguments{
+ \item{object}{an object inheriting from class \code{groupedData}.}
  \item{formula}{a formula of the form \code{resp ~ cov | group} where
    \code{resp} is the response, \code{cov} is the primary covariate, and
    \code{group} is the grouping factor.  The expression \code{1} can be
@@ -73,6 +77,8 @@ groupedData(formula, data, order.groups, FUN, outer, inner,
    the response and the primary covariate.  The units string for the
    primary covariate is named \code{x} and that for the response is
    named \code{y}.  Either units string can be omitted.}
+ \item{\dots}{some methods for this generic require additional
+    arguments.  None are used in this method.} 
 }
 \description{
   An object of the \code{groupedData} class is constructed from the
@@ -127,6 +133,7 @@ plot( Orth.new )         # trellis plot by Subject
 formula( Orth.new )      # extractor for the formula
 gsummary( Orth.new )     # apply summary by Subject
 fm1 <- lme( Orth.new )   # fixed and groups formulae extracted from object
+Orthodont2 <- update(Orthodont, FUN = mean)
 }
 \keyword{manip}
 \keyword{attribute}

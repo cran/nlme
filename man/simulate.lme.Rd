@@ -67,7 +67,7 @@ simulate.lme(m1, m2, Random.seed, method, nsim, niterEM, useGen)
   which are matrices.  An attribute called \code{Random.seed} contains
   the seed that was used for the random number generator.
 }
-\author{Jose Pinheiro and Douglas Bates}
+\author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 \seealso{\code{\link{lme}}
 }
 \examples{

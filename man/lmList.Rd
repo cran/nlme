@@ -1,13 +1,16 @@
-% $Id: lmList.Rd,v 1.6 2001/06/18 21:16:50 bates Exp $
+% $Id: lmList.Rd,v 1.7 2002/01/27 23:27:10 bates Exp $
 \name{lmList}
 \title{List of lm Objects with a Common Model}
 \usage{
 lmList(object, data, level, subset, na.action, pool)
+\method{update}{lmList}(object, formula, data, level, subset, na.action,
+pool, \dots)
 }
 \alias{lmList}
 \alias{lmList.formula}
+\alias{update.lmList}
 \arguments{
-  \item{object}{
+  \item{object}{For \code{lmList},
     either a linear formula object of the form \code{y ~ x1+...+xn | g}
     or a \code{groupedData} object. In the formula object, \code{y}
     represents the response, \code{x1,...,xn} the covariates, and
@@ -17,7 +20,13 @@ lmList(object, data, level, subset, na.action, pool)
     case the grouping structure will be obtained from \code{data}, which
     must inherit from class \code{groupedData}. The method function 
     \code{lmList.groupedData} is documented separately.
+    For the method \code{update.lmList}, \code{object} is an object
+    inheriting from class \code{lmList}.
   }
+  \item{formula}{(used in \code{update.lmList} only)
+    a two-sided linear formula with the common model for the individuals
+    \code{lm} fits.
+    }
   \item{data}{
     a data frame in which to interpret the variables named in
     \code{object}. 
@@ -41,6 +50,8 @@ lmList(object, data, level, subset, na.action, pool)
    returned value.  This will be used as the default for \code{pool} in
    calculations of standard deviations or standard errors for summaries.
  }
+ \item{\dots}{some methods for this generic require additional
+    arguments.  None are used in this method.} 
 }
 \description{
   \code{Data} is partitioned according to the levels of the grouping

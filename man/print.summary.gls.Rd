@@ -24,7 +24,7 @@
   function parameters, if any are present, and the residual standard
   error. 
 }
-\author{Jose Pinheiro and Douglas Bates}
+\author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 \seealso{\code{\link{summary.gls}}, \code{\link{gls}}
 }
 \examples{

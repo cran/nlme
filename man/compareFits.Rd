@@ -29,7 +29,7 @@ compareFits(object1, object2, which)
  and \code{object2}. The returned object inherits from class
  \code{compareFits}. 
 }
-\author{Jose Pinheiro and Douglas Bates}
+\author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 
 \seealso{\code{\link{plot.compareFits}},
   \code{\link{pairs.compareFits}}, \code{\link{comparePred}},

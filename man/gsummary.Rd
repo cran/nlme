@@ -74,7 +74,7 @@ gsummary(object, FUN, omitGroupingFactor, form, level,
   \code{object}.
 }
 
-\author{Jose Pinheiro and Douglas Bates}
+\author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 
 \seealso{\code{\link{summary}}, \code{\link{groupedData}},
   \code{\link{getGroups}}} 

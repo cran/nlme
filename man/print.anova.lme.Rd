@@ -27,7 +27,7 @@
   object is printed. If included in \code{x}, likelihood ratio
   statistics, with associated p-values, are included in the output.   
 }
-\author{Jose Pinheiro and Douglas Bates}
+\author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 \seealso{\code{\link{anova.lme}}, \code{\link{lme}}, \code{\link[base]{print}}}
 \examples{
 data(Orthodont)

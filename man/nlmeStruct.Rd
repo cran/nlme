@@ -26,7 +26,7 @@ nlmeStruct(reStruct, corStruct, varStruct)
   for the associated nonlinear mixed-effects model.
 }
 
-\author{Jose Pinheiro and Douglas Bates}
+\author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 
 \seealso{\code{\link{nlme}}, \code{\link{reStruct}},
   \code{\link{corClasses}}, \code{\link{varFunc}} }

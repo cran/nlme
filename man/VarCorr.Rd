@@ -39,7 +39,7 @@ VarCorr(x, sigma, rdig)
     within-group error variance and standard deviation are included as
     the last row in the matrix. 
 }
-\author{Jose Pinheiro and Douglas Bates}
+\author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 \seealso{\code{\link{lme}}, \code{\link{nlme}}}
 \examples{
 data(Orthodont)

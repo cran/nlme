@@ -35,7 +35,7 @@ corCompSymm(value, form, fixed)
   Milliken, G. A. and Johnson, D. E. (1992) "Analysis of Messy Data,
   Volume I: Designed Experiments", Van Nostrand Reinhold.
 }
-\author{Jose Pinheiro and Douglas Bates}
+\author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 \seealso{\code{\link{initialize.corStruct}}}
 \examples{
 ## covariate is observation order and grouping factor is Subject

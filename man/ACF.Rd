@@ -1,4 +1,3 @@
-% $Id: ACF.Rd,v 1.3 2000/07/03 18:22:45 bates Exp $
 \name{ACF}
 \title{Autocorrelation Function}
 \usage{
@@ -26,7 +25,7 @@ ACF(object, maxLag, ...)
   Box, G.E.P., Jenkins, G.M., and Reinsel G.C. (1994) "Time Series
   Analysis: Forecasting and Control", 3rd Edition, Holden-Day. 
 }
-\author{Jose Pinheiro and Douglas Bates}
+\author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{Bates@stat.wisc.edu}}
 \seealso{\code{\link{ACF.gls}}, \code{\link{ACF.lme}}}
 \examples{
 ## see the method function documentation

@@ -1,4 +1,4 @@
-% $Id: nlsList.selfStart.Rd,v 1.6 2001/06/18 21:16:50 bates Exp $
+% $Id: nlsList.selfStart.Rd,v 1.7 2002/01/28 03:44:17 bates Exp $
 \name{nlsList.selfStart}
 \title{nlsList Fit from a selfStart Function}
 \usage{
@@ -13,9 +13,32 @@
     \code{model}, \code{data} must inherit from class
     \code{groupedData}. 
   }
- \item{other arguments}{identical to the arguments in the generic
-   function call. See the documentation on \code{\link{nlsList}}.
- }
+  \item{start}{an optional named list with initial values for the
+    parameters to be estimated in \code{model}. It is passed as the
+    \code{start} argument to each \code{nls} call and is required when
+    the nonlinear function in \code{model} does not inherit from class
+    \code{selfStart}.
+  }
+  \item{control}{a list of control values passed as the \code{control}
+    argument to \code{nls}. Defaults to an empty list.
+  }
+  \item{level}{an optional integer specifying the level of grouping to
+    be used when multiple nested levels of grouping are present.}
+ \item{subset}{an optional expression indicating the subset of the rows of
+   \code{data} that should be used in the fit. This can be a logical
+   vector, or a numeric vector indicating which observation numbers are
+   to be included, or a  character  vector of the row names to be
+   included.  All observations are included by default.}
+  \item{na.action}{a function that indicates what should happen when the
+    data contain \code{NA}s.  The default action (\code{na.fail}) causes
+    \code{nlsList} to print an error message and terminate if there are any
+    incomplete observations.
+  }
+  \item{pool}{
+    an optional logical value that is preserved as an attribute of the
+    returned value.  This will be used as the default for \code{pool} in
+    calculations of standard deviations or standard errors for summaries.
+  }
 }
 \description{
   The response variable and primary covariate in \code{formula(data)}

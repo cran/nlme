@@ -52,7 +52,7 @@ pdMat(value, form, nam, data, pdClass)
   \code{class(object)}, if \code{object} inherits from \code{pdMat}.
 }
 
-\author{Jose Pinheiro and Douglas Bates}
+\author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 
 \seealso{\code{\link{pdCompSymm}}, \code{\link{pdDiag}},
   \code{\link{pdIdent}}, \code{\link{pdNatural}}, \code{\link{pdSymm}}}

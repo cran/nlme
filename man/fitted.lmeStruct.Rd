@@ -46,7 +46,7 @@
   http://franz.stat.wisc.edu/pub/NLME/
 }
 
-\author{Jose Pinheiro and Douglas Bates}
+\author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 \note{
   This method function is generally only used inside \code{lme} and 
   \code{fitted.lme}.

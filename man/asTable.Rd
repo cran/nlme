@@ -25,7 +25,7 @@ asTable(object)
   are labelled as such.  The rows correspond to the distinct levels of
   the grouping factor and are labelled as such.
 }
-\author{Jose Pinheiro and Douglas Bates}
+\author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 \seealso{\code{\link{groupedData}}, \code{\link{isBalanced}},
   \code{\link{balancedGrouped}}}
 \examples{

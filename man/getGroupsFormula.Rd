@@ -32,7 +32,7 @@ getGroupsFormula(object, asList, sep)
   conditioning expression is present in \code{formula(object)} a
   \code{NULL} value is returned.
 }
-\author{Jose Pinheiro and Douglas Bates}
+\author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 \seealso{
     \code{\link{getGroupsFormula.gls}},
     \code{\link{getGroupsFormula.lmList}},

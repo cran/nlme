@@ -40,7 +40,7 @@
   Box, G.E.P., Jenkins, G.M., and Reinsel G.C. (1994) "Time Series
   Analysis: Forecasting and Control", 3rd Edition, Holden-Day. 
 }
-\author{Jose Pinheiro and Douglas Bates}
+\author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 \seealso{\code{\link{ACF.gls}}, \code{\link{plot.ACF}}}
 \examples{
 data(Ovary)

@@ -57,6 +57,6 @@ MEdims(groups, ncols)
     lengths (number of rows) in the block to be decomposed for each
     group at each level.}
 }
-\author{Jose Pinheiro \email{jcp@research.bell-labs.com} and Douglas Bates \email{bates@stat.wisc.edu}}
+\author{Jose Pinheiro \email{jose.pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 \seealso{\code{\link{MEestimate}}}
 \keyword{models}

@@ -18,7 +18,7 @@ pruneLevels(object)
   an object identical to \code{object}, but with the \code{levels}
   attribute containing only value occurring in the factor.
 }
-\author{Jose Pinheiro and Douglas Bates}
+\author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 
 \seealso{\code{\link{factor}}, \code{\link{ordered}}}
 

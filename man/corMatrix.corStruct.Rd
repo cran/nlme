@@ -46,7 +46,7 @@
   correlation matrices (or their transpose inverse square-root factors)
   corresponding to each component of \code{covariate}.  
 }
-\author{Jose Pinheiro and Douglas Bates}
+\author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 
 \seealso{\code{\link{corFactor.corStruct}}, \code{\link{initialize.corStruct}}}
 

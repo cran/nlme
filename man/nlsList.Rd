@@ -1,12 +1,17 @@
-% $Id: nlsList.Rd,v 1.6 2001/06/18 21:16:50 bates Exp $
+% $Id: nlsList.Rd,v 1.7 2002/01/28 03:44:17 bates Exp $
 \name{nlsList}
 \title{List of nls Objects with a Common Model}
 \usage{
 nlsList(model, data, start, control, level, subset, na.action, pool)
+\method{update}{nlsList}(object, model, data, start, control, level,
+      subset, na.action, pool, \dots)
 }
 \alias{nlsList}
 \alias{nlsList.formula}
+\alias{update.nlsList}
 \arguments{
+  \item{object}{an object inheriting from class \code{nlsList}, representing
+      a list of fitted \code{nls} objects.}
   \item{model}{either a nonlinear model formula, with the response on
     the left of a \code{~} operator and an expression involving
     parameters, covariates, and a grouping factor separated by the
@@ -43,6 +48,8 @@ nlsList(model, data, start, control, level, subset, na.action, pool)
     returned value.  This will be used as the default for \code{pool} in
     calculations of standard deviations or standard errors for summaries.
   }
+ \item{\dots}{some methods for this generic require additional
+    arguments.  None are used in this method.} 
 }
 \description{
   \code{Data} is partitioned according to the levels of the grouping

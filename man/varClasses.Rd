@@ -22,7 +22,7 @@
   \item{varFixed}{fixed weights, determined by a variance covariate.}
   \item{varComb}{combination of variance functions.}
 }
-\author{Jose Pinheiro and Douglas Bates}
+\author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 \note{
   Users may define their own \code{varFunc} classes by specifying a
   \code{constructor} function and, at a minimum, methods for the

@@ -24,7 +24,7 @@
     an object similar to \code{object} (same class, length, and names),
     but with updated elements.
 }
-\author{Jose Pinheiro and Douglas Bates}
+\author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 \note{This method function is primarily used within model fitting
   functions, such as \code{lme} and \code{gls}, that allow model
   components such as variance functions.}

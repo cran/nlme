@@ -33,7 +33,7 @@
   for each element of \code{formula(object)}.
 }
 
-\author{Jose Pinheiro and Douglas Bates}
+\author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 
 \seealso{\code{\link{model.matrix}}, \code{\link{contrasts}},
   \code{\link{reStruct}}, \code{\link{formula.reStruct}}} 

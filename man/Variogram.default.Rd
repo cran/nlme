@@ -34,7 +34,7 @@
   Cressie, N.A.C. (1993), "Statistics for Spatial Data", J. Wiley & Sons.
 }  
 
-\author{Jose Pinheiro and Douglas Bates}
+\author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 
 \seealso{\code{\link{Variogram.gls}}, \code{\link{Variogram.lme}},
   \code{\link{plot.Variogram}}} 

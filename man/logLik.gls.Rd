@@ -28,7 +28,7 @@
   Harville, D.A. (1974) "Bayesian Inference for Variance Components
   Using Only Error Contrasts", Biometrika, 61, 383-385.
 }
-\author{Jose Pinheiro and Douglas Bates}
+\author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 
 \seealso{\code{\link{gls}}}
 

@@ -25,6 +25,7 @@ Glucose                  Glucose levels over time
 Glucose2                 Glucose Levels Following Alcohol Ingestion
 Gun                      Methods for firing naval guns
 IGF                      Radioimmunoassay of IGF-I Protein
+LDEsysMat                Generate system matrix for LDEs
 MEEM                     EM iterations for mixed-effects
 MEdecomp                 Decompose a mixed-effects model
 MEdims                   Calculate dimensions in mixed-effects
@@ -225,6 +226,7 @@ logLik.varFunc           Extract varFunc logLik
 model.matrix.reStruct    reStruct Model Matrix
 needUpdate               Check if Update is Needed
 needUpdate.modelStruct   Check if a modelStruct Object Needs Updating
+nlme-internal            Internal nlme functions
 nlme                     Nonlinear Mixed-Effects Models
 nlme.nlsList             NLME fit from nlsList Object
 nlmeControl              Control Values for nlme Fit
@@ -256,6 +258,7 @@ pdMatrix.reStruct        Extract Matrix or Square-Root Factor from
 pdNatural                General Positive-Definite Matrix in Natural
                          Parametrization
 pdSymm                   General Positive-Definite Matrix
+phenoModel               Model function for the Phenobarb data
 plot.ACF                 Plot an ACF Object
 plot.Variogram           Plot a Variogram Object
 plot.augPred             Plot an augPred Object
@@ -263,7 +266,7 @@ plot.compareFits         Plot a compareFits Object
 plot.gls                 Plot a gls Object
 plot.intervals.lmList    Plot lmList Confidence Intervals
 plot.lmList              Plot an lmList Object
-plot.lme                 Plot an lme Object
+plot.lme                 Plot an lme or nls object
 plot.nffGroupedData      Plot an nffGroupedData Object
 plot.nfnGroupedData      Plot an nfnGroupedData Object
 plot.nmGroupedData       Plot an nmGroupedData Object
@@ -297,6 +300,7 @@ pruneLevels              Prune Factor Levels
 qqnorm.gls               Normal Plot of Residuals from a gls Object
 qqnorm.lme               Normal Plot of Residuals or Random Effects from
                          an lme Object
+quinModel                Model function for the Quinidine data
 random.effects           Extract Random Effects
 ranef.lmList             Extract lmList Random Effects
 ranef.lme                Extract lme Random Effects
@@ -325,14 +329,7 @@ summary.modelStruct      Summarize a modelStruct Object
 summary.nlsList          Summarize an nlsList Object
 summary.pdMat            Summarize a pdMat Object
 summary.varFunc          Summarize varFunc Object
-update.gls               Update a gls Object
-update.gnls              Update a gnls Object
-update.groupedData       Update a groupedData Object
-update.lmList            Update an lmList Object
-update.lme               Update an lme Object
 update.modelStruct       Update a modelStruct Object
-update.nlme              Update an nlme Object
-update.nlsList           Update an nlsList Object
 update.varFunc           Update varFunc Object
 varClasses               Variance Function Classes
 varComb                  Combination of Variance Functions

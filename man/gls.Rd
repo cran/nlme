@@ -1,12 +1,17 @@
-% $Id: gls.Rd,v 1.5 2001/01/10 19:21:04 bates Exp $
+% $Id: gls.Rd,v 1.6 2002/01/28 03:44:17 bates Exp $
 \name{gls}
 \title{Fit Linear Model Using Generalized Least Squares}
 \usage{
 gls(model, data, correlation, weights, subset, method, na.action,
     control, verbose)
+\method{update}{gls}(object, model, data, correlation, weights, subset,
+        method, na.action, control, verbose, \dots)
 }
 \alias{gls}
+\alias{update.gls}
 \arguments{
+ \item{object}{an object inheriting from class \code{gls}, representing
+   a generalized least squares fitted linear model.}
   \item{model}{a two-sided linear formula object describing the
     model, with the response on the left of a \code{~} operator and the
     terms, separated by \code{+} operators, on the right.}
@@ -46,6 +51,8 @@ gls(model, data, correlation, weights, subset, method, na.action,
  \item{verbose}{an optional logical value. If \code{TRUE} information on
    the evolution of the iterative algorithm is printed. Default is
    \code{FALSE}.}
+ \item{\dots}{some methods for this generic require additional
+    arguments.  None are used in this method.} 
 }
 \description{
   This function fits a linear model using generalized least
@@ -82,10 +89,10 @@ gls(model, data, correlation, weights, subset, method, na.action,
  "SAS Systems for Mixed Models", SAS Institute.
 
  Venables, W.N. and Ripley, B.D. (1997) "Modern Applied Statistics with
- S-plus", 2nd Edition, Springer-Verlag.
+ S-PLUS", 2nd Edition, Springer-Verlag.
 }
-
-\author{Jose Pinheiro and Douglas Bates}
+\author{Jose Pinheiro \email{jcp@research.bell-labs.com}, Douglas Bates
+  \email{bates@stat.wisc.edu}} 
 \seealso{
   \code{\link{glsControl}}, \code{\link{glsObject}},
   \code{\link{varFunc}}, \code{\link{corClasses}}, \code{\link{varClasses}}
@@ -96,7 +103,6 @@ data(Ovary)
 fm1 <- gls(follicles ~ sin(2*pi*Time) + cos(2*pi*Time), Ovary,
            correlation = corAR1(form = ~ 1 | Mare))
 # variance increases as a power of the absolute fitted values
-fm2 <- gls(follicles ~ sin(2*pi*Time) + cos(2*pi*Time), Ovary,
-           weights = varPower())
+fm2 <- update(fm1, weights = varPower())
 }
 \keyword{models}

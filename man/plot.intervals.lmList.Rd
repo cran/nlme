@@ -31,7 +31,7 @@
   the individual \code{lm} components of the \code{lmList} that
   generated \code{x}. 
 }
-\author{Jose Pinheiro and Douglas Bates}
+\author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 \seealso{\code{\link{intervals.lmList}}, \code{\link{lmList}},
   \code{\link{dotplot}}} 
 \examples{

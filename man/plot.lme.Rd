@@ -1,13 +1,16 @@
-% $Id: plot.lme.Rd,v 1.8 2001/10/30 20:51:15 bates Exp $
+% $Id: plot.lme.Rd,v 1.9 2002/01/27 23:27:10 bates Exp $
 \name{plot.lme}
-\title{Plot an lme Object}
+\title{Plot an lme or nls object}
+\alias{plot.lme}
+\alias{plot.nls}
 \usage{
 \method{plot}{lme}(x, form, abline, id, idLabels, idResType, grid, \dots)
+\method{plot}{nls}(x, form, abline, id, idLabels, idResType, grid, \dots)
 }
-\alias{plot.lme}
 \arguments{
  \item{x}{an object inheriting from class \code{lme}, representing
-   a fitted linear mixed-effects model.}
+   a fitted linear mixed-effects model, or from \code{nls}, representing
+   an fitted nonlinear least squares model.}
  \item{form}{an optional formula specifying the desired type of
    plot. Any variable present in the original data frame used to obtain
    \code{x} can be referenced. In addition, \code{x} itself
@@ -71,7 +74,7 @@
 \value{
   a diagnostic Trellis plot.
 }
-\author{Jose Pinheiro and Douglas Bates}
+\author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 \seealso{\code{\link{lme}}}%, \code{\link{xyplot}}, \code{\link{bwplot}},
 %  \code{\link{histogram}} }
 \examples{

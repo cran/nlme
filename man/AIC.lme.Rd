@@ -34,7 +34,7 @@ fitted objects, the smaller the AIC, the better the fit.
   Sakamoto, Y., Ishiguro, M., and Kitagawa G. (1986) "Akaike
   Information Criterion Statistics", D. Reidel Publishing Company.
 }
-\author{Jose Pinheiro and Douglas Bates}
+\author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 \seealso{\code{\link{logLik}}, \code{\link{BIC}}, \code{\link{AIC.logLik}}}.
 \examples{
 data(Orthodont)

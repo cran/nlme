@@ -43,7 +43,7 @@ corARMA(value, form, p, q, fixed)
   Box, G.E.P., Jenkins, G.M., and Reinsel G.C. (1994) "Time Series
   Analysis: Forecasting and Control", 3rd Edition, Holden-Day. 
 }
-\author{Jose Pinheiro and Douglas Bates}
+\author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 \seealso{\code{\link{initialize.corStruct}}}
 \examples{
 ## ARMA(1,2) structure, with observation order as a covariate and

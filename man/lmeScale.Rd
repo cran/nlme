@@ -20,6 +20,6 @@ lmeScale(start)
   a vector with the scales to be used in \code{nlm} for estimating the
   coefficients. 
 }
-\author{Jose Pinheiro and Douglas Bates}
+\author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 \seealso{\code{\link{nlm}}}
 \keyword{models}

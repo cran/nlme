@@ -29,7 +29,7 @@ pdFactor(object)
   a vector with a square-root factor of the positive-definite matrix
   associated with \code{object} stacked column-wise.
 }
-\author{Jose Pinheiro and Douglas Bates}
+\author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 \note{
   This function is used intensively in optimization
   algorithms and its value is returned as a vector for efficiency

@@ -32,7 +32,7 @@ pdMatrix(object, factor)
   represented by \code{object} is returned; else a square-root of the
   positive-definite matrix is returned.
 }
-\author{Jose Pinheiro and Douglas Bates}
+\author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 
 \seealso{\code{\link{as.matrix.pdMat}}, \code{\link{pdFactor}},
   \code{\link{corMatrix}}}

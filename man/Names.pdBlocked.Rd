@@ -29,7 +29,7 @@
   column names of the individual block diagonal elements in the matrix
   represented by \code{object}.
 }
-\author{Jose Pinheiro and Douglas Bates}
+\author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 \seealso{\code{\link{Names}}, \code{\link{Names.pdMat}}}
 
 \examples{

@@ -72,7 +72,7 @@
   a data frame inheriting from class \code{anova.lme}.
 }
 
-\author{Jose Pinheiro and Douglas Bates}
+\author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 \note{
   Likelihood comparisons are not meaningful for objects fit using
   restricted maximum likelihood and with different fixed effects.

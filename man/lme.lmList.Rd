@@ -1,4 +1,4 @@
-% $Id: lme.lmList.Rd,v 1.6 2001/06/18 21:16:50 bates Exp $
+% $Id: lme.lmList.Rd,v 1.7 2002/01/28 03:44:17 bates Exp $
 \name{lme.lmList}
 \title{LME fit from lmList Object}
 \usage{
@@ -16,8 +16,33 @@
    attribute. Multiple levels of grouping are not allowed with this
    method function.  Defaults to a formula consisting of the right hand
    side of \code{formula(fixed)}.} 
- \item{other arguments}{identical to the arguments in the generic
-   function call. See the documentation on \code{\link{lme}}.}
+ \item{correlation}{an optional \code{corStruct} object describing the
+   within-group correlation structure. See the documentation of
+   \code{corClasses} for a description of the available \code{corStruct}
+   classes. Defaults to \code{NULL},
+   corresponding to no within-group correlations.}
+ \item{weights}{an optional \code{varFunc} object or one-sided formula
+   describing the within-group heteroscedasticity structure. If given as
+   a formula, it is used as the argument to \code{varFixed},
+   corresponding to fixed variance weights. See the documentation on
+   \code{varClasses} for a description of the available \code{varFunc}
+   classes. Defaults to \code{NULL}, corresponding to homocesdatic
+   within-group errors.} 
+ \item{subset}{an optional expression indicating the subset of the rows of
+   \code{data} that should be used in the fit. This can be a logical
+   vector, or a numeric vector indicating which observation numbers are
+   to be included, or a  character  vector of the row names to be
+   included.  All observations are included by default.}
+ \item{method}{a character string.  If \code{"REML"} the model is fit by
+   maximizing the restricted log-likelihood.  If \code{"ML"} the
+   log-likelihood is maximized.  Defaults to \code{"REML"}.}
+ \item{na.action}{a function that indicates what should happen when the
+   data contain \code{NA}s.  The default action (\code{na.fail}) causes
+   \code{lme} to print an error message and terminate if there are any
+   incomplete observations.}
+ \item{control}{a list of control values for the estimation algorithm to
+   replace the default values returned by the function \code{lmeControl}.
+   Defaults to an empty list.}
 }
 \description{
   If the random effects names defined in \code{random} are a subset of
@@ -80,7 +105,7 @@
  S-plus", 2nd Edition, Springer-Verlag.
 }
 
-\author{Jose Pinheiro and Douglas Bates}
+\author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 
 \seealso{\code{\link{lme}}, \code{\link{lmList}},
   \code{\link{lmeObject}} } 

@@ -33,7 +33,7 @@
   an initialized object with the same class as \code{object}
   representing a variance function structure.
 }
-\author{Jose Pinheiro and Douglas Bates}
+\author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 \examples{
 data(Orthodont)
 vf1 <- varPower( form = ~ age | Sex )

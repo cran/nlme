@@ -1,13 +1,18 @@
-% $Id: lme.Rd,v 1.5 2001/01/10 19:21:04 bates Exp $
+% $Id: lme.Rd,v 1.6 2002/01/28 03:44:17 bates Exp $
 \name{lme}
 \title{Linear Mixed-Effects Models}
 \usage{
 lme(fixed, data, random, correlation, weights, subset, method,
     na.action, control)
+\method{update}{lme}(object, fixed, data, random, correlation, weights,
+      subset, method, na.action, control, \dots)
 }
 \alias{lme}
 \alias{lme.formula}
+\alias{update.lme}
 \arguments{
+ \item{object}{an object inheriting from class \code{lme}, representing
+   a fitted linear mixed-effects model.}
   \item{fixed}{a two-sided linear formula object describing the
     fixed-effects part of the model, with the response on the left of a
     \code{~} operator and the terms, separated by \code{+} operators, on
@@ -67,6 +72,8 @@ lme(fixed, data, random, correlation, weights, subset, method,
  \item{control}{a list of control values for the estimation algorithm to
    replace the default values returned by the function \code{lmeControl}.
    Defaults to an empty list.}
+ \item{\dots}{some methods for this generic require additional
+    arguments.  None are used in this method.} 
 }
 \description{
   This generic function fits a linear mixed-effects model in the
@@ -123,8 +130,8 @@ lme(fixed, data, random, correlation, weights, subset, method,
  Venables, W.N. and Ripley, B.D. (1997) "Modern Applied Statistics with
  S-plus", 2nd Edition, Springer-Verlag.
 }
-
-\author{Jose Pinheiro and Douglas Bates}
+\author{Jose Pinheiro \email{jose.pinheiro@pharma.novartis.com} and
+  Douglas Bates \email{bates@stat.wisc.edu}}
 \seealso{
   \code{\link{lmeControl}}, \code{\link{lme.lmList}},
   \code{\link{lme.groupedData}}, \code{\link{lmeObject}},

@@ -27,7 +27,7 @@ MEestimate(object, groups, conLin=attr(object, "conLin"))
     noise term.}
   \item{varFix}{the estimated variance-covariance matrix of the fixed effects}
 }
-\author{Jose Pinheiro \email{jcp@research.bell-labs.com}, Douglas Bates
+\author{Jose Pinheiro \email{jose.pinheiro@pharma.novartis.com}, Douglas Bates
   \email{bates@stat.wisc.edu}} 
 \seealso{\code{\link{MEEM}}, \code{\link{MEdecomp}}, \code{\link{lme}}, \code{\link{nlme}}}
 \keyword{models}

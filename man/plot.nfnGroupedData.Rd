@@ -86,7 +86,7 @@ Pinheiro, J.C. and Bates, D.M. (1997) "Future Directions in
 Mixed-Effects Software: Design of NLME 3.0" available at
 http://franz.stat.wisc.edu/pub/NLME.
 }
-\author{Jose Pinheiro and Douglas Bates}
+\author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 \seealso{\code{\link{groupedData}}, \code{\link{xyplot}}}
 \examples{
 data(Orthodont)

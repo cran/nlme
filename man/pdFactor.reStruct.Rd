@@ -19,7 +19,7 @@
   a vector with square-root factors of the positive-definite matrices
   corresponding to the elements of \code{object} stacked column-wise.
 }
-\author{Jose Pinheiro and Douglas Bates}
+\author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 \note{
   This function is used intensively in optimization
   algorithms and its value is returned as a vector for efficiency

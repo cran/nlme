@@ -28,7 +28,7 @@
   represented by \code{object}, the function returns the corresponding
   factor vector; else the function returns \code{NULL}.
 }
-\author{Jose Pinheiro and Douglas Bates}
+\author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 
 \seealso{\code{\link{getGroups}}}
 

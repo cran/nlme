@@ -18,7 +18,7 @@ collapse(object, ...)
 \value{
   will depend on the method function used; see the appropriate documentation.
 }
-\author{Jose Pinheiro and Douglas Bates}
+\author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 
 \seealso{\code{\link{collapse.groupedData}}}
 

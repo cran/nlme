@@ -54,7 +54,7 @@
 \value{
   an \code{xyplot} Trellis plot.
 }
-\author{Jose Pinheiro and Douglas Bates}
+\author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 \seealso{\code{\link{Variogram}}, \code{\link{xyplot}}, \code{\link{loess}}}
 \examples{
 \dontrun{

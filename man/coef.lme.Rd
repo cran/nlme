@@ -63,7 +63,7 @@
   summarized over groups. The returned object also inherits from classes
   \code{ranef.lme} and \code{data.frame}.
 }
-\author{Jose Pinheiro and Douglas Bates}
+\author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 \seealso{\code{\link{lme}}, \code{\link{fixef.lme}},
   \code{\link{ranef.lme}},
   \code{\link{plot.ranef.lme}}, \code{\link{gsummary}}

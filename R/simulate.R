@@ -1,4 +1,4 @@
-### $Id: simulate.R,v 1.5 2001/08/19 21:38:55 deepayan Exp $
+### $Id: simulate.R,v 1.6 2002/01/27 23:27:10 bates Exp $
 ###
 ###            Fit a general linear mixed effects model
 ###
@@ -21,7 +21,7 @@
 ### Software Foundation, Inc., 59 Temple Place - Suite 330, Boston,
 ### MA 02111-1307, USA
 
-"createConLin"<-
+createConLin <-
   function(fixed, data = sys.frame(sys.parent()),
 	   random = pdSymm(eval(as.call(fixed[-2]))), ...)
 {
