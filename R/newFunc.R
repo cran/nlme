@@ -1,4 +1,4 @@
-## $Id: newFunc.R,v 1.6 2002/03/05 15:36:27 bates Exp $
+## $Id: newFunc.R,v 1.6.2.1 2002/12/27 17:03:09 bates Exp $
 ###
 ###       Functions that are used in several parts of the nlme library
 ###                 but do not belong to any specific part
@@ -257,7 +257,7 @@ gsummary <-
   varying <- unlist(lapply(object,
 			   function(column, frst) {
 			     aux <- as.character(column)
-			     any(aux != aux[frst])
+			     any(!identical(aux, aux[frst]))
 			   },
 			   frst = asFirst))
   if (any(varying) && (!invariantsOnly)) { # varying wanted

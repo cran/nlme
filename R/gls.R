@@ -1,4 +1,4 @@
-### $Id: gls.R,v 1.6.2.3 2002/12/11 23:56:35 bates Exp $
+### $Id: gls.R,v 1.6.2.4 2002/12/27 17:00:26 bates Exp $
 ###
 ###  Fit a linear model with correlated errors and/or heteroscedasticity
 ###

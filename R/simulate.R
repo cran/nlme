@@ -1,4 +1,4 @@
-### $Id: simulate.R,v 1.6.2.1 2002/08/09 19:45:29 bates Exp $
+### $Id: simulate.R,v 1.6.2.2 2002/12/27 17:00:26 bates Exp $
 ###
 ###            Fit a general linear mixed effects model
 ###

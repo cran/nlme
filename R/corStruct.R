@@ -1,4 +1,4 @@
-### $Id: corStruct.R,v 1.5.2.2 2002/12/11 23:56:35 bates Exp $
+### $Id: corStruct.R,v 1.5.2.3 2002/12/27 17:00:26 bates Exp $
 ###
 ###              Classes of correlation structures
 ###
