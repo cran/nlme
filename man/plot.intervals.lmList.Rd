@@ -1,15 +1,15 @@
-% $Id: plot.intervals.lmList.Rd,v 1.6 2001/06/18 21:16:50 bates Exp $
+% $Id: plot.intervals.lmList.Rd,v 1.7 2001/10/30 20:51:15 bates Exp $
 \name{plot.intervals.lmList}
 \title{Plot lmList Confidence Intervals}
 \usage{
-\method{plot}{lmList}(object, ...)
+\method{plot}{intervals.lmList}(x, ...)
 }
 \alias{plot.intervals.lmList}
 \arguments{
- \item{object}{an object inheriting from class \code{intervals.lmList},
+ \item{x}{an object inheriting from class \code{intervals.lmList},
    representing confidence intervals and estimates for the coefficients
    in the \code{lm} components of the \code{lmList} object used to
-   produce \code{object}.
+   produce \code{x}.
  }
  \item{\dots}{optional arguments passed to the Trellis \code{dotplot}
    function.
@@ -20,7 +20,7 @@
   coefficients is generated, with a different panel for each
   coefficient. Rows in the dot-plot correspond to the names of the
   \code{lm} components of the \code{lmList} object used to produce
-  \code{object}. The lower and upper confidence limits are connected by
+  \code{x}. The lower and upper confidence limits are connected by
   a line segment and the estimated coefficients are marked with a
   \code{"+"}. The Trellis function \code{dotplot} is used in this method
   function.  
@@ -29,7 +29,7 @@
 \value{
   a Trellis plot with the confidence intervals on the coefficients of
   the individual \code{lm} components of the \code{lmList} that
-  generated \code{object}. 
+  generated \code{x}. 
 }
 \author{Jose Pinheiro and Douglas Bates}
 \seealso{\code{\link{intervals.lmList}}, \code{\link{lmList}},

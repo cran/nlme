@@ -1,4 +1,4 @@
-### $Id: groupedData.R,v 1.5 2001/08/19 21:38:55 deepayan Exp $
+### $Id: groupedData.R,v 1.6 2001/10/30 20:51:14 bates Exp $
 ###
 ###           groupedData - data frame with a grouping structure
 ###
@@ -220,7 +220,7 @@ as.data.frame.groupedData <-
 collapse.groupedData <-
   function(object, collapseLevel = Q, displayLevel = collapseLevel,
            outer = NULL, inner = NULL, preserve = NULL, FUN = mean,
-           subset = NULL)
+           subset = NULL, ...)
 {
   form <- formula(object)
   grpForm <- getGroupsFormula(form, asList = TRUE)
@@ -372,7 +372,7 @@ collapse.groupedData <-
 }
 
 formula.groupedData <-
-  function(object) eval(attr(object, "formula"))
+  function(x, ...) eval(attr(x, "formula"))
 
 plot.nfnGroupedData <-
   function(x, outer = NULL, inner = NULL, innerGroups = NULL,
@@ -581,7 +581,7 @@ print.groupedData <-
 
 update.groupedData <-
   function(object, formula, data, order.groups, FUN, outer, inner,
-           labels, units)
+           labels, units, ...)
 
 {
   args <- as.list( attributes( object ) )

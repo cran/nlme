@@ -1,8 +1,8 @@
-% $Id: coef.corStruct.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
+% $Id: coef.corStruct.Rd,v 1.6 2001/10/30 20:51:14 bates Exp $
 \name{coef.corStruct}
 \title{Coefficients of a corStruct Object}
 \usage{
-\method{coef}{corStruct}(object, unconstrained)
+\method{coef}{corStruct}(object, unconstrained, \dots)
 coef(object) <- value
 }
 \alias{coef.corStruct}
@@ -41,6 +41,8 @@ coef(object) <- value
  \item{value}{a vector with the replacement values for the coefficients
    associated with \code{object}. It must be a vector with the same length
    of \code{coef{object}} and must be given in unconstrained form.}
+ \item{\dots}{some methods for this generic require additional
+    arguments.  None are used in this method.} 
 }
 \description{
   This method function extracts the coefficients associated with the

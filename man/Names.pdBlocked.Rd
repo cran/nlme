@@ -1,8 +1,8 @@
-% $Id: Names.pdBlocked.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
+% $Id: Names.pdBlocked.Rd,v 1.6 2001/10/30 20:51:14 bates Exp $
 \name{Names.pdBlocked}
 \title{Names of a pdBlocked Object}
 \usage{
-\method{Names}{pdBlocked}(object, asList)
+\method{Names}{pdBlocked}(object, asList, \dots)
 }
 \alias{Names.pdBlocked}
 \alias{Names<-.pdBlocked}
@@ -14,6 +14,8 @@
    names for each block diagonal element is returned. If \code{FALSE}
    a character vector with all column names is returned. Defaults to
    \code{FALSE}.}
+ \item{\dots}{some methods for this generic require additional
+    arguments.  None are used in this method.} 
 }
 \description{
   This method function extracts the first element of the \code{Dimnames}

@@ -1,30 +1,32 @@
-% $Id: coef.lmList.Rd,v 1.6 2001/10/30 20:51:14 bates Exp $
-\name{coef.lmList}
-\title{Extract lmList Coefficients}
+% $Id: ranef.lmList.Rd,v 1.3 2001/10/30 20:51:15 bates Exp $
+\name{ranef.lmList}
+\title{Extract lmList Random Effects}
 \usage{
-\method{coef}{lmList}(object, augFrame, data, which, FUN,
-omitGroupingFactor, \dots)
+\method{ranef}{lmList}(object, augFrame, data, which, FUN, standard,
+                 omitGroupingFactor, \dots)
 }
-\alias{coef.lmList}
+\alias{random.effects.lmList}
+\alias{ranef.lmList}
 \arguments{
  \item{object}{an object inheriting from class \code{lmList}, representing
    a list of \code{lm} objects with a common model.
  }
  \item{augFrame}{an optional logical value. If \code{TRUE}, the returned
-   data frame is augmented with variables defined in the data frame used
-   to produce \code{object}; else, if \code{FALSE}, only the coefficients
-   are returned. Defaults to \code{FALSE}.
- }
+   data frame is augmented with variables defined in \code{data}; else,
+   if \code{FALSE}, only the coefficients are returned. Defaults to
+   \code{FALSE}.}
+ \item{level}{an optional vector of positive integers giving the levels
+   of grouping to be used in extracting the random effects from an
+   object with multiple nested grouping levels. Defaults to all levels
+   of grouping.} 
  \item{data}{an optional data frame with the variables to be used for
    augmenting the returned data frame when \code{augFrame =
      TRUE}. Defaults to the data frame used to fit \code{object}.}
- \item{which}{an optional positive integer or character vector
-   specifying which columns of the data frame used to produce \code{object}
-   should be used in the augmentation of the returned data
-   frame. Defaults to all variables in the data.
- }
+ \item{which}{an optional positive integer vector specifying which
+   columns of \code{data} should be used in the augmentation of the
+   returned data frame. Defaults to all columns in \code{data}.}
  \item{FUN}{an optional summary function or a list of summary functions
-   to be applied to group-varying variables, when collapsing the data
+   to be applied to group-varying variables, when collapsing \code{data}
    by groups.  Group-invariant variables are always summarized by the
    unique value that they assume within that group. If \code{FUN} is a
    single function it will be applied to each non-invariant variable by
@@ -37,43 +39,36 @@ omitGroupingFactor, \dots)
    \code{factor} and \code{ordered}.  The \code{Mode} function, defined
    internally in \code{gsummary}, returns the modal or most popular
    value of the variable.  It is different from the \code{mode} function
-   that returns the S-language mode of the variable.
- }
+   that returns the S-language mode of the variable.}
+ \item{standard}{an optional logical value indicating whether the
+   estimated random effects should be "standardized" (i.e. divided by
+   the corresponding estimated standard error). Defaults to
+   \code{FALSE}.} 
  \item{omitGroupingFactor}{an optional logical value.  When \code{TRUE}
    the grouping factor itself will be omitted from the group-wise
    summary of \code{data} but the levels of the grouping factor will
    continue to be used as the row names for the returned data frame.
-   Defaults to \code{FALSE}.
- }
+   Defaults to \code{FALSE}.}
  \item{\dots}{some methods for this generic require additional
     arguments.  None are used in this method.} 
 }
 \description{
-  The coefficients of each \code{lm} object in the \code{object} list are
-  extracted and organized into a data frame, with rows corresponding to
-  the \code{lm} components and columns corresponding to the
-  coefficients.  Optionally, the returned data frame may be augmented
-  with covariates summarized over the groups associated with the
-  \code{lm} components.  
+  The difference between the individual \code{lm} components
+  coefficients and their average is calculated.
 }
 \value{
-  a data frame inheriting from class \code{coef.lmList} with the estimated
-  coefficients for each \code{lm} component of \code{object} and,
-  optionally, other covariates summarized over the groups corresponding
-  to the \code{lm} components. The returned object also inherits from
-  classes \code{ranef.lmList} and \code{data.frame}.
+  a vector with the differences between the individual \code{lm}
+  coefficients in \code{object} and their average. 
 }
 
 \author{Jose Pinheiro and Douglas Bates}
 
-\seealso{\code{\link{lmList}}, \code{\link{fixed.effects.lmList}},
-  \code{\link{ranef.lmList}},
-  \code{\link{plot.ranef.lmList}}, \code{\link{gsummary}}} 
-
+\seealso{\code{\link{lmList}}, \code{\link{fixed.effects.lmList}}}
+ 
 \examples{
 data(Orthodont)
-fm1 <- lmList(distance ~ age|Subject, data = Orthodont)
-coef(fm1)
-coef(fm1, augFrame = TRUE)
+fm1 <- lmList(distance ~ age | Subject, Orthodont)
+ranef(fm1)
+random.effects(fm1)              # same as above
 }
 \keyword{models}

@@ -1,8 +1,8 @@
-% $Id: summary.gls.Rd,v 1.6 2001/06/18 21:16:50 bates Exp $
+% $Id: summary.gls.Rd,v 1.7 2001/10/30 20:51:15 bates Exp $
 \name{summary.gls}
 \title{Summarize a gls Object}
 \usage{
-\method{summary}{gls}(object, verbose)
+\method{summary}{gls}(object, verbose, \dots)
 }
 \alias{summary.gls}
 \arguments{
@@ -11,6 +11,8 @@
  \item{verbose}{an optional logical value used to control the amount of
    output in the \code{print.summary.gls} method. Defaults to
    \code{FALSE}.} 
+ \item{\dots}{some methods for this generic require additional
+    arguments.  None are used in this method.} 
 }
 \description{
   Additional information about the linear model fit represented

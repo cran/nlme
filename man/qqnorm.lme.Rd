@@ -1,16 +1,22 @@
-% $Id: qqnorm.lme.Rd,v 1.6 2001/06/18 21:16:50 bates Exp $
+% $Id: qqnorm.lme.Rd,v 1.7 2001/10/30 20:51:15 bates Exp $
 \name{qqnorm.lme}
 \title{Normal Plot of Residuals or Random Effects from an lme Object}
 \usage{
-\method{qqnorm}{lme}(object, form, abline, id, idLabels, grid, ...)
+\method{qqnorm}{lme}(y, form, abline, id, idLabels, grid, ...)
 }
+\alias{qqnorm.lm}
 \alias{qqnorm.lme}
+\alias{qqnorm.lmList}
+\alias{qqnorm.nls}
 \arguments{
- \item{object}{an object inheriting from class \code{lme}, representing
-   a fitted linear mixed-effects model.}
+ \item{y}{an object inheriting from class \code{lme}, representing
+   a fitted linear mixed-effects model or from class \code{lmList},
+   representing a list of \code{lm} objects, or from class \code{lm},
+   representing a fitted linear model, or from class \code{nls},
+   representing a nonlinear least squares fitted model.}
  \item{form}{an optional one-sided formula specifying the desired type of
    plot. Any variable present in the original data frame used to obtain
-   \code{object} can be referenced. In addition, \code{object} itself
+   \code{y} can be referenced. In addition, \code{y} itself
    can be referenced in the formula using the symbol
    \code{"."}. Conditional expressions on the right of a \code{|}
    operator can be used to define separate panels in a Trellis

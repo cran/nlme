@@ -1,8 +1,8 @@
-% $Id: Dim.pdMat.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
+% $Id: Dim.pdMat.Rd,v 1.6 2001/10/30 20:51:14 bates Exp $
 \name{Dim.pdMat}
 \title{Dimensions of a pdMat Object}
 \usage{
-\method{Dim}{pdMat}(object)
+\method{Dim}{pdMat}(object, \dots)
 }
 \alias{Dim.pdMat}
 \alias{Dim.pdCompSymm}
@@ -13,6 +13,8 @@
 \arguments{
  \item{object}{an object inheriting from class \code{pdMat},
    representing a positive-definite matrix.}
+ \item{\dots}{some methods for this generic require additional
+    arguments.  None are used in this method.} 
 }
 \description{
   This method function returns the dimensions of the matrix represented

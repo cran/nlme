@@ -1,8 +1,8 @@
-% $Id: fitted.lmList.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
+% $Id: fitted.lmList.Rd,v 1.6 2001/10/30 20:51:15 bates Exp $
 \name{fitted.lmList}
 \title{Extract lmList Fitted Values}
 \usage{
-\method{fitted}{lmList}(object, subset, asList)
+\method{fitted}{lmList}(object, subset, asList, \dots)
 }
 \alias{fitted.lmList}
 \arguments{
@@ -18,6 +18,8 @@
    object is a list with the fitted values split by groups; else the
    returned value is a vector. Defaults to \code{FALSE}.
  }
+ \item{\dots}{some methods for this generic require additional
+    arguments.  None are used in this method.} 
 }
 \description{
   The fitted values are extracted from each \code{lm} component of

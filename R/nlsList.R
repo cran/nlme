@@ -1,4 +1,4 @@
-### $Id: nlsList.R,v 1.3 2001/01/10 19:04:03 bates Exp $
+### $Id: nlsList.R,v 1.4 2001/10/30 20:51:14 bates Exp $
 ###
 ###                  Create a list of nls objects
 ###
@@ -147,7 +147,7 @@ coef.summary.nlsList <-
   function(object, ...) object$parameters
 
 formula.nlsList <-
-  function(object) eval(attr(object, "call")[["model"]])
+  function(x, ...) eval(attr(x, "call")[["model"]])
 
 summary.nlsList <-
   function(object, ...)
@@ -159,7 +159,7 @@ summary.nlsList <-
 
 update.nlsList <-
   function(object, model, data, start, control, level, subset, na.action,
-	   pool)
+	   pool, ...)
 {
   thisCall <- as.list(match.call())[-(1:2)]
   if (!missing(model)) {

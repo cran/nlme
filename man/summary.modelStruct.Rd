@@ -1,16 +1,18 @@
-% $Id: summary.modelStruct.Rd,v 1.6 2001/06/18 21:16:50 bates Exp $
+% $Id: summary.modelStruct.Rd,v 1.7 2001/10/30 20:51:15 bates Exp $
 \name{summary.modelStruct}
 \alias{summary.modelStruct}
 \alias{summary.reStruct}
 \title{Summarize a modelStruct Object}
 \usage{
-\method{summary}{modelStruct}(object)
+\method{summary}{modelStruct}(object, \dots)
 }
 \arguments{
   \item{object}{an object inheriting from class \code{modelStruct},
     representing a list of model components, such as \code{reStruct},
     \code{corStruct} and \code{varFunc} objects.
   }
+ \item{\dots}{some methods for this generic require additional
+    arguments.  None are used in this method.} 
 }
 \description{
   This method function applies \code{summary} to each element of

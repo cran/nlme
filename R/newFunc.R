@@ -1,4 +1,4 @@
-## $Id: newFunc.R,v 1.4 2001/02/24 22:20:06 bates Exp $
+## $Id: newFunc.R,v 1.5 2001/10/30 20:51:14 bates Exp $
 ###
 ###       Functions that are used in several parts of the nlme library
 ###                 but do not belong to any specific part
@@ -203,13 +203,13 @@ getCovariateFormula <-
   ## Return the primary covariate formula as a one sided formula
   form <- formula(object)
   if (!(inherits(form, "formula"))) {
-    stop("\"Form\" must be a formula")
+    stop("formula(object) must return a formula")
   }
   form <- form[[length(form)]]
   if (length(form) == 3 && form[[1]] == as.name("|")){ # conditional expression
     form <- form[[2]]
   }
-  eval(parse(text = paste("~", deparse(form))))
+  eval(substitute(~form))
 }
 
 getResponseFormula <-

@@ -1,14 +1,16 @@
-% $Id: fixed.effects.lme.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
-\name{fixed.effects.lme}
+% $Id: fixef.lme.Rd,v 1.3 2001/10/30 20:51:15 bates Exp $
+\name{fixef.lme}
 \title{Extract lme Fixed Effects}
 \usage{
-\method{fixed.effects}{lme}(object)
+\method{fixef}{lme}(object, \dots)
 }
 \alias{fixed.effects.lme}
 \alias{fixef.lme}
 \arguments{
  \item{object}{an object inheriting from class \code{lme}, representing
    a fitted linear mixed-effects model.}
+  \item{\dots}{some methods for this generic require additional
+   arguments.  None are used in this method.} 
 }
 \description{
   The fixed effects estimates corresponding to the linear mixed-effects
@@ -27,5 +29,6 @@
 data(Orthodont)
 fm1 <- lme(distance ~ age, Orthodont, random = ~ age | Subject)
 fixed.effects(fm1)
+fixef(fm1)
 }
 \keyword{models}

@@ -1,8 +1,8 @@
-% $Id: logLik.glsStruct.Rd,v 1.4 2001/06/18 21:16:50 bates Exp $
+% $Id: logLik.glsStruct.Rd,v 1.5 2001/10/30 20:51:15 bates Exp $
 \name{logLik.glsStruct}
 \title{Log-Likelihood of a glsStruct Object}
 \usage{
-\method{logLik}{glsStruct}(object, Pars, conLin)
+\method{logLik}{glsStruct}(object, Pars, conLin, \dots)
 }
 \alias{logLik.glsStruct}
 
@@ -17,6 +17,8 @@
    matrix (\code{X}) combined with a response vector (\code{y}), and 
    \code{"logLik"}, corresponding to the log-likelihood of the
    underlying linear model. Defaults to \code{attr(object, "conLin")}.}
+ \item{\dots}{some methods for this generic require additional
+    arguments.  None are used in this method.} 
 }
 \description{
   \code{Pars} is used to update the coefficients of the model components

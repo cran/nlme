@@ -1,4 +1,4 @@
-### $Id: newMethods.R,v 1.6 2001/08/19 21:38:55 deepayan Exp $
+### $Id: newMethods.R,v 1.8 2001/10/30 20:51:14 bates Exp $
 ###
 ###      Methods for generics from newGenerics.q for some standard classes
 ###
@@ -54,7 +54,7 @@ if(R.version$major <= 1 && R.version$minor < 3) {
 
 BIC.logLik <-
   ## BIC for logLik objects
-  function(object)
+  function(object, ...)
 {
   -2 * (c(object) - attr(object, "df") * log(attr(object, "nobs"))/2)
 }
@@ -76,10 +76,10 @@ BIC.lm <- BIC.nls <-
   }
 }
 
-Dim.default <- function(object) dim(object)
+Dim.default <- function(object, ...) dim(object)
 
 getCovariate.data.frame <-
-  function(object, form = formula(object))
+  function(object, form = formula(object), data)
 {
   ## Return the primary covariate
   if (!(inherits(form, "formula"))) {
@@ -223,7 +223,7 @@ getGroupsFormula.default <-
 }
 
 Names.formula <-
-  function(object, data = list(), exclude = c("pi", "."))
+  function(object, data = list(), exclude = c("pi", "."), ...)
 {
   if (!is.list(data)) { return(NULL) }  # no data to evaluate variable names
   allV <- all.vars(object)
@@ -239,7 +239,7 @@ Names.formula <-
 }
 
 Names.listForm <-
-  function(object, data = list(), exclude = c("pi", "."))
+  function(object, data = list(), exclude = c("pi", "."), ...)
 {
   pnames <- as.character(unlist(lapply(object, "[[", 2)))
   nams <- lapply(object, function(el, data, exclude) {
@@ -267,9 +267,9 @@ needUpdate.default <-
 
 ##--- needs Trellis/Lattice :
 pairs.compareFits <-
-  function(object, subset, key = TRUE, ...)
+  function(x, subset, key = TRUE, ...)
 {
-
+  object <- x
   if(!missing(subset)) {
     object <- object[subset,,]
   }
@@ -328,11 +328,12 @@ pairs.compareFits <-
 
 ##--- needs Trellis/Lattice :
 plot.nls <-
-  function(object, form = resid(., type = "pearson") ~ fitted(.), abline,
+  function(x, form = resid(., type = "pearson") ~ fitted(.), abline,
 	   id = NULL, idLabels = NULL, idResType = c("pearson", "normalized"),
            grid, ...)
   ## Diagnostic plots based on residuals and/or fitted values
 {
+  object <- x
   if (!inherits(form, "formula")) {
     stop("\"Form\" must be a formula")
   }
@@ -545,9 +546,10 @@ pruneLevels.ordered <-
 
 ##*## Plot method for ACF objects
 plot.ACF <-
-  function(object, alpha = 0, xlab = "Lag", ylab = "Autocorrelation",
+  function(x, alpha = 0, xlab = "Lag", ylab = "Autocorrelation",
            grid = FALSE, ...)
 {
+  object <- x
   ylim <- range(object$ACF)
   if (alpha) {
     assign("stdv",  qnorm(1-alpha/2)/sqrt(attr(object,"n.used")))
@@ -620,9 +622,9 @@ plot.augPred <-
 }
 
 plot.compareFits <-
-  function(object, subset, key = TRUE, mark = NULL, ...)
+  function(x, subset, key = TRUE, mark = NULL, ...)
 {
-
+  object <- x
   if(!missing(subset)) {
     object <- object[subset,,]
   }
@@ -667,10 +669,11 @@ plot.compareFits <-
 }
 
 plot.Variogram <-
-  function(object, smooth, showModel, sigma = NULL, span = 0.6,
+  function(x, smooth, showModel, sigma = NULL, span = 0.6,
            xlab = "Distance", ylab = "Semivariogram", type = "p", ylim,
            grid = FALSE, ...)
 {
+  object <- x
   trlLin <- trellis.par.get("superpose.line")
   coll <- attr(object, "collapse")
   modVrg <- attr(object, "modelVariog")
@@ -750,10 +753,11 @@ print.correlation <-
 ##if(R.version$major <= 1 && R.version$minor < 3) ## not in R 1.3 and later
 ##--- needs Trellis/Lattice :
 qqnorm.nls <-
-  function(object, form = ~ resid(., type = "p"), abline = NULL,
+  function(y, form = ~ resid(., type = "p"), abline = NULL,
            id = NULL, idLabels = NULL, grid = FALSE, ...)
   ## normal probability plots for residuals
 {
+  object <- y
   if (!inherits(form, "formula")) {
     stop("\"Form\" must be a formula")
   }
@@ -866,7 +870,7 @@ qqnorm.nls <-
 }
 
 Variogram.default <-
-  function(object, distance)
+  function(object, distance, ...)
 {
   ld <- length(distance)
   lo <- length(object)

@@ -1,4 +1,4 @@
-### $Id: modelStruct.R,v 1.2 2001/01/10 19:04:03 bates Exp $
+### $Id: modelStruct.R,v 1.3 2001/10/30 20:51:14 bates Exp $
 ###
 ###         modelStruct - a virtual class of model structures
 ###
@@ -31,7 +31,7 @@
 ###*# Methods for standard generics
 
 coef.modelStruct <-
-  function(object, unconstrained = TRUE)
+  function(object, unconstrained = TRUE, ...)
 {
   unlist(lapply(object, coef, unconstrained))
 }
@@ -50,9 +50,9 @@ coef.modelStruct <-
 }
 
 formula.modelStruct <-
-  function(object)
+  function(x, ...)
 {
-  lapply(object, formula)
+  lapply(x, formula)
 }
 
 needUpdate.modelStruct <-
@@ -76,7 +76,7 @@ print.summary.modelStruct <-
 }
 
 recalc.modelStruct <-
-  function(object, conLin = attr(object, "conLin"))
+  function(object, conLin = attr(object, "conLin"), ...)
 {
   for(i in rev(seq(along = object))) {
     conLin <- recalc(object[[i]], conLin)
@@ -86,7 +86,7 @@ recalc.modelStruct <-
 }
 
 summary.modelStruct <-
-  function(object)
+  function(object, ...)
 {
   value <- lapply(object, summary)
   class(value) <- "summary.modelStruct"
@@ -94,7 +94,7 @@ summary.modelStruct <-
 }
 ## will not work as it is. fitted needs more than one argument!
 update.modelStruct <-
-  function(object, data)
+  function(object, data, ...)
 {
   if (needUpdate(object)) {
     object[] <- lapply(object, update, c(list("." = object), as.list(data)))

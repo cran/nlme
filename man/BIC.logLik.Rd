@@ -1,14 +1,16 @@
-% $Id: BIC.logLik.Rd,v 1.5 2001/06/08 21:54:37 bates Exp $
+% $Id: BIC.logLik.Rd,v 1.6 2001/10/30 20:51:14 bates Exp $
 \name{BIC.logLik}
 \title{BIC of a logLik Object}
 \usage{
-\method{BIC}{logLik}(object)
+\method{BIC}{logLik}(object, ...)
 }
 \alias{BIC.logLik}
 \arguments{
  \item{object}{an object inheriting from class \code{logLik}, usually
    resulting from applying a \code{logLik} method to a fitted model
    object.}
+ \item{\dots}{some methods for this generic use optional arguments.
+   None are used in this method.}
 }
 \description{
   This function calculates the Bayesian information criterion,

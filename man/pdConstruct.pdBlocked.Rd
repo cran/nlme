@@ -1,8 +1,9 @@
-% $Id: pdConstruct.pdBlocked.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
+% $Id: pdConstruct.pdBlocked.Rd,v 1.6 2001/10/30 20:51:15 bates Exp $
 \name{pdConstruct.pdBlocked}
 \title{Construct pdBlocked Objects}
 \usage{
-\method{pdConstruct}{pdBlocked}(object, value, form, nam, data, pdClass)
+\method{pdConstruct}{pdBlocked}(object, value, form, nam, data, pdClass,
+\dots)
 }
 \alias{pdConstruct.pdBlocked}
 \arguments{
@@ -41,6 +42,8 @@
    block-diagonal elements. This argument will only be used when
    \code{value} is missing, or its elements are not \code{pdMat}
    objects. Defaults to \code{"pdSymm"}.} 
+ \item{\dots}{some methods for this generic require additional
+    arguments.  None are used in this method.} 
 }
 \description{
   This function give an alternative constructor for the \code{pdBlocked}

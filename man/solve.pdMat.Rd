@@ -1,8 +1,8 @@
-% $Id: solve.pdMat.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
+% $Id: solve.pdMat.Rd,v 1.6 2001/10/30 20:51:15 bates Exp $
 \name{solve.pdMat}
 \title{Calculate Inverse of a Positive-Definite Matrix}
 \usage{
-\method{solve}{pdMat}(a, b, tol)
+\method{solve}{pdMat}(a, b, \dots)
 }
 \alias{solve.pdMat}
 \alias{solve.pdBlocked}
@@ -16,8 +16,8 @@
    a positive definite matrix.} 
  \item{b}{this argument is only included for consistency with the generic
    function and is not used in this method function.}
- \item{tol}{an optional numeric value for the tolerance used in the
-   numerical algorithm. Defaults to \code{1e-7}.}
+ \item{\dots}{some methods for this generic require additional
+    arguments.  None are used in this method.} 
 }
 \description{
   The positive-definite matrix represented by \code{a} is inverted and

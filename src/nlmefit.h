@@ -1,8 +1,9 @@
-/* $Id: nlmefit.h,v 1.5 2000/07/07 21:20:35 saikat Exp $
+/* $Id: nlmefit.h,v 1.6 2001/10/15 17:19:12 bates Exp $
 
    header file for the nlme package
 
-   Copyright 1999 Saikat DebRoy <saikat@stat.wisc.edu>
+   Copyright 1999-2001 Saikat DebRoy <saikat@stat.wisc.edu>,
+                       Douglas Bates <bates@stat.wisc.edu>
 
    This file is part of the nlme library for R and related languages
    and is made available under the terms of the GNU General Public
@@ -53,6 +54,7 @@ typedef struct state_struct {
 } *statePTR;
     
 extern dimPTR dims(longint *);
+extern dimPTR dimS(SEXP);
 extern size_t count_DmHalf_pars(dimPTR, longint *);
 extern double * generate_theta(double *, dimPTR, longint *, double *);
 extern double * generate_DmHalf(double *, dimPTR, longint *, double *);	

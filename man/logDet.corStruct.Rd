@@ -1,8 +1,8 @@
-% $Id: logDet.corStruct.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
+% $Id: logDet.corStruct.Rd,v 1.6 2001/10/30 20:51:15 bates Exp $
 \name{logDet.corStruct}
 \title{Extract corStruct Log-Determinant}
 \usage{
-\method{logDet}{corStruct}(object, covariate)
+\method{logDet}{corStruct}(object, covariate, \dots)
 }
 \alias{logDet.corStruct}
 \alias{logDet.corIdent}
@@ -13,6 +13,8 @@
    covariate vectors (matrices), at which values the correlation matrix,
    or list of correlation  matrices, are to be evaluated. Defaults to
    \code{getCovariate(object)}.} 
+ \item{\dots}{some methods for this generic require additional
+    arguments.  None are used in this method.} 
 }
 \description{
   This method function extracts the logarithm of the determinant of a

@@ -1,10 +1,10 @@
-% $Id: update.nlme.Rd,v 1.9 2001/06/18 21:16:50 bates Exp $
+% $Id: update.nlme.Rd,v 1.10 2001/10/30 20:51:15 bates Exp $
 \name{update.nlme}
 \title{Update an nlme Object}
 \usage{
 \method{update}{nlme}(object, model, data, fixed, random, groups, start,
        correlation, weights, subset, method, na.action, naPattern,
-       control, verbose)
+       control, verbose, \dots)
 }
 \alias{update.nlme}
 \arguments{
@@ -13,6 +13,8 @@
  \item{other arguments}{defined as in \code{\link{nlme}}. See that
      function's documentation for descriptions of and default values
      for these arguments.}
+ \item{\dots}{some methods for this generic require additional
+    arguments.  None are used in this method.} 
 }
 \description{
   The non-missing arguments in the call to the \code{update.nlme} method

@@ -1,8 +1,8 @@
-% $Id: logLik.corStruct.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
+% $Id: logLik.corStruct.Rd,v 1.6 2001/10/30 20:51:15 bates Exp $
 \name{logLik.corStruct}
 \title{Extract corStruct Log-Likelihood}
 \usage{
-\method{logLik}{corStruct}(object, data)
+\method{logLik}{corStruct}(object, data, \dots)
 }
 \alias{logLik.corStruct}
 \arguments{
@@ -10,6 +10,8 @@
    representing a correlation structure.}
  \item{data}{this argument is included to make this method function
    compatible with other \code{logLik} methods and will be ignored.} 
+ \item{\dots}{some methods for this generic require additional
+    arguments.  None are used in this method.} 
 }
 \description{
   This method function extracts the component of a Gaussian

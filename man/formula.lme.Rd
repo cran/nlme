@@ -1,21 +1,23 @@
-% $Id: formula.lme.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
+% $Id: formula.lme.Rd,v 1.6 2001/10/30 20:51:15 bates Exp $
 \name{formula.lme}
 \title{Extract lme Object Formula}
 \usage{
-\method{formula}{lme}(object)
+\method{formula}{lme}(x, \dots)
 }
 \alias{formula.lme}
 \arguments{
- \item{object}{an object inheriting from class \code{lme}, representing
+ \item{x}{an object inheriting from class \code{lme}, representing
    a fitted linear mixed-effects model.}
+ \item{\dots}{some methods for this generic require additional
+    arguments.  None are used in this method.} 
 }
 \description{
   This method function extracts the fixed effects model formula
-  associated with \code{object}. 
+  associated with \code{x}. 
 }
 \value{
   a two-sided linear formula specifying the fixed effects model used to
-  obtain \code{object}.
+  obtain \code{x}.
 }
 
 \author{Jose Pinheiro and Douglas Bates}

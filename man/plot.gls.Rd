@@ -1,16 +1,16 @@
-% $Id: plot.gls.Rd,v 1.7 2001/06/18 21:16:50 bates Exp $
+% $Id: plot.gls.Rd,v 1.8 2001/10/30 20:51:15 bates Exp $
 \name{plot.gls}
 \title{Plot a gls Object}
 \usage{
-\method{plot}{gls}(object, form, abline, id, idLabels, idResType, grid, ...)
+\method{plot}{gls}(x, form, abline, id, idLabels, idResType, grid, \dots)
 }
 \alias{plot.gls}
 \arguments{
- \item{object}{an object inheriting from class \code{gls}, representing
+ \item{x}{an object inheriting from class \code{gls}, representing
    a generalized least squares fitted linear model.}
  \item{form}{an optional formula specifying the desired type of
    plot. Any variable present in the original data frame used to obtain
-   \code{object} can be referenced. In addition, \code{object} itself
+   \code{x} can be referenced. In addition, \code{x} itself
    can be referenced in the formula using the symbol
    \code{"."}. Conditional expressions on the right of a \code{|}
    operator can be used to define separate panels in a Trellis
@@ -45,8 +45,7 @@
    residuals pre-multiplied by the inverse square-root factor of the
    estimated error correlation matrix) are used. Partial matching of
    arguments is used, so only the first character needs to be
-   provided. Defaults to \code{"pearson"}.}  
- }
+   provided. Defaults to \code{"pearson"}.}
  \item{grid}{an optional logical value indicating whether a grid should
    be added to plot. Default depends on the type of Trellis plot used:
    if \code{xyplot} defaults to \code{TRUE}, else defaults to

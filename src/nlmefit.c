@@ -1,4 +1,4 @@
-/* $Id: nlmefit.c,v 1.9 2001/03/30 16:50:52 bates Exp $ 
+/* $Id: nlmefit.c,v 1.10 2001/10/15 17:19:12 bates Exp $ 
 
    Routines for calculation of the log-likelihood or restricted
    log-likelihood with mixed-effects models.
@@ -74,6 +74,66 @@ dims(longint *pdims)
   return value;
 }
 
+SEXP getListElement(SEXP list, char *str)
+{
+  SEXP elmt = R_NilValue, names = getAttrib(list, R_NamesSymbol);
+  int i;
+
+  for (i = 0; i < length(list); i++)
+    if(strcmp(CHAR(STRING_ELT(names, i)), str) == 0) {
+      elmt = VECTOR_ELT(list, i);
+      break;
+    }
+  return elmt;
+}
+
+dimPTR				/* create a dimensions object directly */
+dimS(SEXP d)			/* from an SEXP */
+{
+    int i, Qp2;  SEXP tmp; 
+    dimPTR value = Calloc((size_t) 1, struct dim_struct);
+    value->N = INTEGER(coerceVector(getListElement(d, "N"), INTSXP))[0];
+    value->ZXrows =
+	INTEGER(coerceVector(getListElement(d, "ZXrows"), INTSXP))[0];
+    value->ZXcols =
+	INTEGER(coerceVector(getListElement(d, "ZXcols"), INTSXP))[0];
+    value->Q =
+	INTEGER(coerceVector(getListElement(d, "Q"), INTSXP))[0];
+    value->Srows =
+	INTEGER(coerceVector(getListElement(d, "Srows"), INTSXP))[0];
+    Qp2 = value->Q + 2;
+    value->q = INTEGER(coerceVector(getListElement(d, "q"), INTSXP));
+    value->ngrp = INTEGER(coerceVector(getListElement(d, "ngrp"), INTSXP));
+    value->DmOff = INTEGER(coerceVector(getListElement(d, "DmOff"), INTSXP));
+    value->ncol = INTEGER(coerceVector(getListElement(d, "ncol"), INTSXP));
+    value->nrot = INTEGER(coerceVector(getListElement(d, "nrot"), INTSXP));
+    value->ZXoff = Calloc(Qp2, int *);
+    tmp = coerceVector(getListElement(d, "ZXoff"), VECSXP);
+    for (i = 0; i < Qp2; i++) {
+	(value->ZXoff)[i] = INTEGER(coerceVector(VECTOR_ELT(tmp, i), INTSXP));
+    }
+    value->ZXlen = Calloc(Qp2, int *);
+    tmp = coerceVector(getListElement(d, "ZXlen"), VECSXP);
+    for (i = 0; i < Qp2; i++) {
+	(value->ZXlen)[i] = INTEGER(coerceVector(VECTOR_ELT(tmp, i), INTSXP));
+    }
+    value->SToff = Calloc(Qp2, int *);
+    tmp = coerceVector(getListElement(d, "SToff"), VECSXP);
+    for (i = 0; i < Qp2; i++) {
+	(value->SToff)[i] = INTEGER(coerceVector(VECTOR_ELT(tmp, i), INTSXP));
+    }
+    value->DecOff = Calloc(Qp2, int *);
+    tmp = coerceVector(getListElement(d, "DecOff"), VECSXP);
+    for (i = 0; i < Qp2; i++) {
+	(value->DecOff)[i] = INTEGER(coerceVector(VECTOR_ELT(tmp, i), INTSXP));
+    }
+    value->DecLen = Calloc(Qp2, int *);
+    tmp = coerceVector(getListElement(d, "DecLen"), VECSXP);
+    for (i = 0; i < Qp2; i++) {
+	(value->DecLen)[i] = INTEGER(coerceVector(VECTOR_ELT(tmp, i), INTSXP));
+    }
+    value;
+}
 void
 dimFree(dimPTR this)
 {

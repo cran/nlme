@@ -1,8 +1,8 @@
-% $Id: initialize.reStruct.Rd,v 1.4 2001/06/18 21:16:50 bates Exp $
+% $Id: initialize.reStruct.Rd,v 1.5 2001/10/30 20:51:15 bates Exp $
 \name{initialize.reStruct}
 \title{Initialize reStruct Object}
 \usage{
-\method{initialize}{reStruct}(object, data, conLin, control)
+\method{initialize}{reStruct}(object, data, conLin, control, \dots)
 }
 \alias{initialize.reStruct}
 \arguments{
@@ -21,6 +21,8 @@
    refine initial parameter estimates. It is given as a list for
    compatibility with other \code{initialize} methods. Defaults to
    \code{list(niterEM = 20)}.}
+ \item{\dots}{some methods for this generic require additional
+    arguments.  None are used in this method.} 
 }
 \description{
   Initial estimates for the parameters in the \code{pdMat} objects

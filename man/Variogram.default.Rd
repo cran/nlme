@@ -1,8 +1,8 @@
-% $Id: Variogram.default.Rd,v 1.6 2001/06/18 21:16:50 bates Exp $
+% $Id: Variogram.default.Rd,v 1.7 2001/10/30 20:51:14 bates Exp $
 \name{Variogram.default}
 \title{Calculate Semi-variogram}
 \usage{
-\method{Variogram}{default}(object, distance)
+\method{Variogram}{default}(object, distance, \dots)
 }
 \alias{Variogram.default}
 \arguments{
@@ -14,6 +14,8 @@
     elements in \code{distance} must correspond to the pairs
     \code{(1,2), (1,3), ..., (n-1,n)}, with \code{n} representing the
     length of \code{object}, and must have length \code{n(n-1)/2}.}
+ \item{\dots}{some methods for this generic require additional
+    arguments.  None are used in this method.} 
 }
 \description{
   This method function calculates the semi-variogram for an arbitrary

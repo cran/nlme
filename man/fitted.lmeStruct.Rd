@@ -1,8 +1,8 @@
-% $Id: fitted.lmeStruct.Rd,v 1.4 2001/06/18 21:16:50 bates Exp $
+% $Id: fitted.lmeStruct.Rd,v 1.5 2001/10/30 20:51:15 bates Exp $
 \name{fitted.lmeStruct}
 \title{Calculate lmeStruct Fitted Values}
 \usage{
-\method{fitted}{lmeStruct}(object, level, conLin, lmeFit)
+\method{fitted}{lmeStruct}(object, level, conLin, lmeFit, \dots)
 }
 \alias{fitted.lmeStruct}
 \arguments{
@@ -23,6 +23,7 @@
    containing respectively the fixed effects estimates and the random
    effects estimates to be used to calculate the fitted values. Defaults
    to \code{attr(object, "lmeFit")}.}
+ \item{\dots}{some methods for this generic accept other optional arguments.}
 }
 \description{
   The fitted values at level \eqn{i} are obtained by adding together the

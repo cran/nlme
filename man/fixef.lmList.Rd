@@ -1,8 +1,8 @@
-% $Id: fixed.effects.lmList.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
-\name{fixed.effects.lmList}
+% $Id: fixef.lmList.Rd,v 1.3 2001/10/30 20:51:15 bates Exp $
+\name{fixef.lmList}
 \title{Extract lmList Fixed Effects}
 \usage{
-\method{fixed.effects}{lmList}(object)
+\method{fixef}{lmList}(object, \dots)
 }
 \alias{fixed.effects.lmList}
 \alias{fixef.lmList}
@@ -10,6 +10,8 @@
  \item{object}{an object inheriting from class \code{lmList}, representing
    a list of \code{lm} objects with a common model.
  }
+ \item{\dots}{some methods for this generic require additional
+   arguments.  None are used in this method.} 
 }
 \description{
   The average of the coefficients corresponding to the \code{lm}

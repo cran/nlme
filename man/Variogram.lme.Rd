@@ -1,9 +1,10 @@
-% $Id: Variogram.lme.Rd,v 1.6 2001/06/18 21:16:50 bates Exp $
+% $Id: Variogram.lme.Rd,v 1.7 2001/10/30 20:51:14 bates Exp $
 \name{Variogram.lme}
 \title{Calculate Semi-variogram for Residuals from an lme Object}
 \usage{
-\method{Variogram}{lme}(object, distance, form, resType, data, na.action, maxDist,
-          length.out, collapse, nint, breaks, robust, metric)
+\method{Variogram}{lme}(object, distance, form, resType, data,
+       na.action, maxDist, length.out, collapse, nint, breaks,
+       robust, metric, \dots)
 }
 \alias{Variogram.lme}
 \arguments{
@@ -74,6 +75,8 @@
     for the sum of the absolute differences. Partial matching of
     arguments is used, so only the first three characters need to be
     provided. Defaults to \code{"euclidean"}.}
+ \item{\dots}{some methods for this generic require additional
+    arguments.  None are used in this method.} 
 }
 \description{
   This method function calculates the semi-variogram for the

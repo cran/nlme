@@ -1,21 +1,23 @@
-% $Id: formula.gls.Rd,v 1.6 2001/06/18 21:16:50 bates Exp $
+% $Id: formula.gls.Rd,v 1.7 2001/10/30 20:51:15 bates Exp $
 \name{formula.gls}
 \title{Extract gls Object Formula}
 \usage{
-\method{formula}{gls}(object)
+\method{formula}{gls}(x, \dots)
 }
 \alias{formula.gls}
 \arguments{
- \item{object}{an object inheriting from class \code{gls}, representing
+ \item{x}{an object inheriting from class \code{gls}, representing
    a generalized least squares fitted linear model.}
+ \item{\dots}{some methods for this generic require additional
+    arguments.  None are used in this method.} 
 }
 \description{
   This method function extracts the linear model formula
-  associated with \code{object}. 
+  associated with \code{x}. 
 }
 \value{
   a two-sided linear formula specifying the linear model used to
-  obtain \code{object}.
+  obtain \code{x}.
 }
 
 \author{Jose Pinheiro and Douglas Bates}

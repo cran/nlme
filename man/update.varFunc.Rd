@@ -1,8 +1,8 @@
-% $Id: update.varFunc.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
+% $Id: update.varFunc.Rd,v 1.6 2001/10/30 20:51:15 bates Exp $
 \name{update.varFunc}
 \title{Update varFunc Object}
 \usage{
-\method{update}{varFunc}(object, data)
+\method{update}{varFunc}(object, data, \dots)
 }
 \alias{update.varExp}
 \alias{update.varFunc}
@@ -17,6 +17,8 @@
     version of the fitted object (from which fitted values, coefficients,
     and residuals can be extracted) and, if necessary, other variables
     used to evaluate the variance covariate(s).}
+ \item{\dots}{some methods for this generic require additional
+    arguments.  None are used in this method.} 
 }
 \description{
   If the \code{formula(object)} includes a \code{"."} term, representing

@@ -1,8 +1,9 @@
-% $Id: update.lmList.Rd,v 1.6 2001/06/18 21:16:50 bates Exp $
+% $Id: update.lmList.Rd,v 1.7 2001/10/30 20:51:15 bates Exp $
 \name{update.lmList}
 \title{Update an lmList Object}
 \usage{
-\method{update}{lmList}(object, formula, data, level, subset, na.action, pool)
+\method{update}{lmList}(object, formula, data, level, subset, na.action,
+pool, \dots)
 }
 
 \alias{update.lmList}
@@ -18,6 +19,8 @@
    that function's documentation for descriptions of and default values
    for these arguments.
  }
+ \item{\dots}{some methods for this generic require additional
+    arguments.  None are used in this method.} 
 }
 \description{
   The non-missing arguments in the call to the \code{update.lmList} method

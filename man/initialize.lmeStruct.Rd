@@ -1,8 +1,8 @@
-% $Id: initialize.lmeStruct.Rd,v 1.4 2001/06/18 21:16:50 bates Exp $
+% $Id: initialize.lmeStruct.Rd,v 1.5 2001/10/30 20:51:15 bates Exp $
 \name{initialize.lmeStruct}
 \title{Initialize an lmeStruct Object}
 \usage{
-\method{initialize}{lmeStruct}(object, data, groups, conLin, control)
+\method{initialize}{lmeStruct}(object, data, groups, conLin, control, \dots)
 }
 \alias{initialize.lmeStruct}
 \arguments{
@@ -27,6 +27,8 @@
    component of \code{object} and, if possible, numerical gradient
    vectors and Hessian matrices for the log-likelihood function are to
    be used in the optimization algorithm.}
+ \item{\dots}{some methods for this generic require additional
+    arguments.  None are used in this method.} 
 }
 \description{
   The individual linear mixed-effects model components of the

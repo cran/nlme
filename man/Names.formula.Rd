@@ -1,8 +1,8 @@
-% $Id: Names.formula.Rd,v 1.4 2001/06/18 21:16:50 bates Exp $
+% $Id: Names.formula.Rd,v 1.5 2001/10/30 20:51:14 bates Exp $
 \name{Names.formula}
 \title{Extract Names from a formula}
 \usage{
-\method{Names}{formula}(object, data, exclude)
+\method{Names}{formula}(object, data, exclude, \dots)
 }
 \alias{Names.formula}
 \alias{Names.listForm}
@@ -13,6 +13,8 @@
    environment from which \code{Names.formula} is called.}
  \item{exclude}{an optional character vector with names to be excluded
    from the returned value. Default is \code{c("pi",".")}.}
+ \item{\dots}{some methods for this generic require additional
+    arguments.  None are used in this method.} 
 }
 \description{
   This method function returns the names of the terms corresponding to

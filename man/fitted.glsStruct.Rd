@@ -1,8 +1,8 @@
-% $Id: fitted.glsStruct.Rd,v 1.4 2001/06/18 21:16:50 bates Exp $
+% $Id: fitted.glsStruct.Rd,v 1.5 2001/10/30 20:51:15 bates Exp $
 \name{fitted.glsStruct}
 \title{Calculate glsStruct Fitted Values}
 \usage{
-\method{fitted}{glsStruct}(object, glsFit)
+\method{fitted}{glsStruct}(object, glsFit, \dots)
 }
 \alias{fitted.glsStruct}
 \arguments{
@@ -15,6 +15,8 @@
    deviation for error term), \code{varBeta} (coefficients' covariance
    matrix), \code{fitted} (fitted values), and \code{residuals}
    (residuals). Defaults to \code{attr(object, "glsFit")}.}
+ \item{\dots}{some methods for this generic require additional
+    arguments.  None are used in this method.} 
 }
 \description{
   The fitted values for the linear model represented by \code{object}

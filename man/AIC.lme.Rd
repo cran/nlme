@@ -1,10 +1,9 @@
-% $Id: AIC.lme.Rd,v 1.1 2001/06/18 21:16:50 bates Exp $
+% $Id: AIC.lme.Rd,v 1.2 2001/10/30 20:51:14 bates Exp $
 \name{AIC.lme}
 \title{Akaike Information Criterion}
 \usage{
 \method{AIC}{lme}(object, ..., k)
 }
-\alias{AIC.lmList}
 \alias{AIC.gls}
 \alias{AIC.lme}
 \alias{AIC.nlme}

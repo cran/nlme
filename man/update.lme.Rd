@@ -1,9 +1,9 @@
-% $Id: update.lme.Rd,v 1.6 2001/06/18 21:16:50 bates Exp $
+% $Id: update.lme.Rd,v 1.7 2001/10/30 20:51:15 bates Exp $
 \name{update.lme}
 \title{Update an lme Object}
 \usage{
-\method{update}{lme}(object, fixed, data, random, correlation, weights, subset, method,
-       na.action, control)
+\method{update}{lme}(object, fixed, data, random, correlation, weights,
+      subset, method, na.action, control, \dots)
 }
 
 \alias{update.lme}
@@ -12,6 +12,8 @@
    a fitted linear mixed-effects model.}
  \item{other arguments}{defined as in \code{\link{lme}}. See that function's
    documentation for descriptions of and default values for these arguments.}
+ \item{\dots}{some methods for this generic require additional
+    arguments.  None are used in this method.} 
 }
 \description{
   The non-missing arguments in the call to the \code{update.lme} method

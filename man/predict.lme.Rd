@@ -1,8 +1,8 @@
-% $Id: predict.lme.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
+% $Id: predict.lme.Rd,v 1.6 2001/10/30 20:51:15 bates Exp $
 \name{predict.lme}
 \title{Predictions from an lme Object}
 \usage{
-\method{predict}{lme}(object, newdata, level, asList, na.action)
+\method{predict}{lme}(object, newdata, level, asList, na.action, \dots)
 }
 \alias{predict.lme}
 \arguments{
@@ -26,6 +26,8 @@
    \code{newdata} contains \code{NA}s.  The default action
    (\code{na.fail}) causes the function to print an error message and
    terminate if there are any incomplete observations.}
+ \item{\dots}{some methods for this generic require additional
+    arguments.  None are used in this method.} 
 }
 \description{
   The predictions at level \eqn{i} are obtained by adding together the

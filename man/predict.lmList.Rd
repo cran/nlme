@@ -1,8 +1,8 @@
-% $Id: predict.lmList.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
+% $Id: predict.lmList.Rd,v 1.6 2001/10/30 20:51:15 bates Exp $
 \name{predict.lmList}
 \title{Predictions from an lmList Object}
 \usage{
-\method{predict}{lmList}(object, newdata, subset, pool, asList, se.fit)
+\method{predict}{lmList}(object, newdata, subset, pool, asList, se.fit, \dots)
 }
 \alias{predict.lmList}
 \arguments{
@@ -31,6 +31,8 @@
    standard errors should be computed along with the
    predictions. Default is \code{FALSE}.
  }
+ \item{\dots}{some methods for this generic require additional
+    arguments.  None are used in this method.} 
 }
 \description{
   If the grouping factor corresponding to \code{object} is included

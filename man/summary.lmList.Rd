@@ -1,8 +1,8 @@
-% $Id: summary.lmList.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
+% $Id: summary.lmList.Rd,v 1.6 2001/10/30 20:51:15 bates Exp $
 \name{summary.lmList}
 \title{Summarize an lmList Object}
 \usage{
-\method{summary}{lmList}(object, pool)
+\method{summary}{lmList}(object, pool, \dots)
 }
 \alias{summary.lmList}
 \arguments{
@@ -13,6 +13,8 @@
    estimate of the residual standard error should be used. Default is
    \code{attr(object, "pool")}.
  }
+ \item{\dots}{some methods for this generic require additional
+    arguments.  None are used in this method.} 
 }
 \description{
   The \code{summary.lm} method is applied to each \code{lm} component of

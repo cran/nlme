@@ -1,8 +1,8 @@
-% $Id: fitted.lme.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
+% $Id: fitted.lme.Rd,v 1.6 2001/10/30 20:51:15 bates Exp $
 \name{fitted.lme}
 \title{Extract lme Fitted Values}
 \usage{
-\method{fitted}{lme}(object, level, asList)
+\method{fitted}{lme}(object, level, asList, \dots)
 }
 \alias{fitted.lme}
 \arguments{
@@ -18,6 +18,8 @@
    the fitted values split by groups; else the returned value is
    either a vector or a data frame, according to the length of
    \code{level}. Defaults to \code{FALSE}.}
+ \item{\dots}{some methods for this generic require additional
+    arguments.  None are used in this method.} 
 }
 \description{
   The fitted values at level \eqn{i} are obtained by adding together the

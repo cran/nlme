@@ -1,8 +1,8 @@
-% $Id: intervals.lme.Rd,v 1.6 2001/06/20 16:55:20 bates Exp $
+% $Id: intervals.lme.Rd,v 1.7 2001/10/30 20:51:15 bates Exp $
 \name{intervals.lme}
 \title{Confidence Intervals on lme Parameters}
 \usage{
-\method{intervals}{lme}(object, level, which)
+\method{intervals}{lme}(object, level, which, \dots)
 }
 \alias{intervals.lme}
 \alias{print.intervals.lme}
@@ -16,6 +16,8 @@
    intervals. Possible values are \code{"all"} for all parameters,
    \code{"var-cov"} for the variance-covariance parameters only, and
    \code{"fixed"} for the fixed effects only. Defaults to \code{"all"}.}
+ \item{\dots}{some methods for this generic require additional
+    arguments.  None are used in this method.} 
 }
 \description{
   Approximate confidence intervals for the parameters in the linear

@@ -1,4 +1,4 @@
-### $Id: gnls.R,v 1.4 2001/06/18 21:16:49 bates Exp $
+### $Id: gnls.R,v 1.5 2001/10/30 20:51:14 bates Exp $
 ###
 ###  Fit a general nonlinear regression model with correlated and/or
 ###  heteroscedastic errors
@@ -653,9 +653,9 @@ getParsGnls <-
 ###  Methods for standard generics
 ###
 
-coef.gnls <- function(object) object$coefficients
+coef.gnls <- function(object, ...) object$coefficients
 
-formula.gnls <- function(object) eval(object$call[["model"]])
+formula.gnls <- function(x, ...) eval(x$call[["model"]])
 
 getData.gnls <-
   function(object)
@@ -681,7 +681,7 @@ getData.gnls <-
 
 
 logLik.gnls <-
-  function(object, REML = FALSE)
+  function(object, REML = FALSE, ...)
 {
   if (REML) {
     stop("Cannot calculate REML log-likelihood for gnls objects")
@@ -697,7 +697,7 @@ logLik.gnls <-
 
 
 predict.gnls <-
-  function(object, newdata, na.action = na.fail, naPattern = NULL)
+  function(object, newdata, na.action = na.fail, naPattern = NULL, ...)
 {
   ##
   ## method for predict() designed for objects inheriting from class gnls
@@ -791,7 +791,7 @@ update.gnls <-
   function(object, model, data = sys.frame(sys.parent()), params, start ,
            correlation = NULL, weights = NULL, subset,
            na.action = na.fail, naPattern, control = list(),
-	   verbose = FALSE)
+	   verbose = FALSE, ...)
 {
   thisCall <- as.list(match.call())[-(1:2)]
   nextCall <- as.list(object$call)[-1]
@@ -836,13 +836,13 @@ gnlsStruct <-
 ##*## gnlsStruct methods for standard generics
 
 fitted.gnlsStruct <-
-  function(object)
+  function(object, ...)
 {
   attr(object, "resp") - resid(object)
 }
 
 initialize.gnlsStruct <-
-  function(object, data)
+  function(object, data, ...)
 {
   if (length(object)) {
     object[] <- lapply(object, initialize, data)
@@ -864,7 +864,7 @@ initialize.gnlsStruct <-
 }
 
 logLik.gnlsStruct <-
-  function(object, Pars, conLin = attr(object, "conLin"))
+  function(object, Pars, conLin = attr(object, "conLin"), ...)
 {
   coef(object) <- Pars			# updating parameter values
   conLin <- recalc(object, conLin)	# updating conLin
@@ -873,7 +873,7 @@ logLik.gnlsStruct <-
 
 
 residuals.gnlsStruct <-
-  function(object)
+  function(object, ...)
 {
   c(eval(attr(object, "model")[[2]], envir = attr(object, "local")))
 }

@@ -1,9 +1,9 @@
-% $Id: update.gls.Rd,v 1.6 2001/06/18 21:16:50 bates Exp $
+% $Id: update.gls.Rd,v 1.7 2001/10/30 20:51:15 bates Exp $
 \name{update.gls}
 \title{Update a gls Object}
 \usage{
-\method{update}{gls}(object, model, data, correlation, weights, subset, method,
-       na.action, control, verbose)
+\method{update}{gls}(object, model, data, correlation, weights, subset,
+        method, na.action, control, verbose, \dots)
 }
 
 \alias{update.gls}
@@ -13,6 +13,8 @@
  \item{other arguments}{defined as in \code{\link{gls}}. See
      that function's documentation for descriptions of and default values
      for these arguments.}
+ \item{\dots}{some methods for this generic require additional
+    arguments.  None are used in this method.} 
 }
 \description{
   The non-missing arguments in the call to the \code{update.gls} method

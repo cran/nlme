@@ -1,22 +1,24 @@
-% $Id: formula.pdBlocked.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
+% $Id: formula.pdBlocked.Rd,v 1.6 2001/10/30 20:51:15 bates Exp $
 \name{formula.pdBlocked}
 \title{Extract pdBlocked Formula}
 \usage{
-\method{formula}{pdBlocked}(object, asList)
+\method{formula}{pdBlocked}(x, asList, \dots)
 }
 \alias{formula.pdBlocked}
 \arguments{
- \item{object}{an object inheriting from class \code{pdBlocked},
+ \item{x}{an object inheriting from class \code{pdBlocked},
    representing a positive definite block diagonal matrix.} 
  \item{asList}{an optional logical value. If \code{TRUE}, a list with
    the formulas for the individual block diagonal elements of
-   \code{object} is returned; else, if \code{FALSE}, a one-sided formula
+   \code{x} is returned; else, if \code{FALSE}, a one-sided formula
    combining all individual formulas is returned. Defaults to
    \code{FALSE}.} 
+ \item{\dots}{some methods for this generic require additional
+    arguments.  None are used in this method.} 
 }
 \description{
   The \code{formula} attributes of the \code{pdMat} elements of
-  \code{object} are extracted and returned as a list, in case
+  \code{x} are extracted and returned as a list, in case
   \code{asList=TRUE}, or converted to a single one-sided formula when
   \code{asList=FALSE}. If the \code{pdMat} elements do not have a
   \code{formula} attribute, a \code{NULL} value is returned.

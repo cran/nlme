@@ -1,8 +1,8 @@
-% $Id: solve.reStruct.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
+% $Id: solve.reStruct.Rd,v 1.6 2001/10/30 20:51:15 bates Exp $
 \name{solve.reStruct}
 \title{Apply Solve to an reStruct Object}
 \usage{
-\method{solve}{reStruct}(a, b, tol)
+\method{solve}{reStruct}(a, b, \dots)
 }
 \alias{solve.reStruct}
 \arguments{
@@ -11,8 +11,8 @@
    \code{pdMat} objects.} 
  \item{b}{this argument is only included for consistency with the
    generic function and is not used in this method function.}
- \item{tol}{an optional numeric value for the tolerance used in the
-   numerical algorithm. Defaults to \code{1e-7}.}
+ \item{\dots}{some methods for this generic require additional
+    arguments.  None are used in this method.} 
 }
 \description{
   \code{Solve} is applied to each \code{pdMat} component of \code{a},

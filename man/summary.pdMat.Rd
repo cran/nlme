@@ -1,8 +1,8 @@
-% $Id: summary.pdMat.Rd,v 1.6 2001/06/20 16:55:20 bates Exp $
+% $Id: summary.pdMat.Rd,v 1.7 2001/10/30 20:51:15 bates Exp $
 \name{summary.pdMat}
 \title{Summarize a pdMat Object}
 \usage{
-\method{summary}{pdMat}(object, structName, noCorrelation)
+\method{summary}{pdMat}(object, structName, noCorrelation, \dots)
 }
 \alias{summary.pdMat}
 \alias{summary.pdBlocked}
@@ -28,6 +28,8 @@
    correlations are to be printed in \code{print.summary.pdMat}. Default
    depends on the method function: \code{FALSE} for \code{pdDiag} and
    \code{pdIdent}, and \code{TRUE} for all other classes.}
+ \item{\dots}{some methods for this generic require additional
+    arguments.  None are used in this method.} 
 }
 \description{
   Attributes \code{structName} and \code{noCorrelation}, with the values

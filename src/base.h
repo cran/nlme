@@ -1,8 +1,9 @@
-/* $Id: base.h,v 1.5 2001/01/10 19:40:15 bates Exp $
+/* $Id: base.h,v 1.6 2001/10/15 17:19:12 bates Exp $
 
    header file for the nlme package
 
-   Copyright 1999-2001  Saikat DebRoy <saikat@stat.wisc.edu>
+   Copyright 1999-2001  Saikat DebRoy <saikat@stat.wisc.edu>,
+                        Douglas Bates <bates@stat.wisc.edu>
 
    This file is part of the nlme library for S and related languages
    and is made available under the terms of the GNU General Public
@@ -30,6 +31,7 @@
 
 #ifdef R_S_H
 #include <R.h>
+#include <Rinternals.h>
 #include <R_ext/Mathlib.h>
 #include <R_ext/Applic.h>
 #else

@@ -1,9 +1,10 @@
-% $Id: Variogram.gls.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
+% $Id: Variogram.gls.Rd,v 1.6 2001/10/30 20:51:14 bates Exp $
 \name{Variogram.gls}
 \title{Calculate Semi-variogram for Residuals from a gls Object}
 \usage{
-\method{Variogram}{gls}(object, distance, form, resType, data, na.action, maxDist,
-          length.out, collapse, nint, breaks, robust, metric)
+\method{Variogram}{gls}(object, distance, form, resType, data,
+      na.action, maxDist, length.out, collapse, nint, breaks,
+      robust, metric, \dots)
 }
 \alias{Variogram.gls}
 \arguments{
@@ -74,6 +75,8 @@
     for the sum of the absolute differences. Partial matching of
     arguments is used, so only the first three characters need to be
     provided. Defaults to \code{"euclidean"}.}
+ \item{\dots}{some methods for this generic require additional
+    arguments.  None are used in this method.} 
 }
 \description{
   This method function calculates the semi-variogram for the residuals

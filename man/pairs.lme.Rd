@@ -1,16 +1,16 @@
-% $Id: pairs.lme.Rd,v 1.7 2001/06/18 21:16:50 bates Exp $
+% $Id: pairs.lme.Rd,v 1.8 2001/10/30 20:51:15 bates Exp $
 \name{pairs.lme}
 \title{Pairs Plot of an lme Object}
 \usage{
-\method{pairs}{lme}(object, form, label, id, idLabels, grid, ...)
+\method{pairs}{lme}(x, form, label, id, idLabels, grid, \dots)
 }
 \alias{pairs.lme}
 \arguments{
- \item{object}{an object inheriting from class \code{lme}, representing
+ \item{x}{an object inheriting from class \code{lme}, representing
    a fitted linear mixed-effects model.}
  \item{form}{an optional one-sided formula specifying the desired type of
    plot. Any variable present in the original data frame used to obtain
-   \code{object} can be referenced. In addition, \code{object} itself
+   \code{x} can be referenced. In addition, \code{x} itself
    can be referenced in the formula using the symbol
    \code{"."}. Conditional expressions on the right of a \code{|}
    operator can be used to define separate panels in a Trellis
@@ -19,6 +19,8 @@
    at least two columns. Default is \code{~ coef(.) }, corresponding to
    a pairs plot of the coefficients evaluated at the innermost level of
    nesting.}    
+ \item{label}{an optional character vector of labels for the variables
+   in the pairs plot.}
  \item{id}{an optional numeric value, or one-sided formula. If given as
    a value, it is used as a significance level for an outlier
    test based on the Mahalanobis distances of the estimated random

@@ -1,14 +1,16 @@
-% $Id: formula.varFunc.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
+% $Id: formula.varFunc.Rd,v 1.6 2001/10/30 20:51:15 bates Exp $
 \name{formula.varFunc}
 \title{Extract varFunc Formula}
 \usage{
-\method{formula}{varFunc}(object)
+\method{formula}{varFunc}(x, \dots)
 }
 \alias{formula.varFunc}
 \alias{formula.varComb}
 \arguments{
- \item{object}{an object inheriting from class \code{varFunc},
+ \item{x}{an object inheriting from class \code{varFunc},
    representing a variance function structure.} 
+ \item{\dots}{some methods for this generic require additional
+    arguments.  None are used in this method.} 
 }
 \description{
   This method function extracts the formula associated with a
@@ -16,7 +18,7 @@
   specified. 
 }
 \value{
-  if \code{object} has a \code{formula} attribute, its value is
+  if \code{x} has a \code{formula} attribute, its value is
   returned; else \code{NULL} is returned.
 }
 

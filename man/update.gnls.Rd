@@ -1,9 +1,9 @@
-% $Id: update.gnls.Rd,v 1.7 2001/06/18 21:16:50 bates Exp $
+% $Id: update.gnls.Rd,v 1.8 2001/10/30 20:51:15 bates Exp $
 \name{update.gnls}
 \title{Update a gnls Object}
 \usage{
-\method{update}{gnls}(object, model, data, params, start, correlation, weights, subset,
-       na.action, naPattern, control, verbose) 
+\method{update}{gnls}(object, model, data, params, start, correlation, 
+       weights, subset, na.action, naPattern, control, verbose, \dots) 
 }
 
 \alias{update.gnls}
@@ -13,6 +13,8 @@
  \item{other arguments}{defined as in \code{\link{gnls}}. See
    that function's documentation for descriptions of and default values
    for these arguments.}
+ \item{\dots}{some methods for this generic require additional
+    arguments.  None are used in this method.} 
 }
 \description{
   The non-missing arguments in the call to the \code{update.gnls} method

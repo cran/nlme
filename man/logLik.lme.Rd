@@ -1,8 +1,8 @@
-% $Id: logLik.lme.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
+% $Id: logLik.lme.Rd,v 1.6 2001/10/30 20:51:15 bates Exp $
 \name{logLik.lme}
 \title{Log-Likelihood of an lme Object}
 \usage{
-\method{logLik}{lme}(object, REML)
+\method{logLik}{lme}(object, REML, \dots)
 }
 \alias{logLik.lme}
 \arguments{
@@ -11,6 +11,8 @@
  \item{REML}{an optional logical value. If \code{TRUE} the restricted
    log-likelihood is returned, else, if \code{FALSE}, the log-likelihood
    is returned. Defaults to \code{FALSE}. }
+ \item{\dots}{some methods for this generic require additional
+    arguments.  None are used in this method.} 
 }
 \description{
   If \code{REML=FALSE}, returns the log-likelihood value of the linear

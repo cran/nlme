@@ -1,8 +1,8 @@
-% $Id: predict.gls.Rd,v 1.6 2001/06/18 21:16:50 bates Exp $
+% $Id: predict.gls.Rd,v 1.7 2001/10/30 20:51:15 bates Exp $
 \name{predict.gls}
 \title{Predictions from a gls Object}
 \usage{
-\method{predict}{gls}(object, newdata, na.action)
+\method{predict}{gls}(object, newdata, na.action, \dots)
 }
 \alias{predict.gls}
 \arguments{
@@ -15,6 +15,8 @@
    \code{newdata} contains \code{NA}s.  The default action
    (\code{na.fail}) causes the function to print an error message and
    terminate if there are any incomplete observations.}
+ \item{\dots}{some methods for this generic require additional
+    arguments.  None are used in this method.} 
 }
 \description{
   The predictions for the linear model represented by \code{object} are

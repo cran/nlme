@@ -1,25 +1,27 @@
-% $Id: pairs.lmList.Rd,v 1.7 2001/06/18 21:16:50 bates Exp $
+% $Id: pairs.lmList.Rd,v 1.8 2001/10/30 20:51:15 bates Exp $
 \name{pairs.lmList}
 \title{Pairs Plot of an lmList Object}
 \usage{
-\method{pairs}{lmList}(object, form, label, id, idLabels, grid, ...)
+\method{pairs}{lmList}(x, form, label, id, idLabels, grid, ...)
 }
 \alias{pairs.lmList}
 \arguments{
- \item{object}{an object inheriting from class \code{lmList}, representing
+ \item{x}{an object inheriting from class \code{lmList}, representing
    a list of \code{lm} objects with a common model.
  }
  \item{form}{an optional one-sided formula specifying the desired type of
    plot. Any variable present in the original data frame used to obtain
-   \code{object} can be referenced. In addition, \code{object} itself
+   \code{x} can be referenced. In addition, \code{x} itself
    can be referenced in the formula using the symbol
    \code{"."}. Conditional expressions on the right of a \code{|}
    operator can be used to define separate panels in a Trellis
    display. The expression on the right hand side of \code{form}, and to
    the left of the \code{|} operator, must evaluate to a data frame with
    at least two columns. Default is \code{~ coef(.) }, corresponding to
-   a pairs plot of the coefficients of \code{object}.
+   a pairs plot of the coefficients of \code{x}.
  }    
+ \item{label}{an optional character vector of labels for the variables
+   in the pairs plot.}
  \item{id}{an optional numeric value, or one-sided formula. If given as
    a value, it is used as a significance level for an outlier
    test based on the Mahalanobis distances of the estimated random
@@ -44,7 +46,7 @@
 }
 \description{
   Diagnostic plots for the linear model fits corresponding to the
-  \code{object}  components  are obtained. The \code{form} argument
+  \code{x}  components  are obtained. The \code{form} argument
   gives considerable  flexibility in the type of plot specification. A
   conditioning  expression (on the right side of a \code{|} operator)
   always implies  that different panels are used for  each level of the

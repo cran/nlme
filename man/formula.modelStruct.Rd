@@ -1,22 +1,23 @@
-% $Id: formula.modelStruct.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
+% $Id: formula.modelStruct.Rd,v 1.6 2001/10/30 20:51:15 bates Exp $
 \name{formula.modelStruct}
-%\title{Extract Formula from \code{modelStruct} Object}
 \title{Extract modelStruct Object Formula}
 \usage{
-\method{formula}{modelStruct}(object)
+\method{formula}{modelStruct}(x, \dots)
 }
 \alias{formula.modelStruct}
 \arguments{
- \item{object}{an object inheriting from class \code{modelStruct},
+ \item{x}{an object inheriting from class \code{modelStruct},
    representing a list of model components, such as \code{corStruct} and
    \code{varFunc} objects.}
+ \item{\dots}{some methods for this generic require additional
+    arguments.  None are used in this method.} 
 }
 \description{
   This method function extracts a formula from each of the 
-  components of \code{object}, returning a list of formulas.
+  components of \code{x}, returning a list of formulas.
 }
 \value{
-  a list with the formulas of each component of \code{object}.
+  a list with the formulas of each component of \code{x}.
 }
 \author{Jose Pinheiro and Douglas Bates}
 

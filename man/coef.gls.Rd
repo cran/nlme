@@ -1,8 +1,8 @@
-% $Id: coef.gls.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
+% $Id: coef.gls.Rd,v 1.6 2001/10/30 20:51:14 bates Exp $
 \name{coef.gls}
 \title{Extract gls Coefficients}
 \usage{
-\method{coef}{gls}(object, allCoef)
+\method{coef}{gls}(object, allCoef, \dots)
 }
 \alias{coef.gls}
 \arguments{
@@ -12,6 +12,8 @@
    coefficients, including the non-estimable, should be
    extracted. Non-estimable coefficients are assigned
    \code{NAs}. Default is \code{FALSE}.}
+ \item{\dots}{some methods for this generic require additional
+    arguments.  None are used in this method.} 
 }
 \description{
   The estimated coefficients for the linear model represented by

@@ -1,4 +1,4 @@
-## $Id: lmList.R,v 1.5 2001/08/19 21:38:55 deepayan Exp $
+## $Id: lmList.R,v 1.7 2001/10/30 20:51:14 bates Exp $
 ###
 ###                  Create a list of lm objects
 ###
@@ -169,7 +169,7 @@ augPred.lmList <-
 coef.lmList <-
   ## Extract the coefficients and form a  data.frame if possible
   function(object, augFrame = FALSE, data = NULL,
-           which = NULL, FUN = mean, omitGroupingFactor = TRUE)
+           which = NULL, FUN = mean, omitGroupingFactor = TRUE, ...)
 {
   coefs <- lapply(object, coef)
   non.null <- !unlist(lapply(coefs, is.null))
@@ -219,7 +219,7 @@ coef.lmList <-
 }
 
 fitted.lmList <-
-  function(object, subset = NULL, asList = FALSE)
+  function(object, subset = NULL, asList = FALSE, ...)
 {
   if(!is.null(subset)) {
     if(is.character(subset)) {
@@ -263,7 +263,7 @@ fitted.lmList <-
 }
 
 fixef.lmList <-
-  function(object)
+  function(object, ...)
 {
   coeff <- coef(object)
   if(is.matrix(coeff) || is.data.frame(coeff)) {
@@ -273,7 +273,7 @@ fixef.lmList <-
 }
 
 formula.lmList <-
-  function(object) eval(attr(object, "call")[["object"]])
+  function(x, ...) eval(attr(x, "call")[["object"]])
 
 getData.lmList <-
   function(object)
@@ -311,7 +311,7 @@ getResponse.lmList <-
 }
 
 intervals.lmList <-
-  function(object, level = 0.95, pool = attr(object, "pool"))
+  function(object, level = 0.95, pool = attr(object, "pool"), ...)
 {
   smry <- summary(object, pool = pool)
   coeff <- coef(smry)
@@ -334,7 +334,7 @@ intervals.lmList <-
 }
 
 logLik.lmList <-
-  function(object, REML = FALSE, pool = attr(object, "pool"))
+  function(object, REML = FALSE, pool = attr(object, "pool"), ...)
 {
   if(any(unlist(lapply(object, is.null)))) {
     stop("Log-likelihood not available with NULL fits.")
@@ -373,9 +373,10 @@ logLik.lmList <-
 }
 
 pairs.lmList <-
-  function(object, form = ~ coef(.), label, id = NULL, idLabels = NULL,
+  function(x, form = ~ coef(.), label, id = NULL, idLabels = NULL,
 	   grid = FALSE, ...)
 {
+  object <- x
   ## scatter plot matrix plots, generally based on coef or random.effects
   if (!inherits(form, "formula")) {
     stop("\"Form\" must be a formula")
@@ -564,8 +565,9 @@ pairs.lmList <-
 }
 
 plot.intervals.lmList <-
-  function(object, ...)
+  function(x, ...)
 {
+  object <- x
   dims <- dim(object)
   dn <- dimnames(object)
   ## changed definition of what to ordered to preserve order of parameters
@@ -617,17 +619,18 @@ plot.intervals.lmList <-
 }
 
 plot.ranef.lmList <-
-  function(object, form = NULL, grid = TRUE, control, ...)
+  function(x, form = NULL, grid = TRUE, control, ...)
 {
   fArgs <- as.list(match.call())[-1]
   do.call("plot.ranef.lme", fArgs)
 }
 
 plot.lmList <-
-  function(object, form = resid(., type = "pool") ~ fitted(.), abline,
+  function(x, form = resid(., type = "pool") ~ fitted(.), abline,
 	   id = NULL, idLabels = NULL,  grid, ...)
   ## Diagnostic plots based on residuals and/or fitted values
 {
+  object <- x
   if (!inherits(form, "formula")) {
     stop("\"Form\" must be a formula")
   }
@@ -815,7 +818,7 @@ plot.lmList <-
 
 predict.lmList <-
   function(object, newdata, subset = NULL, pool = attr(object, "pool"),
-	   asList = FALSE, se.fit = FALSE)
+	   asList = FALSE, se.fit = FALSE, ...)
 {
   if(missing(newdata)) {
     if (!se.fit) return(fitted(object, subset, asList))
@@ -1002,10 +1005,11 @@ print.summary.lmList <-
 }
 
 qqnorm.lmList <-
-  function(object, form = ~ resid(., type = "pooled"), abline = NULL,
+  function(y, form = ~ resid(., type = "pooled"), abline = NULL,
            id = NULL, idLabels = NULL, grid = FALSE, resType = "pool", ...)
   ## normal probability plots for residuals and random effects
 {
+  object <- y
   if (!inherits(form, "formula")) {
     stop("\"Form\" must be a formula")
   }
@@ -1203,7 +1207,7 @@ ranef.lmList <-
   ##  function fun.
   function(object, augFrame = FALSE, data = NULL,
            which = NULL, FUN = mean, standard = FALSE,
-           omitGroupingFactor = TRUE)
+           omitGroupingFactor = TRUE, ...)
 {
   val <- coef(object, augFrame, data, which, FUN, omitGroupingFactor)
   effNames <- attr(val, "effectNames")
@@ -1226,7 +1230,7 @@ ranef.lmList <-
 
 residuals.lmList <-
   function(object, type = c("response", "pearson", "pooled.pearson"),
-	   subset = NULL, asList = FALSE)
+	   subset = NULL, asList = FALSE, ...)
 {
   type <- match.arg(type)
   if(type == "pooled.pearson") {
@@ -1296,7 +1300,7 @@ residuals.lmList <-
 }
 
 summary.lmList <-
-  function(object, pool = attr(object, "pool"))
+  function(object, pool = attr(object, "pool"), ...)
 {
   to.3d.array <-
     ## Convert the list to a 3d array watching for null elements
@@ -1391,7 +1395,7 @@ summary.lmList <-
 }
 
 update.lmList <-
-  function(object, formula, data, level, subset, na.action, pool)
+  function(object, formula, data, level, subset, na.action, pool, ...)
 {
   thisCall <- as.list(match.call())[-(1:2)]
   if (!missing(formula)) {

@@ -1,21 +1,23 @@
-% $Id: formula.nlme.Rd,v 1.7 2001/06/18 21:16:50 bates Exp $
+% $Id: formula.nlme.Rd,v 1.8 2001/10/30 20:51:15 bates Exp $
 \name{formula.nlme}
 \title{Extract nlme Object Formula}
 \usage{
-\method{formula}{nlme}(object)
+\method{formula}{nlme}(x, \dots)
 }
 \alias{formula.nlme}
 \arguments{
- \item{object}{an object inheriting from class \code{nlme}, representing
+ \item{x}{an object inheriting from class \code{nlme}, representing
    a fitted nonlinear mixed-effects model.}
+ \item{\dots}{some methods for this generic require additional
+    arguments.  None are used in this method.} 
 }
 \description{
   This method function extracts the nonlinear model formula
-  associated with \code{object}. 
+  associated with \code{x}. 
 }
 \value{
   a two-sided nonlinear formula specifying the model used to
-  obtain \code{object}.
+  obtain \code{x}.
 }
 
 \author{Jose Pinheiro and Douglas Bates}

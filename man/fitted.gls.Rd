@@ -1,13 +1,15 @@
-% $Id: fitted.gls.Rd,v 1.6 2001/06/18 21:16:50 bates Exp $
+% $Id: fitted.gls.Rd,v 1.7 2001/10/30 20:51:15 bates Exp $
 \name{fitted.gls}
 \title{Extract gls Fitted Values}
 \usage{
-\method{fitted}{gls}(object)
+\method{fitted}{gls}(object, \dots)
 }
 \alias{fitted.gls}
 \arguments{
  \item{object}{an object inheriting from class \code{gls}, representing
    a generalized least squares fitted linear model.}
+ \item{\dots}{some methods for this generic require additional
+    arguments.  None are used in this method.} 
 }
 \description{
   The fitted values for the linear model represented by \code{object}

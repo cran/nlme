@@ -1,8 +1,8 @@
-% $Id: summary.varFunc.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
+% $Id: summary.varFunc.Rd,v 1.6 2001/10/30 20:51:15 bates Exp $
 \name{summary.varFunc}
 \title{Summarize varFunc Object}
 \usage{
-\method{summary}{varFunc}(object, structName)
+\method{summary}{varFunc}(object, structName, \dots)
 }
 \alias{summary.varFunc}
 \alias{summary.varComb}
@@ -23,6 +23,8 @@
  \code{"Different standard deviations per stratum"} for \code{varIdent},
  \code{"Power of variance covariate"} for \code{varPower}, and
  \code{data.class(object)} for \code{varFunc}.}
+ \item{\dots}{some methods for this generic require additional
+    arguments.  None are used in this method.} 
 }
 \description{
   A \code{structName} attribute, with the value of corresponding

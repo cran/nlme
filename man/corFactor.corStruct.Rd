@@ -1,8 +1,8 @@
-% $Id: corFactor.corStruct.Rd,v 1.6 2001/06/18 21:16:50 bates Exp $
+% $Id: corFactor.corStruct.Rd,v 1.7 2001/10/30 20:51:15 bates Exp $
 \name{corFactor.corStruct}
 \title{Factor of a corStruct Object Matrix}
 \usage{
-\method{corFactor}{corStruct}(object)
+\method{corFactor}{corStruct}(object, \dots)
 }
 \alias{corFactor.compSymm}
 \alias{corFactor.corAR1}
@@ -16,6 +16,8 @@
  \item{object}{an object inheriting from class \code{corStruct}
    representing a correlation structure, which must have been
    initialized (using \code{initialize}).}
+ \item{\dots}{some methods for this generic require additional
+    arguments.  None are used in this method.} 
 }
 \description{
   This method function extracts a transpose inverse square-root factor,

@@ -1,13 +1,17 @@
-% $Id: getCovariate.varFunc.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
+% $Id: getCovariate.varFunc.Rd,v 1.6 2001/10/30 20:51:15 bates Exp $
 \name{getCovariate.varFunc}
 \title{Extract varFunc Covariate}
 \usage{
-\method{getCovariate}{varFunc}(object)
+\method{getCovariate}{varFunc}(object, form, data))
 }
 \alias{getCovariate.varFunc}
 \arguments{
  \item{object}{an object inheriting from class \code{varFunc},
-   representing a variance function structure.} 
+   representing a variance function structure.}
+ \item{form}{an optional formula specifying the covariate to be
+   evaluated in \code{object}. Defaults to \code{formula(object)}.}
+ \item{data}{some methods for this generic require a \code{data}
+   object.  Not used in this method.} 
 }
 \description{
   This method function extracts the covariate(s) associated with the

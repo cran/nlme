@@ -1,4 +1,4 @@
-### $Id: pdMat.R,v 1.4 2001/06/18 21:16:49 bates Exp $
+### $Id: pdMat.R,v 1.5 2001/10/30 20:51:14 bates Exp $
 ###
 ###              Classes of positive-definite matrices
 ###
@@ -53,7 +53,7 @@ pdMat <-
 ###*# Methods for local generics
 
 corMatrix.pdMat <-
-  function(object)
+  function(object, ...)
 {
   if (!isInitialized(object)) {
     stop("Cannot access the matrix of uninitialized objects")
@@ -74,7 +74,7 @@ corMatrix.pdMat <-
 
 pdConstruct.pdMat <-
   function(object, value = numeric(0), form = formula(object),
-	   nam = Names(object), data = sys.frame(sys.parent()))
+	   nam = Names(object), data = sys.frame(sys.parent()), ...)
 {
   if (inherits(value, "pdMat")) {	# constructing from another pdMat
     if (length(form) == 0) {
@@ -247,7 +247,7 @@ as.matrix.pdMat <-
   function(x) pdMatrix(x)
 
 coef.pdMat <-
-  function(object, unconstrained = TRUE)
+  function(object, unconstrained = TRUE, ...)
 {
   if (unconstrained || !isInitialized(object)) {
     as.vector(object)
@@ -273,7 +273,7 @@ coef.pdMat <-
 }
 
 Dim.pdMat <-
-  function(object)
+  function(object, ...)
 {
   if ((val <- length(Names(object))) > 0) {
     return(c(val, val))
@@ -285,7 +285,7 @@ Dim.pdMat <-
 }
 
 formula.pdMat <-
-  function(object, asList) eval(attr(object, "formula"))
+  function(x, asList, ...) eval(attr(x, "formula"))
 
 isInitialized.pdMat <-
   function(object)
@@ -294,7 +294,7 @@ isInitialized.pdMat <-
 }
 
 logDet.pdMat <-
-  function(object)
+  function(object, ...)
 {
   if (!isInitialized(object)) {
     stop(paste("Cannot extract the log of the determinant",
@@ -315,7 +315,7 @@ logDet.pdMat <-
 }
 
 Names.pdMat <-
-  function(object)
+  function(object, ...)
 {
   as.character(attr(object, "Dimnames")[[2]])
 }
@@ -394,7 +394,7 @@ Names.pdMat <-
   }
 }
 
-"plot.pdMat"<-
+plot.pdMat <-
   function(x, nseg = 50, levels = 1, center = rep(0, length(stdDev)),
 	   additional, ...)
 {
@@ -532,7 +532,7 @@ print.summary.pdMat <-
 }
 
 solve.pdMat <-
-  function(a, b, tol)
+  function(a, b, ...)
 {
   if (!isInitialized(a)) {
     stop("Cannot get the inverse of an uninitialized object")
@@ -542,7 +542,7 @@ solve.pdMat <-
 }
 
 summary.pdMat <-
-  function(object, structName = class(object)[1], noCorrelation = FALSE)
+  function(object, structName = class(object)[1], noCorrelation = FALSE, ...)
 {
   if (isInitialized(object)) {
     value <- corMatrix(object)
@@ -603,7 +603,7 @@ pdSymm <-
 
 pdConstruct.pdSymm <-
   function(object, value = numeric(0), form = formula(object),
-	   nam = Names(object), data = sys.frame(sys.parent()))
+	   nam = Names(object), data = sys.frame(sys.parent()), ...)
 {
   val <- NextMethod()
   if (length(val) == 0) {               # uninitialized object
@@ -658,7 +658,7 @@ pdMatrix.pdSymm <-
 ####* Methods for standard generics
 
 coef.pdSymm <-
-  function(object, unconstrained = TRUE)
+  function(object, unconstrained = TRUE, ...)
 {
   if (unconstrained || !isInitialized(object)) NextMethod()
   else {				# upper triangular elements
@@ -675,7 +675,7 @@ coef.pdSymm <-
 }
 
 Dim.pdSymm <-
-  function(object)
+  function(object, ...)
 {
   if (isInitialized(object)) {
     val <- round((sqrt(8*length(object) + 1) - 1)/2)
@@ -686,7 +686,7 @@ Dim.pdSymm <-
 }
 
 logDet.pdSymm <-
-  function(object)
+  function(object, ...)
 {
   if (!isInitialized(object)) {
     stop(paste("Cannot extract the log of the determinant",
@@ -696,7 +696,7 @@ logDet.pdSymm <-
 }
 
 solve.pdSymm <-
-  function(a, b)
+  function(a, b, ...)
 {
   if (!isInitialized(a)) {
     stop("Cannot extract the inverse from an uninitialized object")
@@ -707,7 +707,7 @@ solve.pdSymm <-
 
 summary.pdSymm <-
   function(object,
-	   structName = "General positive-definite")
+	   structName = "General positive-definite", ...)
 {
   summary.pdMat(object, structName)
 }
@@ -734,7 +734,7 @@ pdLogChol <-
 
 pdConstruct.pdLogChol <-
   function(object, value = numeric(0), form = formula(object),
-	   nam = Names(object), data = sys.parent())
+	   nam = Names(object), data = sys.parent(), ...)
 {
   val <- pdConstruct.pdMat(object, value, form, nam, data)
   if (length(val) == 0) {               # uninitialized object
@@ -769,7 +769,7 @@ pdFactor.pdLogChol <-
 ####* Methods for standard generics
 
 solve.pdLogChol <-
-  function(a, b)
+  function(a, b, ...)
 {
   if (!isInitialized(a)) {
     stop("Cannot get the inverse of an uninitialized object")
@@ -791,7 +791,8 @@ solve.pdLogChol <-
 
 summary.pdLogChol <-
   function(object, structName =
-           "General positive-definite, Log-Cholesky parametrization")
+           "General positive-definite, Log-Cholesky parametrization",
+           ...)
 {
   summary.pdMat(object, structName)
 }
@@ -1130,7 +1131,7 @@ pdNatural <-
 
 pdConstruct.pdNatural <-
   function(object, value = numeric(0), form = formula(object),
-	   nam = Names(object), data = sys.frame(sys.parent()))
+	   nam = Names(object), data = sys.frame(sys.parent()), ...)
 {
   val <- pdConstruct.pdMat(object, value, form, nam, data)
   if (length(val) == 0) {               # uninitiliazed object
@@ -1191,7 +1192,7 @@ pdMatrix.pdNatural <-
 ####* Methods for standard generics
 
 coef.pdNatural <-
-  function(object, unconstrained = TRUE)
+  function(object, unconstrained = TRUE, ...)
 {
   if (unconstrained || !isInitialized(object)) NextMethod()
   else {				# standard deviations and correlations
@@ -1210,7 +1211,7 @@ coef.pdNatural <-
 }
 
 Dim.pdNatural <-
-  function(object)
+  function(object, ...)
 {
   if (isInitialized(object)) {
     val <- round((sqrt(8*length(object) + 1) - 1)/2)
@@ -1221,7 +1222,7 @@ Dim.pdNatural <-
 }
 
 logDet.pdNatural <-
-  function(object)
+  function(object, ...)
 {
   if (!isInitialized(object)) {
     stop(paste("Cannot extract the log of the determinant",
@@ -1232,7 +1233,7 @@ logDet.pdNatural <-
 
 
 solve.pdNatural <-
-  function(a, b)
+  function(a, b, ...)
 {
   if (!isInitialized(a)) {
     stop("Cannot get the inverse of an uninitialized object")
@@ -1260,7 +1261,8 @@ solve.pdNatural <-
 
 summary.pdNatural <-
   function(object,
-	   structName = "General positive-definite, Natural parametrization")
+	   structName = "General positive-definite, Natural parametrization",
+           ...)
 {
   summary.pdMat(object, structName)
 }
@@ -1285,7 +1287,7 @@ pdDiag <-
 ####* Methods for local generics
 
 corMatrix.pdDiag <-
-  function(object)
+  function(object, ...)
 {
   val <- diag(length(as.vector(object)))
   attr(val, "stdDev") <- exp(as.vector(object))
@@ -1300,7 +1302,7 @@ corMatrix.pdDiag <-
 
 pdConstruct.pdDiag <-
   function(object, value = numeric(0), form = formula(object),
-	   nam = Names(object), data = sys.frame(sys.parent()))
+	   nam = Names(object), data = sys.frame(sys.parent()), ...)
 {
   val <- NextMethod()
   if (length(val) == 0) {               # uninitiliazed object
@@ -1350,7 +1352,7 @@ pdMatrix.pdDiag <-
 ####* Methods for standard generics
 
 coef.pdDiag <-
-  function(object, unconstrained = TRUE)
+  function(object, unconstrained = TRUE, ...)
 {
   if (unconstrained) NextMethod()
   else {
@@ -1361,7 +1363,7 @@ coef.pdDiag <-
 }
 
 Dim.pdDiag <-
-  function(object)
+  function(object, ...)
 {
   if (isInitialized(object)) {
     val <- length(object)
@@ -1372,7 +1374,7 @@ Dim.pdDiag <-
 }
 
 logDet.pdDiag <-
-  function(object)
+  function(object, ...)
 {
   if (!isInitialized(object)) {
     stop(paste("Cannot extract the log of the determinant",
@@ -1382,7 +1384,7 @@ logDet.pdDiag <-
 }
 
 solve.pdDiag <-
-  function(a, b)
+  function(a, b, ...)
 {
   if (!isInitialized(a)) {
     stop("Cannot extract the inverse from an uninitialized object")
@@ -1392,7 +1394,7 @@ solve.pdDiag <-
 }
 
 summary.pdDiag <-
-  function(object, structName = "Diagonal")
+  function(object, structName = "Diagonal", ...)
 {
   summary.pdMat(object, structName, noCorrelation = TRUE)
 }
@@ -1416,7 +1418,7 @@ pdIdent <-
 ####* Methods for local generics
 
 corMatrix.pdIdent <-
-  function(object)
+  function(object, ...)
 {
   if (!isInitialized(object)) {
     stop("Cannot extract the matrix from an uninitialized pdMat object")
@@ -1436,7 +1438,7 @@ corMatrix.pdIdent <-
 
 pdConstruct.pdIdent <-
   function(object, value = numeric(0), form = formula(object),
-	   nam = Names(object), data = sys.frame(sys.parent()))
+	   nam = Names(object), data = sys.frame(sys.parent()), ...)
 {
   val <- NextMethod()
   if (length(val) == 0) {			# uninitialized object
@@ -1501,7 +1503,7 @@ pdMatrix.pdIdent <-
 ####* Methods for standard generics
 
 coef.pdIdent <-
-  function(object, unconstrained = TRUE)
+  function(object, unconstrained = TRUE, ...)
 {
   if (unconstrained) NextMethod()
   else structure(exp(as.vector(object)),
@@ -1509,7 +1511,7 @@ coef.pdIdent <-
 }
 
 Dim.pdIdent <-
-  function(object)
+  function(object, ...)
 {
   if (!is.null(val <- attr(object, "ncol"))) {
     c(val, val)
@@ -1519,13 +1521,13 @@ Dim.pdIdent <-
 }
 
 logDet.pdIdent <-
-  function(object)
+  function(object, ...)
 {
   attr(object, "ncol") * as.vector(object)
 }
 
 solve.pdIdent <-
-  function(a, b)
+  function(a, b, ...)
 {
   if (!isInitialized(a)) {
     stop("Cannot extract the inverse from an uninitialized object")
@@ -1535,7 +1537,7 @@ solve.pdIdent <-
 }
 
 summary.pdIdent <-
-  function(object, structName = "Multiple of an Identity")
+  function(object, structName = "Multiple of an Identity", ...)
 {
   summary.pdMat(object, structName, noCorrelation = TRUE)
 }
@@ -1556,7 +1558,7 @@ pdCompSymm <-
 ####* Methods for local generics
 
 corMatrix.pdCompSymm <-
-  function(object)
+  function(object, ...)
 {
   if (!isInitialized(object)) {
     stop("Cannot extract the matrix from an uninitialized pdMat object")
@@ -1580,7 +1582,7 @@ corMatrix.pdCompSymm <-
 
 pdConstruct.pdCompSymm <-
   function(object, value = numeric(0), form = formula(object),
-	   nam = Names(object), data = sys.frame(sys.parent()))
+	   nam = Names(object), data = sys.frame(sys.parent()), ...)
 {
   val <- NextMethod()
   if (length(val) == 0) {                # uninitialized object
@@ -1663,7 +1665,7 @@ pdMatrix.pdCompSymm <-
 ####* Methods for standard generics
 
 coef.pdCompSymm <-
-  function(object, unconstrained = TRUE)
+  function(object, unconstrained = TRUE, ...)
 {
   if (unconstrained || !isInitialized(object)) NextMethod()
   else {
@@ -1680,7 +1682,7 @@ coef.pdCompSymm <-
 }
 
 Dim.pdCompSymm <-
-  function(object)
+  function(object, ...)
 {
   if (!is.null(val <- attr(object, "ncol"))) {
     c(val, val)
@@ -1690,13 +1692,13 @@ Dim.pdCompSymm <-
 }
 
 logDet.pdCompSymm <-
-  function(object)
+  function(object, ...)
 {
   attr(pdMatrix(object, factor = TRUE), "logDet")
 }
 
 summary.pdCompSymm <-
-  function(object, structName = "Compound Symmetry")
+  function(object, structName = "Compound Symmetry", ...)
 {
   summary.pdMat(object, structName)
 }
@@ -1718,7 +1720,7 @@ pdBlocked <-
 ####* Methods for local generics
 
 corMatrix.pdBlocked <-
-  function(object)
+  function(object, ...)
 {
   if (!isInitialized(object)) {
     stop("Cannot access the matrix of uninitialized objects")
@@ -1744,7 +1746,7 @@ corMatrix.pdBlocked <-
 pdConstruct.pdBlocked <-
   function(object, value = numeric(0), form = formula(object, TRUE),
 	   nam = Names(object, TRUE), data = sys.frame(sys.parent()),
-	   pdClass = "pdSymm")
+	   pdClass = "pdSymm", ...)
 {
   if (inherits(value, "pdMat")) {	# constructing from another pdMat
     if (inherits(value, "pdBlocked")) {
@@ -1984,7 +1986,7 @@ pdMatrix.pdBlocked <-
 ####* Methods for standard generics
 
 coef.pdBlocked <-
-  function(object, unconstrained = TRUE)
+  function(object, unconstrained = TRUE, ...)
 {
   unlist(lapply(object, coef, unconstrained))
 }
@@ -2008,9 +2010,9 @@ coef.pdBlocked <-
 }
 
 formula.pdBlocked <-
-  function(object, asList = TRUE)
+  function(x, asList = TRUE, ...)
 {
-  val <- lapply(object, formula)
+  val <- lapply(x, formula)
   isNULL <- unlist(lapply(val, is.null))
   if (all(isNULL)) return(NULL)
   if (any(isNULL)) {
@@ -2052,7 +2054,7 @@ isInitialized.pdBlocked <-
 }
 
 logDet.pdBlocked <-
-  function(object)
+  function(object, ...)
 {
   sum(unlist(lapply(object, logDet)))
 }
@@ -2083,7 +2085,7 @@ logDet.pdBlocked <-
 }
 
 Names.pdBlocked <-
-  function(object, asList = FALSE)
+  function(object, asList = FALSE, ...)
 {
   if (asList) attr(object, "namesList")
   else attr(object, "Dimnames")[[2]]
@@ -2106,7 +2108,7 @@ pdFactor.pdBlocked <-
 }
 
 solve.pdBlocked <-
-  function(a, b)
+  function(a, b, ...)
 {
   if (!isInitialized(a)) {
     stop("Cannot get the inverse of an uninitialized object")
@@ -2116,7 +2118,7 @@ solve.pdBlocked <-
 }
 
 summary.pdBlocked <-
-  function(object, structName = "Blocked")
+  function(object, structName = "Blocked", ...)
 {
   value <- lapply(object, summary)
   names(value) <- unlist(lapply(object, function(el) paste(Names(el),

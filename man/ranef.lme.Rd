@@ -1,12 +1,12 @@
-% $Id: random.effects.lme.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
-\name{random.effects.lme}
+% $Id: ranef.lme.Rd,v 1.3 2001/10/30 20:51:15 bates Exp $
+\name{ranef.lme}
 \title{Extract lme Random Effects}
 \usage{
-\method{random.effects}{lme}(object, augFrame, level, data, which, FUN, standard, 
-               omitGroupingFactor)
+\method{ranef}{lme}(object, augFrame, level, data, which, FUN,
+      standard, omitGroupingFactor, subset, \dots)
 }
-\alias{random.effects.lme}
 \alias{ranef.lme}
+\alias{random.effects.lme}
 \alias{print.ranef.lme}
 \arguments{
  \item{object}{an object inheriting from class \code{lme}, representing
@@ -49,6 +49,10 @@
    summary of \code{data} but the levels of the grouping factor will
    continue to be used as the row names for the returned data frame.
    Defaults to \code{FALSE}.}
+ \item{subset}{an optional expression indicating for which rows the
+   random effects should be extracted.}
+ \item{\dots}{some methods for this generic require additional
+    arguments.  None are used in this method.} 
 }
 \description{
   The estimated random effects at level \eqn{i} are represented as a
@@ -76,7 +80,8 @@
 \examples{
 data(Orthodont)
 fm1 <- lme(distance ~ age, Orthodont, random = ~ age | Subject)
-random.effects(fm1)
+ranef(fm1)
+random.effects(fm1)             # same as above
 random.effects(fm1, augFrame = TRUE)
 }
 \keyword{models}

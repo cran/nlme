@@ -1,12 +1,12 @@
-% $Id: plot.ACF.Rd,v 1.6 2001/06/18 21:16:50 bates Exp $
+% $Id: plot.ACF.Rd,v 1.7 2001/10/30 20:51:15 bates Exp $
 \name{plot.ACF}
 \title{Plot an ACF Object}
 \usage{
-\method{plot}{ACF}(object, alpha, xlab, ylab, grid, ...)
+\method{plot}{ACF}(x, alpha, xlab, ylab, grid, \dots)
 }
 \alias{plot.ACF}
 \arguments{
- \item{object}{an object inheriting from class \code{ACF},
+ \item{x}{an object inheriting from class \code{ACF},
    consisting of a data frame with two columns named \code{lag} and
    \code{ACF}, representing the autocorrelation values and the
    corresponding lags. 

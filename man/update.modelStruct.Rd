@@ -1,8 +1,8 @@
-% $Id: update.modelStruct.Rd,v 1.4 2001/06/18 21:16:50 bates Exp $
+% $Id: update.modelStruct.Rd,v 1.5 2001/10/30 20:51:15 bates Exp $
 \name{update.modelStruct}
 \title{Update a modelStruct Object}
 \usage{
-\method{update}{modelStruct}(object, data)
+\method{update}{modelStruct}(object, data, \dots)
 }
 \alias{update.modelStruct}
 \alias{update.corStruct}
@@ -13,6 +13,8 @@
     \code{varFunc} objects.}
   \item{data}{a data frame in which to evaluate the variables needed for
     updating the elements of \code{object}.}
+ \item{\dots}{some methods for this generic require additional
+    arguments.  None are used in this method.} 
 }
 \description{
     This method function updates each element of \code{object}, allowing

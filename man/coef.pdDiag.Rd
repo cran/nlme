@@ -1,8 +1,8 @@
-% $Id: coef.pdDiag.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
+% $Id: coef.pdDiag.Rd,v 1.6 2001/10/30 20:51:15 bates Exp $
 \name{coef.pdDiag}
 \title{pdDiag Object Coefficients}
 \usage{
-\method{coef}{pdDiag}(object, unconstrained)
+\method{coef}{pdDiag}(object, unconstrained, \dots)
 coef(object) <- value
 }
 \alias{coef.pdDiag}
@@ -17,6 +17,8 @@ coef(object) <- value
    associated with \code{object}. It must be a vector with length equal
    to \code{coef(object)} and must be given in unconstrained form.
  }
+ \item{\dots}{some methods for this generic require additional
+    arguments.  None are used in this method.} 
 }
 \description{
   This method function extracts the coefficients associated with the

@@ -1,8 +1,8 @@
-% $Id: logDet.pdMat.Rd,v 1.6 2001/06/18 21:16:50 bates Exp $
+% $Id: logDet.pdMat.Rd,v 1.7 2001/10/30 20:51:15 bates Exp $
 \name{logDet.pdMat}
 \title{Extract Log-Determinant from a pdMat Object}
 \usage{
-\method{logDet}{pdMat}(object)
+\method{logDet}{pdMat}(object, \dots)
 }
 \alias{logDet.pdMat}
 \alias{logDet.pdBlocked}
@@ -14,6 +14,8 @@
 \arguments{
  \item{object}{an object inheriting from class \code{pdMat}, representing
    a positive definite matrix.} 
+ \item{\dots}{some methods for this generic require additional
+    arguments.  None are used in this method.} 
 }
 \description{
   This method function extracts the logarithm of the determinant of a

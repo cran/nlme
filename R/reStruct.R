@@ -1,4 +1,4 @@
-### $Id: reStruct.R,v 1.4 2001/06/18 21:16:49 bates Exp $
+### $Id: reStruct.R,v 1.5 2001/10/30 20:51:14 bates Exp $
 ###
 ###      Methods for the class of random-effects structures.
 ###
@@ -151,7 +151,7 @@ reStruct <-
 ###*# Methods for pdMat generics
 
 corMatrix.reStruct <-
-  function(object)
+  function(object, ...)
 {
   if (!isInitialized(object)) {
     stop("Cannot access the matrix of uninitialized objects")
@@ -177,10 +177,10 @@ pdMatrix.reStruct <-
 ###*# Methods for standard generics
 
 as.matrix.reStruct <-
-  function(object) pdMatrix(object)
+  function(x) pdMatrix(x)
 
 coef.reStruct <-
-  function(object, unconstrained = TRUE)
+  function(object, unconstrained = TRUE, ...)
 {
   unlist(lapply(object, coef, unconstrained))
 }
@@ -204,9 +204,9 @@ coef.reStruct <-
 }
 
 formula.reStruct <-
-  function(object, asList = FALSE)
+  function(x, asList = FALSE, ...)
 {
-  as.list(lapply(object, formula, asList))
+  as.list(lapply(x, formula, asList))
 }
 
 getGroupsFormula.reStruct <-
@@ -230,7 +230,7 @@ isInitialized.reStruct <-
   function(object) all(unlist(lapply(object, isInitialized)))
 
 initialize.reStruct <-
-  function(object, data, conLin, control = list(niterEM = 20))
+  function(object, data, conLin, control = list(niterEM = 20), ...)
 {
   ## initialize reStruct object, possibly getting initial estimates
   seqO <- seq(along = object)
@@ -281,13 +281,13 @@ initialize.reStruct <-
 }
 
 logDet.reStruct <-
-  function(object)
+  function(object, ...)
 {
   unlist(lapply(object, logDet))
 }
 
 logLik.reStruct <-
-  function(object, conLin)
+  function(object, conLin, ...)
 {
   if(any(!is.finite(conLin$Xy))) return(-Inf)
   .C("mixed_loglik",
@@ -315,7 +315,7 @@ logLik.reStruct <-
 }
 
 model.matrix.reStruct <-
-  function(object, data, contrast = NULL)
+  function(object, data, contrast = NULL, ...)
 {
   if (is.null(form <- formula(object, asList = TRUE))) {
     stop("Cannot extract model matrix without formula")
@@ -367,9 +367,9 @@ model.matrix.reStruct <-
 }
 
 Names.reStruct <-
-  function(object)
+    function(object, ...)
 {
-  as.list(lapply(object, Names))
+    as.list(lapply(object, Names))
 }
 
 "Names<-.reStruct" <-
@@ -414,23 +414,23 @@ print.reStruct <-
 }
 
 recalc.reStruct <-
-  function(object, conLin)
+  function(object, conLin, ...)
 {
   conLin[["logLik"]] <- conLin[["logLik"]] + logLik(object, conLin)
   conLin
 }
 
 solve.reStruct <-
-  function(a, b, tol)
+  function(a, b, ...)
 {
   a[] <- lapply(a, solve)
   a
 }
 
-summary.reStruct <- function(object) object
+summary.reStruct <- function(object, ...) object
 
 update.reStruct <-
-  function(object, data)
+  function(object, data, ...)
 {
   object
 }

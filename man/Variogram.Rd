@@ -1,10 +1,22 @@
-% $Id: Variogram.Rd,v 1.3 2000/07/03 18:22:46 bates Exp $
+% $Id: Variogram.Rd,v 1.4 2001/10/30 20:51:14 bates Exp $
 \name{Variogram}
 \title{Calculate Semi-variogram}
 \usage{
 Variogram(object, distance, ...)
 }
 \alias{Variogram}
+\arguments{
+  \item{object}{a numeric vector with the values to be used for
+    calculating the semi-variogram, usually a residual vector from a
+    fitted model.}
+  \item{distance}{a numeric vector with the pairwise distances
+    corresponding to the elements of \code{object}. The order of the
+    elements in \code{distance} must correspond to the pairs
+    \code{(1,2), (1,3), ..., (n-1,n)}, with \code{n} representing the
+    length of \code{object}, and must have length \code{n(n-1)/2}.}
+  \item{\dots}{some methods for this generic function require additional
+    arguments.}
+}
 \description{
   This function is generic; method functions can be written to handle
   specific classes of objects. Classes which already have methods for

@@ -1,7 +1,7 @@
 \name{getCovariateFormula}
 \title{Extract Covariates Formula}
 \usage{
-\method{getCovariateFormula}{getCovariateFormula}(object)
+getCovariateFormula(object)
 }
 \alias{getCovariateFormula}
 \arguments{

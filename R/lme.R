@@ -1,4 +1,4 @@
-### $Id: lme.R,v 1.6 2001/08/19 21:38:55 deepayan Exp $
+### $Id: lme.R,v 1.8 2001/10/30 20:51:14 bates Exp $
 ###
 ###            Fit a general linear mixed effects model
 ###
@@ -1106,7 +1106,7 @@ augPred.lme <-
 
 coef.lme <-
   function(object, augFrame = FALSE, level = Q, data, which = 1:ncol(data),
-	   FUN = mean, omitGroupingFactor = TRUE, subset = NULL)
+	   FUN = mean, omitGroupingFactor = TRUE, subset = NULL, ...)
 {
   Q <- object$dims$Q
   if (length(level) > 1) {
@@ -1166,7 +1166,7 @@ coef.lme <-
 }
 
 fitted.lme <-
-  function(object, level = Q, asList = FALSE)
+  function(object, level = Q, asList = FALSE, ...)
 {
   Q <- object$dims$Q
   val <- object[["fitted"]]
@@ -1196,10 +1196,10 @@ fitted.lme <-
   val
 }
 
-formula.lme <- function(object) eval(object$call$fixed)
+formula.lme <- function(x, ...) eval(x$call$fixed)
 
 fixef.lme <-
-  function(object) object$coefficients$fixed
+  function(object, ...) object$coefficients$fixed
 
 getGroups.lme <-
   function(object, form, level = Q, data, sep)
@@ -1233,7 +1233,7 @@ getResponse.lme <-
 }
 
 intervals.lme <-
-  function(object, level = 0.95, which = c("all", "var-cov", "fixed"))
+  function(object, level = 0.95, which = c("all", "var-cov", "fixed"), ...)
 {
   which <- match.arg(which)
   val <- list()
@@ -1340,7 +1340,7 @@ intervals.lme <-
 }
 
 logLik.lme <-
-  function(object, REML)
+  function(object, REML, ...)
 {
   p <- object$dims$ncol[object$dims$Q + 1]
   N <- object$dims$N
@@ -1364,9 +1364,10 @@ logLik.lme <-
 }
 
 pairs.lme <-
-  function(object, form = ~coef(.), label, id = NULL, idLabels = NULL,
+  function(x, form = ~coef(.), label, id = NULL, idLabels = NULL,
 	   grid = FALSE, ...)
 {
+  object <- x
   ## scatter plot matrix plots, generally based on coef or ranef
   if (!inherits(form, "formula")) {
     stop("\"Form\" must be a formula")
@@ -1566,9 +1567,10 @@ pairs.lme <-
 }
 
 plot.ranef.lme <-
-  function(object, form = NULL, omitFixed = TRUE, level = Q,
+  function(x, form = NULL, omitFixed = TRUE, level = Q,
            grid = TRUE, control, ...)
 {
+  object <- x
   plotControl <-
     function(drawLine = TRUE, span.loess = 2/3, degree.loess = 1,
              cex.axis = 0.8, srt.axis = 0, mgp.axis = c(2, 0.5, 0))
@@ -1815,7 +1817,8 @@ plot.ranef.lme <-
 }
 
 predict.lme <-
-  function(object, newdata, level = Q, asList = FALSE, na.action = na.fail)
+  function(object, newdata, level = Q, asList = FALSE,
+           na.action = na.fail, ...)
 {
   ##
   ## method for predict() designed for objects inheriting from class lme
@@ -1984,7 +1987,7 @@ predict.lme <-
 }
 
 print.anova.lme <-
-  function(x, verbose = attr(x, "verbose"))
+  function(x, verbose = attr(x, "verbose"), ...)
 {
   if ((rt <- attr(x,"rt")) == 1) {
     if (!is.null(lab <- attr(x, "label"))) {
@@ -2180,10 +2183,11 @@ print.summary.lme <-
 }
 
 qqnorm.lme <-
-  function(object, form = ~ resid(., type = "p"), abline = NULL,
+  function(y, form = ~ resid(., type = "p"), abline = NULL,
            id = NULL, idLabels = NULL, grid = FALSE, ...)
   ## normal probability plots for residuals and random effects
 {
+  object <- y
   if (!inherits(form, "formula")) {
     stop("\"Form\" must be a formula")
   }
@@ -2389,7 +2393,7 @@ ranef.lme <-
   ##  function fun.
 function(object, augFrame = FALSE, level = 1:Q, data, which = 1:ncol(data),
 	 FUN = mean, standard = FALSE , omitGroupingFactor = TRUE,
-         subset = NULL)
+         subset = NULL, ...)
 {
   Q <- object$dims$Q
   effects <- object$coefficients$random
@@ -2467,7 +2471,7 @@ function(object, augFrame = FALSE, level = 1:Q, data, which = 1:ncol(data),
 
 residuals.lme <-
   function(object, level = Q, type = c("response", "pearson", "normalized"),
-           asList = FALSE)
+           asList = FALSE, ...)
 
 {
   type <- match.arg(type)
@@ -2519,7 +2523,7 @@ residuals.lme <-
   val
 }
 
-summary.lme <- function(object, adjustSigma = TRUE, verbose = FALSE)
+summary.lme <- function(object, adjustSigma = TRUE, verbose = FALSE, ...)
 {
   ##  variance-covariance estimates for fixed effects
   fixed <- fixef(object)
@@ -2562,7 +2566,7 @@ summary.lme <- function(object, adjustSigma = TRUE, verbose = FALSE)
 
 update.lme <-
   function(object, fixed, data, random, correlation, weights, subset,
-           method, na.action, control)
+           method, na.action, control, ...)
 {
   thisCall <- as.list(match.call())[-(1:2)]
   if (is.null(nextCall <- object$origCall) ||
@@ -2600,7 +2604,8 @@ Variogram.lme <-
            resType = c("pearson", "response", "normalized"),
            data, na.action = na.fail, maxDist, length.out = 50,
            collapse = c("quantiles", "fixed", "none"), nint = 20, breaks,
-           robust = FALSE, metric = c("euclidean", "maximum", "manhattan"))
+           robust = FALSE, metric = c("euclidean", "maximum", "manhattan"),
+           ...)
 {
   resType <- match.arg(resType)
   Q <- object$dims$Q
@@ -2745,7 +2750,7 @@ lmeStruct <-
 
 fitted.lmeStruct <-
   function(object, level = Q, conLin = attr(object, "conLin"),
-           lmeFit = attr(object, "lmeFit"))
+           lmeFit = attr(object, "lmeFit"), ...)
 {
   if (is.null(conLin)) {
     stop("No condensed linear model")
@@ -2780,7 +2785,7 @@ fitted.lmeStruct <-
 
 initialize.lmeStruct <-
   function(object, data, groups, conLin = attr(object, "conLin"),
-	   control= list(niterEM = 20, gradHess = TRUE))
+	   control= list(niterEM = 20, gradHess = TRUE), ...)
 {
   object[] <- lapply(object, initialize, data, conLin, control)
   theta <- lapply(object, coef)
@@ -2809,14 +2814,14 @@ initialize.lmeStruct <-
 }
 
 logLik.lmeStruct <-
-  function(object, Pars, conLin = attr(object, "conLin"))
+  function(object, Pars, conLin = attr(object, "conLin"), ...)
 {
   coef(object) <- Pars			# updating parameter values
   recalc(object, conLin)[["logLik"]]	# updating conLin
 }
 
 logLik.lmeStructInt <-
-  function(object, Pars, conLin = attr(object, "conLin"))
+  function(object, Pars, conLin = attr(object, "conLin"), ...)
 {
   ## logLik for objects with reStruct parameters only, with
   ## internally defined class
@@ -2837,7 +2842,7 @@ logLik.lmeStructInt <-
 
 residuals.lmeStruct <-
   function(object, level = Q, conLin = attr(object, "conLin"),
-           lmeFit = attr(object, "lmeFit"))
+           lmeFit = attr(object, "lmeFit"), ...)
 {
   Q <- conLin$dims$Q
   conLin$Xy[, conLin$dims$ZXcols] - fitted(object, level, conLin, lmeFit)

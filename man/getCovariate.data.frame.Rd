@@ -1,14 +1,16 @@
-% $Id: getCovariate.data.frame.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
+% $Id: getCovariate.data.frame.Rd,v 1.6 2001/10/30 20:51:15 bates Exp $
 \name{getCovariate.data.frame}
 \title{Extract Data Frame Covariate}
 \usage{
-\method{getCovariate}{data.frame}(object, form)
+\method{getCovariate}{data.frame}(object, form, data)
 }
 \alias{getCovariate.data.frame}
 \arguments{
  \item{object}{an object inheriting from class \code{data.frame}.}
  \item{form}{an optional formula specifying the covariate to be
    evaluated in \code{object}. Defaults to \code{formula(object)}.}
+ \item{data}{some methods for this generic require a separate data
+   frame. Not used in this method.}
 }
 \description{
   The right hand side of \code{form}, stripped of any conditioning

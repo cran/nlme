@@ -1,8 +1,8 @@
-% $Id: logLik.varFunc.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
+% $Id: logLik.varFunc.Rd,v 1.6 2001/10/30 20:51:15 bates Exp $
 \name{logLik.varFunc}
 \title{Extract varFunc logLik}
 \usage{
-\method{logLik}{varFunc}(object, data)
+\method{logLik}{varFunc}(object, data, \dots)
 }
 \alias{logLik.varFunc}
 \alias{logLik.varComb}
@@ -11,6 +11,8 @@
    representing a variance function structure.} 
  \item{data}{this argument is included to make this method function
    compatible with other \code{logLik} methods and will be ignored.} 
+ \item{\dots}{some methods for this generic require additional
+    arguments.  None are used in this method.} 
 }
 \description{
   This method function extracts the component of a Gaussian

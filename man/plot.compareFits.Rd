@@ -1,14 +1,14 @@
-% $Id: plot.compareFits.Rd,v 1.6 2001/06/18 21:16:50 bates Exp $
+% $Id: plot.compareFits.Rd,v 1.7 2001/10/30 20:51:15 bates Exp $
 \name{plot.compareFits}
 \title{Plot a compareFits Object}
 \usage{
-\method{plot}{compareFits}(object, subset, key, mark, ...)
+\method{plot}{compareFits}(x, subset, key, mark, ...)
 }
 \alias{plot.compareFits}
 \arguments{
- \item{object}{an object of class \code{compareFits}.}
+ \item{x}{an object of class \code{compareFits}.}
  \item{subset}{an optional logical or integer vector specifying which
-   rows of \code{object} should be used in the plots. If missing, all
+   rows of \code{x} should be used in the plots. If missing, all
    rows are used.}
  \item{key}{an optional logical value, or list. If \code{TRUE}, a legend
  is included at the top of the plot indicating which symbols (colors)

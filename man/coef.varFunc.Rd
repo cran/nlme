@@ -1,8 +1,8 @@
-% $Id: coef.varFunc.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
+% $Id: coef.varFunc.Rd,v 1.6 2001/10/30 20:51:15 bates Exp $
 \name{coef.varFunc}
 \title{varFunc Object Coefficients}
 \usage{
-\method{coef}{varFunc}(object, unconstrained, allCoef)
+\method{coef}{varFunc}(object, unconstrained, allCoef, \dots)
 coef(object) <- value
 }
 \alias{coef.varFunc}
@@ -33,6 +33,8 @@ coef(object) <- value
    \code{coef{object}} and must be given in unconstrained
    form. \code{Object} must be initialized before new values can be
    assigned to its coefficients.}
+ \item{\dots}{some methods for this generic require additional
+    arguments.  None are used in this method.} 
 }
 \description{
   This method function extracts the coefficients associated with the

@@ -1,8 +1,8 @@
-% $Id: initialize.corStruct.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
+% $Id: initialize.corStruct.Rd,v 1.6 2001/10/30 20:51:15 bates Exp $
 \name{initialize.corStruct}
 \title{Initialize corStruct Object}
 \usage{
-\method{initialize}{corStruct}(object, data, ...)
+\method{initialize}{corStruct}(object, data, \dots)
 }
 \alias{initialize.corStruct}
 \alias{initialize.corAR1}

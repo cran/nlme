@@ -1,8 +1,8 @@
-% $Id: Dim.corStruct.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
+% $Id: Dim.corStruct.Rd,v 1.6 2001/10/30 20:51:14 bates Exp $
 \name{Dim.corStruct}
 \title{Dimensions of a corStruct Object}
 \usage{
-\method{Dim}{corStruct}(object, groups)
+\method{Dim}{corStruct}(object, groups, \dots)
 }
 \alias{Dim.corStruct}
 \arguments{
@@ -11,6 +11,8 @@
  \item{groups}{an optional factor defining the grouping of the
    observations; observations within a group are correlated and
    observations in different groups are uncorrelated.}
+ \item{\dots}{some methods for this generic require additional
+    arguments.  None are used in this method.} 
 }
 \description{
   if \code{groups} is missing, it returns the \code{Dim} attribute of

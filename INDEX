@@ -3,7 +3,6 @@ ACF.gls                  Autocorrelation Function for gls Residuals
 ACF.lme                  Autocorrelation Function for lme Residuals
 AIC                      Akaike Information Criterion
 AIC.lme                  Akaike Information Criterion
-AIC.logLik               AIC of a logLik Object
 Alfalfa                  Split-Plot Experiment on Varieties of Alfalfa
 Assay                    Bioassay on Cell Culture Plate
 BIC                      Bayesian Information Criterion
@@ -88,6 +87,7 @@ asOneFormula             Combine Formulas of a Set of Objects
 asTable                  Convert groupedData to a matrix
 augPred                  Augmented Predictions
 balancedGrouped          Create a groupedData object from a matrix
+bdf                      Language scores
 coef.corStruct           Coefficients of a corStruct Object
 coef.gls                 Extract gls Coefficients
 coef.gnls                Extract gnls Coefficients
@@ -136,8 +136,8 @@ fitted.lme               Extract lme Fitted Values
 fitted.lmeStruct         Calculate lmeStruct Fitted Values
 fitted.nlmeStruct        Calculate nlmeStruct Fitted Values
 fixed.effects            Extract Fixed Effects
-fixed.effects.lmList     Extract lmList Fixed Effects
-fixed.effects.lme        Extract lme Fixed Effects
+fixef.lmList             Extract lmList Fixed Effects
+fixef.lme                Extract lme Fixed Effects
 formula.corStruct        Extract corStruct Object Formula
 formula.gls              Extract gls Object Formula
 formula.gnls             Extract gnls Object Formula
@@ -146,7 +146,6 @@ formula.lmList           Extract lmList Object Formula
 formula.lme              Extract lme Object Formula
 formula.modelStruct      Extract modelStruct Object Formula
 formula.nlme             Extract nlme Object Formula
-formula.nls              Extract Model Formula from nls Object
 formula.nlsList          Extract nlsList Object Formula
 formula.pdBlocked        Extract pdBlocked Formula
 formula.pdMat            Extract pdMat Formula
@@ -218,7 +217,6 @@ logLik.gls               Log-Likelihood of a gls Object
 logLik.glsStruct         Log-Likelihood of a glsStruct Object
 logLik.gnls              Log-Likelihood of a gnls Object
 logLik.gnlsStruct        Log-Likelihood of a gnlsStruct Object
-logLik.lm                Extract Log-Likelihood from an lm Object
 logLik.lmList            Log-Likelihood of an lmList Object
 logLik.lme               Log-Likelihood of an lme Object
 logLik.lmeStruct         Log-Likelihood of an lmeStruct Object
@@ -300,8 +298,8 @@ qqnorm.gls               Normal Plot of Residuals from a gls Object
 qqnorm.lme               Normal Plot of Residuals or Random Effects from
                          an lme Object
 random.effects           Extract Random Effects
-random.effects.lmList    Extract lmList Random Effects
-random.effects.lme       Extract lme Random Effects
+ranef.lmList             Extract lmList Random Effects
+ranef.lme                Extract lme Random Effects
 reStruct                 Random Effects Structure
 recalc                   Recalculate Condensed Linear Model Object
 recalc.corStruct         Recalculate for corStruct Object
@@ -310,7 +308,6 @@ recalc.reStruct          Recalculate for an reStruct Object
 recalc.varFunc           Recalculate for varFunc Object
 residuals.gls            Extract gls Residuals
 residuals.glsStruct      Calculate glsStruct Residuals
-residuals.gnls           Extract gnls Residuals
 residuals.gnlsStruct     Calculate gnlsStruct Residuals
 residuals.lmList         Extract lmList Residuals
 residuals.lme            Extract lme Residuals

@@ -1,8 +1,8 @@
-% $Id: corMatrix.corStruct.Rd,v 1.6 2001/06/18 21:16:50 bates Exp $
+% $Id: corMatrix.corStruct.Rd,v 1.7 2001/10/30 20:51:15 bates Exp $
 \name{corMatrix.corStruct}
 \title{Matrix of a corStruct Object}
 \usage{
-\method{corMatrix}{corStruct}(object, covariate, corr)
+\method{corMatrix}{corStruct}(object, covariate, corr, \dots)
 }
 \alias{corMatrix.corStruct}
 \alias{corMatrix.compSymm}
@@ -26,6 +26,8 @@
    \code{object}. If \code{FALSE} the function returns a transpose
    inverse square-root of the correlation matrix, or a list of transpose
    inverse square-root factors of the correlation matrices.}
+ \item{\dots}{some methods for this generic require additional
+    arguments.  None are used in this method.} 
 }
 \description{
   This method function extracts the correlation matrix (or its transpose

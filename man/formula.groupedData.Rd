@@ -1,12 +1,14 @@
-% $Id: formula.groupedData.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
+% $Id: formula.groupedData.Rd,v 1.6 2001/10/30 20:51:15 bates Exp $
 \name{formula.groupedData}
 \title{Extract groupedData Formula}
 \usage{
-\method{formula}{groupedData}(object)
+\method{formula}{groupedData}(x, \dots)
 }
 \alias{formula.groupedData}
 \arguments{
- \item{object}{an object inheriting from class \code{groupedData}.}
+ \item{x}{an object inheriting from class \code{groupedData}.}
+ \item{\dots}{some methods for this generic require additional
+    arguments.  None are used in this method.} 
 }
 \description{
   This method function extracts the display formula associated with a
@@ -17,7 +19,7 @@
 }
 \value{
   a two-sided formula with a conditioning expression, representing the
-  display formula for \code{object}.
+  display formula for \code{x}.
 }
 \author{Jose Pinheiro and Douglas Bates}
 

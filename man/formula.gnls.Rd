@@ -1,21 +1,23 @@
-% $Id: formula.gnls.Rd,v 1.6 2001/06/18 21:16:50 bates Exp $
+% $Id: formula.gnls.Rd,v 1.7 2001/10/30 20:51:15 bates Exp $
 \name{formula.gnls}
 \title{Extract gnls Object Formula}
 \usage{
-\method{formula}{gnls}(object)
+\method{formula}{gnls}(x, \dots)
 }
 \alias{formula.gnls}
 \arguments{
- \item{object}{an object inheriting from class \code{gnls}, representing
+ \item{x}{an object inheriting from class \code{gnls}, representing
    a generalized nonlinear least squares fitted model.}
+ \item{\dots}{some methods for this generic require additional
+    arguments.  None are used in this method.} 
 }
 \description{
   This method function extracts the nonlinear model formula
-  associated with \code{object}. 
+  associated with \code{x}. 
 }
 \value{
   a two-sided formula specifying the nonlinear model used to
-  obtain \code{object}.
+  obtain \code{x}.
 }
 
 \author{Jose Pinheiro and Douglas Bates}

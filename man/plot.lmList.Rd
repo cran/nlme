@@ -1,16 +1,16 @@
-% $Id: plot.lmList.Rd,v 1.7 2001/06/18 21:16:50 bates Exp $
+% $Id: plot.lmList.Rd,v 1.8 2001/10/30 20:51:15 bates Exp $
 \name{plot.lmList}
 \title{Plot an lmList Object}
 \usage{
-\method{plot}{lmList}(object, form, abline, id, idLabels, grid, ...)
+\method{plot}{lmList}(x, form, abline, id, idLabels, grid, ...)
 }
 \alias{plot.lmList}
 \arguments{
- \item{object}{an object inheriting from class \code{lmList}, representing
+ \item{x}{an object inheriting from class \code{lmList}, representing
    a list of \code{lm} objects with a common model.}
  \item{form}{an optional formula specifying the desired type of
    plot. Any variable present in the original data frame used to obtain
-   \code{object} can be referenced. In addition, \code{object} itself
+   \code{x} can be referenced. In addition, \code{x} itself
    can be referenced in the formula using the symbol
    \code{"."}. Conditional expressions on the right of a \code{|}
    operator can be used to define separate panels in a Trellis
@@ -39,7 +39,7 @@
    observations identified according to \code{id}. If given as a
    one-sided formula, its right hand side must evaluate to a vector
    which is converted to character and used to label the identified
-   observations. Default is \code{getGroups(object)}. 
+   observations. Default is \code{getGroups(x)}. 
  }
  \item{grid}{an optional logical value indicating whether a grid should
    be added to plot. Default depends on the type of Trellis plot used:
@@ -50,7 +50,7 @@
 }
 \description{
   Diagnostic plots for the linear model fits corresponding to the
-  \code{object}  components are obtained. The \code{form} argument gives
+  \code{x}  components are obtained. The \code{form} argument gives
   considerable flexibility in the type of  plot specification. A
   conditioning expression (on the right side of a  \code{|} operator)
   always implies that different panels are used for  each level of the

@@ -1,9 +1,9 @@
-% $Id: summary.corStruct.Rd,v 1.6 2001/06/18 21:16:50 bates Exp $
+% $Id: summary.corStruct.Rd,v 1.7 2001/10/30 20:51:15 bates Exp $
 \name{summary.corStruct}
 %\title{Summarize \code{corStruct} Object}
 \title{Summarize a corStruct Object}
 \usage{
-\method{summary}{corStruct}(object, structName)
+\method{summary}{corStruct}(object, structName, \dots)
 }
 \alias{summary.corStruct}
 \alias{summary.corAR1}
@@ -27,6 +27,8 @@
    correlation structure associated with \code{object}, to be used in
    the \code{print.summary} method. Defaults to
    \code{class(object)[1]}.} 
+ \item{\dots}{some methods for this generic require additional
+    arguments.  None are used in this method.} 
 }
 \description{
   This method function prepares \code{object} to be printed using the

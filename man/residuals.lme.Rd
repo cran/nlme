@@ -1,8 +1,8 @@
-% $Id: residuals.lme.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
+% $Id: residuals.lme.Rd,v 1.6 2001/10/30 20:51:15 bates Exp $
 \name{residuals.lme}
 \title{Extract lme Residuals}
 \usage{
-\method{residuals}{lme}(object, level, type, asList)
+\method{residuals}{lme}(object, level, type, asList, \dots)
 }
 \alias{residuals.lme}
 \arguments{
@@ -27,6 +27,8 @@
     the residuals split by groups; else the returned value is
     either a vector or a data frame, according to the length of
     \code{level}. Defaults to \code{FALSE}.}
+ \item{\dots}{some methods for this generic require additional
+    arguments.  None are used in this method.} 
 }
 \description{
   The residuals at level \eqn{i} are obtained by subtracting the fitted

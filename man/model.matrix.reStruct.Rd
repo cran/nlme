@@ -1,8 +1,8 @@
-% $Id: model.matrix.reStruct.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
+% $Id: model.matrix.reStruct.Rd,v 1.6 2001/10/30 20:51:15 bates Exp $
 \name{model.matrix.reStruct}
 \title{reStruct Model Matrix}
 \usage{
-\method{model.matrix}{reStruct}(object, data, contrast)
+\method{model.matrix}{reStruct}(object, data, contrast, \dots)
 }
 \alias{model.matrix.reStruct}
 \arguments{
@@ -18,6 +18,8 @@
    components of this list will be used as the \code{contrasts}
    attribute of the corresponding factor. If missing, the default
    contrast specification is used.}  
+ \item{\dots}{some methods for this generic require additional
+    arguments.  None are used in this method.} 
 }
 \description{
   The model matrices for each element of \code{formula(object)},

@@ -1,8 +1,8 @@
-% $Id: varExp.Rd,v 1.4 2000/07/03 18:22:49 bates Exp $
+% $Id: varExp.Rd,v 1.5 2001/10/30 20:51:15 bates Exp $
 \name{varExp}
 \title{Exponential Variance Function}
 \usage{
-varExpon(value, form, fixed)
+varExp(value, form, fixed)
 }
 \alias{varExp}
 \arguments{

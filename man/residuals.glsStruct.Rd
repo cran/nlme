@@ -1,8 +1,8 @@
-% $Id: residuals.glsStruct.Rd,v 1.4 2001/06/18 21:16:50 bates Exp $
+% $Id: residuals.glsStruct.Rd,v 1.5 2001/10/30 20:51:15 bates Exp $
 \name{residuals.glsStruct}
 \title{Calculate glsStruct Residuals}
 \usage{
-\method{residuals}{glsStruct}(object, glsFit)
+\method{residuals}{glsStruct}(object, glsFit, \dots)
 }
 \alias{residuals.glsStruct}
 \arguments{
@@ -14,6 +14,8 @@
    deviation for error term), \code{varBeta} (coefficients' covariance
    matrix), \code{fitted} (fitted values), and \code{residuals}
    (residuals). Defaults to \code{attr(object, "glsFit")}.}
+ \item{\dots}{some methods for this generic require additional
+    arguments.  None are used in this method.} 
 }
 \description{
   The residuals for the linear model represented by \code{object}

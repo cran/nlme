@@ -1,8 +1,8 @@
-% $Id: print.anova.lme.Rd,v 1.6 2001/06/18 21:16:50 bates Exp $
+% $Id: print.anova.lme.Rd,v 1.7 2001/10/30 20:51:15 bates Exp $
 \name{print.anova.lme}
 \title{Print an anova.lme Object}
 \usage{
-\method{print}{anova.lme}(x, verbose)
+\method{print}{anova.lme}(x, verbose, \dots)
 }
 \alias{print.anova.lme}
 \arguments{
@@ -13,6 +13,8 @@
    sequences for each fitted model object are printed with the rest of
    the output, being omitted if \code{verbose = FALSE}. Defaults to
    \code{attr(x, "verbose")}.}
+ \item{\dots}{some methods for this generic require additional
+    arguments.  None are used in this method.} 
 }
 \description{
   When only one fitted model object is used in the call to

@@ -1,8 +1,8 @@
-% $Id: initialize.glsStruct.Rd,v 1.4 2001/06/18 21:16:50 bates Exp $
+% $Id: initialize.glsStruct.Rd,v 1.5 2001/10/30 20:51:15 bates Exp $
 \name{initialize.glsStruct}
 \title{Initialize a glsStruct Object}
 \usage{
-\method{initialize}{glsStruct}(object, data, control)
+\method{initialize}{glsStruct}(object, data, control, \dots)
 }
 \alias{initialize.glsStruct}
 \arguments{
@@ -18,6 +18,8 @@
    allowed in the model and that the tolerance for detecting linear
    dependencies among the columns of the regression matrix is
    \code{.Machine$single.eps}.}
+ \item{\dots}{some methods for this generic require additional
+    arguments.  None are used in this method.} 
 }
 
 \description{

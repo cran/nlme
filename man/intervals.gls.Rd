@@ -1,8 +1,8 @@
-% $Id: intervals.gls.Rd,v 1.7 2001/06/20 16:55:20 bates Exp $
+% $Id: intervals.gls.Rd,v 1.8 2001/10/30 20:51:15 bates Exp $
 \name{intervals.gls}
 \title{Confidence Intervals on gls Parameters}
 \usage{
-\method{intervals}{gls}(object, level, which)
+\method{intervals}{gls}(object, level, which, \dots)
 }
 \alias{intervals.gls}
 \alias{print.intervals.gls}
@@ -17,6 +17,8 @@
    \code{"var-cov"} for the variance-covariance parameters only, and
    \code{"coef"} for the linear model coefficients  only. Defaults to
    \code{"all"}.}
+ \item{\dots}{some methods for this generic require additional
+    arguments.  None are used in this method.} 
 }
 \description{
   Approximate confidence intervals for the parameters in the linear

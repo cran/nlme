@@ -1,12 +1,12 @@
-% $Id: plot.ranef.lme.Rd,v 1.6 2001/06/18 21:16:50 bates Exp $
+% $Id: plot.ranef.lme.Rd,v 1.7 2001/10/30 20:51:15 bates Exp $
 \name{plot.ranef.lme}
 \title{Plot a ranef.lme Object}
 \usage{
-\method{plot}{ranef.lme}(object, form, omitFixed, level, grid, control, ...)
+\method{plot}{ranef.lme}(x, form, omitFixed, level, grid, control, ...)
 }
 \alias{plot.ranef.lme}
 \arguments{
- \item{object}{an object inheriting from class
+ \item{x}{an object inheriting from class
    \code{ranef.lme}, representing the estimated coefficients or
    estimated random effects for the \code{lme} object from which it was
    produced.} 
@@ -17,7 +17,7 @@
      factors (\code{~g}) or crossed factors (\code{~g1*g2}) are
      allowed. If given as a two-sided formula, the left hand side must
      be a single random effects (coefficient) and the right hand side
-     is formed by covariates in \code{object} separated by \code{+}. A
+     is formed by covariates in \code{x} separated by \code{+}. A
      Trellis display of the random effect (coefficient) versus the named
      covariates is returned in this case. Default is \code{NULL}, in
      which case  the row names of the random effects (coefficients) are
@@ -26,7 +26,7 @@
    columns with values that are constant across groups should be
    omitted. Default is \code{TRUE}.}
  \item{level}{an optional integer value giving the level of grouping
-   to be used for \code{object}. Only used when \code{object} is a list
+   to be used for \code{x}. Only used when \code{x} is a list
    with different components for each grouping level. Defaults to the
    highest or innermost level of grouping.}
  \item{grid}{an optional logical value indicating whether a grid should

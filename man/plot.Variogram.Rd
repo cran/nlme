@@ -1,13 +1,13 @@
-% $Id: plot.Variogram.Rd,v 1.6 2001/06/18 21:16:50 bates Exp $
+% $Id: plot.Variogram.Rd,v 1.7 2001/10/30 20:51:15 bates Exp $
 \name{plot.Variogram}
 \title{Plot a Variogram Object}
 \usage{
-\method{plot}{Variogram}(object, smooth, showModel, sigma, span, xlab,
+\method{plot}{Variogram}(x, smooth, showModel, sigma, span, xlab,
      ylab, type, ylim, grid, ...)
 }
 \alias{plot.Variogram}
 \arguments{
- \item{object}{an object inheriting from class \code{Variogram},
+ \item{x}{an object inheriting from class \code{Variogram},
    consisting of a data frame with two columns named \code{variog} and
    \code{dist}, representing the semi-variogram values and the corresponding
    distances.
@@ -18,7 +18,7 @@
  }
  \item{showModel}{an optional logical value controlling whether the
    semi-variogram corresponding to an \code{"modelVariog"} attribute of
-   \code{object}, if any is present, should be added to the
+   \code{x}, if any is present, should be added to the
    plot. Defaults to \code{TRUE}, when the \code{"modelVariog"}
    attribute is present.
  }
@@ -38,7 +38,7 @@
      to \code{"p"}.
  }
  \item{ylim}{an optional numeric vector with the limits for the
-   y-axis. Defaults to \code{c(0, max(object$variog))}.
+   y-axis. Defaults to \code{c(0, max(x$variog))}.
  }
  \item{grid}{an optional logical value indicating whether a grid should
    be added to plot. Default is \code{FALSE}.}
@@ -47,7 +47,7 @@
 \description{
   an \code{xyplot} of the semi-variogram versus the distances is
   produced. If \code{smooth = TRUE}, a \code{loess} smoother is added to
-  the plot. If \code{showModel = TRUE} and \code{object} includes an
+  the plot. If \code{showModel = TRUE} and \code{x} includes an
   \code{"modelVariog"} attribute, the corresponding semi-variogram
   is added to the plot.
 }

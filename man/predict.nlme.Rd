@@ -1,8 +1,9 @@
-% $Id: predict.nlme.Rd,v 1.7 2001/06/18 21:16:50 bates Exp $
+% $Id: predict.nlme.Rd,v 1.8 2001/10/30 20:51:15 bates Exp $
 \name{predict.nlme}
 \title{Predictions from an nlme Object}
 \usage{
-\method{predict}{nlme}(object, newdata, level, asList, na.action, naPattern)
+\method{predict}{nlme}(object, newdata, level, asList, na.action,
+naPattern, \dots)
 }
 \alias{predict.nlme}
 \arguments{
@@ -28,6 +29,8 @@
    terminate if there are any incomplete observations.}
  \item{naPattern}{an expression or formula object, specifying which returned
    values are to be regarded as missing.}
+ \item{\dots}{some methods for this generic require additional
+    arguments.  None are used in this method.} 
 }
 \description{
   The predictions at level \eqn{i} are obtained by adding together the

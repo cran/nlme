@@ -1,9 +1,9 @@
-% $Id: collapse.groupedData.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
+% $Id: collapse.groupedData.Rd,v 1.6 2001/10/30 20:51:15 bates Exp $
 \name{collapse.groupedData}
 \title{Collapse a groupedData Object}
 \usage{
-\method{collapse}{groupedData}(object, collapseLevel, displayLevel, outer, inner, preserve,
-         FUN, subset)
+\method{collapse}{groupedData}(object, collapseLevel, displayLevel,
+       outer, inner, preserve, FUN, subset, \dots)
 }
 \alias{collapse.groupedData}
 \arguments{
@@ -68,6 +68,8 @@
    data. Default is \code{NULL}, meaning that all levels are
    used.
  } 
+ \item{\dots}{some methods for this generic require additional
+    arguments.  None are used in this method.} 
 }
 \description{
  If \code{object} has a single grouping factor, it is returned

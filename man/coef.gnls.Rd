@@ -1,13 +1,15 @@
-% $Id: coef.gnls.Rd,v 1.6 2001/06/18 21:16:50 bates Exp $
+% $Id: coef.gnls.Rd,v 1.7 2001/10/30 20:51:14 bates Exp $
 \name{coef.gnls}
 \title{Extract gnls Coefficients}
 \usage{
-\method{coef}{gnls}(object)
+\method{coef}{gnls}(object, \dots)
 }
 \alias{coef.gnls}
 \arguments{
  \item{object}{an object inheriting from class \code{gnls}, representing
    a generalized nonlinear least squares fitted model.}
+ \item{\dots}{some methods for this generic require additional
+    arguments.  None are used in this method.} 
 }
 \description{
   The estimated coefficients for the nonlinear model represented by

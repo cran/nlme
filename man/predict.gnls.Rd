@@ -1,8 +1,8 @@
-% $Id: predict.gnls.Rd,v 1.6 2001/06/18 21:16:50 bates Exp $
+% $Id: predict.gnls.Rd,v 1.7 2001/10/30 20:51:15 bates Exp $
 \name{predict.gnls}
 \title{Predictions from a gnls Object}
 \usage{
-\method{predict}{gnls}(object, newdata, na.action, naPattern)
+\method{predict}{gnls}(object, newdata, na.action, naPattern, \dots)
 }
 \alias{predict.gnls}
 \arguments{
@@ -17,6 +17,8 @@
    terminate if there are any incomplete observations.}
  \item{naPattern}{an expression or formula object, specifying which returned
    values are to be regarded as missing.}
+ \item{\dots}{some methods for this generic require additional
+    arguments.  None are used in this method.} 
 }
 \description{
   The predictions for the nonlinear model represented by \code{object} are

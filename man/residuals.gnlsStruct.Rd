@@ -1,8 +1,8 @@
-% $Id: residuals.gnlsStruct.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
+% $Id: residuals.gnlsStruct.Rd,v 1.6 2001/10/30 20:51:15 bates Exp $
 \name{residuals.gnlsStruct}
 \title{Calculate gnlsStruct Residuals}
 \usage{
-\method{residuals}{gnlsStruct}(object)
+\method{residuals}{gnlsStruct}(object, \dots)
 }
 \alias{residuals.gnlsStruct}
 \arguments{
@@ -10,6 +10,8 @@
    representing a list of model components, such as
    \code{corStruct} and \code{varFunc} objects, and attributes
    specifying the underlying nonlinear model and the response variable.}
+ \item{\dots}{some methods for this generic require additional
+    arguments.  None are used in this method.} 
 }
 \description{
   The residuals for the nonlinear model represented by \code{object}

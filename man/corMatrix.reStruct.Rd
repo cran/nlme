@@ -1,8 +1,8 @@
-% $Id: corMatrix.reStruct.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
+% $Id: corMatrix.reStruct.Rd,v 1.6 2001/10/30 20:51:15 bates Exp $
 \name{corMatrix.reStruct}
 \title{Extract Correlation Matrix from Components of an reStruct Object}
 \usage{
-\method{corMatrix}{reStruct}(object)
+\method{corMatrix}{reStruct}(object, \dots)
 }
 \alias{corMatrix.reStruct}
 
@@ -10,6 +10,8 @@
  \item{object}{an object inheriting from class \code{reStruct},
    representing a random effects structure and consisting of a list of
    \code{pdMat} objects.} 
+ \item{\dots}{some methods for this generic require additional
+    arguments.  None are used in this method.} 
 }
 \description{
   This method function extracts the correlation matrices

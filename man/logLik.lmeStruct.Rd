@@ -1,8 +1,8 @@
-% $Id: logLik.lmeStruct.Rd,v 1.4 2001/06/18 21:16:50 bates Exp $
+% $Id: logLik.lmeStruct.Rd,v 1.5 2001/10/30 20:51:15 bates Exp $
 \name{logLik.lmeStruct}
 \title{Log-Likelihood of an lmeStruct Object}
 \usage{
-\method{logLik}{lmeStruct}(object, Pars, conLin)
+\method{logLik}{lmeStruct}(object, Pars, conLin, \dots)
 }
 \alias{logLik.lmeStruct}
 \alias{logLik.lmeStructInt}
@@ -18,6 +18,8 @@
    matrix (\code{X}) combined with a response vector (\code{y}), and 
    \code{"logLik"}, corresponding to the log-likelihood of the
    underlying lme model. Defaults to \code{attr(object, "conLin")}.}
+ \item{\dots}{some methods for this generic require additional
+    arguments.  None are used in this method.} 
 }
 \description{
   \code{Pars} is used to update the coefficients of the model components

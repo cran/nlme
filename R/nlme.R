@@ -1,4 +1,4 @@
-### $Id: nlme.R,v 1.5 2001/06/18 21:16:49 bates Exp $
+### $Id: nlme.R,v 1.7 2001/10/30 20:51:14 bates Exp $
 ###
 ###            Fit a general nonlinear mixed effects model
 ###
@@ -1067,11 +1067,11 @@ getParsNlme <-
 ###  Methods for standard generics
 ###
 
-formula.nlme <- function(object) eval(object$call[["model"]])
+formula.nlme <- function(x, ...) eval(x$call[["model"]])
 
 predict.nlme <-
   function(object, newdata, level = Q, asList = FALSE, na.action = na.fail,
-	   naPattern = NULL)
+	   naPattern = NULL, ...)
 {
   ##
   ## method for predict() designed for objects inheriting from class nlme
@@ -1310,7 +1310,8 @@ predict.nlme <-
 
 update.nlme <-
   function(object, model, data, fixed, random, groups, start, correlation,
-           weights, subset, method, na.action, naPattern, control, verbose)
+           weights, subset, method, na.action, naPattern, control,
+           verbose, ...)
 {
   thisCall <- as.list(match.call())[-(1:2)]
   if (!is.null(thisCall$start) && is.numeric(start)) {

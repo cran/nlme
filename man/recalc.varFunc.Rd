@@ -1,8 +1,8 @@
-% $Id: recalc.varFunc.Rd,v 1.4 2001/06/18 21:16:50 bates Exp $
+% $Id: recalc.varFunc.Rd,v 1.5 2001/10/30 20:51:15 bates Exp $
 \name{recalc.varFunc}
 \title{Recalculate for varFunc Object}
 \usage{
-\method{recalc}{varFunc}(object, conLin)
+\method{recalc}{varFunc}(object, conLin, \dots)
 }
 \alias{recalc.varFunc}
 \alias{recalc.varIdent}
@@ -14,6 +14,8 @@
    (\code{X}) combined with a response vector (\code{y}), and
    \code{"logLik"}, corresponding to the log-likelihood of the
    underlying model.} 
+ \item{\dots}{some methods for this generic require additional
+    arguments.  None are used in this method.} 
 }
 \description{
   This method function pre-multiples the \code{"Xy"} component of

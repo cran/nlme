@@ -1,9 +1,9 @@
-% $Id: recalc.modelStruct.Rd,v 1.4 2001/06/18 21:16:50 bates Exp $
+% $Id: recalc.modelStruct.Rd,v 1.5 2001/10/30 20:51:15 bates Exp $
 \name{recalc.modelStruct}
 %\title{Recalculate Condensed Linear Model for a \code{modelStruct} Object}
 \title{Recalculate for a modelStruct Object}
 \usage{
-\method{recalc}{modelStruct}(object, conLin)
+\method{recalc}{modelStruct}(object, conLin, \dots)
 }
 \alias{recalc.modelStruct}
 \arguments{
@@ -15,6 +15,8 @@
    matrix (\code{X}) combined with a response vector (\code{y}), and 
    \code{"logLik"}, corresponding to the log-likelihood of the
    underlying model. Defaults to \code{attr(object, "conLin")}.}
+ \item{\dots}{some methods for this generic require additional
+    arguments.  None are used in this method.} 
 }
 \description{
   This method function recalculates the condensed linear model object

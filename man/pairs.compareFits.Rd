@@ -1,14 +1,14 @@
-% $Id: pairs.compareFits.Rd,v 1.7 2001/06/18 21:16:50 bates Exp $
+% $Id: pairs.compareFits.Rd,v 1.8 2001/10/30 20:51:15 bates Exp $
 \name{pairs.compareFits}
 \title{Pairs Plot of compareFits Object}
 \usage{
-\method{pairs}{compareFits}(object, subset, key, ...)
+\method{pairs}{compareFits}(x, subset, key, \dots)
 }
 \alias{pairs.compareFits}
 \arguments{
- \item{object}{an object of class \code{compareFits}.}
+ \item{x}{an object of class \code{compareFits}.}
  \item{subset}{an optional logical or integer vector specifying which
-   rows of \code{object} should be used in the plots. If missing, all
+   rows of \code{x} should be used in the plots. If missing, all
    rows are used.}
  \item{key}{an optional logical value, or list. If \code{TRUE}, a legend
  is included at the top of the plot indicating which symbols (colors)
@@ -21,7 +21,7 @@
 }
 \description{
   Scatter plots of the values being compared are generated for each pair
-  of coefficients in \code{object}. Different symbols (colors) are used
+  of coefficients in \code{x}. Different symbols (colors) are used
   for each object being compared and values corresponding to the same
   group are joined by a line, to facilitate comparison of fits. If only
   two coefficients are present, the \code{trellis} function

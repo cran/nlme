@@ -1,13 +1,16 @@
-% $Id: residuals.gls.Rd,v 1.6 2001/06/18 21:16:50 bates Exp $
+% $Id: residuals.gls.Rd,v 1.7 2001/10/30 20:51:15 bates Exp $
 \name{residuals.gls}
 \title{Extract gls Residuals}
 \usage{
-\method{residuals}{gls}(object, type)
+\method{residuals}{gls}(object, type, ...)
 }
 \alias{residuals.gls}
+\alias{residuals.gnls}
 \arguments{
  \item{object}{an object inheriting from class \code{gls}, representing
-   a generalized least squares fitted linear model.}
+   a generalized least squares fitted linear model, or from class
+   \code{gnls}, representing a generalized nonlinear least squares
+   fitted linear model.}
   \item{type}{an optional character string specifying the type of
     residuals to be used. If \code{"response"}, the "raw" residuals
     (observed - fitted) are used; else, if \code{"pearson"}, the
@@ -16,7 +19,9 @@
     normalized residuals (standardized residuals pre-multiplied by the
     inverse square-root factor of the estimated error correlation
     matrix) are used. Partial matching of arguments is used, so only the
-    first character needs to be provided. Defaults to \code{"pearson"}.} 
+    first character needs to be provided. Defaults to \code{"pearson"}.}
+  \item{\dots}{some methods for this generic function require additional
+    arguments.  None are used in this method.}
 }
 \description{
   The residuals for the linear model represented by \code{object}

@@ -1,8 +1,8 @@
-% $Id: intervals.lmList.Rd,v 1.6 2001/06/20 18:04:02 bates Exp $
+% $Id: intervals.lmList.Rd,v 1.7 2001/10/30 20:51:15 bates Exp $
 \name{intervals.lmList}
 \title{Confidence Intervals on lmList Coefficients}
 \usage{
-\method{intervals}{lmList}(object, level, pool)
+\method{intervals}{lmList}(object, level, pool, \dots)
 }
 \alias{intervals.lmList}
 \alias{print.intervals.lmList}
@@ -17,6 +17,8 @@
    estimate of the residual standard error should be used. Default is
    \code{attr(object, "pool")}.
  }
+ \item{\dots}{some methods for this generic require additional
+    arguments.  None are used in this method.} 
 }
 \description{
   Confidence intervals on the linear model coefficients are obtained for

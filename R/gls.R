@@ -1,4 +1,4 @@
-### $Id: gls.R,v 1.3 2001/01/10 19:04:03 bates Exp $
+### $Id: gls.R,v 1.5 2001/10/30 20:51:14 bates Exp $
 ###
 ###  Fit a linear model with correlated errors and/or heteroscedasticity
 ###
@@ -583,7 +583,7 @@ augPred.gls <-
 }
 
 coef.gls <-
-  function(object, allCoef = FALSE)
+  function(object, allCoef = FALSE, ...)
 {
   val <- object$coefficients
   if (allCoef) {
@@ -674,7 +674,7 @@ comparePred.gls <-
 }
 
 fitted.gls <-
-  function(object)
+  function(object, ...)
 {
   val <- object$fitted
   lab <- "Fitted values"
@@ -686,7 +686,7 @@ fitted.gls <-
 }
 
 
-formula.gls <- function(object) eval(object$call$model)
+formula.gls <- function(x, ...) eval(x$call$model)
 
 getGroups.gls <- function(object, form, level, data, sep) object$groups
 
@@ -715,7 +715,7 @@ getResponse.gls <-
 }
 
 intervals.gls <-
-  function(object, level = 0.95, which = c("all", "var-cov", "coef"))
+  function(object, level = 0.95, which = c("all", "var-cov", "coef"), ...)
 {
   which <- match.arg(which)
   val <- list()
@@ -799,7 +799,7 @@ intervals.gls <-
 }
 
 logLik.gls <-
-  function(object, REML)
+  function(object, REML, ...)
 {
   p <- object$dims$p
   N <- object$dims$N
@@ -823,16 +823,16 @@ logLik.gls <-
 }
 
 plot.gls <-
-  function(object, form = resid(., type = "pearson") ~ fitted(.), abline,
+  function(x, form = resid(., type = "pearson") ~ fitted(.), abline,
 	   id = NULL, idLabels = NULL, idResType = c("pearson", "normalized"),
            grid, ...)
-  ## Diagnostic plots based on residuals and/or fitted values
+    ## Diagnostic plots based on residuals and/or fitted values
 {
-  do.call("plot.lme", as.list(match.call()[-1]))
+    do.call("plot.lme", as.list(match.call()[-1]))
 }
 
 predict.gls <-
-  function(object, newdata, na.action = na.fail)
+  function(object, newdata, na.action = na.fail, ...)
 {
   ##
   ## method for predict() designed for objects inheriting from class gls
@@ -977,7 +977,7 @@ print.summary.gls <-
 }
 
 residuals.gls <-
-  function(object, type = c("response", "pearson", "normalized"))
+  function(object, type = c("response", "pearson", "normalized"), ...)
 {
   type <- match.arg(type)
   val <- object$residuals
@@ -1001,7 +1001,7 @@ residuals.gls <-
   val
 }
 
-summary.gls <- function(object, verbose = FALSE) {
+summary.gls <- function(object, verbose = FALSE, ...) {
   ##
   ## generates an object used in the print.summary method for lme
   ##
@@ -1043,7 +1043,7 @@ summary.gls <- function(object, verbose = FALSE) {
 
 update.gls <-
   function(object, model, data, correlation, weights, subset, method,
-	   na.action, control, verbose)
+	   na.action, control, verbose, ...)
 {
   thisCall <- as.list(match.call())[-(1:2)]
   nextCall <- as.list(object$call)[-1]
@@ -1067,7 +1067,8 @@ Variogram.gls <-
            resType = c("pearson", "response", "normalized"),
            data, na.action = na.fail, maxDist, length.out = 50,
            collapse = c("quantiles", "fixed", "none"), nint = 20, breaks,
-           robust = FALSE, metric = c("euclidean", "maximum", "manhattan"))
+           robust = FALSE, metric = c("euclidean", "maximum", "manhattan"),
+           ...)
 {
   resType <- match.arg(resType)
   ## checking if object has a corSpatial element
@@ -1225,14 +1226,14 @@ glsStruct <-
 ##*## glsStruct methods for standard generics
 
 fitted.glsStruct <-
-  function(object, glsFit = attr(object, "glsFit"))
+  function(object, glsFit = attr(object, "glsFit"), ...)
 {
   glsFit[["fitted"]]
 }
 
 initialize.glsStruct <-
   function(object, data, control = list(singular.ok = FALSE,
-                           qrTol = .Machine$single.eps))
+                           qrTol = .Machine$single.eps), ...)
 {
   if (length(object)) {
     object[] <- lapply(object, initialize, data)
@@ -1256,7 +1257,7 @@ initialize.glsStruct <-
 }
 
 logLik.glsStruct <-
-  function(object, Pars, conLin = attr(object, "conLin"))
+  function(object, Pars, conLin = attr(object, "conLin"), ...)
 {
   coef(object) <- Pars			# updating parameter values
   conLin <- recalc(object, conLin)	# updating conLin
@@ -1270,7 +1271,7 @@ logLik.glsStruct <-
 }
 
 residuals.glsStruct <-
-  function(object, glsFit = attr(object, "glsFit"))
+  function(object, glsFit = attr(object, "glsFit"), ...)
 {
   glsFit[["resid"]]
 }

@@ -1,14 +1,14 @@
-% $Id: print.corStruct.Rd,v 1.6 2001/06/20 16:55:20 bates Exp $
+% $Id: print.corStruct.Rd,v 1.7 2001/10/30 20:51:15 bates Exp $
 \name{print.corStruct}
 \title{Print a corStruct Object}
 \usage{
 \method{print}{corStruct}(x, \dots)
-\method{print}{corHF}(x, \dots)
 \method{print}{corSymm}(x, \dots)
+%\method{print}{corHF}(x, \dots)
 }
 \alias{print.corStruct}
-\alias{print.corHF}
 \alias{print.corSymm}
+%\alias{print.corHF}
 \arguments{
  \item{x}{an object inheriting from class \code{corStruct}, representing
    a correlation structure.}

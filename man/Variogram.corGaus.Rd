@@ -1,8 +1,8 @@
-% $Id: Variogram.corGaus.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
+% $Id: Variogram.corGaus.Rd,v 1.6 2001/10/30 20:51:14 bates Exp $
 \name{Variogram.corGaus}
 \title{Calculate Semi-variogram for a corGaus Object}
 \usage{
-\method{Variogram}{corGaus}(object, distance, sig2, length.out)
+\method{Variogram}{corGaus}(object, distance, sig2, length.out, \dots)
 }
 \alias{Variogram.corGaus}
 \arguments{
@@ -18,6 +18,8 @@
   \item{length.out}{an optional integer specifying the length of the
     sequence of distances to be used for calculating the semi-variogram,
     when \code{distance = NULL}. Defaults to \code{50}.}
+ \item{\dots}{some methods for this generic require additional
+    arguments.  None are used in this method.} 
 }
 \description{
   This method function calculates the semi-variogram values

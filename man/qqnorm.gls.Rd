@@ -1,16 +1,16 @@
-% $Id: qqnorm.gls.Rd,v 1.6 2001/06/18 21:16:50 bates Exp $
+% $Id: qqnorm.gls.Rd,v 1.7 2001/10/30 20:51:15 bates Exp $
 \name{qqnorm.gls}
 \title{Normal Plot of Residuals from a gls Object}
 \usage{
-\method{qqnorm}{gls}(object, form, abline, id, idLabels, grid, ...)
+\method{qqnorm}{gls}(y, form, abline, id, idLabels, grid, ...)
 }
 \alias{qqnorm.gls}
 \arguments{
- \item{object}{an object inheriting from class \code{gls}, representing
+ \item{y}{an object inheriting from class \code{gls}, representing
    a generalized least squares fitted model.}
  \item{form}{an optional one-sided formula specifying the desired type of
    plot. Any variable present in the original data frame used to obtain
-   \code{object} can be referenced. In addition, \code{object} itself
+   \code{y} can be referenced. In addition, \code{y} itself
    can be referenced in the formula using the symbol
    \code{"."}. Conditional expressions on the right of a \code{|}
    operator can be used to define separate panels in a Trellis

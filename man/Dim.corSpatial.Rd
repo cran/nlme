@@ -1,8 +1,8 @@
-% $Id: Dim.corSpatial.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
+% $Id: Dim.corSpatial.Rd,v 1.6 2001/10/30 20:51:14 bates Exp $
 \name{Dim.corSpatial}
 \title{Dimensions of a corSpatial Object}
 \usage{
-\method{Dim}{corSpatial}(object, groups)
+\method{Dim}{corSpatial}(object, groups, \dots)
 }
 \alias{Dim.corSpatial}
 \arguments{
@@ -11,6 +11,7 @@
  \item{groups}{an optional factor defining the grouping of the
    observations; observations within a group are correlated and
    observations in different groups are uncorrelated.}
+ \item{\dots}{further arguments to be passed to or from methods.}
 }
 \description{
   if \code{groups} is missing, it returns the \code{Dim} attribute of

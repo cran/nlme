@@ -1,8 +1,8 @@
-% $Id: residuals.lmeStruct.Rd,v 1.4 2001/06/18 21:16:50 bates Exp $
+% $Id: residuals.lmeStruct.Rd,v 1.5 2001/10/30 20:51:15 bates Exp $
 \name{residuals.lmeStruct}
 \title{Calculate lmeStruct Residuals}
 \usage{
-\method{residuals}{lmeStruct}(object, level, conLin, lmeFit)
+\method{residuals}{lmeStruct}(object, level, conLin, lmeFit, \dots)
 }
 \alias{residuals.lmeStruct}
 \arguments{
@@ -23,6 +23,7 @@
    containing respectively the fixed effects estimates and the random
    effects estimates to be used to calculate the residuals. Defaults
    to \code{attr(object, "lmeFit")}.}
+ \item{\dots}{some methods for this generic accept optional arguments.}
 }
 \description{
   The residuals at level \eqn{i} are obtained by subtracting the fitted

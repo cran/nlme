@@ -1,4 +1,4 @@
-### $Id: varFunc.R,v 1.3 2001/06/18 21:16:49 bates Exp $
+### $Id: varFunc.R,v 1.5 2001/10/30 20:51:14 bates Exp $
 ###
 ###              Classes of variance functions
 ###
@@ -60,7 +60,7 @@ varWeights.varFunc <-
 ###*# Methods for standard generics
 
 coef.varFunc <-
-  function(object, unconstrained = TRUE, allCoef = FALSE)
+  function(object, unconstrained = TRUE, allCoef = FALSE, ...)
 {
   ### checking if initialized
   wPar <- attr(object, "whichFix")
@@ -101,10 +101,10 @@ coef.varFunc <-
 }
 
 formula.varFunc <-
-  function(object) eval(attr(object, "formula"))
+  function(x, ...) eval(attr(x, "formula"))
 
 getCovariate.varFunc <-
-  function(object) attr(object, "covariate")
+  function(object, form, data) attr(object, "covariate")
 
 getGroups.varFunc <-
   function(object, form, level, data, sep) attr(object, "groups")
@@ -122,12 +122,13 @@ initialize.varFunc <-
 }
 
 logLik.varFunc <-
-  function(object, data) {
-      if (is.null(ll <- attr(object, "logLik"))) return(NULL)
-      attr(ll, "df") <- length(object)
-      class(ll) <- "logLik"
-      ll
-  }
+  function(object, data, ...)
+{
+    if (is.null(ll <- attr(object, "logLik"))) return(NULL)
+    attr(ll, "df") <- length(object)
+    class(ll) <- "logLik"
+    ll
+}
 
 print.summary.varFunc <-
   function(x, header = TRUE, ...)
@@ -163,7 +164,7 @@ print.varFunc <-
 }
 
 recalc.varFunc <-
-  function(object, conLin)
+  function(object, conLin, ...)
 {
   conLin$Xy[] <- conLin$Xy * varWeights(object)
   conLin$logLik <- conLin$logLik + logLik(object)
@@ -171,7 +172,7 @@ recalc.varFunc <-
 }
 
 summary.varFunc <-
-  function(object, structName = class(object)[1])
+  function(object, structName = class(object)[1], ...)
 {
   attr(object, "structName") <- structName
   attr(object, "oClass") <- class(object)
@@ -180,7 +181,7 @@ summary.varFunc <-
 }
 
 update.varFunc <-
-  function(object, data)
+  function(object, data, ...)
 {
   if (needUpdate(object)) {
     covariate(object) <-
@@ -218,7 +219,7 @@ varFixed <-
 ###*# Methods for standard generics
 
 coef.varFixed <-
-  function(object, unconstrained, allCoef) numeric(0)
+  function(object, ...) numeric(0)
 
 "coef<-.varFixed" <-
   function(object, value) object
@@ -247,7 +248,7 @@ print.summary.varFixed <-
 }
 
 summary.varFixed <-
-  function(object, structName)
+  function(object, structName, ...)
 {
   class(object) <- "summary.varFixed"
   object
@@ -293,7 +294,7 @@ varIdent <-
 ###*# Methods for standard generics
 
 coef.varIdent <-
-  function(object, unconstrained = TRUE, allCoef = FALSE)
+  function(object, unconstrained = TRUE, allCoef = FALSE, ...)
 {
   if (!is.null(getGroupsFormula(object)) &&
       !is.null( wPar <- attr(object, "whichFix"))) {
@@ -438,7 +439,7 @@ needUpdate.varIdent <-
   function(object) FALSE
 
 recalc.varIdent <-
-  function(object, conLin)
+  function(object, conLin, ...)
 {
   if (is.null(formula(object))) conLin else NextMethod()
 }
@@ -446,8 +447,11 @@ recalc.varIdent <-
 summary.varIdent <-
   function(object,
 	   structName = if (is.null(formula(object))) "Constant variance"
-	                else "Different standard deviations per stratum")
-  { summary.varFunc(object, structName) }
+	                else "Different standard deviations per stratum",
+           ...)
+{
+    summary.varFunc(object, structName)
+}
 
 
 ###*# varPower - power of variance covariate variance structure
@@ -483,7 +487,7 @@ varPower <-
 ###*# Methods for standard generics
 
 coef.varPower <-
-  function(object, unconstrained = TRUE, allCoef = FALSE)
+  function(object, unconstrained = TRUE, allCoef = FALSE, ...)
 {
   if (((length(object) == 0) &&
        (!allCoef || is.null(attr(object, "fixed")))) ||
@@ -643,7 +647,7 @@ initialize.varPower <-
 }
 
 summary.varPower <-
-  function(object, structName = "Power of variance covariate")
+  function(object, structName = "Power of variance covariate", ...)
 {
   if (!is.null(getGroupsFormula(object))) {
     structName <- paste(structName, " different strata", sep = ",")
@@ -652,7 +656,7 @@ summary.varPower <-
 }
 
 update.varPower <-
-  function(object, data)
+  function(object, data, ...)
 {
   val <- NextMethod()
   if (length(val) == 0) {		# chance to update weights
@@ -699,7 +703,7 @@ varExp <-
 ###*# Methods for standard generics
 
 coef.varExp <-
-  function(object, unconstrained = TRUE, allCoef = FALSE)
+  function(object, unconstrained = TRUE, allCoef = FALSE, ...)
 {
   if (((length(object) == 0) &&
        (!allCoef || is.null(attr(object, "fixed")))) ||
@@ -857,7 +861,7 @@ initialize.varExp <-
 
 
 summary.varExp <-
-  function(object, structName = "Exponential of variance covariate")
+  function(object, structName = "Exponential of variance covariate", ...)
 {
   if (!is.null(getGroupsFormula(object))) {
     structName <- paste(structName, " different strata", sep = ",")
@@ -866,7 +870,7 @@ summary.varExp <-
 }
 
 update.varExp <-
-  function(object, data)
+  function(object, data, ...)
 {
   val <- NextMethod()
   if (length(val) == 0) {		# chance to update weights
@@ -961,7 +965,7 @@ varConstPower <-
 ###*# Methods for standard generics
 
 coef.varConstPower <-
-  function(object, unconstrained = TRUE, allCoef = FALSE)
+  function(object, unconstrained = TRUE, allCoef = FALSE, ...)
 {
   wPar <- attr(object, "whichFix")
   nonInit <- !unlist(lapply(object, length))
@@ -1129,7 +1133,8 @@ initialize.varConstPower <-
 }
 
 summary.varConstPower <-
-  function(object, structName = "Constant plus power of variance covariate")
+  function(object, structName = "Constant plus power of variance covariate",
+           ...)
 {
   if (!is.null(getGroupsFormula(object))) {
     structName <- paste(structName, " different strata", sep = ",")
@@ -1138,7 +1143,7 @@ summary.varConstPower <-
 }
 
 update.varConstPower <-
-  function(object, data)
+  function(object, data, ...)
 {
   val <- NextMethod()
   if (length(unlist(val)) == 0) {	# chance to update weights
@@ -1184,7 +1189,7 @@ varWeights.varComb <-
 ###*# Methods for standard generics
 
 coef.varComb <-
-  function(object, unconstrained = TRUE, allCoef = FALSE)
+  function(object, unconstrained = TRUE, allCoef = FALSE, ...)
 {
   unlist(lapply(object, coef, unconstrained, allCoef))
 }
@@ -1209,7 +1214,7 @@ coef.varComb <-
 }
 
 formula.varComb <-
-  function(object) lapply(object, formula)
+  function(x, ...) lapply(x, formula)
 
 initialize.varComb <-
   function(object, data, ...)
@@ -1221,19 +1226,20 @@ initialize.varComb <-
 }
 
 logLik.varComb <-
-  function(object) {
-      lls <- lapply(object, logLik)
-      val <- sum(unlist(lls))
-      attr(val, "df") <- sum(unlist(lapply(lls, attr, "df")))
-      class(val) <- "logLik"
-      val
-  }
+  function(object, ...)
+{
+    lls <- lapply(object, logLik)
+    val <- sum(unlist(lls))
+    attr(val, "df") <- sum(unlist(lapply(lls, attr, "df")))
+    class(val) <- "logLik"
+    val
+}
 
 needUpdate.varComb <-
   function(object) any(unlist(lapply(object, needUpdate)))
 
 print.varComb <-
-  function(x)
+  function(x, ...)
 {
   cat("Combination of:\n")
   lapply(x, print)
@@ -1248,7 +1254,7 @@ print.summary.varComb <-
 }
 
 summary.varComb <-
-  function(object, structName = "Combination of variance functions:")
+  function(object, structName = "Combination of variance functions:", ...)
 {
   object[] <- lapply(object, summary)
   attr(object, "structName") <- structName
@@ -1257,27 +1263,8 @@ summary.varComb <-
 }
 
 update.varComb <-
-  function(object, data)
+  function(object, data, ...)
 {
   object[] <- lapply(object, update, data)
   object
 }
-
-
-##*## Beginning of epilogue
-### This file is automatically placed in Outline minor mode.
-### The file is structured as follows:
-### Chapters:     ^L #
-### Sections:    ##*##
-### Subsections: ###*###
-### Components:  non-comment lines flushed left
-###              Random code beginning with a ####* comment
-
-### Local variables:
-### mode: S
-### mode: outline-minor
-### outline-regexp: "\^L\\|\\`#\\|##\\*\\|###\\*\\|[a-zA-Z]\\|\\\"[a-zA-Z]\\|####\\*"
-### End:
-
-
-

@@ -1,8 +1,8 @@
-% $Id: logLik.lmList.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
+% $Id: logLik.lmList.Rd,v 1.6 2001/10/30 20:51:15 bates Exp $
 \name{logLik.lmList}
 \title{Log-Likelihood of an lmList Object}
 \usage{
-\method{logLik}{lmList}(object, REML, pool)
+\method{logLik}{lmList}(object, REML, pool, \dots)
 }
 \alias{logLik.lmList}
 \arguments{
@@ -17,6 +17,8 @@
    components of \code{object} may be assumed to have the same error
    variance. Default is \code{attr(object, "pool")}.
  }
+ \item{\dots}{some methods for this generic require additional
+    arguments.  None are used in this method.} 
 }
 \description{
  If \code{pool=FALSE}, the (restricted) log-likelihoods of the \code{lm}
