@@ -1056,7 +1056,7 @@ update.gls <-
     thisCall$weights <- thWgt
   }
   if (!is.null(thisCall$model)) {
-    thisCall$model <- update(as.formula(nextCall$model), thisCall$model)
+    thisCall$model <- update(as.formula(nextCall$model), model)
   }
   nextCall[names(thisCall)] <- thisCall
   do.call("gls", nextCall)

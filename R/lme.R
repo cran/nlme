@@ -2594,7 +2594,7 @@ update.lme <-
     args[ names(nextCall) ] <- nextCall
     nextCall <- args
   if (!is.null(thisCall$fixed)) {
-    thisCall$fixed <- update(as.formula(nextCall$fixed), thisCall$fixed)
+    thisCall$fixed <- update(as.formula(nextCall$fixed), fixed)
   }
   nextCall[names(thisCall)] <- thisCall
   do.call("lme", nextCall)

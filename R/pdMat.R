@@ -763,7 +763,7 @@ pdFactor.pdLogChol <-
   .C("logChol_pd",
      Factor = double(Ncol * Ncol),
      as.integer(Ncol),
-     as.double(object))$Factor
+     as.double(object), PACKAGE = "nlme")$Factor
 }
 
 ####* Methods for standard generics

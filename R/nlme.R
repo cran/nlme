@@ -861,7 +861,7 @@ nlme.formula <-
 	       as.integer(!is.null(correlation)),
 	       as.integer(!is.null(weights)),
                nlModel,
-	       NAOK = TRUE)
+	       NAOK = TRUE, PACKAGE = "nlme")
     if (work$settings[4] == 1) {
       convResult <- 2
       if (controlvals$returnObject) {
@@ -1341,7 +1341,7 @@ update.nlme <-
     }
   }
   if (!is.null(thisCall$model)) {
-    thisCall$model <- update(formula(object), thisCall$model)
+    thisCall$model <- update(formula(object), model)
   }
   if (is.na(match("correlation", names(thisCall))) &&
       !is.null(thCor <- object$modelStruct$corStruct)) {

@@ -409,7 +409,7 @@ gnls <-
 	       as.integer(!is.null(correlation)),
 	       as.integer(!is.null(weights)),
                nlModel,
-	       NAOK = TRUE)
+	       NAOK = TRUE, PACKAGE = "nlme")
     if (work$settings[4] == 1) {
       convResult <- 2
       if (controlvals$returnObject) {
@@ -760,7 +760,7 @@ update.gnls <-
   thisCall <- as.list(match.call())[-(1:2)]
   nextCall <- as.list(object$call)[-1]
   if (!is.null(thisCall$model)) {
-    thisCall$model <- update(formula(object), thisCall$model)
+    thisCall$model <- update(formula(object), model)
   } else {                              # same model
     if (is.null(thisCall$start)) {
       thisCall$start <- coef(object)
