@@ -2,9 +2,9 @@
 
    Routines for fitting gnls models
 
-   Copyright 1997, 1999 Douglas M. Bates <bates@stat.wisc.edu>,
-                        Jose C. Pinheiro <jcp@research.bell-labs.com>,
-			Saikat DebRoy <saikat@stat.wisc.edu>
+   Copyright 1997-2005 Douglas M. Bates <bates@stat.wisc.edu>,
+                       Jose C. Pinheiro <jose.pinheiro@pharma.novartis.com>
+		       Saikat DebRoy <saikat@stat.wisc.edu>
 
    This file is part of the nlme library for R and related languages
    and is made available under the terms of the GNU General Public

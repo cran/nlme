@@ -76,6 +76,7 @@
    \code{\link[lattice]{bwplot}},
    \code{\link[lattice]{histogram}}}
 \examples{
+\dontrun{
 fm1 <- gls(follicles ~ sin(2*pi*Time) + cos(2*pi*Time), Ovary,
            correlation = corAR1(form = ~ 1 | Mare))
 # standardized residuals versus fitted values by Mare
@@ -84,5 +85,6 @@ plot(fm1, resid(., type = "p") ~ fitted(.) | Mare, abline = 0)
 plot(fm1, Mare ~ resid(.))
 # observed versus fitted values by Mare
 plot(fm1, follicles ~ fitted(.) | Mare, abline = c(0,1))
+}
 }
 \keyword{models}

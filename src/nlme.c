@@ -3,7 +3,7 @@
    Routines for fitting nlme models
 
    Copyright 1997-2001  Douglas M. Bates <bates@stat.wisc.edu>,
-                        Jose C. Pinheiro <jcp@research.bell-labs.com>,
+                        Jose C. Pinheiro <jose.pinheiro@pharma.novartis.com>
 			Saikat DebRoy <saikat@stat.wisc.edu>
 
    This file is part of the nlme library for R and related languages
@@ -497,20 +497,18 @@ nlme_one_comp_first (longint *nrow, double *Resp, double *inmat)
 	*Resp = 0;
 	if (*Subject != sl) {	/* new Subject */
 	    if (is_na_DOUBLE(Dose)) {
-		PROBLEM
-		    "First observation on an individual must have a dose"
-		    RECOVER(NULL_ENTRY);
+		error(_("First observation on an individual must have a dose"));
 	    }
 	    sl = *Subject;
 	    mm = 0;
 	    tl[mm] = *Time;
 	    ds[mm] = *Dose;
-	} else {			/* same Subject */
+	} else {		/* same Subject */
 	    if (!is_na_DOUBLE(Dose)) { /* Dose measurement */
 		mm++;
 		tl[mm] = *Time;
 		ds[mm] = *Dose;
-	    } else {			/* Concentration measurement */
+	    } else {		/* Concentration measurement */
 		for(j = 0; j <= mm; j++) {
 		    *Resp += ds[j] * exp(-cl * (*Time - tl[j]) / v) / v;
 		}

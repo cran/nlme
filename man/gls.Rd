@@ -100,10 +100,12 @@ gls(model, data, correlation, weights, subset, method, na.action,
   \code{\link{varFunc}}, \code{\link{corClasses}}, \code{\link{varClasses}}
 }
 \examples{
+\dontrun{
 # AR(1) errors within each Mare
 fm1 <- gls(follicles ~ sin(2*pi*Time) + cos(2*pi*Time), Ovary,
            correlation = corAR1(form = ~ 1 | Mare))
 # variance increases as a power of the absolute fitted values
 fm2 <- update(fm1, weights = varPower())
+}
 }
 \keyword{models}
