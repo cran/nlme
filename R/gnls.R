@@ -233,7 +233,7 @@ gnls <-
   names(plist) <- pnames
   for (nm in pnames) {
     plist[[nm]] <- TRUE
-    if (deparse(as.vector(params[[nm]][[3]])) != "1") {
+    if (deparse(params[[nm]][[3]]) != "1") {
       plist[[nm]] <-
         model.matrix(asOneSidedFormula(params[[nm]][[3]]),
                  model.frame(asOneSidedFormula(params[[nm]][[3]]), dataModShrunk))

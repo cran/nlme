@@ -1,3 +1,8 @@
+2002-10-04  Douglas Bates  <bates@stat.wisc.edu>
+
+	* R/gnls.R (gnls): removed as.vector that was causing gnls to fail
+	on models for which the parameters depended on covariates.
+
 2002-09-10  Saikat DebRoy  <saikat@stat.wisc.edu>
 
 	* nlsList.R (nlsList.formula): Use "try" instead of "restart".
