@@ -367,7 +367,7 @@ gnls <-
     }
     if (length(oldPars <- coef(gnlsSt)) > 0) {
       aNlm <- optim(fn = function(gnlsPars) -logLik(gnlsSt, gnlsPars),
-                    par = c(coef(gnlsSt)), hessian = TRUE,
+                    par = c(coef(gnlsSt)),
                     method = "BFGS",
                     control = list(trace = controlvals$msVerbose,
                        reltol = if(numIter == 1) controlvals$msTol

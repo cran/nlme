@@ -318,7 +318,7 @@ lme.formula <-
   repeat {
     oldPars <- coef(lmeSt)
     aNlm <- optim(fn = function(lmePars) -logLik(lmeSt, lmePars),
-                  par = c(coef(lmeSt)), hessian = TRUE,
+                  par = c(coef(lmeSt)),
                   method = "BFGS",
                   control = list(trace = controlvals$msVerbose,
                   reltol = if(numIter == 0) controlvals$msTol

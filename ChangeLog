@@ -1,3 +1,8 @@
+2003-02-08  Douglas Bates  <bates@stat.wisc.edu>
+
+	* R/lme.R (lme.formula): Removed hessian=TRUE in calls to optim as
+	suggested by Brian Ripley.
+
 2003-01-30  Douglas Bates  <bates@stat.wisc.edu>
 
 	* R/lme.R:

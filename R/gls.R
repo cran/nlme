@@ -122,7 +122,7 @@ gls <-
     oldPars <- c(attr(glsSt, "glsFit")[["beta"]], coef(glsSt))
     if (length(coef(glsSt))) {		# needs ms()
       aNlm <- optim(fn = function(glsPars) -logLik(glsSt, glsPars),
-                    par = c(coef(glsSt)), hessian = TRUE,
+                    par = c(coef(glsSt)),
                     method = "BFGS",
                     control = list(trace = controlvals$msVerbose,
                        reltol = if(numIter == 0) controlvals$msTol
