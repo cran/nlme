@@ -29,8 +29,8 @@ fm2Indom.nlme <- update( fm1Indom.nlme,
   random = pdDiag(A1 + lrc1 + A2 ~ 1) )
 anova( fm1Indom.nlme, fm2Indom.nlme )
 fm3Indom.nlme <- update( fm2Indom.nlme, random = A1+lrc1+A2 ~ 1 )
-# fm3Indom.nlme
-fm4Indom.nlme <- update( fm2Indom.nlme,
+fm3Indom.nlme
+fm4Indom.nlme <- update( fm3Indom.nlme,
   random = pdBlocked(list(A1 + lrc1 ~ 1, A2 ~ 1)) )
 anova( fm3Indom.nlme, fm4Indom.nlme )
 anova( fm2Indom.nlme, fm4Indom.nlme )
@@ -69,7 +69,7 @@ fm1Pheno.nlme <-
   nlme( conc ~ phenoModel(Subject, time, dose, lCl, lV),
     data = Phenobarb, fixed = lCl + lV ~ 1,
     random = pdDiag(lCl + lV ~ 1), start = c(-5, 0),
-    na.action = na.include, naPattern = ~ !is.na(conc) )
+    na.action = NULL, naPattern = ~ !is.na(conc) )
 fm1Pheno.nlme
 fm1Pheno.ranef <- ranef( fm1Pheno.nlme, augFrame = T )
 # plot( fm1Pheno.ranef, form = lCl ~ Wt + ApgarInd )
@@ -78,7 +78,7 @@ options( contrasts = c("contr.treatment", "contr.poly") )
 fm2Pheno.nlme <- update( fm1Pheno.nlme,
   fixed = list(lCl ~ Wt, lV ~ Wt + ApgarInd),
   start = c(-5.0935, 0, 0.34259, 0, 0),
-  control = list(pnlsTol = 1e-6) )
+  control = list(pnlsTol = 1e-6, maxIter = 200) )
 #pnlsTol reduced to prevent convergence problems in PNLS step
 summary( fm2Pheno.nlme )
 fm3Pheno.nlme <- update( fm2Pheno.nlme,

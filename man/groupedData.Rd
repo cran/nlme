@@ -128,4 +128,5 @@ formula( Orth.new )      # extractor for the formula
 gsummary( Orth.new )     # apply summary by Subject
 fm1 <- lme( Orth.new )   # fixed and groups formulae extracted from object
 }
-\keyword{manip, attribute}
+\keyword{manip}
+\keyword{attribute}

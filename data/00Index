@@ -27,10 +27,10 @@ Phenobarb                Phenobarbitol Kinetics
 Pixel                    X-ray pixel intensities over time
 Quinidine                Quinidine Kinetics
 Rail                     Evaluation of Stress in Railway Rails
-RatPupWeight
-Relaxin
+RatPupWeight             The weight of rat pups
+Relaxin                  Assay for Relaxin
 Remifentanil             Pharmacokinetics of remifentanil
-Soybean
+Soybean                  Growth of soybean plants
 Spruce                   Growth of Spruce Trees
 Tetracycline1            Pharmacokinetics of tetracycline
 Tetracycline2            Pharmacokinetics of tetracycline

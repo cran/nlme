@@ -1,11 +1,12 @@
 Package: nlme
-Version: 3.1-10
-Date: 2001/01/10
+Version: 3.1-13
+Date: 2001/05/12
+Priority: Recommended
 Title: Linear and nonlinear mixed effects models
 Author: Jose Pinheiro <jcp@research.bell-labs.com>,
         Douglas Bates <bates@stat.wisc.edu>, and
         Saikat DebRoy <saikat@stat.wisc.edu>
 Maintainer: Douglas Bates <bates@stat.wisc.edu>
 Description: Fit and compare Gaussian linear and nonlinear mixed-effects models.
-Depends: nls, R(>=1.1.0)
+Depends: nls, R(>= 1.1.0)
 License: GPL version 2 or later

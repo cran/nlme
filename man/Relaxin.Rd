@@ -1,7 +1,7 @@
 \name{Relaxin}
 \alias{Relaxin}
 \non_function{}
-\title{}
+\title{Assay for Relaxin}
 \description{
     The \code{Relaxin} data frame has 198 rows and 3 columns.
 }

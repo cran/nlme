@@ -1,4 +1,4 @@
-% $Id: pairs.lmList.Rd,v 1.5 2001/01/10 19:21:05 bates Exp $
+% $Id: pairs.lmList.Rd,v 1.6 2001/03/30 16:50:52 bates Exp $
 \name{pairs.lmList}
 \title{Pairs Plot of an lmList Object}
 \usage{

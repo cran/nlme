@@ -1,7 +1,7 @@
 \name{RatPupWeight}
 \alias{RatPupWeight}
 \non_function{}
-\title{}
+\title{The weight of rat pups}
 \description{
     The \code{RatPupWeight} data frame has 322 rows and 5 columns.
 }

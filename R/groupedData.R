@@ -1,4 +1,4 @@
-### $Id: groupedData.R,v 1.3 2001/01/10 19:04:03 bates Exp $
+### $Id: groupedData.R,v 1.4 2001/03/30 16:50:52 bates Exp $
 ###
 ###           groupedData - data frame with a grouping structure
 ###
@@ -547,7 +547,7 @@ plot.nffGroupedData <-
   }
   dots <- list(...)
   args[names(dots)] <- dots
-  do.call("dotplot", args)
+  do.call("dtplot", args)
 }
 
 plot.nmGroupedData <-

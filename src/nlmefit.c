@@ -1,4 +1,4 @@
-/* $Id: nlmefit.c,v 1.8 2001/01/10 19:40:15 bates Exp $ 
+/* $Id: nlmefit.c,v 1.9 2001/03/30 16:50:52 bates Exp $ 
 
    Routines for calculation of the log-likelihood or restricted
    log-likelihood with mixed-effects models.
@@ -822,29 +822,25 @@ Delta2MatrixLog( double *theta, longint *q, double *Delta )
 static void
 Delta2LogCholesky(double *theta, longint *q, double *Delta )
 {
-    longint qq = *q;
+    longint i, qq = *q, one = 1L, info = 0L;
     if ( qq == 1 ) {
-	if (Delta[0] < 0)
-	    Delta[0] = -Delta[0];
-	*theta = log(Delta[0]);
+	*theta = log(*Delta * *Delta)/2.;
     } else {
-	longint i;
-	double *ll = theta + qq;
-
-	for (i = 0; i < qq; i++) {
-	    if (Delta[i * (qq + 1)] < 0) {
-		int j;
-		for (j = i * (qq + 1); j < (i + 1) * qq; j++)
-		    Delta[j] = -Delta[j];
-	    }
+	double *ll = theta + qq,
+	    *DtransD = Calloc((size_t) qq * qq, double);
+	crossprod_mat(DtransD, qq, Delta, qq, qq, qq); /* form t(Delta) %*% Delta */
+	F77_CALL(chol) (DtransD, &qq, &qq, Delta, &info); /* re-writes Delta */
+	if (info != 0L) {
+	    PROBLEM "Unable to form Cholesky decomposition"
+		RECOVER(NULL_ENTRY);
 	}
-
 	*theta = log(Delta[0]);
 	for(i = 1; i < qq; i++) {
 	    theta[i] = log(Delta[i * (qq + 1)]);
-	    Memcpy(ll, Delta + i * (qq + 1) + 1, i);
+	    Memcpy(ll, Delta + i * qq, i);
 	    ll += i;
 	}
+	Free(DtransD);
     }
 }
 
@@ -917,7 +913,7 @@ mixed_combined(double *ZXy, longint *pdims, double *DmHalf, longint *nIter,
     statePTR st = Calloc(1, struct state_struct);
     int ntheta = count_DmHalf_pars( dd, pdC ), itrmcd, itncnt,
       msg, p = dd->ncol[dd->Q], iagflg;
-    double epsm,
+    double 
       *theta = Calloc(ntheta, double),
       *typsiz = Calloc(ntheta, double),
       *grad = Calloc(ntheta, double),
@@ -932,10 +928,10 @@ mixed_combined(double *ZXy, longint *pdims, double *DmHalf, longint *nIter,
 
     generate_theta(theta, dd, pdClass, DmHalf);
     
-    epsm = DBL_EPSILON;
-    msg = 0;			/* don't inhibit checks */
+    *info = 9;			/* don't inhibit checks but suppress output */
     for (i = 0; i < ntheta; i++) { typsiz[i] = 1.0; }
-    iagflg = 1;
+/*      iagflg = 1; */
+    iagflg = 0;
     for (i = 0; i < dd->Q; i++) {
 	if (pdClass[i] < 1 || pdClass[i] == 3 || pdClass[i] > 4) {
 	    iagflg = 0;
@@ -945,14 +941,16 @@ mixed_combined(double *ZXy, longint *pdims, double *DmHalf, longint *nIter,
 
     optif9(ntheta, ntheta, theta, (fcn_p) mixed_fcn, (fcn_p)
 	   mixed_grad, (d2fcn_p) 0, st, typsiz, 1.0 /*fscale*/,
-	   1 /*method*/,1 /*iexp*/, &msg, -1 /*ndigit*/, 50 /*itnlim*/,
-	   iagflg, 0 /*iahflg*/, -1. /*dlt*/, pow(epsm, 1.0/3.0)
-           /*gradtl*/, 0. /*stepmx*/, sqrt(epsm) /*steptl*/, newtheta,
-	   logLik, grad, &itrmcd, a, work, &itncnt);
-    *logLik = internal_loglik( dd, ZXy,
-			       generate_DmHalf( DmHalf, dd, pdC, theta ),
-			       setngs, dc, lRSS );
-    copy_mat(R0, p, dc + (dd->SToff)[(dd->Q)][0], (dd->Srows), p, p + 1);
+	   1 /*method*/,1 /*iexp*/, info, -1 /*ndigit*/, 50 /*itnlim*/,
+	   iagflg, 0 /*iahflg*/, 1. /*dlt*/, pow(DBL_EPSILON, 0.25)
+           /*gradtl*/, 0. /*stepmx*/, sqrt(DBL_EPSILON) /*steptl*/,
+	   newtheta, logLik, grad, &itrmcd, a, work, &itncnt);
+    if (*info == 0) {
+	*logLik = internal_loglik( dd, ZXy,
+				   generate_DmHalf( DmHalf, dd, pdC, theta ),
+				   setngs, dc, lRSS );
+	copy_mat(R0, p, dc + (dd->SToff)[(dd->Q)][0], (dd->Srows), p, p + 1);
+    }
     Free(work); Free(a); Free(newtheta); Free(grad); Free(typsiz); Free(theta);
     Free(st);
   }

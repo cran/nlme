@@ -32,4 +32,4 @@ asTable(object)
 data(Orthodont)
 asTable(Orthodont)
 }
-\keyword{ data }
+\keyword{manip}

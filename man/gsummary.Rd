@@ -87,4 +87,4 @@ gsummary(Orthodont)  # default summary by Subject
 ## within the repeated observations on the same Subject.
 gsummary(Orthodont, inv = TRUE, omit = TRUE)
 }
-\keyword{ manip }
+\keyword{manip}

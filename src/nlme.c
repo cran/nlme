@@ -1,4 +1,4 @@
-/* $Id: nlme.c,v 1.6 2001/01/10 19:40:15 bates Exp $
+/* $Id: nlme.c,v 1.7 2001/03/30 16:50:52 bates Exp $
 
    Routines for fitting nlme models
 
@@ -274,16 +274,17 @@ nlme_increment(nlmePtr nlme)
 	generate_theta(theta, nlme->dd, nlme->pdClass, nlme->DmHalf);
 	
 	epsm = DBL_EPSILON;
-	msg = 8;			/* don't inhibit checks but suppress output */
+	msg = 9;		/* don't inhibit checks but suppress output */
 	for (i = 0; i < ntheta; i++) { typsiz[i] = 1.0; }
-	iagflg = 1;
-	for (i = 0; i < nlme->dd->Q; i++) {
-	    if (nlme->pdClass[i] < 1 || nlme->pdClass[i] == 3 || nlme->pdClass[i] > 4) {
-		iagflg = 0;
-		break;
-	    }
-	}
-	
+/*  	iagflg = 1; */
+/*  	for (i = 0; i < nlme->dd->Q; i++) { */
+/*  	    if (nlme->pdClass[i] < 1 || nlme->pdClass[i] == 3 || nlme->pdClass[i] > 4) { */
+/*  		iagflg = 0; */
+/*  		break; */
+/*  	    } */
+/*  	} */
+	iagflg = 0;		/* temporary modification */
+
 	optif9(ntheta, ntheta, theta, (fcn_p) mixed_fcn, (fcn_p)
 	       mixed_grad, (d2fcn_p) 0,
 	       st, typsiz, 1.0 /*fscale*/, 1 /*method*/, 1 /*iexp*/, &msg,
@@ -291,7 +292,9 @@ nlme_increment(nlmePtr nlme)
 	       -1. /*dlt*/, pow(epsm, 1.0/3.0) /*gradtl*/, 0. /*stepmx*/,
 	       sqrt(epsm) /*steptl*/, newtheta, &logLik, grad, &itrmcd, a,
 	       work, &itncnt);
-	generate_DmHalf(nlme->DmHalf, nlme->dd, nlme->pdClass, theta);
+	if (msg == 0) {
+	    generate_DmHalf(nlme->DmHalf, nlme->dd, nlme->pdClass, theta);
+	}
 	Free(work);
 	Free(a);
 	Free(newtheta);

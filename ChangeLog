@@ -1,3 +1,8 @@
+2001-03-28  Douglas Bates  <bates@stat.wisc.edu>
+
+	* R/simulate.R: Modified simulate.lme for default pdMat class of
+	pdLogChol.
+
 2001-02-24  Douglas Bates  <bates@stat.wisc.edu>
 
 	* R/newFunc.R: Removed the old fake xyplot function.  The new work

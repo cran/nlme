@@ -54,10 +54,10 @@ Phenobarb                Phenobarbitol Kinetics
 Pixel                    X-ray pixel intensities over time
 Quinidine                Quinidine Kinetics
 Rail                     Evaluation of Stress in Railway Rails
-RatPupWeight
-Relaxin
+RatPupWeight             The weight of rat pups
+Relaxin                  Assay for Relaxin
 Remifentanil             Pharmacokinetics of remifentanil
-Soybean
+Soybean                  Growth of soybean plants
 Spruce                   Growth of Spruce Trees
 Tetracycline1            Pharmacokinetics of tetracycline
 Tetracycline2            Pharmacokinetics of tetracycline
@@ -142,7 +142,7 @@ formula.gnls             Extract gnls Object Formula
 formula.groupedData      Extract groupedData Formula
 formula.lmList           Extract lmList Object Formula
 formula.lme              Extract lme Object Formula
-formula.modelStruct      Extract Formula from \code{modelStruct
+formula.modelStruct      Extract modelStruct Object Formula
 formula.nlme             Extract nlme Object Formula
 formula.nls              Extract Model Formula from nls Object
 formula.nlsList          Extract nlsList Object Formula
@@ -229,7 +229,7 @@ logLik.reStruct          Calculate reStruct Log-Likelihood
 logLik.varFunc           Extract varFunc logLik
 model.matrix.reStruct    reStruct Model Matrix
 needUpdate               Check if Update is Needed
-needUpdate.modelStruct   Check if \code{modelStruct
+needUpdate.modelStruct   Check if a modelStruct Object Needs Updating
 nlme                     Nonlinear Mixed-Effects Models
 nlme.nlsList             NLME fit from nlsList Object
 nlmeControl              Control Values for nlme Fit
@@ -287,7 +287,7 @@ print.intervals.gls      Print an intervals.gls Object
 print.intervals.lme      Print an intervals.lme Object
 print.lmList             Print an lmList Object
 print.lme                Print an lme Object
-print.modelStruct        Use \code{print
+print.modelStruct        Print a modelStruct Object
 print.pdMat              Print a pdMat Object
 print.reStruct           Print an reStruct Object
 print.summary.corStruct  Print a summary.corStruct Object
@@ -295,7 +295,7 @@ print.summary.gls        Print a summary.gls Object
 print.summary.lmList     Print a summary.lmList Object
 print.summary.lme        Print a summary.lme Object
 print.summary.modelStruct
-                         Use \code{print
+                         Print a summary.modelStruct Object
 print.summary.pdMat      Print a summary.pdMat Object
 print.summary.varFunc    Print a summary.varFunc Object
 print.varFunc            Print a varFunc Object
@@ -309,8 +309,7 @@ random.effects.lme       Extract lme Random Effects
 reStruct                 Random Effects Structure
 recalc                   Recalculate Condensed Linear Model Object
 recalc.corStruct         Recalculate for corStruct Object
-recalc.modelStruct       Recalculate Condensed Linear Model for a
-                         \code{modelStruct
+recalc.modelStruct       Recalculate for a modelStruct Object
 recalc.reStruct          Recalculate for an reStruct Object
 recalc.varFunc           Recalculate for varFunc Object
 residuals.gls            Extract gls Residuals
@@ -325,7 +324,7 @@ simulate.lme             simulate lme models
 solve.pdMat              Calculate Inverse of a Positive-Definite Matrix
 solve.reStruct           Apply Solve to an reStruct Object
 splitFormula             Split a Formula
-summary.corStruct        Summarize \code{corStruct
+summary.corStruct        Summarize a corStruct Object
 summary.gls              Summarize a gls Object
 summary.lmList           Summarize an lmList Object
 summary.lme              Summarize an lme Object

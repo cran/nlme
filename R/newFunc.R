@@ -1,4 +1,4 @@
-## $Id: newFunc.R,v 1.3 2001/01/10 19:04:03 bates Exp $
+## $Id: newFunc.R,v 1.4 2001/02/24 22:20:06 bates Exp $
 ###
 ###       Functions that are used in several parts of the nlme library
 ###                 but do not belong to any specific part

@@ -1,4 +1,4 @@
-### $Id: simulate.R,v 1.3 2001/01/10 19:04:03 bates Exp $
+### $Id: simulate.R,v 1.4 2001/03/30 16:50:52 bates Exp $
 ###
 ###            Fit a general linear mixed effects model
 ###
@@ -239,10 +239,8 @@ simulate.lme <-
     control2$niterEM <- niterEM[2]
     pdClass2 <- unlist(lapply(fit2$modelStruct$reStruct, data.class))
     pdClass2 <- match(pdClass2, c("pdSymm", "pdDiag", "pdIdent",
-                                  "pdCompSymm"), 0) - 1
-    if (missing(useGen)) {
-      useGen <- useGen || any(pdClass2 == -1)
-    }
+                                  "pdCompSymm", "pdLogChol"), 0) - 1
+    useGen <- useGen || any(pdClass2 == -1)
     altD <- condL2$dims
     ssq2 <- sum((altD$qvec[1:altD$Q])^2)
     p2 <- altD$ncol[altD$Q + 1]

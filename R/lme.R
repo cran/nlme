@@ -1,4 +1,4 @@
-### $Id: lme.R,v 1.4 2001/02/23 23:28:18 bates Exp $
+### $Id: lme.R,v 1.5 2001/03/30 16:50:52 bates Exp $
 ###
 ###            Fit a general linear mixed effects model
 ###
@@ -1723,7 +1723,7 @@ plot.ranef.lme <-
     if (is.null(args$strip)) {
       args$strip <- function(...) strip.default(..., style = 1)
     }
-    do.call("dotplot", as.list(args))
+    do.call("dtplot", as.list(args))
   } else {
     if (!inherits(form, "formula")) {
       stop("Form must be a formula, when not NULL.")

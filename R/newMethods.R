@@ -1,4 +1,4 @@
-### $Id: newMethods.R,v 1.3 2001/02/23 23:28:19 bates Exp $
+### $Id: newMethods.R,v 1.4 2001/03/30 16:50:52 bates Exp $
 ###
 ###      Methods for generics from newGenerics.q for some standard classes
 ###
@@ -401,7 +401,7 @@ plot.nls <-
     stop("Covariate must be numeric")
   }
   argForm <- ~ .x
-  argData <- data.frame(.x = .x)
+  argData <- data.frame(.x = .x, check.names = FALSE)
   if (is.null(xlab <- attr(.x, "label"))) {
     xlab <- deparse(covF[[2]])
     if (!is.null(cF) && (xlab == cF)) xlab <- cL  #### BUG!!!!
@@ -688,7 +688,7 @@ plot.compareFits <-
   } else {
     args[["key"]] <- key
   }
-  do.call("dotplot", args)
+  do.call("dtplot", args)
 }
 
 plot.Variogram <-

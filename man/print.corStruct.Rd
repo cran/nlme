@@ -1,8 +1,10 @@
-% $Id: print.corStruct.Rd,v 1.4 2000/07/03 18:22:48 bates Exp $
+% $Id: print.corStruct.Rd,v 1.5 2001/03/30 16:50:52 bates Exp $
 \name{print.corStruct}
 \title{Print a corStruct Object}
 \usage{
-print(x, ...)
+\method{print}{corStruct}(x, \dots)
+\method{print}{corHF}(x, \dots)
+\method{print}{corSymm}(x, \dots)
 }
 \alias{print.corStruct}
 \alias{print.corHF}

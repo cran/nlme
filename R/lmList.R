@@ -1,4 +1,4 @@
-## $Id: lmList.R,v 1.3 2001/01/10 19:04:03 bates Exp $
+## $Id: lmList.R,v 1.4 2001/03/30 16:50:52 bates Exp $
 ###
 ###                  Create a list of lm objects
 ###
@@ -589,7 +589,7 @@ plot.intervals.lmList <-
   if ( is.null( ylab ) ) {
     ylab <- attr(object, "groupsName")
   }
-  dotplot(group ~ intervals | what,
+  dtplot(group ~ intervals | what,
 	  data = tt,
 	  scales = list(x=list(relation="free")),
 	  strip = strip,
@@ -678,7 +678,7 @@ plot.lmList <-
     stop("Covariate must be numeric")
   }
   argForm <- ~ .x
-  argData <- data.frame(.x = .x)
+  argData <- as.data.frame(.x)
   if (is.null(xlab <- attr(.x, "label"))) {
     xlab <- deparse(covF[[2]])
     if (!is.null(cF) && (xlab == cF)) xlab <- cL
