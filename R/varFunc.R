@@ -1,21 +1,21 @@
-### $Id: varFunc.R,v 1.1 2000/07/03 18:22:44 bates Exp $
+### $Id: varFunc.R,v 1.2 2001/01/10 19:04:03 bates Exp $
 ###
 ###              Classes of variance functions
 ###
-### Copyright 1997, 1999 Jose C. Pinheiro <jcp$research.bell-labs.com>,
-###                      Douglas M. Bates <bates$stat.wisc.edu>
+### Copyright 1997-2001  Jose C. Pinheiro <jcp@research.bell-labs.com>,
+###                      Douglas M. Bates <bates@stat.wisc.edu>
 ###
 ### This file is part of the nlme library for S and related languages.
 ### It is made available under the terms of the GNU General Public
 ### License, version 2, or at your option, any later version,
 ### incorporated herein by reference.
-### 
+###
 ### This program is distributed in the hope that it will be
 ### useful, but WITHOUT ANY WARRANTY; without even the implied
 ### warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
 ### PURPOSE.  See the GNU General Public License for more
 ### details.
-### 
+###
 ### You should have received a copy of the GNU General Public
 ### License along with this program; if not, write to the Free
 ### Software Foundation, Inc., 59 Temple Place - Suite 330, Boston,
@@ -32,9 +32,9 @@ varWeights <-
 ###*# Constructor
 
 varFunc <-
-  ## Can take as argument either a varFunc object, in which case it does 
-  ## nothing, a formula or a character string , in which case it 
-  ## calls varFixed 
+  ## Can take as argument either a varFunc object, in which case it does
+  ## nothing, a formula or a character string , in which case it
+  ## calls varFixed
   function(object)
 {
   if(is.null(object)) return(object)	# NULL object - no varFunc structure
@@ -60,7 +60,7 @@ varWeights.varFunc <-
 ###*# Methods for standard generics
 
 coef.varFunc <-
-  function(object, unconstrained = TRUE, allCoef = FALSE) 
+  function(object, unconstrained = TRUE, allCoef = FALSE)
 {
   ### checking if initialized
   wPar <- attr(object, "whichFix")
@@ -148,7 +148,7 @@ print.varFunc <-
   function(x, ...)
 {
   if (length(aux <- coef(x, uncons = FALSE, allCoef = TRUE)) > 0) {
-    cat("Variance function structure of class", class(x)[1], 
+    cat("Variance function structure of class", class(x)[1],
 	"representing\n")
     print(invisible(aux), ...)
   } else {
@@ -178,7 +178,7 @@ update.varFunc <-
   function(object, data)
 {
   if (needUpdate(object)) {
-    covariate(object) <- 
+    covariate(object) <-
       eval(getCovariateFormula(object)[[2]], data)
   }
   object
@@ -288,7 +288,7 @@ varIdent <-
 ###*# Methods for standard generics
 
 coef.varIdent <-
-  function(object, unconstrained = TRUE, allCoef = FALSE) 
+  function(object, unconstrained = TRUE, allCoef = FALSE)
 {
   if (!is.null(getGroupsFormula(object)) &&
       !is.null( wPar <- attr(object, "whichFix"))) {
@@ -316,11 +316,11 @@ coef.varIdent <-
   }
 }
 
-"coef<-.varIdent" <- 
-  function(object, value) 
+"coef<-.varIdent" <-
+  function(object, value)
 {
-  if (!(is.null(grps <- getGroups(object)) || 
-       all(attr(object, "whichFix")))) { 
+  if (!(is.null(grps <- getGroups(object)) ||
+       all(attr(object, "whichFix")))) {
     ## different group variances & varying parameters
     value <- as.numeric(value)
     nGroups <- length(attr(object, "groupNames"))
@@ -328,7 +328,7 @@ coef.varIdent <-
 #      stop("Cannot assign parameters of uninitialized varIdent object")
 #    }
     if (length(value) != nGroups - 1) {
-      stop(paste("Cannot change the length of the varIdent", 
+      stop(paste("Cannot change the length of the varIdent",
 		 "parameter after initialization"))
     }
     object[] <- value
@@ -347,7 +347,7 @@ initialize.varIdent <-
     if (length(coef(object)) > 0) { # initialized - nothing to do
       return(object)
     }
-    strat <- attr(object, "groups") <- 
+    strat <- attr(object, "groups") <-
       as.character(getGroups(data, form,
                              level = length(splitFormula(grpForm, sep = "*")),
                              sep = "*"))
@@ -407,7 +407,7 @@ initialize.varIdent <-
       attributes(object) <- oldAttr
       attr(object, "groupNames") <- uStrat
     }
-    attr(object, "whichFix") <- 
+    attr(object, "whichFix") <-
       !is.na(match(attr(object, "groupNames")[-1], names(fix)))
     if (all(attr(object, "whichFix"))) {
       if (all(attr(object, "fixed") == 0)) {
@@ -439,7 +439,7 @@ recalc.varIdent <-
 }
 
 summary.varIdent <-
-  function(object, 
+  function(object,
 	   structName = if (is.null(formula(object))) "Constant variance"
 	                else "Different standard deviations per stratum")
   { summary.varFunc(object, structName) }
@@ -478,7 +478,7 @@ varPower <-
 ###*# Methods for standard generics
 
 coef.varPower <-
-  function(object, unconstrained = TRUE, allCoef = FALSE) 
+  function(object, unconstrained = TRUE, allCoef = FALSE)
 {
   if (((length(object) == 0) &&
        (!allCoef || is.null(attr(object, "fixed")))) ||
@@ -511,11 +511,11 @@ coef.varPower <-
   if ((len <- length(object)) > 0) {		# varying parameters
     value <- as.numeric(value)
     if (length(value) != len) {
-      stop(paste("Cannot change the length of the varStruct", 
+      stop(paste("Cannot change the length of the varStruct",
 		 "parameter after initialization"))
     }
     object[] <- value
-    aux <- coef(object, FALSE, allCoef = TRUE) 
+    aux <- coef(object, FALSE, allCoef = TRUE)
     if (!is.null(grps <- getGroups(object))) {
       aux <- aux[grps]
     }
@@ -529,7 +529,7 @@ coef.varPower <-
   }
   object
 }
-  
+
 initialize.varPower <-
   function(object, data, ...)
 {
@@ -541,7 +541,7 @@ initialize.varPower <-
   } else {
     attr(object, "needUpdate") <- TRUE
   }
-  if (!is.null(grpForm <- getGroupsFormula(form))) { 
+  if (!is.null(grpForm <- getGroupsFormula(form))) {
     strat <- as.character(getGroups(data, form,
                             level = length(splitFormula(grpForm, sep = "*")),
                             sep = "*"))
@@ -577,14 +577,14 @@ initialize.varPower <-
 	  names(object) <- uStratVar
 	} else {
 	  if (length(as.vector(object)) != nStratVar) {
-	    stop(paste("Initial value for \"varPower\" should be of length", 
+	    stop(paste("Initial value for \"varPower\" should be of length",
 		       nStratVar))
 	  }
 	  stN <- attr(object, "groupNames") # must have names
 	  if (length(stN) != length(uStrat) ||
 	      any(sort(stN) != sort(uStrat))) {
 	    stop("Nonexistent groups names for initial values in varPower")
-	  }	
+	  }
 	}
       } else {				# all parameters are fixed
 	if (all(attr(object, "fixed") == 0)) {
@@ -625,7 +625,7 @@ initialize.varPower <-
     }
   }
   if (!is.null(covar <- getCovariate(object))) {
-    natPar <- coef(object, allCoef = TRUE) 
+    natPar <- coef(object, allCoef = TRUE)
     if (!is.null(grps <- getGroups(object))) {
       natPar <- natPar[grps]
     }
@@ -639,11 +639,11 @@ initialize.varPower <-
 
 summary.varPower <-
   function(object, structName = "Power of variance covariate")
-{ 
+{
   if (!is.null(getGroupsFormula(object))) {
     structName <- paste(structName, " different strata", sep = ",")
   }
-  summary.varFunc(object, structName) 
+  summary.varFunc(object, structName)
 }
 
 update.varPower <-
@@ -651,7 +651,7 @@ update.varPower <-
 {
   val <- NextMethod()
   if (length(val) == 0) {		# chance to update weights
-    aux <- coef(val, allCoef = TRUE) 
+    aux <- coef(val, allCoef = TRUE)
     if (!is.null(grps <- getGroups(val))) {
       aux <- aux[grps]
     }
@@ -694,7 +694,7 @@ varExp <-
 ###*# Methods for standard generics
 
 coef.varExp <-
-  function(object, unconstrained = TRUE, allCoef = FALSE) 
+  function(object, unconstrained = TRUE, allCoef = FALSE)
 {
   if (((length(object) == 0) &&
        (!allCoef || is.null(attr(object, "fixed")))) ||
@@ -726,7 +726,7 @@ coef.varExp <-
   if ((len <- length(object)) > 0) {		# varying parameters
     value <- as.numeric(value)
     if (length(value) != length(object)) {
-      stop(paste("Cannot change the length of the varStruct", 
+      stop(paste("Cannot change the length of the varStruct",
 		 "parameter after initialization"))
     }
     object[] <- value
@@ -754,7 +754,7 @@ initialize.varExp <-
   } else {
     attr(object, "needUpdate") <- T
   }
-  if (!is.null(grpForm <- getGroupsFormula(form))) { 
+  if (!is.null(grpForm <- getGroupsFormula(form))) {
     strat <- as.character(getGroups(data, form,
                             level = length(splitFormula(grpForm, sep = "*")),
                             sep = "*"))
@@ -790,14 +790,14 @@ initialize.varExp <-
 	  names(object) <- uStratVar
 	} else {
 	  if (length(as.vector(object)) != nStratVar) {
-	    stop(paste("Initial value for \"varExp\" should be of length", 
+	    stop(paste("Initial value for \"varExp\" should be of length",
 		       nStratVar))
 	  }
 	  stN <- attr(object, "groupNames") #must have names
 	  if ((length(stN) != length(uStrat)) ||
 	      any(sort(stN) != sort(uStrat))) {
 	    stop("Nonexistent groups names for initial values in varExp")
-	  }	
+	  }
 	}
       } else {
 	if (all(attr(object, "fixed") == 0)) {
@@ -809,7 +809,7 @@ initialize.varExp <-
 	  attributes(object) <- oldAttr
 	  attr(object, "groupNames") <- uStrat
 	}
-      }	  
+      }
     } else {                            # single stratum
       attr(object, "formula") <- getCovariateFormula(formula(object))
       attr(object, "whichFix") <- !is.null(attr(object, "fixed"))
@@ -838,7 +838,7 @@ initialize.varExp <-
     }
   }
   if (!is.null(covar <- getCovariate(object))) {
-    natPar <- coef(object, allCoef = TRUE) 
+    natPar <- coef(object, allCoef = TRUE)
     if (!is.null(grps <- getGroups(object))) {
       natPar <- natPar[grps]
     }
@@ -849,7 +849,7 @@ initialize.varExp <-
     NextMethod()
   }
 }
-  
+
 
 summary.varExp <-
   function(object, structName = "Exponential of variance covariate")
@@ -857,7 +857,7 @@ summary.varExp <-
   if (!is.null(getGroupsFormula(object))) {
     structName <- paste(structName, " different strata", sep = ",")
   }
-  summary.varFunc(object, structName) 
+  summary.varFunc(object, structName)
 }
 
 update.varExp <-
@@ -865,7 +865,7 @@ update.varExp <-
 {
   val <- NextMethod()
   if (length(val) == 0) {		# chance to update weights
-    aux <- coef(val, allCoef = TRUE) 
+    aux <- coef(val, allCoef = TRUE)
     if (!is.null(grps <- getGroups(val))) {
       aux <- aux[grps]
     }
@@ -908,7 +908,7 @@ varConstPower <-
       val <- as.list(val)
       names(val) <- nv
       grpNames <- NULL
-    }    
+    }
     if (!is.null(getGroupsFormula(form))) {
       if (any(unlist(lapply(val, function(el) {
 	(length(el) > 1) && is.null(names(el))
@@ -931,13 +931,13 @@ varConstPower <-
     stop("\"form\" must have a covariate")
   }
   ## initial value may be given as a vector or list. If groups are
-  ## present and different initial values are given for each group, then 
+  ## present and different initial values are given for each group, then
   ## it must be a list with components "const" and/or "power"
   value <- CPconstr(value, form, "Value")
   fixed <- CPconstr(fixed, form, "Fixed")
   attr(value, "formula") <- form
-  attr(value, "groupNames") <- 
-    unique(c(attr(value, "groupNames"), 
+  attr(value, "groupNames") <-
+    unique(c(attr(value, "groupNames"),
 	   attr(attr(value[["const"]], "fixed"), "groupNames"),
 	   attr(attr(value[["power"]], "fixed"), "groupNames")))
   for (i in names(fixed)) {
@@ -945,7 +945,7 @@ varConstPower <-
   }
   if (is.null(getGroupsFormula(form))) {   # no groups
     whichFix <- array(F, c(2,1), list(c("const", "power"), NULL))
-    whichFix[,1] <- unlist(lapply(value, 
+    whichFix[,1] <- unlist(lapply(value,
                                   function(el) !is.null(attr(el, "fixed"))))
     attr(value, "whichFix") <- whichFix
   }
@@ -961,7 +961,7 @@ coef.varConstPower <-
   wPar <- attr(object, "whichFix")
   nonInit <- !unlist(lapply(object, length))
   nonInit <- is.null(wPar) || (any(nonInit) && !all(c(wPar[nonInit,])))
-  
+
   if (nonInit || (!allCoef && (length(unlist(object)) == 0))) {
     return(numeric(0))
   }
@@ -980,7 +980,7 @@ coef.varConstPower <-
   if (!allCoef) {
     val <- list(const = if (!all(wPar[1,])) val[1,!wPar[1,]] else NULL,
 		power = if (!all(wPar[2,])) val[2,!wPar[2,]] else NULL)
-    ## getting rid of name repetition 
+    ## getting rid of name repetition
     val <- lapply(val, function(el)
                   ifelse(length(el) == 1, as.vector(el), el))
     val <- unlist(val[!unlist(lapply(val, is.null))])
@@ -996,7 +996,7 @@ coef.varConstPower <-
   if ((len <- length(unlist(object))) > 0) {	# varying parameters
     value <- as.numeric(value)
     if (length(value) != length(unlist(object))) {
-      stop(paste("Cannot change the length of the", 
+      stop(paste("Cannot change the length of the",
 		 "parameter after initialization"))
     }
     start <- 0
@@ -1016,7 +1016,7 @@ coef.varConstPower <-
   } else {
     stop(paste("Cannot change coefficients before initialization or",
                "when all parameters are fixed"))
-  }    
+  }
   object
 }
 
@@ -1032,12 +1032,12 @@ initialize.varConstPower <-
     attr(object, "needUpdate") <- TRUE
   }
   dfltCoef <- c(const = log(0.1), power = 0)
-  if (!is.null(grpForm <- getGroupsFormula(form))) { 
+  if (!is.null(grpForm <- getGroupsFormula(form))) {
     strat <- as.character(getGroups(data, form,
                             level = length(splitFormula(grpForm, sep = "*")),
                             sep = "*"))
     uStrat <- unique(strat)
-    whichFix <- array(FALSE, c(2, length(uStrat)), 
+    whichFix <- array(FALSE, c(2, length(uStrat)),
 		      list(c("const", "power"), uStrat))
     if (length(uStrat) > 1) {		# multi-groups
       attr(object, "groups") <- strat
@@ -1100,8 +1100,8 @@ initialize.varConstPower <-
   }
   ## single stratum
   whichFix <- attr(object, "whichFix")
-  if (all(whichFix) && 
-      !any(unlist(lapply(object, function(el) attr(el, "fixed"))))) { 
+  if (all(whichFix) &&
+      !any(unlist(lapply(object, function(el) attr(el, "fixed"))))) {
     ## equal variances structure
     return(initialize(varIdent(), data))
   }
@@ -1129,7 +1129,7 @@ summary.varConstPower <-
   if (!is.null(getGroupsFormula(object))) {
     structName <- paste(structName, " different strata", sep = ",")
   }
-  summary.varFunc(object, structName) 
+  summary.varFunc(object, structName)
 }
 
 update.varConstPower <-
@@ -1152,7 +1152,7 @@ update.varConstPower <-
 
 ####* Constructor
 
-varComb <- 
+varComb <-
   ## constructor for the varComb class
   function(...)
 {
@@ -1179,7 +1179,7 @@ varWeights.varComb <-
 ###*# Methods for standard generics
 
 coef.varComb <-
-  function(object, unconstrained = TRUE, allCoef = FALSE) 
+  function(object, unconstrained = TRUE, allCoef = FALSE)
 {
   unlist(lapply(object, coef, unconstrained, allCoef))
 }
@@ -1256,7 +1256,7 @@ update.varComb <-
 ##*## Beginning of epilogue
 ### This file is automatically placed in Outline minor mode.
 ### The file is structured as follows:
-### Chapters:     ^L # 
+### Chapters:     ^L #
 ### Sections:    ##*##
 ### Subsections: ###*###
 ### Components:  non-comment lines flushed left

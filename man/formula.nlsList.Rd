@@ -1,4 +1,4 @@
-% $Id: formula.nlsList.Rd,v 1.4.2.2 2000/12/07 21:54:10 bates Exp $
+% $Id: formula.nlsList.Rd,v 1.5 2001/01/10 19:21:04 bates Exp $
 \name{formula.nlsList}
 \title{Extract nlsList Object Formula}
 \usage{

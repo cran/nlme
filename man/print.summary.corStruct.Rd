@@ -1,10 +1,12 @@
-% $Id: print.summary.corStruct.Rd,v 1.4 2000/07/03 18:22:48 bates Exp $
+% $Id: print.summary.corStruct.Rd,v 1.5 2001/01/10 19:21:05 bates Exp $
 \name{print.summary.corStruct}
 \title{Print a summary.corStruct Object}
 \usage{
 print(x, ...)
 }
 \alias{print.summary.corStruct}
+\alias{print.summary.corNatural}
+\alias{print.summary.corSymm}
 \arguments{
  \item{x}{an object inheriting from class \code{summary.corStruct},
    generally resulting from applying \code{summary} to an object

@@ -1,4 +1,4 @@
-% $Id: plot.gls.Rd,v 1.4.2.1 2000/12/02 21:06:08 bates Exp $
+% $Id: plot.gls.Rd,v 1.5 2001/01/10 19:21:05 bates Exp $
 \name{plot.gls}
 \title{Plot a gls Object}
 \usage{
@@ -73,8 +73,8 @@ plot(object, form, abline, id, idLabels, idResType, grid, ...)
   a diagnostic Trellis plot.
 }
 \author{Jose Pinheiro and Douglas Bates}
-\seealso{\code{\link{gls}}, \code{\link{xyplot}}, \code{\link{bwplot}},
-  \code{\link{histogram}} }
+\seealso{\code{\link{gls}}}%, \code{\link{xyplot}}, \code{\link{bwplot}},
+%  \code{\link{histogram}} }
 \examples{
 \dontrun{
 data(Ovary)

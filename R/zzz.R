@@ -1,8 +1,8 @@
-### $Id: zzz.R,v 1.3 2000/07/03 18:22:44 bates Exp $
+### $Id: zzz.R,v 1.4 2001/01/10 19:04:03 bates Exp $
 ###
 ### nlme for R
 ###
-### Copyright 1999-1999 Douglas M. Bates <bates@stat.wisc.edu>,
+### Copyright 1999-2001 Douglas M. Bates <bates@stat.wisc.edu>,
 ###                     Saikat DebRoy <saikat@stat.wisc.edu>
 ###
 ### This file is part of the nlme library for R and related languages.

@@ -1,34 +1,34 @@
-### $Id: nlsList.R,v 1.2.2.1 2000/12/07 19:12:36 bates Exp $
+### $Id: nlsList.R,v 1.3 2001/01/10 19:04:03 bates Exp $
 ###
 ###                  Create a list of nls objects
 ###
-### Copyright 1997, 1999 Jose C. Pinheiro <jcp$research.bell-labs.com>,
-###                      Douglas M. Bates <bates$stat.wisc.edu>
+### Copyright 1997-2001  Jose C. Pinheiro <jcp@research.bell-labs.com>,
+###                      Douglas M. Bates <bates@stat.wisc.edu>
 ###
 ### This file is part of the nlme library for S and related languages.
 ### It is made available under the terms of the GNU General Public
 ### License, version 2, or at your option, any later version,
 ### incorporated herein by reference.
-### 
+###
 ### This program is distributed in the hope that it will be
 ### useful, but WITHOUT ANY WARRANTY; without even the implied
 ### warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
 ### PURPOSE.  See the GNU General Public License for more
 ### details.
-### 
+###
 ### You should have received a copy of the GNU General Public
 ### License along with this program; if not, write to the Free
 ### Software Foundation, Inc., 59 Temple Place - Suite 330, Boston,
 ### MA 02111-1307, USA
 
-nlsList <- 
+nlsList <-
   ## A list of nls objects
   function(model, data, start, control, level, subset, na.action = na.fail,
            pool = TRUE) UseMethod("nlsList")
 
 nlsList.selfStart <-
-  function (model, data, start, control, level, subset, na.action = na.fail, 
-            pool = TRUE) 
+  function (model, data, start, control, level, subset, na.action = na.fail,
+            pool = TRUE)
 {
   mCall <- as.list(match.call())[-1]
   if (!inherits(data, "groupedData")) {
@@ -102,7 +102,7 @@ nlsList.formula <-
                  "for the new form of the \"initial\" attribute.", sep="" ))
     }
   }
-  
+
   controlvals <- nls.control()
   if(!missing(control)) {
     controlvals[names(control)] <- control
@@ -158,7 +158,7 @@ summary.nlsList <-
 }
 
 update.nlsList <-
-  function(object, model, data, start, control, level, subset, na.action, 
+  function(object, model, data, start, control, level, subset, na.action,
 	   pool)
 {
   thisCall <- as.list(match.call())[-(1:2)]

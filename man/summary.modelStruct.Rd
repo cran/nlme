@@ -1,15 +1,16 @@
-% $Id: summary.modelStruct.Rd,v 1.4 2000/07/03 18:22:48 bates Exp $
+% $Id: summary.modelStruct.Rd,v 1.5 2001/01/10 19:21:05 bates Exp $
 \name{summary.modelStruct}
-%\title{Summarize \code{modelStruct} Object}
+\alias{summary.modelStruct}
+\alias{summary.reStruct}
 \title{Summarize a modelStruct Object}
 \usage{
 summary(object)
 }
-\alias{summary.modelStruct}
 \arguments{
- \item{object}{an object inheriting from class \code{modelStruct},
-   representing a list of model components, such as \code{corStruct} and
-   \code{varFunc} objects.}
+  \item{object}{an object inheriting from class \code{modelStruct},
+    representing a list of model components, such as \code{reStruct},
+    \code{corStruct} and \code{varFunc} objects.
+  }
 }
 \description{
   This method function applies \code{summary} to each element of
@@ -19,13 +20,10 @@ summary(object)
   a list with elements given by the summarized components of
   \code{object}. The returned value is of class
   \code{summary.modelStruct}, also inheriting from the same classes as
-  \code{object}. 
+  \code{object}.
 }
-
 \author{Jose Pinheiro and Douglas Bates}
-
 \seealso{\code{\link{print.summary.modelStruct}}}
-
 \examples{
 lms1 <- lmeStruct(reStruct = reStruct(pdDiag(diag(2), ~age)),
    corStruct = corAR1(0.3))

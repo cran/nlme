@@ -1,8 +1,8 @@
-/* $Id: nlme.c,v 1.5.2.1 2000/12/02 21:06:08 bates Exp $
+/* $Id: nlme.c,v 1.6 2001/01/10 19:40:15 bates Exp $
 
    Routines for fitting nlme models
 
-   Copyright 1997, 2001 Douglas M. Bates <bates@stat.wisc.edu>,
+   Copyright 1997-2001  Douglas M. Bates <bates@stat.wisc.edu>,
                         Jose C. Pinheiro <jcp@research.bell-labs.com>,
 			Saikat DebRoy <saikat@stat.wisc.edu>
 

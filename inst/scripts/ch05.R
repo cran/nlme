@@ -106,16 +106,16 @@ ACF( fm1Ovar.lme )
 # plot(ACF(fm1Ovar.lme,  maxLag = 10), alpha = 0.01)
 fm2Ovar.lme <- update( fm1Ovar.lme, correlation = corAR1() )
 anova( fm1Ovar.lme, fm2Ovar.lme )
-intervals( fm2Ovar.lme )
+# intervals( fm2Ovar.lme )
 fm3Ovar.lme <- update(fm1Ovar.lme, correlation = corARMA(q = 2))
 fm3Ovar.lme
 anova( fm2Ovar.lme, fm3Ovar.lme, test = F )
 fm4Ovar.lme <- update( fm1Ovar.lme,
                        correlation = corCAR1(form = ~Time) )
 anova( fm2Ovar.lme, fm4Ovar.lme, test = F )
-fm5Ovar.lme <- update(fm1Ovar.lme, corr = corARMA(p = 1, q = 1))
-fm5Ovar.lme
-anova( fm2Ovar.lme, fm5Ovar.lme )
+# fm5Ovar.lme <- update(fm1Ovar.lme, corr = corARMA(p = 1, q = 1))
+# fm5Ovar.lme
+# anova( fm2Ovar.lme, fm5Ovar.lme )
 # plot( ACF(fm5Ovar.lme,  maxLag = 10, resType = "n"),
 #          alpha = 0.01 )
 Variogram( fm2BW.lme, form = ~ Time )

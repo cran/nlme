@@ -1,21 +1,21 @@
-### $Id: newGenerics.R,v 1.1 2000/07/03 18:22:44 bates Exp $
+### $Id: newGenerics.R,v 1.2 2001/01/10 19:04:03 bates Exp $
 ###
 ###    New generics used with corStruct, varFunc, groupedData, and reStruct
 ###
-### Copyright 1997, 1999 Jose C. Pinheiro <jcp$research.bell-labs.com>,
-###                      Douglas M. Bates <bates$stat.wisc.edu>
+### Copyright 1997-2001  Jose C. Pinheiro <jcp@research.bell-labs.com>,
+###                      Douglas M. Bates <bates@stat.wisc.edu>
 ###
 ### This file is part of the nlme library for S and related languages.
 ### It is made available under the terms of the GNU General Public
 ### License, version 2, or at your option, any later version,
 ### incorporated herein by reference.
-### 
+###
 ### This program is distributed in the hope that it will be
 ### useful, but WITHOUT ANY WARRANTY; without even the implied
 ### warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
 ### PURPOSE.  See the GNU General Public License for more
 ### details.
-### 
+###
 ### You should have received a copy of the GNU General Public
 ### License along with this program; if not, write to the Free
 ### Software Foundation, Inc., 59 Temple Place - Suite 330, Boston,
@@ -40,19 +40,19 @@ asTable <-
 augPred <-
   ## Return the data used to fit the model augmented with the predictions
   function(object, primary = NULL, minimum = min(primary),
-           maximum = max(primary), length.out = 51, ...) UseMethod("augPred") 
+           maximum = max(primary), length.out = 51, ...) UseMethod("augPred")
 
 "coef<-" <- "coefficients<-" <-
   ## Assignment of the unconstrained parameter
   function(object, value) UseMethod("coef<-")
 
-collapse <- 
-  ## collapse a data frame according to a factor, or several nested factors 
+collapse <-
+  ## collapse a data frame according to a factor, or several nested factors
   function(object, ...) UseMethod("collapse")
 
 comparePred <-
   ## compare predictions from different fitted objects
-  function(object1, object2, primary = NULL, 
+  function(object1, object2, primary = NULL,
 	   minimum = min(primary), maximum = max(primary),
 	   length.out = 51, level = NULL, ...) UseMethod("comparePred")
 
@@ -74,7 +74,7 @@ fixef <-
 
 getCovariate <-
   ## Return the primary covariate associated with object according to form
-  function(object, form = formula(object), data) 
+  function(object, form = formula(object), data)
     UseMethod("getCovariate")
 
 getData <-
@@ -84,10 +84,10 @@ getData <-
 
 getGroups <-
   ## Return the groups associated with object according to form.
-  function(object, form = formula(object), level, data, sep = "/") 
+  function(object, form = formula(object), level, data, sep = "/")
     UseMethod("getGroups")
 
-getGroupsFormula <- 
+getGroupsFormula <-
   ## Return the formula(s) for the groups associated with object.
   ## The result is a one-sided formula unless asList is TRUE in which case
   ## it is a list of formulas, one for each level.
@@ -111,7 +111,7 @@ initialize <-
   ## Initialize  objects
   function(object, data, ...) UseMethod("initialize")
 
-intervals <- 
+intervals <-
   ## generate confidence intervals for the parameters in object
   function(object, level = 0.95, ...) UseMethod("intervals")
 
@@ -142,7 +142,7 @@ pruneLevels <-
 
 random.effects <-
   ## Generic function for extracting the random effects
-  ## If aug.frame is true, the returned data frame is augmented with 
+  ## If aug.frame is true, the returned data frame is augmented with
   ## values from the original data object, if available.  The variables
   ## in the original data are collapsed over the groups variable by the
   ## function fun.

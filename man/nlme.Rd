@@ -1,4 +1,4 @@
-% $Id: nlme.Rd,v 1.5.2.2 2000/12/07 21:54:10 bates Exp $
+% $Id: nlme.Rd,v 1.6 2001/01/10 19:21:05 bates Exp $
 \name{nlme}
 \title{Nonlinear Mixed-Effects Models}
 \usage{

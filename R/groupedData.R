@@ -1,27 +1,27 @@
-### $Id: groupedData.R,v 1.2.2.1 2000/12/07 19:12:35 bates Exp $
+### $Id: groupedData.R,v 1.3 2001/01/10 19:04:03 bates Exp $
 ###
 ###           groupedData - data frame with a grouping structure
 ###
-### Copyright 1997, 1999 Jose C. Pinheiro <jcp$research.bell-labs.com>,
-###                      Douglas M. Bates <bates$stat.wisc.edu>
+### Copyright 1997-2001  Jose C. Pinheiro <jcp@research.bell-labs.com>,
+###                      Douglas M. Bates <bates@stat.wisc.edu>
 ###
 ### This file is part of the nlme library for S and related languages.
 ### It is made available under the terms of the GNU General Public
 ### License, version 2, or at your option, any later version,
 ### incorporated herein by reference.
-### 
+###
 ### This program is distributed in the hope that it will be
 ### useful, but WITHOUT ANY WARRANTY; without even the implied
 ### warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
 ### PURPOSE.  See the GNU General Public License for more
 ### details.
-### 
+###
 ### You should have received a copy of the GNU General Public
 ### License along with this program; if not, write to the Free
 ### Software Foundation, Inc., 59 Temple Place - Suite 330, Boston,
 ### MA 02111-1307, USA
 
-groupedData <- 
+groupedData <-
   ## Constructor for the groupedData class.  Takes a formula and a frame
   ## The formula must be of the form "response ~ primary | groups",
   ## "respose ~ primary ~ groups1/groups2/.../groups_k",
@@ -37,9 +37,9 @@ groupedData <-
   if (is.null(grpForm <- getGroupsFormula(formula, asList = TRUE))) {
     stop("Right hand side of first argument must be a conditional expression")
   }
-  
+
   mCall <- as.list(match.call())[-1]
-  if (length(grpForm) == 1) {	
+  if (length(grpForm) == 1) {
     ## single grouping variable
     do.call("nfGroupedData", mCall)
   } else {				        # multiple nesting
@@ -47,7 +47,7 @@ groupedData <-
   }
 }
 
-nfGroupedData <- 
+nfGroupedData <-
   ## Constructor for the nfGroupedData class.  Takes a formula and a frame
   ## The formula must be of the form "response ~ primary | groups"
   ## where groups evaluates to a factor in frame.
@@ -66,7 +66,7 @@ nfGroupedData <-
     stop("Only one level of grouping allowed")
   }
   ## create a data frame in which formula, inner, and outer can be evaluated
-  if (missing(data)) {	
+  if (missing(data)) {
     vnames <- all.vars(asOneFormula(formula, inner, outer))
     alist <- lapply(as.list(vnames), as.name)
     names(alist) <- vnames
@@ -74,7 +74,7 @@ nfGroupedData <-
     mode(alist) <- "call"
     data <- eval(alist, sys.parent(1))
   } else {
-    if (!inherits(data, "data.frame")) {  
+    if (!inherits(data, "data.frame")) {
       stop("second argument to groupedData must inherit from data.frame")
     }
   }
@@ -97,9 +97,9 @@ nfGroupedData <-
         ## obtain the order within each group
         outer <- asOneSidedFormula(outer)
         ## paste together all variables in outer with a character
-        ## unlikely to be in a name	  
+        ## unlikely to be in a name
         combined <-
-          do.call("paste", c(data[all.vars(outer), drop = FALSE], sep='\007'))  
+          do.call("paste", c(data[all.vars(outer), drop = FALSE], sep='\007'))
         levs <-
           as.vector(unlist(lapply(split(data.frame(response = response,
                                                    groups = groups),
@@ -117,10 +117,10 @@ nfGroupedData <-
   attr(data, "units") <- units
   attr(data, "outer") <- outer
   attr(data, "inner") <- inner
-  attr( data, "FUN" ) <- FUN 
+  attr( data, "FUN" ) <- FUN
   attr( data, "order.groups" ) <- order.groups
   dClass <-  unique(c("nfGroupedData", "groupedData", class(data)))
-  if ((length(all.vars(getCovariateFormula(formula))) == 0) || 
+  if ((length(all.vars(getCovariateFormula(formula))) == 0) ||
       (data.class(primary) != "numeric")) {
     ## primary covariate is a factor or a "1"
     class(data) <- unique(c("nffGroupedData", dClass))
@@ -133,7 +133,7 @@ nfGroupedData <-
 
 nmGroupedData <-
   ## Constructor for the nmGroupedData class.  Takes a formula and a frame
-  ## The formula must be of the form 
+  ## The formula must be of the form
   ## "respose ~ primary | groups1/groups2/.../groups_k",
   ## where groups_i evaluates to a factor in frame.
   function(formula, data = sys.parent(1), order.groups = TRUE,
@@ -152,7 +152,7 @@ nmGroupedData <-
       object <- rep(list(object), length(nams))
       names(object) <- nams
       return(object)
-    } 
+    }
     object <- list(object)
     names(object) <- nams[length(nams)]
     object
@@ -176,8 +176,8 @@ nmGroupedData <-
   outer <- checkForList(outer, grpNames)
   inner <- checkForList(inner, grpNames)
 
-  ## create a data frame in which formula, outer, and inner can be evaluated  
-  if (missing(data)) {		
+  ## create a data frame in which formula, outer, and inner can be evaluated
+  if (missing(data)) {
     vnames <- all.vars(asOneFormula(formula, outer, inner))
     alist <- lapply(as.list(vnames), as.name)
     names(alist) <- vnames
@@ -185,7 +185,7 @@ nmGroupedData <-
     mode(alist) <- "call"
     data <- eval(alist, sys.parent(1))
   } else {
-    if (!inherits(data, "data.frame")) {  
+    if (!inherits(data, "data.frame")) {
       stop("second argument to groupedData must inherit from data.frame")
     }
   }
@@ -258,7 +258,7 @@ collapse.groupedData <-
     stop("Only one display level allowed")
   }
   if (is.null(grpForm[[displayLevel]])) {
-    stop(paste("Undefined display level",displayLevel,"for", 
+    stop(paste("Undefined display level",displayLevel,"for",
 	       substitute(object)))
   }
   attribs <- attributes(object)
@@ -297,7 +297,7 @@ collapse.groupedData <-
       warning(paste("Collapsing level cannot be smaller than display level;",
 		    "setting it to the display level"))
     }
-    if ((dlevel < clevel) || (clevel < Q)) { 
+    if ((dlevel < clevel) || (clevel < Q)) {
       collapseGroups <-
         do.call("paste", c(lapply(groups[, 1:clevel, drop = FALSE ],
                                   as.character), sep = "\007"))
@@ -313,7 +313,7 @@ collapse.groupedData <-
       }
       collapseGroups <- paste(collapseGroups, getCovariate(object),
                               sep = "\007")
-      collapseGroups <- ordered(collapseGroups, 
+      collapseGroups <- ordered(collapseGroups,
                                 levels = unique(as.character(collapseGroups)))
       if (length(levels(collapseGroups)) < dim(object)[1]) {
         ## collapsing the object
@@ -348,7 +348,7 @@ collapse.groupedData <-
       outFact <- do.call("paste", c(lapply(object[, all.vars(outer)],
 					 as.character), sep = "\007"))
       groups <- c(list(outFact), groups)
-    } 
+    }
     displayGroups <- ordered(displayGroups,
       levels = unique(as.character(displayGroups[do.call("order", groups)])))
     form[[3]][[3]] <- as.name(".groups")
@@ -365,7 +365,7 @@ collapse.groupedData <-
     value[[".collapseGroups"]] <- cGroups[order(rnams)]
     attr(value, "innerGroups") <- ~.collapseGroups
   }
-  if (dlevel > 1 && !is.na(match(".groups", names(value)))) { 
+  if (dlevel > 1 && !is.na(match(".groups", names(value)))) {
     attr(value[,".groups"], "label") <- namesDgrp[dlevel]
   }
   value
@@ -404,7 +404,7 @@ plot.nfnGroupedData <-
     if (length(innerGroups) == 0) {
       innerGroups <- getGroupsFormula(x)
     }
-  } 
+  }
   if ((length(innerGroups) > 0) && (length(inner) == 0)) {
     inner <- innerGroups
     innerGroups <- NULL
@@ -439,7 +439,7 @@ plot.nfnGroupedData <-
             panel.xyplot(x, y)
             panel.superpose(x, y, subscripts, groups, type = "l")
           }
-      }        
+      }
     } else {				#inner and innerGroups
       args[["groups"]] <- asOneSidedFormula(innerGroups)[[2]]
       Inner <- as.factor(eval(asOneSidedFormula(inner)[[2]], x))
@@ -465,7 +465,7 @@ plot.nfnGroupedData <-
   if(is.logical(key)) {
     if(key && (!is.null(Inner) && (lInn <- length(levInn)) > 1)) {
       lInn <- min(c(lInn, length(trll.set[["lty"]])))
-      args[["key"]] <- 
+      args[["key"]] <-
 	list(lines = Rows(trellis.par.get("superpose.line"), 1:lInn),
 	     text = list(levels = levInn), columns = lInn)
     }
@@ -535,13 +535,13 @@ plot.nffGroupedData <-
 		     lty = dot.line$lty, col = dot.line$col)
 	panel.superpose(x, y, subscripts, groups)
       }
-  } 
+  }
   if(is.logical(key) && key && (length(inner) > 0)) {
     Inner <- eval(inner[[2]], x)
     levInn <- levels(as.factor(Inner))
     lInn <- length(levInn)
     lInn <- min(c(lInn, length(trellis.par.get("superpose.symbol")$pch)))
-    args[["key"]] <- 
+    args[["key"]] <-
       list(points = Rows(trellis.par.get("superpose.symbol"), 1:lInn),
 	     text = list(levels = levInn), columns = lInn)
   }
@@ -549,9 +549,9 @@ plot.nffGroupedData <-
   args[names(dots)] <- dots
   do.call("dotplot", args)
 }
-    
-plot.nmGroupedData <- 
-  function(x, collapseLevel = Q, displayLevel = collapseLevel, 
+
+plot.nmGroupedData <-
+  function(x, collapseLevel = Q, displayLevel = collapseLevel,
 	   outer = NULL, inner = NULL, preserve = NULL, FUN = mean,
            subset = NULL, key = TRUE, grid = TRUE, ...)
 {
@@ -582,7 +582,7 @@ print.groupedData <-
 update.groupedData <-
   function(object, formula, data, order.groups, FUN, outer, inner,
            labels, units)
-  
+
 {
   args <- as.list( attributes( object ) )
   args <- args[is.na(match(names(args),
@@ -622,7 +622,7 @@ update.groupedData <-
 }
 
 isBalanced.groupedData <-
-  function(object, countOnly = FALSE, level) 
+  function(object, countOnly = FALSE, level)
 {
   if (missing(level)) {
     level <- length(getGroupsFormula(object, asList = TRUE))
@@ -635,7 +635,7 @@ isBalanced.groupedData <-
 }
 
 asTable.groupedData <-
-  function(object) 
+  function(object)
 {
   if (length(getGroupsFormula(object, asList = TRUE)) > 1) {
     stop("asTable cannot be used with multilevel grouped data")
@@ -647,7 +647,7 @@ asTable.groupedData <-
   tab
 }
 
-balancedGrouped <- 
+balancedGrouped <-
   function(form, data, labels = NULL, units = NULL)
 {
   form <- as.formula( form )

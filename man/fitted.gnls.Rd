@@ -1,4 +1,4 @@
-% $Id: fitted.gnls.Rd,v 1.4.2.1 2000/12/02 21:06:08 bates Exp $
+% $Id: fitted.gnls.Rd,v 1.4 2000/07/03 18:22:46 bates Exp $
 \name{fitted.gnls}
 \title{Extract gnls Fitted Values}
 \usage{
@@ -17,12 +17,17 @@ fitted(object)
   a vector with the fitted values for the nonlinear model represented by
   \code{object}. 
 }
+
 \author{Jose Pinheiro and Douglas Bates}
+
 \seealso{\code{\link{gnls}}, \code{\link{residuals.gnls}} }
+
 \examples{
 data(Soybean)
+%\dontrun{
 fm1 <- gnls(weight ~ SSlogis(Time, Asym, xmid, scal), Soybean,
             weights = varPower())
 fitted(fm1)
+%}
 }
 \keyword{models}

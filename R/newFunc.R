@@ -1,10 +1,10 @@
-## $Id: newFunc.R,v 1.2.2.2 2000/12/07 19:12:36 bates Exp $
+## $Id: newFunc.R,v 1.3 2001/01/10 19:04:03 bates Exp $
 ###
 ###       Functions that are used in several parts of the nlme library
 ###                 but do not belong to any specific part
 ###
-### Copyright 1997, 1999 Jose C. Pinheiro <jcp$research.bell-labs.com>,
-###                      Douglas M. Bates <bates$stat.wisc.edu>
+### Copyright 1997-2001  Jose C. Pinheiro <jcp@research.bell-labs.com>,
+###                      Douglas M. Bates <bates@stat.wisc.edu>
 ###
 ### This file is part of the nlme library for S and related languages.
 ### It is made available under the terms of the GNU General Public
@@ -387,17 +387,6 @@ LDEsysMat <-
     diag(val) <- - tapply(pp, ff, sum)
     val[incidence[tt > 0, c("To", "From"), drop = FALSE]] <- pp[tt > 0]
     val
-}
-
-##
-## fake version of xyplot using coplot just so some of the plots from the
-## library can be drawn
-
-xyplot <- function (formula, data = list(), groups = NULL, ..., subset = TRUE)
-{
-  args <- as.list(match.call())[-1]
-  do.call("coplot", c(args[match(c("formula", "data", "xlab", "ylab", "panel"),
-                     names(args), 0)], list(show.given = FALSE) ) )
 }
 
 ## Local Variables:

@@ -1,9 +1,9 @@
-### $Id: newMethods.R,v 1.1 2000/07/03 18:22:44 bates Exp $
+### $Id: newMethods.R,v 1.3 2001/02/23 23:28:19 bates Exp $
 ###
 ###      Methods for generics from newGenerics.q for some standard classes
 ###
-### Copyright 1997, 1999 Jose C. Pinheiro <jcp$research.bell-labs.com>,
-###                      Douglas M. Bates <bates$stat.wisc.edu>
+### Copyright 1997-2001  Jose C. Pinheiro <jcp@research.bell-labs.com>,
+###                      Douglas M. Bates <bates@stat.wisc.edu>
 ###
 ### This file is part of the nlme library for S and related languages.
 ### It is made available under the terms of the GNU General Public
@@ -487,9 +487,10 @@ plot.nls <-
     }
   }
 
-  assign("id", id , where = 1)
-  assign("idLabels", idLabels, where = 1)
-  assign("abl", abline, where = 1)
+  #assign("id", id , where = 1)
+  #assign("idLabels", idLabels, where = 1)
+  #assign("abl", abline, where = 1)
+  assign("abl", abline)
 
   ## defining the type of plot
   if (length(argForm) == 3) {
@@ -546,7 +547,7 @@ plot.nls <-
     if (plotFun == "xyplot") grid <- TRUE
     else grid <- FALSE
   }
-  assign("grid", grid, where = 1)
+  # assign("grid", grid, where = 1)
   do.call(plotFun, as.list(args))
 }
 

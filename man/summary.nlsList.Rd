@@ -1,4 +1,4 @@
-% $Id: summary.nlsList.Rd,v 1.4.2.2 2000/12/07 21:54:10 bates Exp $
+% $Id: summary.nlsList.Rd,v 1.5 2001/01/10 19:21:05 bates Exp $
 \name{summary.nlsList}
 \title{Summarize an nlsList Object}
 \usage{

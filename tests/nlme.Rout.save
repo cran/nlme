@@ -15,7 +15,6 @@ Type `q()' to quit R.
 
 > library(nlme)
 Loading required package: nls 
-Warning message: 
 > data(Loblolly)
 > fm1 <- nlsList(SSasymp, Loblolly)
 > fm1

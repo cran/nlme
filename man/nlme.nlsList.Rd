@@ -1,4 +1,4 @@
-% $Id: nlme.nlsList.Rd,v 1.4.2.2 2000/12/07 21:54:10 bates Exp $
+% $Id: nlme.nlsList.Rd,v 1.5 2001/01/10 19:21:05 bates Exp $
 \name{nlme.nlsList}
 \title{NLME fit from nlsList Object}
 \usage{

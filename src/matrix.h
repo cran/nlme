@@ -1,8 +1,8 @@
-/* $Id: matrix.h,v 1.3.2.1 2000/11/30 19:28:34 bates Exp $
+/* $Id: matrix.h,v 1.4 2001/01/10 19:40:15 bates Exp $
 
    header file for the nlme package
 
-   Copyright 1999 Saikat DebRoy <saikat@stat.wisc.edu>
+   Copyright 1999-2001  Saikat DebRoy <saikat@stat.wisc.edu>
 
    This file is part of the nlme library for S and related languages
    and is made available under the terms of the GNU General Public

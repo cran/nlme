@@ -25,6 +25,10 @@ Glucose                  Glucose levels over time
 Glucose2                 Glucose Levels Following Alcohol Ingestion
 Gun                      Methods for firing naval guns
 IGF                      Radioimmunoassay of IGF-I Protein
+MEEM                     EM iterations for mixed-effects
+MEdecomp                 Decompose a mixed-effects model
+MEdims                   Calculate dimensions in mixed-effects
+MEestimate               Estimate mixed-effects parameters
 Machines                 Productivity Scores for Machines and Workers
 MathAchSchool            School demographic data for MathAchieve
 MathAchieve              Mathematics achievement scores
@@ -50,10 +54,10 @@ Phenobarb                Phenobarbitol Kinetics
 Pixel                    X-ray pixel intensities over time
 Quinidine                Quinidine Kinetics
 Rail                     Evaluation of Stress in Railway Rails
-RatPupWeight             RatPupWeight
-Relaxin                  Relaxin
+RatPupWeight
+Relaxin
 Remifentanil             Pharmacokinetics of remifentanil
-Soybean                  Soybean
+Soybean
 Spruce                   Growth of Spruce Trees
 Tetracycline1            Pharmacokinetics of tetracycline
 Tetracycline2            Pharmacokinetics of tetracycline
@@ -99,6 +103,7 @@ collapse                 Collapse According to Groups
 collapse.groupedData     Collapse a groupedData Object
 compareFits              Compare Fitted Objects
 comparePred              Compare Predictions
+contr.SAS                Contrast Matrices
 corAR1                   AR(1) Correlation Structure
 corARMA                  ARMA(p,q) Correlation Structure
 corCAR1                  Continuous AR(1) Correlation Structure
@@ -119,6 +124,7 @@ corSpatial               Spatial Correlation Structure
 corSpher                 Spherical Correlation Structure
 corSymm                  General Correlation Structure
 ergoStool                Ergometrics experiment with stool types
+fdHess                   Finite difference Hessian
 fitted.gls               Extract gls Fitted Values
 fitted.glsStruct         Calculate glsStruct Fitted Values
 fitted.gnls              Extract gnls Fitted Values
@@ -250,7 +256,7 @@ pdMat                    Positive-Definite Matrix
 pdMatrix                 Extract Matrix or Square-Root Factor from a
                          pdMat Object
 pdMatrix.reStruct        Extract Matrix or Square-Root Factor from
-                         Components of an   reStruct Object
+                         Components of an reStruct Object
 pdNatural                General Positive-Definite Matrix in Natural
                          Parametrization
 pdSymm                   General Positive-Definite Matrix
@@ -323,7 +329,7 @@ summary.corStruct        Summarize \code{corStruct
 summary.gls              Summarize a gls Object
 summary.lmList           Summarize an lmList Object
 summary.lme              Summarize an lme Object
-summary.modelStruct      Summarize \code{modelStruct
+summary.modelStruct      Summarize a modelStruct Object
 summary.nlsList          Summarize an nlsList Object
 summary.pdMat            Summarize a pdMat Object
 summary.varFunc          Summarize varFunc Object

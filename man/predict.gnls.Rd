@@ -1,4 +1,4 @@
-% $Id: predict.gnls.Rd,v 1.4.2.1 2000/12/02 21:06:08 bates Exp $
+% $Id: predict.gnls.Rd,v 1.5 2001/01/10 19:21:05 bates Exp $
 \name{predict.gnls}
 \title{Predictions from a gnls Object}
 \usage{

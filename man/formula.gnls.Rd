@@ -1,4 +1,4 @@
-% $Id: formula.gnls.Rd,v 1.4.2.1 2000/12/02 21:06:08 bates Exp $
+% $Id: formula.gnls.Rd,v 1.5 2001/01/10 19:21:04 bates Exp $
 \name{formula.gnls}
 \title{Extract gnls Object Formula}
 \usage{

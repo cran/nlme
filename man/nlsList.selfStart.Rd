@@ -1,4 +1,4 @@
-% $Id: nlsList.selfStart.Rd,v 1.4.2.1 2000/12/02 21:06:08 bates Exp $
+% $Id: nlsList.selfStart.Rd,v 1.5 2001/01/10 19:21:05 bates Exp $
 \name{nlsList.selfStart}
 \title{nlsList Fit from a selfStart Function}
 \usage{

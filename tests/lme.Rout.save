@@ -1,6 +1,6 @@
 
 R : Copyright 2000, The R Development Core Team
-Version 1.2.0 Under development (unstable) (2000-12-05)
+Version 1.2.0  (2000-12-15)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -72,4 +72,4 @@ Residual    0.659889
 
 Number of Observations: 234
 Number of Groups: 26 
-> q()
+> 

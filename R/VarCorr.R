@@ -1,21 +1,21 @@
-### $Id: VarCorr.R,v 1.1 2000/07/03 18:22:44 bates Exp $
+### $Id: VarCorr.R,v 1.2 2001/01/10 19:04:03 bates Exp $
 ###
 ###          Extract variance components of lme models.
 ###
-### Copyright 1997-1999  Jose C. Pinheiro <jcp$research.bell-labs.com>,
-###                      Douglas M. Bates <bates$stat.wisc.edu>
+### Copyright 1997-2001  Jose C. Pinheiro <jcp@research.bell-labs.com>,
+###                      Douglas M. Bates <bates@stat.wisc.edu>
 ###
 ### This file is part of the nlme library for S and related languages.
 ### It is made available under the terms of the GNU General Public
 ### License, version 2, or at your option, any later version,
 ### incorporated herein by reference.
-### 
+###
 ### This program is distributed in the hope that it will be
 ### useful, but WITHOUT ANY WARRANTY; without even the implied
 ### warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
 ### PURPOSE.  See the GNU General Public License for more
 ### details.
-### 
+###
 ### You should have received a copy of the GNU General Public
 ### License along with this program; if not, write to the Free
 ### Software Foundation, Inc., 59 Temple Place - Suite 330, Boston,
@@ -98,7 +98,7 @@ VarCorr.pdMat <- function( x, sigma = 1., rdig = 3)
 # ## puts in an extra blank.  We'll do it the clunky way instead
   attr(v, "formStr") <-
     if ( inherits( attr(x, "formula"), "listForm" ) ) {# an nlme'ism
-      paste(class(x)[[1]], "(list(", 
+      paste(class(x)[[1]], "(list(",
             paste( sapply( attr(x, "formula"),
                           function(x) as.character(deparse(as.vector(x)))),
                   collapse=","), "))", sep = "")
@@ -128,13 +128,13 @@ VarCorr.pdBlocked <- function( x, sigma = 1., rdig = 3)
   maxCorr <- 0
   if ( !all( Nulls <- sapply( corr, is.null ) ) ) {
     maxCorr <- max( sapply( corr[!Nulls], ncol ) )
-    
+
   }
   attr(bd, "formStr") <-
     paste( sapply( m, attr, which = "formStr" ), collapse = ", ")
   bd
 }
-  
+
 ### Local variables:
 ### mode: S
 ### End:

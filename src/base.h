@@ -1,8 +1,8 @@
-/* $Id: base.h,v 1.4.2.2 2000/12/02 21:06:08 bates Exp $
+/* $Id: base.h,v 1.5 2001/01/10 19:40:15 bates Exp $
 
    header file for the nlme package
 
-   Copyright 1999 Saikat DebRoy <saikat@stat.wisc.edu>
+   Copyright 1999-2001  Saikat DebRoy <saikat@stat.wisc.edu>
 
    This file is part of the nlme library for S and related languages
    and is made available under the terms of the GNU General Public

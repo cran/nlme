@@ -1,9 +1,9 @@
-### $Id: nlme.R,v 1.3.2.2 2000/12/07 19:12:36 bates Exp $
+### $Id: nlme.R,v 1.4 2001/01/10 19:04:03 bates Exp $
 ###
 ###            Fit a general nonlinear mixed effects model
 ###
-### Copyright 1997, 2001 Jose C. Pinheiro <jcp$research.bell-labs.com>,
-###                      Douglas M. Bates <bates$stat.wisc.edu>
+### Copyright 1997-2001  Jose C. Pinheiro <jcp@research.bell-labs.com>,
+###                      Douglas M. Bates <bates@stat.wisc.edu>
 ###
 ### This file is part of the nlme library for S and related languages.
 ### It is made available under the terms of the GNU General Public
@@ -430,6 +430,8 @@ nlme.formula <-
                  random = as.list(lapply(ranForm, function(el, nm)
                    !is.null(el[[nm]]), nm = nm)))
     if (this[["fixed"]]) {
+## Peter Dalgaard claims the next line should be this[["fixed"]][[3]][[1]] != "1"
+## but the current version seems to work ok.
       if (fixed[[nm]][[3]] != "1") {
 	this[["fixed"]] <-
           model.matrix(asOneSidedFormula(fixed[[nm]][[3]]),

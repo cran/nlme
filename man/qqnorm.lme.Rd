@@ -1,4 +1,4 @@
-% $Id: qqnorm.lme.Rd,v 1.4.2.1 2000/12/02 21:06:08 bates Exp $
+% $Id: qqnorm.lme.Rd,v 1.5 2001/01/10 19:21:05 bates Exp $
 \name{qqnorm.lme}
 \title{Normal Plot of Residuals or Random Effects from an lme Object}
 \usage{

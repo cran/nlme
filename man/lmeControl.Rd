@@ -1,4 +1,4 @@
-% $Id: lmeControl.Rd,v 1.5 2000/07/03 18:22:47 bates Exp $
+% $Id: lmeControl.Rd,v 1.6 2001/01/10 19:21:05 bates Exp $
 \name{lmeControl}
 \title{Control Values for lme Fit}
 \usage{

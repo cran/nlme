@@ -1,9 +1,9 @@
-## $Id: lmList.R,v 1.2.2.2 2000/12/07 19:12:35 bates Exp $
+## $Id: lmList.R,v 1.3 2001/01/10 19:04:03 bates Exp $
 ###
 ###                  Create a list of lm objects
 ###
-### Copyright 1997, 1999 Jose C. Pinheiro <jcp$research.bell-labs.com>,
-###                      Douglas M. Bates <bates$stat.wisc.edu>
+### Copyright 1997-2001  Jose C. Pinheiro <jcp@research.bell-labs.com>,
+###                      Douglas M. Bates <bates@stat.wisc.edu>
 ###
 ### This file is part of the nlme library for S and related languages.
 ### It is made available under the terms of the GNU General Public

@@ -1,4 +1,4 @@
-% $Id: pairs.compareFits.Rd,v 1.4.2.1 2000/12/02 21:06:08 bates Exp $
+% $Id: pairs.compareFits.Rd,v 1.5 2001/01/10 19:21:05 bates Exp $
 \name{pairs.compareFits}
 \title{Pairs Plot of compareFits Object}
 \usage{
@@ -33,8 +33,8 @@ pairs(object, subset, key, ...)
   symbols (colors) used for each object under comparison.
 }
 \author{Jose Pinheiro and Douglas Bates }
-\seealso{\code{\link{compareFits}}, \code{\link{plot.compareFits}},
-  \code{\link{xyplot}}, \code{\link{splom}} }
+\seealso{\code{\link{compareFits}}, \code{\link{plot.compareFits}}}%,
+%  \code{\link{xyplot}}, \code{\link{splom}} }
 \examples{
 \dontrun{
 data(Orthodont)

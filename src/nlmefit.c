@@ -1,9 +1,9 @@
-/* $Id: nlmefit.c,v 1.7.2.1 2000/12/02 21:06:08 bates Exp $ 
+/* $Id: nlmefit.c,v 1.8 2001/01/10 19:40:15 bates Exp $ 
 
    Routines for calculation of the log-likelihood or restricted
    log-likelihood with mixed-effects models.
 
-   Copyright 1997, 2001 Douglas M. Bates <bates@stat.wisc.edu>,
+   Copyright 1997-2001  Douglas M. Bates <bates@stat.wisc.edu>,
                         Jose C. Pinheiro <jcp@research.bell-labs.com>,
 			Saikat DebRoy <saikat@stat.wisc.edu>
 
@@ -265,30 +265,29 @@ void
 internal_decomp(dimPTR dd, double *ZXy)
 {				/* decompose ZXy and re-write the dims */
   longint i, j, Qp2 = (dd->Q) + 2;
-  double *dc = Calloc((size_t) ((dd->Srows) * (dd->ZXcols)), double);
+  double *dc;
 
-  if ((dd->Srows) < (dd->ZXrows)) { /* decomposition is worthwhile */
-    for (i = 0; i < Qp2; i++) {
+  if ((dd->Srows) >= (dd->ZXrows)) /* decomposition is not worthwhile */
+      return;
+  dc = Calloc((size_t) ((dd->Srows) * (dd->ZXcols)), double);
+  for (i = 0; i < Qp2; i++) {
       for(j = 0; j < (dd->ngrp)[i]; j++) {
-	QR_and_rotate(ZXy + (dd->ZXoff)[i][j], dd->ZXrows, (dd->ZXlen)[i][j],
-		      (dd->ncol)[i] + (dd->nrot)[i], DNULLP, 0L,
-		      (dd->ncol)[i], DNULLP, dc + (dd->SToff)[i][j],
-		      dd->Srows);
+	  QR_and_rotate(ZXy + (dd->ZXoff)[i][j], dd->ZXrows, (dd->ZXlen)[i][j],
+			(dd->ncol)[i] + (dd->nrot)[i], DNULLP, 0L,
+			(dd->ncol)[i], DNULLP, dc + (dd->SToff)[i][j],
+			dd->Srows);
       }
-    }
-    Memcpy(ZXy, dc, dd->Srows * dd->ZXcols);
   }
+  Memcpy(ZXy, dc, dd->Srows * dd->ZXcols);
   for (i = 0; i < Qp2; i++) {	/* re-write the offsets and lengths */
-    for (j = 0; j < (dd->ngrp)[i]; j++) {
-      (dd->ZXoff)[i][j] = (dd->DecOff)[i][j];
-      (dd->ZXlen)[i][j] = (dd->DecLen)[i][j];
-    }
+      for (j = 0; j < (dd->ngrp)[i]; j++) {
+	  (dd->ZXoff)[i][j] = (dd->DecOff)[i][j];
+	  (dd->ZXlen)[i][j] = (dd->DecLen)[i][j];
+      }
   }
   dd->ZXrows = dd->Srows;	/* and the total number of rows */
   Free(dc);
 }
-
-
 
 double			/* evaluate the log-likelihood pieces */
 internal_loglik(dimPTR dd, double *ZXy, double *DmHalf, longint *RML,

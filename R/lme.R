@@ -1,9 +1,9 @@
-### $Id: lme.R,v 1.2.2.1 2000/12/07 19:12:35 bates Exp $
+### $Id: lme.R,v 1.4 2001/02/23 23:28:18 bates Exp $
 ###
 ###            Fit a general linear mixed effects model
 ###
-### Copyright 1997, 1999 Jose C. Pinheiro <jcp$research.bell-labs.com>,
-###                      Douglas M. Bates <bates$stat.wisc.edu>
+### Copyright 1997-2001  Jose C. Pinheiro <jcp@research.bell-labs.com>,
+###                      Douglas M. Bates <bates@stat.wisc.edu>
 ###
 ### This file is part of the nlme library for S and related languages.
 ### It is made available under the terms of the GNU General Public
@@ -1519,9 +1519,9 @@ pairs.lme <-
     }
   }
 
-  assign("id", as.logical(as.character(id)) , where = 1)
-  assign("idLabels", as.character(idLabels), where = 1)
-  assign("grid", grid, where = 1)
+  assign("id", as.logical(as.character(id)))# , where = 1)
+  assign("idLabels", as.character(idLabels))#, where = 1)
+  #assign("grid", grid, where = 1)
   ## adding to args list
   args <- c(list(formula = argForm, data = argData), args)
   if (is.null(args$strip)) {
@@ -1775,17 +1775,17 @@ plot.ranef.lme <-
     }
     argData <- data.frame(y = reVal, x = vVal,
                           g = ordered(vNam, levels = vNames))
-    assign(".vNam", vNam, where = 1)
-    assign(".vType", vType, where = 1)
-    assign(".vLevs", vLevs, where = 1)
-    assign(".grid", grid, where = 1)
-    assign(".drawLine", pControl$drawLine, where = 1)
-    assign(".span", pControl$span.loess, where = 1)
-    assign(".degree", pControl$degree.loess, where = 1)
-    assign("panel.bwplot2", panel.bwplot2, where = 1)
-    assign(".cex", pControl$cex.axis, where = 1)
-    assign(".srt", pControl$srt.axis, where = 1)
-    assign(".mgp", pControl$mgp.axis, where = 1)
+    assign(".vNam", vNam)#, where = 1)
+    assign(".vType", vType)#, where = 1)
+    assign(".vLevs", vLevs)#, where = 1)
+    assign(".grid", grid)#, where = 1)
+    assign(".drawLine", pControl$drawLine)#, where = 1)
+    assign(".span", pControl$span.loess)#, where = 1)
+    assign(".degree", pControl$degree.loess)#, where = 1)
+    #assign("panel.bwplot2", panel.bwplot2, where = 1)
+    assign(".cex", pControl$cex.axis)#, where = 1)
+    assign(".srt", pControl$srt.axis)#, where = 1)
+    assign(".mgp", pControl$mgp.axis)#, where = 1)
     dots <- list(...)
     ylab <- dots$ylab
     if (is.null(ylab)) {
@@ -2353,11 +2353,11 @@ qqnorm.lme <-
       data <- fData
     }
   }
-  assign("id", if (is.null(id)) NULL else as.logical(as.character(id)),
-         where = 1)
-  assign("idLabels", as.character(idLabels), where = 1)
-  assign("grid", grid, where = 1)
-  assign("abl", abline, where = 1)
+  assign("id", if (is.null(id)) NULL else as.logical(as.character(id)))#,
+  #   where = 1)
+  assign("idLabels", as.character(idLabels))#, where = 1)
+  #assign("grid", grid, where = 1)
+  assign("abl", abline)#, where = 1)
   if (is.null(args$strip)) {
     args$strip <- function(...) strip.default(..., style = 1)
   }

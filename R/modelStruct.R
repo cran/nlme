@@ -1,21 +1,21 @@
-### $Id: modelStruct.R,v 1.1 2000/07/03 18:22:44 bates Exp $
+### $Id: modelStruct.R,v 1.2 2001/01/10 19:04:03 bates Exp $
 ###
 ###         modelStruct - a virtual class of model structures
 ###
-### Copyright 1997, 1999 Jose C. Pinheiro <jcp$research.bell-labs.com>,
-###                      Douglas M. Bates <bates$stat.wisc.edu>
+### Copyright 1997-2001  Jose C. Pinheiro <jcp@research.bell-labs.com>,
+###                      Douglas M. Bates <bates@stat.wisc.edu>
 ###
 ### This file is part of the nlme library for S and related languages.
 ### It is made available under the terms of the GNU General Public
 ### License, version 2, or at your option, any later version,
 ### incorporated herein by reference.
-### 
+###
 ### This program is distributed in the hope that it will be
 ### useful, but WITHOUT ANY WARRANTY; without even the implied
 ### warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
 ### PURPOSE.  See the GNU General Public License for more
 ### details.
-### 
+###
 ### You should have received a copy of the GNU General Public
 ### License along with this program; if not, write to the Free
 ### Software Foundation, Inc., 59 Temple Place - Suite 330, Boston,
@@ -25,7 +25,7 @@
 ### There is no constructor function for this class (i.e. no function
 ### called modelStruct) because the class is virtual.
 ### Objects inheriting from this class are required to have a "conLin"
-### (condensed linear model) attribute and a "pmap" (parameter map) 
+### (condensed linear model) attribute and a "pmap" (parameter map)
 ### attribute
 
 ###*# Methods for standard generics
@@ -58,7 +58,7 @@ formula.modelStruct <-
 needUpdate.modelStruct <-
   function(object) any(unlist(lapply(object, needUpdate)))
 
-print.modelStruct <- 
+print.modelStruct <-
   function(x, ...)
 {
   for(i in names(x)) {
@@ -70,7 +70,7 @@ print.modelStruct <-
 }
 
 print.summary.modelStruct <-
-  function(x, ...) 
+  function(x, ...)
 {
   lapply(x, print, ...)
 }
@@ -85,7 +85,7 @@ recalc.modelStruct <-
   conLin
 }
 
-summary.modelStruct <- 
+summary.modelStruct <-
   function(object)
 {
   value <- lapply(object, summary)

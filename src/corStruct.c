@@ -1,8 +1,8 @@
-/* $Id: corStruct.c,v 1.3.2.1 2000/11/30 19:28:34 bates Exp $
+/* $Id: corStruct.c,v 1.4 2001/01/10 19:40:15 bates Exp $
 
    Routines dealaing with correlation structures.
 
-   Copyright 1997, 1999 Douglas M. Bates <bates@stat.wisc.edu>,
+   Copyright 1997-2001  Douglas M. Bates <bates@stat.wisc.edu>,
                         Jose C. Pinheiro <jcp@research.bell-labs.com>,
 			Saikat DebRoy <saikat@stat.wisc.edu>
 

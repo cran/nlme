@@ -1,4 +1,4 @@
-% $Id: update.nlme.Rd,v 1.7.2.2 2000/12/07 21:54:10 bates Exp $
+% $Id: update.nlme.Rd,v 1.8 2001/01/10 19:21:05 bates Exp $
 \name{update.nlme}
 \title{Update an nlme Object}
 \usage{

@@ -1,3 +1,22 @@
+2001-02-24  Douglas Bates  <bates@stat.wisc.edu>
+
+	* R/newFunc.R: Removed the old fake xyplot function.  The new work
+	by Murrell and Sarkar will make this superfluous.
+
+	* man/MEestimate.Rd: Added manual pages for MEEM, MEdecomp,
+	MEestimate.
+
+	* R/newMethods.R: Revised assignments in plotting methods to be
+	compatible with the Murrell/Sarkar preliminary trellis package.
+
+	* src/nlmefit.c (internal_decomp): Corrected an error reported by
+	Kathryn Chaloner where Srows >= ZXrows.
+
+2001-01-10  Douglas Bates  <bates@stat.wisc.edu>
+
+	* DESCRIPTION (Maintainer): Added Maintainer entry to
+	DESCRIPTION. 
+
 2000-12-09  Douglas Bates  <bates@stat.wisc.edu>
 
 	* R/lme.R: (Variogram.lme) Coerced n.pairs to numeric and

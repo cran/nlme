@@ -1,4 +1,4 @@
-% $Id: formula.nlme.Rd,v 1.5.2.2 2000/12/07 21:54:10 bates Exp $
+% $Id: formula.nlme.Rd,v 1.6 2001/01/10 19:21:04 bates Exp $
 \name{formula.nlme}
 \title{Extract nlme Object Formula}
 \usage{

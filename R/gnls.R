@@ -1,37 +1,37 @@
-### $Id: gnls.R,v 1.2.2.1 2000/12/07 19:12:35 bates Exp $
+### $Id: gnls.R,v 1.3 2001/01/10 19:04:03 bates Exp $
 ###
 ###  Fit a general nonlinear regression model with correlated and/or
 ###  heteroscedastic errors
 ###
-### Copyright 1997, 1999 Jose C. Pinheiro <jcp$research.bell-labs.com>,
-###                      Douglas M. Bates <bates$stat.wisc.edu>
+### Copyright 1997-2001  Jose C. Pinheiro <jcp@research.bell-labs.com>,
+###                      Douglas M. Bates <bates@stat.wisc.edu>
 ###
 ### This file is part of the nlme library for S and related languages.
 ### It is made available under the terms of the GNU General Public
 ### License, version 2, or at your option, any later version,
 ### incorporated herein by reference.
-### 
+###
 ### This program is distributed in the hope that it will be
 ### useful, but WITHOUT ANY WARRANTY; without even the implied
 ### warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
 ### PURPOSE.  See the GNU General Public License for more
 ### details.
-### 
+###
 ### You should have received a copy of the GNU General Public
 ### License along with this program; if not, write to the Free
 ### Software Foundation, Inc., 59 Temple Place - Suite 330, Boston,
 ### MA 02111-1307, USA
 
-gnls <- 
+gnls <-
   function(model,
 	   data = sys.frame(sys.parent()),
-	   params, 
-	   start, 
+	   params,
+	   start,
            correlation = NULL,
            weights = NULL,
 	   subset,
 	   na.action = na.fail,
-	   naPattern, 
+	   naPattern,
 	   control = list(),
 	   verbose= FALSE)
 {
@@ -96,7 +96,7 @@ gnls <-
   } else {
     start <- unlist(start)
   }
-    
+
   gnlsModel <- call("-", form[[2]], form[[3]])
   ##
   ## save writing list(...) when only one element
@@ -167,8 +167,8 @@ gnls <-
 #	  groups <- NULL
 #	} else {
 #          groups <- groups[[1]]
-#          attr(correlation, "formula") <- 
-#            eval(parse(text = paste("~", 
+#          attr(correlation, "formula") <-
+#            eval(parse(text = paste("~",
 #                         deparse(getCovariateFormula(formula(correlation))[[2]]),
 #			 "|", deparse(groups[[2]]))))
 #        }
@@ -192,7 +192,7 @@ gnls <-
   origOrder <- row.names(dataMod)	# preserve the original order
   ##
   ## Evaluating the groups expression, if needed
-  ##  
+  ##
   if (!is.null(groups)) {
     ## sort the model.frame by groups and get the matrices and parameters
     ## used in the estimation procedures
@@ -201,7 +201,7 @@ gnls <-
     grps <- getGroups(dataMod, groups,
                       level = length(getGroupsFormula(groups, asList = TRUE)))
     ## ordering data by groups
-    ord <- order(grps)	
+    ord <- order(grps)
     grps <- grps[ord]
     dataMod <- dataMod[ord, ,drop = FALSE]
     revOrder <- match(origOrder, row.names(dataMod)) # putting in orig. order
@@ -239,7 +239,7 @@ gnls <-
                  model.frame(asOneSidedFormula(params[[nm]][[3]]), dataModShrunk))
       auxContr <- attr(plist[[nm]], "contr")
       contr <- c(contr, auxContr[is.na(match(names(auxContr), names(contr)))])
-    } 
+    }
   }
   ##
   ## Params effects names
@@ -273,7 +273,7 @@ gnls <-
     }
   }
   pLen <- length(pn)
-  if (length(start) != pLen) 
+  if (length(start) != pLen)
     stop ("starting values for parameters are not the correct length")
   spar <- start
   names(spar) <- pn
@@ -289,7 +289,7 @@ gnls <-
       n1 <- n1 + 1
     } else {
       pmap[[nm]] <- n1:(n1+ncol(p) - 1)
-      n1 <- n1 + ncol(p) 
+      n1 <- n1 + ncol(p)
     }
   }
 
@@ -308,7 +308,7 @@ gnls <-
                             naPat = naPat,
 			    .parameters = c("beta"),
                             finiteDiffGrad = finiteDiffGrad)
-                       
+
   lapply(names(nlList), function(x, y, env) assign(x, y[[x]], envir = env),
          nlList, env = nlEnv)
 
@@ -340,10 +340,10 @@ gnls <-
   ## creating the condensed linear model
   Dims <- list(p = pLen, N = NReal, REML = FALSE)
   attr(gnlsSt, "conLin") <-
-    list(Xy = array(w, c(NReal, 1), 
+    list(Xy = array(w, c(NReal, 1),
            list(row.names(dataModShrunk), deparse(form[[2]]))), dims = Dims,
          logLik = 0)
-                
+
   ## additional attributes of gnlsSt
   attr(gnlsSt, "resp") <- yShrunk
   attr(gnlsSt, "model") <- modelResid
@@ -398,7 +398,7 @@ gnls <-
     } else {
       vW <- varWeights(gnlsSt$varStruct)
     }
-    work <- .C("fit_gnls", 
+    work <- .C("fit_gnls",
 	       thetaNLS = as.double(spar),
 	       as.integer(unlist(Dims)),
 	       as.double(cF),
@@ -411,7 +411,7 @@ gnls <-
                nlModel,
 	       NAOK = TRUE)
     if (work$settings[4] == 1) {
-      convResult <- 2                 
+      convResult <- 2
       if (controlvals$returnObject) {
         warning("Step halving factor reduced below minimum in NLS step")
       } else {
@@ -542,7 +542,7 @@ gnls <-
   class(estOut) <- c("gnls", "gls")
   estOut
 }
-	      
+
 ### Auxiliary functions used internally in gls and its methods
 
 gnlsApVar <-
@@ -631,7 +631,7 @@ gnlsApVar <-
 
 
 ###
-### function used to calculate the parameters from 
+### function used to calculate the parameters from
 ### the params and random effects
 ###
 
@@ -646,9 +646,9 @@ getParsGnls <-
       pars[, nm] <- p %*% beta[pmap[[nm]]]
     }
   }
-  pars  
+  pars
 }
-  
+
 ###
 ###  Methods for standard generics
 ###
@@ -689,15 +689,15 @@ logLik.gnls <-
   p <- object$dims$p
   N <- object$dims$N
   val <- object[["logLik"]]
-  attr(val, "nobs") <- attr(val, "nall") <- N 
+  attr(val, "nobs") <- attr(val, "nall") <- N
   attr(val, "df") <- p + length(coef(object[["modelStruct"]])) + 1
   class(val) <- "logLik"
   val
 }
 
 
-predict.gnls <- 
-  function(object, newdata, na.action = na.fail, naPattern = NULL)  
+predict.gnls <-
+  function(object, newdata, na.action = na.fail, naPattern = NULL)
 {
   ##
   ## method for predict() designed for objects inheriting from class gnls
@@ -709,7 +709,7 @@ predict.gnls <-
   mCall <- object$call
 
   mfArgs <- list(formula = asOneFormula(formula(object),
-                   mCall$params, naPattern, 
+                   mCall$params, naPattern,
                    omit = c(names(object$plist), "pi",
                      deparse(getResponseFormula(object)[[2]]))),
                  data = newdata, na.action = na.action)
@@ -751,7 +751,7 @@ predict.gnls <-
   if (is.null(params <- eval(object$call$params))) {
     params <- eval(parse(text = paste(paste(pnames, collapse = "+"), "1",
                            sep = "~")))
-  }    
+  }
   if (!is.list(params)) {
     params <- list(params)
   }
@@ -787,7 +787,7 @@ predict.gnls <-
   val
 }
 
-update.gnls <- 
+update.gnls <-
   function(object, model, data = sys.frame(sys.parent()), params, start ,
            correlation = NULL, weights = NULL, subset,
            na.action = na.fail, naPattern, control = list(),
@@ -858,7 +858,7 @@ initialize.gnlsStruct <-
     attr(object, "pmap") <- pmap
     if (needUpdate(object)) {
       object <- update(object, data)
-    } 
+    }
   }
   object
 }
@@ -890,7 +890,7 @@ gnlsControl <-
 {
   list(maxIter = maxIter, nlsMaxIter = nlsMaxIter, msMaxIter = msMaxIter,
        minScale = minScale, tolerance = tolerance, nlsTol = nlsTol,
-       msTol = msTol, msScale = msScale, returnObject = returnObject, 
+       msTol = msTol, msScale = msScale, returnObject = returnObject,
        msVerbose = msVerbose, gradHess = gradHess, apVar = apVar,
        nlmStepMax = nlmStepMax,
        .relStep = .relStep, minAbsParApVar = minAbsParApVar)
@@ -900,4 +900,4 @@ gnlsControl <-
 ### mode:S
 ### S-keep-dump-files: t
 ### End:
- 
+

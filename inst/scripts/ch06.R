@@ -29,8 +29,8 @@ fm2Indom.nlme <- update( fm1Indom.nlme,
   random = pdDiag(A1 + lrc1 + A2 ~ 1) )
 anova( fm1Indom.nlme, fm2Indom.nlme )
 fm3Indom.nlme <- update( fm2Indom.nlme, random = A1+lrc1+A2 ~ 1 )
-fm3Indom.nlme
-fm4Indom.nlme <- update( fm3Indom.nlme,
+# fm3Indom.nlme
+fm4Indom.nlme <- update( fm2Indom.nlme,
   random = pdBlocked(list(A1 + lrc1 ~ 1, A2 ~ 1)) )
 anova( fm3Indom.nlme, fm4Indom.nlme )
 anova( fm2Indom.nlme, fm4Indom.nlme )
@@ -60,7 +60,7 @@ fm3Soy.nlme <- update( fm2Soy.nlme,
   start = c(soyFix[1], 0, 0, soyFix[2], 0, 0, soyFix[3], 0, 0) )
 fm3Soy.nlme
 anova( fm3Soy.nlme )
-summary( fm4Soy.nlme )
+# summary( fm4Soy.nlme )
 
 # 6.4 Clinical Study of Phenobarbital Kinetics
 

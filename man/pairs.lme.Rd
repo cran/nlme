@@ -1,4 +1,4 @@
-% $Id: pairs.lme.Rd,v 1.4.2.1 2000/12/02 21:06:08 bates Exp $
+% $Id: pairs.lme.Rd,v 1.5 2001/01/10 19:21:05 bates Exp $
 \name{pairs.lme}
 \title{Pairs Plot of an lme Object}
 \usage{
@@ -57,7 +57,7 @@ pairs(object, form, label, id, idLabels, grid, ...)
   a diagnostic Trellis plot.
 }
 \author{Jose Pinheiro and Douglas Bates}
-\seealso{\code{\link{lme}}, \code{\link{xyplot}}, \code{\link{splom}}} 
+\seealso{\code{\link{lme}}}%, \code{\link{xyplot}}, \code{\link{splom}}} 
 \examples{
 \dontrun{
 data(Orthodont)
