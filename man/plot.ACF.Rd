@@ -1,4 +1,4 @@
-% $Id: plot.ACF.Rd,v 1.8 2002/03/05 14:59:39 bates Exp $
+% $Id: plot.ACF.Rd,v 1.9 2002/04/16 14:28:53 bates Exp $
 \name{plot.ACF}
 \title{Plot an ACF Object}
 \usage{
@@ -35,12 +35,10 @@
   an \code{xyplot} Trellis plot.
 }
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
-\seealso{\code{\link{ACF}}, \code{\link{xyplot}}}
+\seealso{\code{\link{ACF}}, \code{\link[lattice]{xyplot}}}
 \examples{
-\dontrun{
 data(Ovary)
 fm1 <- lme(follicles ~ sin(2*pi*Time) + cos(2*pi*Time), Ovary)
 plot(ACF(fm1, maxLag = 10), alpha = 0.01)
-}
 }
 \keyword{models}

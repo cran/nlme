@@ -1,4 +1,4 @@
-% $Id: qqnorm.gls.Rd,v 1.8 2002/03/05 14:59:39 bates Exp $
+% $Id: qqnorm.gls.Rd,v 1.9 2002/04/16 14:28:53 bates Exp $
 \name{qqnorm.gls}
 \title{Normal Plot of Residuals from a gls Object}
 \usage{
@@ -58,11 +58,9 @@
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 \seealso{\code{\link{gls}}, \code{\link{plot.gls}}}
 \examples{
-\dontrun{
 data(Ovary)
 fm1 <- gls(follicles ~ sin(2*pi*Time) + cos(2*pi*Time), Ovary,
            correlation = corAR1(form = ~ 1 | Mare))
 qqnorm(fm1, abline = c(0,1))
-}
 }
 \keyword{models}

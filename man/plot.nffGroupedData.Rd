@@ -1,4 +1,4 @@
-% $Id: plot.nffGroupedData.Rd,v 1.6 2002/03/05 14:59:39 bates Exp $
+% $Id: plot.nffGroupedData.Rd,v 1.7 2002/04/16 14:28:53 bates Exp $
 \name{plot.nffGroupedData}
 \title{Plot an nffGroupedData Object}
 \usage{
@@ -84,12 +84,10 @@ Mixed-Effects Software: Design of NLME 3.0" available at
 http://franz.stat.wisc.edu/pub/NLME.
 }
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
-\seealso{\code{\link{groupedData}}, \code{\link{dotplot}}}
+\seealso{\code{\link{groupedData}}, \code{\link[lattice]{dotplot}}}
 \examples{
-\dontrun{
 data(Machines)
 plot(Machines)
 plot(Machines, inner = TRUE)
-}
 }
 \keyword{models}

@@ -1,4 +1,4 @@
-% $Id: plot.nmGroupedData.Rd,v 1.6 2002/03/05 14:59:39 bates Exp $
+% $Id: plot.nmGroupedData.Rd,v 1.7 2002/04/16 14:28:53 bates Exp $
 \name{plot.nmGroupedData}
 \title{Plot an nmGroupedData Object}
 \usage{
@@ -105,7 +105,7 @@ Springer-Verlag, New York.
 
 Pinheiro, J.C. and Bates, D.M. (1997) "Future Directions in
 Mixed-Effects Software: Design of NLME 3.0" available at
-http://franz.stat.wisc.edu/pub/NLME.
+\url{http://franz.stat.wisc.edu/pub/NLME}.
 }
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 \seealso{\code{\link{groupedData}}, \code{\link{collapse.groupedData}},
@@ -113,11 +113,9 @@ http://franz.stat.wisc.edu/pub/NLME.
 }  
 \examples{
 data(Pixel)
-\dontrun{
 # no collapsing, panels by Dog
 plot(Pixel, display = "Dog", inner = ~Side)
 # collapsing by Dog, preserving day
 plot(Pixel, collapse = "Dog", preserve = ~day)
-}
 }
 \keyword{models}

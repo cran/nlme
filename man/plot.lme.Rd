@@ -1,4 +1,4 @@
-% $Id: plot.lme.Rd,v 1.10 2002/03/05 14:59:39 bates Exp $
+% $Id: plot.lme.Rd,v 1.11 2002/04/16 14:28:53 bates Exp $
 \name{plot.lme}
 \title{Plot an lme or nls object}
 \alias{plot.lme}
@@ -75,10 +75,9 @@
   a diagnostic Trellis plot.
 }
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
-\seealso{\code{\link{lme}}}%, \code{\link{xyplot}}, \code{\link{bwplot}},
-%  \code{\link{histogram}} }
+\seealso{\code{\link{lme}}, \code{\link[lattice]{xyplot}},
+   \code{\link[lattice]{bwplot}}, \code{\link[lattice]{histogram}}}
 \examples{
-\dontrun{
 data(Orthodont)
 fm1 <- lme(distance ~ age, Orthodont, random = ~ age | Subject)
 # standardized residuals versus fitted values by gender
@@ -87,7 +86,6 @@ plot(fm1, resid(., type = "p") ~ fitted(.) | Sex, abline = 0)
 plot(fm1, Subject ~ resid(.))
 # observed versus fitted values by Subject
 plot(fm1, distance ~ fitted(.) | Subject, abline = c(0,1))
-}
 }
 \keyword{models}
 \keyword{hplot}

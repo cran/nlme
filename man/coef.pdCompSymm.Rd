@@ -1,4 +1,4 @@
-% $Id: coef.pdCompSymm.Rd,v 1.6 2001/10/30 20:51:15 bates Exp $
+% $Id: coef.pdCompSymm.Rd,v 1.7 2002/03/05 20:11:56 bates Exp $
 \name{coef.pdCompSymm}
 \title{pdCompSymm Object Coefficients}
 \usage{

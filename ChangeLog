@@ -1,6 +1,23 @@
+2002-04-20  Douglas Bates  <bates@stat.wisc.edu>
+
+	* R/nlme.R: Bug fix by SDR - convergence criterion was being
+	calculated incorrectly.
+
+2002-04-04  Douglas Bates  <bates@stat.wisc.edu>
+
+	* man/getVarCov.Rd: Added an example of the type="marginal"
+	Corrected misplaced brace.
+
+	* R/VarCov.R (getVarCov.lme): Added the getVarCov functions
+	contributed by Mary Lindstrom <lindstro@biostat.wisc.edu>
+
+2002-03-27  Douglas Bates  <bates@stat.wisc.edu>
+
+	* R/lme.R (anova.lme): Change strvar != "NA" to !is.na(strvar)
+
 2002-03-05  Douglas Bates  <bates@stat.wisc.edu>
 
-	* man/ACF.gls.Rd: Changed Jose's email address on this an all the
+	* man/ACF.gls.Rd: Changed Jose's email address on this and all the
 	other man pages.
 
 	* R/varFunc.R: Incorporate fix from Thomas Lumley and from Setzer

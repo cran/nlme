@@ -37,7 +37,7 @@
 }
 \examples{
 data(Cefamandole)
-coplot(formula(Cefamandole), Cefamandole, show = FALSE, type = "b")
+plot(Cefamandole)
 fm1 <- nlsList(SSbiexp, data = Cefamandole)
 summary(fm1)
 }

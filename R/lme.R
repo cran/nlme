@@ -1,4 +1,4 @@
-### $Id: lme.R,v 1.10 2002/03/05 15:36:27 bates Exp $
+### $Id: lme.R,v 1.11 2002/03/27 23:21:23 bates Exp $
 ###
 ###            Fit a general linear mixed effects model
 ###
@@ -949,7 +949,7 @@ anova.lme <-
 			       val
 			     }))
     ## checking consistency of estimation methods
-    if(length(uEst <- unique(estMeth[estMeth != "NA"])) > 1) {
+    if(length(uEst <- unique(estMeth[!is.na(estMeth)])) > 1) {
       stop("All fitted objects must have the same estimation method.")
     }
     estMeth[is.na(estMeth)] <- uEst

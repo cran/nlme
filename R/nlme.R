@@ -1,4 +1,4 @@
-### $Id: nlme.R,v 1.7 2001/10/30 20:51:14 bates Exp $
+### $Id: nlme.R,v 1.8 2002/04/20 03:56:27 saikat Exp $
 ###
 ###            Fit a general nonlinear mixed effects model
 ###
@@ -890,6 +890,7 @@ nlme.formula <-
       for (i in 1:fLen) cat(format(signif(sfix[i]))," ")
       cat("\n iterations:",work$set[5],"\n")
     }
+    aConv <- coef(nlmeSt) # added by SDR 04/19/2002
     aConv <- c(sfix, aConv)
     w[] <- work$additional[(NReal * pLen) + 1:NReal]
     ZX[] <- work$additional[1:(NReal * pLen)]

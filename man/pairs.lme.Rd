@@ -1,4 +1,4 @@
-% $Id: pairs.lme.Rd,v 1.9 2002/03/05 14:59:39 bates Exp $
+% $Id: pairs.lme.Rd,v 1.10 2002/04/16 14:28:53 bates Exp $
 \name{pairs.lme}
 \title{Pairs Plot of an lme Object}
 \usage{
@@ -59,14 +59,15 @@
   a diagnostic Trellis plot.
 }
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
-\seealso{\code{\link{lme}}}%, \code{\link{xyplot}}, \code{\link{splom}}} 
+\seealso{\code{\link{lme}}, \code{\link[lattice]{xyplot}},
+  \code{\link[lattice]{splom}}}
 \examples{
-\dontrun{
 data(Orthodont)
 fm1 <- lme(distance ~ age, Orthodont, random = ~ age | Subject)
 # scatter plot of coefficients by gender, identifying unusual subjects
-pairs(fm1, ~coef(., augFrame = T) | Sex, id = 0.1, adj = -0.5)    
+pairs(fm1, ~coef(., augFrame = TRUE) | Sex, id = 0.1, adj = -0.5)    
 # scatter plot of estimated random effects
+\dontrun{
 pairs(fm1, ~ranef(.))
 }
 }

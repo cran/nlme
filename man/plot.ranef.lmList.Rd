@@ -1,4 +1,4 @@
-% $Id: plot.ranef.lmList.Rd,v 1.8 2002/03/05 14:59:39 bates Exp $
+% $Id: plot.ranef.lmList.Rd,v 1.9 2002/04/16 14:28:53 bates Exp $
 \name{plot.ranef.lmList}
 \title{Plot a ranef.lmList Object}
 \usage{
@@ -69,14 +69,14 @@
   covariates, or groups.
 }
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
-\seealso{\code{\link{lmList}}, \code{\link{dotplot}}}
+\seealso{\code{\link{lmList}}, \code{\link[lattice]{dotplot}}}
 \examples{
-\dontrun{
 data(Orthodont)
 fm1 <- lmList(distance ~ age | Subject, Orthodont)
 plot(ranef(fm1))
 fm1RE <- ranef(fm1, aug = TRUE)
 plot(fm1RE, form = ~ Sex)
+\dontrun{
 plot(fm1RE, form = age ~ Sex)
 }
 }

@@ -1,4 +1,4 @@
-% $Id: plot.augPred.Rd,v 1.7 2002/03/05 14:59:39 bates Exp $
+% $Id: plot.augPred.Rd,v 1.8 2002/04/16 14:28:53 bates Exp $
 \name{plot.augPred}
 \title{Plot an augPred Object}
 \usage{
@@ -32,13 +32,11 @@
 
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 
-\seealso{\code{\link{augPred}}, \code{\link{xyplot}}}
+\seealso{\code{\link{augPred}}, \code{\link[lattice]{xyplot}}}
 
 \examples{
-\dontrun{
 data(Orthodont)
 fm1 <- lme(Orthodont)
 plot(augPred(fm1, level = 0:1, length.out = 2))
-}
 }
 \keyword{models}

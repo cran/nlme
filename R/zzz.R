@@ -1,4 +1,4 @@
-### $Id: zzz.R,v 1.5 2001/03/30 17:16:51 saikat Exp $
+### $Id: zzz.R,v 1.6 2002/04/16 14:28:53 bates Exp $
 ###
 ### nlme for R
 ###
@@ -23,5 +23,5 @@
 
 .First.lib <- function(lib, pkg) {
   library.dynam(pkg, pkg, lib )
+  require(lattice)
 }
-

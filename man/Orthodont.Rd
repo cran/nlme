@@ -48,6 +48,7 @@
 }
 \examples{
 data(Orthodont)
-coplot(distance ~ age | Subject, data = Orthodont, show = FALSE)
+formula(Orthodont)
+plot(Orthodont)
 }
 \keyword{datasets}

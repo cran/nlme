@@ -1,4 +1,4 @@
-% $Id: plot.nfnGroupedData.Rd,v 1.6 2002/03/05 14:59:39 bates Exp $
+% $Id: plot.nfnGroupedData.Rd,v 1.7 2002/04/16 14:28:53 bates Exp $
 \name{plot.nfnGroupedData}
 \title{Plot an nfnGroupedData Object}
 \usage{
@@ -87,14 +87,12 @@ Mixed-Effects Software: Design of NLME 3.0" available at
 http://franz.stat.wisc.edu/pub/NLME.
 }
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
-\seealso{\code{\link{groupedData}}, \code{\link{xyplot}}}
+\seealso{\code{\link{groupedData}}, \code{\link[lattice]{xyplot}}}
 \examples{
 data(Orthodont)
-\dontrun{
 # different panels per Subject
 plot(Orthodont)
 # different panels per gender
 plot(Orthodont, outer = TRUE)
-}
 }
 \keyword{models}

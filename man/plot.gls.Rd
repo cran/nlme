@@ -1,4 +1,4 @@
-% $Id: plot.gls.Rd,v 1.9 2002/03/05 14:59:39 bates Exp $
+% $Id: plot.gls.Rd,v 1.10 2002/04/16 14:28:53 bates Exp $
 \name{plot.gls}
 \title{Plot a gls Object}
 \usage{
@@ -72,10 +72,10 @@
   a diagnostic Trellis plot.
 }
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
-\seealso{\code{\link{gls}}}%, \code{\link{xyplot}}, \code{\link{bwplot}},
-%  \code{\link{histogram}} }
+\seealso{\code{\link{gls}}, \code{\link[lattice]{xyplot}},
+   \code{\link[lattice]{bwplot}},
+   \code{\link[lattice]{histogram}}}
 \examples{
-\dontrun{
 data(Ovary)
 fm1 <- gls(follicles ~ sin(2*pi*Time) + cos(2*pi*Time), Ovary,
            correlation = corAR1(form = ~ 1 | Mare))
@@ -85,6 +85,5 @@ plot(fm1, resid(., type = "p") ~ fitted(.) | Mare, abline = 0)
 plot(fm1, Mare ~ resid(.))
 # observed versus fitted values by Mare
 plot(fm1, follicles ~ fitted(.) | Mare, abline = c(0,1))
-}
 }
 \keyword{models}
