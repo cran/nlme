@@ -1,4 +1,4 @@
-/* $Id: nlmefit.c,v 1.10 2001/10/15 17:19:12 bates Exp $ 
+/* $Id: nlmefit.c,v 1.10.2.1 2002/09/13 05:54:00 saikat Exp $ 
 
    Routines for calculation of the log-likelihood or restricted
    log-likelihood with mixed-effects models.
@@ -132,7 +132,7 @@ dimS(SEXP d)			/* from an SEXP */
     for (i = 0; i < Qp2; i++) {
 	(value->DecLen)[i] = INTEGER(coerceVector(VECTOR_ELT(tmp, i), INTSXP));
     }
-    value;
+    return value;
 }
 void
 dimFree(dimPTR this)
@@ -524,7 +524,7 @@ mixed_grad(longint n, double *pars, double *g, void *state)
 	*DmHalf, sigmainv, logLik, *pt, *res;
     double  sqrtDF = sqrt((double) (st->dd->N -
 				    *(st->RML)*(st->dd->ncol[st->dd->Q])));
-    longint i, j, k, offset;
+    longint i, j, offset;
 
     DmHalf = generate_DmHalf(Delta, st->dd, st->pdClass, pars),
     Memcpy(zxcopy, st->ZXy, st->dd->ZXrows * st->dd->ZXcols);
@@ -543,10 +543,10 @@ mixed_grad(longint n, double *pars, double *g, void *state)
 	pt = res = Calloc((size_t) (ncol * nrow), double);
 	for (j = 0L; j < (st->dd->ngrp)[i]; j++) {
 	    copy_trans(pt, nrow, dc + (st->dd->SToff)[i][j], st->dd->Srows,
-		       ncol, ncol + nright);
+                   ncol, ncol + nright);
 	    pt += ncol + nright;
 	    scale_mat(pt++, nrow, sigmainv, dc + offset + (st->dd->SToff)[i][j],
-		      1L, 1L, ncol);
+                  1L, 1L, ncol);
 	}
 	offset -= (st->dd->Srows) * ncol;
 	qq = QR(res, nrow, nrow, ncol);
@@ -561,15 +561,15 @@ mixed_grad(longint n, double *pars, double *g, void *state)
 	    break;
 	case 1:			/* diagonal */
 	    for (j = 0; j < ncol; j++) {
-		double tmp = DmHalf[ (st->dd->DmOff)[i] + j * (ncol + 1)];
-		*g++ = st->dd->ngrp[i] - tmp*tmp*d_sum_sqr(res + j * ncol, j + 1L);
+            double tmp = DmHalf[ (st->dd->DmOff)[i] + j * (ncol + 1)];
+            *g++ = st->dd->ngrp[i] - tmp*tmp*d_sum_sqr(res + j * ncol, j + 1L);
 	    }
 	    break;
 	case 2:			/* multiple of identity */
 	{
 	    double tmp = 0.0;
 	    for(j = 0; j < ncol; j++) {
-		tmp += d_sum_sqr( res + j * nrow, j + 1L );
+            tmp += d_sum_sqr( res + j * nrow, j + 1L );
 	    }
 	    *g = tmp;
 	    tmp = DmHalf[ (st->dd->DmOff)[i] + j * (ncol + 1)];
@@ -581,32 +581,36 @@ mixed_grad(longint n, double *pars, double *g, void *state)
 	case 3:			/* compound symmetry */
 	{
 	    PROBLEM "analytic gradient is not available with compound symmetry "
-		"pdMat class" RECOVER(NULL_ENTRY);
+            "pdMat class" RECOVER(NULL_ENTRY);
 	    break;
 	}
 	case 4:			/* unstructured with log-cholesky
-				   parametrization */
+                       parametrization */
 	{
-	    int i1, j1, k1, k2;
+	    int j1;
 	    double *col_j = Calloc(ncol, double);
 	    for (j1 = 0; j1 < ncol; j1++) {
-		for(i1 = 0; i1 < ncol; i1++)
-		    col_j[i1] = d_dot_prod(res + i1*ncol, 1, res +
-					   j1*ncol, 1, (j < k1) ? j : k1);
-		for (i1 = 0; i1 <= j1; i1++) {
-		    double sum;
-		    sum = 0.0;
+            int i1;
+            for(i1 = 0; i1 < j1; i1++)
+                col_j[i1] = d_dot_prod(res + i1*ncol, 1, res +
+                                       j1*ncol, 1, 1+i1);
+            for(i1 = j1; i1 < ncol; i1++)
+                col_j[i1] = d_dot_prod(res + i1*ncol, 1, res +
+                                       j1*ncol, 1, 1+j1);
+            for (i1 = 0; i1 <= j1; i1++) {
+                int k1;
+                double sum = 0.0;
 		    
-		    for (k1 = i1; k1 < ncol; k1++) {
-			sum += DmHalf[(st->dd->DmOff)[i] + i1*ncol + k1] *
-			    col_j[k1];
-		    }
-		    if (i1 == j1)
-			*g++ = st->dd->ngrp[i] -
-			    sum*DmHalf[(st->dd->DmOff)[i] + i1*(ncol + 1)];
-		    else
-			*g++ = -sum;
-		}
+                for (k1 = i1; k1 < ncol; k1++) {
+                    sum += DmHalf[(st->dd->DmOff)[i] + i1*ncol + k1] *
+                        col_j[k1];
+                }
+                if (i1 == j1)
+                    *g++ = st->dd->ngrp[i] -
+                        sum*DmHalf[(st->dd->DmOff)[i] + i1*(ncol + 1)];
+                else
+                    *g++ = -sum;
+            }
 	    }
 	    break;
 	}
@@ -769,11 +773,11 @@ internal_EM(dimPTR dd, double *ZXy, double *DmHalf, int nn,
 	    }
 	  }
 	  zero = 0L;
-#ifdef R_S_H
+#ifdef USING_R
 	  F77_CALL(chol)(auxRes, &ncol, &ncol, auxRes, &l);
 #else
 	  F77_CALL(chol)(auxRes, &ncol, res, &zero, &zero, &l);
-#endif /* R_S_H */
+#endif /* USING_R */
 	}
 	break;
       }
@@ -882,7 +886,7 @@ Delta2MatrixLog( double *theta, longint *q, double *Delta )
 static void
 Delta2LogCholesky(double *theta, longint *q, double *Delta )
 {
-    longint i, qq = *q, one = 1L, info = 0L;
+    longint i, qq = *q, info = 0L;
     if ( qq == 1 ) {
 	*theta = log(*Delta * *Delta)/2.;
     } else {
@@ -968,11 +972,11 @@ mixed_combined(double *ZXy, longint *pdims, double *DmHalf, longint *nIter,
     }
   }
   internal_EM(dd, ZXy, DmHalf, *nIter, pdClass, RML, logLik, Ra, lRSS);
-#ifdef R_S_H
+#ifdef USING_R
   {
     statePTR st = Calloc(1, struct state_struct);
     int ntheta = count_DmHalf_pars( dd, pdC ), itrmcd, itncnt,
-      msg, p = dd->ncol[dd->Q], iagflg;
+        p = dd->ncol[dd->Q], iagflg;
     double 
       *theta = Calloc(ntheta, double),
       *typsiz = Calloc(ntheta, double),
@@ -1014,7 +1018,7 @@ mixed_combined(double *ZXy, longint *pdims, double *DmHalf, longint *nIter,
     Free(work); Free(a); Free(newtheta); Free(grad); Free(typsiz); Free(theta);
     Free(st);
   }
-#else  /* R_S_H */
+#else  /* USING_R */
   {
     int ntheta = count_DmHalf_pars( dd, pdC );
     longint p, *iv, liv, lv, uiparm[1]; /* for msmnh */
@@ -1045,7 +1049,7 @@ mixed_combined(double *ZXy, longint *pdims, double *DmHalf, longint *nIter,
     copy_mat(R0, p, dc + (dd->SToff)[(dd->Q)][0], (dd->Srows), p, p + 1);
     Free(scale); Free(work); Free(iv); Free(values); Free(theta); Free(zxcopy);
   }
-#endif  /* R_S_H */ 
+#endif  /* USING_R */ 
   dimFree( dd ); Free( dc ); Free( Ra );
 }
 

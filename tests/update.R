@@ -1,3 +1,4 @@
+library(nlme)
 data(petrol, package = 'MASS')
 Petrol <- petrol
 Petrol[, 2:5] <- scale(Petrol[, 2:5], scale = F)

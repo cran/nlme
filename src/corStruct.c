@@ -1,4 +1,4 @@
-/* $Id: corStruct.c,v 1.4 2001/01/10 19:40:15 bates Exp $
+/* $Id: corStruct.c,v 1.4.2.1 2002/09/13 05:54:00 saikat Exp $
 
    Routines dealaing with correlation structures.
 
@@ -26,28 +26,31 @@
 
 #include "matrix.h"
 
-#ifndef R_S_H
+#ifndef USING_R
 extern void F77_NAME(dqrdca)();
 #else
 #include <R_ext/Applic.h>
 #ifdef beta
 #undef beta
 #endif /* beta */
-#endif /* R_S_H */
+#endif /* USING_R */
 
 /* Factor list and Recalc for general corStruct object */
 
 void 
 corStruct_factList(double *mat, longint *pdims, double *FactorL, double *logdet)
 {
-  longint i, j, M = pdims[1], *len = pdims + 4, job = 11L, info, zero = 0L;
+  longint i, j, M = pdims[1], *len = pdims + 4, job = 11L, info;
+#ifndef USING_R
+  longint zero = 0L;
+#endif
   double *work, *work1;
   
   for(i = 0; i < M; i++) {
     longint li = len[i], lisq = li * li, lip1 = li + 1;
     work = Calloc(li, double);
     work1 = Calloc(lisq, double);
-#ifdef R_S_H
+#ifdef USING_R
     F77_CALL(chol) (mat, &li, &li, mat, &info);
 #else
     F77_CALL(chol) (mat, &li, work, &zero, &zero, &info);
@@ -148,11 +151,14 @@ static void
 symm_fact(double *crr, longint *time, longint *n, longint *maxC, double *mat, 
 	  double *logdet)
 {
-  longint job = 11L, info, zero = 0L, i, nsq = *n * (*n), np1 = *n + 1;
+  longint job = 11L, info, i, nsq = *n * (*n), np1 = *n + 1;
+#ifndef USING_R
+  longint zero = 0L;
+#endif
   double *work = Calloc(*n, double), *work1 = Calloc(nsq, double);
 
   symm_mat(crr, time, n, maxC, mat);
-#ifdef R_S_H
+#ifdef USING_R
   F77_CALL(chol) (mat, n, n, mat, &info);
 #else
   F77_CALL(chol) (mat, n, work, &zero, &zero, &info);
@@ -386,12 +392,13 @@ CAR1_matList(double *par, double *time, longint *pdims, double *mat)
 static void 
 CAR1_fact(double *par, double *time, longint *n, double *mat, double *logdet)
 {
-  longint job = 11L, info, zero = 0L, i, nsq = *n * (*n), np1 = *n + 1;
+  longint job = 11L, info, i, nsq = *n * (*n), np1 = *n + 1;
   double *work = Calloc(*n, double), *work1 = Calloc(nsq, double);
   CAR1_mat(par, time, n, mat);
-#ifdef R_S_H
+#ifdef USING_R
   F77_CALL(chol) (mat, n, n, mat, &info);
 #else
+  longint zero = 0L;
   F77_CALL(chol) (mat, n, work, &zero, &zero, &info);
 #endif
   for(i = 0; i < *n; i++) {
@@ -631,10 +638,13 @@ ARMA_matList(double *pars, longint *p, longint *q, longint *time,
 static void 
 ARMA_fact(double *crr, longint *time, longint *n, double *mat, double *logdet)
 {
-  longint job = 11L, info, zero = 0L, i, nsq = *n * (*n), np1 = *n + 1;
+  longint job = 11L, info, i, nsq = *n * (*n), np1 = *n + 1;
   double *work = Calloc(*n, double), *work1 = Calloc(nsq, double);
+#ifndef USING_R
+  longint zero = 0L;
+#endif
   ARMA_mat(crr, time, n, mat);
-#ifdef R_S_H
+#ifdef USING_R
   F77_CALL(chol) (mat, n, n, mat, &info);
 #else
   F77_CALL(chol) (mat, n, work, &zero, &zero, &info);
@@ -802,10 +812,13 @@ HF_matList(double *par, longint *maxC, longint *time, longint *pdims,
 static void 
 HF_fact(double *par, longint *time, longint *n, double *mat, double *logdet)
 {
-  longint job = 11L, info, zero = 0L, i, nsq = *n * (*n), np1 = *n + 1;
+  longint job = 11L, info, i, nsq = *n * (*n), np1 = *n + 1;
   double *work = Calloc(*n, double), *work1 = Calloc(nsq, double);
+#ifndef USING_R
+  longint zero = 0L;
+#endif
   HF_mat(par, time, n, mat);
-#ifdef R_S_H
+#ifdef USING_R
   F77_CALL(chol) (mat, n, n, mat, &info);
 #else
   F77_CALL(chol) (mat, n, work, &zero, &zero, &info);
@@ -975,10 +988,13 @@ spatial_fact(double *par, double *dist, longint *n, longint *nug,
 	     double (*corr) (double ), double *mat, 
 	     double *logdet)
 {
-  longint job = 11L, info, zero = 0L, i, nsq = *n * (*n), np1 = *n + 1;
+  longint job = 11L, info, i, nsq = *n * (*n), np1 = *n + 1;
   double *work = Calloc(*n, double), *work1 = Calloc(nsq, double);
+#ifndef USING_R
+  longint zero = 0L;
+#endif
   spatial_mat(par, dist, n, nug, corr, mat);
-#ifdef R_S_H
+#ifdef USING_R
   F77_CALL(chol) (mat, n, n, mat, &info);
 #else
   F77_CALL(chol) (mat, n, work, &zero, &zero, &info);
