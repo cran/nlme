@@ -23,7 +23,8 @@
       a numeric vector giving the crude oil gravity (degrees API)
     }
     \item{vapor}{
-      a numeric vector giving the vapor pressure of the crude oil (lbf/in^2)
+	a numeric vector giving the vapor pressure of the crude oil
+	\eqn{(\mathrm{lbf}/\mathrm{in}^2)}{(lbf/in^2)}
     }
     \item{ASTM}{
       a numeric vector giving the crude oil 10\% point ASTM---the
