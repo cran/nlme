@@ -1,4 +1,4 @@
-### $Id: Alfalfa.R,v 1.1 2000/03/17 22:21:21 saikat Exp $
+### $Id: Alfalfa.R,v 1.3 2000/07/03 18:22:44 bates Exp $
 ### Yields of three varieties of Alfalfa (T/Acre) in 1994 following third
 ###  date of cutting in 1943
 ### Snedecor and Cochran (1980), Table 16.15.1, p. 327

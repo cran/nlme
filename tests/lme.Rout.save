@@ -1,0 +1,75 @@
+
+R : Copyright 2000, The R Development Core Team
+Version 1.1.0  (June 15, 2000)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type	"?license" or "?licence" for distribution details.
+
+R is a collaborative project with many contributors.
+Type	"?contributors" for a list.
+
+Type	"demo()" for some demos, "help()" for on-line help, or
+    	"help.start()" for a HTML browser interface to help.
+Type	"q()" to quit R.
+
+> library(nlme)
+Loading required package: nls 
+> data(Oxboys)
+> fm1 <- lmList(Oxboys)
+> fm1
+Call:
+  Model: height ~ age | Subject 
+   Data: Oxboys 
+
+Coefficients:
+   (Intercept)      age
+10    130.2616 3.722915
+26    137.9927 5.588783
+25    139.2105 4.024081
+9     138.1369 6.009057
+2     142.8584 5.440176
+6     146.7908 3.963171
+7     146.1279 4.990050
+17    142.9777 8.611780
+16    147.5447 4.545196
+15    144.2759 7.124260
+8     148.2929 6.464712
+20    151.4707 4.374466
+1     148.1203 7.178151
+18    151.1804 5.957793
+5     151.4293 6.246128
+23    151.0645 7.185123
+11    150.0467 8.506082
+21    150.5210 7.497794
+3     155.6508 4.774669
+24    153.1404 6.764705
+22    154.5670 8.087514
+12    156.8106 7.015468
+13    156.0714 8.493806
+14    159.4738 8.670886
+19    164.5761 9.065620
+4     165.0724 9.360561
+
+Degrees of freedom: 234 total; 182 residual
+Residual standard error: 0.6598878
+> fm2 <- lme(fm1)
+> fm2
+Linear mixed-effects model fit by REML
+  Data: Oxboys 
+  Log-restricted-likelihood: -362.0455
+  Fixed: height ~ age 
+(Intercept)         age 
+ 149.371753    6.525469 
+
+Random effects:
+ Formula: ~age | Subject
+ Structure: General positive-definite
+            StdDev   Corr  
+(Intercept) 8.081077 (Intr)
+age         1.680717 0.641 
+Residual    0.659889       
+
+Number of Observations: 234
+Number of Groups: 26 
+> 

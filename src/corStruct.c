@@ -1,4 +1,4 @@
-/* $Id: corStruct.c,v 1.1 2000/03/17 22:21:24 saikat Exp $
+/* $Id: corStruct.c,v 1.3 2000/07/03 18:22:49 bates Exp $
 
    Routines dealaing with correlation structures.
 
@@ -42,7 +42,11 @@ corStruct_factList(double *mat, longint *pdims, double *FactorL, double *logdet)
     longint li = len[i], lisq = li * li, lip1 = li + 1;
     work = Calloc(li, double);
     work1 = Calloc(lisq, double);
+#ifdef R_S_H
+    F77_CALL(chol) (mat, &li, &li, mat, &info);
+#else
     F77_CALL(chol) (mat, &li, work, &zero, &zero, &info);
+#endif    
     for(j = 0; j < li; j++) {
       work1[j * lip1] = 1;
       F77_CALL(dtrsl) (mat, &li, &li, work1 + j * li, &job, &info);
@@ -143,7 +147,11 @@ symm_fact(double *crr, longint *time, longint *n, longint *maxC, double *mat,
   double *work = Calloc(*n, double), *work1 = Calloc(nsq, double);
 
   symm_mat(crr, time, n, maxC, mat);
+#ifdef R_S_H
+  F77_CALL(chol) (mat, n, n, mat, &info);
+#else
   F77_CALL(chol) (mat, n, work, &zero, &zero, &info);
+#endif
   for(i = 0; i < *n; i++) {
     work1[i * np1] = 1;
     F77_CALL(dtrsl) (mat, n, n, work1 + i * (*n), &job, &info);
@@ -376,7 +384,11 @@ CAR1_fact(double *par, double *time, longint *n, double *mat, double *logdet)
   longint job = 11L, info, zero = 0L, i, nsq = *n * (*n), np1 = *n + 1;
   double *work = Calloc(*n, double), *work1 = Calloc(nsq, double);
   CAR1_mat(par, time, n, mat);
+#ifdef R_S_H
+  F77_CALL(chol) (mat, n, n, mat, &info);
+#else
   F77_CALL(chol) (mat, n, work, &zero, &zero, &info);
+#endif
   for(i = 0; i < *n; i++) {
     work1[i * np1] = 1;
     F77_CALL(dtrsl) (mat, n, n, work1 + i * (*n), &job, &info);
@@ -616,7 +628,11 @@ ARMA_fact(double *crr, longint *time, longint *n, double *mat, double *logdet)
   longint job = 11L, info, zero = 0L, i, nsq = *n * (*n), np1 = *n + 1;
   double *work = Calloc(*n, double), *work1 = Calloc(nsq, double);
   ARMA_mat(crr, time, n, mat);
+#ifdef R_S_H
+  F77_CALL(chol) (mat, n, n, mat, &info);
+#else
   F77_CALL(chol) (mat, n, work, &zero, &zero, &info);
+#endif
   for(i = 0; i < *n; i++) {
     work1[i * np1] = 1;
     F77_CALL(dtrsl) (mat, n, n, work1 + i * (*n), &job, &info);
@@ -783,7 +799,11 @@ HF_fact(double *par, longint *time, longint *n, double *mat, double *logdet)
   longint job = 11L, info, zero = 0L, i, nsq = *n * (*n), np1 = *n + 1;
   double *work = Calloc(*n, double), *work1 = Calloc(nsq, double);
   HF_mat(par, time, n, mat);
+#ifdef R_S_H
+  F77_CALL(chol) (mat, n, n, mat, &info);
+#else
   F77_CALL(chol) (mat, n, work, &zero, &zero, &info);
+#endif
   for(i = 0; i < *n; i++) {
     work1[i * np1] = 1;
     F77_CALL(dtrsl) (mat, n, n, work1 + i * (*n), &job, &info);
@@ -952,7 +972,11 @@ spatial_fact(double *par, double *dist, longint *n, longint *nug,
   longint job = 11L, info, zero = 0L, i, nsq = *n * (*n), np1 = *n + 1;
   double *work = Calloc(*n, double), *work1 = Calloc(nsq, double);
   spatial_mat(par, dist, n, nug, corr, mat);
+#ifdef R_S_H
+  F77_CALL(chol) (mat, n, n, mat, &info);
+#else
   F77_CALL(chol) (mat, n, work, &zero, &zero, &info);
+#endif
   for(i = 0; i < *n; i++) {
     work1[i * np1] = 1;
     F77_CALL(dtrsl) (mat, n, n, work1 + i * (*n), &job, &info);

@@ -1,4 +1,4 @@
-### $Id: Tetracycline1.R,v 1.1 2000/03/17 22:21:21 saikat Exp $
+### $Id: Tetracycline1.R,v 1.3 2000/07/03 18:22:45 bates Exp $
 ### Tetracycline pharmacokinetic data
 ### Hand and Crowder (1996), Table B.8, p. 198
 "Tetracycline1" <-

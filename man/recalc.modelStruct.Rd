@@ -1,4 +1,4 @@
-% $Id: recalc.modelStruct.Rd,v 1.1 2000/03/17 22:21:24 saikat Exp $
+% $Id: recalc.modelStruct.Rd,v 1.3 2000/07/03 18:22:48 bates Exp $
 \name{recalc.modelStruct}
 %\title{Recalculate Condensed Linear Model for a \code{modelStruct} Object}
 \title{Recalculate for a modelStruct Object}

@@ -1,4 +1,4 @@
-### $Id: IGF.R,v 1.1 2000/03/17 22:21:21 saikat Exp $
+### $Id: IGF.R,v 1.3 2000/07/03 18:22:44 bates Exp $
 ### Radioimmunoassay data for the protein Insulin-like Growth Factor
 ### Davidian and Giltinan (1995), section 3.2.1, p. 65.
 "IGF" <-

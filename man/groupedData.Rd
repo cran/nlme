@@ -1,4 +1,4 @@
-% $Id: groupedData.Rd,v 1.2 2000/04/04 22:26:02 bates Exp $
+% $Id: groupedData.Rd,v 1.5 2000/07/03 21:13:47 bates Exp $
 \name{groupedData}
 \title{Construct a groupedData Object}
 \usage{
@@ -6,6 +6,8 @@ groupedData(formula, data, order.groups, FUN, outer, inner,
  labels, units)
 }
 \alias{groupedData}
+\alias{nfgroupedData}
+\alias{nmgroupedData}
 \alias{[.groupedData}
 \alias{as.data.frame.groupedData}
 \arguments{

@@ -1,4 +1,4 @@
-### $Id: Gasoline.R,v 1.1 2000/03/17 22:21:21 saikat Exp $
+### $Id: Gasoline.R,v 1.3 2000/07/03 18:22:44 bates Exp $
 ### Data on gasoline yields for different samples of crude and different
 ###  refining conditions.
 ### Prater (1955), Petroleum Refiner, 35, no. 5.

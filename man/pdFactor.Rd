@@ -1,4 +1,4 @@
-% $Id: pdFactor.Rd,v 1.2 2000/04/17 19:03:39 bates Exp $
+% $Id: pdFactor.Rd,v 1.5 2000/07/03 21:13:47 bates Exp $
 \name{pdFactor}
 \title{Square-Root Factor of a Positive-Definite Matrix}
 \usage{
@@ -11,7 +11,7 @@ pdFactor(object, ...)
 \alias{pdFactor.pdIdent}
 \alias{pdFactor.pdMat}
 \alias{pdFactor.pdNatural}
-
+\alias{pdFactor.pdSymm}
 \arguments{
  \item{object}{an object inheriting from class \code{pdMat}, representing
    a positive definite matrix, which must have been initialized

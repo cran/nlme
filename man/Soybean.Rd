@@ -13,7 +13,7 @@
     }
     \item{Variety}{
       a factor indicating the variety; Forrest (F) or Plant
-      Introduction \#416937 (P).
+      Introduction #416937 (P).
     }
     \item{Year}{
       a factor indicating the year the plot was planted.
@@ -31,7 +31,7 @@
   These data are described in
   Davidian and Giltinan (1995, 1.1.3, p.7) as ``Data from an
   experiment to compare growth patterns of two genotypes of soybeans:
-  Plant Introduction \#416937 (P), an experimental strain, and Forrest
+  Plant Introduction #416937 (P), an experimental strain, and Forrest
   (F), a commercial variety.''
 }
 \source{

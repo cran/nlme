@@ -1,4 +1,4 @@
-% $Id: gapply.Rd,v 1.1 2000/03/17 22:21:22 saikat Exp $
+% $Id: gapply.Rd,v 1.5 2000/07/03 18:22:47 bates Exp $
 \name{gapply}
 \title{Apply a Function by Groups}
 \usage{
@@ -51,11 +51,8 @@ gapply(object, which, FUN, form, level, groups, ...)
 \seealso{\code{\link{gsummary}}}
 
 \examples{
-\dontrun{
-library( nlme )
-data( Quinidine )
+data( Phenobarb )
 ## Find number of non-missing "conc" observations for each Subject
-gapply( Quinidine, FUN = function(x) sum(!is.na(x$conc)) )
-}
+gapply( Phenobarb, FUN = function(x) sum(!is.na(x$conc)) )
 }
 \keyword{data}

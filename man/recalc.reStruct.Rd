@@ -1,4 +1,4 @@
-% $Id: recalc.reStruct.Rd,v 1.1 2000/03/17 22:21:24 saikat Exp $
+% $Id: recalc.reStruct.Rd,v 1.3 2000/07/03 18:22:48 bates Exp $
 \name{recalc.reStruct}
 \title{Recalculate for an reStruct Object}
 \usage{

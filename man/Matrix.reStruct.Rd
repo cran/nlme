@@ -1,4 +1,4 @@
-% $Id: Matrix.reStruct.Rd,v 1.3 2000/04/17 19:03:38 bates Exp $
+% $Id: Matrix.reStruct.Rd,v 1.1 2000/07/03 18:22:46 bates Exp $
 \name{Matrix.reStruct}
 \title{Assign reStruct Matrices}
 \usage{

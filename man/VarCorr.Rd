@@ -1,4 +1,4 @@
-% $Id: VarCorr.Rd,v 1.3 2000/04/17 19:03:38 bates Exp $
+% $Id: VarCorr.Rd,v 1.5 2000/07/03 21:13:47 bates Exp $
 \name{VarCorr}
 \title{Extract variance and correlation components}
 \usage{
@@ -9,6 +9,7 @@ VarCorr(object, sigma, rdig)
 \alias{VarCorr.pdMat}
 \alias{VarCorr.pdBlocked}
 \alias{summary.VarCorr.lme}
+\alias{print.VarCorr.lme}
 \arguments{
  \item{object}{a fitted model object, usually an object inheriting from
      class \code{lme}. 

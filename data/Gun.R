@@ -1,4 +1,4 @@
-### $Id: Gun.R,v 1.1 2000/03/17 22:21:21 saikat Exp $
+### $Id: Gun.R,v 1.3 2000/07/03 18:22:44 bates Exp $
 ### The Gun data from the standard S version 3 distribution but as a groupedData
 ###   object.  Given as Table 7.8 in Hicks (1993), "Fundamental Concepts in the
 ###   Design of Experiments".

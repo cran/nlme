@@ -1,4 +1,4 @@
-% $Id: reStruct.Rd,v 1.3 2000/04/17 19:03:40 bates Exp $
+% $Id: reStruct.Rd,v 1.4 2000/07/03 18:22:48 bates Exp $
 \name{reStruct}
 \title{Random Effects Structure}
 \usage{

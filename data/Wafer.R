@@ -1,4 +1,4 @@
-### $Id: Wafer.R,v 1.1 2000/03/17 22:21:21 saikat Exp $
+### $Id: Wafer.R,v 1.3 2000/07/03 18:22:45 bates Exp $
 ### Voltage versus intensity of current at 8 sites of 10 wafers
 ### from an experiment conducted at Lucent Technologies
 "Wafer" <-

@@ -1,4 +1,4 @@
-### $Id: Wheat2.R,v 1.1 2000/03/17 22:21:21 saikat Exp $
+### $Id: Wheat2.R,v 1.3 2000/07/03 18:22:45 bates Exp $
 ### Data on yield of 56 varieties of wheat from a RCB design
 ### SAS System for Mixed Models (1996), p. 321
 "Wheat2" <-

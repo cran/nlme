@@ -1,4 +1,4 @@
-% $Id: getCovariate.Rd,v 1.1 2000/03/17 22:21:22 saikat Exp $
+% $Id: getCovariate.Rd,v 1.3 2000/07/03 18:22:47 bates Exp $
 \name{getCovariate}
 \title{Extract Covariate from an Object}
 \usage{

@@ -1,4 +1,4 @@
-% $Id: pdNatural.Rd,v 1.2 2000/04/17 19:03:39 bates Exp $
+% $Id: pdNatural.Rd,v 1.4 2000/07/03 18:22:48 bates Exp $
 \name{pdNatural}
 \title{General Positive-Definite Matrix in Natural Parametrization}
 \usage{

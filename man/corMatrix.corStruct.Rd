@@ -1,4 +1,4 @@
-% $Id: corMatrix.corStruct.Rd,v 1.2 2000/04/17 19:03:39 bates Exp $
+% $Id: corMatrix.corStruct.Rd,v 1.5 2000/07/03 21:13:47 bates Exp $
 \name{corMatrix.corStruct}
 \title{Matrix of a corStruct Object}
 \usage{
@@ -9,7 +9,8 @@ corMatrix(object, covariate, corr)
 \alias{corMatrix.corAR1}
 \alias{corMatrix.corARMA}
 \alias{corMatrix.corCAR1}
-\alias{corMatrix.corHF}
+\alias{corMatrix.corCompSymm}
+\alias{corMatrix.corNatural}
 \alias{corMatrix.corSpatial}
 \alias{corMatrix.corSymm}
 \arguments{

@@ -1,4 +1,4 @@
-% $Id: Covariate.Rd,v 1.2 2000/04/05 18:43:21 bates Exp $
+% $Id: Covariate.Rd,v 1.1 2000/07/03 18:22:45 bates Exp $
 \name{Covariate}
 \title{Assign Covariate Values}
 \usage{

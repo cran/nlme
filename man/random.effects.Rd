@@ -1,4 +1,4 @@
-% $Id: random.effects.Rd,v 1.1 2000/03/17 22:21:24 saikat Exp $
+% $Id: random.effects.Rd,v 1.4 2000/07/03 21:13:47 bates Exp $
 \name{random.effects}
 \title{Extract Random Effects}
 \usage{
@@ -7,6 +7,7 @@ ranef(object, ...)
 }
 \alias{random.effects}
 \alias{ranef}
+\alias{print.ranef}
 \arguments{
  \item{object}{any fitted model object from which random effects
    estimates can be extracted.}

@@ -1,4 +1,4 @@
-### $Id: Glucose2.R,v 1.1 2000/03/17 22:21:21 saikat Exp $
+### $Id: Glucose2.R,v 1.3 2000/07/03 18:22:44 bates Exp $
 ### Data on the glucose levels of several subjects over time after
 ###  ingestion of alcohol
 ### Hand and Crowder (1996), Table A.17, p. 180-181.

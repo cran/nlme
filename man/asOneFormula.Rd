@@ -1,4 +1,4 @@
-% $Id: asOneFormula.Rd,v 1.2 2000/04/17 19:03:39 bates Exp $
+% $Id: asOneFormula.Rd,v 1.4 2000/07/03 18:22:46 bates Exp $
 \name{asOneFormula}
 \title{Combine Formulas of a Set of Objects}
 \usage{

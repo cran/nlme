@@ -1,4 +1,4 @@
-% $Id: formula.reStruct.Rd,v 1.2 2000/04/17 19:03:39 bates Exp $
+% $Id: formula.reStruct.Rd,v 1.4 2000/07/03 18:22:47 bates Exp $
 \name{formula.reStruct}
 \title{Extract reStruct Object Formula}
 \usage{

@@ -1,4 +1,4 @@
-% $Id: glsControl.Rd,v 1.1 2000/03/17 22:21:23 saikat Exp $
+% $Id: glsControl.Rd,v 1.5 2000/07/03 18:22:47 bates Exp $
 \name{glsControl}
 \title{Control Values for gls Fit}
 \usage{
@@ -10,7 +10,7 @@ glsControl(maxIter, msMaxIter, tolerance, msTol, msScale, msVerbose,
  \item{maxIter}{maximum number of iterations for the \code{gls}
    optimization algorithm. Default is 50.} 
  \item{msMaxIter}{maximum number of iterations
-   for the \code{ms} optimization step inside the \code{gls}
+   for the optimization step inside the \code{gls}
    optimization. Default is 50.}
  \item{tolerance}{tolerance for the convergence criterion in the
    \code{gls} algorithm. Default is 1e-6.}
@@ -52,10 +52,10 @@ glsControl(maxIter, msMaxIter, tolerance, msTol, msScale, msVerbose,
 
 \author{Jose Pinheiro and Douglas Bates}
 
-\seealso{\code{\link{gls}}, \code{\link{ms}}, \code{\link{lmeScale}}}
+\seealso{\code{\link{gls}}, \code{\link{lmeScale}}}
 
 \examples{
-# decrease the maximum number iterations in the ms call and
+# decrease the maximum number iterations in the optimization call and
 # request that information on the evolution of the ms iterations be printed
 glsControl(msMaxIter = 20, msVerbose = TRUE)
 

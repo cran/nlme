@@ -1,4 +1,4 @@
-% $Id: getData.Rd,v 1.1 2000/03/17 22:21:22 saikat Exp $
+% $Id: getData.Rd,v 1.3 2000/07/03 18:22:47 bates Exp $
 \name{getData}
 \title{Extract Data from an Object}
 \usage{

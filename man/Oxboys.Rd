@@ -19,7 +19,7 @@
       a numeric vector giving the height of the boy (cm)
     }
     \item{Occasion}{
-      an ordered factor - the result of converting \code{age} from a
+      an ordered factor - the result of converting \Co{age} from a
       continuous variable to a count so these slightly unbalanced
       data can be analyzed as balanced.
     }

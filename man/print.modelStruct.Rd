@@ -1,4 +1,4 @@
-% $Id: print.modelStruct.Rd,v 1.2 2000/04/17 19:03:40 bates Exp $
+% $Id: print.modelStruct.Rd,v 1.4 2000/07/03 18:22:48 bates Exp $
 \name{print.modelStruct}
 %\title{Use \code{print} on a \code{modelStruct} Object}
 \title{Print a modelStruct Object}

@@ -1,4 +1,4 @@
-% $Id: coef.gnls.Rd,v 1.2 2000/04/17 19:03:39 bates Exp $
+% $Id: coef.gnls.Rd,v 1.5 2000/07/03 18:22:46 bates Exp $
 \name{coef.gnls}
 \title{Extract gnls Coefficients}
 \usage{

@@ -1,4 +1,4 @@
-% $Id: logLik.lm.Rd,v 1.2 2000/04/17 19:03:39 bates Exp $
+% $Id: logLik.lm.Rd,v 1.4 2000/07/03 18:22:47 bates Exp $
 \name{logLik.lm}
 \title{Extract Log-Likelihood from an lm Object}
 \usage{

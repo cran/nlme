@@ -1,4 +1,4 @@
-### $Id: modelStruct.R,v 1.1 2000/03/17 22:21:20 saikat Exp $
+### $Id: modelStruct.R,v 1.1 2000/07/03 18:22:44 bates Exp $
 ###
 ###         modelStruct - a virtual class of model structures
 ###

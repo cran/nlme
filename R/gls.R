@@ -1,4 +1,4 @@
-### $Id: gls.R,v 1.2 2000/03/30 00:07:26 bates Exp $
+### $Id: gls.R,v 1.1 2000/07/03 18:22:44 bates Exp $
 ###
 ###  Fit a linear model with correlated errors and/or heteroscedasticity
 ###
@@ -9,19 +9,19 @@
 ### It is made available under the terms of the GNU General Public
 ### License, version 2, or at your option, any later version,
 ### incorporated herein by reference.
-### 
+###
 ### This program is distributed in the hope that it will be
 ### useful, but WITHOUT ANY WARRANTY; without even the implied
 ### warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
 ### PURPOSE.  See the GNU General Public License for more
 ### details.
-### 
+###
 ### You should have received a copy of the GNU General Public
 ### License along with this program; if not, write to the Free
 ### Software Foundation, Inc., 59 Temple Place - Suite 330, Boston,
 ### MA 02111-1307, USA
 
-gls <- 
+gls <-
   ## fits linear model with serial correlation and variance functions,
   ## by maximum likelihood using a Newton-Raphson algorithm.
   function(model,
@@ -29,8 +29,8 @@ gls <-
 	   correlation = NULL,
 	   weights = NULL,
 	   subset,
-	   method = c("REML", "ML"), 
-	   na.action = na.fail, 
+	   method = c("REML", "ML"),
+	   na.action = na.fail,
 	   control = list(),
 	   verbose = FALSE)
 {
@@ -58,7 +58,7 @@ gls <-
     groups <- getGroupsFormula(correlation)
   } else groups <- NULL
   ## create a gls structure containing the plug-ins
-  glsSt <- 
+  glsSt <-
     glsStruct(corStruct = correlation, varStruct = varFunc(weights))
 
   ## extract a data frame with enough information to evaluate
@@ -78,16 +78,16 @@ gls <-
     grps <- getGroups(dataMod, groups,
                       level = length(getGroupsFormula(groups, asList = TRUE)))
     ## ordering data by groups
-    ord <- order(grps)	
+    ord <- order(grps)
     grps <- grps[ord]
     dataMod <- dataMod[ord, ,drop = FALSE]
     revOrder <- match(origOrder, row.names(dataMod)) # putting in orig. order
   } else grps <- NULL
-  
+
   ## obtaing basic model matrices
   X <- model.frame(model, dataMod)
   ## keeping the contrasts for later use in predict
-  contr <- lapply(X, function(el) 
+  contr <- lapply(X, function(el)
 		  if (inherits(el, "factor")) contrasts(el))
   contr <- contr[!unlist(lapply(contr, is.null))]
   X <- model.matrix(model, X)
@@ -104,8 +104,8 @@ gls <-
   parAssign <- split(order(parAssign), namTerms)
   ## creating the condensed linear model
   attr(glsSt, "conLin") <-
-    list(Xy = array(c(X, y), c(N, ncol(X) + 1), list(row.names(dataMod), 
-	     c(colnames(X), deparse(model[[2]])))), 
+    list(Xy = array(c(X, y), c(N, ncol(X) + 1), list(row.names(dataMod),
+	     c(colnames(X), deparse(model[[2]])))),
 	 dims = list(N = N, p = p, REML = as.integer(REML)), logLik = 0)
 
   ## initialization
@@ -181,10 +181,10 @@ gls <-
     Resid <- y - Fitted
     attr(Resid, "std") <- glsFit$sigma/(varWeights(glsSt))
   }
-    
-  ## getting the approximate var-cov of the parameters 
+
+  ## getting the approximate var-cov of the parameters
   if (controlvals$apVar) {
-    apVar <- glsApVar(glsSt, glsFit$sigma, 
+    apVar <- glsApVar(glsSt, glsFit$sigma,
 		      .relStep = controlvals[[".relStep"]],
                       minAbsPar = controlvals[["minAbsParApVar"]],
                       natural = controlvals[["natural"]])
@@ -208,7 +208,7 @@ gls <-
 		 apVar = apVar,
 		 logLik = glsFit$logLik,
 		 numIter = if (needUpdate(glsSt)) numIter
-		   else numIter0, 
+		   else numIter0,
 		 groups = grps,
 		 call = Call,
 		 method = method,
@@ -285,7 +285,7 @@ glsApVar <-
 }
 
 glsEstimate <-
-  function(object, conLin = attr(object, "conLin"), 
+  function(object, conLin = attr(object, "conLin"),
 	   control = list(singular.ok = FALSE, qrTol = .Machine$single.eps))
 {
   dd <- conLin$dims
@@ -312,13 +312,13 @@ glsEstimate <-
   N <- dd$N - dd$REML * p
   namCoef <- colnames(oXy)[val[["pivot"]][1:rnkm1] + 1]	# coef names
   ll <- conLin$logLik + val[["logLik"]]
-  varBeta <- t(array(val[["varBeta"]], c(rnkm1, rnkm1), 
+  varBeta <- t(array(val[["varBeta"]], c(rnkm1, rnkm1),
 		     list(namCoef, namCoef)))
   beta <- val[["beta"]][1:rnkm1]
   names(beta) <- namCoef
   fitVal <- oXy[, namCoef, drop = FALSE] %*% beta
   list(logLik = N * (log(N) - (1 + log(2 * pi)))/2 + ll, beta = beta,
-       sigma = val[["sigma"]], varBeta = varBeta, 
+       sigma = val[["sigma"]], varBeta = varBeta,
        fitted = c(fitVal), resid = c(oXy[, p + 1] - fitVal))
 }
 
@@ -343,7 +343,7 @@ ACF.gls <-
           alist <- c(as.list(as.name("data.frame")), alist)
           mode(alist) <- "call"
           data <- eval(alist, sys.parent(1))
-        } 
+        }
       }
       grps <- model.frame(grpsF, data, na.action = na.action)
       wchRows <- !is.na(match(row.names(data), row.names(grps)))
@@ -359,7 +359,7 @@ ACF.gls <-
     res <- list(res)
   }
   if(missing(maxLag)) {
-    maxLag <- min(c(maxL <- max(sapply(res, length)) - 1, 
+    maxLag <- min(c(maxL <- max(sapply(res, length)) - 1,
                     as.integer(10 * log10(maxL + 1))))
   }
   val <- lapply(res,
@@ -369,7 +369,7 @@ ACF.gls <-
                   nn <- integer(N)
                   N <- min(c(N, n <- length(el)))
                   nn[1:N] <- n + 1 - 1:N
-                  ## el <- el - mean(el) 
+                  ## el <- el - mean(el)
                   for(i in 1:N) {
                     el1 <- el[1:(n-i+1)]
                     el2 <- el[i:n]
@@ -386,7 +386,7 @@ ACF.gls <-
   z
 }
 
-anova.gls <- 
+anova.gls <-
   function(object, ..., test = TRUE, type = c("sequential", "marginal"),
            adjustSigma = TRUE, Terms, L, verbose = FALSE)
 {
@@ -433,7 +433,7 @@ anova.gls <-
       ## fixed effects F-values, df, and p-values
       ##
       aod <- data.frame(nDF, Fval, Pval)
-      dimnames(aod) <- 
+      dimnames(aod) <-
         list(names(assign),c("numDF", "F-value", "p-value"))
     } else {
       if (missing(L)) {                 # terms is given
@@ -509,8 +509,8 @@ anova.gls <-
   else do.call("anova.lme", as.list(match.call()[-1]))
 }
 
-augPred.gls <- 
-  function(object, primary = NULL, minimum = min(primary), 
+augPred.gls <-
+  function(object, primary = NULL, minimum = min(primary),
 	   maximum = max(primary), length.out = 51, ...)
 {
   data <- eval(object$call$data)
@@ -568,14 +568,14 @@ augPred.gls <-
     labs[names(attr(data, "labels"))] <- attr(data, "labels")
     unts[names(attr(data, "units"))] <- attr(data, "units")
     attr(value, "units") <- attr(data, "units")
-  } 
+  }
   attr(value, "labels") <- labs
   attr(value, "units") <- unts
   if (noGrp) {
-    attr(value, "formula") <- 
+    attr(value, "formula") <-
       eval(parse(text = paste(respName, prName, sep = "~")))
   } else {
-    attr(value, "formula") <- 
+    attr(value, "formula") <-
       eval(parse(text = paste(respName, "~", prName, "|", grName)))
   }
   class(value) <- c("augPred", class(value))
@@ -599,14 +599,14 @@ coef.gls <-
 }
 
 comparePred.gls <-
-  function(object1, object2, primary = NULL, 
+  function(object1, object2, primary = NULL,
 	   minimum = min(primary), maximum = max(primary),
-	   length.out = 51, level = NULL, ...) 
+	   length.out = 51, level = NULL, ...)
 {
   if (length(level) > 1) {
     stop("Only one level allowed for predictions")
   }
-  args <- list(object = object1, 
+  args <- list(object = object1,
 	       primary = primary,
 	       level = level,
 	       length.out = length.out)
@@ -633,7 +633,7 @@ comparePred.gls <-
       stop(paste(c1, "and", c2, "must have the same group levels"))
     }
     val <- rbind(val1[, -4], val2[, -4])
-    val[, ".type"] <- 
+    val[, ".type"] <-
       ordered(c(as.character(val1[,4]), as.character(val2[,4])),
 		levels = c(c1, c2, "original"))
     attr(val, "formula") <- attr(val1, "formula")
@@ -645,11 +645,11 @@ comparePred.gls <-
 	{
 	  stop("Wrong group levels")
 	}
-      val <- 
+      val <-
 	data.frame(c(val1[,1], rep(val2[,1], mult)), rep(val1[,1], 2),
 	   c(val1[,3], rep(val2[,3], mult)),
-	   ordered(c(as.character(val1[,4]), 
-		     rep(as.character(val2[,4]), mult)), 
+	   ordered(c(as.character(val1[,4]),
+		     rep(as.character(val2[,4]), mult)),
 		   levels = c(c1, c2, "original")))
       attr(val, "formula") <- attr(val1, "formula")
     } else {
@@ -659,10 +659,10 @@ comparePred.gls <-
 	{
 	  stop("Wrong group levels")
 	}
-      val <- 
+      val <-
 	data.frame(c(rep(val1[,1], mult), val2[,1]), rep(val2[,1], 2),
 	   c(rep(val1[,3], mult), val2[,3]),
-	   ordered(c(rep(as.character(val1[,4]), mult), 
+	   ordered(c(rep(as.character(val1[,4]), mult),
 		     as.character(val1[,4])), levels = c(c1, c2, "original")))
       attr(val, "formula") <- attr(val2, "formula")
     }
@@ -723,8 +723,8 @@ intervals.gls <-
   if (which != "var-cov") {		# coefficients included
     len <- -qt((1-level)/2, dims$N - dims$p) * sqrt(diag(object$varBeta))
     est <- coef(object)
-    val[["coef"]] <- 
-      array(c(est - len, est, est + len), 
+    val[["coef"]] <-
+      array(c(est - len, est, est + len),
 	    c(length(est), 3), list(names(est), c("lower", "est.", "upper")))
     attr(val[["coef"]], "label") <- "Coefficients:"
   }
@@ -737,8 +737,8 @@ intervals.gls <-
         Nr <- dims$N - dims$REML * dims$p
       }
       est <- object$sigma * sqrt(Nr)
-      val[["sigma"]] <- 
-	structure(c(est/sqrt(qchisq((1+level)/2, Nr)), object$sigma, 
+      val[["sigma"]] <-
+	structure(c(est/sqrt(qchisq((1+level)/2, Nr)), object$sigma,
 		est/sqrt(qchisq((1-level)/2, Nr))),
                   names = c("lower", "est.", "upper"))
       attr(val[["sigma"]], "label") <- "Residual standard error:"
@@ -782,7 +782,7 @@ intervals.gls <-
       }
       for(i in namG) {
 	auxVal[[i]] <- aux[pmap[,i], , drop = FALSE]
-	dimnames(auxVal[[i]])[[1]] <- 
+	dimnames(auxVal[[i]])[[1]] <-
 	  substring(dimnames(auxVal[[i]])[[1]], nchar(i) + 2)
 	attr(auxVal[[i]], "label") <-
 	  switch(i,
@@ -822,17 +822,17 @@ logLik.gls <-
   val
 }
 
-plot.gls <- 
-  function(object, form = resid(., type = "pearson") ~ fitted(.), abline, 
+plot.gls <-
+  function(object, form = resid(., type = "pearson") ~ fitted(.), abline,
 	   id = NULL, idLabels = NULL, idResType = c("pearson", "normalized"),
-           grid, ...)  
+           grid, ...)
   ## Diagnostic plots based on residuals and/or fitted values
 {
   do.call("plot.lme", as.list(match.call()[-1]))
 }
 
-predict.gls <- 
-  function(object, newdata, na.action = na.fail)  
+predict.gls <-
+  function(object, newdata, na.action = na.fail)
 {
   ##
   ## method for predict() designed for objects inheriting from class gls
@@ -892,7 +892,7 @@ print.intervals.gls <-
   }
 }
 
-print.gls <- 
+print.gls <-
   ## method for print() used for gls objects
   function(x, ...)
 {
@@ -976,7 +976,7 @@ print.summary.gls <-
       "residual\n")
 }
 
-residuals.gls <- 
+residuals.gls <-
   function(object, type = c("response", "pearson", "normalized"))
 {
   type <- match.arg(type)
@@ -990,7 +990,7 @@ residuals.gls <-
         val <- recalc(cSt, list(Xy = as.matrix(val)))$Xy[, 1]
         attr(val, "label") <- "Normalized residuals"
       }
-    } 
+    }
   } else {
     lab <- "Residuals"
     if (!is.null(aux <- attr(object, "units")$y)) {
@@ -1090,7 +1090,7 @@ Variogram.gls <-
           alist <- c(as.list(as.name("data.frame")), alist)
           mode(alist) <- "call"
           data <- eval(alist, sys.parent(1))
-        } 
+        }
       }
       grpsF <- getGroupsFormula(form)
       grps <- NULL
@@ -1246,11 +1246,11 @@ initialize.glsStruct <-
     }
     dimnames(pmap) <- list(NULL, names(object))
     attr(object, "pmap") <- pmap
-    attr(object, "glsFit") <- 
+    attr(object, "glsFit") <-
       glsEstimate(object, control = control)
     if (needUpdate(object)) {
       object <- update(object, data)
-    } 
+    }
   }
   object
 }
@@ -1286,16 +1286,16 @@ varWeights.glsStruct <-
 
 glsControl <-
   ## Control parameters for gls
-  function(maxIter = 50, msMaxIter = 50, tolerance = 1e-6, msTol = 1e-7, 
-	   msScale = lmeScale, msVerbose = FALSE, singular.ok = FALSE, 
+  function(maxIter = 50, msMaxIter = 50, tolerance = 1e-6, msTol = 1e-7,
+	   msScale = lmeScale, msVerbose = FALSE, singular.ok = FALSE,
 	   qrTol = .Machine$single.eps, returnObject = FALSE,
 	   apVar = TRUE, .relStep = (.Machine$double.eps)^(1/3),
            nlmStepMax = 100.0,
            minAbsParApVar = 0.05, natural = TRUE)
 {
   list(maxIter = maxIter, msMaxIter = msMaxIter, tolerance = tolerance,
-       msTol = msTol, msScale = msScale, msVerbose = msVerbose, 
-       singular.ok = singular.ok, qrTol = qrTol, 
+       msTol = msTol, msScale = msScale, msVerbose = msVerbose,
+       singular.ok = singular.ok, qrTol = qrTol,
        returnObject = returnObject, apVar = apVar,
        minAbsParApVar = minAbsParApVar, .relStep = .relStep,
        nlmStepMax = nlmStepMax,

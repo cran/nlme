@@ -1,6 +1,6 @@
-## $Id: newFunc.R,v 1.2 2000/03/30 00:07:26 bates Exp $
+## $Id: newFunc.R,v 1.1 2000/07/03 18:22:44 bates Exp $
 ###
-###       Functions that are used in several parts of the nlme library 
+###       Functions that are used in several parts of the nlme library
 ###                 but do not belong to any specific part
 ###
 ### Copyright 1997, 1999 Jose C. Pinheiro <jcp$research.bell-labs.com>,
@@ -10,13 +10,13 @@
 ### It is made available under the terms of the GNU General Public
 ### License, version 2, or at your option, any later version,
 ### incorporated herein by reference.
-### 
+###
 ### This program is distributed in the hope that it will be
 ### useful, but WITHOUT ANY WARRANTY; without even the implied
 ### warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
 ### PURPOSE.  See the GNU General Public License for more
 ### details.
-### 
+###
 ### You should have received a copy of the GNU General Public
 ### License along with this program; if not, write to the Free
 ### Software Foundation, Inc., 59 Temple Place - Suite 330, Boston,
@@ -54,8 +54,8 @@ allVarsRec <-
   }
 }
 
-asOneFormula <- 
-  ## Constructs a linear formula with all the variables used in a 
+asOneFormula <-
+  ## Constructs a linear formula with all the variables used in a
   ## list of formulas, except for the names in omit
   function(..., omit = c(".", "pi"))
 {
@@ -66,9 +66,9 @@ asOneFormula <-
   } else NULL
 }
 
-compareFits <- 
+compareFits <-
   ## compares coeffificients from different fitted objects
-  function(object1, object2, which = 1:ncol(object1)) 
+  function(object1, object2, which = 1:ncol(object1))
 {
   dn1 <- dimnames(object1)
   dn2 <- dimnames(object2)
@@ -86,7 +86,7 @@ compareFits <-
     stop("Objects must have coefficients with same row names")
   }
   ## putting object2 in same order
-  object2 <- object2[dn1[[1]], dn1[[2]], drop = FALSE]	
+  object2 <- object2[dn1[[1]], dn1[[2]], drop = FALSE]
   object1 <- object1[, which, drop = FALSE]
   object2 <- object2[, which, drop = FALSE]
   dn1 <- dimnames(object1)
@@ -149,10 +149,10 @@ fdHess <- function(pars, fun, ..., .relStep = (.Machine$double.eps)^(1/3),
 }
 
 gapply <-
-  ## Apply a function to the subframes of a data.frame 
+  ## Apply a function to the subframes of a data.frame
   ## If "apply" were generic, this would be the method for groupedData
   function(object, which, FUN, form = formula(object), level,
-           groups = getGroups(object, form, level), ...) 
+           groups = getGroups(object, form, level), ...)
 {
   if (!inherits(object, "data.frame")) {
     stop("Object must inherit from data.frame")
@@ -227,9 +227,9 @@ gsummary <-
   ## Summarize an object according to the levels of a grouping factor
   ##
   function(object, FUN = function(x) mean(x, na.rm = TRUE),
-           omitGroupingFactor = FALSE, 
-	   form = formula(object), level, 
-	   groups = getGroups(object, form , level), 
+           omitGroupingFactor = FALSE,
+	   form = formula(object), level,
+	   groups = getGroups(object, form , level),
 	   invariantsOnly = FALSE, ...)
 {
   if (!inherits(object, "data.frame")) {
@@ -254,7 +254,7 @@ gsummary <-
   value <- as.data.frame(object[firstInGroup, , drop = FALSE])
   row.names(value) <- as.character(gunique)
   value <- value[as.character(sort(gunique)), , drop = FALSE]
-  varying <- unlist(lapply(object, 
+  varying <- unlist(lapply(object,
 			   function(column, frst) {
 			     aux <- as.character(column)
 			     any(aux != aux[frst])
@@ -268,7 +268,7 @@ gsummary <-
     if (data.class(FUN) == "function") {	# single function given
       FUN <- list(numeric = FUN, ordered = Mode, factor = Mode)
     } else {
-      if (!(is.list(FUN) && 
+      if (!(is.list(FUN) &&
 	   all(sapply(FUN, data.class) == "function"))) {
 	stop("FUN can only be a function or a list of functions")
       }
@@ -281,7 +281,7 @@ gsummary <-
       if (dClass == "numeric") {
 	value[[nm]] <- as.vector(tapply(object[[nm]], groups, FUN[["numeric"]],...))
       } else {
-	value[[nm]] <- 
+	value[[nm]] <-
 	  as.vector(tapply(as.character(object[[nm]]), groups, FUN[[dClass]]))
         if (inherits(object[,nm], "ordered")) {
           value[[nm]] <- pruneLevels(ordered(value[,nm],
@@ -318,7 +318,7 @@ pooledSD <-
   if (!inherits(object, "lmList")) {
     stop("Object must inherit from class \"lmList\"")
   }
-  aux <- apply(sapply(object, 
+  aux <- apply(sapply(object,
 		      function(el) {
 			if (is.null(el)) {
 			  c(0,0)
@@ -352,7 +352,7 @@ splitFormula <-
 ##*## phenoModel - one-compartment open model with intravenous
 ##*##   administration and first-order elimination for the Phenobarbital data
 
-phenoModel <- 
+phenoModel <-
   function(Subject, time, dose, lCl, lV)
 {
   .C("nlme_one_comp_first",
@@ -365,7 +365,7 @@ phenoModel <-
 ##*## quinModel - one-compartment open model with first order
 ##*##   absorption for the Quinidine data
 
-quinModel <- 
+quinModel <-
   function(Subject, time, conc, dose, interval, lV, lKa, lCl)
 {
   .C("nlme_one_comp_open",
@@ -381,10 +381,10 @@ quinModel <-
 ## fake version of xyplot using coplot just so some of the plots from the
 ## library can be drawn
 
-xyplot <- function (formula, data = list(), groups = NULL, ..., subset = TRUE) 
+xyplot <- function (formula, data = list(), groups = NULL, ..., subset = TRUE)
 {
   args <- as.list(match.call())[-1]
-  do.call("coplot", c(args[match(c("formula", "data", "xlab", "ylab", "panel"), 
+  do.call("coplot", c(args[match(c("formula", "data", "xlab", "ylab", "panel"),
                      names(args), 0)], list(show.given = FALSE) ) )
 }
 

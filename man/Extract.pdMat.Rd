@@ -1,4 +1,4 @@
-% $Id: Extract.pdMat.Rd,v 1.2 2000/04/17 19:03:38 bates Exp $
+% $Id: Extract.pdMat.Rd,v 1.3 2000/07/03 18:22:45 bates Exp $
 \name{[.pdMat}
 \title{Subscript a pdMat Object}
 \usage{

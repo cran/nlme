@@ -1,4 +1,4 @@
-% $Id: Variogram.gls.Rd,v 1.2 2000/04/17 19:03:38 bates Exp $
+% $Id: Variogram.gls.Rd,v 1.4 2000/07/03 18:22:46 bates Exp $
 \name{Variogram.gls}
 \title{Calculate Semi-variogram for Residuals from a gls Object}
 \usage{

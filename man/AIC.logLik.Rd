@@ -1,4 +1,4 @@
-% $Id: AIC.logLik.Rd,v 1.2 2000/04/17 19:03:38 bates Exp $
+% $Id: AIC.logLik.Rd,v 1.4 2000/07/03 18:22:45 bates Exp $
 \name{AIC.logLik}
 \title{AIC of a logLik Object}
 \usage{

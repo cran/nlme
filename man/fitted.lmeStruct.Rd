@@ -1,4 +1,4 @@
-% $Id: fitted.lmeStruct.Rd,v 1.1 2000/03/17 22:21:22 saikat Exp $
+% $Id: fitted.lmeStruct.Rd,v 1.3 2000/07/03 18:22:46 bates Exp $
 \name{fitted.lmeStruct}
 \title{Calculate lmeStruct Fitted Values}
 \usage{

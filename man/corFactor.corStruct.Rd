@@ -1,18 +1,17 @@
-% $Id: corFactor.corStruct.Rd,v 1.2 2000/04/17 19:03:39 bates Exp $
+% $Id: corFactor.corStruct.Rd,v 1.5 2000/07/03 21:13:47 bates Exp $
 \name{corFactor.corStruct}
 \title{Factor of a corStruct Object Matrix}
 \usage{
 corFactor(object)
 }
-\alias{corFactor.corStruct}
 \alias{corFactor.compSymm}
 \alias{corFactor.corAR1}
 \alias{corFactor.corARMA}
 \alias{corFactor.corCAR1}
-\alias{corFactor.corHF}
+\alias{corFactor.corNatural}
 \alias{corFactor.corSpatial}
+\alias{corFactor.corStruct}
 \alias{corFactor.corSymm}
-
 \arguments{
  \item{object}{an object inheriting from class \code{corStruct}
    representing a correlation structure, which must have been

@@ -1,4 +1,4 @@
-### $Id: RatPupWeight.R,v 1.1 2000/03/17 22:21:21 saikat Exp $
+### $Id: RatPupWeight.R,v 1.3 2000/07/03 18:22:45 bates Exp $
 ### Weight of rat pups by litter where the dam is treated with a drug
 ### Dempster et al. (1984).  Cited in Davidian and Giltinan (1995),
 ### section 3.2.1, p. 64-65.

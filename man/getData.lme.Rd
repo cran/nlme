@@ -1,4 +1,4 @@
-% $Id: getData.lme.Rd,v 1.3 2000/04/17 19:03:39 bates Exp $
+% $Id: getData.lme.Rd,v 1.4 2000/07/03 18:22:47 bates Exp $
 \name{getData.lme}
 \title{Extract lme Object Data}
 \usage{

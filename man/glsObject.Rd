@@ -1,4 +1,4 @@
-% $Id: glsObject.Rd,v 1.1 2000/03/17 22:21:23 saikat Exp $
+% $Id: glsObject.Rd,v 1.3 2000/07/03 18:22:47 bates Exp $
 \name{glsObject}
 \title{Fitted gls Object}
 \alias{glsObject}

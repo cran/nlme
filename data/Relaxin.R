@@ -1,4 +1,4 @@
-### $Id: Relaxin.R,v 1.1 2000/03/17 22:21:21 saikat Exp $
+### $Id: Relaxin.R,v 1.3 2000/07/03 18:22:45 bates Exp $
 ### Assays of the drug relaxin
 ### Fei, Gross, Lofgren, Mora-Worms and Chen (1990), Biochem and Biophys
 ### Research Comm. 170, 214-222.  Also cited in section 1.1.4 of Davidian

@@ -1,4 +1,4 @@
-% $Id: predict.nlme.Rd,v 1.2 2000/04/17 19:03:40 bates Exp $
+% $Id: predict.nlme.Rd,v 1.5 2000/07/03 18:22:48 bates Exp $
 \name{predict.nlme}
 \title{Predictions from an nlme Object}
 \usage{

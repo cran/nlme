@@ -1,4 +1,4 @@
-### $Id: Pixel.R,v 1.1 2000/03/17 22:21:21 saikat Exp $
+### $Id: Pixel.R,v 1.4 2000/07/03 18:22:45 bates Exp $
 ### X-ray pixel intensity for several dogs over time
 ### Provided by Deborah Darien, Department of Medical Sciences, School of
 ### Veterinary Medicine, U. of Wisconsin - Madison.

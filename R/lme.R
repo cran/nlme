@@ -1,4 +1,4 @@
-### $Id: lme.R,v 1.2 2000/03/30 00:07:26 bates Exp $
+### $Id: lme.R,v 1.1 2000/07/03 18:22:44 bates Exp $
 ###
 ###            Fit a general linear mixed effects model
 ###
@@ -9,19 +9,19 @@
 ### It is made available under the terms of the GNU General Public
 ### License, version 2, or at your option, any later version,
 ### incorporated herein by reference.
-### 
+###
 ### This program is distributed in the hope that it will be
 ### useful, but WITHOUT ANY WARRANTY; without even the implied
 ### warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
 ### PURPOSE.  See the GNU General Public License for more
 ### details.
-### 
+###
 ### You should have received a copy of the GNU General Public
 ### License along with this program; if not, write to the Free
 ### Software Foundation, Inc., 59 Temple Place - Suite 330, Boston,
 ### MA 02111-1307, USA
 
-lme <- 
+lme <-
   ## fits general linear mixed effects model by maximum likelihood, or
   ## residual maximum likelihood using Newton-Raphson algorithm.
   function(fixed,
@@ -30,20 +30,20 @@ lme <-
 	   correlation = NULL,
 	   weights = NULL,
 	   subset,
-	   method = c("REML", "ML"), 
-	   na.action = na.fail, 
+	   method = c("REML", "ML"),
+	   na.action = na.fail,
 	   control = list())
   UseMethod("lme")
 
-lme.groupedData <- 
+lme.groupedData <-
   function(fixed,
 	   data = sys.frame(sys.parent()),
 	   random,
 	   correlation = NULL,
 	   weights = NULL,
 	   subset,
-	   method = c("REML", "ML"), 
-	   na.action = na.fail, 
+	   method = c("REML", "ML"),
+	   na.action = na.fail,
 	   control = list())
 {
   args <- as.list(match.call())[-1]
@@ -53,15 +53,15 @@ lme.groupedData <-
   do.call("lme", c(list(fixed = form), args))
 }
 
-lme.lmList <- 
+lme.lmList <-
   function(fixed,
 	   data = sys.frame(sys.parent()),
 	   random,
 	   correlation = NULL,
 	   weights = NULL,
 	   subset,
-	   method = c("REML", "ML"), 
-	   na.action = na.fail, 
+	   method = c("REML", "ML"),
+	   na.action = na.fail,
 	   control = list())
 {
   if (length(grpForm <- getGroupsFormula(fixed, asList = TRUE)) > 1) {
@@ -99,7 +99,7 @@ lme.lmList <-
   } else {
     if (mode(mData) == "name" || mode(mData) == "call") {
       mData <- eval(mData)
-    } 
+    }
   }
 
   reSt <- reStruct(random, data = mData) # getting random effects names
@@ -123,15 +123,15 @@ lme.lmList <-
   val
 }
 
-lme.formula <- 
+lme.formula <-
   function(fixed,
 	   data = sys.frame(sys.parent()),
 	   random = pdSymm( eval( as.call( fixed[ -2 ] ) ) ),
 	   correlation = NULL,
 	   weights = NULL,
 	   subset,
-	   method = c("REML", "ML"), 
-	   na.action = na.fail, 
+	   method = c("REML", "ML"),
+	   na.action = na.fail,
 	   control = list())
 {
   Call <- match.call()
@@ -184,7 +184,7 @@ lme.formula <-
   if (!is.null(correlation)) {
     if(!is.null(corGrpsForm <- getGroupsFormula(correlation, asList = TRUE))) {
       corGrpsForm <- unlist(lapply(corGrpsForm,
-                                   function(el) deparse(el[[2]]))) 
+                                   function(el) deparse(el[[2]])))
       corQ <- length(corGrpsForm)
       lmeGrpsForm <- unlist(lapply(splitFormula(groups),
                         function(el) deparse(el[[2]])))
@@ -198,8 +198,8 @@ lme.formula <-
           warning(paste("Cannot use smaller level of grouping for",
                         "\"correlation\" than for \"random\". Replacing",
                         "the former with the latter."))
-          attr(correlation, "formula") <- 
-            eval(parse(text = paste("~", 
+          attr(correlation, "formula") <-
+            eval(parse(text = paste("~",
                     deparse(getCovariateFormula(formula(correlation))[[2]]),
                          "|", deparse(groups[[2]]))))
         }
@@ -211,8 +211,8 @@ lme.formula <-
       }
     } else {
       ## using the same grouping as in random
-      attr(correlation, "formula") <- 
-        eval(parse(text = paste("~", 
+      attr(correlation, "formula") <-
+        eval(parse(text = paste("~",
 		     deparse(getCovariateFormula(formula(correlation))[[2]]),
 		     "|", deparse(groups[[2]]))))
       corQ <- lmeQ <- 1
@@ -221,7 +221,7 @@ lme.formula <-
     corQ <- lmeQ <- 1
   }
   ## create an lme structure containing the random effects model and plug-ins
-  lmeSt <- lmeStruct(reStruct = reSt, corStruct = correlation, 
+  lmeSt <- lmeStruct(reStruct = reSt, corStruct = correlation,
 		     varStruct = varFunc(weights))
 
   ## extract a data frame with enough information to evaluate
@@ -269,7 +269,7 @@ lme.formula <-
   ## keeping the contrasts for later use in predict
   contr <- attr(Z, "contr")
   X <- model.frame(fixed, dataMix)
-  auxContr <- lapply(X, function(el) 
+  auxContr <- lapply(X, function(el)
 		     if (inherits(el, "factor") &&
                          length(levels(el)) > 1) contrasts(el))
   contr <- c(contr, auxContr[is.na(match(names(auxContr), names(contr)))])
@@ -280,7 +280,7 @@ lme.formula <-
   Q <- ncol(grps)
   ## creating the condensed linear model
   attr(lmeSt, "conLin") <-
-    list(Xy = array(c(Z, X, y), c(N, sum(ncols)), 
+    list(Xy = array(c(Z, X, y), c(N, sum(ncols)),
 	     list(row.names(dataMix), c(colnames(Z), colnames(X),
 					deparse(fixed[[2]])))),
 	 dims = MEdims(grps, ncols), logLik = 0)
@@ -346,15 +346,15 @@ lme.formula <-
   ## wrapping up
   lmeFit <- attr(lmeSt, "lmeFit")
   names(lmeFit$beta) <- namBeta <- colnames(X)
-  attr(fixDF, "varFixFact") <- varFix <- lmeFit$sigma * lmeFit$varFix 
+  attr(fixDF, "varFixFact") <- varFix <- lmeFit$sigma * lmeFit$varFix
   varFix <- crossprod(varFix)
   dimnames(varFix) <- list(namBeta, namBeta)
   ##
   ## fitted.values and residuals (in original order)
   ##
-  Fitted <- fitted(lmeSt, level = 0:Q, 
+  Fitted <- fitted(lmeSt, level = 0:Q,
 		   conLin = if (decomp) {
-		     oldConLin 
+		     oldConLin
 		   } else {
 		     attr(lmeSt, "conLin")
 		   })[revOrder, , drop = FALSE]
@@ -367,13 +367,13 @@ lme.formula <-
 #    lmeFit$b[[i]] <- lmeFit$b[[i]][unique(as.character(grps[, i])),, drop = F]
 #    NULL
 #  }
-  ## inverting back reStruct 
+  ## inverting back reStruct
   lmeSt$reStruct <- solve(lmeSt$reStruct)
   ## saving part of dims
   dims <- attr(lmeSt, "conLin")$dims[c("N", "Q", "qvec", "ngrps", "ncol")]
-  ## getting the approximate var-cov of the parameters 
+  ## getting the approximate var-cov of the parameters
   if (controlvals$apVar) {
-    apVar <- lmeApVar(lmeSt, lmeFit$sigma, 
+    apVar <- lmeApVar(lmeSt, lmeFit$sigma,
 		      .relStep = controlvals[[".relStep"]],
                       minAbsPar = controlvals[["minAbsParApVar"]],
 		      natural = controlvals[["natural"]])
@@ -491,7 +491,7 @@ getFixDF <-
                                  function(el, notIntX) {
                                    any(notIntX[el])
                                  }, notIntX = notIntX))
-  }    
+  }
   if (!all(notIntX)) {  #intercept included
     valX[!notIntX] <- max(dfX)
     if (!all(notIntTerms)) {
@@ -582,18 +582,18 @@ lmeApVar <-
 
 MEdecomp <-
  function(conLin)
-  ## decompose a condensed linear model.  Returns another condensed 
-  ## linear model 
+  ## decompose a condensed linear model.  Returns another condensed
+  ## linear model
 {
   dims <- conLin$dims
   if (dims[["StrRows"]] >= dims[["ZXrows"]]) {
     ## no pint in doing the decomposition
     return(conLin)
   }
-  dc <- array(.C("mixed_decomp", 
-		 as.double(conLin$Xy), 
+  dc <- array(.C("mixed_decomp",
+		 as.double(conLin$Xy),
 		 as.integer(unlist(dims)),
-		 PACKAGE = "nlme")[[1]], 
+		 PACKAGE = "nlme")[[1]],
 	      c(dims$StrRows, dims$ZXcols))
   dims$ZXrows <- dims$StrRows
   dims$ZXoff <- dims$DecOff
@@ -604,7 +604,7 @@ MEdecomp <-
 
 MEEM <-
   function(object, conLin, niter = 0)
-  ## perform niter iterations of the EM algorithm for conLin 
+  ## perform niter iterations of the EM algorithm for conLin
   ## assumes that object is in precision form
 {
   if (niter > 0) {
@@ -659,9 +659,9 @@ MEestimate <-
   names(val) <- nam
   start <- dd$StrRows * c(0, cumsum(nc))
   for (i in seq(along = reSt)) {
-    val[[i]] <- 
+    val[[i]] <-
       matrix(resp[as.vector(outer(1:(nc[i]), dd$SToff[[i]] - start[i], "+"))],
-	     ncol = nc[i], byrow = TRUE, 
+	     ncol = nc[i], byrow = TRUE,
 	     dimnames = list(unique(as.character(groups[, nam[i]])),
 		 Names(reSt[[i]])))
     NULL
@@ -669,8 +669,8 @@ MEestimate <-
   p <- nc[Q + 1]
   N <- dd$N - REML * p
   dimE <- dim(estimates)
-  list(logLik = N * (log(N) - (1 + log(2 * pi)))/2 + rConLin$logLik, 
-       b = rev(val), 
+  list(logLik = N * (log(N) - (1 + log(2 * pi)))/2 + rConLin$logLik,
+       b = rev(val),
        beta = resp[dimE[1] - (p:1)],
        sigma = abs(resp[dimE[1]])/sqrt(N),
        varFix = t(solve(estimates[dimE[1]-(p:1), dimE[2]-(p:1), drop = FALSE])))
@@ -723,7 +723,7 @@ MEdims <-
     lastRow <- as.list(lastRow)
     names(lastRow) <- nm
   }
-  
+
   isLast <- t(isLast)
   strSizes <- cumsum(ncols * isLast) * isLast # required storage sizes
   lastStr <- apply(t(strSizes), 2, function(x) x[x != 0])
@@ -766,13 +766,13 @@ MEdims <-
 ### Methods for standard generics
 
 ACF.lme <-
-  function(object, maxLag, 
+  function(object, maxLag,
            resType = c("pearson", "response", "normalized"), ...)
 {
   resType <- match.arg(resType)
   res <- resid(object, type = resType, asList = TRUE)
   if(missing(maxLag)) {
-    maxLag <- min(c(maxL <- max(sapply(res, length)) - 1, 
+    maxLag <- min(c(maxL <- max(sapply(res, length)) - 1,
                     as.integer(10 * log10(maxL + 1))))
   }
   val <- lapply(res,
@@ -798,14 +798,14 @@ ACF.lme <-
 }
 
 
-anova.lme <- 
+anova.lme <-
   function(object, ..., test = TRUE, type = c("sequential", "marginal"),
            adjustSigma = TRUE, Terms, L, verbose = FALSE)
 
 {
   ## returns the likelihood ratio statistics, the AIC, and the BIC
   dots <- list(...)
-  if ((rt <- (length(dots) + 1)) == 1) {    ## just one object 
+  if ((rt <- (length(dots) + 1)) == 1) {    ## just one object
     if (!inherits(object,"lme")) {
       stop("Object must inherit from class \"lme\" ")
     }
@@ -837,7 +837,7 @@ anova.lme <-
       ## fixed effects F-values, df, and p-values
       ##
       aod <- data.frame(nDF, dDF, Fval, Pval)
-      dimnames(aod) <- 
+      dimnames(aod) <-
         list(names(assign),c("numDF","denDF","F-value", "p-value"))
       attr(aod,"rt") <- rt
     } else {
@@ -914,7 +914,7 @@ anova.lme <-
       }
     }
   }
-             
+
   ##
   ## Otherwise construct the likelihood ratio and information table
   ## objects in ... may inherit from gls, gnls, lm, lmList, lme,
@@ -929,19 +929,19 @@ anova.lme <-
       stop(paste("Objects must inherit from classes \"gls\", \"gnls\"",
                "\"lm\",\"lmList\", \"lme\",\"nlme\",\"nlsList\", or \"nls\""))
     }
-    resp <- unlist(lapply(object, 
+    resp <- unlist(lapply(object,
 		  function(el) deparse(getResponseFormula(el)[[2]])))
     ## checking if responses are the same
     subs <- as.logical(match(resp, resp[1], FALSE))
     if (!all(subs))
-      warning(paste("Some fitted objects deleted because", 
+      warning(paste("Some fitted objects deleted because",
 		    "response differs from the first model"))
     if (sum(subs) == 1)
       stop("First model has a different response from the rest")
     object <- object[subs]
     rt <- length(object)
     termsModel <- lapply(object, function(el) formula(el)[-2])
-    estMeth <- unlist(lapply(object, 
+    estMeth <- unlist(lapply(object,
 			     function(el) {
 			       val <- el[["method"]]
 			       if (is.null(val)) val <- NA
@@ -955,7 +955,7 @@ anova.lme <-
     ## checking if all models have same fixed effects when estMeth = "REML"
     REML <- uEst == "REML"
     if(REML) {
-      aux <- unlist(lapply(termsModel, 
+      aux <- unlist(lapply(termsModel,
                            function(el) {
                              aux <- terms(el)
                              val <- paste(sort(attr(aux, "term.labels")),
@@ -992,7 +992,7 @@ anova.lme <-
     BIC <- unlist(lapply(aux, BIC))
     aod <- data.frame(call = termsCall,
 		      Model = (1:rt),
-		      df = dfModel, 
+		      df = dfModel,
 		      AIC = AIC,
 		      BIC = BIC,
 		      logLik = logLik,
@@ -1012,8 +1012,8 @@ anova.lme <-
 	lratio[!ldf] <- NA
 	pval[ldf] <- 1 - pchisq(lratio[ldf],abs(ddf[ldf]))
 	aod <- data.frame(aod,
-			  Test = effects, 
-			  "L.Ratio" = c(NA, lratio),  
+			  Test = effects,
+			  "L.Ratio" = c(NA, lratio),
 			  "p-value" = c(NA, pval),
 			  check.names = FALSE)
       }
@@ -1026,8 +1026,8 @@ anova.lme <-
   aod
 }
 
-augPred.lme <- 
-  function(object, primary = NULL, minimum = min(primary), 
+augPred.lme <-
+  function(object, primary = NULL, minimum = min(primary),
 	   maximum = max(primary), length.out = 51, level = Q, ...)
 {
   data <- eval(object$call$data)
@@ -1094,10 +1094,10 @@ augPred.lme <-
     labs[names(attr(data, "labels"))] <- attr(data, "labels")
     unts[names(attr(data, "units"))] <- attr(data, "units")
     attr(value, "units") <- attr(data, "units")
-  } 
+  }
   attr(value, "labels") <- labs
   attr(value, "units") <- unts
-  attr(value, "formula") <- 
+  attr(value, "formula") <-
       eval(parse(text = paste(respName, "~", prName, "|", grName)))
   class(value) <- c("augPred", class(value))
   value
@@ -1118,7 +1118,7 @@ coef.lme <-
   if (Q > 1) {
     grpNames <- t(array(rep(rev(names(grps)), Q), c(Q, Q)))
     grpNames[lower.tri(grpNames)] <- ""
-    grpNames <- 
+    grpNames <-
       rev(apply(grpNames, 1,
                 function(x) paste(x[x != ""], collapse = " %in% ")))[level]
   } else {
@@ -1131,7 +1131,7 @@ coef.lme <-
   grps <- grps[row.names(value[[level]]), , drop = FALSE]
   M <- nrow(grps)
   effNams <- unique(c(names(fixed), effNams))
-  effs <- array(0, c(M, length(effNams)), 
+  effs <- array(0, c(M, length(effNams)),
 		list(row.names(grps), effNams))
 
   effs[, names(fixed)] <- array(rep(fixed, rep(M, p)),	c(M, p))
@@ -1139,7 +1139,7 @@ coef.lme <-
     nami <- names(value[[i]])
     effs[, nami] <- as.matrix(effs[, nami] + value[[i]][as.character(grps[, i]), ])
   }
-  
+
   if (augFrame) {			# can only do that for last level
     if (missing(data)) {
       data <- getData(object)
@@ -1164,7 +1164,7 @@ coef.lme <-
   effs
 }
 
-fitted.lme <- 
+fitted.lme <-
   function(object, level = Q, asList = FALSE)
 {
   Q <- object$dims$Q
@@ -1173,7 +1173,7 @@ fitted.lme <-
     nlevel <- match(level, names(val))
     if (any(aux <- is.na(nlevel))) {
       stop(paste("Nonexistent level(s)", level[aux]))
-    } 
+    }
     level <- nlevel
   } else {				# assuming integers
     level <- 1 + level
@@ -1336,7 +1336,7 @@ intervals.lme <-
   attr(val, "level") <- level
   class(val) <- "intervals.lme"
   val
-}					  
+}
 
 logLik.lme <-
   function(object, REML)
@@ -1362,8 +1362,8 @@ logLik.lme <-
   val
 }
 
-pairs.lme <- 
-  function(object, form = ~coef(.), label, id = NULL, idLabels = NULL, 
+pairs.lme <-
+  function(object, form = ~coef(.), label, id = NULL, idLabels = NULL,
 	   grid = FALSE, ...)
 {
   ## scatter plot matrix plots, generally based on coef or ranef
@@ -1373,7 +1373,7 @@ pairs.lme <-
   if (length(form) != 2) {
     stop("\"Form\" must be a one-sided formula")
   }
-  ## constructing data 
+  ## constructing data
   allV <- all.vars(asOneFormula(form, id, idLabels))
   allV <- allV[is.na(match(allV,c("T","F","TRUE","FALSE")))]
   if (length(allV) > 0) {
@@ -1431,7 +1431,7 @@ pairs.lme <-
     argForm <- ~ .x
     argData <- list(.x = .x)
   }
-  
+
   auxData <- list()
   ## groups - need not be present
   grpsF <- getGroupsFormula(form)
@@ -1450,7 +1450,7 @@ pairs.lme <-
   ## id and idLabels - need not be present
   if (!is.null(id)) {			# identify points in plot
     N <- object$dims$N
-    id <- 
+    id <-
       switch(mode(id),
 	     numeric = {
 	       if ((id <= 0) || (id >= 1)) {
@@ -1485,7 +1485,7 @@ pairs.lme <-
       } else if (is.vector(idLabels)) {
 	if (length(idLabels <- unlist(idLabels)) != N) {
 	  stop("\"IdLabels\" of incorrect length")
-	} 
+	}
 	idLabels <- as.character(idLabels)
       } else {
 	stop("\"IdLabels\" can only be a formula or a vector")
@@ -1501,7 +1501,7 @@ pairs.lme <-
   }
 
   if (length(auxData)) {		# need collapsing
-    auxData <- gsummary(as.data.frame(auxData), 
+    auxData <- gsummary(as.data.frame(auxData),
 			groups = getGroups(object, level = level))
     auxData <- auxData[row.names(.x), , drop = FALSE]
 
@@ -1533,8 +1533,8 @@ pairs.lme <-
   if (length(argForm) == 3) {		# xyplot
     plotFun <- "xyplot"
     if (is.null(args$panel)) {
-      args <- c(args, 
-                panel = list(function(x, y, subscripts, ...) 
+      args <- c(args,
+                panel = list(function(x, y, subscripts, ...)
 		  {
                     dots <- list(...)
 		    if (grid) panel.grid()
@@ -1549,7 +1549,7 @@ pairs.lme <-
   } else {				# splom
     plotFun <- "splom"
     if (is.null(args$panel)) {
-      args <- c(args, 
+      args <- c(args,
                 panel = list(function(x, y, subscripts, ...)
 		  {
                     dots <- list(...)
@@ -1603,27 +1603,27 @@ plot.ranef.lme <-
         outliers <- Y[Y < lo.w | Y > up.w]
         Y <- c(up.w, q, lo.w)
         median.value <- list(x = X, y = Y[3])
-        Box <- list(x1 = X + c( - w,  - w, w, w), 
-                    y1 = Y[c(2, 4, 4, 2)], 
+        Box <- list(x1 = X + c( - w,  - w, w, w),
+                    y1 = Y[c(2, 4, 4, 2)],
                     x2 = X + c( - w, w, w,  - w),
                     y2 = Y[c(4, 4, 2, 2)])
         e <- par("cxy")[2]
-        e.l <- min(e, (Y[4] - Y[5])/2)	
+        e.l <- min(e, (Y[4] - Y[5])/2)
         ## prevent lower staple ends from touching box
-        e.u <- min(e, (Y[1] - Y[2])/2)	
+        e.u <- min(e, (Y[1] - Y[2])/2)
         ## prevent upper staple ends from touching box
-        staple.ends <- 
+        staple.ends <-
           list(x1 = c(rep(X - w, 2), rep(X + w, 2)),
-               y1 = rep(c(Y[5], max(Y[1] - e.u, Y[2])), 2), 
-               x2 = c(rep(X - w, 2), rep(X + w, 2)), 
+               y1 = rep(c(Y[5], max(Y[1] - e.u, Y[2])), 2),
+               x2 = c(rep(X - w, 2), rep(X + w, 2)),
                y2 = rep(c(min(Y[5] + e.l, Y[4]), Y[1]), 2))
-        staple.body <- list(x1 = rep(X - w, 2), y1 = Y[c(1, 5)], 
+        staple.body <- list(x1 = rep(X - w, 2), y1 = Y[c(1, 5)],
                             x2 = rep(X + w, 2), y2 = Y[c(1, 5)])
-        dotted.line <- list(x1 = c(X, X), y1 = Y[c(1, 4)], 
+        dotted.line <- list(x1 = c(X, X), y1 = Y[c(1, 4)],
                             x2 = c(X, X), y2 = Y[c(2, 5)])
         box.umbrella <- trellis.par.get("box.umbrella")
         box.dot <- trellis.par.get("box.dot")
-        box.dot.par <- c(list(pch = pch, cex = cex, col = col, font = 
+        box.dot.par <- c(list(pch = pch, cex = cex, col = col, font =
                               font), ...)
         do.call("segments", c(staple.ends, box.umbrella))
         do.call("segments", c(staple.body, box.umbrella))
@@ -1676,7 +1676,7 @@ plot.ranef.lme <-
   eNames <- attr(object, "effectNames")
   if (is.null(form) || (inherits(form, "formula") && length(form) == 2)) {
     eLen <- length(eNames)
-    argData <- data.frame(.pars = as.vector(unlist(object[, eNames])), 
+    argData <- data.frame(.pars = as.vector(unlist(object[, eNames])),
                       .enames = ordered(rep(eNames, rep(nrow(object), eLen)),
                         level = eNames))
     for(i in names(object)[is.na(match(names(object), eNames))]) {
@@ -1690,17 +1690,17 @@ plot.ranef.lme <-
         stop(paste(paste(onames[whichNA], collapse = ", "),
                    "not available for plotting"))
       }
-      argData[[".groups"]] <- 
+      argData[[".groups"]] <-
         as.character(argData[[as.character(onames[1])]])
       if (length(onames) > 1) {
         for(i in onames[-1]) {
-          argData[[".groups"]] <- 
+          argData[[".groups"]] <-
             paste(as.character(argData[[".groups"]]),
                   as.character(argData[[i]]))
         }
       }
     }
-    argData[[".groups"]] <- ordered(argData[[".groups"]], 
+    argData[[".groups"]] <- ordered(argData[[".groups"]],
                                     levels = unique(argData[[".groups"]]))
     args <- list(formula = argForm, data = argData, ...)
     if (is.null(args$xlab)) {
@@ -1784,7 +1784,7 @@ plot.ranef.lme <-
     assign("panel.bwplot2", panel.bwplot2, where = 1)
     assign(".cex", pControl$cex.axis, where = 1)
     assign(".srt", pControl$srt.axis, where = 1)
-    assign(".mgp", pControl$mgp.axis, where = 1)    
+    assign(".mgp", pControl$mgp.axis, where = 1)
     dots <- list(...)
     ylab <- dots$ylab
     if (is.null(ylab)) {
@@ -1797,7 +1797,7 @@ plot.ranef.lme <-
 
     xyplot(y ~ x | g, data = argData, subscripts = TRUE,
            scales = list(x = list(relation = "free", tck = 0,
-                           labels = FALSE)), 
+                           labels = FALSE)),
            panel = function(x, y, subscripts, ...) {
              vN <- .vNam[subscripts][1]
              if (.grid) panel.grid()
@@ -1813,11 +1813,11 @@ plot.ranef.lme <-
                              mgp.axis = .mgp, ...)
              }
            }, xlab = "", ylab = ylab, strip = strip, ...)
-  }    
+  }
 }
 
-predict.lme <- 
-  function(object, newdata, level = Q, asList = FALSE, na.action = na.fail)  
+predict.lme <-
+  function(object, newdata, level = Q, asList = FALSE, na.action = na.fail)
 {
   ##
   ## method for predict() designed for objects inheriting from class lme
@@ -1851,11 +1851,11 @@ predict.lme <-
   dataMix <- do.call("model.frame", mfArgs)
   origOrder <- row.names(dataMix)	# preserve the original order
   whichRows <- match(origOrder, row.names(newdata))
-  
+
   if (maxQ > 0) {
     ## sort the model.frame by groups and get the matrices and parameters
     ## used in the estimation procedures
-    grps <- getGroups(newdata, 
+    grps <- getGroups(newdata,
 	      eval(parse(text = paste("~1", deparse(groups[[2]]), sep = "|"))))
     ## ordering data by groups
     if (inherits(grps, "factor")) {	# single level
@@ -1870,7 +1870,7 @@ predict.lme <-
       row.names(grps) <- origOrder
       names(grps) <- names(oGrps) <- as.character(deparse((groups[[2]])))
     } else {
-      grps <- oGrps <- 
+      grps <- oGrps <-
 	do.call("data.frame", lapply(grps[whichRows, ], pruneLevels))
       ## checking for missing groups
       if (any(naGrps <- is.na(grps))) {
@@ -1920,10 +1920,10 @@ predict.lme <-
     Z <- model.matrix(reSt, dataMix)
     ncols <- attr(Z, "ncols")
     Names(lmeSt$reStruct) <- attr(Z, "nams")
-  } 
+  }
   N <- nrow(dataMix)
   if (length(all.vars(fixed)) > 0) {
-#    X <- model.matrix(fixed, model.frame(fixed, dataMix), contr) 
+#    X <- model.matrix(fixed, model.frame(fixed, dataMix), contr)
     X <- model.matrix(fixed, model.frame(fixed, dataMix))
   } else {
     X <- array(1, c(N, 1), list(row.names(dataMix), "(Intercept)"))
@@ -1934,11 +1934,11 @@ predict.lme <-
     attr(val, "label") <- "Predicted values"
     return(val)
   }
-  
+
   ncols <- c(ncols, dim(X)[2], 1)
   ## creating the condensed linear model
   attr(lmeSt, "conLin") <-
-    list(Xy = array(c(Z, X, double(N)), c(N, sum(ncols)), 
+    list(Xy = array(c(Z, X, double(N)), c(N, sum(ncols)),
 	     list(row.names(dataMix), c(colnames(Z), colnames(X),
 					"resp"))),
 	 dims = MEdims(grps, ncols))
@@ -1954,7 +1954,7 @@ predict.lme <-
     val[dimnames(re[[i]])[[1]], ] <- re[[i]]
     re[[i]] <- val
   }
-  
+
   attr(lmeSt, "lmeFit") <- list(beta = fixef(object), b = re)
   val <- fitted(lmeSt, level = 0:maxQ)
   val[as.logical(naGrps)] <- NA			# setting missing groups to NA
@@ -2054,7 +2054,7 @@ print.intervals.lme <-
   }
 }
 
-print.lme <- 
+print.lme <-
   function(x, ...)
 {
   dd <- x$dims
@@ -2065,7 +2065,7 @@ print.lme <-
   } else {				# lme objects
     cat( "Linear mixed-effects model fit by " )
     cat( ifelse( x$method == "REML", "REML\n", "maximum likelihood\n") )
-  }    
+  }
   cat("  Data:", deparse( x$call$data ), "\n")
   if (!is.null(x$call$subset)) {
     cat("  Subset:", deparse(asOneSidedFormula(x$call$subset)[[2]]),"\n")
@@ -2090,7 +2090,7 @@ print.lme <-
   } else {				# multiple nesting
     sNgrps <- 1:lNgrps
     aux <- rep(names(Ngrps), sNgrps)
-    aux <- split(aux, array(rep(sNgrps, lNgrps), 
+    aux <- split(aux, array(rep(sNgrps, lNgrps),
 			    c(lNgrps, lNgrps))[!lower.tri(diag(lNgrps))])
     names(Ngrps) <- unlist(lapply(aux, paste, collapse = " %in% "))
     cat("\n")
@@ -2125,7 +2125,7 @@ print.summary.lme <-
   } else {				# lme objects
     cat( "Linear mixed-effects model fit by " )
     cat( ifelse( x$method == "REML", "REML\n", "maximum likelihood\n") )
-  }    
+  }
   method <- x$method
   cat(" Data:", deparse( x$call$data ), "\n")
   if (!is.null(x$call$subset)) {
@@ -2134,7 +2134,7 @@ print.summary.lme <-
   print( data.frame( AIC = x$AIC, BIC = x$BIC, logLik = x$logLik, row.names = " ") )
   if (verbose) { cat("Convergence at iteration:",x$numIter,"\n") }
   cat("\n")
-  print(summary(x$modelStruct), sigma = x$sigma, 
+  print(summary(x$modelStruct), sigma = x$sigma,
 	reEstimates = x$coef$random, verbose = verbose)
   cat("Fixed effects: ")
   fixF <- x$call$fixed
@@ -2173,7 +2173,7 @@ print.summary.lme <-
   } else {				# multiple nesting
     sNgrps <- 1:lNgrps
     aux <- rep(names(Ngrps), sNgrps)
-    aux <- split(aux, array(rep(sNgrps, lNgrps), 
+    aux <- split(aux, array(rep(sNgrps, lNgrps),
 			    c(lNgrps, lNgrps))[!lower.tri(diag(lNgrps))])
     names(Ngrps) <- unlist(lapply(aux, paste, collapse = " %in% "))
     cat("\n")
@@ -2184,12 +2184,12 @@ print.summary.lme <-
 qqnorm.lme <-
   function(object, form = ~ resid(., type = "p"), abline = NULL,
            id = NULL, idLabels = NULL, grid = FALSE, ...)
-  ## normal probability plots for residuals and random effects 
+  ## normal probability plots for residuals and random effects
 {
   if (!inherits(form, "formula")) {
     stop("\"Form\" must be a formula")
   }
-  ## constructing data 
+  ## constructing data
   allV <- all.vars(asOneFormula(form, id, idLabels))
   allV <- allV[is.na(match(allV,c("T","F","TRUE","FALSE")))]
   if (length(allV) > 0) {
@@ -2239,7 +2239,7 @@ qqnorm.lme <-
       dform <- paste(dform, deparse(grp[[2]]), sep = "|")
     }
     if (!is.null(id)) {			# identify points in plot
-      id <- 
+      id <-
         switch(mode(id),
                numeric = {
                  if ((id <= 0) || (id >= 1)) {
@@ -2267,7 +2267,7 @@ qqnorm.lme <-
         } else if (is.vector(idLabels)) {
           if (length(idLabels <- unlist(idLabels)) != length(id)) {
             stop("\"IdLabels\" of incorrect length")
-          } 
+          }
           idLabels <- as.character(idLabels)
         } else {
           stop("\"IdLabels\" can only be a formula or a vector")
@@ -2297,7 +2297,7 @@ qqnorm.lme <-
     ## id and idLabels - need not be present
     if (!is.null(id)) {			# identify points in plot
       N <- object$dims$N
-      id <- 
+      id <-
         switch(mode(id),
                numeric = {
                  if ((id <= 0) || (id >= 1)) {
@@ -2313,7 +2313,7 @@ qqnorm.lme <-
         ## id as a formula evaluated in data
         auxData[[".id"]] <- id
       }
-      
+
       if (is.null(idLabels)) {
         idLabels <- rep(row.names(.x), nc)
       } else {
@@ -2323,7 +2323,7 @@ qqnorm.lme <-
         } else if (is.vector(idLabels)) {
           if (length(idLabels <- unlist(idLabels)) != N) {
             stop("\"IdLabels\" of incorrect length")
-          } 
+          }
           idLabels <- as.character(idLabels)
         } else {
           stop("\"IdLabels\" can only be a formula or a vector")
@@ -2336,14 +2336,14 @@ qqnorm.lme <-
     }
 
     if (length(auxData)) {		# need collapsing
-      auxData <- gsummary(as.data.frame(auxData), 
+      auxData <- gsummary(as.data.frame(auxData),
                           groups = getGroups(object, level = level))
       auxData <- auxData[row.names(.x), , drop = FALSE]
 
       if (!is.null(auxData[[".id"]])) {
         id <- rep(auxData[[".id"]], nc)
       }
-      
+
       if (!is.null(auxData[[".Lid"]])) {
         idLabels <- rep(auxData[[".Lid"]], nc)
       }
@@ -2390,7 +2390,7 @@ ranef.lme <-
   ##  values from the original data object, if available.  The variables
   ##  in the original data are collapsed over the cluster variable by the
   ##  function fun.
-function(object, augFrame = FALSE, level = 1:Q, data, which = 1:ncol(data), 
+function(object, augFrame = FALSE, level = 1:Q, data, which = 1:ncol(data),
 	 FUN = mean, standard = FALSE , omitGroupingFactor = TRUE,
          subset = NULL)
 {
@@ -2399,7 +2399,7 @@ function(object, augFrame = FALSE, level = 1:Q, data, which = 1:ncol(data),
   if (Q > 1) {
     grpNames <- t(array(rep(rev(names(effects)), Q), c(Q, Q)))
     grpNames[lower.tri(grpNames)] <- ""
-    grpNames <- 
+    grpNames <-
       rev(apply(grpNames, 1, function(x) paste(x[x != ""], collapse = " %in% ")))
   } else {
     grpNames <- names(effects)
@@ -2408,8 +2408,8 @@ function(object, augFrame = FALSE, level = 1:Q, data, which = 1:ncol(data),
   grpNames <- grpNames[level]
   if (standard) {
     for (i in names(effects)) {
-      effects[[i]] <- 
-	t(t(effects[[i]]) / (object$sigma * 
+      effects[[i]] <-
+	t(t(effects[[i]]) / (object$sigma *
 		     sqrt(diag(as.matrix(object$modelStruct$reStruct[[i]])))))
     }
   }
@@ -2439,8 +2439,8 @@ function(object, augFrame = FALSE, level = 1:Q, data, which = 1:ncol(data),
     grps <- as.character(object[["groups"]][, level])
     data <- gsummary(data, FUN = FUN, groups = grps)
     if (omitGroupingFactor) {
-      data <- 	
-	data[, is.na(match(names(data), names(object$modelStruct$reStruct))), 
+      data <-
+	data[, is.na(match(names(data), names(object$modelStruct$reStruct))),
 	      drop = FALSE]
     }
     if (length(data) > 0) {
@@ -2455,7 +2455,7 @@ function(object, augFrame = FALSE, level = 1:Q, data, which = 1:ncol(data),
                       })
     if (length(level) == 1) effects <- effects[[1]]
   }
-  attr(effects, "label") <- 
+  attr(effects, "label") <-
     if (standard) {
       "Standardized random effects"
     } else {
@@ -2468,10 +2468,10 @@ function(object, augFrame = FALSE, level = 1:Q, data, which = 1:ncol(data),
   effects
 }
 
-residuals.lme <- 
+residuals.lme <-
   function(object, level = Q, type = c("response", "pearson", "normalized"),
            asList = FALSE)
-	  
+
 {
   type <- match.arg(type)
   Q <- object$dims$Q
@@ -2480,7 +2480,7 @@ residuals.lme <-
     nlevel <- match(level, names(val))
     if (any(aux <- is.na(nlevel))) {
       stop(paste("Nonexistent level(s)", level[aux]))
-    } 
+    }
     level <- nlevel
   } else {				# assuming integers
     level <- 1 + level
@@ -2600,7 +2600,7 @@ update.lme <-
 
 Variogram.lme <-
   function(object, distance, form = ~1,
-           resType = c("pearson", "response", "normalized"), 
+           resType = c("pearson", "response", "normalized"),
            data, na.action = na.fail, maxDist, length.out = 50,
            collapse = c("quantiles", "fixed", "none"), nint = 20, breaks,
            robust = FALSE, metric = c("euclidean", "maximum", "manhattan"))
@@ -2627,8 +2627,8 @@ Variogram.lme <-
           alist <- c(as.list(as.name("data.frame")), alist)
           mode(alist) <- "call"
           data <- eval(alist, sys.parent(1))
-        } 
-      } 
+        }
+      }
       covForm <- getCovariateFormula(form)
       if (length(all.vars(covForm)) > 0) {
         if (attr(terms(covForm), "intercept") == 1) {
@@ -2692,7 +2692,7 @@ Variogram.lme <-
         } else {                          # fixed length intervals
           breaks <- seq(udist[1], udist[length(udist)], length = nint + 1)
         }
-      } 
+      }
       cutDist <- cut(dst, breaks)
     } else {
       cutDist <- dst
@@ -2755,12 +2755,12 @@ fitted.lmeStruct <-
   }
   if (is.null(lmeFit)) {
     stop("No fitted lme object")
-  } 
+  }
   dd <- conLin$dims
   Q <- dd$Q
   Qp1 <- Q + 1
   nc <- dd$ncol
-  fit <- array(0, c(dd$N, Qp1), 
+  fit <- array(0, c(dd$N, Qp1),
        list(dimnames(conLin$Xy)[[1]], c("fixed", rev(names(object$reStruct)))))
   ZXstart <- rev(cumsum(c(1, nc[1:Q])))
   ZXend <- rev(cumsum(nc[1:Qp1]))
@@ -2774,15 +2774,15 @@ fitted.lmeStruct <-
 
   for(i in 1:Q) {
     j <- i + 1
-    fit[, j] <- fit[, i] + 
-      (conLin$Xy[, ZXstart[j]:ZXend[j], drop = FALSE] * 
+    fit[, j] <- fit[, i] +
+      (conLin$Xy[, ZXstart[j]:ZXend[j], drop = FALSE] *
        ZXb[[i]][rep(1:ZXngrps[i], ZXlen[[i]]),,drop = FALSE]) %*% rep(1, nc[i])
   }
   fit[, level + 1]
 }
 
 initialize.lmeStruct <-
-  function(object, data, groups, conLin = attr(object, "conLin"), 
+  function(object, data, groups, conLin = attr(object, "conLin"),
 	   control= list(niterEM = 20, gradHess = TRUE))
 {
   object[] <- lapply(object, initialize, data, conLin, control)
@@ -2798,7 +2798,7 @@ initialize.lmeStruct <-
   attr(object, "pmap") <- pmap
   if (length(object) == 1  &&           # only reStruct
       all(attr(object, "settings")[-(1:3)] >= 0) && # known pdMat class
-      control[["gradHess"]]) { 
+      control[["gradHess"]]) {
     ## can use numerical derivatives
     attr(object, "settings")[2:3] <- c(0, 1)
     class(object) <- c("lmeStructInt", class(object))
@@ -2821,7 +2821,7 @@ logLik.lmeStruct <-
 logLik.lmeStructInt <-
   function(object, Pars, conLin = attr(object, "conLin"))
 {
-  ## logLik for objects with reStruct parameters only, with 
+  ## logLik for objects with reStruct parameters only, with
   ## internally defined class
   q <- length(Pars)
   aux <- .C("mixed_loglik",
@@ -2855,8 +2855,8 @@ varWeights.lmeStruct <-
 
 ## Auxiliary control functions
 
-lmeScale <- function(start) 
-# 
+lmeScale <- function(start)
+#
 # function used to set the scale inside ms(), for lme() and nlme()
 # calls
 #
@@ -2877,8 +2877,8 @@ lmeControl <-
   ## Control parameters for lme
   function(maxIter = 50, msMaxIter = 50, tolerance = 1e-6, niterEM = 25,
 	   msTol = 1e-7, msScale = lmeScale, msVerbose = FALSE,
-           returnObject = FALSE, gradHess = TRUE, apVar = TRUE, 
-	   .relStep = (.Machine$double.eps)^(1/3), minAbsParApVar = 0.05, 
+           returnObject = FALSE, gradHess = TRUE, apVar = TRUE,
+	   .relStep = (.Machine$double.eps)^(1/3), minAbsParApVar = 0.05,
            nlmStepMax = 100.0,
            natural = TRUE)
 {

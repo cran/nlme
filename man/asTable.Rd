@@ -1,4 +1,4 @@
-% $Id: asTable.Rd,v 1.1 2000/03/17 22:21:22 saikat Exp $
+% $Id: asTable.Rd,v 1.4 2000/07/03 18:22:46 bates Exp $
 \name{asTable}
 \alias{asTable}
 \alias{asTable.groupedData}

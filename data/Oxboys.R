@@ -1,4 +1,4 @@
-### $Id: Oxboys.R,v 1.1 2000/03/17 22:21:21 saikat Exp $
+### $Id: Oxboys.R,v 1.3 2000/07/03 18:22:45 bates Exp $
 ### Data on the height of a selection of boys from Oxford, England
 ### versus a standardized age.  These data are used in Goldstein, H. (1987),
 ### "Multilevel models in education and social research", Oxford U. Press.

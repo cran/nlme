@@ -1,4 +1,4 @@
-% $Id: gnlsControl.Rd,v 1.1 2000/03/17 22:21:23 saikat Exp $
+% $Id: gnlsControl.Rd,v 1.5 2000/07/03 18:22:47 bates Exp $
 \name{gnlsControl}
 \title{Control Values for gnls Fit}
 \usage{
@@ -55,7 +55,7 @@ gnlsControl(maxIter, nlsMaxIter, msMaxIter, minScale, tolerance, nlsTol,
 
 \author{Jose Pinheiro and Douglas Bates}
 
-\seealso{\code{\link{gnls}}, \code{\link{ms}}, \code{\link{lmeScale}}}
+\seealso{\code{\link{gnls}}, \code{\link{lmeScale}}}
 
 \examples{
 # decrease the maximum number iterations in the ms call and

@@ -1,4 +1,4 @@
-### $Id: Ovary.R,v 1.1 2000/03/17 22:21:21 saikat Exp $
+### $Id: Ovary.R,v 1.4 2000/07/03 18:22:45 bates Exp $
 ### Counts of large ovarian follicles for several mares
 ### Pierson and Ginther (1987), Animal Reproduction Science, 4, 12-35.
 ### Cited in Lindstrom and Bates (1988), JASA, 83, 1014-1022.

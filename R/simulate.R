@@ -1,4 +1,4 @@
-### $Id: simulate.R,v 1.2 2000/03/30 00:07:26 bates Exp $
+### $Id: simulate.R,v 1.1 2000/07/03 18:22:44 bates Exp $
 ###
 ###            Fit a general linear mixed effects model
 ###
@@ -9,13 +9,13 @@
 ### It is made available under the terms of the GNU General Public
 ### License, version 2, or at your option, any later version,
 ### incorporated herein by reference.
-### 
+###
 ### This program is distributed in the hope that it will be
 ### useful, but WITHOUT ANY WARRANTY; without even the implied
 ### warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
 ### PURPOSE.  See the GNU General Public License for more
 ### details.
-### 
+###
 ### You should have received a copy of the GNU General Public
 ### License along with this program; if not, write to the Free
 ### Software Foundation, Inc., 59 Temple Place - Suite 330, Boston,
@@ -35,7 +35,7 @@
   if(is.null(groups)) {
     if(inherits(data, "groupedData")) {
       groups <- getGroupsFormula(data)
-      groupsL <- rev(getGroupsFormula(data, 
+      groupsL <- rev(getGroupsFormula(data,
 				      asList = TRUE))
       Q <- length(groupsL)
       if(length(reSt) != Q) {		# may need to repeat reSt
@@ -57,7 +57,7 @@
     }
   }
   ## create an lme structure containing the random effects model
-  lmeSt <- lmeStruct(reStruct = reSt)	
+  lmeSt <- lmeStruct(reStruct = reSt)
   ## extract a data frame with enough information to evaluate
   ## fixed, groups, reStruct, corStruct, and varStruct
   dataMix <-
@@ -66,21 +66,21 @@
   ## sort the model.frame by groups and get the matrices and parameters
   ## used in the estimation procedures
   grps <- getGroups(dataMix, eval(parse(text = paste("~1",
-					  deparse(groups[[2]]), sep = "|"))))	
+					  deparse(groups[[2]]), sep = "|"))))
   ## ordering data by groups
   if(inherits(grps, "factor")) {	# single level
     ##"order" treats a single named argument peculiarly so must split this off
-    ord <- order(grps)			
+    ord <- order(grps)
     grps <- data.frame(grps)
     row.names(grps) <- origOrder
     names(grps) <- as.character(deparse((groups[[2]])))
   }
   else {
-    ord <- do.call("order", grps)	
+    ord <- do.call("order", grps)
     ## making group levels unique
     for(i in 2:ncol(grps)) {
       grps[, i] <-
-        as.factor(paste(as.character(grps[, i - 1]), as.character(grps[, i]), 
+        as.factor(paste(as.character(grps[, i - 1]), as.character(grps[, i]),
                         sep = "/"))
       NULL
     }
@@ -92,7 +92,7 @@
   N <- nrow(grps)
   Z <- model.matrix(reSt, dataMix)
   ncols <- attr(Z, "ncols")
-  Names(lmeSt$reStruct) <- attr(Z, "nams")	
+  Names(lmeSt$reStruct) <- attr(Z, "nams")
   ## keeping the contrasts for later use in predict
   contr <- attr(Z, "contr")
   X <- model.frame(fixed, dataMix)
@@ -142,7 +142,7 @@ simulate.lme <-
     attr(lmeSt, "conLin") <- MEdecomp(attr(lmeSt, "conLin"))
     aMs <- ms( ~ -logLik(lmeSt, lmePars),
               start = list(lmePars = c(coef(lmeSt))),
-              control= list(rel.tolerance = control$msTol, 
+              control= list(rel.tolerance = control$msTol,
                 maxiter = control$msMaxIter,
                 scale = control$msScale))
     c(info = aMs$flags[1], logLik = -aMs$value)
@@ -226,7 +226,7 @@ simulate.lme <-
       aux[names(m2)] <- m2
       m2 <- aux
       fit2 <- do.call("lme", m2)
-    }    
+    }
     if (length(fit2$modelStruct) > 1) {
       stop("Models with corStruct and/or varFunc objects not allowed.")
     }
@@ -348,7 +348,7 @@ print.simulate.lme <-
 
 
 plot.simulate.lme <-
-  function(x, form = y ~ x | df * method, df = attr(x, "df"), weights, 
+  function(x, form = y ~ x | df * method, df = attr(x, "df"), weights,
            xlab = "Empirical p-value",
            ylab = "Nominal p-value", xlim = c(0.037, 0.963),
            ylim = c(0.037, 0.963), aspect = 1,

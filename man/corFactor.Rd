@@ -1,4 +1,4 @@
-% $Id: corFactor.Rd,v 1.1 2000/03/17 22:21:22 saikat Exp $
+% $Id: corFactor.Rd,v 1.3 2000/07/03 18:22:46 bates Exp $
 \name{corFactor}
 \title{Factor of a Correlation Matrix}
 \usage{

@@ -1,4 +1,4 @@
-/* $Id: nls.c,v 1.1 2000/03/17 22:21:24 saikat Exp $
+/* $Id: nls.c,v 1.3 2000/07/03 18:22:49 bates Exp $
 
    nls functions used in predict.nls
 

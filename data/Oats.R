@@ -1,4 +1,4 @@
-### $Id: Oats.R,v 1.1 2000/03/17 22:21:21 saikat Exp $
+### $Id: Oats.R,v 1.3 2000/07/03 18:22:45 bates Exp $
 ### Yields of different varieties of oats under different fertilizer conditions.
 ### Originally in Yates (1935).  Also analysed in Venables and Ripley (1996).
 "Oats" <-

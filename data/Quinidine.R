@@ -1,4 +1,4 @@
-### $Id: Quinidine.R,v 1.1 2000/03/17 22:21:21 saikat Exp $
+### $Id: Quinidine.R,v 1.4 2000/07/03 18:22:45 bates Exp $
 ### Pharmacokinetic study of Quinidine
 ### Verme, Ludden, Celmenti, and Harris (1992), Clinical Pharmacokinetics,
 ### 22, 468-480.

@@ -1,4 +1,4 @@
-% $Id: summary.pdMat.Rd,v 1.2 2000/04/17 19:03:40 bates Exp $
+% $Id: summary.pdMat.Rd,v 1.4 2000/07/03 18:22:48 bates Exp $
 \name{summary.pdMat}
 \title{Summarize a pdMat Object}
 \usage{

@@ -1,10 +1,11 @@
-% $Id: compareFits.Rd,v 1.2 2000/04/17 19:03:39 bates Exp $
+% $Id: compareFits.Rd,v 1.5 2000/07/03 21:13:47 bates Exp $
 \name{compareFits}
 \title{Compare Fitted Objects}
 \usage{
 compareFits(object1, object2, which)
 }
 \alias{compareFits}
+\alias{print.compareFits}
 \arguments{
  \item{object1,object2}{data frames, or matrices, with the same
    row names, but possibly different column names. These will usually

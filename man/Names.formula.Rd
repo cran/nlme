@@ -1,4 +1,4 @@
-% $Id: Names.formula.Rd,v 1.2 2000/04/04 22:26:02 bates Exp $
+% $Id: Names.formula.Rd,v 1.3 2000/07/03 18:22:46 bates Exp $
 \name{Names.formula}
 \title{Extract Names from a formula}
 \usage{

@@ -1,4 +1,4 @@
-### $Id: Earthquake.R,v 1.1 2000/03/17 22:21:21 saikat Exp $
+### $Id: Earthquake.R,v 1.3 2000/07/03 18:22:44 bates Exp $
 ### Data on the severity of earthquakes
 ### Joyner and Boore (1981), Bull. Seismological Soc. of Amer., 71, 2011-2038
 ### cited in Brillinger (1987), Statistical Science, 2, 448-450 and in

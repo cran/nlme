@@ -1,4 +1,4 @@
-### $Id: MathAchieve.R,v 1.1 2000/03/17 22:21:21 saikat Exp $
+### $Id: MathAchieve.R,v 1.3 2000/07/03 18:22:44 bates Exp $
 ### Mathematics Achievement score data from Bryk and Raudenbush (1992), chapter 4
 ### A subsample of the 1982 High School and Beyond Survey.
 "MathAchieve" <-

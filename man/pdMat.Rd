@@ -1,10 +1,11 @@
-% $Id: pdMat.Rd,v 1.2 2000/04/17 19:03:39 bates Exp $
+% $Id: pdMat.Rd,v 1.5 2000/07/03 21:13:47 bates Exp $
 \name{pdMat}
 \title{Positive-Definite Matrix}
 \usage{
 pdMat(value, form, nam, data, pdClass)
 }
 \alias{pdMat}
+\alias{plot.pdMat}
 \arguments{
  \item{value}{an optional initialization value, which can be any of the
    following: a \code{pdMat} object, a positive-definite

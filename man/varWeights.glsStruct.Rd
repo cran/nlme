@@ -1,4 +1,4 @@
-% $Id: varWeights.glsStruct.Rd,v 1.1 2000/03/17 22:21:24 saikat Exp $
+% $Id: varWeights.glsStruct.Rd,v 1.3 2000/07/03 18:22:49 bates Exp $
 \name{varWeights.glsStruct}
 \title{Variance Weights for glsStruct Object}
 \usage{

@@ -1,4 +1,4 @@
-### $Id: zzz.R,v 1.2 2000/03/30 00:07:26 bates Exp $
+### $Id: zzz.R,v 1.3 2000/07/03 18:22:44 bates Exp $
 ###
 ### nlme for R
 ###
@@ -25,4 +25,3 @@
   library.dynam( "nlme", pkg, lib )
 }
 
-provide(nlme)

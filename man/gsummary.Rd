@@ -1,4 +1,4 @@
-% $Id: gsummary.Rd,v 1.1 2000/03/17 22:21:23 saikat Exp $
+% $Id: gsummary.Rd,v 1.4 2000/07/03 18:22:47 bates Exp $
 \name{gsummary}
 \title{Summarize by Groups}
 \usage{

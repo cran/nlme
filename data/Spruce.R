@@ -1,4 +1,4 @@
-### $Id: Spruce.R,v 1.1 2000/03/17 22:21:21 saikat Exp $
+### $Id: Spruce.R,v 1.3 2000/07/03 18:22:45 bates Exp $
 ### Spruce tree growth under different conditions
 ### Diggle, Liang and Zeger (1994), Table 1.2, pp. 6-7
 "Spruce" <-

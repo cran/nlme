@@ -1,4 +1,4 @@
-### $Id: reStruct.R,v 1.2 2000/03/30 00:07:26 bates Exp $
+### $Id: reStruct.R,v 1.1 2000/07/03 18:22:44 bates Exp $
 ###
 ###      Methods for the class of random-effects structures.
 ###
@@ -9,13 +9,13 @@
 ### It is made available under the terms of the GNU General Public
 ### License, version 2, or at your option, any later version,
 ### incorporated herein by reference.
-### 
+###
 ### This program is distributed in the hope that it will be
 ### useful, but WITHOUT ANY WARRANTY; without even the implied
 ### warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
 ### PURPOSE.  See the GNU General Public License for more
 ### details.
-### 
+###
 ### You should have received a copy of the GNU General Public
 ### License along with this program; if not, write to the Free
 ### Software Foundation, Inc., 59 Temple Place - Suite 330, Boston,
@@ -25,7 +25,7 @@
 
 ###*# Constructor
 
-reStruct <- 
+reStruct <-
   function(object, pdClass = "pdSymm", REML = FALSE, data = sys.frame(sys.parent()))
 {
   ## object can be:
@@ -36,7 +36,7 @@ reStruct <-
   ## 4) a formula like ~x, a pdMat object, or a list of such
   ##    formulas or objects . In this case, the data used to
   ##    initialize the reStruct will be required to inherit from class
-  ##    "groupedData" 
+  ##    "groupedData"
   ## 5) another reStruct object
   ## parametrization specifies the pdMat constructor to be used for all
   ## formulas used in object
@@ -80,20 +80,20 @@ reStruct <-
       object <- list(object)
     } else {
       ## checking if elements are valid
-      object <- lapply(object, 
+      object <- lapply(object,
                        function(el) {
                          if (inherits(el, "pdMat")) {
                            if (is.null(formula(el))) {
                              stop("pdMat elements must have a formula")
                            }
-                           return(el) 
+                           return(el)
                          }
                          if (inherits(el, "formula")) {
                            grpForm <- getGroupsFormula(el)
                            if (!is.null(grpForm)) {
                              el <- getCovariateFormula(el)
                              attr(el, "grpName") <- deparse(grpForm[[2]])
-                           } 
+                           }
                            return(el)
                          } else {
                            if (data.class(el) == "list" &&
@@ -109,9 +109,9 @@ reStruct <-
     if (is.null(namObj <- names(object))) {
       namObj <- rep("", length(object))
     }
-    aux <- unlist(lapply(object, 
+    aux <- unlist(lapply(object,
 			 function(el) {
-			   if (inherits(el, "formula") && 
+			   if (inherits(el, "formula") &&
 			       !is.null(attr(el, "grpName"))) {
 			     attr(el, "grpName")
 			   } else ""
@@ -135,9 +135,9 @@ reStruct <-
   }
   pC <- unlist(lapply(object, data.class))
   pC <- match(pC, c("pdSymm", "pdDiag", "pdIdent", "pdCompSymm"), 0) - 1
-#  if (any(pC == -1)) {                 # multiple nesting 
+#  if (any(pC == -1)) {                 # multiple nesting
 #    pC <- -1
-#  } 
+#  }
   ## at this point, always require asDelta = TRUE and gradHess = 0
   attr(object, "settings") <- c(as.integer(REML), 1, 0, pC)
   attr(object, "plen") <- plen
@@ -155,7 +155,7 @@ corMatrix.reStruct <-
   }
   as.list(rev(lapply(object, corMatrix)))
 }
-  
+
 pdFactor.reStruct <-
   function(object)
 {
@@ -235,12 +235,12 @@ initialize.reStruct <-
   lNams <- unlist(lapply(object, function(el) length(Names(el)))) == 0
   if (any(lNams)) {			# need to resolve formula names
     aux <- seqO[lNams]
-    object[aux] <- lapply(object[aux], 
+    object[aux] <- lapply(object[aux],
 			  function(el, data) {
 			    pdConstruct(el, el, data = data)
 			  }, data = data)
   }
-  ## obtaining the parameters mapping 
+  ## obtaining the parameters mapping
   plen <- unlist(lapply(object, function(el)
 			{
 			  if (isInitialized(el)) {
@@ -261,8 +261,8 @@ initialize.reStruct <-
     dims <- conLin$dims
     Q <- dims$Q
     qvec <- dims$qvec[1:Q]
-    auxInit <- 
-      lapply(split(0.375^2 * apply((conLin$Xy[, 1:sum(qvec), drop = FALSE])^2, 
+    auxInit <-
+      lapply(split(0.375^2 * apply((conLin$Xy[, 1:sum(qvec), drop = FALSE])^2,
 	     2, sum)/ rep(dims$ngrps[1:Q], qvec), rep(1:Q, qvec)),
 	     function(x) diag(x, length(x)))
   }
@@ -278,7 +278,7 @@ initialize.reStruct <-
 }
 
 logDet.reStruct <-
-  function(object) 
+  function(object)
 {
   unlist(lapply(object, logDet))
 }
@@ -348,7 +348,7 @@ model.matrix.reStruct <-
                   if( inherits( x, "factor" ) &&
                      length(levels(x)) > 1) contrasts(x) else NULL ))
   contr[names(contrast)] <- contrast
-  
+
   ncols <- as.vector(unlist(lapply(value, length)))
   nams <- if (length(value) == 1) {
     names(value[[1]])
@@ -370,7 +370,7 @@ Names.reStruct <-
 }
 
 "Names<-.reStruct" <-
-  function(object, ..., value) 
+  function(object, ..., value)
 {
   if (length(object) != length(value)) {
     stop("Incompatible lengths for object names")
@@ -393,7 +393,7 @@ print.reStruct <-
     aux <- t(array(rep(names(x), nobj), c(nobj, nobj)))
     aux[lower.tri(aux)] <- ""
     x[] <- rev(x)
-    names(x) <- 
+    names(x) <-
       rev(apply(aux, 1, function(x) paste(x[x != ""], collapse = " %in% ")))
     cat("Random effects:\n")
     for(i in seq(along = x)) {

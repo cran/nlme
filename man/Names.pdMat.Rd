@@ -1,4 +1,4 @@
-% $Id: Names.pdMat.Rd,v 1.2 2000/04/17 19:03:38 bates Exp $
+% $Id: Names.pdMat.Rd,v 1.4 2000/07/03 18:22:46 bates Exp $
 \name{Names.pdMat}
 \title{Names of a pdMat Object}
 \usage{

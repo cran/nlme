@@ -1,4 +1,4 @@
-### $Id: Muscle.R,v 1.1 2000/03/17 22:21:21 saikat Exp $
+### $Id: Muscle.R,v 1.3 2000/07/03 18:22:45 bates Exp $
 ### Muscle response for different concentrations of CaCl2
 ### Baumann and Waldvogel (1963), Helvetica Physiologica Acta, 21.
 ### Cited in Linder, Chakravarti, and Vuagnat (1964).

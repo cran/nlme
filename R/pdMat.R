@@ -1,4 +1,4 @@
-### $Id: pdMat.R,v 1.2 2000/03/30 00:07:26 bates Exp $
+### $Id: pdMat.R,v 1.1 2000/07/03 18:22:44 bates Exp $
 ###
 ###              Classes of positive-definite matrices
 ###
@@ -9,13 +9,13 @@
 ### It is made available under the terms of the GNU General Public
 ### License, version 2, or at your option, any later version,
 ### incorporated herein by reference.
-### 
+###
 ### This program is distributed in the hope that it will be
 ### useful, but WITHOUT ANY WARRANTY; without even the implied
 ### warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
 ### PURPOSE.  See the GNU General Public License for more
 ### details.
-### 
+###
 ### You should have received a copy of the GNU General Public
 ### License along with this program; if not, write to the Free
 ### Software Foundation, Inc., 59 Temple Place - Suite 330, Boston,
@@ -38,8 +38,8 @@ pdMatrix <-
 
 ###*#  constructor for the virtual class
 
-pdMat <- 
-  function(value = numeric(0), form = NULL, nam = NULL, 
+pdMat <-
+  function(value = numeric(0), form = NULL, nam = NULL,
 	   data = sys.frame(sys.parent()), pdClass = "pdSymm")
 {
   if (inherits(value, "pdMat")) {	# nothing to construct
@@ -73,7 +73,7 @@ corMatrix.pdMat <-
 }
 
 pdConstruct.pdMat <-
-  function(object, value = numeric(0), form = formula(object), 
+  function(object, value = numeric(0), form = formula(object),
 	   nam = Names(object), data = sys.frame(sys.parent()))
 {
   if (inherits(value, "pdMat")) {	# constructing from another pdMat
@@ -90,7 +90,7 @@ pdConstruct.pdMat <-
     }
   }
   if (length(value) > 0) {
-    if (inherits(value, "formula") || data.class(value) == "call") {	
+    if (inherits(value, "formula") || data.class(value) == "call") {
       ## constructing from a formula
       if (!is.null(form)) {
 	warning("Ignoring argument \"form\"")
@@ -216,13 +216,13 @@ pdConstruct.pdMat <-
 		 "of initial value"))
     }
   }
-  attr(object, "formula") <- form    
+  attr(object, "formula") <- form
   attr(object, "Dimnames") <- list(nam, nam)
   object
 }
 
 pdFactor.pdMat <-
-  function(object) 
+  function(object)
 {
   c(qr.R(qr(pdMatrix(object))))
 }
@@ -279,7 +279,7 @@ Dim.pdMat <-
     return(c(val, val))
   } else if (isInitialized(object)) {
     return(dim(as.matrix(object)))
-  } 
+  }
   stop(paste("Cannot access the number of columns of",
 	     "uninitialized objects without names."))
 }
@@ -392,7 +392,7 @@ Names.pdMat <-
     }
     object
   }
-}    
+}
 
 "plot.pdMat"<-
   function(x, nseg = 50, levels = 1, center = rep(0, length(stdDev)),
@@ -423,7 +423,7 @@ Names.pdMat <-
     g1 <- groups == 1			# plot the center points
     panel.xyplot(mean(x[g1]), mean(y[g1]), ..., type = "p", pch = 3)
     p <- ncol(.corr)
-    laggedCos <- cos(.angles + acos(.corr[round(mean(x[g1])*p + 0.5), 
+    laggedCos <- cos(.angles + acos(.corr[round(mean(x[g1])*p + 0.5),
 					  round(mean(y[g1])*p + 0.5)]))
     xylist <- lapply(split(data.frame(x = x[!g0], y = y[!g0]), groups[!g0]),
 		     function(el, lagged) {
@@ -448,7 +448,7 @@ print.pdMat <-
     cat("Positive definite matrix structure of class", class(x)[1], "representing\n")
     print(invisible(as.matrix(x)), ...)
   } else {
-    cat("Uninitialized positive definite matrix structure of class ", class(x)[1], 
+    cat("Uninitialized positive definite matrix structure of class ", class(x)[1],
 	".\n", sep = "")
   }
 }
@@ -556,7 +556,7 @@ summary.pdMat <-
   }
 }
 
-"[.pdMat" <- 
+"[.pdMat" <-
   function(x, i, j, drop = TRUE)
 {
   xx <- x
@@ -565,7 +565,7 @@ summary.pdMat <-
   else li <- length(i)
   if (missing(j)) lj <- 0
   else lj <- length(j)
-  
+
   if ((li + lj == 0) ||
       (li == lj) && ((mode(i) == mode(j)) && all(i == j))) {
     drop <- F				# even for a 1 by 1 submatrix,
@@ -576,7 +576,7 @@ summary.pdMat <-
   }
 }
 
-"[<-.pdMat" <- 
+"[<-.pdMat" <-
   function(x, i, j, value)
 {
   xx <- x
@@ -606,7 +606,7 @@ pdSymm <-
 ####* Methods for local generics
 
 pdConstruct.pdSymm <-
-  function(object, value = numeric(0), form = formula(object), 
+  function(object, value = numeric(0), form = formula(object),
 	   nam = Names(object), data = sys.frame(sys.parent()))
 {
   val <- NextMethod()
@@ -615,7 +615,7 @@ pdConstruct.pdSymm <-
     return(val)
   }
 
-  if (is.matrix(val)) {			
+  if (is.matrix(val)) {
     vald <- svd(val, nu = 0)
     object <- vald$v %*% (log(vald$d) * t(vald$v))
     value <- object[row(object) <= col(object)]
@@ -636,9 +636,9 @@ pdFactor.pdSymm <-
   function(object)
 {
   Ncol <- round((-1 + sqrt(1 + 8 * length(object))) / 2)
-  .C("matrixLog_pd", 
+  .C("matrixLog_pd",
      Factor = double(Ncol * Ncol),
-     as.integer(Ncol), 
+     as.integer(Ncol),
      as.double(object),
      PACKAGE = "nlme")$Factor
 }
@@ -736,7 +736,7 @@ summary.pdSymm <-
 #####* Methods for local generics
 
 #pdConstruct.pdChol <-
-#  function(object, value = numeric(0), form = formula(object), 
+#  function(object, value = numeric(0), form = formula(object),
 #	   nam = Names(object), data = sys.parent())
 #{
 #  val <- pdConstruct.pdMat(object, value, form, nam, data)
@@ -744,7 +744,7 @@ summary.pdSymm <-
 #    class(val) <- c("pdChol", "pdSymm", "pdMat")
 #    return(val)
 #  }
-#  if (is.matrix(val)) {		
+#  if (is.matrix(val)) {
 #    value <- val[row(val) <= col(val)]
 #    attributes(value) <- attributes(val)[names(attributes(val)) != "dim"]
 #    class(value) <- c("pdChol", "pdSymm", "pdMat")
@@ -763,9 +763,9 @@ summary.pdSymm <-
 #  function(object)
 #{
 #  round(Ncol <- (-1 + sqrt(1 + 8 * length(object))) / 2)
-#  .C("Chol_pd", 
+#  .C("Chol_pd",
 #     Factor = double(Ncol * Ncol),
-#     as.integer(Ncol), 
+#     as.integer(Ncol),
 #     as.double(object))$Factor
 #}
 
@@ -817,7 +817,7 @@ summary.pdSymm <-
 #####* Methods for local generics
 
 #pdConstruct.pdLogChol <-
-#  function(object, value = numeric(0), form = formula(object), 
+#  function(object, value = numeric(0), form = formula(object),
 #	   nam = Names(object), data = sys.parent())
 #{
 #  val <- pdConstruct.pdMat(object, value, form, nam, data)
@@ -825,7 +825,7 @@ summary.pdSymm <-
 #    class(val) <- c("pdLogChol", "pdSymm", "pdMat")
 #    return(val)
 #  }
-#  if (is.matrix(val)) {			
+#  if (is.matrix(val)) {
 #    value <- c(log(diag(val)), val[row(val) < col(val)])
 #    attributes(value) <- attributes(val)[names(attributes(val)) != "dim"]
 #    class(value) <- c("pdLogChol", "pdSymm", "pdMat")
@@ -844,9 +844,9 @@ summary.pdSymm <-
 #  function(object)
 #{
 #  round(Ncol <- (-1 + sqrt(1 + 8 * length(object))) / 2)
-#  .C("logChol_pd", 
+#  .C("logChol_pd",
 #     Factor = double(Ncol * Ncol),
-#     as.integer(Ncol), 
+#     as.integer(Ncol),
 #     as.double(object))$Factor
 #}
 
@@ -900,7 +900,7 @@ summary.pdSymm <-
 #####* Methods for local generics
 
 #pdConstruct.pdSpher <-
-#  function(object, value = numeric(0), form = formula(object), 
+#  function(object, value = numeric(0), form = formula(object),
 #	   nam = Names(object), data = sys.parent())
 #{
 #  val <- pdConstruct.pdMat(object, value, form, nam, data)
@@ -908,7 +908,7 @@ summary.pdSymm <-
 #    class(val) <- c("pdSpher", "pdSymm", "pdMat")
 #    return(val)
 #  }
-#  if (is.matrix(val)) {			
+#  if (is.matrix(val)) {
 #    Ncol <- dim(val)[2]
 #    value <- log(apply(val, FUN = function(x){sqrt(sum(x^2))},2))
 #    for(i in (1:Ncol)[-1]) {
@@ -932,9 +932,9 @@ summary.pdSymm <-
 #  function(object)
 #{
 #  round(Ncol <- (-1 + sqrt(1 + 8 * length(object))) / 2)
-#  .C("spher_pd", 
+#  .C("spher_pd",
 #     Factor = double(Ncol * Ncol),
-#     as.integer(Ncol), 
+#     as.integer(Ncol),
 #     as.double(object))$Factor
 #}
 
@@ -952,7 +952,7 @@ summary.pdSymm <-
 
 #####* Constructor
 
-#pdMatrixLog <- 
+#pdMatrixLog <-
 #  ## Constructor for the pdMatrixLog class
 #  function(value = numeric(0), form = NULL, nam = NULL, data = sys.parent())
 #{
@@ -964,7 +964,7 @@ summary.pdSymm <-
 #####* Methods for local generics
 
 #pdConstruct.pdMatrixLog <-
-#  function(object, value = numeric(0), form = formula(object), 
+#  function(object, value = numeric(0), form = formula(object),
 #	   nam = Names(object), data = sys.parent())
 #{
 #  val <- pdConstruct.pdMat(object, value, form, nam, data)
@@ -973,7 +973,7 @@ summary.pdSymm <-
 #    return(val)
 #  }
 
-#  if (is.matrix(val)) {			
+#  if (is.matrix(val)) {
 #    object <- eigen(crossprod(val), symmetric = TRUE)
 #    object <- object$vectors %*% (log(object$values) * t(object$vectors))
 #    value <- object[row(object) <= col(object)]
@@ -994,14 +994,14 @@ summary.pdSymm <-
 #  function(object)
 #{
 #  round(Ncol <- (-1 + sqrt(1 + 8 * length(object))) / 2)
-#  .C("matrixLog_pd", 
+#  .C("matrixLog_pd",
 #     Factor = double(Ncol * Ncol),
-#     as.integer(Ncol), 
+#     as.integer(Ncol),
 #     as.double(object))$Factor
 #}
 
 #####* Methods for standard generics
-  
+
 #solve.pdMatrixLog <-
 #  function(a, b)
 #{
@@ -1028,7 +1028,7 @@ summary.pdSymm <-
 
 #####* Constructor
 
-#pdGivens <- 
+#pdGivens <-
 #  ## Constructor for the pdGivens class
 #  function(value = numeric(0), form = NULL, nam = NULL, data = sys.parent())
 #{
@@ -1040,7 +1040,7 @@ summary.pdSymm <-
 #####* Methods for local generics
 
 #pdConstruct.pdGivens <-
-#  function(object, value = numeric(0), form = formula(object), 
+#  function(object, value = numeric(0), form = formula(object),
 #	   nam = Names(object), data = sys.parent())
 #{
 #  val <- pdConstruct.pdMat(object, value, form, nam, data)
@@ -1048,7 +1048,7 @@ summary.pdSymm <-
 #    class(val) <- c("pdGivens", "pdSymm", "pdMat")
 #    return(val)
 #  }
-#  if (is.matrix(val)) {			
+#  if (is.matrix(val)) {
 #    q <- dim(val)[1]
 #    aux <-  eigen(crossprod(val), symmetric = TRUE)
 #    Q <- aux$vectors
@@ -1093,9 +1093,9 @@ summary.pdSymm <-
 #  function(object)
 #{
 #  round(Ncol <- (-1 + sqrt(1 + 8 * length(object))) / 2)
-#  .C("Givens_pd", 
+#  .C("Givens_pd",
 #     Factor = double(Ncol * Ncol),
-#     as.integer(Ncol), 
+#     as.integer(Ncol),
 #     as.double(object))$Factor
 #}
 
@@ -1116,11 +1116,11 @@ summary.pdSymm <-
 ####*# pdNatural - a general positive definite structure parameterized
 ####   by the log of the square root of the diagonal elements and the
 ####   generalized logit of the correlations. This is NOT an unrestricted
-####   parametrization 
+####   parametrization
 
 ####* Constructor
 
-pdNatural <- 
+pdNatural <-
   ## Constructor for the pdNatural class
   function(value = numeric(0), form = NULL, nam = NULL, data = sys.frame(sys.parent()))
 {
@@ -1132,7 +1132,7 @@ pdNatural <-
 ####* Methods for local generics
 
 pdConstruct.pdNatural <-
-  function(object, value = numeric(0), form = formula(object), 
+  function(object, value = numeric(0), form = formula(object),
 	   nam = Names(object), data = sys.frame(sys.parent()))
 {
   val <- pdConstruct.pdMat(object, value, form, nam, data)
@@ -1140,7 +1140,7 @@ pdConstruct.pdNatural <-
     class(val) <- c("pdNatural", "pdMat")
     return(val)
   }
-  if (is.matrix(val)) {			
+  if (is.matrix(val)) {
     q <- ncol(val)
     if (q > 1) {
       aux <- crossprod(val)
@@ -1168,9 +1168,9 @@ pdFactor.pdNatural <-
   function(object)
 {
   Ncol <- round((-1 + sqrt(1 + 8 * length(object))) / 2)
-  .C("natural_pd", 
+  .C("natural_pd",
      Factor = double(Ncol * Ncol),
-     as.integer(Ncol), 
+     as.integer(Ncol),
      as.double(object),
      PACKAGE = "nlme")$Factor
 }
@@ -1204,7 +1204,7 @@ coef.pdNatural <-
     val[-(1:Ncol)] <- (aux - 1) / (aux + 1)
     aN <- Names(object)
     aNmat <- t(outer(aN, aN, paste, sep = ","))
-    names(val) <- c(paste("sd(",aN,")", sep = ""), 
+    names(val) <- c(paste("sd(",aN,")", sep = ""),
 		    if (Ncol > 1) {
 		      paste("cor(", aNmat[row(aNmat) > col(aNmat)],")",sep="")
 		    })
@@ -1232,7 +1232,7 @@ logDet.pdNatural <-
   }
   attr(pdMatrix(object, factor = TRUE), "logDet")
 }
- 
+
 
 solve.pdNatural <-
   function(a, b)
@@ -1299,9 +1299,9 @@ corMatrix.pdDiag <-
   names(attr(val, "stdDev")) <- nm
   val
 }
-  
+
 pdConstruct.pdDiag <-
-  function(object, value = numeric(0), form = formula(object), 
+  function(object, value = numeric(0), form = formula(object),
 	   nam = Names(object), data = sys.frame(sys.parent()))
 {
   val <- NextMethod()
@@ -1402,7 +1402,7 @@ summary.pdDiag <-
 ### No need to implement other methods as the "pdMat" methods suffice.
 
 ###*# pdIdent: multiple of the identity matrix - the parameter is
-###   the log of the multiple. 
+###   the log of the multiple.
 
 ####* Constructor
 
@@ -1437,7 +1437,7 @@ corMatrix.pdIdent <-
 }
 
 pdConstruct.pdIdent <-
-  function(object, value = numeric(0), form = formula(object), 
+  function(object, value = numeric(0), form = formula(object),
 	   nam = Names(object), data = sys.frame(sys.parent()))
 {
   val <- NextMethod()
@@ -1510,7 +1510,7 @@ coef.pdIdent <-
            names = c(paste("sd(", deparse(formula(object)[[2]]),")",sep = "")))
 }
 
-Dim.pdIdent <- 
+Dim.pdIdent <-
   function(object)
 {
   if (!is.null(val <- attr(object, "ncol"))) {
@@ -1581,7 +1581,7 @@ corMatrix.pdCompSymm <-
 }
 
 pdConstruct.pdCompSymm <-
-  function(object, value = numeric(0), form = formula(object), 
+  function(object, value = numeric(0), form = formula(object),
 	   nam = Names(object), data = sys.frame(sys.parent()))
 {
   val <- NextMethod()
@@ -1629,7 +1629,7 @@ pdFactor.pdCompSymm <-
   function(object)
 {
   Ncol <- attr(object, "ncol")
-  .C("compSymm_pd", 
+  .C("compSymm_pd",
      Factor = double(Ncol * Ncol),
      as.integer(Ncol),
      as.double(object),
@@ -1651,7 +1651,7 @@ pdMatrix.pdCompSymm <-
   aux <- c(exp(2 * obj[1]), (aux - 1/(Ncol - 1))/(aux + 1))
   if (factor) {
     value <- array(pdFactor(object), c(Ncol, Ncol))
-    attr(value, "logDet") <-  Ncol * obj[1] + 
+    attr(value, "logDet") <-  Ncol * obj[1] +
       ((Ncol - 1) * log(1 - aux[2]) + log(1 + (Ncol - 1) * aux[2]))/2
   } else {
     value <- array(aux[2], c(Ncol, Ncol))
@@ -1681,7 +1681,7 @@ coef.pdCompSymm <-
   }
 }
 
-Dim.pdCompSymm <- 
+Dim.pdCompSymm <-
   function(object)
 {
   if (!is.null(val <- attr(object, "ncol"))) {
@@ -1741,11 +1741,11 @@ corMatrix.pdBlocked <-
   attr(value, "stdDev") <- stdDev
   value
 }
-  
+
 
 pdConstruct.pdBlocked <-
-  function(object, value = numeric(0), form = formula(object, TRUE), 
-	   nam = Names(object, TRUE), data = sys.frame(sys.parent()), 
+  function(object, value = numeric(0), form = formula(object, TRUE),
+	   nam = Names(object, TRUE), data = sys.frame(sys.parent()),
 	   pdClass = "pdSymm")
 {
   if (inherits(value, "pdMat")) {	# constructing from another pdMat
@@ -1799,7 +1799,7 @@ pdConstruct.pdBlocked <-
   } else {
     nP <- 1
   }
-  
+
   nB <- max(c(nF, nN, nP))
 
   oVal <- value
@@ -2129,7 +2129,7 @@ summary.pdBlocked <-
   value
 }
 
-"[.pdBlocked" <- 
+"[.pdBlocked" <-
   function(x, i, j, drop = TRUE)
 {
   xx <- x
@@ -2143,7 +2143,7 @@ summary.pdBlocked <-
 					# you want it to be a matrix
     val <- eval(mCall)
     vNames <- colnames(val)
-    auxNames <- lapply(Names(xx, TRUE), 
+    auxNames <- lapply(Names(xx, TRUE),
 		       function(el, vN) {
 			 aux <- match(vN, el)
 			 if (any(aux1 <- !is.na(aux))) {
@@ -2156,7 +2156,7 @@ summary.pdBlocked <-
     }
     auxNames <- auxNames[auxWhich]
     auxClass <- unlist(lapply(xx, function(el) class(el)[1]))[auxWhich]
-    return(pdConstruct(xx, val, nam = auxNames, form = NULL, 
+    return(pdConstruct(xx, val, nam = auxNames, form = NULL,
 		       pdClass = auxClass))
   } else {
     eval(mCall)

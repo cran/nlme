@@ -1,4 +1,4 @@
-% $Id: Variogram.corSpher.Rd,v 1.2 2000/04/17 19:03:38 bates Exp $
+% $Id: Variogram.corSpher.Rd,v 1.4 2000/07/03 18:22:46 bates Exp $
 \name{Variogram.corSpher}
 \title{Calculate Semi-variogram for a corSpher Object}
 \usage{

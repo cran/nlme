@@ -1,4 +1,4 @@
-% $Id: Covariate.varFunc.Rd,v 1.3 2000/04/17 19:03:38 bates Exp $
+% $Id: Covariate.varFunc.Rd,v 1.1 2000/07/03 18:22:45 bates Exp $
 \name{Covariate.varFunc}
 \title{Assign varFunc Covariate}
 \usage{

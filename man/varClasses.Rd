@@ -1,4 +1,4 @@
-% $Id: varClasses.Rd,v 1.1 2000/03/17 22:21:24 saikat Exp $
+% $Id: varClasses.Rd,v 1.4 2000/07/03 18:22:49 bates Exp $
 \name{varClasses}
 \title{Variance Function Classes}
 \alias{varClasses}

@@ -1,4 +1,4 @@
-### $Id: PBG.R,v 1.1 2000/03/17 22:21:21 saikat Exp $
+### $Id: PBG.R,v 1.3 2000/07/03 18:22:45 bates Exp $
 ### Change in blood pressure versus dose of phenylbiguanide for several rabbits
 ### Ludbrook (1994), Cardiovascular Research, 28, 303-311.
 ### Also cited in Venables and Ripley (1997)

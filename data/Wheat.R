@@ -1,4 +1,4 @@
-### $Id: Wheat.R,v 1.1 2000/03/17 22:21:21 saikat Exp $
+### $Id: Wheat.R,v 1.3 2000/07/03 18:22:45 bates Exp $
 ### Wheat yields under different growing conditions
 ### Milliken and Johnson (1992), section 24.4, p. 308
 "Wheat" <-

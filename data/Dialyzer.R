@@ -1,4 +1,4 @@
-### $Id: Dialyzer.R,v 1.1 2000/03/17 22:21:21 saikat Exp $
+### $Id: Dialyzer.R,v 1.3 2000/07/03 18:22:44 bates Exp $
 ### Data on high flux hemodialyzers measured to assess ultrafiltration
 ### SAS System for Mixed Models (1996), p. 268
 "Dialyzer" <-

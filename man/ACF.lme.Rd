@@ -1,4 +1,4 @@
-% $Id: ACF.lme.Rd,v 1.2 2000/04/17 19:03:38 bates Exp $
+% $Id: ACF.lme.Rd,v 1.4 2000/07/03 18:22:45 bates Exp $
 \name{ACF.lme}
 \title{Autocorrelation Function for lme Residuals}
 \usage{

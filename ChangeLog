@@ -1,11 +1,17 @@
-2000-04-17  Douglas Bates  <bates@stat.wisc.edu>
+2000-07-03  Douglas Bates  <bates@stat.wisc.edu>
 
-	* Updated the DESCRIPTION.
+	* man/corFactor.corStruct.Rd: Added an alias for
+	corFactor.corNatural
 
-	* Removed the TITLE file which is no longer needed.
+	* src/nlmefit.c (internal_loglik): Changed the return value on
+	error from R_NegInf to -DOUBLE_XMAX so the optif[09] optimizers
+	will work properly.
 
-	* Removed the spurious library(nlme) lines from the examples
-	sections in the man pages.
+	* src/corStruct.c (corStruct_factList): Provided a correct call to
+	the R version of F77_CALL(chol) here and everywhere else in this
+	source file.
+
+	* R/zzz.R: Removed the deprecated call to provide
 
 2000-03-17  Douglas Bates  <bates@stat.wisc.edu>
 

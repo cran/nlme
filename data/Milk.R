@@ -1,4 +1,4 @@
-### $Id: Milk.R,v 1.1 2000/03/17 22:21:21 saikat Exp $
+### $Id: Milk.R,v 1.3 2000/07/03 18:22:45 bates Exp $
 ### Milk production under different diets
 ### Diggle, Liang and Zeger (1994), Table 1.3, pp. 9-11
 "Milk" <-

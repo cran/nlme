@@ -1,4 +1,4 @@
-### $Id: Fatigue.R,v 1.1 2000/03/17 22:21:21 saikat Exp $
+### $Id: Fatigue.R,v 1.3 2000/07/03 18:22:44 bates Exp $
 ### Data on the crack propagation in metal fatigue
 ### Given in Lu and Meeker (1993), Technometrics, 35, 161-174
 ### Derived from a figure in Bogdanoff and Kozin (1985).

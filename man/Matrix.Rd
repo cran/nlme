@@ -1,4 +1,4 @@
-% $Id: Matrix.Rd,v 1.2 2000/04/05 18:43:21 bates Exp $
+% $Id: Matrix.Rd,v 1.1 2000/07/03 18:22:46 bates Exp $
 \name{Matrix}
 \title{Assign Matrix Values}
 \usage{

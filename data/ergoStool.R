@@ -1,4 +1,4 @@
-### $Id: ergoStool.R,v 1.1 2000/03/17 22:21:21 saikat Exp $
+### $Id: ergoStool.R,v 1.3 2000/07/03 18:22:45 bates Exp $
 ### Effort required to arise from a stool. 9 different subjects and 4 different
 ###  types of stools.
 ### Devore (1995), exercise 11.9

@@ -1,4 +1,4 @@
-### $Id: Orthodont.R,v 1.1 2000/03/17 22:21:21 saikat Exp $
+### $Id: Orthodont.R,v 1.3 2000/07/03 18:22:45 bates Exp $
 ### An orthodontic measurement on several children over time
 ### Pothoff and Roy (1964), Biometrika, 51, 313-326
 "Orthodont" <-

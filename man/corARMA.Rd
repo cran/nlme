@@ -1,4 +1,4 @@
-% $Id: corARMA.Rd,v 1.3 2000/04/17 19:03:39 bates Exp $
+% $Id: corARMA.Rd,v 1.4 2000/07/03 18:22:46 bates Exp $
 \name{corARMA}
 \title{ARMA(p,q) Correlation Structure}
 \usage{

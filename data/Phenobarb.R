@@ -1,4 +1,4 @@
-### $Id: Phenobarb.R,v 1.1 2000/03/17 22:21:21 saikat Exp $
+### $Id: Phenobarb.R,v 1.3 2000/07/03 18:22:45 bates Exp $
 ### Data from a study of neonatal pharmacokinetics of Phenobarbital
 ### Grasela and Donn (1985), Dev. Pharm. and Therapeutics.  Also discussed
 ### in Davidian and Giltinan (1995).

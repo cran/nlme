@@ -1,4 +1,4 @@
-% $Id: Dim.corSpatial.Rd,v 1.2 2000/04/17 19:03:38 bates Exp $
+% $Id: Dim.corSpatial.Rd,v 1.4 2000/07/03 18:22:45 bates Exp $
 \name{Dim.corSpatial}
 \title{Dimensions of a corSpatial Object}
 \usage{

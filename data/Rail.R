@@ -1,4 +1,4 @@
-### $Id: Rail.R,v 1.1 2000/03/17 22:21:21 saikat Exp $
+### $Id: Rail.R,v 1.3 2000/07/03 18:22:45 bates Exp $
 ### Travel times of ultrasonic head waves in several different railway
 ###  rails. 
 ### Devore (1995), example 10.10

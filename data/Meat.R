@@ -1,4 +1,4 @@
-### $Id: Meat.R,v 1.1 2000/03/17 22:21:21 saikat Exp $
+### $Id: Meat.R,v 1.3 2000/07/03 18:22:45 bates Exp $
 ### Meat tenderness as a function of Storage period and Block
 ### Cochran and Cox (1957), section 11.51, p. 444
 "Meat" <-

@@ -1,4 +1,4 @@
-### $Id: Remifentanil.R,v 1.1 2000/03/17 22:21:21 saikat Exp $
+### $Id: Remifentanil.R,v 1.3 2000/07/03 18:22:45 bates Exp $
 ### Pharmacokinetic data for the synthetic opiate Remifentanil used as an
 ### anesthetic.
 ### ftp://pkpd.icon.palo-alto.med.va.gov/data.dir/remifentanil.dir/comp_pk/remi.dat

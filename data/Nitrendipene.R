@@ -1,4 +1,4 @@
-### $Id: Nitrendipene.R,v 1.1 2000/03/17 22:21:21 saikat Exp $
+### $Id: Nitrendipene.R,v 1.3 2000/07/03 18:22:45 bates Exp $
 ### Activity detected for various concentrations of Nitrendipene
 ### Bates and Watts (1988), Appendix A4.2, pp. 306-307.
 "Nitrendipene" <-

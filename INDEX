@@ -9,9 +9,9 @@ BIC                      Bayesian Information Criterion
 BIC.logLik               BIC of a logLik Object
 BodyWeight               Rat weight over time for different diets
 Cefamandole              Pharmacokinetics of Cefamandole
-Coef                     Assign Values to Coefficients
-Covariate                Assign Covariate Values
-Covariate.varFunc        Assign varFunc Covariate
+coef<-                   Assign Values to Coefficients
+covariate<-              Assign Covariate Values
+covariate<-.varFunc      Assign varFunc Covariate
 Dialyzer                 High-Flux Hemodialyzer
 Dim                      Extract Dimensions from an Object
 Dim.corSpatial           Dimensions of a corSpatial Object
@@ -28,9 +28,9 @@ IGF                      Radioimmunoassay of IGF-I Protein
 Machines                 Productivity Scores for Machines and Workers
 MathAchSchool            School demographic data for MathAchieve
 MathAchieve              Mathematics achievement scores
-Matrix                   Assign Matrix Values
-Matrix.pdMat             Assign Matrix to a pdMat Object
-Matrix.reStruct          Assign reStruct Matrices
+matrix<-                 Assign Matrix Values
+matrix<-.pdMat           Assign Matrix to a pdMat Object
+matrix<-.reStruct        Assign reStruct Matrices
 Meat                     Tenderness of meat
 Milk                     Protein content of cows' milk
 Muscle                   Contraction of heart muscle sections
