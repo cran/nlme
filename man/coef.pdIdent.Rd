@@ -1,4 +1,4 @@
-% $Id: coef.pdIdent.Rd,v 1.6 2001/10/30 20:51:15 bates Exp $
+% $Id: coef.pdIdent.Rd,v 1.6.2.1 2002/08/09 19:45:29 bates Exp $
 \name{coef.pdIdent}
 \title{pdIdent Object Coefficients}
 \usage{

@@ -1,4 +1,4 @@
-% $Id: initialize.varFunc.Rd,v 1.6 2002/03/05 14:59:39 bates Exp $
+% $Id: Initialize.varFunc.Rd,v 1.1.2.1 2002/08/09 19:45:29 bates Exp $
 \name{Initialize.varFunc}
 \title{Initialize varFunc Object}
 \usage{

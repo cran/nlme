@@ -1,4 +1,4 @@
-### $Id: reStruct.R,v 1.6 2002/03/05 15:36:27 bates Exp $
+### $Id: reStruct.R,v 1.6.2.1 2002/08/09 19:45:29 bates Exp $
 ###
 ###      Methods for the class of random-effects structures.
 ###

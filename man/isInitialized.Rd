@@ -1,4 +1,4 @@
-% $Id: isInitialized.Rd,v 1.4 2000/07/03 18:22:47 bates Exp $
+% $Id: isInitialized.Rd,v 1.4.4.1 2002/08/09 19:45:29 bates Exp $
 \name{isInitialized}
 \title{Check if Object is Initialized}
 \usage{

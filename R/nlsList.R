@@ -1,4 +1,4 @@
-### $Id: nlsList.R,v 1.4 2001/10/30 20:51:14 bates Exp $
+### $Id: nlsList.R,v 1.4.2.1 2002/09/10 21:21:28 saikat Exp $
 ###
 ###                  Create a list of nls objects
 ###
@@ -110,20 +110,18 @@ nlsList.formula <-
   val <- lapply(split(data, groups),
 		function(dat, formula, start, control, first = TRUE)
 		{
-		  restart(first)
-		  if(first) {
-		    first <- FALSE
-		    data <- as.data.frame(dat)
+                  ans <- try({
+                    data <- as.data.frame(dat)
                     if (is.null(start)) {
                       nls(formula = formula, data = data, control = control)
                     } else {
                       nls(formula = formula, data = data, start = start,
                           control = control)
                     }
-		  }
-		  else {
-		    NULL
-		  }
+                  })
+                  if (inherits(ans, "try-error"))
+                    NULL
+                  else ans
 		}, formula = model, start = start, control = controlvals)
   if (inherits(data, "groupedData")) {
     ## saving labels and units for plots

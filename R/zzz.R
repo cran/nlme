@@ -1,4 +1,4 @@
-### $Id: zzz.R,v 1.6 2002/04/16 14:28:53 bates Exp $
+### $Id: zzz.R,v 1.6.2.1 2002/08/09 19:45:29 bates Exp $
 ###
 ### nlme for R
 ###

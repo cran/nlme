@@ -27,7 +27,7 @@ Gun                     Methods for firing naval guns
 IGF                     Radioimmunoassay of IGF-I Protein
 Initialize              Initialize Object
 Initialize.corStruct    Initialize corStruct Object
-initialize.glsStruct    Initialize a glsStruct Object
+Initialize.glsStruct    Initialize a glsStruct Object
 Initialize.lmeStruct    Initialize an lmeStruct Object
 Initialize.reStruct     Initialize reStruct Object
 Initialize.varFunc      Initialize varFunc Object

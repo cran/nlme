@@ -1,4 +1,4 @@
-### $Id: newGenerics.R,v 1.3 2001/06/18 21:16:49 bates Exp $
+### $Id: newGenerics.R,v 1.3.2.1 2002/08/09 19:45:29 bates Exp $
 ###
 ###    New generics used with corStruct, varFunc, groupedData, and reStruct
 ###

@@ -1,4 +1,4 @@
-### $Id: nlme.R,v 1.8.2.1 2002/07/23 22:23:28 bates Exp $
+### $Id: nlme.R,v 1.8.2.2 2002/08/09 19:45:29 bates Exp $
 ###
 ###            Fit a general nonlinear mixed effects model
 ###

@@ -1,4 +1,4 @@
-### $Id: lme.R,v 1.11.2.1 2002/07/23 22:23:28 bates Exp $
+### $Id: lme.R,v 1.11.2.2 2002/08/09 19:45:28 bates Exp $
 ###
 ###            Fit a general linear mixed effects model
 ###

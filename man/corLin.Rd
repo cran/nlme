@@ -1,4 +1,4 @@
-% $Id: corLin.Rd,v 1.5 2002/03/05 14:59:39 bates Exp $
+% $Id: corLin.Rd,v 1.5.2.1 2002/08/09 19:45:29 bates Exp $
 \name{corLin}
 \title{Linear Correlation Structure}
 \usage{

@@ -1,4 +1,4 @@
-% $Id: corMatrix.corStruct.Rd,v 1.9 2002/03/05 20:11:56 bates Exp $
+% $Id: corMatrix.corStruct.Rd,v 1.9.2.1 2002/08/09 19:45:29 bates Exp $
 \name{corMatrix.corStruct}
 \title{Matrix of a corStruct Object}
 \usage{

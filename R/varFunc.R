@@ -1,4 +1,4 @@
-### $Id: varFunc.R,v 1.8 2002/03/05 16:15:51 bates Exp $
+### $Id: varFunc.R,v 1.8.2.1 2002/08/09 19:45:29 bates Exp $
 ###
 ###              Classes of variance functions
 ###

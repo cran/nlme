@@ -1,4 +1,4 @@
-### $Id: groupedData.R,v 1.7 2002/03/05 15:36:27 bates Exp $
+### $Id: groupedData.R,v 1.7.2.1 2002/08/09 19:44:25 bates Exp $
 ###
 ###           groupedData - data frame with a grouping structure
 ###

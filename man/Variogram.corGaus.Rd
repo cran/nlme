@@ -1,4 +1,4 @@
-% $Id: Variogram.corGaus.Rd,v 1.7 2002/03/05 14:59:39 bates Exp $
+% $Id: Variogram.corGaus.Rd,v 1.7.2.1 2002/08/09 19:45:29 bates Exp $
 \name{Variogram.corGaus}
 \title{Calculate Semi-variogram for a corGaus Object}
 \usage{

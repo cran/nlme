@@ -1,4 +1,4 @@
-% $Id: gnls.Rd,v 1.7 2002/01/28 03:44:17 bates Exp $
+% $Id: gnls.Rd,v 1.7.2.1 2002/09/10 17:17:27 bates Exp $
 \name{gnls}
 \title{Fit Nonlinear Model Using Generalized Least Squares}
 \usage{
@@ -120,6 +120,6 @@ fm1 <- gnls(weight ~ SSlogis(Time, Asym, xmid, scal), Soybean,
             weights = varPower())
 summary(fm1)
 # errors follow an auto-regressive process of order 1
-fm2 <- update(fm1, correlation = corAR1())
+fm2 <- update(fm1, correlation = corAR1(0.6))
 }
 \keyword{models}
