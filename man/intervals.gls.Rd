@@ -1,4 +1,4 @@
-% $Id: intervals.gls.Rd,v 1.4 2000/07/03 18:22:47 bates Exp $
+% $Id: intervals.gls.Rd,v 1.4.2.1 2000/12/02 21:06:08 bates Exp $
 \name{intervals.gls}
 \title{Confidence Intervals on gls Parameters}
 \usage{
@@ -52,10 +52,8 @@ intervals(object, level, which)
 
 \examples{
 data(Ovary)
-%\dontrun{
 fm1 <- gls(follicles ~ sin(2*pi*Time) + cos(2*pi*Time), Ovary,
            correlation = corAR1(form = ~ 1 | Mare))
 intervals(fm1)
-%}
 }
 \keyword{models}

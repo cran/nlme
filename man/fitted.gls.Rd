@@ -1,4 +1,4 @@
-% $Id: fitted.gls.Rd,v 1.4 2000/07/03 18:22:46 bates Exp $
+% $Id: fitted.gls.Rd,v 1.4.2.1 2000/12/02 21:06:08 bates Exp $
 \name{fitted.gls}
 \title{Extract gls Fitted Values}
 \usage{
@@ -21,10 +21,8 @@ fitted(object)
 \seealso{\code{\link{gls}}, \code{\link{residuals.gls}} }
 \examples{
 data(Ovary)
-%\dontrun{
 fm1 <- gls(follicles ~ sin(2*pi*Time) + cos(2*pi*Time), Ovary,
            correlation = corAR1(form = ~ 1 | Mare))
 fitted(fm1)
-%}
 }
 \keyword{models}

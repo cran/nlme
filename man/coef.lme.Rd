@@ -1,4 +1,4 @@
-% $Id: coef.lme.Rd,v 1.4 2000/07/03 18:22:46 bates Exp $
+% $Id: coef.lme.Rd,v 1.4.2.1 2000/12/02 21:06:08 bates Exp $
 \name{coef.lme}
 \title{Extract lme Coefficients}
 \usage{
@@ -69,9 +69,7 @@ coef(object, augFrame, level, data, which, FUN, omitGroupingFactor)
 \examples{
 data(Orthodont)
 fm1 <- lme(distance ~ age, Orthodont, random = ~ age | Subject)
-%\dontrun{
 coef(fm1)
 coef(fm1, augFrame = TRUE)
-%}
 }
 \keyword{models}

@@ -11,21 +11,21 @@ lmeControl(maxIter, msMaxIter, tolerance, niterEM, msTol,
  \item{maxIter}{maximum number of iterations for the \code{lme}
    optimization algorithm. Default is 50.} 
  \item{msMaxIter}{maximum number of iterations
-   for the \code{ms} optimization step inside the \code{lme}
+   for the \code{nlm} optimization step inside the \code{lme}
    optimization. Default is 50.}
  \item{tolerance}{tolerance for the convergence criterion in the
    \code{lme} algorithm. Default is 1e-6.}
  \item{niterEM}{number of iterations for the EM algorithm used to refine
    the initial estimates of the random effects variance-covariance
    coefficients. Default is 25.}
- \item{msTol}{tolerance for the convergence criterion in \code{ms},
+ \item{msTol}{tolerance for the convergence criterion in \code{nlm},
    passed as the \code{rel.tolerance} argument to the function (see
-   documentation on \code{ms}). Default is 1e-7. }
+   documentation on \code{nlm}). Default is 1e-7. }
  \item{msScale}{scale function passed as the \code{scale} argument to
-   the \code{ms} function (see documentation on that function). Default
+   the \code{nlm} function (see documentation on that function). Default
    is \code{lmeScale}.}
  \item{msVerbose}{a logical value passed as the \code{trace} argument to
-   \code{ms} (see documentation on that function). Default is
+   \code{nlm} (see documentation on that function). Default is
    \code{FALSE}.} 
  \item{returnObject}{a logical value indicating whether the fitted
    object should be returned when the maximum number of iterations is
@@ -33,7 +33,7 @@ lmeControl(maxIter, msMaxIter, tolerance, niterEM, msTol,
    \code{FALSE}.} 
  \item{gradHess}{a logical value indicating whether numerical gradient
    vectors and Hessian matrices of the log-likelihood function should
-   be used in the \code{ms} optimization. This option is only available
+   be used in the \code{nlm} optimization. This option is only available
    when the correlation structure (\code{corStruct}) and the variance
    function structure (\code{varFunc}) have no "varying" parameters and
    the \code{pdMat} classes used in the random effects structure are
@@ -60,15 +60,12 @@ lmeControl(maxIter, msMaxIter, tolerance, niterEM, msTol,
 \value{
   a list with components for each of the possible arguments.
 }
-
 \author{Jose Pinheiro and Douglas Bates}
-
-\seealso{\code{\link{lme}}, \code{\link{ms}}, \code{\link{lmeScale}}}
-
+\seealso{\code{\link{lme}}, \code{\link{nlm}}, \code{\link{optim}},
+  \code{\link{lmeScale}}}
 \examples{
 # decrease the maximum number iterations in the ms call and
 # request that information on the evolution of the ms iterations be printed
 lmeControl(msMaxIter = 20, msVerbose = TRUE)
-
 }
 \keyword{models}

@@ -1,4 +1,4 @@
-% $Id: plot.lmList.Rd,v 1.4 2000/07/03 18:22:48 bates Exp $
+% $Id: plot.lmList.Rd,v 1.4.2.1 2000/12/02 21:06:08 bates Exp $
 \name{plot.lmList}
 \title{Plot an lmList Object}
 \usage{
@@ -72,8 +72,8 @@ plot(object, form, abline, id, idLabels, grid, ...)
 \seealso{\code{\link{lmList}}, \code{\link{xyplot}}, \code{\link{bwplot}},
   \code{\link{histogram}} }
 \examples{
-data(Orthodont)
 \dontrun{
+data(Orthodont)
 fm1 <- lmList(distance ~ age | Subject, Orthodont)
 # standardized residuals versus fitted values by gender
 plot(fm1, resid(., type = "pool") ~ fitted(.) | Sex, abline = 0, id = 0.05)

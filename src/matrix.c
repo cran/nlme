@@ -1,4 +1,4 @@
-/* $Id: matrix.c,v 1.3 2000/07/03 18:22:49 bates Exp $
+/* $Id: matrix.c,v 1.3.2.1 2000/11/30 19:28:34 bates Exp $
 
    Basic matrix manipulations and QR decomposition
 
@@ -116,8 +116,8 @@ QR(double *mat, longint ldmat, longint nrow, longint ncol)
   value->pivot = Calloc((size_t) ncol, longint);
   for (j = 0; j < ncol; j++) { (value->pivot)[j] = j; }
   work = Calloc( 2 * ncol, double );
-  F77_CALL(dqrdca) (mat, &ldmat, &nrow, &ncol, value->qraux, value->pivot,
-		    work, &(value->rank), &sqrt_eps);
+  F77_CALL(dqrdc2) (mat, &ldmat, &nrow, &ncol, &sqrt_eps, &(value->rank), 
+		    value->qraux, value->pivot, work);
   Free(work);
   return value;
 }

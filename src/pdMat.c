@@ -1,4 +1,4 @@
-/* $Id: pdMat.c,v 1.3 2000/07/03 18:22:49 bates Exp $ 
+/* $Id: pdMat.c,v 1.4 2000/07/07 21:20:35 saikat Exp $ 
 
    Routines for dealing with pdMat objects
 
@@ -36,6 +36,19 @@ Chol_pd(double *L, longint *q, double *l)
   for(i = 0; i < qq; i++) {
     Memcpy(L + i * qq, l, i + 1);
     l += i + 1;
+  }
+}
+
+void				/* general pd, logChol parametrization */
+logChol_pd(double *L, longint *q, double *l)
+{
+  longint i, qq = *q;
+  double *ll = l + qq;
+  L[0] = exp(*l);
+  for(i = 1; i < qq; i++) {
+    L[i * (qq + 1)] = exp(l[i]);
+    Memcpy(L + i * qq, ll, i);
+    ll += i;
   }
 }
 

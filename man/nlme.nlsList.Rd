@@ -1,4 +1,4 @@
-% $Id: nlme.nlsList.Rd,v 1.4 2000/07/03 18:22:47 bates Exp $
+% $Id: nlme.nlsList.Rd,v 1.4.2.2 2000/12/07 21:54:10 bates Exp $
 \name{nlme.nlsList}
 \title{NLME fit from nlsList Object}
 \usage{
@@ -86,12 +86,10 @@ nlme(model, data, fixed, random, groups, start, correlation, weights,
   \code{\link{nlmeObject}} } 
 
 \examples{
-data(Soybean)
-%\dontrun{
-fm1 <- nlsList(weight ~ SSlogis(Time, Asym, xmid, scal) | Plot, Soybean)
-%}
-%\dontrun{
-fm2 <- nlme(fm1)
-%}
+data(Loblolly)
+fm1 <- nlsList(SSasymp, data = Loblolly)
+fm2 <- nlme(fm1, random = Asym ~ 1)
+summary(fm1)
+summary(fm2)
 }
 \keyword{models}

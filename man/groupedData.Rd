@@ -1,4 +1,4 @@
-% $Id: groupedData.Rd,v 1.5 2000/07/03 21:13:47 bates Exp $
+% $Id: groupedData.Rd,v 1.5.2.1 2000/12/02 21:06:08 bates Exp $
 \name{groupedData}
 \title{Construct a groupedData Object}
 \usage{
@@ -112,8 +112,7 @@ http://nlme.stat.wisc.edu/
   \code{\link{gsummary}}, \code{\link{lme}}}
 }
 \examples{
-library( nlme )
-data( Orthodont )
+data(Orthodont)
 Orth.new <-  # create a new copy of the groupedData object
   groupedData( distance ~ age | Subject,
               data = as.data.frame( Orthodont ),
@@ -127,8 +126,6 @@ plot( Orth.new )         # trellis plot by Subject
 }
 formula( Orth.new )      # extractor for the formula
 gsummary( Orth.new )     # apply summary by Subject
-%\dontrun{
 fm1 <- lme( Orth.new )   # fixed and groups formulae extracted from object
-%}
 }
 \keyword{manip, attribute}

@@ -1,4 +1,4 @@
-/* $Id: matrix.h,v 1.3 2000/07/03 18:22:49 bates Exp $
+/* $Id: matrix.h,v 1.3.2.1 2000/11/30 19:28:34 bates Exp $
 
    header file for the nlme package
 
@@ -25,6 +25,7 @@
 #ifndef NLME_MATRIX_H
 #define NLME_MATRIC_H
 #include "base.h"
+#include <R_ext/Applic.h>
 
 typedef struct QR_struct {
   double *mat, *qraux;

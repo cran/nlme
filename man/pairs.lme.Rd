@@ -1,4 +1,4 @@
-% $Id: pairs.lme.Rd,v 1.4 2000/07/03 18:22:47 bates Exp $
+% $Id: pairs.lme.Rd,v 1.4.2.1 2000/12/02 21:06:08 bates Exp $
 \name{pairs.lme}
 \title{Pairs Plot of an lme Object}
 \usage{
@@ -59,10 +59,10 @@ pairs(object, form, label, id, idLabels, grid, ...)
 \author{Jose Pinheiro and Douglas Bates}
 \seealso{\code{\link{lme}}, \code{\link{xyplot}}, \code{\link{splom}}} 
 \examples{
+\dontrun{
 data(Orthodont)
 fm1 <- lme(distance ~ age, Orthodont, random = ~ age | Subject)
 # scatter plot of coefficients by gender, identifying unusual subjects
-\dontrun{
 pairs(fm1, ~coef(., augFrame = T) | Sex, id = 0.1, adj = -0.5)    
 # scatter plot of estimated random effects
 pairs(fm1, ~ranef(.))

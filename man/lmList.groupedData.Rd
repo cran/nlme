@@ -1,4 +1,4 @@
-% $Id: lmList.groupedData.Rd,v 1.4 2000/07/03 18:22:47 bates Exp $
+% $Id: lmList.groupedData.Rd,v 1.4.2.1 2000/12/02 21:06:08 bates Exp $
 \name{lmList.groupedData}
 \title{lmList Fit from a groupedData Object}
 \usage{
@@ -37,5 +37,6 @@ lmList(object, data, level, na.action, pool)
 \examples{
 data(Orthodont)
 fm1 <- lmList(Orthodont)
+summary(fm1)
 }
 \keyword{models}

@@ -1,4 +1,4 @@
-### $Id: gnls.R,v 1.1 2000/07/03 18:22:44 bates Exp $
+### $Id: gnls.R,v 1.2.2.1 2000/12/07 19:12:35 bates Exp $
 ###
 ###  Fit a general nonlinear regression model with correlated and/or
 ###  heteroscedastic errors
@@ -794,7 +794,7 @@ update.gnls <-
 	   verbose = FALSE)
 {
   thisCall <- as.list(match.call())[-(1:2)]
-  nextCall <- object$call
+  nextCall <- as.list(object$call)[-1]
   if (!is.null(thisCall$model)) {
     thisCall$model <- update(formula(object), thisCall$model)
   } else {                              # same model
@@ -811,8 +811,7 @@ update.gnls <-
     thisCall$weights <- thWgt
   }
   nextCall[names(thisCall)] <- thisCall
-  nextCall[[1]] <- as.name("gnls")
-  eval(nextCall, parent.frame())
+  do.call("gnls", nextCall)
 }
 
 ###*### gnlsStruct - a model structure for gnls fits

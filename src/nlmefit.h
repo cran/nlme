@@ -1,4 +1,4 @@
-/* $Id: nlmefit.h,v 1.3 2000/07/03 18:22:49 bates Exp $
+/* $Id: nlmefit.h,v 1.5 2000/07/07 21:20:35 saikat Exp $
 
    header file for the nlme package
 
@@ -45,23 +45,36 @@ typedef struct dim_struct {
     **DecLen;			/* decomposition group lengths */
 } *dimPTR;
 
+typedef struct state_struct {
+  dimPTR dd;
+  double *ZXy;
+  longint *pdClass,
+    *RML;
+} *statePTR;
+    
 extern dimPTR dims(longint *);
+extern size_t count_DmHalf_pars(dimPTR, longint *);
+extern double * generate_theta(double *, dimPTR, longint *, double *);
+extern double * generate_DmHalf(double *, dimPTR, longint *, double *);	
 extern void dimFree(dimPTR);
+extern void mixed_decomp(double *, longint *);
+extern void mixed_fcn(longint, double *, double *, void *);
+extern void mixed_grad(longint, double *, double *, void *);
+extern void internal_decomp(dimPTR, double *);
+extern void mixed_loglik(double *, longint *, double *, longint *,
+			 double *, double *);
 extern double internal_loglik(dimPTR, double *, double *, longint *,
 			      double *, double *);
-#ifndef R_S_H
+extern void mixed_estimate(double *, longint *, double *, longint *,
+			   double *, double *, longint *);
+extern void internal_estimate(dimPTR, double *);
+extern void mixed_EM(double *, longint *, double *, longint *,
+		     longint *, longint *, double *, double *, double *);
+extern void internal_EM(dimPTR, double *, double *, int, longint *,
+			longint *, double *, double *, double *);
 extern void mixed_combined(double *, longint *, double *, longint *,
 			   longint *, longint *, double *, double *,
 			   double *, longint *);
-#endif
-extern void mixed_decomp(double *, longint *);
-extern void mixed_loglik(double *, longint *, double *, longint *,
-			 double *, double *);
-extern void internal_estimate(dimPTR, double *);
-extern void mixed_estimate(double *, longint *, double *, longint *,
-			   double *, double *, longint *);
-extern void mixed_EM(double *, longint *, double *, longint *,
-		     longint *, longint *, double *, double *, double *);
 extern void mixed_calcf(longint *, double *, longint *, double *,
 			longint *, double *, void (*)(void));
 extern void mixed_calcgh(longint *, double *, longint *, double *,

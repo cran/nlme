@@ -43,5 +43,6 @@
 }
 \examples{
 data(Soybean)
+summary(fm1 <- nlsList(SSlogis, data = Soybean))
 }
 \keyword{datasets}

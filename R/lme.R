@@ -1,4 +1,4 @@
-### $Id: lme.R,v 1.1 2000/07/03 18:22:44 bates Exp $
+### $Id: lme.R,v 1.2.2.1 2000/12/07 19:12:35 bates Exp $
 ###
 ###            Fit a general linear mixed effects model
 ###
@@ -46,13 +46,11 @@ lme.groupedData <-
 	   na.action = na.fail,
 	   control = list())
 {
-  args <- match.call()
-  names(args)[2] <- "data"
+  args <- as.list(match.call())[-1]
+  names(args)[1] <- "data"
   form <- getResponseFormula(fixed)
   form[[3]] <- getCovariateFormula(fixed)[[2]]
-  args[["fixed"]] <- form
-  args[[1]] <- as.name("lme")
-  eval(args, parent.frame(1))
+  do.call("lme", c(list(fixed = form), args))
 }
 
 lme.lmList <-
@@ -69,7 +67,7 @@ lme.lmList <-
   if (length(grpForm <- getGroupsFormula(fixed, asList = TRUE)) > 1) {
     stop("Can only fit lmList objects with single grouping variable")
   }
-  this.call <- match.call()
+  this.call <- as.list(match.call())[-1]
   ## warn "data" is passed to this function
   if (!is.na(match("data", names(this.call)))) {
     warning("lme.lmList will redefine \"data\"")
@@ -120,8 +118,7 @@ lme.lmList <-
     matrix(reSt) <- diag((madRan/madRes)^2, ncol = length(rNames))
   }
   this.call[["random"]] <- reSt
-  this.call[[1]] <- as.name("lme.formula")
-  val <- eval(this.call, parent.frame(1))
+  val <- do.call("lme.formula", this.call)
   val$origCall <- match.call()
   val
 }
@@ -807,6 +804,7 @@ anova.lme <-
 
 {
   ## returns the likelihood ratio statistics, the AIC, and the BIC
+  Lmiss <- missing(L)
   dots <- list(...)
   if ((rt <- (length(dots) + 1)) == 1) {    ## just one object
     if (!inherits(object,"lme")) {
@@ -820,7 +818,7 @@ anova.lme <-
     c0 <- solve(t(vFix), fixef(object))
     assign <- attr(object$fixDF, "assign")
     nTerms <- length(assign)
-    if (missing(Terms) && missing(L)) {
+    if (missing(Terms) && Lmiss) {
       ## returns the F.table (Wald) for the fixed effects
       type <- match.arg(type)
       Fval <- Pval <- double(nTerms)
@@ -845,7 +843,7 @@ anova.lme <-
       attr(aod,"rt") <- rt
     } else {
       nX <- length(unlist(assign))
-      if (missing(L)) {                 # terms is given
+      if (Lmiss) {                 # terms is given
         if (is.numeric(Terms) && all(Terms == as.integer(Terms))) {
           if (min(Terms) < 1 || max(Terms) > nTerms) {
             stop(paste("Terms must be between 1 and", nTerms))
@@ -911,7 +909,7 @@ anova.lme <-
       names(aod) <- c("numDF", "denDF", "F-value", "p-value")
       attr(aod, "rt") <- rt
       attr(aod, "label") <- lab
-      if (!missing(L)) {
+      if (!Lmiss) {
         if (nrow(L) > 1) attr(aod, "L") <- L[, noZeroColL, drop = F]
         else attr(aod, "L") <- L[, noZeroColL]
       }
@@ -2576,6 +2574,7 @@ update.lme <-
       is.null(thisCall$random)) {
     nextCall <- object$call
   }
+  nextCall <- as.list(nextCall)[-1]
   if (is.null(thisCall$random)  && is.null(thisCall$subset)) {
     ## no changes in ranef model and no subsetting
     thisCall$random <- object$modelStruct$reStruct
@@ -2588,17 +2587,16 @@ update.lme <-
       !is.null(thWgt <- object$modelStruct$varStruct)) {
     thisCall$weights <- thWgt
   }
-#  argNams <- unique( c(names(nextCall), names(thisCall)) )
-#  args <- vector("list", length(argNams))
-#  names(args) <- argNams
-#  args[ names(nextCall) ] <- nextCall
-#  nextCall <- args
+    argNams <- unique( c(names(nextCall), names(thisCall)) )
+    args <- vector("list", length(argNams))
+    names(args) <- argNams
+    args[ names(nextCall) ] <- nextCall
+    nextCall <- args
   if (!is.null(thisCall$fixed)) {
     thisCall$fixed <- update(as.formula(nextCall$fixed), thisCall$fixed)
   }
   nextCall[names(thisCall)] <- thisCall
-  nextCall[[1]] <- as.name("lme")
-  eval(nextCall, parent.frame(1))
+  do.call("lme", nextCall)
 }
 
 Variogram.lme <-
@@ -2714,7 +2712,7 @@ Variogram.lme <-
                   }, robust = robust)
     val <- do.call("rbind", val)
     val <- na.omit(val)                 # getting rid of NAs
-    val$n.pairs <- table(na.omit(cutDist))
+    val$n.pairs <- as.vector(table(na.omit(cutDist)))
   }
   row.names(val) <- 1:nrow(val)
   if (inherits(csT, "corSpatial") && resType != "normalized") {

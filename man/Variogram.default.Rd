@@ -1,4 +1,4 @@
-% $Id: Variogram.default.Rd,v 1.4 2000/07/03 18:22:46 bates Exp $
+% $Id: Variogram.default.Rd,v 1.4.2.1 2000/12/02 21:06:08 bates Exp $
 \name{Variogram.default}
 \title{Calculate Semi-variogram}
 \usage{
@@ -38,9 +38,9 @@ Variogram(object, distance)
   \code{\link{plot.Variogram}}} 
 \examples{
 data(Ovary)
+\dontrun{
 fm1 <- lm(follicles ~ sin(2 * pi * Time) + cos(2 * pi * Time), Ovary,
           subset = Mare == 1)
-\dontrun{
 Variogram(resid(fm1), dist(1:29))[1:10,]
 }
 }

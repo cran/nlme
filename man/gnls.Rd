@@ -1,4 +1,4 @@
-% $Id: gnls.Rd,v 1.5 2000/07/03 18:22:47 bates Exp $
+% $Id: gnls.Rd,v 1.5.2.1 2000/12/02 21:06:08 bates Exp $
 \name{gnls}
 \title{Fit Nonlinear Model Using Generalized Least Squares}
 \usage{
@@ -112,6 +112,7 @@ data(Soybean)
 # variance increases with a power of the absolute fitted values
 fm1 <- gnls(weight ~ SSlogis(Time, Asym, xmid, scal), Soybean,
             weights = varPower())
+summary(fm1)
 \dontrun{
 # errors follow an auto-regressive process of order 1 
 fm2 <- gnls(weight ~ SSlogis(Time, Asym, xmid, scal), Soybean,

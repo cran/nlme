@@ -1,4 +1,4 @@
-## $Id: lmList.R,v 1.2.2.2 2000/12/07 19:12:35 bates Exp $
+## $Id: lmList.R,v 1.2.2.1 2000/12/02 21:06:08 bates Exp $
 ###
 ###                  Create a list of lm objects
 ###
@@ -28,20 +28,18 @@ lmList <-
   function(object, data, level, subset, na.action = na.fail, pool = TRUE)
   UseMethod("lmList")
 
+### FIXME: match.call problem
 lmList.groupedData <-
   function(object, data, level, subset, na.action = na.fail, pool = TRUE)
 {
   ### object will provide the formula, the data, and the groups
   form <- formula(object)
-  args <- as.list(match.call())[-1]
+  args <- match.call()
   args[["object"]] <- as.vector(eval(parse(text = paste(deparse(form[[2]]),
                                              "~", deparse(form[[3]][[2]])))))
-  if (!missing(data)) {
-    args[["data"]] <- substitute(object)
-  } else {
-    args <- as.list(c(args, list(data = substitute(object))))
-  }
-  do.call("lmList.formula", args)
+  args[["data"]] <- substitute(object)
+  args[[1]] <- as.name("lmList.formula")
+  eval(args, parent.frame(1))
 }
 
 lmList.formula <-
@@ -621,8 +619,9 @@ plot.intervals.lmList <-
 plot.ranef.lmList <-
   function(object, form = NULL, grid = TRUE, control, ...)
 {
-  fArgs <- as.list(match.call())[-1]
-  do.call("plot.ranef.lme", fArgs)
+  fArgs <- match.call()
+  fArgs[[1]] <- as.name("plot.ranef.lme")
+  eval(fArgs, envir = parent.frame(1))
 }
 
 plot.lmList <-

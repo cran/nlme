@@ -1,4 +1,4 @@
-/* $Id: corStruct.c,v 1.3 2000/07/03 18:22:49 bates Exp $
+/* $Id: corStruct.c,v 1.3.2.1 2000/11/30 19:28:34 bates Exp $
 
    Routines dealaing with correlation structures.
 
@@ -28,6 +28,11 @@
 
 #ifndef R_S_H
 extern void F77_NAME(dqrdca)();
+#else
+#include <R_ext/Applic.h>
+#ifdef beta
+#undef beta
+#endif /* beta */
 #endif /* R_S_H */
 
 /* Factor list and Recalc for general corStruct object */
@@ -549,9 +554,10 @@ ARMA_corr(longint *p, longint *q, longint *maxlag, double *pars, double *psi,
 	  *(src + (k * P)) -= pars[j];
 	}
       }
-      F77_CALL(dqrdca) (coef, &P, &P, &P, qraux, pivot, work, &i, &sqrt_eps);
+/*        F77_CALL(dqrdca) (coef, &P, &P, &P, qraux, pivot, work, &i, &sqrt_eps); */
+      F77_CALL(dqrdc2) (coef, &P, &P, &P,  &sqrt_eps, &i, qraux, pivot, work);
       if (i < P) {
-	PROBLEM "Coeficient matrix not invertible" RECOVER(NULL_ENTRY);
+	  PROBLEM "Coefficient matrix not invertible" RECOVER(NULL_ENTRY);
       }
       i = 100L;
       F77_CALL(dqrsl) (coef, &P, &P, &P, qraux, crr, DNULLP, crr, work1, DNULLP, 

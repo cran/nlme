@@ -1,4 +1,4 @@
-% $Id: lme.Rd,v 1.4 2000/07/03 18:22:47 bates Exp $
+% $Id: lme.Rd,v 1.4.2.1 2000/12/02 21:06:08 bates Exp $
 \name{lme}
 \title{Linear Mixed-Effects Models}
 \usage{
@@ -136,5 +136,7 @@ lme(fixed, data, random, correlation, weights, subset, method,
 data(Orthodont)
 fm1 <- lme(distance ~ age, data = Orthodont) # random is ~ age
 fm2 <- lme(distance ~ age + Sex, data = Orthodont, random = ~ 1)
+summary(fm1)
+summary(fm2)
 }
 \keyword{models}

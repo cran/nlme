@@ -1,4 +1,4 @@
-% $Id: plot.Variogram.Rd,v 1.4 2000/07/03 18:22:48 bates Exp $
+% $Id: plot.Variogram.Rd,v 1.4.2.1 2000/12/02 21:06:08 bates Exp $
 \name{plot.Variogram}
 \title{Plot a Variogram Object}
 \usage{
@@ -54,9 +54,9 @@ plot(object, smooth, showModel, sigma, span, xlab, ylab, type, ylim, ...)
 \author{Jose Pinheiro and Douglas Bates}
 \seealso{\code{\link{Variogram}}, \code{\link{xyplot}}, \code{\link{loess}}}
 \examples{
+\dontrun{
 data(Ovary)
 fm1 <- lme(follicles ~ sin(2*pi*Time) + cos(2*pi*Time), Ovary)
-\dontrun{
 plot(Variogram(fm1, form = ~ Time | Mare, maxDist = 0.7))
 }
 }

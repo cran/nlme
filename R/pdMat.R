@@ -1,4 +1,4 @@
-### $Id: pdMat.R,v 1.1 2000/07/03 18:22:44 bates Exp $
+### $Id: pdMat.R,v 1.2.2.1 2000/12/02 21:06:08 bates Exp $
 ###
 ###              Classes of positive-definite matrices
 ###
@@ -592,13 +592,9 @@ summary.pdMat <-
 
 pdSymm <-
   ## Constructor for the pdSymm class
-  function(value = numeric(0), form = NULL, nam = NULL, data = sys.frame(sys.parent()))
-#	   pdClass = c("pdMatrixLog", "pdChol", "pdLogChol", "pdSpher",
-#	       "pdGivens"))
+  function(value = numeric(0), form = NULL, nam = NULL, data = parent.frame())
 {
-#  pdClass <- match.arg(pdClass)
   object <- numeric(0)
-#  class(object) <- c(pdClass, "pdSymm", "pdMat")
   class(object) <- c("pdSymm", "pdMat")
   pdConstruct(object, value, form, nam, data)
 }
@@ -719,6 +715,90 @@ summary.pdSymm <-
 ### No need to implement other methods as the methods for pdMat
 ### are sufficient.
 
+###*# pdLogChol - a general positive definite structure parameterized
+###   by the non-zero elements of the Cholesky factor with the diagonal
+###   elements given in the logarithm scale.
+
+####* Constructor
+
+pdLogChol <-
+  ## Constructor for the pdLogChol class
+  function(value = numeric(0), form = NULL, nam = NULL, data = sys.parent())
+{
+  object <- numeric(0)
+  class(object) <- c("pdLogChol", "pdMat")
+  pdConstruct(object, value, form, nam, data)
+}
+
+####* Methods for local generics
+
+pdConstruct.pdLogChol <-
+  function(object, value = numeric(0), form = formula(object),
+	   nam = Names(object), data = sys.parent())
+{
+  val <- pdConstruct.pdMat(object, value, form, nam, data)
+  if (length(val) == 0) {               # uninitialized object
+    class(val) <- c("pdLogChol", "pdSymm", "pdMat")
+    return(val)
+  }
+  if (is.matrix(val)) {
+    value <- c(log(diag(val)), val[row(val) < col(val)])
+    attributes(value) <- attributes(val)[names(attributes(val)) != "dim"]
+    class(value) <- c("pdLogChol", "pdSymm", "pdMat")
+    return(value)
+  }
+  Ncol <- round((sqrt(8*length(val) + 1) - 1)/2)
+  if (length(val) != round((Ncol * (Ncol + 1))/2)) {
+    stop(paste("An object of length", length(val),
+	       "does not match a Cholesky factor"))
+  }
+  class(val) <- c("pdLogChol", "pdSymm", "pdMat")
+  val
+}
+
+pdFactor.pdLogChol <-
+  function(object)
+{
+  round(Ncol <- (-1 + sqrt(1 + 8 * length(object))) / 2)
+  .C("logChol_pd",
+     Factor = double(Ncol * Ncol),
+     as.integer(Ncol),
+     as.double(object))$Factor
+}
+
+####* Methods for standard generics
+
+solve.pdLogChol <-
+  function(a, b)
+{
+  if (!isInitialized(a)) {
+    stop("Cannot get the inverse of an uninitialized object")
+  }
+  Ncol <- (-1 + sqrt(1 + 8 * length(a))) / 2
+#  val <- array(.Fortran("dbksl",
+# 			as.double(pdFactor(a)),
+# 			as.integer(Ncol),
+# 			as.integer(Ncol),
+# 			val = as.double(diag(Ncol)),
+# 			as.integer(Ncol),
+# 			integer(1))[["val"]], c(Ncol, Ncol))
+#  val <- qr(t(val))$qr
+  val <- qr(t(solve(pdMatrix(a, fact = TRUE))))$qr
+  val <- sign(diag(val)) * val
+  coef(a) <- c(log(diag(val)), val[c(row(val) < col(val))])
+  a
+}
+
+summary.pdLogChol <-
+  function(object, structName =
+           "General positive-definite, Log-Cholesky parametrization")
+{
+  summary.pdMat(object, structName)
+}
+
+### No need to implement other methods as the methods for pdMat
+### are sufficient.
+
 ####*# pdChol - a general positive definite structure parameterized by
 ####   the non-zero elements of the Cholesky factor.
 
@@ -792,89 +872,6 @@ summary.pdSymm <-
 #summary.pdChol <-
 #  function(object,
 #           structName = "General positive-definite, Cholesky parametrization")
-#{
-#  summary.pdMat(object, structName)
-#}
-
-#### No need to implement other methods as the methods for pdMat
-#### are sufficient.
-
-####*# pdLogChol - a general positive definite structure parameterized
-####   by the non-zero elements of the Cholesky factor with the diagonal
-####   elements given in the logarithm scale.
-
-#####* Constructor
-
-#pdLogChol <-
-#  ## Constructor for the pdLogChol class
-#  function(value = numeric(0), form = NULL, nam = NULL, data = sys.parent())
-#{
-#  object <- numeric(0)
-#  class(object) <- c("pdLogChol", "pdMat")
-#  pdConstruct(object, value, form, nam, data)
-#}
-
-#####* Methods for local generics
-
-#pdConstruct.pdLogChol <-
-#  function(object, value = numeric(0), form = formula(object),
-#	   nam = Names(object), data = sys.parent())
-#{
-#  val <- pdConstruct.pdMat(object, value, form, nam, data)
-#  if (length(val) == 0) {               # uninitialized object
-#    class(val) <- c("pdLogChol", "pdSymm", "pdMat")
-#    return(val)
-#  }
-#  if (is.matrix(val)) {
-#    value <- c(log(diag(val)), val[row(val) < col(val)])
-#    attributes(value) <- attributes(val)[names(attributes(val)) != "dim"]
-#    class(value) <- c("pdLogChol", "pdSymm", "pdMat")
-#    return(value)
-#  }
-#  Ncol <- round((sqrt(8*length(val) + 1) - 1)/2)
-#  if (length(val) != round((Ncol * (Ncol + 1))/2)) {
-#    stop(paste("An object of length", length(val),
-#	       "does not match a Cholesky factor"))
-#  }
-#  class(val) <- c("pdLogChol", "pdSymm", "pdMat")
-#  val
-#}
-
-#pdFactor.pdLogChol <-
-#  function(object)
-#{
-#  round(Ncol <- (-1 + sqrt(1 + 8 * length(object))) / 2)
-#  .C("logChol_pd",
-#     Factor = double(Ncol * Ncol),
-#     as.integer(Ncol),
-#     as.double(object))$Factor
-#}
-
-#####* Methods for standard generics
-
-#solve.pdLogChol <-
-#  function(a, b)
-#{
-#  if (!isInitialized(a)) {
-#    stop("Cannot get the inverse of an uninitialized object")
-#  }
-#  Ncol <- (-1 + sqrt(1 + 8 * length(a))) / 2
-#  val <- array(.Fortran("dbksl",
-#			as.double(pdFactor(a)),
-#			as.integer(Ncol),
-#			as.integer(Ncol),
-#			val = as.double(diag(Ncol)),
-#			as.integer(Ncol),
-#			integer(1))[["val"]], c(Ncol, Ncol))
-#  val <- qr(t(val))$qr
-#  val <- sign(diag(val)) * val
-#  coef(a) <- c(log(diag(val)), val[c(row(val) < col(val))])
-#  a
-#}
-
-#summary.pdLogChol <-
-#  function(object,
-#           structName = "General positive-definite, Log-Cholesky parametrization")
 #{
 #  summary.pdMat(object, structName)
 #}
@@ -1242,13 +1239,14 @@ solve.pdNatural <-
   }
   Ncol <- round((-1 + sqrt(1 + 8 * length(a))) / 2)
   if (Ncol > 1) {
-    val <- array(.Fortran("dbksl",
-			  as.double(pdFactor(a)),
-			  as.integer(Ncol),
-			  as.integer(Ncol),
-			  val = as.double(diag(Ncol)),
-			  as.integer(Ncol),
-			  integer(1))[["val"]], c(Ncol, Ncol))
+#     val <- array(.Fortran("dbksl",
+# 			  as.double(pdFactor(a)),
+# 			  as.integer(Ncol),
+# 			  as.integer(Ncol),
+# 			  val = as.double(diag(Ncol)),
+# 			  as.integer(Ncol),
+# 			  integer(1))[["val"]], c(Ncol, Ncol))
+    val <- solve(pdMatrix(a, fact = TRUE))
     val <- val %*% t(val)
     stdDev <- sqrt(diag(val))
     val <- t(val/stdDev)/stdDev

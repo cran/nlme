@@ -1,4 +1,4 @@
-% $Id: update.lmList.Rd,v 1.4 2000/07/03 18:22:48 bates Exp $
+% $Id: update.lmList.Rd,v 1.4.2.1 2000/12/02 21:06:08 bates Exp $
 \name{update.lmList}
 \title{Update an lmList Object}
 \usage{
@@ -37,5 +37,7 @@ update(object, formula, data, level, subset, na.action, control, pool)
 data(Orthodont)
 fm1 <- lmList(Orthodont)
 fm2 <- update(fm1, distance ~ I(age - 11))
+summary(fm1)
+summary(fm2)
 }
 \keyword{models}

@@ -1,4 +1,4 @@
-% $Id: plot.lme.Rd,v 1.4 2000/07/03 18:22:48 bates Exp $
+% $Id: plot.lme.Rd,v 1.4.2.1 2000/12/02 21:06:08 bates Exp $
 \name{plot.lme}
 \title{Plot an lme Object}
 \usage{
@@ -76,8 +76,8 @@ plot(object, form, abline, id, idLabels, idResType, grid, ...)
 \seealso{\code{\link{lme}}, \code{\link{xyplot}}, \code{\link{bwplot}},
   \code{\link{histogram}} }
 \examples{
-data(Orthodont)
 \dontrun{
+data(Orthodont)
 fm1 <- lme(distance ~ age, Orthodont, random = ~ age | Subject)
 # standardized residuals versus fitted values by gender
 plot(fm1, resid(., type = "p") ~ fitted(.) | Sex, abline = 0)

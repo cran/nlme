@@ -1967,7 +1967,7 @@ getCovariate.corSpatial <-
 	covar <- as.vector(dist(1:nrow(data)))
       } else {
 	covar <- as.vector(dist(as.matrix(covar),
-                                metric = attr(object, "metric")))
+                                method = attr(object, "metric")))
       }
     }
     if (any(unlist(covar) == 0)) {

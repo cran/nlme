@@ -1,20 +1,21 @@
 
 R : Copyright 2000, The R Development Core Team
-Version 1.1.0  (June 15, 2000)
+Version 1.2.0 Under development (unstable) (2000-12-05)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
-Type	"?license" or "?licence" for distribution details.
+Type `license()' or `licence()' for distribution details.
 
 R is a collaborative project with many contributors.
-Type	"?contributors" for a list.
+Type `contributors()' for more information.
 
-Type	"demo()" for some demos, "help()" for on-line help, or
-    	"help.start()" for a HTML browser interface to help.
-Type	"q()" to quit R.
+Type `demo()' for some demos, `help()' for on-line help, or
+`help.start()' for a HTML browser interface to help.
+Type `q()' to quit R.
 
 > library(nlme)
 Loading required package: nls 
+Warning message: 
 > data(Loblolly)
 > fm1 <- nlsList(SSasymp, Loblolly)
 > fm1
@@ -46,16 +47,16 @@ Residual standard error: 0.7003965
 Nonlinear mixed-effects model fit by maximum likelihood
   Model: height ~ SSasymp(age, Asym, R0, lrc) 
   Data: Loblolly 
-  Log-likelihood: -114.7431
+  Log-likelihood: -114.743
   Fixed: list(Asym ~ 1, R0 ~ 1, lrc ~ 1) 
       Asym         R0        lrc 
-101.447474  -8.627594  -3.233718 
+101.448300  -8.627494  -3.233730 
 
 Random effects:
  Formula: Asym ~ 1 | Seed
             Asym  Residual
-StdDev: 3.650647 0.7188624
+StdDev: 3.650645 0.7188624
 
 Number of Observations: 84
 Number of Groups: 14 
-> 
+> q()

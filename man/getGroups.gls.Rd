@@ -1,4 +1,4 @@
-% $Id: getGroups.gls.Rd,v 1.4 2000/07/03 18:22:47 bates Exp $
+% $Id: getGroups.gls.Rd,v 1.4.2.1 2000/12/02 21:06:08 bates Exp $
 \name{getGroups.gls}
 \title{Extract gls Object Groups}
 \usage{
@@ -26,10 +26,8 @@ getGroups(object)
 
 \examples{
 data(Ovary)
-%\dontrun{
 fm1 <- gls(follicles ~ sin(2*pi*Time) + cos(2*pi*Time), Ovary,
            correlation = corAR1(form = ~ 1 | Mare))
 getGroups(fm1)
-%}
 }
 \keyword{models}

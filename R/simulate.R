@@ -1,4 +1,4 @@
-### $Id: simulate.R,v 1.1 2000/07/03 18:22:44 bates Exp $
+### $Id: simulate.R,v 1.2.2.1 2000/12/07 19:12:36 bates Exp $
 ###
 ###            Fit a general linear mixed effects model
 ###
@@ -115,7 +115,7 @@ simulate.lme <-
            niterEM = c(40, 200), useGen = FALSE)
 {
 ## m1 is a list of arguments to lme, or an lme object from which the
-##   call i sextracted, to define the null model
+##    call is extracted, to define the null model
 ## m2 is an option list of arguments to lme to define the feared model
   getResults1 <-
     function(conLin, nIter, pdClass, REML, ssq, p, pp1)
@@ -156,21 +156,19 @@ simulate.lme <-
 
   if (inherits(m1, "lme")) {            # given as an lme object
     fit1 <- m1
-    m1 <- m1$call
+    m1 <- as.list(m1$call[-1])
   } else {
-    m1 <- match.call(lme, substitute(m1))
-    m1[[1]] <- as.name("lme")
-    fit1 <- eval(m1, parent.frame(1))
+    m1 <- as.list(match.call(lme, substitute(m1))[ -1 ])
+    fit1 <- do.call("lme", m1)
   }
   if (length(fit1$modelStruct) > 1) {
     stop("Models with corStruct and/or varFunc objects not allowed.")
   }
   reSt1 <- fit1$modelStruct$reStruct
-  m1[[1]] <- as.name("createConlin")
-  condL1 <- eval(m1, parent.frame(1))
+  condL1 <- do.call("createConLin", m1)
   pdClass1 <- unlist(lapply(reSt1, data.class))
   pdClass1 <- match(pdClass1, c("pdSymm", "pdDiag", "pdIdent",
-                                "pdCompSymm"), 0) - 1
+                                "pdCompSymm", "pdLogChol"), 0) - 1
   control1 <- lmeControl()
   if (!is.null(m1$control)) {
     control1[names(m1$control)] <- m1$control
@@ -218,23 +216,21 @@ simulate.lme <-
     ALT <- TRUE
     if (inherits(m2, "lme")) {            # given as an lme object
       fit2 <- m2
-      m2 <- m2$call
+      m2 <- as.list(m2$call[-1])
     } else {
-      m2 <- match.call(lme, substitute(m2))
+      m2 <- as.list(match.call(lme, substitute(m2))[ -1 ])
       if (is.null(m2$random)) {
         m2$random <- asOneSidedFormula(m1$fixed[-2])
       }
       aux <- m1
       aux[names(m2)] <- m2
       m2 <- aux
-      m2[[1]] <- as.name("lme")
-      fit2 <- eval(m2, parent.frame(1))
+      fit2 <- do.call("lme", m2)
     }
     if (length(fit2$modelStruct) > 1) {
       stop("Models with corStruct and/or varFunc objects not allowed.")
     }
-    m2[[1]] <- as.name("createConLin")
-    condL2 <- eval(m2, parent.frame(1))
+    condL2 <- do.call("createConLin", m2)
     reSt2 <- fit2$modelStruct$reStruct
     control2 <- lmeControl()
     if (!is.null(m2$control)) {

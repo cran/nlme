@@ -1,4 +1,4 @@
-/* $Id: base.h,v 1.3 2000/07/03 18:22:49 bates Exp $
+/* $Id: base.h,v 1.4.2.2 2000/12/02 21:06:08 bates Exp $
 
    header file for the nlme package
 
@@ -29,7 +29,9 @@
 #include <stdlib.h>
 
 #ifdef R_S_H
-#include "S_compat.h"
+#include <R.h>
+#include <R_ext/Mathlib.h>
+#include <R_ext/Applic.h>
 #else
 #include "nonlin.h"
 #endif
@@ -65,9 +67,6 @@ extern void F77_NAME(dqrsl)();
 #define aSEV
 #define S_EVALUATOR
 #endif /* SPLUS_VERSION */
-
-extern void F77_NAME(chol)();
-extern void F77_NAME(rs)();
 
 extern double sqrt_eps;
 extern double xlower;

@@ -1,4 +1,4 @@
-### $Id: reStruct.R,v 1.1 2000/07/03 18:22:44 bates Exp $
+### $Id: reStruct.R,v 1.2.2.1 2000/12/02 21:06:08 bates Exp $
 ###
 ###      Methods for the class of random-effects structures.
 ###
@@ -26,7 +26,7 @@
 ###*# Constructor
 
 reStruct <-
-  function(object, pdClass = "pdSymm", REML = FALSE, data = sys.frame(sys.parent()))
+  function(object, pdClass = "pdLogChol", REML = FALSE, data = sys.frame(sys.parent()))
 {
   ## object can be:
   ## 1) a named list of formulas or pdMats with grouping factors as names
@@ -126,6 +126,8 @@ reStruct <-
   ## converting elements in object to pdMat objects
   object <- lapply(object,
 		   function(el, pdClass, data) {
+#                     if (data.class(el) == "pdSymm")
+#                       warning("class pdSymm may cause problems if using analytic gradients")
 		     pdMat(el, pdClass = pdClass, data = data)
 		   }, pdClass = pdClass, data = data)
 
@@ -134,7 +136,8 @@ reStruct <-
     plen <- unlist(lapply(object, function(el) length(coef(el))))
   }
   pC <- unlist(lapply(object, data.class))
-  pC <- match(pC, c("pdSymm", "pdDiag", "pdIdent", "pdCompSymm"), 0) - 1
+  pC <- match(pC, c("pdSymm", "pdDiag", "pdIdent", "pdCompSymm",
+                    "pdLogChol"), 0) - 1
 #  if (any(pC == -1)) {                 # multiple nesting
 #    pC <- -1
 #  }

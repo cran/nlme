@@ -1,4 +1,4 @@
-### $Id: groupedData.R,v 1.1 2000/07/03 18:22:44 bates Exp $
+### $Id: groupedData.R,v 1.2.2.1 2000/12/07 19:12:35 bates Exp $
 ###
 ###           groupedData - data frame with a grouping structure
 ###
@@ -38,14 +38,12 @@ groupedData <-
     stop("Right hand side of first argument must be a conditional expression")
   }
   
-  mCall <- match.call()
+  mCall <- as.list(match.call())[-1]
   if (length(grpForm) == 1) {	
     ## single grouping variable
-    mCall[[1]] <- as.name("nfGroupedData")
-    eval(mCall, parent.frame(1))
+    do.call("nfGroupedData", mCall)
   } else {				        # multiple nesting
-    mCall[[1]] <- as.name("nmGroupedData")
-    eval(mCall, parent.frame(1))
+    do.call("nmGroupedData", mCall)
   }
 }
 
@@ -167,9 +165,8 @@ nmGroupedData <-
     stop("Right hand side of first argument must be a conditional expression")
   }
   if (length(grpForm) == 1) {           # single group
-    mCall <- match.call()
-    mCall[[1]] <- as.name("nfGroupedData")
-    eval(mCall, parent.frame(1))
+    mCall <- match.call()[-1]
+    do.call("nfGroupedData", mCall)
   }
 
   grpNames <- names(grpForm)

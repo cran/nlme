@@ -1,4 +1,4 @@
-% $Id: glsControl.Rd,v 1.5 2000/07/03 18:22:47 bates Exp $
+% $Id: glsControl.Rd,v 1.6 2000/07/07 16:06:48 bates Exp $
 \name{glsControl}
 \title{Control Values for gls Fit}
 \usage{

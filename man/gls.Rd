@@ -1,4 +1,4 @@
-% $Id: gls.Rd,v 1.4 2000/07/03 18:22:47 bates Exp $
+% $Id: gls.Rd,v 1.4.2.1 2000/12/02 21:06:08 bates Exp $
 \name{gls}
 \title{Fit Linear Model Using Generalized Least Squares}
 \usage{
@@ -92,13 +92,11 @@ gls(model, data, correlation, weights, subset, method, na.action,
 }
 \examples{
 data(Ovary)
-%\dontrun{
 # AR(1) errors within each Mare
 fm1 <- gls(follicles ~ sin(2*pi*Time) + cos(2*pi*Time), Ovary,
            correlation = corAR1(form = ~ 1 | Mare))
 # variance increases as a power of the absolute fitted values
 fm2 <- gls(follicles ~ sin(2*pi*Time) + cos(2*pi*Time), Ovary,
            weights = varPower())
-%}
 }
 \keyword{models}

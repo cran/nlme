@@ -1,4 +1,4 @@
-% $Id: lmList.Rd,v 1.4 2000/07/03 18:22:47 bates Exp $
+% $Id: lmList.Rd,v 1.4.2.1 2000/12/02 21:06:08 bates Exp $
 \name{lmList}
 \title{List of lm Objects with a Common Model}
 \usage{
@@ -58,6 +58,7 @@ lmList(object, data, level, na.action, pool)
 \examples{
 data(Orthodont)
 fm1 <- lmList(distance ~ age | Subject, Orthodont)
+summary(fm1)
 }
 \keyword{models}
 

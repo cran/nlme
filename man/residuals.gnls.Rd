@@ -1,4 +1,4 @@
-% $Id: residuals.gnls.Rd,v 1.4 2000/07/03 18:22:48 bates Exp $
+% $Id: residuals.gnls.Rd,v 1.4.2.1 2000/12/02 21:06:08 bates Exp $
 \name{residuals.gnls}
 \title{Extract gnls Residuals}
 \usage{
@@ -30,10 +30,8 @@ residuals(object, type)
 \seealso{\code{\link{gnls}}, \code{\link{fitted.gnls}} }
 \examples{
 data(Soybean)
-%\dontrun{
 fm1 <- gnls(weight ~ SSlogis(Time, Asym, xmid, scal), Soybean,
             weights = varPower())
 fitted(fm1)
-%}
 }
 \keyword{models}

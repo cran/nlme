@@ -1,4 +1,4 @@
-% $Id: nlsList.Rd,v 1.4 2000/07/03 18:22:47 bates Exp $
+% $Id: nlsList.Rd,v 1.4.2.1 2000/12/02 21:06:08 bates Exp $
 \name{nlsList}
 \title{List of nls Objects with a Common Model}
 \usage{
@@ -62,7 +62,7 @@ nlsList(model, data, start, control, level, na.action, pool)
 data(CO2)
 fm1 <- nlsList(uptake ~ SSasympOff(conc, Asym, lrc, c0),
    data = CO2, start = c(Asym = 30, lrc = -4.5, c0 = 52))
-fm1
+summary(fm1)
 }
 \keyword{models}
 

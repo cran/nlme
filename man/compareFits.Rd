@@ -1,4 +1,4 @@
-% $Id: compareFits.Rd,v 1.5 2000/07/03 21:13:47 bates Exp $
+% $Id: compareFits.Rd,v 1.5.2.1 2000/12/02 21:06:08 bates Exp $
 \name{compareFits}
 \title{Compare Fitted Objects}
 \usage{
@@ -39,8 +39,6 @@ compareFits(object1, object2, which)
 data(Orthodont)
 fm1 <- lmList(Orthodont)
 fm2 <- lme(fm1)
-%\dontrun{
 compareFits(coef(fm1), coef(fm2))
-%}
 }
 \keyword{models}

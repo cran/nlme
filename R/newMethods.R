@@ -9,13 +9,13 @@
 ### It is made available under the terms of the GNU General Public
 ### License, version 2, or at your option, any later version,
 ### incorporated herein by reference.
-### 
+###
 ### This program is distributed in the hope that it will be
 ### useful, but WITHOUT ANY WARRANTY; without even the implied
 ### warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
 ### PURPOSE.  See the GNU General Public License for more
 ### details.
-### 
+###
 ### You should have received a copy of the GNU General Public
 ### License along with this program; if not, write to the Free
 ### Software Foundation, Inc., 59 Temple Place - Suite 330, Boston,
@@ -31,14 +31,14 @@ AIC.logLik <-
   -2 * (c(object) - attr(object, "df"))
 }
 
-AIC.lm <- AIC.nls <- 
+AIC.lm <- AIC.nls <-
   ## AIC for various fitted objects
-  function(object, ...) 
+  function(object, ...)
 {
   if((rt <- nargs()) > 1) {
     object <- list(object, ...)
     val <- lapply(object, logLik)
-    val <- 
+    val <-
       as.data.frame(t(sapply(val, function(el) c(attr(el, "df"), AIC(el)))))
     names(val) <- c("df", "AIC")
     row.names(val) <- as.character(match.call()[-1])
@@ -55,14 +55,14 @@ BIC.logLik <-
   -2 * (c(object) - attr(object, "df") * log(attr(object, "nobs"))/2)
 }
 
-BIC.lm <- BIC.nls <- 
+BIC.lm <- BIC.nls <-
   ## BIC for various fitted objects
-  function(object, ...) 
+  function(object, ...)
 {
   if((rt <- nargs()) > 1) {
     object <- list(object, ...)
     val <- lapply(object, logLik)
-    val <- 
+    val <-
       as.data.frame(t(sapply(val, function(el) c(attr(el, "df"), BIC(el)))))
     names(val) <- c("df", "BIC")
     row.names(val) <- as.character(match.call()[-1])
@@ -131,7 +131,7 @@ getGroups.data.frame <-
     form <- grpForm
   } else if (data.class(form) == "list") {
     if (!all(unlist(lapply(form, function(el) inherits(el, "formula"))))) {
-      stop("Form must have all components as formulas") 
+      stop("Form must have all components as formulas")
     }
   } else {
     stop("Form can only be a formula, or a list of formulas")
@@ -157,8 +157,8 @@ getGroups.data.frame <-
     }
   } else {
     nlevel <- as.numeric(level)
-    if (any(aux <- is.na(match(nlevel, 1:ncol(value))))) { 
-      stop(paste("level of ", level[aux]," does not match formula \"", 
+    if (any(aux <- is.na(match(nlevel, 1:ncol(value))))) {
+      stop(paste("level of ", level[aux]," does not match formula \"",
 	       deparse(as.vector(form)), "\""))
     }
   }
@@ -169,7 +169,7 @@ getGroups.data.frame <-
 					     as.character), sep = sep)))
   if (inherits(value[, 1], "ordered")) {
     value <- value[do.call("order", value),]
-    aux <- unique(do.call("paste", c(lapply(as.list(value), 
+    aux <- unique(do.call("paste", c(lapply(as.list(value),
 					    as.character), sep = sep)))
     return(ordered(val, aux))
   } else {
@@ -202,7 +202,7 @@ getGroupsFormula.default <-
   if (!((length(form) == 3) && (form[[1]] == as.name("|")))) {
     ## no conditioning expression
     return(NULL)
-  } 
+  }
   ## val <- list( asOneSidedFormula( form[[ 3 ]] ) )
   val <- splitFormula(asOneSidedFormula(form[[3]]), sep = sep)
   names(val) <- unlist(lapply(val, function(el) deparse(el[[2]])))
@@ -212,7 +212,7 @@ getGroupsFormula.default <-
 #    } else {
 #      val <- val[level]
 #    }
-#  } 
+#  }
   if (asList) as.list(val)
   else as.formula(eval(parse(text = paste("~",  paste(names(val),
                                collapse = sep)))))
@@ -224,8 +224,8 @@ logLik.lm <-
 {
   res <- resid(object)
   p <- object$rank
-  N <- length(res) 
-  if(is.null(w <- object$weights)) {	
+  N <- length(res)
+  if(is.null(w <- object$weights)) {
     w <- rep(1, N)
   } else {
     excl <- w == 0			# eliminating zero weights
@@ -235,7 +235,7 @@ logLik.lm <-
       w <- w[!excl]
     }
   }
-  
+
   N <- N - p * REML
   val <- (sum(log(w)) -N * (log(2 * pi) + 1 - log(N) +
            log(sum(w*res^2))))/2 -
@@ -306,7 +306,7 @@ pairs.compareFits <-
 		 list(rep(dn[[1]], dims[2]), dn[[3]]))
   if(dims[3] > 2) {			# splom
     tt <- list(coefs = coefs,
-	       grp = ordered(rep(dn[[2]], rep(dims[1], dims[2])), 
+	       grp = ordered(rep(dn[[2]], rep(dims[1], dims[2])),
 		   levels  = dn[[2]]))
     args <- list(formula = ~ coefs,
 		  data = tt,
@@ -316,7 +316,7 @@ pairs.compareFits <-
 		    panel.superpose(x, y, subscripts, groups)
 		    aux <- groups[subscripts]
 		    aux <- aux == unique(aux)[1]
-		    segments(x[aux], y[aux], x[!aux], y[!aux], 
+		    segments(x[aux], y[aux], x[!aux], y[!aux],
 			     lty = 2, lwd = 0.5)
 		  })
   } else {
@@ -332,7 +332,7 @@ pairs.compareFits <-
 		    panel.superpose(x, y, subscripts, groups)
 		    aux <- groups[subscripts]
 		    aux <- aux == unique(aux)[1]
-		    segments(x[aux], y[aux], x[!aux], y[!aux], 
+		    segments(x[aux], y[aux], x[!aux], y[!aux],
 			     lty = 2, lwd = 0.5)
 		  }, xlab = dn[[3]][1], ylab = dn[[3]][2])
   }
@@ -340,7 +340,7 @@ pairs.compareFits <-
   args[names(dots)] <- dots
   if(is.logical(key)) {
     if(key && length(unique(tt$grp)) > 1) {
-      args[["key"]] <- 
+      args[["key"]] <-
 	list(points = Rows(trellis.par.get("superpose.symbol"), 1:2),
 	     text = list(levels = levels(tt$grp)), columns = 2)
     }
@@ -351,15 +351,15 @@ pairs.compareFits <-
 }
 
 plot.nls <-
-  function(object, form = resid(., type = "pearson") ~ fitted(.), abline, 
+  function(object, form = resid(., type = "pearson") ~ fitted(.), abline,
 	   id = NULL, idLabels = NULL, idResType = c("pearson", "normalized"),
-           grid, ...)  
+           grid, ...)
   ## Diagnostic plots based on residuals and/or fitted values
 {
   if (!inherits(form, "formula")) {
     stop("\"Form\" must be a formula")
   }
-  ## constructing data 
+  ## constructing data
   allV <- all.vars(asOneFormula(form, id, idLabels))
   allV <- allV[is.na(match(allV,c("T","F","TRUE","FALSE")))]
   if (length(allV) > 0) {
@@ -408,7 +408,7 @@ plot.nls <-
     else if (!is.null(rF) && (xlab == rF)) xlab <- rL
   }
   if (is.null(args$xlab)) args$xlab <- xlab
-      
+
   ## response - need not be present
   respF <- getResponseFormula(form)
   if (!is.null(respF)) {
@@ -447,7 +447,7 @@ plot.nls <-
 
   if (!is.null(id)) {			# identify points in plot
     idResType <- match.arg(idResType)
-    id <- 
+    id <-
       switch(mode(id),
 	     numeric = {
 	       if ((id <= 0) || (id >= 1)) {
@@ -470,7 +470,7 @@ plot.nls <-
       } else if (is.vector(idLabels)) {
 	if (length(idLabels <- unlist(idLabels)) != length(id)) {
 	  stop("\"IdLabels\" of incorrect length")
-	} 
+	}
 	idLabels <- as.character(idLabels)
       } else {
 	stop("\"IdLabels\" can only be a formula or a vector")
@@ -485,7 +485,7 @@ plot.nls <-
     } else {
       abline <- NULL
     }
-  } 
+  }
 
   assign("id", id , where = 1)
   assign("idLabels", idLabels, where = 1)
@@ -496,8 +496,8 @@ plot.nls <-
     if (is.numeric(.y)) {		# xyplot
       plotFun <- "xyplot"
       if (is.null(args$panel)) {
-        args <- c(args, 
-                  panel = list(function(x, y, subscripts, ...) 
+        args <- c(args,
+                  panel = list(function(x, y, subscripts, ...)
 		    {
                       dots <- list(...)
 		      if (grid) panel.grid()
@@ -515,8 +515,8 @@ plot.nls <-
     } else {				# assume factor or character
       plotFun <- "bwplot"
       if (is.null(args$panel)) {
-        args <- c(args, 
-                  panel = list(function(x, y, ...) 
+        args <- c(args,
+                  panel = list(function(x, y, ...)
 		    {
 		      if (grid) panel.grid()
 		      panel.bwplot(x, y, ...)
@@ -529,8 +529,8 @@ plot.nls <-
   } else {
     plotFun <- "histogram"
     if (is.null(args$panel)) {
-      args <- c(args, 
-                panel = list(function(x, y, ...) 
+      args <- c(args,
+                panel = list(function(x, y, ...)
 		  {
 		    if (grid) panel.grid()
 		    panel.histogram(x, y, ...)
@@ -549,7 +549,7 @@ plot.nls <-
   assign("grid", grid, where = 1)
   do.call(plotFun, as.list(args))
 }
-  
+
 pruneLevels.factor <-
   function(object)
 {
@@ -564,7 +564,7 @@ pruneLevels.ordered <-
   levs <- levels(object)
   ordered(as.character(object),
           levels = levs[!is.na(match(levs, as.character(object)))])
-}  
+}
 
 ##*## Plot method for ACF objects
 plot.ACF <-
@@ -631,11 +631,11 @@ plot.augPred <-
       if (sum(aux) > 0) {
 	levs[aux] <- substring(levs[aux], 9)
       }
-      args[["key"]] <- 
+      args[["key"]] <-
 	list(lines = c(Rows(trellis.par.get("superpose.line"), 1:lLev),
 		       list(size = rep(3, lLev))),
 	     text = list(levels = levs), columns = lLev)
-    } 
+    }
   } else {
     args[["key"]] <- key
   }
@@ -658,7 +658,7 @@ plot.compareFits <-
 		   coefs = as.vector(object),
 		   what = ordered(rep(dn[[3]],
 		       rep(dims[1] * dims[2], dims[3])), levels = dn[[3]]),
-		   grp = ordered(rep(rep(dn[[2]], rep(dims[1], dims[2])), 
+		   grp = ordered(rep(rep(dn[[2]], rep(dims[1], dims[2])),
 		       dims[3]), levels = dn[[2]]))
   args <- list(formula = group ~ coefs | what,
 	       data = tt,
@@ -669,7 +669,7 @@ plot.compareFits <-
 	       panel = function(x, y, subscripts, groups, ...)
 	       {
 		 dot.line <- trellis.par.get("dot.line")
-		 panel.abline(h = y, lwd = dot.line$lwd, 
+		 panel.abline(h = y, lwd = dot.line$lwd,
 			      lty = dot.line$lty, col = dot.line$col)
 		 if(!is.null(mark)) {
 		   panel.abline(v = mark[subscripts][1], lty = 2)
@@ -680,7 +680,7 @@ plot.compareFits <-
   args[names(dots)] <- dots
   if(is.logical(key)) {
     if(key && length(unique(tt$grp)) > 1) {
-      args[["key"]] <- 
+      args[["key"]] <-
 	list(points = Rows(trellis.par.get("superpose.symbol"), 1:2),
 	     text = list(levels = levels(tt$grp)), columns = 2)
     }
@@ -715,7 +715,7 @@ plot.Variogram <-
     lineT <- lineT + 1
   }
   if (missing(smooth)) {
-    smooth <- !showModel 
+    smooth <- !showModel
   }
   if (smooth) {
     assign("ltyS", trlLin$lty[lineT])
@@ -730,7 +730,7 @@ plot.Variogram <-
   if (missing(ylim)) {
     ylim <- c(0, max(object$variog))
   }
-  xyplot(variog ~ dist, object, ylim = ylim, 
+  xyplot(variog ~ dist, object, ylim = ylim,
          panel = function(x, y, ...) {
            if (grid) panel.grid()
            panel.xyplot(x, y, type = type, ...)
@@ -771,7 +771,7 @@ print.correlation <-
   invisible(x)
 }
 
-print.logLik <- 
+print.logLik <-
   function(x, ...) print(c(x), ...)
 
 qqnorm.nls <-
@@ -782,7 +782,7 @@ qqnorm.nls <-
   if (!inherits(form, "formula")) {
     stop("\"Form\" must be a formula")
   }
-  ## constructing data 
+  ## constructing data
   allV <- all.vars(asOneFormula(form, id, idLabels))
   allV <- allV[is.na(match(allV,c("T","F","TRUE","FALSE")))]
   if (length(allV) > 0) {
@@ -825,7 +825,7 @@ qqnorm.nls <-
     dform <- paste(dform, deparse(grp[[2]]), sep = "|")
   }
   if (!is.null(id)) {			# identify points in plot
-    id <- 
+    id <-
       switch(mode(id),
              numeric = {
                if ((id <= 0) || (id >= 1)) {
@@ -853,7 +853,7 @@ qqnorm.nls <-
       } else if (is.vector(idLabels)) {
         if (length(idLabels <- unlist(idLabels)) != length(id)) {
           stop("\"IdLabels\" of incorrect length")
-        } 
+        }
         idLabels <- as.character(idLabels)
       } else {
         stop("\"IdLabels\" can only be a formula or a vector")
@@ -900,7 +900,7 @@ Variogram.default <-
   }
   val <- outer(object, object, function(x,y) ((x - y)^2)/2)
   val <- val[lower.tri(val)]
-  val <- data.frame(variog = val, dist = distance)
+  val <- data.frame(variog = val, dist = as.numeric(distance))
   class(val) <- c("Variogram", "data.frame")
   val
 }

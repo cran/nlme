@@ -1,4 +1,4 @@
-% $Id: gsummary.Rd,v 1.4 2000/07/03 18:22:47 bates Exp $
+% $Id: gsummary.Rd,v 1.4.2.1 2000/12/02 21:06:08 bates Exp $
 \name{gsummary}
 \title{Summarize by Groups}
 \usage{
@@ -80,12 +80,11 @@ gsummary(object, FUN, omitGroupingFactor, form, level,
   \code{\link{getGroups}}} 
 
 \examples{
-library(nlme )
-data( Orthodont )
-gsummary( Orthodont )  # default summary by Subject
+data(Orthodont)
+gsummary(Orthodont)  # default summary by Subject
 ## gsummary with invariantsOnly = TRUE and omitGroupingFactor = TRUE
 ## determines whether there are covariates like Sex that are invariant
 ## within the repeated observations on the same Subject.
-gsummary( Orthodont, inv = TRUE, omit = TRUE )
+gsummary(Orthodont, inv = TRUE, omit = TRUE)
 }
 \keyword{ manip }

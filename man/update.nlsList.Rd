@@ -1,4 +1,4 @@
-% $Id: update.nlsList.Rd,v 1.4 2000/07/03 18:22:49 bates Exp $
+% $Id: update.nlsList.Rd,v 1.4.2.1 2000/12/02 21:06:08 bates Exp $
 \name{update.nlsList}
 \title{Update an nlsList Object}
 \usage{
@@ -30,9 +30,7 @@ update(object, model, data, start, control, level, subset, na.action,
 
 \examples{
 data(Soybean)
-%\dontrun{
 fm1 <- nlsList(weight ~ SSlogis(Time, Asym, xmid, scal) | Plot, Soybean)
 fm2 <- update(fm1, start = list(Asym = 23, xmid = 57, scal = 9))
-%}
 }
 \keyword{models}

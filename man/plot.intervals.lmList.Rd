@@ -1,4 +1,4 @@
-% $Id: plot.intervals.lmList.Rd,v 1.4 2000/07/03 18:22:48 bates Exp $
+% $Id: plot.intervals.lmList.Rd,v 1.4.2.1 2000/12/02 21:06:08 bates Exp $
 \name{plot.intervals.lmList}
 \title{Plot lmList Confidence Intervals}
 \usage{
@@ -35,9 +35,9 @@ plot(object, ...)
 \seealso{\code{\link{intervals.lmList}}, \code{\link{lmList}},
   \code{\link{dotplot}}} 
 \examples{
+\dontrun{
 data(Orthodont)
 fm1 <- lmList(distance ~ age | Subject, Orthodont)
-\dontrun{
 plot(intervals(fm1))
 }
 }

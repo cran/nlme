@@ -1,4 +1,4 @@
-% $Id: formula.gls.Rd,v 1.4 2000/07/03 18:22:46 bates Exp $
+% $Id: formula.gls.Rd,v 1.4.2.1 2000/12/02 21:06:08 bates Exp $
 \name{formula.gls}
 \title{Extract gls Object Formula}
 \usage{
@@ -24,10 +24,8 @@ formula(object)
 
 \examples{
 data(Ovary)
-%\dontrun{
 fm1 <- gls(follicles ~ sin(2*pi*Time) + cos(2*pi*Time), Ovary,
            correlation = corAR1(form = ~ 1 | Mare))
 formula(fm1)
-%}
 }
 \keyword{models}

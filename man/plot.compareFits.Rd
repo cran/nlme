@@ -1,4 +1,4 @@
-% $Id: plot.compareFits.Rd,v 1.4 2000/07/03 18:22:48 bates Exp $
+% $Id: plot.compareFits.Rd,v 1.4.2.1 2000/12/02 21:06:08 bates Exp $
 \name{plot.compareFits}
 \title{Plot a compareFits Object}
 \usage{
@@ -36,10 +36,10 @@ plot(object, subset, key, mark, ...)
 \seealso{\code{\link{compareFits}}, \code{\link{pairs.compareFits}},
   \code{\link{dotplot}} }
 \examples{
+\dontrun{
 data(Orthodont)
 fm1 <- lmList(Orthodont)
 fm2 <- lme(Orthodont)
-\dontrun{
 plot(compareFits(coef(fm1), coef(fm2)))
 }
 }

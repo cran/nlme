@@ -1,4 +1,4 @@
-% $Id: asTable.Rd,v 1.4 2000/07/03 18:22:46 bates Exp $
+% $Id: asTable.Rd,v 1.4.2.1 2000/12/02 21:06:08 bates Exp $
 \name{asTable}
 \alias{asTable}
 \alias{asTable.groupedData}
@@ -29,8 +29,7 @@ asTable(object)
 \seealso{\code{\link{groupedData}}, \code{\link{isBalanced}},
   \code{\link{balancedGrouped}}}
 \examples{
-library( nlme )
-data( Orthodont )
-asTable( Orthodont )
+data(Orthodont)
+asTable(Orthodont)
 }
 \keyword{ data }

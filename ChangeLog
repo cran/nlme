@@ -1,6 +1,59 @@
+2000-12-09  Douglas Bates  <bates@stat.wisc.edu>
+
+	* R/lme.R: (Variogram.lme) Coerced n.pairs to numeric and
+	corrected calls to dist.
+
+2000-12-08  Douglas Bates  <bates@stat.wisc.edu>
+
+	* R/lme.R: Changed all calls to dist in lme.R, gls.R and
+	corStruct.R to use the argument "method" rather than "metric".
+
+	* R/pdMat.R: Replaced calls to .Fortran("dbksl", ...) with calls
+	to the R function solve() for R-1.2.0 where the S_compat.c file
+	has been removed.
+
+	* inst/scripts/ch01.R: Added the chapter scripts from
+	"Mixed-Effects Models in S and S-PLUS" to the inst directory.
+
+	* man/formula.nlme.Rd: Modified the examples in this and many
+	other .Rd files to use the Loblolly data and the SSasymp
+	self-starting function.  There were many occasions where the
+	Soybean data was being fit to a default formulation of an nlme
+	model just to get things like a formula.  This fit of the Soybean
+	data is difficult and time consuming and not very illuminating.
+
+2000-11-30  Douglas Bates  <bates@stat.wisc.edu>
+
+	* src/matrix.c: Removed dependency on S_compat.h by replacing
+	calls to dqrdca with the equivalent call to dqrdc2.
+	
 2000-07-24  Saikat DebRoy <saikat@stat.wisc.edu>
 
-	* Changed various uses of do.call to eval 
+	* Changed various uses of do.call to eval.  The reason for doing
+	this is to allow calls to the function calling eval from within
+	another function.  It's the old scoping problem again.
+
+2000-07-07  Saikat DebRoy <saikat@stat.wisc.edu>
+
+	* src/nlme.c, src/nlmefit.c: Added mixed_grad in calls to optif9.
+
+	* src/nlmefit.c : Added handling of pdLogChol objects (pdClass =
+	4) in various functions.
+
+	* src/nlmefit.c (mixed_grad): New function giving analytic
+	gradient for mixed-effects log-likelihood.
+
+	* R/nlme.R (nlme.formula): Added updating of the pdFactor in the
+	PNLS step. 
+
+	* R/reStruct.R: Made pdLogChol the default representation for
+	reStruct objects.
+
+	* src/pdMat.c (logChol_pd): new function.
+
+	* R/pdMat.R: Added back the pdLogChol class and associated
+	methods.
+	
 
 2000-07-03  Douglas Bates  <bates@stat.wisc.edu>
 

@@ -1,4 +1,4 @@
-/* $Id: pdMat.h,v 1.3 2000/07/03 18:22:49 bates Exp $
+/* $Id: pdMat.h,v 1.4 2000/07/07 21:20:35 saikat Exp $
 
    header file for the nlme package
 
@@ -28,5 +28,6 @@
 
 extern void compSymm_pd(double *, longint *, double *);
 extern void matrixLog_pd(double *, longint *, double *);
+extern void logChol_pd(double *, longint *, double *);
 
 #endif /* NLME_BASE_H */

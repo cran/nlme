@@ -1,4 +1,4 @@
-% $Id: print.gls.Rd,v 1.4 2000/07/03 18:22:48 bates Exp $
+% $Id: print.gls.Rd,v 1.4.2.1 2000/12/02 21:06:08 bates Exp $
 \name{print.gls}
 \title{Print a gls Object}
 \usage{
@@ -24,11 +24,9 @@ print(x, ...)
 
 \examples{
 data(Ovary)
-%\dontrun{
 fm1 <- gls(follicles ~ sin(2*pi*Time) + cos(2*pi*Time), Ovary,
            correlation = corAR1(form = ~ 1 | Mare))
 print(fm1)
-%}
 }
 \keyword{models}
 \keyword{print}

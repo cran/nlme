@@ -1,4 +1,4 @@
-### $Id: gls.R,v 1.1 2000/07/03 18:22:44 bates Exp $
+### $Id: gls.R,v 1.2.2.1 2000/12/07 19:12:35 bates Exp $
 ###
 ###  Fit a linear model with correlated errors and/or heteroscedasticity
 ###
@@ -506,11 +506,7 @@ anova.gls <-
   ## Otherwise construct the likelihood ratio and information table
   ## objects in ... may inherit from gls, lm, lmList, and lme (for now)
   ##
-  else {
-      mCall <- match.call()
-      mCall[[1]] <- as.name("anova.lme")
-      eval(mCall, envir = parent.frame(1))
-  }
+  else do.call("anova.lme", as.list(match.call()[-1]))
 }
 
 augPred.gls <-
@@ -832,9 +828,7 @@ plot.gls <-
            grid, ...)
   ## Diagnostic plots based on residuals and/or fitted values
 {
-    mCall <- match.call()
-    mCall[[1]] <- as.name("plot.lme")
-    eval(mCall, envir = parent.frame(1))
+  do.call("plot.lme", as.list(match.call()[-1]))
 }
 
 predict.gls <-
@@ -1052,7 +1046,7 @@ update.gls <-
 	   na.action, control, verbose)
 {
   thisCall <- as.list(match.call())[-(1:2)]
-  nextCall <- object$call
+  nextCall <- as.list(object$call)[-1]
   if (is.na(match("correlation", names(thisCall))) &&
       !is.null(thCor <- object$modelStruct$corStruct)) {
     thisCall$correlation <- thCor
@@ -1062,11 +1056,10 @@ update.gls <-
     thisCall$weights <- thWgt
   }
   if (!is.null(thisCall$model)) {
-    thisCall$model <- update(as.formula(nextCall[["model"]], thisCall$model))
+    thisCall$model <- update(as.formula(nextCall$model), thisCall$model)
   }
   nextCall[names(thisCall)] <- thisCall
-  nextCall[[1]] <- as.name("gls")
-  eval(nextCall, envir = parent.frame())
+  do.call("gls", nextCall)
 }
 
 Variogram.gls <-
@@ -1127,14 +1120,14 @@ Variogram.gls <-
         }
       }
       if (is.null(grps)) {
-        distance <- dist(as.matrix(covar), metric = metric)
+        distance <- dist(as.matrix(covar), method = metric)
       } else {
         covar <- split(covar, grps)
         ## getting rid of 1-observation groups
         covar <- covar[sapply(covar, function(el) nrow(as.matrix(el))) > 1]
         distance <- lapply(covar,
                            function(el, metric) dist(as.matrix(el), metric),
-                           metric = metric)
+                           method = metric)
       }
     }
   }

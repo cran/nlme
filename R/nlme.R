@@ -1,62 +1,66 @@
-### $Id: nlme.R,v 1.1 2000/07/03 18:22:44 bates Exp $
+### $Id: nlme.R,v 1.3.2.2 2000/12/07 19:12:36 bates Exp $
 ###
 ###            Fit a general nonlinear mixed effects model
 ###
-### Copyright 1997, 1999 Jose C. Pinheiro <jcp$research.bell-labs.com>,
+### Copyright 1997, 2001 Jose C. Pinheiro <jcp$research.bell-labs.com>,
 ###                      Douglas M. Bates <bates$stat.wisc.edu>
 ###
 ### This file is part of the nlme library for S and related languages.
 ### It is made available under the terms of the GNU General Public
 ### License, version 2, or at your option, any later version,
 ### incorporated herein by reference.
-### 
+###
 ### This program is distributed in the hope that it will be
 ### useful, but WITHOUT ANY WARRANTY; without even the implied
 ### warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
 ### PURPOSE.  See the GNU General Public License for more
 ### details.
-### 
+###
 ### You should have received a copy of the GNU General Public
 ### License along with this program; if not, write to the Free
 ### Software Foundation, Inc., 59 Temple Place - Suite 330, Boston,
 ### MA 02111-1307, USA
 
-nlme <- 
+nlme <-
   function(model,
 	   data = sys.frame(sys.parent()),
-	   fixed, 
+	   fixed,
 	   random = fixed,
            groups,
-	   start, 
+	   start,
            correlation = NULL,
            weights = NULL,
 	   subset,
-	   method = c("ML", "REML"), 
+	   method = c("ML", "REML"),
 	   na.action = na.fail,
-	   naPattern, 
+	   naPattern,
 	   control = list(),
 	   verbose= FALSE)
 {
   UseMethod("nlme")
 }
 
-nlme.nlsList <- 
+nlme.nlsList <-
   function(model,
 	   data = sys.frame(sys.parent()),
-	   fixed, 
+	   fixed,
 	   random = fixed,
            groups,
-	   start, 
+	   start,
            correlation = NULL,
            weights = NULL,
 	   subset,
-	   method = c("ML", "REML"), 
+	   method = c("ML", "REML"),
 	   na.action = na.fail,
-	   naPattern, 
+	   naPattern,
 	   control = list(),
 	   verbose= FALSE)
 {
-  thisCall <- match.call()
+  ## control parameters
+  controlvals <- nlmeControl()
+  controlvals[names(control)] <- control
+
+  thisCall <- as.list(match.call())[-1]
   ## checking the use of arguments defined within the function
   if (any(!is.na(match(names(thisCall),
 		       c("fixed", "data", "start"))))) {
@@ -69,8 +73,6 @@ nlme.nlsList <-
   last.call <- as.list(attr(model, "call"))[-1]
   last.call$control <- NULL
   last.call$pool <- NULL
-  ## was
-  ## last.call <- last.call[is.na(match(names(last.call), "control"))]
   thisCall[names(last.call)] <- last.call
   thisModel <- last.call[["model"]]
   thisCall[["model"]] <-
@@ -109,7 +111,7 @@ nlme.nlsList <-
   } else {
     if (mode(mData) == "name" || mode(mData) == "call") {
       mData <- eval(mData)
-    } 
+    }
   }
   reSt <- reStruct(random, REML = REML, data = mData)
   names(reSt) <- deparse(groups[[2]])
@@ -128,26 +130,25 @@ nlme.nlsList <-
   }
   thisCall[["start"]] <- start
   thisCall[["random"]] <- reSt
-  thisCall[[1]] <- as.name("nlme.formula")
-  val <- eval(thisCall, parent.frame(1))
+  val <- do.call("nlme.formula", thisCall)
   val$origCall <- match.call()
   val
 }
 
 
-nlme.formula <- 
+nlme.formula <-
   function(model,
 	   data = sys.frame(sys.parent()),
-	   fixed, 
+	   fixed,
 	   random,
            groups,
-	   start, 
+	   start,
            correlation = NULL,
            weights = NULL,
 	   subset,
-	   method = c("ML", "REML"), 
+	   method = c("ML", "REML"),
 	   na.action = na.fail,
-	   naPattern, 
+	   naPattern,
 	   control = list(),
 	   verbose= FALSE)
 {
@@ -218,7 +219,7 @@ nlme.formula <-
       ## will assume single group
       groups <- ~ 1
       names(reSt) <- namGrp <- "1"
-      
+
     }
   } else {
     namGrp <- rev(names(getGroupsFormula(eval(parse(text =
@@ -285,9 +286,9 @@ nlme.formula <-
   }
   names(fixed) <- fnames
 
-  ranForm <- formula(reSt)              # random effects formula(s) 
+  ranForm <- formula(reSt)              # random effects formula(s)
   Q <- length(ranForm)                  # number of groups
-  names(ranForm) <- namGrp 
+  names(ranForm) <- namGrp
   rnames <- vector("list", Q)
   names(rnames) <- namGrp
   for(i in 1:Q) {
@@ -323,7 +324,7 @@ nlme.formula <-
   if (!is.null(correlation)) {
     if(!is.null(corGrpsForm <- getGroupsFormula(correlation, asList = TRUE))) {
       corGrpsForm <- unlist(lapply(corGrpsForm,
-                                   function(el) deparse(el[[2]]))) 
+                                   function(el) deparse(el[[2]])))
       corQ <- length(corGrpsForm)
       lmeGrpsForm <- unlist(lapply(splitFormula(groups),
                         function(el) deparse(el[[2]])))
@@ -337,8 +338,8 @@ nlme.formula <-
           warning(paste("Cannot use smaller level of grouping for",
                         "\"correlation\" than for \"random\". Replacing",
                         "the former with the latter."))
-          attr(correlation, "formula") <- 
-            eval(parse(text = paste("~", 
+          attr(correlation, "formula") <-
+            eval(parse(text = paste("~",
                     deparse(getCovariateFormula(formula(correlation))[[2]]),
                          "|", deparse(groups[[2]]))))
         }
@@ -350,8 +351,8 @@ nlme.formula <-
       }
     } else {
       ## using the same grouping as in random
-      attr(correlation, "formula") <- 
-        eval(parse(text = paste("~", 
+      attr(correlation, "formula") <-
+        eval(parse(text = paste("~",
 		     deparse(getCovariateFormula(formula(correlation))[[2]]),
 		     "|", deparse(groups[[2]]))))
       corQ <- lmeQ <- 1
@@ -360,7 +361,7 @@ nlme.formula <-
     corQ <- lmeQ <- 1
   }
   ## create an nlme structure containing the random effects model and plug-ins
-  nlmeSt <- nlmeStruct(reStruct = reSt, corStruct = correlation, 
+  nlmeSt <- nlmeStruct(reStruct = reSt, corStruct = correlation,
                        varStruct = varFunc(weights))
 
   ## extract a data frame with enough information to evaluate
@@ -376,8 +377,8 @@ nlme.formula <-
   origOrder <- row.names(dataMix)	# preserve the original order
   ##
   ## Evaluating the groups expression
-  ##  
-  grps <- getGroups(dataMix, 
+  ##
+  grps <- getGroups(dataMix,
 	     eval(parse(text = paste("~1", deparse(groups[[2]]), sep = "|"))))
   N <- dim(dataMix)[1]			# number of observations
   ##
@@ -509,7 +510,7 @@ nlme.formula <-
     }
   }
   fLen <- length(fn)
-  if (length(sfix) != fLen) 
+  if (length(sfix) != fLen)
     stop ("starting values for the fixed component are not the correct length")
   names(sfix) <- fn
   ##
@@ -528,15 +529,15 @@ nlme.formula <-
       r <- plist[[nm]]$random[[i]]
       if (data.class(r) == "list") r <- r[[wchRnames[[i]][nm]]]
       if (is.logical(r)) {
-        if (r) { 
+        if (r) {
           if (is.logical(plist[[nm]]$fixed)) {
-            rn[[i]] <- c(rn[[i]], nm) 
+            rn[[i]] <- c(rn[[i]], nm)
           } else {
             rn[[i]] <- c(rn[[i]], paste(nm,"(Intercept)",sep="."))
           }
         }
       } else {
-        rn[[i]] <- c(rn[[i]], paste(nm, colnames(r), sep = ".")) 
+        rn[[i]] <- c(rn[[i]], paste(nm, colnames(r), sep = "."))
       }
     }
   }
@@ -606,7 +607,7 @@ nlme.formula <-
         }
         sran[[i]] <- sran[[i]][levGrps, , drop = FALSE]
       }
-        
+
       if (!is.null(dnamesran[[2]])) {
         if(!all(sort(dnamesran[[2]]) == sort(rn[[i]]))) {
           ## first try to resolve it
@@ -652,7 +653,7 @@ nlme.formula <-
       n1 <- n1 + 1
     } else {
       fmap[[nm]] <- n1:(n1+ncol(f) - 1)
-      n1 <- n1 + ncol(f) 
+      n1 <- n1 + ncol(f)
     }
   }
   rmap <- rmapRel <- vector("list", Q)
@@ -673,7 +674,7 @@ nlme.formula <-
         n1 <- n1 + 1
       } else {
         val <- n1:(n1+ncol(r) - 1)
-        n1 <- n1 + ncol(r) 
+        n1 <- n1 + ncol(r)
       }
       if (is.null(rmap[[i]][[nm]])) {
         rmap[[i]][[nm]] <- val
@@ -714,10 +715,10 @@ nlme.formula <-
                             naPat = naPat,
 			    .parameters = c("bvec", "beta"),
                             finiteDiffGrad = finiteDiffGrad)
-                       
+
   lapply(names(nlList), function(x, y, env) assign(x, y[[x]], envir = env),
          nlList, env = nlEnv)
-                       
+
   modelExpression <- ~{
     pars <- getParsNlme(plist, fmap, rmapRel, bmap, groups, beta, bvec, b, level, N)
     res <- eval(model, data.frame(data, pars))
@@ -768,7 +769,7 @@ nlme.formula <-
   if (!is.null(start$random)) {
     startRan <- 0
     for(i in 1:Q) {
-      w <- w + as.vector((ZX[, startRan + 1:ncols[i], drop = FALSE] * 
+      w <- w + as.vector((ZX[, startRan + 1:ncols[i], drop = FALSE] *
                   t(sran[[i]])[as.character(grpShrunk[, Q-i+1]),,drop = FALSE]) %*%
                          rep(1, ncols[i]))
       startRan <- startRan + ncols[i]
@@ -776,11 +777,11 @@ nlme.formula <-
   }
   ## creating the condensed linear model
   attr(nlmeSt, "conLin") <-
-    list(Xy = array(c(ZX, w), c(NReal, sum(ncols)), 
+    list(Xy = array(c(ZX, w), c(NReal, sum(ncols)),
 	     list(row.names(dataMixShrunk), c(colnames(ZX),
 					deparse(model[[2]])))),
 	 dims = Dims, logLik = 0)
-                
+
   ## additional attributes of nlmeSt
   attr(nlmeSt, "resp") <- yShrunk
   attr(nlmeSt, "model") <- modelResid
@@ -813,15 +814,15 @@ nlme.formula <-
       attr(nlmeSt, "conLin") <- MEdecomp(oldConLin)
     }
     oldPars <- coef(nlmeSt)
-    aNlm <- optim(fn = function(nlmePars) -logLik(nlmeSt, nlmePars),
-                  par = c(coef(nlmeSt)), hessian = TRUE,
-                  method = "BFGS",
-                  control = list(trace = controlvals$msVerbose,
-                      reltol = if(numIter == 1) controlvals$msTol
-                               else 100*.Machine$double.eps,
-                      maxit = if(numIter < 10) 10 else controlvals$msMaxIter))
-    aConv <- coef(nlmeSt) <- aNlm$par
-    convIter <- aNlm$counts[2]
+    aNlm <- nlm(f = function(nlmePars) -logLik(nlmeSt, nlmePars),
+                p = c(coef(nlmeSt)), hessian = TRUE,
+                print.level = controlvals$msVerbose,
+                gradtol = if(numIter == 1) controlvals$msTol
+                          else 100*.Machine$double.eps,
+                iterlim = if(numIter < 10) 10 else controlvals$msMaxIter,
+                check.analyticals = FALSE)
+    aConv <- coef(nlmeSt) <- aNlm$estimate
+    convIter <- aNlm$iterations
     nlmeFit <- attr(nlmeSt, "lmeFit") <- MEestimate(nlmeSt, grpShrunk)
     if (verbose) {
       cat("\n**Iteration", numIter)
@@ -844,11 +845,12 @@ nlme.formula <-
     } else {
       vW <- varWeights(nlmeSt$varStruct)
     }
-    work <- .C("fit_nlme", 
+    work <- .C("fit_nlme",
 	       thetaPNLS = as.double(c(as.vector(unlist(sran)), sfix)),
-               as.double(pdFactor(nlmeSt$reStruct)),
+               pdFactor = as.double(pdFactor(nlmeSt$reStruct)),
                as.integer(unlist(rev(grpShrunk))),
 	       as.integer(unlist(Dims)),
+               as.integer(attr(nlmeSt$reStruct, "settings"))[-(1:3)],
 	       as.double(cF),
 	       as.double(vW),
                as.integer(unlist(cD)),
@@ -859,14 +861,15 @@ nlme.formula <-
                nlModel,
 	       NAOK = TRUE)
     if (work$settings[4] == 1) {
-      convResult <- 2                 
+      convResult <- 2
       if (controlvals$returnObject) {
         warning("Step halving factor reduced below minimum in PNLS step")
       } else {
         stop("Step halving factor reduced below minimum in PNLS step")
       }
-#      break
     }
+    dim(work$pdFactor) <- dim(pdMatrix(nlmeSt$reStruct[[1]]))
+    matrix(nlmeSt$reStruct[[1]]) <- crossprod(work$pdFactor)
     oldPars <- c(sfix, oldPars)
     for(i in 1:Q) sran[[i]][] <- work$thetaPNLS[(bmap[i]+1):bmap[i+1]]
     sfix[] <- work$thetaPNLS[nPars + 1 - (fLen:1)]
@@ -881,7 +884,7 @@ nlme.formula <-
     w <- w + as.vector(ZX[, rLen + (1:fLen), drop = FALSE] %*% sfix)
     startRan <- 0
     for(i in 1:Q) {
-      w <- w + as.vector((ZX[, startRan + 1:ncols[i], drop = FALSE] * 
+      w <- w + as.vector((ZX[, startRan + 1:ncols[i], drop = FALSE] *
                  t(sran[[i]])[as.character(grpShrunk[, Q-i+1]),,drop = FALSE]) %*%
                          rep(1, ncols[i]))
       startRan <- startRan + ncols[i]
@@ -937,7 +940,7 @@ nlme.formula <-
   fixDF <- getFixDF(ZX[, rLen + (1:fLen), drop = FALSE],
                     grpShrunk, attr(nlmeSt, "conLin")$dims$ngrps, fixAssign)
 
-  attr(fixDF, "varFixFact") <- nlmeFit$sigma * nlmeFit$varFix 
+  attr(fixDF, "varFixFact") <- nlmeFit$sigma * nlmeFit$varFix
   varFix <- crossprod(nlmeFit$sigma * nlmeFit$varFix)
   dimnames(varFix) <- list(fn, fn)
   ##
@@ -951,13 +954,13 @@ nlme.formula <-
   Fitted <- yShrunk[revOrderShrunk] - Resid
   grpShrunk <- grpShrunk[revOrderShrunk, , drop = FALSE]
   attr(Resid, "std") <- nlmeFit$sigma/(varWeights(nlmeSt)[revOrderShrunk])
-  ## inverting back reStruct 
+  ## inverting back reStruct
   nlmeSt$reStruct <- solve(nlmeSt$reStruct)
   ## saving part of dims
   dims <- attr(nlmeSt, "conLin")$dims[c("N", "Q", "qvec", "ngrps", "ncol")]
-  ## getting the approximate var-cov of the parameters 
+  ## getting the approximate var-cov of the parameters
   if (controlvals$apVar) {
-    apVar <- lmeApVar(nlmeSt, nlmeFit$sigma, 
+    apVar <- lmeApVar(nlmeSt, nlmeFit$sigma,
 		      .relStep = controlvals[[".relStep"]],
                       minAbsPar = controlvals[["minAbsParApVar"]],
      		      natural = controlvals[["natural"]])
@@ -998,9 +1001,9 @@ nlme.formula <-
   class(estOut) <- c("nlme","lme")
   estOut
 }
-	      
+
 ###
-### function used to calculate the parameters from 
+### function used to calculate the parameters from
 ### the fixed and random effects
 ###
 
@@ -1045,18 +1048,18 @@ getParsNlme <-
       }
     }
   }
-  pars  
+  pars
 }
-  
+
 ###
 ###  Methods for standard generics
 ###
 
 formula.nlme <- function(object) eval(object$call[["model"]])
 
-predict.nlme <- 
+predict.nlme <-
   function(object, newdata, level = Q, asList = FALSE, na.action = na.fail,
-	   naPattern = NULL)  
+	   naPattern = NULL)
 {
   ##
   ## method for predict() designed for objects inheriting from class nlme
@@ -1086,7 +1089,7 @@ predict.nlme <-
   }
 
   mfArgs <- list(formula = asOneFormula(formula(object),
-                   mCall$fixed, formula(reSt), naPattern, 
+                   mCall$fixed, formula(reSt), naPattern,
                    omit = c(names(object$plist), "pi",
                      deparse(getResponseFormula(object)[[2]]))),
                  data = newdata, na.action = na.action)
@@ -1097,7 +1100,7 @@ predict.nlme <-
   if (maxQ > 0) {
     ## sort the model.frame by groups and get the matrices and parameters
     ## used in the estimation procedures
-    grps <- getGroups(newdata, 
+    grps <- getGroups(newdata,
 	      eval(parse(text = paste("~1", deparse(groups[[2]]), sep = "|"))))
     ## ordering data by groups
     if (inherits(grps, "factor")) {	# single level
@@ -1112,7 +1115,7 @@ predict.nlme <-
       row.names(grps) <- origOrder
       names(grps) <- names(oGrps) <- as.character(deparse((groups[[2]])))
     } else {
-      grps <- oGrps <- 
+      grps <- oGrps <-
 	do.call("data.frame", lapply(grps[whichRows, ], pruneLevels))
       ## checking for missing groups
       if (any(naGrps <- is.na(grps))) {
@@ -1265,7 +1268,7 @@ predict.nlme <-
       val[naGrps] <- NA
     }
   }
-  ## putting back in original order 
+  ## putting back in original order
   if (maxQ > 1) {                      # making groups unique
     for(i in 2:maxQ) {
       oGrps[, i] <- paste(as.character(oGrps[,i-1]), as.character(oGrps[,i]),
@@ -1293,7 +1296,7 @@ predict.nlme <-
   val
 }
 
-update.nlme <- 
+update.nlme <-
   function(object, model, data, fixed, random, groups, start, correlation,
            weights, subset, method, na.action, naPattern, control, verbose)
 {
@@ -1301,9 +1304,11 @@ update.nlme <-
   if (!is.null(thisCall$start) && is.numeric(start)) {
     thisCall$start <- list(fixed = start)
   }
-  if (is.null(nextCall <- object$origCall) ||
-      !is.null(thisCall$fixed) || is.null(thisCall$random)) {
-    nextCall <- object$call
+  if (!is.null(nextCall <- object$origCall) &&
+      (is.null(thisCall$fixed) && !is.null(thisCall$random))) {
+    nextCall <- as.list(nextCall)[-1]
+  } else {
+    nextCall <- as.list(object$call)[-1]
     if (is.null(thisCall$fixed)) {        # no changes in fixef model
       if (is.null(thisCall$start)) {
         thisCall$start <- list(fixed = fixef(object))
@@ -1333,8 +1338,7 @@ update.nlme <-
     thisCall$weights <- thWgt
   }
   nextCall[names(thisCall)] <- thisCall
-  nextCall[[1]] <- as.name("nlme")
-  eval(nextCall, parent.frame(1))
+  do.call("nlme", nextCall)
 }
 
 ###*### nlmeStruct - a model structure for nlme fits
@@ -1376,7 +1380,7 @@ residuals.nlmeStruct <-
   oLev <- get("level", envir = loc)
   on.exit(assign("level", oLev, envir = loc))
   dn <- c("fixed", rev(names(object$reStruct)))[level + 1]
-  val <- array(0, c(attr(object, "NReal"), length(level)), 
+  val <- array(0, c(attr(object, "NReal"), length(level)),
        list(dimnames(conLin$Xy)[[1]], dn))
   for(i in 1:length(level)) {
     assign("level", level[i], envir = loc, immediate = TRUE)
@@ -1408,4 +1412,4 @@ nlmeControl <-
 ### mode:S
 ### S-keep-dump-files: t
 ### End:
- 
+

@@ -1,17 +1,17 @@
 
 R : Copyright 2000, The R Development Core Team
-Version 1.1.0  (June 15, 2000)
+Version 1.2.0 Under development (unstable) (2000-12-05)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
-Type	"?license" or "?licence" for distribution details.
+Type `license()' or `licence()' for distribution details.
 
 R is a collaborative project with many contributors.
-Type	"?contributors" for a list.
+Type `contributors()' for more information.
 
-Type	"demo()" for some demos, "help()" for on-line help, or
-    	"help.start()" for a HTML browser interface to help.
-Type	"q()" to quit R.
+Type `demo()' for some demos, `help()' for on-line help, or
+`help.start()' for a HTML browser interface to help.
+Type `q()' to quit R.
 
 > library(nlme)
 Loading required package: nls 
@@ -64,7 +64,7 @@ Linear mixed-effects model fit by REML
 
 Random effects:
  Formula: ~age | Subject
- Structure: General positive-definite
+ Structure: General positive-definite, Log-Cholesky parametrization
             StdDev   Corr  
 (Intercept) 8.081077 (Intr)
 age         1.680717 0.641 
@@ -72,4 +72,4 @@ Residual    0.659889
 
 Number of Observations: 234
 Number of Groups: 26 
-> 
+> q()

@@ -1,4 +1,4 @@
-## $Id: newFunc.R,v 1.1 2000/07/03 18:22:44 bates Exp $
+## $Id: newFunc.R,v 1.2.2.2 2000/12/07 19:12:36 bates Exp $
 ###
 ###       Functions that are used in several parts of the nlme library
 ###                 but do not belong to any specific part
@@ -376,6 +376,18 @@ quinModel <-
      NAOK = T, PACKAGE = "nlme")$resp
 }
 
+LDEsysMat <-
+    function(pars, incidence)
+{
+    tt <- incidence[, "To"]
+    ff <- incidence[, "From"]
+    pp <- pars[incidence[, "Par"]]
+    n <- max(ff, tt)
+    val <- array(double(n * n), c(n, n))
+    diag(val) <- - tapply(pp, ff, sum)
+    val[incidence[tt > 0, c("To", "From"), drop = FALSE]] <- pp[tt > 0]
+    val
+}
 
 ##
 ## fake version of xyplot using coplot just so some of the plots from the
@@ -383,12 +395,9 @@ quinModel <-
 
 xyplot <- function (formula, data = list(), groups = NULL, ..., subset = TRUE)
 {
-  args <- match.call()
-  args <- c(args[c(1, match(c("formula", "data", "xlab", "ylab", "panel"),
-                     names(args), 0))])
-  args[["show.given"]] <- FALSE
-  args[[1]] <- as.name("coplot")
-  eval(args, parent.frame(1))
+  args <- as.list(match.call())[-1]
+  do.call("coplot", c(args[match(c("formula", "data", "xlab", "ylab", "panel"),
+                     names(args), 0)], list(show.given = FALSE) ) )
 }
 
 ## Local Variables:

@@ -1,4 +1,4 @@
-% $Id: nlme.Rd,v 1.5 2000/07/03 18:22:47 bates Exp $
+% $Id: nlme.Rd,v 1.5.2.2 2000/12/07 21:54:10 bates Exp $
 \name{nlme}
 \title{Nonlinear Mixed-Effects Models}
 \usage{
@@ -165,16 +165,12 @@ nlme(model, data, fixed, random, groups, start, correlation, weights,
   \code{\link{corClasses}}, \code{\link{varClasses}}
 }
 \examples{
-data(Soybean)
-%\dontrun{
-## all parameters as fixed and random effects
-fm1 <- nlme(weight ~ SSlogis(Time, Asym, xmid, scal), data = Soybean,
-            fixed = Asym + xmid + scal ~ 1, start = c(18, 52, 7.5),
-            control = list(nlmStepMax = 1.0))
-## only Asym and xmid as random, with a diagonal covariance 
-fm2 <- nlme(weight ~ SSlogis(Time, Asym, xmid, scal), data = Soybean,
-            fixed = Asym + xmid + scal ~ 1, random = pdDiag(Asym + xmid ~ 1),
-            start = c(18, 52, 7.5))
-%}
+data(Loblolly)
+fm1 <- nlme(height ~ SSasymp(age, Asym, R0, lrc),
+            data = Loblolly,
+            fixed = Asym + R0 + lrc ~ 1,
+            random = Asym ~ 1,
+            start = c(Asym = 103, R0 = -8.5, lrc = -3.3))
+summary(fm1)
 }
 \keyword{models}

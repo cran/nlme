@@ -1,4 +1,4 @@
-### $Id: nlsList.R,v 1.1 2000/07/03 18:22:44 bates Exp $
+### $Id: nlsList.R,v 1.2.2.1 2000/12/07 19:12:36 bates Exp $
 ###
 ###                  Create a list of nls objects
 ###
@@ -30,7 +30,7 @@ nlsList.selfStart <-
   function (model, data, start, control, level, subset, na.action = na.fail, 
             pool = TRUE) 
 {
-  mCall <- match.call()
+  mCall <- as.list(match.call())[-1]
   if (!inherits(data, "groupedData")) {
     stop("second argument must be a groupedData object")
   }
@@ -46,8 +46,7 @@ nlsList.selfStart <-
   form <- formula(data)
   form[[3]][[2]] <- m
   mCall$model <- form
-  mCall[[1]] <- as.name("nlsList.formula")
-  eval(mCall, parent.frame(1))
+  do.call("nlsList.formula", mCall)
 }
 
 nlsList.formula <-
@@ -166,10 +165,9 @@ update.nlsList <-
   if (!missing(model)) {
     names(thisCall)[match(names(thisCall), "model")] <- "object"
   }
-  nextCall <- attr(object, "call")
+  nextCall <- as.list(attr(object, "call")[-1])
   nextCall[names(thisCall)] <- thisCall
-  nextCall[[1]] <- as.name("nlsList")
-  eval(nextCall, parent.frame(1))
+  do.call("nlsList", nextCall)
 }
 
 ### Local variables:

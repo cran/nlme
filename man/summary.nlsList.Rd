@@ -1,4 +1,4 @@
-% $Id: summary.nlsList.Rd,v 1.4 2000/07/03 18:22:48 bates Exp $
+% $Id: summary.nlsList.Rd,v 1.4.2.2 2000/12/07 21:54:10 bates Exp $
 \name{summary.nlsList}
 \title{Summarize an nlsList Object}
 \usage{
@@ -75,10 +75,8 @@ summary(object, pool)
 \seealso{\code{\link{nlsList}}, \code{\link{summary.nls}}}
 
 \examples{
-data(Soybean)
-%\dontrun{
-fm1 <- nlsList(weight ~ SSlogis(Time, Asym, xmid, scal) | Plot, Soybean)
+data(Loblolly)
+fm1 <- nlsList(SSasymp, Loblolly)
 summary(fm1)
-%}
 }
 \keyword{models}

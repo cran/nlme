@@ -1,4 +1,4 @@
-% $Id: Variogram.lme.Rd,v 1.4 2000/07/03 18:22:46 bates Exp $
+% $Id: Variogram.lme.Rd,v 1.4.2.1 2000/12/02 21:06:08 bates Exp $
 \name{Variogram.lme}
 \title{Calculate Semi-variogram for Residuals from an lme Object}
 \usage{
@@ -106,8 +106,8 @@ Variogram(object, distance, form, resType, data, na.action, maxDist,
   \code{\link{Variogram.gls}}, \code{\link{plot.Variogram}}}
 \examples{
 data(BodyWeight)
-fm1 <- lme(weight ~ Time * Diet, BodyWeight, ~ Time | Rat)
 \dontrun{
+fm1 <- lme(weight ~ Time * Diet, BodyWeight, ~ Time | Rat)
 Variogram(fm1, form = ~ Time | Rat, nint = 10, robust = TRUE)
 }
 }

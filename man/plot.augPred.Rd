@@ -1,4 +1,4 @@
-% $Id: plot.augPred.Rd,v 1.4 2000/07/03 18:22:48 bates Exp $
+% $Id: plot.augPred.Rd,v 1.4.2.1 2000/12/02 21:06:08 bates Exp $
 \name{plot.augPred}
 \title{Plot an augPred Object}
 \usage{
@@ -35,9 +35,9 @@ plot(x, key, grid, ...)
 \seealso{\code{\link{augPred}}, \code{\link{xyplot}}}
 
 \examples{
+\dontrun{
 data(Orthodont)
 fm1 <- lme(Orthodont)
-\dontrun{
 plot(augPred(fm1, level = 0:1, length.out = 2))
 }
 }

@@ -1,9 +1,9 @@
-/* $Id: nlmefit.c,v 1.5 2000/07/03 21:13:47 bates Exp $ 
+/* $Id: nlmefit.c,v 1.7.2.1 2000/12/02 21:06:08 bates Exp $ 
 
    Routines for calculation of the log-likelihood or restricted
    log-likelihood with mixed-effects models.
 
-   Copyright 1997, 1999 Douglas M. Bates <bates@stat.wisc.edu>,
+   Copyright 1997, 2001 Douglas M. Bates <bates@stat.wisc.edu>,
                         Jose C. Pinheiro <jcp@research.bell-labs.com>,
 			Saikat DebRoy <saikat@stat.wisc.edu>
 
@@ -28,7 +28,6 @@
 #include "nlmefit.h"
 #include "matrix.h"
 #include "pdMat.h"
-#include "R_ext/Arith.h"
 
 #ifndef SPLUS_VERSION
 #ifdef S_VERSION
@@ -85,13 +84,13 @@ dimFree(dimPTR this)
   Free(this);
 }
 
-static size_t
+size_t
 count_DmHalf_pars( dimPTR dd, longint *pdClass )
 {
   int i, result;
   for ( i = 0, result = 0; i < dd->Q; i++ ) {
     switch( pdClass[ i ] ) {
-    case 0: result += ( (dd->q)[ i ] * ( (dd->q)[ i ] + 1 ) ) / 2;
+    case 0: case 4: result += ( (dd->q)[ i ] * ( (dd->q)[ i ] + 1 ) ) / 2;
       break;
     case 1: result += (dd->q)[ i ];
       break;
@@ -103,7 +102,7 @@ count_DmHalf_pars( dimPTR dd, longint *pdClass )
   return (size_t) result;
 }
   
-static double *
+double *
 generate_DmHalf( double *DmHalf, dimPTR dd, longint *pdClass, double *pars )
 {				/* Expand parameters to DmHalf arrays */
   int i, j, q, Q = dd->Q; double diag;
@@ -129,6 +128,11 @@ generate_DmHalf( double *DmHalf, dimPTR dd, longint *pdClass, double *pars )
     case 3:			/* compound symmetry */
       compSymm_pd( DmHalf + (dd->DmOff)[ i ], dd->q + i, pars );
       pars += 2;
+      break;
+    case 4:                 /* unstructured with log-cholesky
+			       parametrization */
+      logChol_pd(DmHalf + (dd->DmOff)[ i ], dd->q + i, pars );
+      pars += (q * (q + 1))/2;
       break;
     }
   }
@@ -253,6 +257,13 @@ void				/* return the decomposition for ZXy */
 mixed_decomp(double *ZXy, longint *pdims)
 {
   dimPTR dd = dims(pdims);	/* Create a dimensions structure */
+  internal_decomp(dd, ZXy);
+  dimFree(dd);
+}
+
+void
+internal_decomp(dimPTR dd, double *ZXy)
+{				/* decompose ZXy and re-write the dims */
   longint i, j, Qp2 = (dd->Q) + 2;
   double *dc = Calloc((size_t) ((dd->Srows) * (dd->ZXcols)), double);
 
@@ -267,8 +278,17 @@ mixed_decomp(double *ZXy, longint *pdims)
     }
     Memcpy(ZXy, dc, dd->Srows * dd->ZXcols);
   }
-  Free(dc); dimFree(dd);
+  for (i = 0; i < Qp2; i++) {	/* re-write the offsets and lengths */
+    for (j = 0; j < (dd->ngrp)[i]; j++) {
+      (dd->ZXoff)[i][j] = (dd->DecOff)[i][j];
+      (dd->ZXlen)[i][j] = (dd->DecLen)[i][j];
+    }
+  }
+  dd->ZXrows = dd->Srows;	/* and the total number of rows */
+  Free(dc);
 }
+
+
 
 double			/* evaluate the log-likelihood pieces */
 internal_loglik(dimPTR dd, double *ZXy, double *DmHalf, longint *RML,
@@ -290,7 +310,7 @@ internal_loglik(dimPTR dd, double *ZXy, double *DmHalf, longint *RML,
       { 
 	PROBLEM "Singular precision matrix in level %ld, block %ld",
 	  (long int) (i - (dd->Q)), j + 1L  WARNING(NULL_ENTRY);
-	return -DOUBLE_XMAX;
+	return -DBL_MAX;
       }
     }
   }
@@ -421,6 +441,122 @@ finite_diff_Hess( double (*func)(double*), double *pars, int npar,
   return;
 }
 
+void				/* For optif0 or optif9 */
+mixed_fcn(longint n, double *pars, double *g, void *state)
+{
+  statePTR st = (statePTR) state;
+  double *zxcopy = Calloc(st->dd->ZXrows * st->dd->ZXcols, double),
+    *Delta = Calloc(st->dd->DmOff[st->dd->Q], double);
+  
+  Memcpy(zxcopy, st->ZXy, st->dd->ZXrows * st->dd->ZXcols);
+  *g = -internal_loglik(st->dd, zxcopy,
+			generate_DmHalf(Delta, st->dd, st->pdClass, pars),
+			st->RML, DNULLP, DNULLP);
+  Free(Delta); Free(zxcopy);
+}
+
+void				/* For optif0 or optif9 */
+mixed_grad(longint n, double *pars, double *g, void *state)
+{
+    statePTR st = (statePTR) state;
+    double *zxcopy = Calloc(st->dd->ZXrows * st->dd->ZXcols, double),
+	*Delta = Calloc(st->dd->DmOff[st->dd->Q], double),
+	*dc = Calloc((size_t) ((st->dd->Srows) * (st->dd->ZXcols)), double),
+	*DmHalf, sigmainv, logLik, *pt, *res;
+    double  sqrtDF = sqrt((double) (st->dd->N -
+				    *(st->RML)*(st->dd->ncol[st->dd->Q])));
+    longint i, j, k, offset;
+
+    DmHalf = generate_DmHalf(Delta, st->dd, st->pdClass, pars),
+    Memcpy(zxcopy, st->ZXy, st->dd->ZXrows * st->dd->ZXcols);
+    logLik = -internal_loglik(st->dd, zxcopy, DmHalf, st->RML, dc,
+			      DNULLP);
+    internal_estimate(st->dd, dc);
+    internal_R_invert(st->dd, dc);
+    sigmainv = *(dc + (size_t)((st->dd->Srows) * (st->dd->ZXcols)) - 1)/sqrtDF;
+    sigmainv = 1.0/((sigmainv < 0.0) ? - sigmainv : sigmainv);
+    offset = ((st->dd->ZXcols) - 1L) * (st->dd->Srows);
+    for (i = 0L; i < (st->dd->Q); i++) {
+	longint ncol = (st->dd->q)[i], 
+	    nright = (st->dd->nrot)[i] - (st->dd->nrot)[(st->dd->Q) - ( (*(st->RML)) ? 0 : 1 )];
+	longint nrow = (ncol + nright + 1L) * (st->dd->ngrp)[i];
+	QRptr qq;
+	pt = res = Calloc((size_t) (ncol * nrow), double);
+	for (j = 0L; j < (st->dd->ngrp)[i]; j++) {
+	    copy_trans(pt, nrow, dc + (st->dd->SToff)[i][j], st->dd->Srows,
+		       ncol, ncol + nright);
+	    pt += ncol + nright;
+	    scale_mat(pt++, nrow, sigmainv, dc + offset + (st->dd->SToff)[i][j],
+		      1L, 1L, ncol);
+	}
+	offset -= (st->dd->Srows) * ncol;
+	qq = QR(res, nrow, nrow, ncol);
+	QRstoreR(qq, res, ncol);
+	QRfree(qq);
+	switch (st->pdClass[i]) {
+	case 0:			/* unstructured with matrix-logarithm
+				   parametrization */
+	    PROBLEM "analytic gradient is not available with matrix "
+		"logarithm representation.\n Try the log cholesky "
+		"representation" RECOVER(NULL_ENTRY);
+	    break;
+	case 1:			/* diagonal */
+	    for (j = 0; j < ncol; j++) {
+		double tmp = DmHalf[ (st->dd->DmOff)[i] + j * (ncol + 1)];
+		*g++ = st->dd->ngrp[i] - tmp*tmp*d_sum_sqr(res + j * ncol, j + 1L);
+	    }
+	    break;
+	case 2:			/* multiple of identity */
+	{
+	    double tmp = 0.0;
+	    for(j = 0; j < ncol; j++) {
+		tmp += d_sum_sqr( res + j * nrow, j + 1L );
+	    }
+	    *g = tmp;
+	    tmp = DmHalf[ (st->dd->DmOff)[i] + j * (ncol + 1)];
+	    *g *= tmp * tmp;
+	    *g = ncol*st->dd->ngrp[i] - *g;
+	    g++;
+	    break;
+	}
+	case 3:			/* compound symmetry */
+	{
+	    PROBLEM "analytic gradient is not available with compound symmetry "
+		"pdMat class" RECOVER(NULL_ENTRY);
+	    break;
+	}
+	case 4:			/* unstructured with log-cholesky
+				   parametrization */
+	{
+	    int i1, j1, k1, k2;
+	    double *col_j = Calloc(ncol, double);
+	    for (j1 = 0; j1 < ncol; j1++) {
+		for(i1 = 0; i1 < ncol; i1++)
+		    col_j[i1] = d_dot_prod(res + i1*ncol, 1, res +
+					   j1*ncol, 1, (j < k1) ? j : k1);
+		for (i1 = 0; i1 <= j1; i1++) {
+		    double sum;
+		    sum = 0.0;
+		    
+		    for (k1 = i1; k1 < ncol; k1++) {
+			sum += DmHalf[(st->dd->DmOff)[i] + i1*ncol + k1] *
+			    col_j[k1];
+		    }
+		    if (i1 == j1)
+			*g++ = st->dd->ngrp[i] -
+			    sum*DmHalf[(st->dd->DmOff)[i] + i1*(ncol + 1)];
+		    else
+			*g++ = -sum;
+		}
+	    }
+	    break;
+	}
+	}
+	Free(res);
+    }
+    Free(dc); Free(Delta); Free(zxcopy);
+}
+
 				/* In gcc we can use nested function
 				   definitions but not for other compilers */
 static double *zxcopy, *zxcopy2, *Delta, *values;
@@ -488,22 +624,20 @@ mixed_estimate(double *ZXy, longint *pdims, double *DmHalf, longint *RML,
   dimFree(dd);
 }
 
-void				/* EM iterations for mixed-effects models */
-mixed_EM(double *ZXy, longint *pdims, double *DmHalf, longint *nIter,
-	 longint *pdClass, longint *RML, double *logLik, double *Ra,
-	 double *lRSS)
+void 				/* EM iterations for mixed-effects models */ 
+internal_EM(dimPTR dd, double *ZXy, double *DmHalf, int nn,
+	    longint *pdClass, longint *RML, double *logLik, double *Ra,
+	    double *lRSS)
 {
-  dimPTR dd = dims(pdims);
   double sigmainv, *res, *pt, 
     *dc = Calloc((size_t) ((dd->Srows) * (dd->ZXcols)), double),
     *zxcopy = Calloc((size_t) ((dd->ZXrows) * (dd->ZXcols)), double);
   double  sqrtDF = sqrt((double) (dd->N - *RML * (dd->ncol[dd->Q])));
-  longint i, j, k, offset, nn = *nIter, zero;
+  longint i, j, k, offset, zero;
 
-  copy_mat(zxcopy, dd->ZXrows, ZXy, dd->ZXrows, dd->ZXrows, dd->ZXcols);
   while (nn-- > 0) {
-    copy_mat(ZXy, dd->ZXrows, zxcopy, dd->ZXrows, dd->ZXrows, dd->ZXcols);
-    *logLik = internal_loglik(dd, ZXy, DmHalf, RML, dc, DNULLP);
+    copy_mat(zxcopy, dd->ZXrows, ZXy, dd->ZXrows, dd->ZXrows, dd->ZXcols);
+    *logLik = internal_loglik(dd, zxcopy, DmHalf, RML, dc, DNULLP);
     internal_estimate( dd, dc );
     internal_R_invert( dd, dc );
     sigmainv = *(dc + (size_t)((dd->Srows) * (dd->ZXcols)) - 1)/sqrtDF;
@@ -529,7 +663,7 @@ mixed_EM(double *ZXy, longint *pdims, double *DmHalf, longint *nIter,
       scale_mat(res, nrow, sqrt(1.0/((dd->ngrp)[i])),
 		Ra + (dd->DmOff)[i], ncol, ncol, ncol);
       switch (pdClass[i]) {
-      case 0:			/* default: unstructured */
+      case 0: case 4:			/* default: unstructured */
 	invert_upper(res, nrow, ncol);
 	copy_trans(DmHalf + (dd->DmOff)[i], ncol, res, nrow, ncol, ncol);
 	break;
@@ -550,7 +684,7 @@ mixed_EM(double *ZXy, longint *pdims, double *DmHalf, longint *nIter,
 	    DmHalf[(dd->DmOff)[i] + j * (ncol + 1)] = aux;
 	  }
 	}
-      break;
+	break;
       case 3:			/* compound symmetry */
 	{
 	  double trA = 0.0, trAJ = 0.0, *auxRes = res;
@@ -582,14 +716,25 @@ mixed_EM(double *ZXy, longint *pdims, double *DmHalf, longint *nIter,
 	  F77_CALL(chol)(auxRes, &ncol, res, &zero, &zero, &l);
 #endif /* R_S_H */
 	}
-      break;
+	break;
       }
       Free(res);
     }
   }
-  copy_mat(ZXy, dd->ZXrows, zxcopy, dd->ZXrows, dd->ZXrows, dd->ZXcols);
-  *logLik = internal_loglik(dd, ZXy, DmHalf, RML, dc, lRSS);
-  dimFree(dd); Free(dc); Free(zxcopy);
+  copy_mat(zxcopy, dd->ZXrows, ZXy, dd->ZXrows, dd->ZXrows, dd->ZXcols);
+  *logLik = internal_loglik(dd, zxcopy, DmHalf, RML, dc, lRSS);
+  Free(dc); Free(zxcopy);
+}
+
+void
+mixed_EM(double *ZXy, longint *pdims, double *DmHalf, longint *nIter,
+	 longint *pdClass, longint *RML, double *logLik, double *Ra,
+	 double *lRSS)
+{
+  dimPTR dd = dims(pdims);
+
+  internal_EM(dd, ZXy, DmHalf, *nIter, pdClass, RML, logLik, Ra, lRSS);
+  dimFree(dd);
 }
 
 void				/* to be called by Fortran msmnh */
@@ -618,8 +763,6 @@ mixed_calcgh(longint *n, double *theta, longint *nf,
     hpt += nn;
   }
 }
-
-#ifndef R_S_H
 
 static double *
 crossprod_mat(double *y, longint ldy, double *x, longint ldx,
@@ -677,7 +820,36 @@ Delta2MatrixLog( double *theta, longint *q, double *Delta )
   }
 }
 
-static double *
+static void
+Delta2LogCholesky(double *theta, longint *q, double *Delta )
+{
+    longint qq = *q;
+    if ( qq == 1 ) {
+	if (Delta[0] < 0)
+	    Delta[0] = -Delta[0];
+	*theta = log(Delta[0]);
+    } else {
+	longint i;
+	double *ll = theta + qq;
+
+	for (i = 0; i < qq; i++) {
+	    if (Delta[i * (qq + 1)] < 0) {
+		int j;
+		for (j = i * (qq + 1); j < (i + 1) * qq; j++)
+		    Delta[j] = -Delta[j];
+	    }
+	}
+
+	*theta = log(Delta[0]);
+	for(i = 1; i < qq; i++) {
+	    theta[i] = log(Delta[i * (qq + 1)]);
+	    Memcpy(ll, Delta + i * (qq + 1) + 1, i);
+	    ll += i;
+	}
+    }
+}
+
+double *
 generate_theta( double *theta, dimPTR dd, longint *pdClass, double *DmHalf )
 {				/* Expand parameters to DmHalf arrays */
   int i, j, q, Q = dd->Q;
@@ -700,6 +872,10 @@ generate_theta( double *theta, dimPTR dd, longint *pdClass, double *DmHalf )
       PROBLEM "Haven't written the compound symmetry case for this yet"
 	RECOVER(NULL_ENTRY);
       break;
+    case 4:			/* default: unstructured */
+      Delta2LogCholesky( theta, dd->q + i, DmHalf + (dd->DmOff)[ i ] );
+      theta += (q * (q + 1))/2;
+      break;
     }
   }
   return theta;
@@ -710,88 +886,111 @@ mixed_combined(double *ZXy, longint *pdims, double *DmHalf, longint *nIter,
 	 longint *pdClass, longint *RML, double *logLik, double *R0,
 	 double *lRSS, longint *info)
 {
-  longint i, j, Qp2, ssq, p;
-  int ntheta;
-  longint *iv, liv, lv, uiparm[1]; /* for msmnh */
-  double *theta, *work, *scale, ufparm[1], *Ra, *dc;
+  longint i, j, Qp2;
+  double *Ra, *dc, *work;
 
   dd = dims(pdims);		/* Using global dd, pdC, setngs, and Delta */
   pdC = pdClass;
   setngs = RML;
-  Delta = DmHalf;
 
   dc = Calloc((size_t) ((dd->Srows) * (dd->ZXcols)), double);
-  p = (dd->ncol)[(dd->Q)];
 
-  ssq = 0;
-  for(i = 0; i < (dd->Q); i++) {
-    ssq += (dd->q)[i] * (dd->q)[i];
-  }
-  Ra = Calloc((size_t) ssq, double);
+  Ra = Calloc( dd->DmOff[dd->Q], double);
   Qp2 =  (dd->Q) + 2L;
-  ntheta = count_DmHalf_pars( dd, pdC );
-  theta = Calloc((size_t) ntheta, double);
-  if (dd->ZXrows > dd->Srows) { /* Take a decomposition */
-    mixed_decomp( ZXy, pdims );
-    for (i = 0; i < Qp2; i++) {	/* re-write the offsets and lengths */
-      for (j = 0; j < (dd->ngrp)[i]; j++) {
-	(dd->ZXoff)[i][j] = (dd->DecOff)[i][j];
-	(dd->ZXlen)[i][j] = (dd->DecLen)[i][j];
-      }
-    }
-    pdims[1] = pdims[4];	/* ZXrows = Srows in original locations */
-    dd->ZXrows = dd->Srows;	/* and in the copy */
-  }
-  zxdim = (dd->ZXrows) * (dd->ZXcols); /* also global zxdim, zxcopy, and zxcopy2 */
-  zxcopy = Calloc( zxdim, double );
-  zxcopy2 = ZXy;
-  Memcpy( zxcopy, ZXy, zxdim );	/* keep a copy before we mess it up */
+  internal_decomp( dd, ZXy );	/* take decomp if useful */
 
-  *uiparm = 0; work = DmHalf;	/* check for non-zero entries in DmHalf */
-  for( i = 0; i < dd->Q; i++ ) {
-    for( j = 0; j < (dd->q)[i] * (dd->q)[i]; j++ ) {
-      if (*work++ != 0.) {
-	*uiparm = 1;
-      }
-    }
-  }
-  if (*uiparm != 0) {
-    *uiparm = 0;
-  } else {			/* initialize the DmHalf arrays */
-    work = ZXy;
-    scale = DmHalf;
+				/* check for non-zero entries in DmHalf */
+  if ( d_sum_sqr( DmHalf, dd->DmOff[ dd->Q ]) == 0. ) {
+    work = ZXy;			/* create starting estimates */
+    Delta = DmHalf;
     for( i = 0; i < dd->Q; i++ ) {
       for ( j = 0; j < (dd->q)[i]; j++ ) {
-	*scale = 0.375 * sqrt( d_dot_prod( work, 1L, work, 1L, dd->ZXrows ) /
-			       (dd->ngrp)[i]);
-	scale += (dd->q)[i] + 1;
+	*Delta = 0.375 * sqrt( d_sum_sqr( work, dd->ZXrows ) / (dd->ngrp)[i]);
+	Delta += (dd->q)[i] + 1;
 	work += dd->ZXrows;
       }
-      scale -= (dd->q)[i];	/* have moved too far - step back */
+      Delta -= (dd->q)[i];	/* have moved too far - step back */
     }
   }
-  mixed_EM(ZXy, pdims, DmHalf, nIter, pdClass, RML, logLik, Ra, lRSS);
-  generate_theta( theta, dd, pdClass, DmHalf );
+  internal_EM(dd, ZXy, DmHalf, *nIter, pdClass, RML, logLik, Ra, lRSS);
+#ifdef R_S_H
+  {
+    statePTR st = Calloc(1, struct state_struct);
+    int ntheta = count_DmHalf_pars( dd, pdC ), itrmcd, itncnt,
+      msg, p = dd->ncol[dd->Q], iagflg;
+    double epsm,
+      *theta = Calloc(ntheta, double),
+      *typsiz = Calloc(ntheta, double),
+      *grad = Calloc(ntheta, double),
+      *newtheta = Calloc(ntheta, double),
+      *a = Calloc(ntheta * ntheta, double),
+      *work = Calloc(ntheta * 9, double);
 
-  values = Calloc( (size_t) ntheta * (ntheta + 1) + 1, double ); /* global */
-  liv = 60;
-  iv = Calloc( (size_t) liv, longint );
-  lv = 78 + ntheta * (ntheta + 12);
-  work = Calloc( (size_t) lv, double );
-  scale = Calloc( (size_t) ntheta, double );
-  for( i = 0; i < ntheta; i++ ) { scale[i] = 1.; }
-  F77_CALL(msmnh) (&ntheta, scale, theta, mixed_calcf, mixed_calcgh,
-		   iv, &liv, &lv, work, uiparm, ufparm, abort);
-  *info = iv[0];
-  Memcpy( zxcopy2, zxcopy, zxdim );
-  *logLik = internal_loglik( dd, zxcopy2, generate_DmHalf( Delta, dd, pdC, theta ),
-			     setngs, dc, lRSS );
-  copy_mat(R0, p, dc + (dd->SToff)[(dd->Q)][0], (dd->Srows), p, p + 1);
-  Free( values ); Free(iv); Free(work); Free(scale); Free( zxcopy );
-  dimFree( dd ); Free( theta ); Free(dc); Free(Ra);
-}
+    st->dd = dd;
+    st->ZXy = ZXy;
+    st->pdClass = pdClass;
+    st->RML = RML;
 
+    generate_theta(theta, dd, pdClass, DmHalf);
+    
+    epsm = DBL_EPSILON;
+    msg = 0;			/* don't inhibit checks */
+    for (i = 0; i < ntheta; i++) { typsiz[i] = 1.0; }
+    iagflg = 1;
+    for (i = 0; i < dd->Q; i++) {
+	if (pdClass[i] < 1 || pdClass[i] == 3 || pdClass[i] > 4) {
+	    iagflg = 0;
+	    break;
+	}
+    }
+
+    optif9(ntheta, ntheta, theta, (fcn_p) mixed_fcn, (fcn_p)
+	   mixed_grad, (d2fcn_p) 0, st, typsiz, 1.0 /*fscale*/,
+	   1 /*method*/,1 /*iexp*/, &msg, -1 /*ndigit*/, 50 /*itnlim*/,
+	   iagflg, 0 /*iahflg*/, -1. /*dlt*/, pow(epsm, 1.0/3.0)
+           /*gradtl*/, 0. /*stepmx*/, sqrt(epsm) /*steptl*/, newtheta,
+	   logLik, grad, &itrmcd, a, work, &itncnt);
+    *logLik = internal_loglik( dd, ZXy,
+			       generate_DmHalf( DmHalf, dd, pdC, theta ),
+			       setngs, dc, lRSS );
+    copy_mat(R0, p, dc + (dd->SToff)[(dd->Q)][0], (dd->Srows), p, p + 1);
+    Free(work); Free(a); Free(newtheta); Free(grad); Free(typsiz); Free(theta);
+    Free(st);
+  }
+#else  /* R_S_H */
+  {
+    int ntheta = count_DmHalf_pars( dd, pdC );
+    longint p, *iv, liv, lv, uiparm[1]; /* for msmnh */
+    double *theta, *scale, ufparm[1];
+
+    Delta = DmHalf;
+    p = (dd->ncol)[(dd->Q)];
+    zxdim = (dd->ZXrows) * (dd->ZXcols); /* global zxdim, zxcopy, and zxcopy2 */
+    zxcopy = Calloc( zxdim, double );
+    zxcopy2 = ZXy;
+    Memcpy( zxcopy, ZXy, zxdim );	/* keep a copy before we mess it up */
+    theta = Calloc((size_t) ntheta, double);
+    generate_theta( theta, dd, pdClass, DmHalf );
+    values = Calloc( (size_t) ntheta * (ntheta + 1) + 1, double ); /* global */
+    liv = 60;
+    iv = Calloc( (size_t) liv, longint );
+    lv = 78 + ntheta * (ntheta + 12);
+    work = Calloc( (size_t) lv, double );
+    scale = Calloc( (size_t) ntheta, double );
+    for( i = 0; i < ntheta; i++ ) { scale[i] = 1.; }
+    F77_CALL(msmnh) (&ntheta, scale, theta, mixed_calcf, mixed_calcgh,
+		     iv, &liv, &lv, work, uiparm, ufparm, abort);
+    *info = iv[0];
+    Memcpy( zxcopy2, ZXy, zxdim );
+    *logLik = internal_loglik( dd, zxcopy2,
+			       generate_DmHalf( Delta, dd, pdC, theta ),
+			       setngs, dc, lRSS );
+    copy_mat(R0, p, dc + (dd->SToff)[(dd->Q)][0], (dd->Srows), p, p + 1);
+    Free(scale); Free(work); Free(iv); Free(values); Free(theta); Free(zxcopy);
+  }
 #endif  /* R_S_H */ 
+  dimFree( dd ); Free( dc ); Free( Ra );
+}
 
 /* functions for calculating df's for fixed effects tests */
 

@@ -1,4 +1,4 @@
-% $Id: augPred.Rd,v 1.4 2000/07/03 18:22:46 bates Exp $
+% $Id: augPred.Rd,v 1.4.2.1 2000/12/02 21:06:08 bates Exp $
 \name{augPred}
 \title{Augmented Predictions}
 \usage{
@@ -64,7 +64,7 @@ augPred(object, primary, minimum, maximum, length.out, level, ...)
 
 \examples{
 data(Orthodont)
-fm1 <- lme(Orthodont)
+fm1 <- lme(Orthodont, random = ~1)
 augPred(fm1, length.out = 2, level = c(0,1))
 }
 \keyword{models}

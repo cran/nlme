@@ -1,4 +1,4 @@
-% $Id: update.gnls.Rd,v 1.5 2000/07/03 18:22:48 bates Exp $
+% $Id: update.gnls.Rd,v 1.5.2.1 2000/12/02 21:06:08 bates Exp $
 \name{update.gnls}
 \title{Update a gnls Object}
 \usage{
@@ -29,10 +29,10 @@ update(object, model, data, params, start, correlation, weights, subset,
 \seealso{\code{\link{gnls}}}
 
 \examples{
+\dontrun{
 data(Soybean)
 fm1 <- gnls(weight ~ SSlogis(Time, Asym, xmid, scal), Soybean,
             weights = varPower())
-\dontrun{
 fm2 <- update(fm1, correlation = corAR1())
 }
 }

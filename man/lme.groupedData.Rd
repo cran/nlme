@@ -1,4 +1,4 @@
-% $Id: lme.groupedData.Rd,v 1.4 2000/07/03 18:22:47 bates Exp $
+% $Id: lme.groupedData.Rd,v 1.4.2.1 2000/12/02 21:06:08 bates Exp $
 \name{lme.groupedData}
 \title{LME fit from groupedData Object}
 \usage{
@@ -79,5 +79,6 @@ lme(fixed, data, random, correlation, weights, subset, method,
 \examples{
 data(Orthodont)
 fm1 <- lme(Orthodont)
+summary(fm1)
 }
 \keyword{models}

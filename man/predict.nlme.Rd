@@ -1,4 +1,4 @@
-% $Id: predict.nlme.Rd,v 1.5 2000/07/03 18:22:48 bates Exp $
+% $Id: predict.nlme.Rd,v 1.5.2.2 2000/12/07 21:54:10 bates Exp $
 \name{predict.nlme}
 \title{Predictions from an nlme Object}
 \usage{
@@ -48,20 +48,17 @@ predict(object, newdata, level, asList, na.action, naPattern)
   columns given by the predictions at different levels and the grouping
   factors. 
 }
-
 \author{Jose Pinheiro and Douglas Bates}
-
-\seealso{\code{\link{nlme}}, \code{\link{fitted.nlme}}}
-
+\seealso{\code{\link{nlme}}, \code{\link{fitted.lme}}}
 \examples{
-data(Soybean)
-%\dontrun{
-fm1 <- nlme(weight ~ SSlogis(Time, Asym, xmid, scal), data = Soybean,
-            fixed = Asym + xmid + scal ~ 1, start = c(18, 52, 7.5),
-            control = list(nlmStepMax = 1.0))
-newSoybean <- data.frame(Time = c(10,30,50,80,100),
-                    Plot = c("1988F1", "1988F1","1988F1", "1988F1","1988F1"))
-predict(fm1, newSoybean, level = 0:1)
-%}
+data(Loblolly)
+fm1 <- nlme(height ~ SSasymp(age, Asym, R0, lrc),
+            data = Loblolly,
+            fixed = Asym + R0 + lrc ~ 1,
+            random = Asym ~ 1,
+            start = c(Asym = 103, R0 = -8.5, lrc = -3.3))
+newLoblolly <- data.frame(age = c(5,10,15,20,25,30),
+                    Seed = rep(301,6))
+predict(fm1, newLoblolly, level = 0:1)
 }
 \keyword{models}

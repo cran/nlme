@@ -14,7 +14,7 @@ nlmeControl(maxIter, pnlsMaxIter, msMaxIter, minScale, tolerance,
    for the \code{PNLS} optimization step inside the \code{nlme}
    optimization. Default is 7.}
  \item{msMaxIter}{maximum number of iterations
-   for the \code{ms} optimization step inside the \code{nlme}
+   for the \code{nlm} optimization step inside the \code{nlme}
    optimization. Default is 50.}
  \item{minScale}{minimum factor by which to shrink the default step size
    in an attempt to decrease the sum of squares in the \code{PNLS} step.
@@ -26,22 +26,22 @@ nlmeControl(maxIter, pnlsMaxIter, msMaxIter, minScale, tolerance,
    coefficients. Default is 25.}
  \item{pnlsTol}{tolerance for the convergence criterion in \code{PNLS}
    step. Default is 1e-3.} 
- \item{msTol}{tolerance for the convergence criterion in \code{ms},
+ \item{msTol}{tolerance for the convergence criterion in \code{nlm},
    passed as the \code{rel.tolerance} argument to the function (see
-   documentation on \code{ms}). Default is 1e-7. }
+   documentation on \code{nlm}). Default is 1e-7. }
  \item{msScale}{scale function passed as the \code{scale} argument to
-   the \code{ms} function (see documentation on that function). Default
+   the \code{nlm} function (see documentation on that function). Default
    is \code{lmeScale}.}
  \item{returnObject}{a logical value indicating whether the fitted
    object should be returned when the maximum number of iterations is
    reached without convergence of the algorithm. Default is
    \code{FALSE}.} 
  \item{msVerbose}{a logical value passed as the \code{trace} argument to
-   \code{ms} (see documentation on that function). Default is
+   \code{nlm} (see documentation on that function). Default is
    \code{FALSE}.} 
  \item{gradHess}{a logical value indicating whether numerical gradient
    vectors and Hessian matrices of the log-likelihood function should
-   be used in the \code{ms} optimization. This option is only available
+   be used in the \code{nlm} optimization. This option is only available
    when the correlation structure (\code{corStruct}) and the variance
    function structure (\code{varFunc}) have no "varying" parameters and
    the \code{pdMat} classes used in the random effects structure are
@@ -68,11 +68,9 @@ nlmeControl(maxIter, pnlsMaxIter, msMaxIter, minScale, tolerance,
 \value{
   a list with components for each of the possible arguments.
 }
-
 \author{Jose Pinheiro and Douglas Bates}
-
-\seealso{\code{\link{nlme}}, \code{\link{ms}}, \code{\link{nlmeStruct}}}
-
+\seealso{\code{\link{nlme}}, \code{\link{nlm}}, \code{\link{optim}},
+  \code{\link{nlmeStruct}}}
 \examples{
 # decrease the maximum number iterations in the ms call and
 # request that information on the evolution of the ms iterations be printed
