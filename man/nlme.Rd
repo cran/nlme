@@ -1,4 +1,4 @@
-% $Id: nlme.Rd,v 1.8.2.2 2003/05/15 17:04:57 bates Exp $
+% $Id: nlme.Rd,v 1.8.2.3 2003/06/12 14:58:30 bates Exp $
 \name{nlme}
 \title{Nonlinear Mixed-Effects Models}
 \usage{
@@ -7,7 +7,6 @@ nlme(model, data, fixed, random, groups, start, correlation, weights,
 }
 \alias{nlme}
 \alias{nlme.formula}
-%\alias{update.nlme}
 \arguments{
   \item{model}{a nonlinear model formula, with the response on the left
     of a \code{~} operator and an expression involving parameters and
@@ -108,8 +107,6 @@ nlme(model, data, fixed, random, groups, start, correlation, weights,
  \item{verbose}{an optional logical value. If \code{TRUE} information on
    the evolution of the iterative algorithm is printed. Default is
    \code{FALSE}.}
- \item{\dots}{some methods for this generic require additional
-    arguments.  None are used in this method.} 
 }
 \description{
   This generic function fits a nonlinear mixed-effects model in the

@@ -1,4 +1,4 @@
-% $Id: ranef.lmList.Rd,v 1.4 2002/03/05 14:59:39 bates Exp $
+% $Id: ranef.lmList.Rd,v 1.4.2.1 2003/06/12 14:59:10 bates Exp $
 \name{ranef.lmList}
 \title{Extract lmList Random Effects}
 \usage{
@@ -15,10 +15,6 @@
    data frame is augmented with variables defined in \code{data}; else,
    if \code{FALSE}, only the coefficients are returned. Defaults to
    \code{FALSE}.}
- \item{level}{an optional vector of positive integers giving the levels
-   of grouping to be used in extracting the random effects from an
-   object with multiple nested grouping levels. Defaults to all levels
-   of grouping.} 
  \item{data}{an optional data frame with the variables to be used for
    augmenting the returned data frame when \code{augFrame =
      TRUE}. Defaults to the data frame used to fit \code{object}.}
