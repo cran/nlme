@@ -1,4 +1,4 @@
-### $Id: zzMethods.R,v 1.4 2001/10/30 20:51:14 bates Exp $
+### $Id: zzMethods.R,v 1.5 2001/12/10 00:24:13 bates Exp $
 ###
 ###   Miscellaneous methods that must be defined last in the library
 ###
@@ -26,15 +26,15 @@
 AIC.lme <- AIC.lmList <- AIC.gls <- AIC.lm
 BIC.lme <- BIC.lmList <- BIC.gls <- BIC.lm
 
-comparePred.lme <- comparePred.lmList <- .Alias(comparePred.gls)
+comparePred.lme <- comparePred.lmList <- comparePred.gls
 
-getData.nlme <- .Alias(getData.gnls)
+getData.nlme <- getData.gnls
 
-getData.lme <- getData.gls <- .Alias(getData.nls)
+getData.lme <- getData.gls <- getData.nls
 
-qqnorm.gls <- qqnorm.lm <- .Alias(qqnorm.nls)
+qqnorm.gls <- qqnorm.lm <- qqnorm.nls
 
-plot.lme <- .Alias(plot.nls)
+plot.lme <- plot.nls
 
 fitted.gnls <- fitted.gls
 

@@ -2132,7 +2132,8 @@ print.summary.lme <-
   if (!is.null(x$call$subset)) {
     cat("  Subset:", deparse(asOneSidedFormula(x$call$subset)[[2]]),"\n")
   }
-  print( data.frame( AIC = x$AIC, BIC = x$BIC, logLik = x$logLik, row.names = " ") )
+  print( data.frame( AIC = x$AIC, BIC = x$BIC, logLik = c(x$logLik),
+                    row.names = " ") )
   if (verbose) { cat("Convergence at iteration:",x$numIter,"\n") }
   cat("\n")
   print(summary(x$modelStruct), sigma = x$sigma,

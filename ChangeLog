@@ -1,3 +1,12 @@
+2001-12-10  Douglas Bates  <bates@stat.wisc.edu>
+
+	* R/lme.R: unclassed the logLik component of an lme summary before
+	trying to put it into a data frame for printing.	
+
+2001-12-01  Douglas Bates  <bates@stat.wisc.edu>
+
+	* R/zzMethods.R: Removed the .Alias calls.
+
 2001-10-30  Douglas Bates  <bates@stat.wisc.edu>
 
 	* man/pairs.lme.Rd: Modified many documentation files to pass the
