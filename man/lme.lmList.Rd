@@ -1,9 +1,9 @@
-% $Id: lme.lmList.Rd,v 1.8 2002/03/05 14:59:39 bates Exp $
+% $Id: lme.lmList.Rd,v 1.8.2.1 2003/01/30 18:35:33 bates Exp $
 \name{lme.lmList}
 \title{LME fit from lmList Object}
 \usage{
 \method{lme}{lmList}(fixed, data, random, correlation, weights, subset, method,
-    na.action, control)
+    na.action, control, contrasts)
 }
 \alias{lme.lmList}
 \arguments{
@@ -43,6 +43,8 @@
  \item{control}{a list of control values for the estimation algorithm to
    replace the default values returned by the function \code{lmeControl}.
    Defaults to an empty list.}
+ \item{contrasts}{an optional list. See the \code{contrasts.arg}
+   of \code{model.matrix.default}.}
 }
 \description{
   If the random effects names defined in \code{random} are a subset of

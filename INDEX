@@ -128,7 +128,8 @@ corMatrix.corStruct     Matrix of a corStruct Object
 corMatrix.pdMat         Extract Correlation Matrix from a pdMat Object
 corMatrix.reStruct      Extract Correlation Matrix from Components of
                         an reStruct Object
-corNatural              General correlation in natural parameterization
+corNatural              General correlation in natural
+                        parameterization
 corRatio                Rational Quadratic Correlation Structure
 corSpatial              Spatial Correlation Structure
 corSpher                Spherical Correlation Structure
@@ -234,7 +235,6 @@ model.matrix.reStruct   reStruct Model Matrix
 needUpdate              Check if Update is Needed
 needUpdate.modelStruct
                         Check if a modelStruct Object Needs Updating
-nlme-internal           Internal nlme functions
 nlme                    Nonlinear Mixed-Effects Models
 nlme.nlsList            NLME fit from nlsList Object
 nlmeControl             Control Values for nlme Fit
@@ -247,8 +247,8 @@ pairs.lmList            Pairs Plot of an lmList Object
 pairs.lme               Pairs Plot of an lme Object
 pdBlocked               Positive-Definite Block Diagonal Matrix
 pdClasses               Positive-Definite Matrix Classes
-pdCompSymm              Positive-Definite Matrix with Compound Symmetry
-                        Structure
+pdCompSymm              Positive-Definite Matrix with Compound
+                        Symmetry Structure
 pdConstruct             Construct pdMat Objects
 pdConstruct.pdBlocked   Construct pdBlocked Objects
 pdDiag                  Diagonal Positive-Definite Matrix
@@ -308,8 +308,8 @@ print.summary.varFunc   Print a summary.varFunc Object
 print.varFunc           Print a varFunc Object
 pruneLevels             Prune Factor Levels
 qqnorm.gls              Normal Plot of Residuals from a gls Object
-qqnorm.lme              Normal Plot of Residuals or Random Effects from
-                        an lme Object
+qqnorm.lme              Normal Plot of Residuals or Random Effects
+                        from an lme Object
 quinModel               Model function for the Quinidine data
 random.effects          Extract Random Effects
 ranef.lmList            Extract lmList Random Effects
@@ -328,7 +328,8 @@ residuals.lme           Extract lme Residuals
 residuals.lmeStruct     Calculate lmeStruct Residuals
 residuals.nlmeStruct    Calculate nlmeStruct Residuals
 simulate.lme            simulate lme models
-solve.pdMat             Calculate Inverse of a Positive-Definite Matrix
+solve.pdMat             Calculate Inverse of a Positive-Definite
+                        Matrix
 solve.reStruct          Apply Solve to an reStruct Object
 splitFormula            Split a Formula
 summary.corStruct       Summarize a corStruct Object

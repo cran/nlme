@@ -1,9 +1,9 @@
-% $Id: lme.groupedData.Rd,v 1.8 2002/03/05 14:59:39 bates Exp $
+% $Id: lme.groupedData.Rd,v 1.8.2.1 2003/01/30 18:35:14 bates Exp $
 \name{lme.groupedData}
 \title{LME fit from groupedData Object}
 \usage{
 \method{lme}{groupedData}(fixed, data, random, correlation, weights, 
-    subset, method, na.action, control)
+    subset, method, na.action, control, contrasts)
 }
 \alias{lme.groupedData}
 \arguments{
@@ -59,6 +59,8 @@
  \item{control}{a list of control values for the estimation algorithm to
    replace the default values returned by the function \code{lmeControl}.
    Defaults to an empty list.}
+ \item{contrasts}{an optional list. See the \code{contrasts.arg}
+   of \code{model.matrix.default}.}
 }
 \description{
   The response variable and primary covariate in \code{formula(fixed)}

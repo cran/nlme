@@ -1,4 +1,4 @@
-### $Id: lme.R,v 1.11.2.5 2002/12/27 17:00:26 bates Exp $
+### $Id: lme.R,v 1.11.2.6 2003/01/30 18:38:29 bates Exp $
 ###
 ###            Fit a general linear mixed effects model
 ###
@@ -32,7 +32,8 @@ lme <-
 	   subset,
 	   method = c("REML", "ML"),
 	   na.action = na.fail,
-	   control = list())
+	   control = list(),
+           contrasts = NULL)
   UseMethod("lme")
 
 lme.groupedData <-
@@ -44,7 +45,8 @@ lme.groupedData <-
 	   subset,
 	   method = c("REML", "ML"),
 	   na.action = na.fail,
-	   control = list())
+	   control = list(),
+           contrasts = NULL)
 {
   args <- as.list(match.call())[-1]
   names(args)[1] <- "data"
@@ -62,7 +64,8 @@ lme.lmList <-
 	   subset,
 	   method = c("REML", "ML"),
 	   na.action = na.fail,
-	   control = list())
+	   control = list(),
+           contrasts = NULL)
 {
   if (length(grpForm <- getGroupsFormula(fixed, asList = TRUE)) > 1) {
     stop("Can only fit lmList objects with single grouping variable")
@@ -132,7 +135,8 @@ lme.formula <-
 	   subset,
 	   method = c("REML", "ML"),
 	   na.action = na.fail,
-	   control = list())
+	   control = list(),
+           contrasts = NULL)
 {
   Call <- match.call()
 
@@ -234,6 +238,8 @@ lme.formula <-
   mfArgs$drop.unused.levels <- TRUE
   dataMix <- do.call("model.frame", mfArgs)
   origOrder <- row.names(dataMix)	# preserve the original order
+  for(i in names(contrasts))            # handle contrasts statement
+      contrasts(dataMix[[i]]) = contrasts[[i]]
   ## sort the model.frame by groups and get the matrices and parameters
   ## used in the estimation procedures
   grps <- getGroups(dataMix, groups)
@@ -275,7 +281,7 @@ lme.formula <-
                          length(levels(el)) > 1) contrasts(el))
   contr <- c(contr, auxContr[is.na(match(names(auxContr), names(contr)))])
   contr <- contr[!unlist(lapply(contr, is.null))]
-  X <- model.matrix(fixed, X)
+  X <- model.matrix(fixed, data=X)
   y <- eval(fixed[[2]], dataMix)
   ncols <- c(ncols, dim(X)[2], 1)
   Q <- ncol(grps)
@@ -1839,7 +1845,7 @@ predict.lme <-
   }
   maxQ <- max(level)			# maximum level for predictions
   mCall <- object$call
-  fixed <- eval(as.call(mCall[["fixed"]][-2]))
+  fixed <- eval(mCall[["fixed"]][-2])
   newdata <- as.data.frame(newdata)
 
   if (maxQ > 0) {			# predictions with random effects
@@ -2577,7 +2583,7 @@ summary.lme <- function(object, adjustSigma = TRUE, verbose = FALSE, ...)
 
 update.lme <-
   function(object, fixed, data, random, correlation, weights, subset,
-           method, na.action, control, ...)
+           method, na.action, control, contrasts, ...)
 {
   thisCall <- as.list(match.call())[-(1:2)]
   if (is.null(nextCall <- object$origCall) ||

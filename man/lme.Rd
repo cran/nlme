@@ -1,11 +1,11 @@
-% $Id: lme.Rd,v 1.6 2002/01/28 03:44:17 bates Exp $
+% $Id: lme.Rd,v 1.6.2.1 2003/01/30 18:34:52 bates Exp $
 \name{lme}
 \title{Linear Mixed-Effects Models}
 \usage{
 lme(fixed, data, random, correlation, weights, subset, method,
-    na.action, control)
+    na.action, control, contrasts = NULL)
 \method{update}{lme}(object, fixed, data, random, correlation, weights,
-      subset, method, na.action, control, \dots)
+      subset, method, na.action, control, contrasts, \dots)
 }
 \alias{lme}
 \alias{lme.formula}
@@ -72,6 +72,8 @@ lme(fixed, data, random, correlation, weights, subset, method,
  \item{control}{a list of control values for the estimation algorithm to
    replace the default values returned by the function \code{lmeControl}.
    Defaults to an empty list.}
+ \item{contrasts}{an optional list. See the \code{contrasts.arg}
+   of \code{model.matrix.default}.}
  \item{\dots}{some methods for this generic require additional
     arguments.  None are used in this method.} 
 }

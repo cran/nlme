@@ -1,8 +1,22 @@
+2003-01-30  Douglas Bates  <bates@stat.wisc.edu>
+
+	* R/lme.R:
+	Incorporate change from Brian Ripley in response to Dieter Menne
+
+	* man/lme.lmList.Rd, man/lme.groupedData.Rd, man/lme.Rd:
+	Documentation of the contrasts argument added (Greg Warnes).
+
+2003-01-30  Douglas Bates  <bates@stat.wisc.edu>
+
+	* R/lme.R (lme.formula): Incorporate Greg Warnes' changes for
+	the contrasts argument.
+
+	* R/nlsList.R: Correct check for is.null(class(FUN))
+
 2002-12-27  Douglas Bates  <bates@stat.wisc.edu>
 
-
-	* R/newFunc.R (gsummary): Fix comparison to check for varying
-	columns.  Bug fix to #1775 by Dieter Menne.
+	* R/newFunc.R (gsummary): Fix comparison in check for varying
+	columns (PR#1775 - bug report with fix provided by Dieter Menne.
 
 2002-12-11  Douglas Bates  <bates@stat.wisc.edu>
 

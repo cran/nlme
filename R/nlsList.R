@@ -1,4 +1,4 @@
-### $Id: nlsList.R,v 1.4.2.1 2002/09/10 21:21:28 saikat Exp $
+### $Id: nlsList.R,v 1.4.2.2 2003/01/18 20:49:28 saikat Exp $
 ###
 ###                  Create a list of nls objects
 ###
@@ -86,8 +86,7 @@ nlsList.formula <-
     ## no starting values
     ## checking for old-style selfStart functions
     FUN <- eval(model[[3]][[1]])
-    if (is.function(FUN) &&
-        (is.null(class(FUN)) || class(FUN) != "selfStart") &&
+    if (is.function(FUN) && class(FUN) != "selfStart" &&
         !is.null(attr(FUN, "initial"))) {
       stop(paste("old-style self-starting model functions\n",
                  "are no longer supported.\n",
