@@ -1,3 +1,10 @@
+2003-08-29  Douglas Bates  <bates@stat.wisc.edu>
+
+	* tests/lme.Rout.save (Coefficients): Now consistent with
+	i386-linux result.
+
+	* src/base.h: Replace R_ext/Mathlib.h by Rmath.h
+
 2003-08-09  Douglas Bates  <bates@stat.wisc.edu>
 
 	* man/Covariate.varFunc.Rd, man/Matrix.pdMat.Rd, man/Matrix.reStruct.Rd, man/Names.pdMat.Rd, man/Names.reStruct.Rd, man/coef.corStruct.Rd, man/coef.modelStruct.Rd, man/coef.pdMat.Rd, man/coef.reStruct.Rd, man/coef.varFunc.Rd, man/getData.lmList.Rd, man/gnls.Rd:

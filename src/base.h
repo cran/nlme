@@ -1,4 +1,4 @@
-/* $Id: base.h,v 1.6 2001/10/15 17:19:12 bates Exp $
+/* $Id: base.h,v 1.6.2.1 2003/08/29 22:56:46 bates Exp $
 
    header file for the nlme package
 
@@ -32,7 +32,7 @@
 #ifdef R_S_H
 #include <R.h>
 #include <Rinternals.h>
-#include <R_ext/Mathlib.h>
+#include <Rmath.h>
 #include <R_ext/Applic.h>
 #else
 #include "nonlin.h"
