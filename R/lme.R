@@ -1538,12 +1538,14 @@ pairs.lme <-
       args <- c(args,
                 panel = list(function(x, y, subscripts, ...)
 		  {
+                    x <- as.numeric(x)
+                    y <- as.numeric(y)
                     dots <- list(...)
 		    if (grid) panel.grid()
 		    panel.xyplot(x, y, ...)
                     if (any(ids <- id[subscripts])){
-                        text(x[ids], y[ids], idLabels[subscripts][ids],
-                             cex = dots$cex, adj = dots$adj)
+                        ltext(x[ids], y[ids], idLabels[subscripts][ids],
+                              cex = dots$cex, adj = dots$adj)
                     }
 		  }))
     }
@@ -1553,12 +1555,14 @@ pairs.lme <-
           args <- c(args,
                     panel = list(function(x, y, subscripts, ...)
                 {
+                    x <- as.numeric(x)
+                    y <- as.numeric(y)
                     dots <- list(...)
 		    if (grid) panel.grid()
 		    panel.xyplot(x, y, ...)
                     if (any(ids <- id[subscripts])){
-                        text(x[ids], y[ids], idLabels[subscripts][ids],
-                             cex = dots$cex, adj = dots$adj)
+                        ltext(x[ids], y[ids], idLabels[subscripts][ids],
+                              cex = dots$cex, adj = dots$adj)
                     }
                 }))
       }
@@ -1587,6 +1591,8 @@ plot.ranef.lme <-
              cex = box.dot$cex, col = box.dot$col, drawLine = TRUE, levs,
              cex.axis = 0.8, srt.axis = 0, mgp.axis = c(2, 0.5, 0), ...)
     {
+      x <- as.numeric(x)
+      y <- as.numeric(y)
       ok <- !is.na(x) & !is.na(y)
       x <- x[ok]
       y <- y[ok]
@@ -1799,6 +1805,9 @@ plot.ranef.lme <-
     xyplot(y ~ x | g, data = argData, subscripts = TRUE,
            scales = list(x = list(relation = "free", draw = FALSE)),
            panel = function(x, y, subscripts, ...) {
+             x <- as.numeric(x)
+             y <- as.numeric(y)
+               
              vN <- .vNam[subscripts][1]
              if (.grid) panel.grid()
              if (.vType[vN] == "numeric") {
@@ -2370,12 +2379,14 @@ qqnorm.lme <-
                  data = substitute(data)), args)
   if (is.null(args$panel)) {
     args <- c(list(panel = function(x, y, subscripts, ...){
+      x <- as.numeric(x)
+      y <- as.numeric(y)
       dots <- list(...)
       if (grid) panel.grid()
       panel.xyplot(x, y, ...)
       if (any(ids <- id[subscripts])){
-          text(x[ids], y[ids], idLabels[subscripts][ids],
-               cex = dots$cex, adj = dots$adj)
+          ltext(x[ids], y[ids], idLabels[subscripts][ids],
+                cex = dots$cex, adj = dots$adj)
       }
       if (!is.null(abl)) panel.abline(abl, ...)
     }), args)

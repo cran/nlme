@@ -539,12 +539,14 @@ pairs.lmList <-
     args <- c(args,
 	      panel = list(function(x, y, subscripts, ...)
 		  {
+                    x <- as.numeric(x)
+                    y <- as.numeric(y)
                     dots <- list(...)
 		    if (grid) panel.grid()
 		    panel.xyplot(x, y)
                     if (any(ids <- id[subscripts])) {
-                        text(x[ids], y[ids], idLabels[subscripts][ids],
-                             cex = dots$cex, adj = dots$adj)
+                        ltext(x[ids], y[ids], idLabels[subscripts][ids],
+                              cex = dots$cex, adj = dots$adj)
 		    }
 		  }))
   } else {				# splom
@@ -552,12 +554,14 @@ pairs.lmList <-
     args <- c(args,
 	      panel = list(function(x, y, subscripts, ...)
 		  {
+                    x <- as.numeric(x)
+                    y <- as.numeric(y)
                     dots <- list(...)
 		    if (grid) panel.grid()
 		    panel.xyplot(x, y)
                     if (any(ids <- id[subscripts])) {
-                        text(x[ids], y[ids], idLabels[subscripts][ids],
-                             cex = dots$cex, adj = dots$adj)
+                        ltext(x[ids], y[ids], idLabels[subscripts][ids],
+                              cex = dots$cex, adj = dots$adj)
 		    }
 		  }))
   }
@@ -598,6 +602,8 @@ plot.intervals.lmList <-
 	      col = dot.symbol$col, cex = dot.symbol$cex,
 	      font = dot.symbol$font, ...)
 	  {
+            x <- as.numeric(x)
+            y <- as.numeric(y)
 	    ok <- !is.na(x) & !is.na(y)
 	    yy <- y[ok]
 	    xx <- x[ok]
@@ -771,12 +777,14 @@ plot.lmList <-
       args <- c(args,
 		panel = list(function(x, y, subscripts, ...)
 		    {
+                      x <- as.numeric(x)
+                      y <- as.numeric(y)
                       dots <- list(...)
 		      if (grid) panel.grid()
 		      panel.xyplot(x, y)
                       if (any(ids <- id[subscripts])) {
-                          text(x[ids], y[ids], idLabels[subscripts][ids],
-                               cex = dots$cex, adj = dots$adj)
+                          ltext(x[ids], y[ids], idLabels[subscripts][ids],
+                                cex = dots$cex, adj = dots$adj)
                       }
 		      if (!is.null(abl)) {
 			panel.abline(abl, ...)
@@ -799,6 +807,8 @@ plot.lmList <-
     args <- c(args,
 	      panel = list(function(x, y, ...)
 		  {
+                    x <- as.numeric(x)
+                    y <- as.numeric(y)
 		    if (grid) panel.grid()
 		    panel.histogram(x, y)
 		    if (!is.null(abl)) {
@@ -1184,12 +1194,14 @@ qqnorm.lmList <-
   args <- c(list(formula = eval(parse(text = dform)),
                  data = substitute(data),
                  panel = function(x, y, subscripts, ...){
+                   x <- as.numeric(x)
+                   y <- as.numeric(y)
                    dots <- list(...)
                    if (grid) panel.grid()
                    panel.xyplot(x, y, ...)
                    if (any(ids <- id[subscripts])) {
-                       text(x[ids], y[ids], idLabels[subscripts][ids],
-                            cex = dots$cex, adj = dots$adj)
+                       ltext(x[ids], y[ids], idLabels[subscripts][ids],
+                             cex = dots$cex, adj = dots$adj)
                    }
                    if (!is.null(abl)) panel.abline(abl, ...)
                  }), args)

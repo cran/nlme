@@ -377,6 +377,8 @@ plot.nfnGroupedData <-
            strip = function(...) strip.default(..., style = 1),
            aspect = "xy",
            panel = function(x, y, ...) {
+             x <- as.numeric(x)
+             y <- as.numeric(y)
              if (grid) panel.grid()
              panel.xyplot(x, y, ...)
              y.avg <- tapply(y, x, mean) # lines through average y
@@ -480,6 +482,8 @@ plot.nffGroupedData <-
            ylab = groupLabel,
            strip = function(...) strip.default(..., style = 1),
            panel = function(x, y) {
+             x <- as.numeric(x)
+             y <- as.numeric(y)
              dot.line <- trellis.par.get("dot.line")
              panel.abline(h = y, lwd = dot.line$lwd,
                           lty = dot.line$lty, col = dot.line$col)
@@ -526,6 +530,9 @@ plot.nffGroupedData <-
     args[["groups"]] <- asOneSidedFormula(inner)[[2]]
     args[["panel"]] <- function(x, y, subscripts, groups)
       {
+        x <- as.numeric(x)
+        y <- as.numeric(y)
+
 	dot.line <- trellis.par.get("dot.line")
 	panel.abline(h = y, lwd = dot.line$lwd,
 		     lty = dot.line$lty, col = dot.line$col)

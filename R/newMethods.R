@@ -289,11 +289,13 @@ pairs.compareFits <-
 		  groups = tt$grp,
 		  panel = function(x, y, subscripts, groups, ...)
 		  {
+                    x <- as.numeric(x)
+                    y <- as.numeric(y)
 		    panel.superpose(x, y, subscripts, groups)
 		    aux <- groups[subscripts]
 		    aux <- aux == unique(aux)[1]
-		    segments(x[aux], y[aux], x[!aux], y[!aux],
-			     lty = 2, lwd = 0.5)
+		    lsegments(x[aux], y[aux], x[!aux], y[!aux],
+                              lty = 2, lwd = 0.5)
 		  })
   } else {
     tt <- list(x = coefs[,1], y = coefs[,2],
@@ -304,13 +306,15 @@ pairs.compareFits <-
 		  groups = tt$grp,
 		  panel = function(x, y, subscripts, groups, ...)
 		  {
+                    x <- as.numeric(x)
+                    y <- as.numeric(y)
 		    panel.grid()
 		    panel.superpose(x, y, subscripts, groups)
 		    aux <- groups[subscripts]
 		    aux <- aux == unique(aux)[1]
-		    segments(x[aux], y[aux], x[!aux], y[!aux],
-			     lty = 2, lwd = 0.5)
-		  }, xlab = dn[[3]][1], ylab = dn[[3]][2])
+		    lsegments(x[aux], y[aux], x[!aux], y[!aux],
+                              lty = 2, lwd = 0.5)
+                }, xlab = dn[[3]][1], ylab = dn[[3]][2])
   }
   dots <- list(...)
   args[names(dots)] <- dots
@@ -478,12 +482,14 @@ plot.nls <-
         args <- c(args,
                   panel = list(function(x, y, subscripts, ...)
 		    {
+                      x <- as.numeric(x)
+                      y <- as.numeric(y)
                       dots <- list(...)
 		      if (grid) panel.grid()
 		      panel.xyplot(x, y, ...)
                       if (any(ids <- id[subscripts])){
-                          text(x[ids], y[ids], idLabels[subscripts][ids],
-                               cex = dots$cex, adj = dots$adj)
+                          ltext(x[ids], y[ids], idLabels[subscripts][ids],
+                                cex = dots$cex, adj = dots$adj)
                       }
 		      if (!is.null(abl)) {
 			panel.abline(abl, ...)
@@ -496,6 +502,8 @@ plot.nls <-
         args <- c(args,
                   panel = list(function(x, y, ...)
 		    {
+                      x <- as.numeric(x)
+                      y <- as.numeric(y)
 		      if (grid) panel.grid()
 		      panel.bwplot(x, y, ...)
 		      if (!is.null(abl)) {
@@ -510,6 +518,8 @@ plot.nls <-
       args <- c(args,
                 panel = list(function(x, ...)
 		  {
+                    x <- as.numeric(x)
+                    y <- as.numeric(y)
 		    if (grid) panel.grid()
 		    panel.histogram(x, ...)
 		    if (!is.null(abl)) {
@@ -560,6 +570,8 @@ plot.ACF <-
   assign("grid", grid)
   xyplot(ACF ~ lag, object, ylim = ylim,
          panel = function(x, y, ...) {
+           x <- as.numeric(x)
+           y <- as.numeric(y)
            if (grid) panel.grid()
            panel.xyplot(x, y, type = "h")
            panel.abline(0, 0)
@@ -856,12 +868,14 @@ qqnorm.nls <-
                  args)
   if (is.null(args$panel)) {
     args <- c(list(panel = function(x, y, subscripts, ...){
+      x <- as.numeric(x)
+      y <- as.numeric(y)
       dots <- list(...)
       if (grid) panel.grid()
       panel.xyplot(x, y, ...)
       if (any(ids <- id[subscripts])){
-          text(x[ids], y[ids], idLabels[subscripts][ids],
-               cex = dots$cex, adj = dots$adj)
+          ltext(x[ids], y[ids], idLabels[subscripts][ids],
+                cex = dots$cex, adj = dots$adj)
       }
       if (!is.null(abl)) panel.abline(abl, ...)
     }), args)

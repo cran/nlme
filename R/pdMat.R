@@ -416,6 +416,9 @@ plot.pdMat <-
     groups <- c(groups, rep(0, nrow(additional)))
   }
   splom(~ dataMat, panel = function(x, y, subscripts, groups, ...) {
+    x <- as.numeric(x)
+    y <- as.numeric(y)
+
     groups <- groups[subscripts]	# should be a no-op but
     if (any(g0 <- groups == 0)) {	# plot as points
       panel.xyplot(x[g0], y[g0], ..., type = "p")

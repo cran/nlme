@@ -502,6 +502,8 @@ plot.simulate.lme <-
   }
   xyplot(form, data = frm,
 	 panel = function(x, y, ...) {
+           x <- as.numeric(x)
+           y <- as.numeric(y)
            panel.grid()
            panel.xyplot(x, y, type = "l", ...)
            if ((dfType <- as.double(names(x)[1])) == 1) {
