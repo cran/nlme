@@ -1,20 +1,21 @@
 % $Id: gls.Rd,v 1.6 2002/01/28 03:44:17 bates Exp $
 \name{gls}
 \title{Fit Linear Model Using Generalized Least Squares}
+\alias{gls}
+\alias{update.gls}
 \usage{
 gls(model, data, correlation, weights, subset, method, na.action,
     control, verbose)
-\method{update}{gls}(object, model, data, correlation, weights, subset,
-        method, na.action, control, verbose, \dots)
+\method{update}{gls}(object, model., \dots, evaluate = TRUE)
 }
-\alias{gls}
-\alias{update.gls}
 \arguments{
  \item{object}{an object inheriting from class \code{gls}, representing
    a generalized least squares fitted linear model.}
   \item{model}{a two-sided linear formula object describing the
     model, with the response on the left of a \code{~} operator and the
     terms, separated by \code{+} operators, on the right.}
+ \item{model.}{Changes to the model -- see \code{update.formula} for
+   details.}
  \item{data}{an optional data frame containing the variables named in
    \code{model}, \code{correlation}, \code{weights}, and
    \code{subset}. By default the variables are taken from the
@@ -53,6 +54,7 @@ gls(model, data, correlation, weights, subset, method, na.action,
    \code{FALSE}.}
  \item{\dots}{some methods for this generic require additional
     arguments.  None are used in this method.} 
+ \item{evaluate}{If \code{TRUE} evaluate the new call else return the call.}
 }
 \description{
   This function fits a linear model using generalized least

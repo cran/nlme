@@ -3,8 +3,7 @@
 \title{List of lm Objects with a Common Model}
 \usage{
 lmList(object, data, level, subset, na.action, pool)
-\method{update}{lmList}(object, formula, data, level, subset,
-   na.action, pool, \dots)
+\method{update}{lmList}(object, formula., \dots, evaluate = TRUE)
 \method{print}{lmList}(x, pool, \dots)
 }
 \alias{lmList}
@@ -29,6 +28,8 @@ lmList(object, data, level, subset, na.action, pool)
     a two-sided linear formula with the common model for the individuals
     \code{lm} fits.
     }
+ \item{formula.}{Changes to the formula -- see \code{update.formula} for
+   details.}
   \item{data}{
     a data frame in which to interpret the variables named in
     \code{object}. 
@@ -55,7 +56,8 @@ lmList(object, data, level, subset, na.action, pool)
  }
  \item{x}{an object inheriting from class \code{lmList} to be printed.}
  \item{\dots}{some methods for this generic require additional
-    arguments.  None are used in this method.} 
+   arguments.  None are used in this method.}
+ \item{evaluate}{If \code{TRUE} evaluate the new call else return the call.}
 }
 \description{
   \code{Data} is partitioned according to the levels of the grouping

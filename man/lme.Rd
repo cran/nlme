@@ -4,8 +4,7 @@
 \usage{
 lme(fixed, data, random, correlation, weights, subset, method,
     na.action, control, contrasts = NULL)
-\method{update}{lme}(object, fixed, data, random, correlation, weights,
-      subset, method, na.action, control, contrasts, \dots)
+\method{update}{lme}(object, fixed., \dots, evaluate = TRUE)
 }
 \alias{lme}
 \alias{lme.formula}
@@ -19,6 +18,8 @@ lme(fixed, data, random, correlation, weights, subset, method,
     the right, an \code{lmList} object, or a \code{groupedData}
     object. The method functions \code{lme.lmList} and
     \code{lme.groupedData} are documented separately.}
+ \item{fixed.}{Changes to the fixed-effects formula -- see
+   \code{update.formula} for details.}
  \item{data}{an optional data frame containing the variables named in
    \code{fixed}, \code{random}, \code{correlation}, \code{weights}, and
    \code{subset}.  By default the variables are taken from the
@@ -76,6 +77,7 @@ lme(fixed, data, random, correlation, weights, subset, method,
    of \code{model.matrix.default}.}
  \item{\dots}{some methods for this generic require additional
     arguments.  None are used in this method.} 
+ \item{evaluate}{If \code{TRUE} evaluate the new call else return the call.}
 }
 \description{
   This generic function fits a linear mixed-effects model in the

@@ -3,8 +3,7 @@
 \title{List of nls Objects with a Common Model}
 \usage{
 nlsList(model, data, start, control, level, subset, na.action, pool)
-\method{update}{nlsList}(object, model, data, start, control, level,
-      subset, na.action, pool, \dots)
+\method{update}{nlsList}(object, model., \dots, evaluate = TRUE)
 }
 \alias{nlsList}
 \alias{nlsList.formula}
@@ -18,6 +17,8 @@ nlsList(model, data, start, control, level, subset, na.action, pool)
     \code{|} operator on the right, or a \code{selfStart} function.  The
     method function \code{nlsList.selfStart} is documented separately.
   }
+ \item{model.}{Changes to the model -- see \code{update.formula} for
+   details.}
   \item{data}{
     a data frame in which to interpret the variables named in
     \code{model}.
@@ -50,6 +51,7 @@ nlsList(model, data, start, control, level, subset, na.action, pool)
   }
  \item{\dots}{some methods for this generic require additional
     arguments.  None are used in this method.} 
+ \item{evaluate}{If \code{TRUE} evaluate the new call else return the call.}
 }
 \description{
   \code{Data} is partitioned according to the levels of the grouping
