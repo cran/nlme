@@ -1,3 +1,11 @@
+2004-01-14  Douglas Bates  <bates@stat.wisc.edu>
+
+	* man/getCovariate.varFunc.Rd: Syntax correction from Kurt.
+
+2003-12-16  Douglas Bates  <bates@stat.wisc.edu>
+
+	* install.R: Create stored image
+
 2003-08-29  Douglas Bates  <bates@stat.wisc.edu>
 
 	* tests/lme.Rout.save (Coefficients): Now consistent with

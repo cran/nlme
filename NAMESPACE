@@ -1,4 +1,7 @@
 useDynLib(nlme)
+import(lattice)
+import(stats)
+importFrom(graphics, pairs, plot)
 
 export(ACF, allCoef, asOneFormula, asTable, augPred, balancedGrouped,
        BIC, "coef<-", "coefficients<-", collapse, compareFits,
@@ -478,4 +481,3 @@ S3method(varWeights, lmeStruct)
 S3method(varWeights, varComb)
 S3method(varWeights, varFunc)
 
-importFrom(mva, dist)

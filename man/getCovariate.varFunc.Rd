@@ -2,7 +2,7 @@
 \name{getCovariate.varFunc}
 \title{Extract varFunc Covariate}
 \usage{
-\method{getCovariate}{varFunc}(object, form, data))
+\method{getCovariate}{varFunc}(object, form, data)
 }
 \alias{getCovariate.varFunc}
 \arguments{
