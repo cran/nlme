@@ -1,8 +1,8 @@
-% $Id: corFactor.corStruct.Rd,v 1.5 2000/07/03 21:13:47 bates Exp $
+% $Id: corFactor.corStruct.Rd,v 1.6 2001/06/18 21:16:50 bates Exp $
 \name{corFactor.corStruct}
 \title{Factor of a corStruct Object Matrix}
 \usage{
-corFactor(object)
+\method{corFactor}{corStruct}(object)
 }
 \alias{corFactor.compSymm}
 \alias{corFactor.corAR1}

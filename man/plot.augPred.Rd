@@ -1,8 +1,8 @@
-% $Id: plot.augPred.Rd,v 1.5 2001/01/10 19:21:05 bates Exp $
+% $Id: plot.augPred.Rd,v 1.6 2001/06/18 21:16:50 bates Exp $
 \name{plot.augPred}
 \title{Plot an augPred Object}
 \usage{
-plot(x, key, grid, ...)
+\method{plot}{augPred}(x, key, grid, ...)
 }
 \alias{plot.augPred}
 \arguments{

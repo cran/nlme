@@ -1,8 +1,8 @@
-% $Id: recalc.Rd,v 1.3 2000/07/03 18:22:48 bates Exp $
+% $Id: recalc.Rd,v 1.4 2001/06/18 21:16:50 bates Exp $
 \name{recalc}
 \title{Recalculate Condensed Linear Model Object}
 \usage{
-recalc(object, conLin)
+recalc(object, conLin, \dots)
 }
 \alias{recalc}
 \arguments{
@@ -12,9 +12,10 @@ recalc(object, conLin)
    with components \code{"Xy"}, corresponding to a regression matrix
    (\code{X}) combined with a response vector (\code{y}), and
    \code{"logLik"}, corresponding to the log-likelihood of the
-   underlying model.} 
- \item{\dots}{some methods for this generic function may require
-   additional arguments.}
+   underlying model.}
+ \item{\dots}{some methods for this generic can take additional
+   arguments.} 
+
 }
 \description{
   This function is generic; method functions can be written to handle

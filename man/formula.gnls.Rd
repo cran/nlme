@@ -1,8 +1,8 @@
-% $Id: formula.gnls.Rd,v 1.5 2001/01/10 19:21:04 bates Exp $
+% $Id: formula.gnls.Rd,v 1.6 2001/06/18 21:16:50 bates Exp $
 \name{formula.gnls}
 \title{Extract gnls Object Formula}
 \usage{
-formula(object)
+\method{formula}{gnls}(object)
 }
 \alias{formula.gnls}
 \arguments{

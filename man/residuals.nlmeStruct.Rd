@@ -1,8 +1,8 @@
-% $Id: residuals.nlmeStruct.Rd,v 1.3 2000/07/03 18:22:48 bates Exp $
+% $Id: residuals.nlmeStruct.Rd,v 1.4 2001/06/18 21:16:50 bates Exp $
 \name{residuals.nlmeStruct}
 \title{Calculate nlmeStruct Residuals}
 \usage{
-residuals(object, levels, conLin)
+\method{residuals}{nlmeStruct}(object, level, conLin, \dots)
 }
 \alias{residuals.nlmeStruct}
 \arguments{
@@ -19,6 +19,8 @@ residuals(object, levels, conLin)
    matrix (\code{X}) combined with a response vector (\code{y}), and 
    \code{"logLik"}, corresponding to the log-likelihood of the
    underlying nlme model. Defaults to \code{attr(object, "conLin")}.}
+ \item{\dots}{optional arguments to the residuals generic.  Not
+   used.}
 }
 \description{
   The residuals at level \eqn{i} are obtained by subtracting the fitted

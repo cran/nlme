@@ -1,8 +1,8 @@
-% $Id: fitted.nlmeStruct.Rd,v 1.3 2000/07/03 18:22:46 bates Exp $
+% $Id: fitted.nlmeStruct.Rd,v 1.4 2001/06/18 21:16:50 bates Exp $
 \name{fitted.nlmeStruct}
 \title{Calculate nlmeStruct Fitted Values}
 \usage{
-fitted(object, levels, nlmeFit, conLin)
+\method{fitted}{nlmeStruct}(object, level, conLin, ...)
 }
 \alias{fitted.nlmeStruct}
 \arguments{
@@ -21,6 +21,8 @@ fitted(object, levels, nlmeFit, conLin)
    matrix (\code{X}) combined with a response vector (\code{y}), and 
    \code{"logLik"}, corresponding to the log-likelihood of the
    underlying nlme model. Defaults to \code{attr(object, "conLin")}.}
+ \item{\dots}{additional arguments that could be given to this method.
+   None are used.}
 }
 \description{
   The fitted values at level \eqn{i} are obtained by adding together the

@@ -1,8 +1,8 @@
-% $Id: predict.lme.Rd,v 1.4 2000/07/03 18:22:48 bates Exp $
+% $Id: predict.lme.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
 \name{predict.lme}
 \title{Predictions from an lme Object}
 \usage{
-predict(object, newdata, level, asList, na.action)
+\method{predict}{lme}(object, newdata, level, asList, na.action)
 }
 \alias{predict.lme}
 \arguments{

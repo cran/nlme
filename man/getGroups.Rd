@@ -1,8 +1,8 @@
-% $Id: getGroups.Rd,v 1.3 2000/07/03 18:22:47 bates Exp $
+% $Id: getGroups.Rd,v 1.4 2001/06/18 21:16:50 bates Exp $
 \name{getGroups}
 \title{Extract Grouping Factors from an Object}
 \usage{
-getGroups(object, form, level, data)
+getGroups(object, form, level, data, sep)
 }
 \alias{getGroups}
 \arguments{
@@ -16,6 +16,8 @@ getGroups(object, form, level, data)
    defaults to all levels of nesting.}
  \item{data}{a data frame in which to interpret the variables named in
    \code{form}. Optional for most methods.}
+ \item{sep}{character, the separator to use between group levels when
+   multiple levels are collapsed.  The default is \code{'/'}.}
 }
 \description{
   This function is generic; method functions can be written to handle

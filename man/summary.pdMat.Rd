@@ -1,8 +1,8 @@
-% $Id: summary.pdMat.Rd,v 1.4 2000/07/03 18:22:48 bates Exp $
+% $Id: summary.pdMat.Rd,v 1.6 2001/06/20 16:55:20 bates Exp $
 \name{summary.pdMat}
 \title{Summarize a pdMat Object}
 \usage{
-summary(object, structName, noCorrelation)
+\method{summary}{pdMat}(object, structName, noCorrelation)
 }
 \alias{summary.pdMat}
 \alias{summary.pdBlocked}
@@ -10,8 +10,8 @@ summary(object, structName, noCorrelation)
 \alias{summary.pdDiag}
 \alias{summary.pdIdent}
 \alias{summary.pdNatural}
-
-
+\alias{summary.pdSymm}
+\alias{summary.pdLogChol}
 \arguments{
  \item{object}{an object inheriting from class \code{pdMat}, representing
    a positive definite matrix.} 

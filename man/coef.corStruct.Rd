@@ -1,8 +1,8 @@
-% $Id: coef.corStruct.Rd,v 1.4 2000/07/03 18:22:46 bates Exp $
+% $Id: coef.corStruct.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
 \name{coef.corStruct}
 \title{Coefficients of a corStruct Object}
 \usage{
-coef(object, unconstrained)
+\method{coef}{corStruct}(object, unconstrained)
 coef(object) <- value
 }
 \alias{coef.corStruct}
@@ -22,6 +22,7 @@ coef(object) <- value
 \alias{coef<-.corARMA}   
 \alias{coef<-.corCAR1}   
 \alias{coef<-.corCompSymm}
+\alias{coef<-.corNatural}
 \alias{coef<-.corHF}
 \alias{coef<-.corIdent}  
 \alias{coef<-.corLin}

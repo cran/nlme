@@ -1,4 +1,4 @@
-% $Id: print.corStruct.Rd,v 1.5 2001/03/30 16:50:52 bates Exp $
+% $Id: print.corStruct.Rd,v 1.6 2001/06/20 16:55:20 bates Exp $
 \name{print.corStruct}
 \title{Print a corStruct Object}
 \usage{
@@ -9,7 +9,6 @@
 \alias{print.corStruct}
 \alias{print.corHF}
 \alias{print.corSymm}
-
 \arguments{
  \item{x}{an object inheriting from class \code{corStruct}, representing
    a correlation structure.}
@@ -24,9 +23,7 @@
   the printed coefficients of \code{x} in constrained form.
 }
 \author{Jose Pinheiro and Douglas Bates}
-
 \seealso{\code{\link{print.default}}, \code{\link{coef.corStruct}}}
-
 \examples{
 cs1 <- corAR1(0.3)
 print(cs1)

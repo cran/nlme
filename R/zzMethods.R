@@ -1,4 +1,4 @@
-### $Id: zzMethods.R,v 1.2 2001/01/10 19:04:03 bates Exp $
+### $Id: zzMethods.R,v 1.3 2001/06/18 21:16:49 bates Exp $
 ###
 ###   Miscellaneous methods that must be defined last in the library
 ###
@@ -21,16 +21,18 @@
 ### Software Foundation, Inc., 59 Temple Place - Suite 330, Boston,
 ### MA 02111-1307, USA
 
+## Note that  require( nls )  has already happened ...
+
 AIC.lme <- AIC.lmList <- AIC.gls <- AIC.lm
 BIC.lme <- BIC.lmList <- BIC.gls <- BIC.lm
 
-comparePred.lme <- comparePred.lmList <- comparePred.gls
+comparePred.lme <- comparePred.lmList <- .Alias(comparePred.gls)
 
-getData.nlme <- getData.gnls
+getData.nlme <- .Alias(getData.gnls)
 
-getData.lme <- getData.gls <- getData.nls
+getData.lme <- getData.gls <- .Alias(getData.nls)
 
-qqnorm.gls <- qqnorm.lm <- qqnorm.nls
+qqnorm.gls <- qqnorm.lm <- .Alias(qqnorm.nls)
 
-plot.lme <- plot.nls
+plot.lme <- .Alias(plot.nls)
 

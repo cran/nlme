@@ -1,8 +1,8 @@
-% $Id: Names.formula.Rd,v 1.3 2000/07/03 18:22:46 bates Exp $
+% $Id: Names.formula.Rd,v 1.4 2001/06/18 21:16:50 bates Exp $
 \name{Names.formula}
 \title{Extract Names from a formula}
 \usage{
-Names(object, data, exclude)
+\method{Names}{formula}(object, data, exclude)
 }
 \alias{Names.formula}
 \alias{Names.listForm}

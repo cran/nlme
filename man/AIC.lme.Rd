@@ -1,17 +1,20 @@
-% $Id: AIC.Rd,v 1.5 2001/06/20 16:55:20 bates Exp $
-\name{AIC}
+% $Id: AIC.lme.Rd,v 1.1 2001/06/18 21:16:50 bates Exp $
+\name{AIC.lme}
 \title{Akaike Information Criterion}
 \usage{
-AIC(object, \dots)
+\method{AIC}{lme}(object, ..., k)
 }
-\alias{AIC}
-\alias{AIC.nls}
-\alias{AIC.nlsList}
+\alias{AIC.lmList}
+\alias{AIC.gls}
+\alias{AIC.lme}
+\alias{AIC.nlme}
 \arguments{
  \item{object}{a fitted model object, for which there exists a
  \code{logLik} method to extract the corresponding log-likelihood, or
  an object inheriting from class \code{logLik}.}
  \item{\dots}{optional fitted model objects.}
+ \item{k}{numeric, the ``penalty'' per parameter to be used; the default
+   \code{k = 2} is the classical AIC.}
 }
 \description{
 This generic function calculates the Akaike information criterion for

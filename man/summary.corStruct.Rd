@@ -1,9 +1,9 @@
-% $Id: summary.corStruct.Rd,v 1.5 2001/01/10 19:21:05 bates Exp $
+% $Id: summary.corStruct.Rd,v 1.6 2001/06/18 21:16:50 bates Exp $
 \name{summary.corStruct}
 %\title{Summarize \code{corStruct} Object}
 \title{Summarize a corStruct Object}
 \usage{
-summary(object, structName)
+\method{summary}{corStruct}(object, structName)
 }
 \alias{summary.corStruct}
 \alias{summary.corAR1}

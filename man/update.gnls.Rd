@@ -1,8 +1,8 @@
-% $Id: update.gnls.Rd,v 1.6 2001/01/10 19:21:05 bates Exp $
+% $Id: update.gnls.Rd,v 1.7 2001/06/18 21:16:50 bates Exp $
 \name{update.gnls}
 \title{Update a gnls Object}
 \usage{
-update(object, model, data, params, start, correlation, weights, subset,
+\method{update}{gnls}(object, model, data, params, start, correlation, weights, subset,
        na.action, naPattern, control, verbose) 
 }
 

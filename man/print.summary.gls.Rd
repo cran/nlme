@@ -1,8 +1,8 @@
-% $Id: print.summary.gls.Rd,v 1.5 2001/01/10 19:21:05 bates Exp $
+% $Id: print.summary.gls.Rd,v 1.6 2001/06/18 21:16:50 bates Exp $
 \name{print.summary.gls}
 \title{Print a summary.gls Object}
 \usage{
-print(x, verbose, ...)
+\method{print}{summary.gls}(x, verbose, digits, ...)
 }
 \alias{print.summary.gls}
 \arguments{
@@ -10,6 +10,9 @@ print(x, verbose, ...)
    representing a summarized \code{gls} object.}
  \item{verbose}{an optional logical value used to control the amount of
    printed output. Defaults to \code{FALSE}.}
+ \item{digits}{an optional integer value specifying the number of
+   significant digits to print for numeric values.  Defaults to
+   \code{options("digits").  Probably not used.}
  \item{\dots}{optional arguments passed to \code{print.default}; see
    the documentation on that method function.}
 }

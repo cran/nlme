@@ -1,13 +1,24 @@
-% $Id: getGroups.gls.Rd,v 1.5 2001/01/10 19:21:04 bates Exp $
+% $Id: getGroups.gls.Rd,v 1.6 2001/06/18 21:16:50 bates Exp $
 \name{getGroups.gls}
 \title{Extract gls Object Groups}
 \usage{
-getGroups(object)
+\method{getGroups}{gls}(object, form, level, data, sep)
 }
 \alias{getGroups.gls}
 \arguments{
  \item{object}{an object inheriting from class \code{gls}, representing
    a generalized least squares fitted linear model.}
+ \item{form}{an optional formula with a conditioning expression on its
+   right hand side (i.e. an expression involving the \code{|}
+   operator). Defaults to \code{formula(object)}.  Not used.}
+ \item{level}{a positive integer vector with the level(s) of grouping to
+   be used when multiple nested levels of grouping are present. This
+   argument is optional for most methods of this generic function and
+   defaults to all levels of nesting.  Not used.}
+ \item{data}{a data frame in which to interpret the variables named in
+   \code{form}. Optional for most methods.  Not used.}
+ \item{sep}{character, the separator to use between group levels when
+   multiple levels are collapsed.  The default is \code{'/'}.  Not used.}
 }
 \description{
   If present, the grouping factor associated to the correlation

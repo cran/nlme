@@ -1,8 +1,8 @@
-% $Id: print.gls.Rd,v 1.5 2001/01/10 19:21:05 bates Exp $
+% $Id: print.gls.Rd,v 1.6 2001/06/18 21:16:50 bates Exp $
 \name{print.gls}
 \title{Print a gls Object}
 \usage{
-print(x, ...)
+\method{print}{gls}(x, ...)
 }
 \alias{print.gls}
 \arguments{

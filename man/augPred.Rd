@@ -1,8 +1,8 @@
-% $Id: augPred.Rd,v 1.5 2001/01/10 19:21:04 bates Exp $
+% $Id: augPred.Rd,v 1.6 2001/06/18 21:16:50 bates Exp $
 \name{augPred}
 \title{Augmented Predictions}
 \usage{
-augPred(object, primary, minimum, maximum, length.out, level, ...)
+augPred(object, primary, minimum, maximum, length.out, ...)
 }
 \alias{augPred}
 \alias{augPred.gls}
@@ -23,10 +23,10 @@ augPred(object, primary, minimum, maximum, length.out, level, ...)
  \item{length.out}{an optional integer with the number of primary
    covariate values at which to evaluate the predictions. Defaults to
    51.}
- \item{level}{an optional integer vector specifying the desired
-   prediction levels. Levels increase from outermost to innermost
-   grouping, with level 0 representing the population (fixed effects)
-   predictions. Defaults to the innermost level.}
+%   \item{level}{an optional integer vector specifying the desired
+%     prediction levels. Levels increase from outermost to innermost
+%     grouping, with level 0 representing the population (fixed effects)
+%     predictions. Defaults to the innermost level.}
  \item{\dots}{some methods for the generic may require additional
    arguments.}
 }

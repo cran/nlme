@@ -1,8 +1,8 @@
-% $Id: predict.nlme.Rd,v 1.6 2001/01/10 19:21:05 bates Exp $
+% $Id: predict.nlme.Rd,v 1.7 2001/06/18 21:16:50 bates Exp $
 \name{predict.nlme}
 \title{Predictions from an nlme Object}
 \usage{
-predict(object, newdata, level, asList, na.action, naPattern)
+\method{predict}{nlme}(object, newdata, level, asList, na.action, naPattern)
 }
 \alias{predict.nlme}
 \arguments{

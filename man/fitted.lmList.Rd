@@ -1,8 +1,8 @@
-% $Id: fitted.lmList.Rd,v 1.4 2000/07/03 18:22:46 bates Exp $
+% $Id: fitted.lmList.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
 \name{fitted.lmList}
 \title{Extract lmList Fitted Values}
 \usage{
-fitted(object, subset, asList)
+\method{fitted}{lmList}(object, subset, asList)
 }
 \alias{fitted.lmList}
 \arguments{

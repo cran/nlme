@@ -1,8 +1,8 @@
-% $Id: residuals.gnls.Rd,v 1.4 2000/07/03 18:22:48 bates Exp $
+% $Id: residuals.gnls.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
 \name{residuals.gnls}
 \title{Extract gnls Residuals}
 \usage{
-residuals(object, type)
+\method{residuals}{gnls}(object, type)
 }
 \alias{residuals.gnls}
 \arguments{

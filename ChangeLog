@@ -1,3 +1,19 @@
+2001-06-20  Douglas Bates  <bates@stat.wisc.edu>
+
+	* R/varFunc.R: Changes in calling sequences and in documentation
+	so the package passes codoc() checks.  These affect many files in
+	both the R and the man directory.  No changes of substance.
+
+2001-05-29  Martin Maechler <maechler@stat.math.ethz.ch>
+
+	* R/zzMethods.R: Use .Alias() 
+	
+	* R/newGenerics.R:  Generic AIC()
+	* R/newMethods.R:   logLik.lm()   moved to "base R"
+	* man/AIC.Rd,   
+	* man/AIC.logLik.Rd: AIC.logLik() and AIC.lm() as well
+	* man/logLik.lm.Rd: 
+
 2001-03-28  Douglas Bates  <bates@stat.wisc.edu>
 
 	* R/simulate.R: Modified simulate.lme for default pdMat class of

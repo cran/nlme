@@ -1,9 +1,9 @@
-% $Id: Names.pdMat.Rd,v 1.4 2000/07/03 18:22:46 bates Exp $
+% $Id: Names.pdMat.Rd,v 1.7 2001/06/20 16:55:20 bates Exp $
 \name{Names.pdMat}
 \title{Names of a pdMat Object}
 \usage{
-Names(object)
-Names(object) <- value
+\method{Names}{pdMat}(object)
+Names(object, \dots) <- value
 }
 \alias{Names.pdMat}
 \alias{Names<-.pdMat}
@@ -16,6 +16,8 @@ Names(object) <- value
    represented by \code{object} and, if names have been previously
    assigned to \code{object}, it must correspond to a permutation of the
    original names.}
+  \item{\dots}{some methods for the generic function require additional
+   arguments. Not used.}
 }
 \description{
   This method function returns the fist element of the \code{Dimnames}

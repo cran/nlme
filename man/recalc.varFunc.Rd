@@ -1,10 +1,11 @@
-% $Id: recalc.varFunc.Rd,v 1.3 2000/07/03 18:22:48 bates Exp $
+% $Id: recalc.varFunc.Rd,v 1.4 2001/06/18 21:16:50 bates Exp $
 \name{recalc.varFunc}
 \title{Recalculate for varFunc Object}
 \usage{
-recalc(object, conLin)
+\method{recalc}{varFunc}(object, conLin)
 }
 \alias{recalc.varFunc}
+\alias{recalc.varIdent}
 \arguments{
  \item{object}{an object inheriting from class \code{varFunc},
    representing a variance function structure.} 

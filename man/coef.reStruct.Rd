@@ -1,8 +1,8 @@
-% $Id: coef.reStruct.Rd,v 1.4 2000/07/03 18:22:46 bates Exp $
+% $Id: coef.reStruct.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
 \name{coef.reStruct}
 \title{reStruct Object Coefficients}
 \usage{
-coef(object, unconstrained)
+\method{coef}{reStruct}(object, unconstrained)
 coef(object) <- value
 }
 \alias{coef.reStruct}

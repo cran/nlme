@@ -1,8 +1,8 @@
-% $Id: residuals.lme.Rd,v 1.4 2000/07/03 18:22:48 bates Exp $
+% $Id: residuals.lme.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
 \name{residuals.lme}
 \title{Extract lme Residuals}
 \usage{
-residuals(object, level, type, asList)
+\method{residuals}{lme}(object, level, type, asList)
 }
 \alias{residuals.lme}
 \arguments{

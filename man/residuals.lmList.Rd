@@ -1,8 +1,8 @@
-% $Id: residuals.lmList.Rd,v 1.4 2000/07/03 18:22:48 bates Exp $
+% $Id: residuals.lmList.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
 \name{residuals.lmList}
 \title{Extract lmList Residuals}
 \usage{
-residuals(object, type, subset, asList)
+\method{residuals}{lmList}(object, type, subset, asList)
 }
 \alias{residuals.lmList}
 \arguments{

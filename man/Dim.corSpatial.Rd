@@ -1,8 +1,8 @@
-% $Id: Dim.corSpatial.Rd,v 1.4 2000/07/03 18:22:45 bates Exp $
+% $Id: Dim.corSpatial.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
 \name{Dim.corSpatial}
 \title{Dimensions of a corSpatial Object}
 \usage{
-Dim(object, groups)
+\method{Dim}{corSpatial}(object, groups)
 }
 \alias{Dim.corSpatial}
 \arguments{

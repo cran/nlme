@@ -1,4 +1,4 @@
-### $Id: nlme.R,v 1.4 2001/01/10 19:04:03 bates Exp $
+### $Id: nlme.R,v 1.5 2001/06/18 21:16:49 bates Exp $
 ###
 ###            Fit a general nonlinear mixed effects model
 ###
@@ -1347,19 +1347,19 @@ update.nlme <-
 
 nlmeStruct <-
   ## constructor for nlmeStruct objects
-  function(reStruct, corStruct = NULL, varStruct = NULL, resp = NULL,
-           model = NULL, local = NULL, N = NULL, naPat = NULL)
+  function(reStruct, corStruct = NULL, varStruct = NULL)#, resp = NULL,
+           #model = NULL, local = NULL, N = NULL, naPat = NULL)
 {
 
   val <- list(reStruct = reStruct, corStruct = corStruct,
               varStruct = varStruct)
   val <- val[!sapply(val, is.null)]	# removing NULL components
   attr(val, "settings") <- attr(val$reStruct, "settings")
-  attr(val, "resp") <- resp
-  attr(val, "model") <- model
-  attr(val, "local") <- local
-  attr(val, "N") <- N
-  attr(val, "naPat") <- naPat
+#  attr(val, "resp") <- resp
+#  attr(val, "model") <- model
+#  attr(val, "local") <- local
+#  attr(val, "N") <- N
+#  attr(val, "naPat") <- naPat
   class(val) <- c("nlmeStruct", "lmeStruct", "modelStruct")
   val
 }

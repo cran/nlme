@@ -1,8 +1,8 @@
-% $Id: as.matrix.corStruct.Rd,v 1.4 2000/07/03 18:22:46 bates Exp $
+% $Id: as.matrix.corStruct.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
 \name{as.matrix.corStruct}
 \title{Matrix of a corStruct Object}
 \usage{
-as.matrix(x)
+\method{as.matrix}{corStruct}(x)
 }
 \alias{as.matrix.corStruct}
 \arguments{

@@ -1,8 +1,8 @@
-% $Id: recalc.corStruct.Rd,v 1.3 2000/07/03 18:22:48 bates Exp $
+% $Id: recalc.corStruct.Rd,v 1.4 2001/06/18 21:16:50 bates Exp $
 \name{recalc.corStruct}
 \title{Recalculate for corStruct Object}
 \usage{
-recalc(object, conLin)
+\method{recalc}{corStruct}(object, conLin)
 }
 \alias{recalc.corStruct}
 \alias{recalc.corAR1}
@@ -11,6 +11,7 @@ recalc(object, conLin)
 \alias{recalc.corCompSymm}
 \alias{recalc.corHF}
 \alias{recalc.corIdent}
+\alias{recalc.corNatural}
 \alias{recalc.corSpatial}
 \alias{recalc.corSymm}
 

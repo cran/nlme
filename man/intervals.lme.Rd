@@ -1,10 +1,11 @@
-% $Id: intervals.lme.Rd,v 1.4 2000/07/03 18:22:47 bates Exp $
+% $Id: intervals.lme.Rd,v 1.6 2001/06/20 16:55:20 bates Exp $
 \name{intervals.lme}
 \title{Confidence Intervals on lme Parameters}
 \usage{
-intervals(object, level, which)
+\method{intervals}{lme}(object, level, which)
 }
 \alias{intervals.lme}
+\alias{print.intervals.lme}
 \arguments{
  \item{object}{an object inheriting from class \code{lme}, representing
    a fitted linear mixed-effects model.}

@@ -1,8 +1,8 @@
-% $Id: nlsList.selfStart.Rd,v 1.5 2001/01/10 19:21:05 bates Exp $
+% $Id: nlsList.selfStart.Rd,v 1.6 2001/06/18 21:16:50 bates Exp $
 \name{nlsList.selfStart}
 \title{nlsList Fit from a selfStart Function}
 \usage{
-nlsList(model, data, start, control, level, na.action, pool)
+\method{nlsList}{selfStart}(model, data, start, control, level, subset, na.action, pool)
 }
 \alias{nlsList.selfStart}
 \arguments{

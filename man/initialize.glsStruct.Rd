@@ -1,8 +1,8 @@
-% $Id: initialize.glsStruct.Rd,v 1.3 2000/07/03 18:22:47 bates Exp $
+% $Id: initialize.glsStruct.Rd,v 1.4 2001/06/18 21:16:50 bates Exp $
 \name{initialize.glsStruct}
 \title{Initialize a glsStruct Object}
 \usage{
-initialize(object, data, control)
+\method{initialize}{glsStruct}(object, data, control)
 }
 \alias{initialize.glsStruct}
 \arguments{

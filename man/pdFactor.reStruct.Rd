@@ -1,11 +1,10 @@
-% $Id: pdFactor.reStruct.Rd,v 1.4 2000/07/03 18:22:48 bates Exp $
+% $Id: pdFactor.reStruct.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
 \name{pdFactor.reStruct}
 \title{Extract Square-Root Factor from Components of an reStruct Object}
 \usage{
-pdFactor(object)
+\method{pdFactor}{reStruct}(object)
 }
 \alias{pdFactor.reStruct}
-
 \arguments{
  \item{object}{an object inheriting from class \code{reStruct},
    representing a random effects structure and consisting of a list of

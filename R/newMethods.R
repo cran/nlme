@@ -1,4 +1,4 @@
-### $Id: newMethods.R,v 1.4 2001/03/30 16:50:52 bates Exp $
+### $Id: newMethods.R,v 1.5 2001/06/18 21:16:49 bates Exp $
 ###
 ###      Methods for generics from newGenerics.q for some standard classes
 ###
@@ -24,28 +24,32 @@
 
 ##*## Methods for some of the generics in newGenerics.q for standard classes
 
-AIC.logLik <-
-  ## AIC for logLik objects
-  function(object)
-{
-  -2 * (c(object) - attr(object, "df"))
-}
+if(R.version$major <= 1 && R.version$minor < 3) {
+ ## not needed in R 1.3 and later
 
-AIC.lm <- AIC.nls <-
-  ## AIC for various fitted objects
-  function(object, ...)
-{
-  if((rt <- nargs()) > 1) {
-    object <- list(object, ...)
-    val <- lapply(object, logLik)
-    val <-
-      as.data.frame(t(sapply(val, function(el) c(attr(el, "df"), AIC(el)))))
-    names(val) <- c("df", "AIC")
-    row.names(val) <- as.character(match.call()[-1])
-    val
-  } else {
-    AIC(logLik(object))
-  }
+ AIC.logLik <-
+   ## AIC for logLik objects
+   function(object)
+ {
+   -2 * (c(object) - attr(object, "df"))
+ }
+
+ AIC.lm <- AIC.nls <-
+   ## AIC for various fitted objects
+   function(object, ...)
+ {
+   if((rt <- nargs()) > 1) {
+     object <- list(object, ...)
+     val <- lapply(object, logLik)
+     val <-
+       as.data.frame(t(sapply(val, function(el) c(attr(el, "df"), AIC(el)))))
+     names(val) <- c("df", "AIC")
+     row.names(val) <- as.character(match.call()[-1])
+     val
+   } else {
+     AIC(logLik(object))
+   }
+ }
 }
 
 BIC.logLik <-
@@ -75,7 +79,7 @@ BIC.lm <- BIC.nls <-
 Dim.default <- function(object) dim(object)
 
 getCovariate.data.frame <-
-  function(object, form = formula(object), data)
+  function(object, form = formula(object))
 {
   ## Return the primary covariate
   if (!(inherits(form, "formula"))) {
@@ -218,35 +222,6 @@ getGroupsFormula.default <-
                                collapse = sep)))))
 }
 
-logLik.lm <-
-  ## log-likelihood for lm objects
-  function(object, REML = FALSE)
-{
-  res <- resid(object)
-  p <- object$rank
-  N <- length(res)
-  if(is.null(w <- object$weights)) {
-    w <- rep(1, N)
-  } else {
-    excl <- w == 0			# eliminating zero weights
-    if (any(excl)) {
-      res <- res[!excl]
-      N <- length(res)
-      w <- w[!excl]
-    }
-  }
-
-  N <- N - p * REML
-  val <- (sum(log(w)) -N * (log(2 * pi) + 1 - log(N) +
-           log(sum(w*res^2))))/2 -
-             REML * sum(log(abs(diag(object$qr$qr)[1:p])))
-  attr(val, "nall") <- N + REML * p
-  attr(val, "df") <- p + 1
-  attr(val, "nobs") <- N
-  class(val) <- "logLik"
-  val
-}
-
 Names.formula <-
   function(object, data = list(), exclude = c("pi", "."))
 {
@@ -290,6 +265,7 @@ needUpdate.default <-
   else TRUE
 }
 
+##--- needs Trellis/Lattice :
 pairs.compareFits <-
   function(object, subset, key = TRUE, ...)
 {
@@ -350,6 +326,7 @@ pairs.compareFits <-
   if(dims[3] > 2) do.call("splom", args) else do.call("xyplot", args)
 }
 
+##--- needs Trellis/Lattice :
 plot.nls <-
   function(object, form = resid(., type = "pearson") ~ fitted(.), abline,
 	   id = NULL, idLabels = NULL, idResType = c("pearson", "normalized"),
@@ -772,9 +749,8 @@ print.correlation <-
   invisible(x)
 }
 
-print.logLik <-
-  function(x, ...) print(c(x), ...)
-
+##if(R.version$major <= 1 && R.version$minor < 3) ## not in R 1.3 and later
+##--- needs Trellis/Lattice :
 qqnorm.nls <-
   function(object, form = ~ resid(., type = "p"), abline = NULL,
            id = NULL, idLabels = NULL, grid = FALSE, ...)

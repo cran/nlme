@@ -1,8 +1,8 @@
-% $Id: fitted.gls.Rd,v 1.5 2001/01/10 19:21:04 bates Exp $
+% $Id: fitted.gls.Rd,v 1.6 2001/06/18 21:16:50 bates Exp $
 \name{fitted.gls}
 \title{Extract gls Fitted Values}
 \usage{
-fitted(object)
+\method{fitted}{gls}(object)
 }
 \alias{fitted.gls}
 \arguments{

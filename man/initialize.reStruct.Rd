@@ -1,8 +1,8 @@
-% $Id: initialize.reStruct.Rd,v 1.3 2000/07/03 18:22:47 bates Exp $
+% $Id: initialize.reStruct.Rd,v 1.4 2001/06/18 21:16:50 bates Exp $
 \name{initialize.reStruct}
 \title{Initialize reStruct Object}
 \usage{
-initialize(object, data, conLin, control)
+\method{initialize}{reStruct}(object, data, conLin, control)
 }
 \alias{initialize.reStruct}
 \arguments{

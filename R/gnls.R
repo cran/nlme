@@ -1,4 +1,4 @@
-### $Id: gnls.R,v 1.3 2001/01/10 19:04:03 bates Exp $
+### $Id: gnls.R,v 1.4 2001/06/18 21:16:49 bates Exp $
 ###
 ###  Fit a general nonlinear regression model with correlated and/or
 ###  heteroscedastic errors
@@ -883,7 +883,7 @@ gnlsControl <-
   function(maxIter = 50, nlsMaxIter = 7, msMaxIter = 50,
 	   minScale = 0.001, tolerance = 1e-6, nlsTol = 0.001,
            msTol = 1e-7, msScale = lmeScale,
-           returnObject = FALSE, msVerbose = FALSE, gradHess = TRUE,
+           returnObject = FALSE, msVerbose = FALSE,
            apVar = TRUE, .relStep = (.Machine$double.eps)^(1/3),
            nlmStepMax = 100.0,
            minAbsParApVar = 0.05)
@@ -891,7 +891,7 @@ gnlsControl <-
   list(maxIter = maxIter, nlsMaxIter = nlsMaxIter, msMaxIter = msMaxIter,
        minScale = minScale, tolerance = tolerance, nlsTol = nlsTol,
        msTol = msTol, msScale = msScale, returnObject = returnObject,
-       msVerbose = msVerbose, gradHess = gradHess, apVar = apVar,
+       msVerbose = msVerbose, apVar = apVar,
        nlmStepMax = nlmStepMax,
        .relStep = .relStep, minAbsParApVar = minAbsParApVar)
 }

@@ -1,8 +1,8 @@
-% $Id: predict.lmList.Rd,v 1.4 2000/07/03 18:22:48 bates Exp $
+% $Id: predict.lmList.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
 \name{predict.lmList}
 \title{Predictions from an lmList Object}
 \usage{
-predict(object, newdata, subset, pool, asList, se.fit)
+\method{predict}{lmList}(object, newdata, subset, pool, asList, se.fit)
 }
 \alias{predict.lmList}
 \arguments{

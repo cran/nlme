@@ -1,8 +1,8 @@
-% $Id: reStruct.Rd,v 1.4 2000/07/03 18:22:48 bates Exp $
+% $Id: reStruct.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
 \name{reStruct}
 \title{Random Effects Structure}
 \usage{
-reStruct(object, pdClass, RML, data)
+reStruct(object, pdClass, REML, data)
 }
 \alias{reStruct}
 \alias{[.reStruct}
@@ -29,7 +29,7 @@ reStruct(object, pdClass, RML, data)
    \code{pdMat} class to be used for the formulas in
    \code{object}. Defaults to \code{"pdSymm"} which corresponds to a
    general positive-definite matrix.}
- \item{RML}{an optional logical value. If \code{TRUE}, the associated
+ \item{REML}{an optional logical value. If \code{TRUE}, the associated
    mixed-effects model will be fitted using restricted maximum
    likelihood; else, if \code{FALSE}, maximum likelihood will be
    used. Defaults to \code{FALSE}.}

@@ -1,8 +1,8 @@
-% $Id: Dim.pdMat.Rd,v 1.4 2000/07/03 18:22:45 bates Exp $
+% $Id: Dim.pdMat.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
 \name{Dim.pdMat}
 \title{Dimensions of a pdMat Object}
 \usage{
-Dim(object)
+\method{Dim}{pdMat}(object)
 }
 \alias{Dim.pdMat}
 \alias{Dim.pdCompSymm}

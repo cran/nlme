@@ -1,9 +1,9 @@
-% $Id: Names.reStruct.Rd,v 1.4 2000/07/03 18:22:46 bates Exp $
+% $Id: Names.reStruct.Rd,v 1.6 2001/06/20 16:55:20 bates Exp $
 \name{Names.reStruct}
 \title{Names of an reStruct Object}
 \usage{
-Names(object)
-Names(object) <- value
+\method{Names}{reStruct}(object)
+Names(object, \dots) <- value
 }
 \alias{Names.reStruct}
 \alias{Names<-.reStruct}
@@ -14,6 +14,8 @@ Names(object) <- value
  \item{value}{a list of character vectors with the replacement values
    for the names of the individual \code{pdMat} objects that form
    \code{object}. It must have the same length as \code{object}.}
+  \item{\dots}{some methods for the generic function require additional
+   arguments. Not used.}
 }
 \description{
   This method function extracts the column names of each of the

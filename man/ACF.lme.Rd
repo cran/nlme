@@ -1,8 +1,8 @@
-% $Id: ACF.lme.Rd,v 1.4 2000/07/03 18:22:45 bates Exp $
+% $Id: ACF.lme.Rd,v 1.6 2001/06/18 21:16:50 bates Exp $
 \name{ACF.lme}
 \title{Autocorrelation Function for lme Residuals}
 \usage{
-ACF(object, maxLag, resType)
+\method{ACF}{lme}(object, maxLag, resType, ...)
 }
 \alias{ACF.lme}
 \arguments{
@@ -20,6 +20,8 @@ ACF(object, maxLag, resType)
     inverse square-root factor of the estimated error correlation
     matrix) are used. Partial matching of arguments is used, so only the
     first character needs to be provided. Defaults to \code{"pearson"}.} 
+ \item{\dots}{some methods for this generic require additional
+   arguments -- not used.} 
 }
 \description{
   This method function calculates the empirical autocorrelation function

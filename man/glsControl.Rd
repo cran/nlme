@@ -1,9 +1,10 @@
-% $Id: glsControl.Rd,v 1.6 2000/07/07 16:06:48 bates Exp $
+% $Id: glsControl.Rd,v 1.7 2001/06/18 21:16:50 bates Exp $
 \name{glsControl}
 \title{Control Values for gls Fit}
 \usage{
 glsControl(maxIter, msMaxIter, tolerance, msTol, msScale, msVerbose,
-           singular.ok, qrTol, returnObject, apVar, nlmStepMax, .relStep) 
+           singular.ok, qrTol, returnObject, apVar, .relStep,
+           nlmStepMax, minAbsParApVar, natural)
 }
 \alias{glsControl}
 \arguments{
@@ -36,10 +37,14 @@ glsControl(maxIter, msMaxIter, tolerance, msTol, msScale, msVerbose,
  \item{apVar}{a logical value indicating whether the approximate
    covariance matrix of the variance-covariance parameters should be
    calculated. Default is \code{TRUE}.}
- \item{nlmStepMax}{stepmax value to be passed to nlm. See
-     \code{\link{nlm}} for details. Default is 100.0}
  \item{.relStep}{relative step for numerical derivatives
    calculations. Default is \code{.Machine$double.eps^(1/3)}.}
+ \item{nlmStepMax}{stepmax value to be passed to nlm. See
+   \code{\link{nlm}} for details. Default is 100.0}
+ \item{minAbsParApVar}{numeric value - minimum absolute parameter value
+   in the approximate variance calculation.  The default is \code{0.05}.}
+ \item{natural}{logical.  Should the natural parameterization be used
+   for the approximate variance calculations?  Default is \code{TRUE}.}
 }
 \description{
   The values supplied in the function call replace the defaults and a

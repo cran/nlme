@@ -1,8 +1,8 @@
-% $Id: summary.lmList.Rd,v 1.4 2000/07/03 18:22:48 bates Exp $
+% $Id: summary.lmList.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
 \name{summary.lmList}
 \title{Summarize an lmList Object}
 \usage{
-summary(object, pool)
+\method{summary}{lmList}(object, pool)
 }
 \alias{summary.lmList}
 \arguments{

@@ -1,8 +1,8 @@
-% $Id: pdFactor.Rd,v 1.5 2000/07/03 21:13:47 bates Exp $
+% $Id: pdFactor.Rd,v 1.7 2001/06/20 16:55:20 bates Exp $
 \name{pdFactor}
 \title{Square-Root Factor of a Positive-Definite Matrix}
 \usage{
-pdFactor(object, ...)
+pdFactor(object)
 }
 \alias{pdFactor}
 \alias{pdFactor.pdBlocked}
@@ -12,14 +12,12 @@ pdFactor(object, ...)
 \alias{pdFactor.pdMat}
 \alias{pdFactor.pdNatural}
 \alias{pdFactor.pdSymm}
+\alias{pdFactor.pdLogChol}
 \arguments{
  \item{object}{an object inheriting from class \code{pdMat}, representing
    a positive definite matrix, which must have been initialized
    (i.e. \code{length(coef(object)) > 0}).} 
- \item{\dots}{some methods for the generic function may require additional
-   arguments.}
 }
-
 \description{
   A square-root factor of the positive-definite matrix represented by
   \code{object} is obtained. Letting \eqn{\Sigma}{S} denote a

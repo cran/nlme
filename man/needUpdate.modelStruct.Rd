@@ -1,11 +1,12 @@
-% $Id: needUpdate.modelStruct.Rd,v 1.4 2000/07/03 18:22:47 bates Exp $
+% $Id: needUpdate.modelStruct.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
 \name{needUpdate.modelStruct}
-%\title{Check if \code{modelStruct} Object Needs Update}
 \title{Check if a modelStruct Object Needs Updating}
 \usage{
-needUpdate(object)
+\method{needUpdate}{modelStruct}(object)
 }
 \alias{needUpdate.modelStruct}
+\alias{needUpdate.corStruct}
+\alias{needUpdate.reStruct}
 \arguments{
  \item{object}{an object inheriting from class \code{modelStruct},
    representing a list of model components, such as \code{corStruct} and

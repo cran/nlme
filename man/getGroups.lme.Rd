@@ -1,8 +1,8 @@
-% $Id: getGroups.lme.Rd,v 1.4 2000/07/03 18:22:47 bates Exp $
+% $Id: getGroups.lme.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
 \name{getGroups.lme}
 \title{Extract lme Object Groups}
 \usage{
-getGroups(object, form, level)
+\method{getGroups}{lme}(object, form, level, data, sep)
 }
 \alias{getGroups.lme}
 \arguments{
@@ -13,6 +13,9 @@ getGroups(object, form, level)
  \item{level}{an optional integer vector giving the level(s) of grouping
    to be extracted from \code{object}. Defaults to the highest or
    innermost level of grouping.}  
+ \item{data}{unused}
+ \item{sep}{character, the separator to use between group levels when
+   multiple levels are collapsed.  The default is \code{'/'}.}
 }
 \description{
   The grouping factors corresponding to the linear mixed-effects model

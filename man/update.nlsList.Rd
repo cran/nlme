@@ -1,9 +1,9 @@
-% $Id: update.nlsList.Rd,v 1.5 2001/01/10 19:21:05 bates Exp $
+% $Id: update.nlsList.Rd,v 1.7 2001/06/18 21:16:50 bates Exp $
 \name{update.nlsList}
 \title{Update an nlsList Object}
 \usage{
-update(object, model, data, start, control, level, subset, na.action,
-       control, pool)
+\method{update}{nlsList}(object, model, data, start, control, level, subset, na.action,
+       pool)
 }
 
 \alias{update.nlsList}

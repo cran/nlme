@@ -1,8 +1,8 @@
-% $Id: summary.gls.Rd,v 1.5 2001/01/10 19:21:05 bates Exp $
+% $Id: summary.gls.Rd,v 1.6 2001/06/18 21:16:50 bates Exp $
 \name{summary.gls}
 \title{Summarize a gls Object}
 \usage{
-summary(object, verbose)
+\method{summary}{gls}(object, verbose)
 }
 \alias{summary.gls}
 \arguments{

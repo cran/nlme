@@ -1,16 +1,14 @@
-% $Id: getResponse.Rd,v 1.3 2000/07/03 18:22:47 bates Exp $
+% $Id: getResponse.Rd,v 1.4 2001/06/18 21:16:50 bates Exp $
 \name{getResponse}
 \title{Extract Response Variable from an Object}
 \usage{
-getResponse(object, form, data)
+getResponse(object, form)
 }
 \alias{getResponse}
 \arguments{
  \item{object}{any object}
  \item{form}{an optional two-sided formula. Defaults to
    \code{formula(object)}.}
- \item{data}{a data frame in which to interpret the variables named in
-   \code{form}. Optional for most methods.}
 }
 \description{
   This function is generic; method functions can be written to handle

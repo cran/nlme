@@ -1,9 +1,9 @@
-% $Id: plot.nmGroupedData.Rd,v 1.4 2000/07/03 18:22:48 bates Exp $
+% $Id: plot.nmGroupedData.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
 \name{plot.nmGroupedData}
 \title{Plot an nmGroupedData Object}
 \usage{
-plot(x, collapseLevel, displayLevel, outer, inner, preserve, FUN,
-    subset, grid, ...) 
+\method{plot}{nmGroupedData}(x, collapseLevel, displayLevel, outer, inner,
+    preserve, FUN, subset, key, grid, ...) 
 }
 \alias{plot.nmGroupedData}
 \arguments{
@@ -70,8 +70,13 @@ plot(x, collapseLevel, displayLevel, outer, inner, preserve, FUN,
    factors. Each element in the list is a vector indicating the levels
    of the corresponding grouping factor to be used for plotting the
    data. Default is \code{NULL}, meaning that all levels are
-   used.
- } 
+   used.} 
+ \item{key}{an optional logical value, or list. If \code{TRUE}, a legend
+   is included at the top of the plot indicating which symbols (colors)
+   correspond to which prediction levels. If \code{FALSE}, no legend
+   is included. If given as a list, \code{key} is passed down as an
+   argument to the \code{trellis} function generating the plots
+   (\code{xyplot}). Defaults to \code{TRUE}.}
  \item{grid}{an optional logical value indicating whether a grid should
    be added to plot. Default is \code{TRUE}.}
  \item{\dots}{optional arguments passed to the Trellis plot function.}

@@ -1,13 +1,15 @@
-% $Id: getResponse.lme.Rd,v 1.4 2000/07/03 18:22:47 bates Exp $
+% $Id: getResponse.lme.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
 \name{getResponse.lme}
 \title{Extract lme Object Response}
 \usage{
-getResponse(object)
+\method{getResponse}{lme}(object, form)
 }
 \alias{getResponse.lme}
 \arguments{
  \item{object}{an object inheriting from class \code{lme}, representing
    a fitted linear mixed-effects model.}
+ \item{form}{an optional two-sided formula. Defaults to
+   \code{formula(object)}.}
 }
 \description{
   This method function extracts the response variable used in fitting

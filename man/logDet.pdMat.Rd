@@ -1,8 +1,8 @@
-% $Id: logDet.pdMat.Rd,v 1.5 2000/07/03 21:13:47 bates Exp $
+% $Id: logDet.pdMat.Rd,v 1.6 2001/06/18 21:16:50 bates Exp $
 \name{logDet.pdMat}
 \title{Extract Log-Determinant from a pdMat Object}
 \usage{
-logDet(object)
+\method{logDet}{pdMat}(object)
 }
 \alias{logDet.pdMat}
 \alias{logDet.pdBlocked}

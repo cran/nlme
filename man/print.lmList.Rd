@@ -1,8 +1,8 @@
-% $Id: print.lmList.Rd,v 1.4 2000/07/03 18:22:48 bates Exp $
+% $Id: print.lmList.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
 \name{print.lmList}
 \title{Print an lmList Object}
 \usage{
-print(x, pool, ...)
+\method{print}{lmList}(x, pool, ...)
 }
 \alias{print.lmList}
 \arguments{

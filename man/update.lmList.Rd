@@ -1,8 +1,8 @@
-% $Id: update.lmList.Rd,v 1.5 2001/01/10 19:21:05 bates Exp $
+% $Id: update.lmList.Rd,v 1.6 2001/06/18 21:16:50 bates Exp $
 \name{update.lmList}
 \title{Update an lmList Object}
 \usage{
-update(object, formula, data, level, subset, na.action, control, pool)
+\method{update}{lmList}(object, formula, data, level, subset, na.action, pool)
 }
 
 \alias{update.lmList}

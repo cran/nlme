@@ -1,8 +1,8 @@
-% $Id: formula.nlme.Rd,v 1.6 2001/01/10 19:21:04 bates Exp $
+% $Id: formula.nlme.Rd,v 1.7 2001/06/18 21:16:50 bates Exp $
 \name{formula.nlme}
 \title{Extract nlme Object Formula}
 \usage{
-formula(object)
+\method{formula}{nlme}(object)
 }
 \alias{formula.nlme}
 \arguments{

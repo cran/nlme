@@ -1,8 +1,8 @@
-% $Id: residuals.gls.Rd,v 1.5 2001/01/10 19:21:05 bates Exp $
+% $Id: residuals.gls.Rd,v 1.6 2001/06/18 21:16:50 bates Exp $
 \name{residuals.gls}
 \title{Extract gls Residuals}
 \usage{
-residuals(object, type)
+\method{residuals}{gls}(object, type)
 }
 \alias{residuals.gls}
 \arguments{

@@ -1,16 +1,22 @@
-% $Id: getGroupsFormula.Rd,v 1.4 2000/07/03 18:22:47 bates Exp $
+% $Id: getGroupsFormula.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
 \name{getGroupsFormula}
 \title{Extract Grouping Formula}
 \usage{
-getGroupsFormula(object, asList)
+getGroupsFormula(object, asList, sep)
 }
 \alias{getGroupsFormula}
 \alias{getGroupsFormula.default}
+\alias{getGroupsFormula.gls}
+\alias{getGroupsFormula.lmList}
+\alias{getGroupsFormula.lme}
+\alias{getGroupsFormula.reStruct}
 \arguments{
  \item{object}{any object from which a formula can be extracted.}
  \item{asList}{an optional logical value. If \code{TRUE} the returned
    value with be a list of formulas; else, if \code{FALSE} the returned
    value will be a one-sided formula. Defaults to \code{FALSE}.}
+ \item{sep}{character, the separator to use between group levels when
+   multiple levels are collapsed.  The default is \code{'/'}.}
 }
 \description{
   The conditioning expression associated with \code{formula(object)}
@@ -27,7 +33,6 @@ getGroupsFormula(object, asList)
   \code{NULL} value is returned.
 }
 \author{Jose Pinheiro and Douglas Bates}
-
 \seealso{
     \code{\link{getGroupsFormula.gls}},
     \code{\link{getGroupsFormula.lmList}},

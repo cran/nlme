@@ -1,8 +1,8 @@
-% $Id: residuals.lmeStruct.Rd,v 1.3 2000/07/03 18:22:48 bates Exp $
+% $Id: residuals.lmeStruct.Rd,v 1.4 2001/06/18 21:16:50 bates Exp $
 \name{residuals.lmeStruct}
 \title{Calculate lmeStruct Residuals}
 \usage{
-residuals(object, levels, lmeFit, conLin)
+\method{residuals}{lmeStruct}(object, level, conLin, lmeFit)
 }
 \alias{residuals.lmeStruct}
 \arguments{
@@ -14,15 +14,15 @@ residuals(object, levels, lmeFit, conLin)
    values increase from outermost to innermost grouping, with
    level zero corresponding to the population fitted values. Defaults to
    the highest or innermost level of grouping.} 
- \item{lmeFit}{an optional list with components \code{beta} and \code{b}
-   containing respectively the fixed effects estimates and the random
-   effects estimates to be used to calculate the residuals. Defaults
-   to \code{attr(object, "lmeFit")}.}
  \item{conLin}{an optional condensed linear model object, consisting of
    a list with components \code{"Xy"}, corresponding to a regression
    matrix (\code{X}) combined with a response vector (\code{y}), and 
    \code{"logLik"}, corresponding to the log-likelihood of the
    underlying lme model. Defaults to \code{attr(object, "conLin")}.}
+ \item{lmeFit}{an optional list with components \code{beta} and \code{b}
+   containing respectively the fixed effects estimates and the random
+   effects estimates to be used to calculate the residuals. Defaults
+   to \code{attr(object, "lmeFit")}.}
 }
 \description{
   The residuals at level \eqn{i} are obtained by subtracting the fitted

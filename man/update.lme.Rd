@@ -1,8 +1,8 @@
-% $Id: update.lme.Rd,v 1.5 2001/01/10 19:21:05 bates Exp $
+% $Id: update.lme.Rd,v 1.6 2001/06/18 21:16:50 bates Exp $
 \name{update.lme}
 \title{Update an lme Object}
 \usage{
-update(object, fixed, data, random, correlation, weights, subset, method,
+\method{update}{lme}(object, fixed, data, random, correlation, weights, subset, method,
        na.action, control)
 }
 

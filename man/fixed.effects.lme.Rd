@@ -1,8 +1,8 @@
-% $Id: fixed.effects.lme.Rd,v 1.4 2000/07/03 18:22:46 bates Exp $
+% $Id: fixed.effects.lme.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
 \name{fixed.effects.lme}
 \title{Extract lme Fixed Effects}
 \usage{
-fixed.effects(object)
+\method{fixed.effects}{lme}(object)
 }
 \alias{fixed.effects.lme}
 \alias{fixef.lme}

@@ -1,10 +1,10 @@
-% $Id: lmeControl.Rd,v 1.6 2001/01/10 19:21:05 bates Exp $
+% $Id: lmeControl.Rd,v 1.7 2001/06/18 21:16:50 bates Exp $
 \name{lmeControl}
 \title{Control Values for lme Fit}
 \usage{
 lmeControl(maxIter, msMaxIter, tolerance, niterEM, msTol,
            msScale, msVerbose, returnObject, gradHess, apVar,
-           nlmStepMax, .relStep, natural)
+           .relStep, minAbsParApVar, nlmStepMax, natural)
 }
 \alias{lmeControl}
 \arguments{
@@ -43,10 +43,12 @@ lmeControl(maxIter, msMaxIter, tolerance, niterEM, msTol,
  \item{apVar}{a logical value indicating whether the approximate
    covariance matrix of the variance-covariance parameters should be
    calculated. Default is \code{TRUE}.}
- \item{nlmStepMax}{stepmax value to be passed to nlm. See
-     \code{\link{nlm}} for details. Default is 100.0}
  \item{.relStep}{relative step for numerical derivatives
    calculations. Default is \code{.Machine$double.eps^(1/3)}.}
+ \item{minAbsParApVar}{numeric value - minimum absolute parameter value
+   in the approximate variance calculation.  The default is \code{0.05}.}
+ \item{nlmStepMax}{stepmax value to be passed to nlm. See
+     \code{\link{nlm}} for details. Default is 100.0}
  \item{natural}{a logical value indicating whether the \code{pdNatural}
    parametrization should be used for general positive-definite matrices
    (\code{pdSymm}) in \code{reStruct}, when the approximate covariance

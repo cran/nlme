@@ -1,15 +1,16 @@
-% $Id: solve.pdMat.Rd,v 1.4 2000/07/03 18:22:48 bates Exp $
+% $Id: solve.pdMat.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
 \name{solve.pdMat}
 \title{Calculate Inverse of a Positive-Definite Matrix}
 \usage{
-solve(a, b, tol)
+\method{solve}{pdMat}(a, b, tol)
 }
 \alias{solve.pdMat}
 \alias{solve.pdBlocked}
 \alias{solve.pdDiag}
 \alias{solve.pdIdent}
+\alias{solve.pdLogChol}
 \alias{solve.pdNatural}
-
+\alias{solve.pdSymm}
 \arguments{
  \item{a}{an object inheriting from class \code{pdMat}, representing
    a positive definite matrix.} 

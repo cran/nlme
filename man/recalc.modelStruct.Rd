@@ -1,9 +1,9 @@
-% $Id: recalc.modelStruct.Rd,v 1.3 2000/07/03 18:22:48 bates Exp $
+% $Id: recalc.modelStruct.Rd,v 1.4 2001/06/18 21:16:50 bates Exp $
 \name{recalc.modelStruct}
 %\title{Recalculate Condensed Linear Model for a \code{modelStruct} Object}
 \title{Recalculate for a modelStruct Object}
 \usage{
-recalc(object, conLin)
+\method{recalc}{modelStruct}(object, conLin)
 }
 \alias{recalc.modelStruct}
 \arguments{

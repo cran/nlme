@@ -1,13 +1,15 @@
-% $Id: getResponse.gls.Rd,v 1.5 2001/01/10 19:21:04 bates Exp $
+% $Id: getResponse.gls.Rd,v 1.6 2001/06/18 21:16:50 bates Exp $
 \name{getResponse.gls}
 \title{Extract gls Object Response}
 \usage{
-getResponse(object)
+\method{getResponse}{gls}(object, form)
 }
 \alias{getResponse.gls}
 \arguments{
  \item{object}{an object inheriting from class \code{gls}, representing
    a generalized least squares fitted linear model.}
+ \item{form}{an optional two-sided formula. Defaults to
+   \code{formula(object)}.}
 }
 \description{
   This method function extracts the response variable used in fitting

@@ -1,9 +1,9 @@
-% $Id: update.gls.Rd,v 1.5 2001/01/10 19:21:05 bates Exp $
+% $Id: update.gls.Rd,v 1.6 2001/06/18 21:16:50 bates Exp $
 \name{update.gls}
 \title{Update a gls Object}
 \usage{
-update(object, model, data, correlation, weights, subset, method,
-       na.action, control)
+\method{update}{gls}(object, model, data, correlation, weights, subset, method,
+       na.action, control, verbose)
 }
 
 \alias{update.gls}

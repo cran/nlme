@@ -1,4 +1,4 @@
-% $Id: simulate.lme.Rd,v 1.4 2000/07/03 18:22:48 bates Exp $
+% $Id: simulate.lme.Rd,v 1.5 2001/06/20 16:55:20 bates Exp $
 \name{simulate.lme}
 \title{simulate lme models}
 \usage{
@@ -6,6 +6,7 @@ simulate.lme(m1, m2, Random.seed, method, nsim, niterEM, useGen)
 }
 \alias{simulate.lme}
 \alias{plot.simulate.lme}
+\alias{print.simulate.lme}
 \arguments{
   \item{m1}{
     an object inheriting from class \code{lme}, representing a fitted

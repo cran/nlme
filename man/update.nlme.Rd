@@ -1,8 +1,8 @@
-% $Id: update.nlme.Rd,v 1.8 2001/01/10 19:21:05 bates Exp $
+% $Id: update.nlme.Rd,v 1.9 2001/06/18 21:16:50 bates Exp $
 \name{update.nlme}
 \title{Update an nlme Object}
 \usage{
-update(object, model, data, fixed, random, groups, start,
+\method{update}{nlme}(object, model, data, fixed, random, groups, start,
        correlation, weights, subset, method, na.action, naPattern,
        control, verbose)
 }

@@ -1,8 +1,8 @@
-% $Id: solve.reStruct.Rd,v 1.4 2000/07/03 18:22:48 bates Exp $
+% $Id: solve.reStruct.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
 \name{solve.reStruct}
 \title{Apply Solve to an reStruct Object}
 \usage{
-solve(a, b, tol)
+\method{solve}{reStruct}(a, b, tol)
 }
 \alias{solve.reStruct}
 \arguments{

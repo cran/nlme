@@ -1,8 +1,8 @@
-% $Id: print.groupedData.Rd,v 1.4 2000/07/03 18:22:48 bates Exp $
+% $Id: print.groupedData.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
 \name{print.groupedData}
 \title{Print a groupedData Object}
 \usage{
-print(x, ...)
+\method{print}{groupedData}(x, ...)
 }
 \alias{print.groupedData}
 \arguments{

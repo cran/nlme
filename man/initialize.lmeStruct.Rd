@@ -1,8 +1,8 @@
-% $Id: initialize.lmeStruct.Rd,v 1.3 2000/07/03 18:22:47 bates Exp $
+% $Id: initialize.lmeStruct.Rd,v 1.4 2001/06/18 21:16:50 bates Exp $
 \name{initialize.lmeStruct}
 \title{Initialize an lmeStruct Object}
 \usage{
-initialize(object, data, groups, conLin, control)
+\method{initialize}{lmeStruct}(object, data, groups, conLin, control)
 }
 \alias{initialize.lmeStruct}
 \arguments{

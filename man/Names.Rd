@@ -1,9 +1,9 @@
-% $Id: Names.Rd,v 1.3 2000/07/03 18:22:46 bates Exp $
+% $Id: Names.Rd,v 1.4 2001/06/20 16:55:20 bates Exp $
 \name{Names}
 \title{Names Associated with an Object}
 \usage{
-Names(object, ...)
-Names(object, ...) <- value
+Names(object, \dots)
+Names(object, \dots) <- value
 }
 \alias{Names}
 \alias{Names<-}

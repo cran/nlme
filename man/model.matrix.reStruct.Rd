@@ -1,8 +1,8 @@
-% $Id: model.matrix.reStruct.Rd,v 1.4 2000/07/03 18:22:47 bates Exp $
+% $Id: model.matrix.reStruct.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
 \name{model.matrix.reStruct}
 \title{reStruct Model Matrix}
 \usage{
-model.matrix(object, data, contr)
+\method{model.matrix}{reStruct}(object, data, contrast)
 }
 \alias{model.matrix.reStruct}
 \arguments{
@@ -11,7 +11,7 @@ model.matrix(object, data, contr)
    \code{pdMat} objects.} 
  \item{data}{a data frame in which to evaluate the variables defined in
    \code{formula(object)}.}
- \item{contr}{an optional named list specifying the contrasts to be used
+ \item{contrast}{an optional named list specifying the contrasts to be used
    for representing the \code{factor} variables in \code{data}. The
    components names should match the names of the variables in
    \code{data} for which the contrasts are to be specified. The

@@ -1,4 +1,4 @@
-### $Id: pdMat.R,v 1.3 2001/01/10 19:04:03 bates Exp $
+### $Id: pdMat.R,v 1.4 2001/06/18 21:16:49 bates Exp $
 ###
 ###              Classes of positive-definite matrices
 ###
@@ -25,7 +25,7 @@
 
 pdConstruct <-
   ## a virtual constructor for these objects
-  function(object, value, ...) UseMethod("pdConstruct")
+  function(object, value, form, nam, data, ...) UseMethod("pdConstruct")
 
 pdFactor <-
   function(object) UseMethod("pdFactor")
@@ -532,7 +532,7 @@ print.summary.pdMat <-
 }
 
 solve.pdMat <-
-  function(a, b)
+  function(a, b, tol)
 {
   if (!isInitialized(a)) {
     stop("Cannot get the inverse of an uninitialized object")

@@ -1,8 +1,8 @@
-% $Id: formula.gls.Rd,v 1.5 2001/01/10 19:21:04 bates Exp $
+% $Id: formula.gls.Rd,v 1.6 2001/06/18 21:16:50 bates Exp $
 \name{formula.gls}
 \title{Extract gls Object Formula}
 \usage{
-formula(object)
+\method{formula}{gls}(object)
 }
 \alias{formula.gls}
 \arguments{

@@ -1,8 +1,8 @@
-% $Id: logLik.varFunc.Rd,v 1.4 2000/07/03 18:22:47 bates Exp $
+% $Id: logLik.varFunc.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
 \name{logLik.varFunc}
 \title{Extract varFunc logLik}
 \usage{
-logLik(object, data)
+\method{logLik}{varFunc}(object, data)
 }
 \alias{logLik.varFunc}
 \alias{logLik.varComb}

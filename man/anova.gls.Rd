@@ -1,8 +1,8 @@
-% $Id: anova.gls.Rd,v 1.4 2000/07/03 18:22:46 bates Exp $
+% $Id: anova.gls.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
 \name{anova.gls}
 \title{Compare Likelihoods of Fitted Objects}
 \usage{
-anova(object, ..., test, type, adjustSigma, Terms, L, verbose)
+\method{anova}{gls}(object, ..., test, type, adjustSigma, Terms, L, verbose)
 }
 \alias{anova.gls}
 \arguments{

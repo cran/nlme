@@ -1,8 +1,8 @@
-% $Id: print.summary.lmList.Rd,v 1.4 2000/07/03 18:22:48 bates Exp $
+% $Id: print.summary.lmList.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
 \name{print.summary.lmList}
 \title{Print a summary.lmList Object}
 \usage{
-print(x, ...)
+\method{print}{summary.lmList}(x, ...)
 }
 \alias{print.summary.lmList}
 \arguments{

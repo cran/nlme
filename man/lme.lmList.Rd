@@ -1,8 +1,8 @@
-% $Id: lme.lmList.Rd,v 1.5 2001/01/10 19:21:04 bates Exp $
+% $Id: lme.lmList.Rd,v 1.6 2001/06/18 21:16:50 bates Exp $
 \name{lme.lmList}
 \title{LME fit from lmList Object}
 \usage{
-lme(fixed, data, random, correlation, weights, subset, method,
+\method{lme}{lmList}(fixed, data, random, correlation, weights, subset, method,
     na.action, control)
 }
 \alias{lme.lmList}

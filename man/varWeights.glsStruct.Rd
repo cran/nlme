@@ -1,8 +1,8 @@
-% $Id: varWeights.glsStruct.Rd,v 1.3 2000/07/03 18:22:49 bates Exp $
+% $Id: varWeights.glsStruct.Rd,v 1.4 2001/06/18 21:16:50 bates Exp $
 \name{varWeights.glsStruct}
 \title{Variance Weights for glsStruct Object}
 \usage{
-varWeights(object)
+\method{varWeights}{glsStruct}(object)
 }
 \alias{varWeights.glsStruct}
 \arguments{

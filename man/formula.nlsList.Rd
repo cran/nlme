@@ -1,8 +1,8 @@
-% $Id: formula.nlsList.Rd,v 1.5 2001/01/10 19:21:04 bates Exp $
+% $Id: formula.nlsList.Rd,v 1.6 2001/06/18 21:16:50 bates Exp $
 \name{formula.nlsList}
 \title{Extract nlsList Object Formula}
 \usage{
-formula(object)
+\method{formula}{nlsList}(object)
 }
 \alias{formula.nlsList}
 \arguments{

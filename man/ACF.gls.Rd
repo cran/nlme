@@ -1,8 +1,8 @@
-% $Id: ACF.gls.Rd,v 1.4 2000/07/03 18:22:45 bates Exp $
+% $Id: ACF.gls.Rd,v 1.6 2001/06/18 21:16:50 bates Exp $
 \name{ACF.gls}
 \title{Autocorrelation Function for gls Residuals}
 \usage{
-ACF(object, maxLag, resType, form, na.action)
+\method{ACF}{gls}(object, maxLag, resType, form, na.action, ...)
 }
 \alias{ACF.gls}
 \arguments{
@@ -32,6 +32,8 @@ ACF(object, maxLag, resType, form, na.action)
     data contain \code{NA}s.  The default action (\code{na.fail}) causes
     \code{ACF.gls} to print an error message and terminate if there are any
     incomplete observations.}
+  \item{\dots}{some methods for this generic require additional
+    arguments.} 
 }
 \description{
   This method function calculates the empirical autocorrelation function

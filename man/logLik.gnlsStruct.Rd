@@ -1,8 +1,8 @@
-% $Id: logLik.gnlsStruct.Rd,v 1.3 2000/07/03 18:22:47 bates Exp $
+% $Id: logLik.gnlsStruct.Rd,v 1.4 2001/06/18 21:16:50 bates Exp $
 \name{logLik.gnlsStruct}
 \title{Log-Likelihood of a gnlsStruct Object}
 \usage{
-logLik(object, Pars, conLin)
+\method{logLik}{gnlsStruct}(object, Pars, conLin)
 }
 \alias{logLik.gnlsStruct}
 

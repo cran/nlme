@@ -1,10 +1,11 @@
-% $Id: intervals.gls.Rd,v 1.5 2001/01/10 19:21:04 bates Exp $
+% $Id: intervals.gls.Rd,v 1.7 2001/06/20 16:55:20 bates Exp $
 \name{intervals.gls}
 \title{Confidence Intervals on gls Parameters}
 \usage{
-intervals(object, level, which)
+\method{intervals}{gls}(object, level, which)
 }
 \alias{intervals.gls}
+\alias{print.intervals.gls}
 \arguments{
  \item{object}{an object inheriting from class \code{gls}, representing
    a generalized least squares fitted linear model.}

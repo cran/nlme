@@ -1,14 +1,16 @@
-% $Id: getResponse.lmList.Rd,v 1.4 2000/07/03 18:22:47 bates Exp $
+% $Id: getResponse.lmList.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
 \name{getResponse.lmList}
 \title{Extract lmList Object Response}
 \usage{
-getResponse(object)
+\method{getResponse}{lmList}(object, form)
 }
 \alias{getResponse.lmList}
 \arguments{
  \item{object}{an object inheriting from class \code{lmList}, representing
    a list of \code{lm} objects with a common model.
  }
+ \item{form}{an optional two-sided formula. Defaults to
+   \code{formula(object)}.}
 }
 \description{
   The response vectors from each of the \code{lm} components of

@@ -1,8 +1,8 @@
-% $Id: fitted.glsStruct.Rd,v 1.3 2000/07/03 18:22:46 bates Exp $
+% $Id: fitted.glsStruct.Rd,v 1.4 2001/06/18 21:16:50 bates Exp $
 \name{fitted.glsStruct}
 \title{Calculate glsStruct Fitted Values}
 \usage{
-fitted(object, glsFit)
+\method{fitted}{glsStruct}(object, glsFit)
 }
 \alias{fitted.glsStruct}
 \arguments{

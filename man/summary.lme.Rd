@@ -1,13 +1,20 @@
-% $Id: summary.lme.Rd,v 1.4 2000/07/03 18:22:48 bates Exp $
+% $Id: summary.lme.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
 \name{summary.lme}
 \title{Summarize an lme Object}
 \usage{
-summary(object, verbose)
+\method{summary}{lme}(object, adjustSigma, verbose)
 }
 \alias{summary.lme}
 \arguments{
  \item{object}{an object inheriting from class \code{lme}, representing
    a fitted linear mixed-effects model.}
+ \item{adjustSigma}{an optional logical value. If \code{TRUE} and the
+   estimation method used to obtain \code{object} was maximum
+   likelihood, the residual standard error is multiplied by
+   \eqn{\sqrt{n_{obs}/(n_{obs} - n_{par})}}{sqrt(nobs/(nobs - npar))},
+   converting it to a REML-like estimate. This argument is only used
+   when a single fitted object is passed to the function. Default is
+   \code{TRUE}.} 
  \item{verbose}{an optional logical value used to control the amount of
    output in the \code{print.summary.lme} method. Defaults to
    \code{FALSE}.} 

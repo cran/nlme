@@ -1,8 +1,8 @@
-% $Id: nlme.nlsList.Rd,v 1.5 2001/01/10 19:21:05 bates Exp $
+% $Id: nlme.nlsList.Rd,v 1.6 2001/06/18 21:16:50 bates Exp $
 \name{nlme.nlsList}
 \title{NLME fit from nlsList Object}
 \usage{
-nlme(model, data, fixed, random, groups, start, correlation, weights,
+\method{nlme}{nlsList}(model, data, fixed, random, groups, start, correlation, weights,
      subset, method, na.action, naPattern, control, verbose)
 }
 \alias{nlme.nlsList}

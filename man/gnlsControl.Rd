@@ -1,10 +1,10 @@
-% $Id: gnlsControl.Rd,v 1.6 2000/07/07 16:06:48 bates Exp $
+% $Id: gnlsControl.Rd,v 1.7 2001/06/18 21:16:50 bates Exp $
 \name{gnlsControl}
 \title{Control Values for gnls Fit}
 \usage{
-gnlsControl(maxIter, nlsMaxIter, msMaxIter, minScale, tolerance, nlsTol,
-            msTol, msScale, returnObject, msVerbose, apVar, nlmStepMax,
-            .relStep) 
+gnlsControl(maxIter, nlsMaxIter, msMaxIter, minScale, tolerance,
+            nlsTol, msTol, msScale, returnObject, msVerbose,
+            apVar, .relStep, nlmStepMax, minAbsParApVar)
 }
 \alias{gnlsControl}
 \arguments{
@@ -39,10 +39,12 @@ gnlsControl(maxIter, nlsMaxIter, msMaxIter, minScale, tolerance, nlsTol,
  \item{apVar}{a logical value indicating whether the approximate
    covariance matrix of the variance-covariance parameters should be
    calculated. Default is \code{TRUE}.}
- \item{nlmStepMax}{stepmax value to be passed to nlm. See
-     \code{\link{nlm}} for details. Default is 100.0}
  \item{.relStep}{relative step for numerical derivatives
    calculations. Default is \code{.Machine$double.eps^(1/3)}.}
+ \item{nlmStepMax}{stepmax value to be passed to nlm. See
+     \code{\link{nlm}} for details. Default is 100.0}
+ \item{minAbsParApVar}{numeric value - minimum absolute parameter value
+   in the approximate variance calculation.  The default is \code{0.05}.}
 }
 \description{
   The values supplied in the function call replace the defaults and a

@@ -1,12 +1,13 @@
-% $Id: random.effects.lme.Rd,v 1.4 2000/07/03 18:22:48 bates Exp $
+% $Id: random.effects.lme.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
 \name{random.effects.lme}
 \title{Extract lme Random Effects}
 \usage{
-random.effects(object, augFrame, level, data, which, FUN, standard, 
+\method{random.effects}{lme}(object, augFrame, level, data, which, FUN, standard, 
                omitGroupingFactor)
 }
 \alias{random.effects.lme}
 \alias{ranef.lme}
+\alias{print.ranef.lme}
 \arguments{
  \item{object}{an object inheriting from class \code{lme}, representing
    a fitted linear mixed-effects model.}

@@ -1,8 +1,8 @@
-% $Id: fixed.effects.lmList.Rd,v 1.4 2000/07/03 18:22:46 bates Exp $
+% $Id: fixed.effects.lmList.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
 \name{fixed.effects.lmList}
 \title{Extract lmList Fixed Effects}
 \usage{
-fixed.effects(object)
+\method{fixed.effects}{lmList}(object)
 }
 \alias{fixed.effects.lmList}
 \alias{fixef.lmList}

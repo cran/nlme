@@ -1,8 +1,8 @@
-% $Id: pairs.lmList.Rd,v 1.6 2001/03/30 16:50:52 bates Exp $
+% $Id: pairs.lmList.Rd,v 1.7 2001/06/18 21:16:50 bates Exp $
 \name{pairs.lmList}
 \title{Pairs Plot of an lmList Object}
 \usage{
-pairs(object, form, label, id, idLabels, grid, ...)
+\method{pairs}{lmList}(object, form, label, id, idLabels, grid, ...)
 }
 \alias{pairs.lmList}
 \arguments{

@@ -1,8 +1,8 @@
-% $Id: lmList.Rd,v 1.5 2001/01/10 19:21:04 bates Exp $
+% $Id: lmList.Rd,v 1.6 2001/06/18 21:16:50 bates Exp $
 \name{lmList}
 \title{List of lm Objects with a Common Model}
 \usage{
-lmList(object, data, level, na.action, pool)
+lmList(object, data, level, subset, na.action, pool)
 }
 \alias{lmList}
 \alias{lmList.formula}
@@ -26,6 +26,11 @@ lmList(object, data, level, na.action, pool)
     an optional integer specifying the level of grouping to be used when 
     multiple nested levels of grouping are present.
   }
+ \item{subset}{an optional expression indicating which subset of the rows of
+   \code{data} should  be  used in the fit. This can be a logical
+   vector, or a numeric vector indicating which observation numbers are
+   to be included, or a  character  vector of the row names to be
+   included.  All observations are included by default.}
  \item{na.action}{a function that indicates what should happen when the
    data contain \code{NA}s.  The default action (\code{na.fail}) causes
    \code{lmList} to print an error message and terminate if there are any

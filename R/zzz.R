@@ -1,4 +1,4 @@
-### $Id: zzz.R,v 1.4 2001/01/10 19:04:03 bates Exp $
+### $Id: zzz.R,v 1.5 2001/03/30 17:16:51 saikat Exp $
 ###
 ### nlme for R
 ###
@@ -22,6 +22,6 @@
 ### MA 02111-1307, USA
 
 .First.lib <- function(lib, pkg) {
-  library.dynam( "nlme", pkg, lib )
+  library.dynam(pkg, pkg, lib )
 }
 

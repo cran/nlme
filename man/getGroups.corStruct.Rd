@@ -1,8 +1,8 @@
-% $Id: getGroups.corStruct.Rd,v 1.4 2000/07/03 18:22:47 bates Exp $
+% $Id: getGroups.corStruct.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
 \name{getGroups.corStruct}
 \title{Extract corStruct Groups}
 \usage{
-getGroups(object, form, data, level)
+\method{getGroups}{corStruct}(object, form, level, data, sep)
 }
 \alias{getGroups.corStruct}
 \arguments{
@@ -11,11 +11,13 @@ getGroups(object, form, data, level)
  \item{form}{this argument is included to make the method function
    compatible with the generic. It will be assigned the value of
    \code{formula(object)} and should not be modified.}
+ \item{level}{this argument is included to make the method function
+   compatible with the generic and is not used.}
  \item{data}{an optional data frame in which to evaluate the variables
    defined in \code{form}, in case \code{object} is not initialized and
    the grouping factor needs to be evaluated.}
- \item{level}{this argument is included to make the method function
-   compatible with the generic and is not used.}
+ \item{sep}{character, the separator to use between group levels when
+   multiple levels are collapsed.  The default is \code{'/'}.}
 }
 \description{
   This method function extracts the grouping factor associated with

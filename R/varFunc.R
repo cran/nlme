@@ -1,4 +1,4 @@
-### $Id: varFunc.R,v 1.2 2001/01/10 19:04:03 bates Exp $
+### $Id: varFunc.R,v 1.3 2001/06/18 21:16:49 bates Exp $
 ###
 ###              Classes of variance functions
 ###
@@ -104,7 +104,7 @@ formula.varFunc <-
   function(object) eval(attr(object, "formula"))
 
 getCovariate.varFunc <-
-  function(object, form, data) attr(object, "covariate")
+  function(object) attr(object, "covariate")
 
 getGroups.varFunc <-
   function(object, form, level, data, sep) attr(object, "groups")

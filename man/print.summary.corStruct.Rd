@@ -1,8 +1,8 @@
-% $Id: print.summary.corStruct.Rd,v 1.5 2001/01/10 19:21:05 bates Exp $
+% $Id: print.summary.corStruct.Rd,v 1.6 2001/06/18 21:16:50 bates Exp $
 \name{print.summary.corStruct}
 \title{Print a summary.corStruct Object}
 \usage{
-print(x, ...)
+\method{print}{summary.corStruct}(x, ...)
 }
 \alias{print.summary.corStruct}
 \alias{print.summary.corNatural}

@@ -1,8 +1,9 @@
-% $Id: coef.lme.Rd,v 1.5 2001/01/10 19:21:04 bates Exp $
+% $Id: coef.lme.Rd,v 1.6 2001/06/18 21:16:50 bates Exp $
 \name{coef.lme}
 \title{Extract lme Coefficients}
 \usage{
-coef(object, augFrame, level, data, which, FUN, omitGroupingFactor)
+\method{coef}{lme}(object, augFrame, level, data, which, FUN,
+       omitGroupingFactor, subset)
 }
 \alias{coef.lme}
 \arguments{
@@ -43,6 +44,7 @@ coef(object, augFrame, level, data, which, FUN, omitGroupingFactor)
    summary of \code{data} but the levels of the grouping factor will
    continue to be used as the row names for the returned data frame.
    Defaults to \code{FALSE}.}
+ \item{subset}{an optional expression specifying a subset
 }
 \description{
   The estimated coefficients at level \eqn{i} are obtained by adding

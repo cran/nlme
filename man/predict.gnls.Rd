@@ -1,8 +1,8 @@
-% $Id: predict.gnls.Rd,v 1.5 2001/01/10 19:21:05 bates Exp $
+% $Id: predict.gnls.Rd,v 1.6 2001/06/18 21:16:50 bates Exp $
 \name{predict.gnls}
 \title{Predictions from a gnls Object}
 \usage{
-predict(object, newdata, na.action, naPattern)
+\method{predict}{gnls}(object, newdata, na.action, naPattern)
 }
 \alias{predict.gnls}
 \arguments{

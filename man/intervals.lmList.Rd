@@ -1,10 +1,11 @@
-% $Id: intervals.lmList.Rd,v 1.4 2000/07/03 18:22:47 bates Exp $
+% $Id: intervals.lmList.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
 \name{intervals.lmList}
 \title{Confidence Intervals on lmList Coefficients}
 \usage{
-intervals(object, level, pool)
+\method{intervals}{lmList}(object, level, pool)
 }
 \alias{intervals.lmList}
+\alias{print.intervals.lmList}
 \arguments{
  \item{object}{an object inheriting from class \code{lmList}, representing
    a list of \code{lm} objects with a common model.

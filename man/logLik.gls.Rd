@@ -1,8 +1,8 @@
-% $Id: logLik.gls.Rd,v 1.5 2001/01/10 19:21:05 bates Exp $
+% $Id: logLik.gls.Rd,v 1.6 2001/06/18 21:16:50 bates Exp $
 \name{logLik.gls}
 \title{Log-Likelihood of a gls Object}
 \usage{
-logLik(object, REML)
+\method{logLik}{gls}(object, REML)
 }
 \alias{logLik.gls}
 \arguments{

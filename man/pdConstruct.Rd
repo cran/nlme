@@ -1,8 +1,8 @@
-% $Id: pdConstruct.Rd,v 1.4 2000/07/03 18:22:48 bates Exp $
+% $Id: pdConstruct.Rd,v 1.6 2001/06/20 16:55:20 bates Exp $
 \name{pdConstruct}
 \title{Construct pdMat Objects}
 \usage{
-pdConstruct(object, value, form, nam, data)
+pdConstruct(object, value, form, nam, data, ...)
 }
 \alias{pdConstruct}
 \alias{pdConstruct.pdCompSymm}
@@ -11,7 +11,7 @@ pdConstruct(object, value, form, nam, data)
 \alias{pdConstruct.pdMat}
 \alias{pdConstruct.pdNatural}
 \alias{pdConstruct.pdSymm}
-
+\alias{pdConstruct.pdLogChol}
 \arguments{
  \item{object}{an object inheriting from class \code{pdMat}, representing
    a positive definite matrix.} 
@@ -40,6 +40,7 @@ pdConstruct(object, value, form, nam, data)
    \code{NULL}, no attempt is made to obtain information on 
    \code{factors} appearing in the formulas. Defaults to the
    parent frame from which the function was called.}
+ \item{\dots}{optional arguments for some methods.}
 }
 \description{
   This function is an alternative constructor for the \code{pdMat}

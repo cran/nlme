@@ -1,9 +1,9 @@
-% $Id: pdMatrix.reStruct.Rd,v 1.4 2000/07/03 18:22:48 bates Exp $
+% $Id: pdMatrix.reStruct.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
 \name{pdMatrix.reStruct}
 \title{Extract Matrix or Square-Root Factor from Components of an
   reStruct Object} 
 \usage{
-pdMatrix(object, fact)
+\method{pdMatrix}{reStruct}(object, factor)
 }
 \alias{pdMatrix.reStruct}
 
@@ -11,7 +11,7 @@ pdMatrix(object, fact)
  \item{object}{an object inheriting from class \code{reStruct},
    representing a random effects structure and consisting of a list of
    \code{pdMat} objects.} 
- \item{fact}{an optional logical value. If \code{TRUE}, square-root
+ \item{factor}{an optional logical value. If \code{TRUE}, square-root
    factors of the positive-definite matrices represented by the elements
    of \code{object} are returned; else, if \code{FALSE}, the
    positive-definite matrices are returned. Defaults to \code{FALSE}.} 

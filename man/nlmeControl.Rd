@@ -1,10 +1,11 @@
-% $Id: nlmeControl.Rd,v 1.6 2001/01/10 19:21:05 bates Exp $
+% $Id: nlmeControl.Rd,v 1.7 2001/06/18 21:16:50 bates Exp $
 \name{nlmeControl}
 \title{Control Values for nlme Fit}
 \usage{
-nlmeControl(maxIter, pnlsMaxIter, msMaxIter, minScale, tolerance,
-            niterEM, pnlsTol, msTol, msScale, returnObject, msVerbose,
-            gradHess, apVar, nlmStepMax, .relStep, natural)
+nlmeControl(maxIter, pnlsMaxIter, msMaxIter, minScale,
+            tolerance, niterEM, pnlsTol, msTol, msScale,
+            returnObject, msVerbose, gradHess, apVar, .relStep,
+            nlmStepMax, minAbsParApVar, natural)
 }
 \alias{nlmeControl}
 \arguments{
@@ -55,6 +56,8 @@ nlmeControl(maxIter, pnlsMaxIter, msMaxIter, minScale, tolerance,
    calculations. Default is \code{.Machine$double.eps^(1/3)}.}
  \item{nlmStepMax}{stepmax value to be passed to nlm. See
      \code{\link{nlm}} for details. Default is 100.0}
+ \item{minAbsParApVar}{numeric value - minimum absolute parameter value
+   in the approximate variance calculation.  The default is \code{0.05}.}
  \item{natural}{a logical value indicating whether the \code{pdNatural}
    parametrization should be used for general positive-definite matrices
    (\code{pdSymm}) in \code{reStruct}, when the approximate covariance

@@ -1,8 +1,8 @@
-% $Id: Variogram.lme.Rd,v 1.5 2001/01/10 19:21:04 bates Exp $
+% $Id: Variogram.lme.Rd,v 1.6 2001/06/18 21:16:50 bates Exp $
 \name{Variogram.lme}
 \title{Calculate Semi-variogram for Residuals from an lme Object}
 \usage{
-Variogram(object, distance, form, resType, data, na.action, maxDist,
+\method{Variogram}{lme}(object, distance, form, resType, data, na.action, maxDist,
           length.out, collapse, nint, breaks, robust, metric)
 }
 \alias{Variogram.lme}

@@ -1,8 +1,8 @@
-% $Id: getCovariate.data.frame.Rd,v 1.4 2000/07/03 18:22:47 bates Exp $
+% $Id: getCovariate.data.frame.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
 \name{getCovariate.data.frame}
 \title{Extract Data Frame Covariate}
 \usage{
-getCovariate(object, form)
+\method{getCovariate}{data.frame}(object, form)
 }
 \alias{getCovariate.data.frame}
 \arguments{

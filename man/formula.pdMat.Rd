@@ -1,13 +1,15 @@
-% $Id: formula.pdMat.Rd,v 1.4 2000/07/03 18:22:47 bates Exp $
+% $Id: formula.pdMat.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
 \name{formula.pdMat}
 \title{Extract pdMat Formula}
 \usage{
-formula(object)
+\method{formula}{pdMat}(object, asList)
 }
 \alias{formula.pdMat}
 \arguments{
  \item{object}{an object inheriting from class \code{pdMat}, representing
-   a positive definite matrix.} 
+   a positive definite matrix.}
+ \item{asList}{logical.  Should the asList argument be applied to each
+   of the components?  Never used.}
 }
 \description{
   This method function extracts the formula associated with a

@@ -1,8 +1,8 @@
-% $Id: getGroups.data.frame.Rd,v 1.4 2000/07/03 18:22:47 bates Exp $
+% $Id: getGroups.data.frame.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
 \name{getGroups.data.frame}
 \title{Extract Groups from a Data Frame}
 \usage{
-getGroups(object, form, level)
+\method{getGroups}{data.frame}(object, form, level, data, sep)
 }
 \alias{getGroups.data.frame}
 \arguments{
@@ -12,7 +12,10 @@ getGroups(object, form, level)
    operator). Defaults to \code{formula(object)}.}  
  \item{level}{a positive integer vector with the level(s) of grouping to
    be used when multiple nested levels of grouping are present. Defaults
-   to all levels of nesting.} 
+   to all levels of nesting.}
+ \item{data}{unused}
+ \item{sep}{character, the separator to use between group levels when
+   multiple levels are collapsed.  The default is \code{'/'}.}
 }
 \description{
   Each variable named in the expression after the \code{|} operator on

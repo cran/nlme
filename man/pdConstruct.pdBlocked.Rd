@@ -1,8 +1,8 @@
-% $Id: pdConstruct.pdBlocked.Rd,v 1.4 2000/07/03 18:22:48 bates Exp $
+% $Id: pdConstruct.pdBlocked.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
 \name{pdConstruct.pdBlocked}
 \title{Construct pdBlocked Objects}
 \usage{
-pdConstruct(object, value, form, nam, data, pdClass)
+\method{pdConstruct}{pdBlocked}(object, value, form, nam, data, pdClass)
 }
 \alias{pdConstruct.pdBlocked}
 \arguments{

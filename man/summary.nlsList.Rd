@@ -1,17 +1,18 @@
-% $Id: summary.nlsList.Rd,v 1.5 2001/01/10 19:21:05 bates Exp $
+% $Id: summary.nlsList.Rd,v 1.6 2001/06/18 21:16:50 bates Exp $
 \name{summary.nlsList}
 \title{Summarize an nlsList Object}
 \usage{
-summary(object, pool)
+\method{summary}{nlsList}(object, \dots)
 }
 \alias{summary.nlsList}
 \arguments{
  \item{object}{an object inheriting from class \code{nlsList},
    representing a list of \code{nls} fitted objects.
  }
- \item{pool}{an optional logical value indicating whether a pooled
-   estimate of the residual standard error should be used. Default is
-   \code{attr(object, "pool")}.
+ \item{\dots}{optional arguments to the \code{summary.lmList} method.
+   One such optional argument is \code{pool}, a logical value indicating
+   whether a pooled estimate of the residual standard error should be
+   used. Default is \code{attr(object, "pool")}.
  }
 }
 \description{

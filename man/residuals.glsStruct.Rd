@@ -1,8 +1,8 @@
-% $Id: residuals.glsStruct.Rd,v 1.3 2000/07/03 18:22:48 bates Exp $
+% $Id: residuals.glsStruct.Rd,v 1.4 2001/06/18 21:16:50 bates Exp $
 \name{residuals.glsStruct}
 \title{Calculate glsStruct Residuals}
 \usage{
-residuals(object, glsFit)
+\method{residuals}{glsStruct}(object, glsFit)
 }
 \alias{residuals.glsStruct}
 \arguments{

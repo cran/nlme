@@ -1,8 +1,8 @@
-% $Id: nlsList.Rd,v 1.5 2001/01/10 19:21:05 bates Exp $
+% $Id: nlsList.Rd,v 1.6 2001/06/18 21:16:50 bates Exp $
 \name{nlsList}
 \title{List of nls Objects with a Common Model}
 \usage{
-nlsList(model, data, start, control, level, na.action, pool)
+nlsList(model, data, start, control, level, subset, na.action, pool)
 }
 \alias{nlsList}
 \alias{nlsList.formula}
@@ -26,10 +26,13 @@ nlsList(model, data, start, control, level, na.action, pool)
   \item{control}{a list of control values passed as the \code{control}
     argument to \code{nls}. Defaults to an empty list.
   }
-  \item{level}{
-    an optional integer specifying the level of grouping to be used when 
-    multiple nested levels of grouping are present.
-  }
+  \item{level}{an optional integer specifying the level of grouping to
+    be used when multiple nested levels of grouping are present.}
+ \item{subset}{an optional expression indicating the subset of the rows of
+   \code{data} that should be used in the fit. This can be a logical
+   vector, or a numeric vector indicating which observation numbers are
+   to be included, or a  character  vector of the row names to be
+   included.  All observations are included by default.}
   \item{na.action}{a function that indicates what should happen when the
     data contain \code{NA}s.  The default action (\code{na.fail}) causes
     \code{nlsList} to print an error message and terminate if there are any

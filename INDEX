@@ -2,6 +2,7 @@ ACF                      Autocorrelation Function
 ACF.gls                  Autocorrelation Function for gls Residuals
 ACF.lme                  Autocorrelation Function for lme Residuals
 AIC                      Akaike Information Criterion
+AIC.lme                  Akaike Information Criterion
 AIC.logLik               AIC of a logLik Object
 Alfalfa                  Split-Plot Experiment on Varieties of Alfalfa
 Assay                    Bioassay on Cell Culture Plate
@@ -119,6 +120,7 @@ corMatrix.corStruct      Matrix of a corStruct Object
 corMatrix.pdMat          Extract Correlation Matrix from a pdMat Object
 corMatrix.reStruct       Extract Correlation Matrix from Components of an
                          reStruct Object
+corNatural               General correlation in natural parameterization
 corRatio                 Rational Quadratic Correlation Structure
 corSpatial               Spatial Correlation Structure
 corSpher                 Spherical Correlation Structure
@@ -168,11 +170,6 @@ getGroups.lmList         Extract lmList Object Groups
 getGroups.lme            Extract lme Object Groups
 getGroups.varFunc        Extract varFunc Groups
 getGroupsFormula         Extract Grouping Formula
-getGroupsFormula.gls     Extract gls Object Grouping Formula
-getGroupsFormula.lmList  Extract lmList Object Grouping Formula
-getGroupsFormula.lme     Extract lme Object Grouping Formula
-getGroupsFormula.reStruct
-                         Extract reStruct Grouping Formula
 getResponse              Extract Response Variable from an Object
 getResponse.data.frame   Extract Response from a Data Frame
 getResponse.gls          Extract gls Object Response
@@ -252,6 +249,7 @@ pdFactor.reStruct        Extract Square-Root Factor from Components of an
                          reStruct Object
 pdIdent                  Multiple of the Identity Positive-Definite
                          Matrix
+pdLogChol                General Positive-Definite Matrix
 pdMat                    Positive-Definite Matrix
 pdMatrix                 Extract Matrix or Square-Root Factor from a
                          pdMat Object
@@ -283,8 +281,6 @@ print.anova.lme          Print an anova.lme Object
 print.corStruct          Print a corStruct Object
 print.gls                Print a gls Object
 print.groupedData        Print a groupedData Object
-print.intervals.gls      Print an intervals.gls Object
-print.intervals.lme      Print an intervals.lme Object
 print.lmList             Print an lmList Object
 print.lme                Print an lme Object
 print.modelStruct        Print a modelStruct Object

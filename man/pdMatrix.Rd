@@ -1,8 +1,8 @@
-% $Id: pdMatrix.Rd,v 1.5 2000/07/03 21:13:47 bates Exp $
+% $Id: pdMatrix.Rd,v 1.6 2001/06/18 21:16:50 bates Exp $
 \name{pdMatrix}
 \title{Extract Matrix or Square-Root Factor from a pdMat Object}
 \usage{
-pdMatrix(object, fact, ...)
+pdMatrix(object, factor)
 }
 \alias{pdMatrix}
 \alias{pdMatrix.pdBlocked}
@@ -15,14 +15,11 @@ pdMatrix(object, fact, ...)
 \arguments{
  \item{object}{an object inheriting from class \code{pdMat}, representing
    a positive definite matrix.}
- \item{fact}{an optional logical value. If \code{TRUE}, a square-root
+ \item{factor}{an optional logical value. If \code{TRUE}, a square-root
    factor of the positive-definite matrix represented by \code{object}
    is returned; else, if \code{FALSE}, the positive-definite matrix is
    returned. Defaults to \code{FALSE}.}
- \item{\dots}{some methods for the generic function may require
-   additional arguments.}
 }
-
 \description{
   The positive-definite matrix represented by \code{object}, or a
   square-root factor of it is obtained. Letting \eqn{\Sigma}{S} denote a
@@ -35,7 +32,6 @@ pdMatrix(object, fact, ...)
   represented by \code{object} is returned; else a square-root of the
   positive-definite matrix is returned.
 }
-
 \author{Jose Pinheiro and Douglas Bates}
 
 \seealso{\code{\link{as.matrix.pdMat}}, \code{\link{pdFactor}},

@@ -1,8 +1,8 @@
-% $Id: print.summary.lme.Rd,v 1.4 2000/07/03 18:22:48 bates Exp $
+% $Id: print.summary.lme.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
 \name{print.summary.lme}
 \title{Print a summary.lme Object}
 \usage{
-print(x, verbose, ...)
+\method{print}{summary.lme}(x, verbose, ...)
 }
 \alias{print.summary.lme}
 \arguments{

@@ -1,8 +1,8 @@
-% $Id: getData.lme.Rd,v 1.4 2000/07/03 18:22:47 bates Exp $
+% $Id: getData.lme.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
 \name{getData.lme}
 \title{Extract lme Object Data}
 \usage{
-getData(object)
+\method{getData}{lme}(object)
 }
 \alias{getData.lme}
 \alias{getData.nlme}

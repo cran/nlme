@@ -1,8 +1,8 @@
-% $Id: logDet.corStruct.Rd,v 1.4 2000/07/03 18:22:47 bates Exp $
+% $Id: logDet.corStruct.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
 \name{logDet.corStruct}
 \title{Extract corStruct Log-Determinant}
 \usage{
-logDet(object, covariate)
+\method{logDet}{corStruct}(object, covariate)
 }
 \alias{logDet.corStruct}
 \alias{logDet.corIdent}

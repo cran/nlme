@@ -1,8 +1,8 @@
-% $Id: coef.gnls.Rd,v 1.5 2000/07/03 18:22:46 bates Exp $
+% $Id: coef.gnls.Rd,v 1.6 2001/06/18 21:16:50 bates Exp $
 \name{coef.gnls}
 \title{Extract gnls Coefficients}
 \usage{
-coef(object)
+\method{coef}{gnls}(object)
 }
 \alias{coef.gnls}
 \arguments{

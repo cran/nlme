@@ -1,8 +1,9 @@
-% $Id: plot.Variogram.Rd,v 1.5 2001/01/10 19:21:05 bates Exp $
+% $Id: plot.Variogram.Rd,v 1.6 2001/06/18 21:16:50 bates Exp $
 \name{plot.Variogram}
 \title{Plot a Variogram Object}
 \usage{
-plot(object, smooth, showModel, sigma, span, xlab, ylab, type, ylim, ...)
+\method{plot}{Variogram}(object, smooth, showModel, sigma, span, xlab,
+     ylab, type, ylim, grid, ...)
 }
 \alias{plot.Variogram}
 \arguments{
@@ -39,6 +40,8 @@ plot(object, smooth, showModel, sigma, span, xlab, ylab, type, ylim, ...)
  \item{ylim}{an optional numeric vector with the limits for the
    y-axis. Defaults to \code{c(0, max(object$variog))}.
  }
+ \item{grid}{an optional logical value indicating whether a grid should
+   be added to plot. Default is \code{FALSE}.}
  \item{\dots}{optional arguments passed to the Trellis \code{xyplot} function.}
 }
 \description{

@@ -1,8 +1,8 @@
-% $Id: VarCorr.Rd,v 1.5 2000/07/03 21:13:47 bates Exp $
+% $Id: VarCorr.Rd,v 1.6 2001/06/18 21:16:50 bates Exp $
 \name{VarCorr}
 \title{Extract variance and correlation components}
 \usage{
-VarCorr(object, sigma, rdig)
+VarCorr(x, sigma, rdig)
 }
 \alias{VarCorr}
 \alias{VarCorr.lme}
@@ -11,7 +11,7 @@ VarCorr(object, sigma, rdig)
 \alias{summary.VarCorr.lme}
 \alias{print.VarCorr.lme}
 \arguments{
- \item{object}{a fitted model object, usually an object inheriting from
+ \item{x}{a fitted model object, usually an object inheriting from
      class \code{lme}. 
  }
  \item{sigma}{an optional numeric value used as a multiplier for the

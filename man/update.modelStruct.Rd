@@ -1,16 +1,18 @@
-% $Id: update.modelStruct.Rd,v 1.3 2000/07/03 18:22:48 bates Exp $
+% $Id: update.modelStruct.Rd,v 1.4 2001/06/18 21:16:50 bates Exp $
 \name{update.modelStruct}
 \title{Update a modelStruct Object}
 \usage{
-update(object, data)
+\method{update}{modelStruct}(object, data)
 }
 \alias{update.modelStruct}
+\alias{update.corStruct}
+\alias{update.reStruct}
 \arguments{
-    \item{object}{an object inheriting from class \code{modelStruct},
-	representing a list of model components, such as \code{corStruct} and
-	\code{varFunc} objects.}
-    \item{data}{a data frame in which to evaluate the variables needed for
-	updating the elements of \code{object}.}
+  \item{object}{an object inheriting from class \code{modelStruct},
+    representing a list of model components, such as \code{corStruct} and
+    \code{varFunc} objects.}
+  \item{data}{a data frame in which to evaluate the variables needed for
+    updating the elements of \code{object}.}
 }
 \description{
     This method function updates each element of \code{object}, allowing

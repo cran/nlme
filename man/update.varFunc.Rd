@@ -1,8 +1,8 @@
-% $Id: update.varFunc.Rd,v 1.4 2001/01/10 19:21:05 bates Exp $
+% $Id: update.varFunc.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
 \name{update.varFunc}
 \title{Update varFunc Object}
 \usage{
-update(object, data)
+\method{update}{varFunc}(object, data)
 }
 \alias{update.varExp}
 \alias{update.varFunc}

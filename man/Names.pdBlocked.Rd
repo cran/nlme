@@ -1,8 +1,8 @@
-% $Id: Names.pdBlocked.Rd,v 1.4 2000/07/03 18:22:46 bates Exp $
+% $Id: Names.pdBlocked.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
 \name{Names.pdBlocked}
 \title{Names of a pdBlocked Object}
 \usage{
-Names(object, asList)
+\method{Names}{pdBlocked}(object, asList)
 }
 \alias{Names.pdBlocked}
 \alias{Names<-.pdBlocked}

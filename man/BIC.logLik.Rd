@@ -1,8 +1,8 @@
-% $Id: BIC.logLik.Rd,v 1.4 2000/07/03 18:22:45 bates Exp $
+% $Id: BIC.logLik.Rd,v 1.5 2001/06/08 21:54:37 bates Exp $
 \name{BIC.logLik}
 \title{BIC of a logLik Object}
 \usage{
-BIC(object)
+\method{BIC}{logLik}(object)
 }
 \alias{BIC.logLik}
 \arguments{

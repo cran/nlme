@@ -1,8 +1,8 @@
-% $Id: fitted.lme.Rd,v 1.4 2000/07/03 18:22:46 bates Exp $
+% $Id: fitted.lme.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
 \name{fitted.lme}
 \title{Extract lme Fitted Values}
 \usage{
-fitted(object, level, asList)
+\method{fitted}{lme}(object, level, asList)
 }
 \alias{fitted.lme}
 \arguments{

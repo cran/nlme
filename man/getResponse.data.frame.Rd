@@ -1,8 +1,8 @@
-% $Id: getResponse.data.frame.Rd,v 1.4 2000/07/03 18:22:47 bates Exp $
+% $Id: getResponse.data.frame.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
 \name{getResponse.data.frame}
 \title{Extract Response from a Data Frame}
 \usage{
-getResponse(object, form)
+\method{getResponse}{data.frame}(object, form)
 }
 \alias{getResponse.data.frame}
 \arguments{

@@ -1,8 +1,8 @@
-% $Id: formula.groupedData.Rd,v 1.4 2000/07/03 18:22:46 bates Exp $
+% $Id: formula.groupedData.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
 \name{formula.groupedData}
 \title{Extract groupedData Formula}
 \usage{
-formula(object)
+\method{formula}{groupedData}(object)
 }
 \alias{formula.groupedData}
 \arguments{
