@@ -1,9 +1,9 @@
-% $Id: Names.reStruct.Rd,v 1.8 2002/03/05 14:59:39 bates Exp $
+% $Id: Names.reStruct.Rd,v 1.8.2.1 2003/08/09 22:45:17 bates Exp $
 \name{Names.reStruct}
 \title{Names of an reStruct Object}
 \usage{
 \method{Names}{reStruct}(object, \dots)
-Names(object, \dots) <- value
+\method{Names}{reStruct}(object, \dots) <- value
 }
 \alias{Names.reStruct}
 \alias{Names<-.reStruct}

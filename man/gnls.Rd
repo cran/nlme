@@ -1,17 +1,15 @@
-% $Id: gnls.Rd,v 1.7.2.3 2003/05/15 17:04:57 bates Exp $
+% $Id: gnls.Rd,v 1.7.2.4 2003/08/09 22:45:17 bates Exp $
 \name{gnls}
 \title{Fit Nonlinear Model Using Generalized Least Squares}
 \usage{
 gnls(model, data, params, start, correlation, weights, subset,
      na.action, naPattern, control, verbose)
-\method{update}{gnls}(object, model, data, params, start, correlation, 
-       weights, subset, na.action, naPattern, control, verbose, \dots) 
+%\method{update}{gnls}(object, model, data, params, start, correlation, 
+%       weights, subset, na.action, naPattern, control, verbose, \dots) 
 }
 \alias{gnls}
 %\alias{update.gnls}
 \arguments{
- \item{object}{an object inheriting from class \code{gnls}, representing
-   a generalized nonlinear least squares fitted model.}
   \item{model}{a two-sided formula object describing the
     model, with the response on the left of a \code{~} operator and 
     a nonlinear expression involving parameters and covariates on the

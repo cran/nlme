@@ -1,8 +1,8 @@
-% $Id: Matrix.reStruct.Rd,v 1.2 2002/03/05 14:59:39 bates Exp $
+% $Id: Matrix.reStruct.Rd,v 1.2.2.1 2003/08/09 22:45:17 bates Exp $
 \name{Matrix.reStruct}
 \title{Assign reStruct Matrices}
 \usage{
-matrix(object) <-  value
+\method{matrix}{reStruct}(object) <-  value
 }
 \alias{matrix<-.reStruct}
 \arguments{

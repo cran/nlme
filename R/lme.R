@@ -416,6 +416,13 @@ getFixDF <-
     namTerms <- factor(assign, labels = namTerms)
     assign <- split(order(assign), namTerms)
   }
+  ## function to check if a vector is (nearly) a multiple of (1,1,...,1)
+  const <- function(x, tolerance = sqrt(.Machine$double.eps)) {
+      if (length(x) < 1) return(NA)
+      x <- as.numeric(x)
+      if (x[1] == 0.) return(all(abs(x) < tolerance))
+      all(abs((x/x[1] - 1.)) < tolerance)
+  }
   N <- nrow(X)
   p <- ncol(X)
   Q <- ncol(grps)
@@ -430,18 +437,18 @@ getFixDF <-
   namTerms <- names(assign)
   valTerms <- double(length(assign))
   names(valTerms) <- namTerms
-  if (any(notIntX <- apply(X, 2, function(el) any(el != el[1])))) {
-        ## percentage of groups for which columns of X are inner
-    innP <- array(c(rep(1, p),
-                    .C("inner_perc_table",
-                       as.double(X),
-                       as.integer(unlist(grps)),
-                       as.integer(p),
-                       as.integer(Q),
-                       as.integer(N),
-                       val = double(p * Q),
-                       PACKAGE = "nlme")[["val"]]), c(p, Qp1),
-                  list(namX, stratNam))
+  if (any(notIntX <- !apply(X, 2, const))) {
+      ## percentage of groups for which columns of X are inner
+      innP <- array(c(rep(1, p),
+                      .C("inner_perc_table",
+                         as.double(X),
+                         as.integer(unlist(grps)),
+                         as.integer(p),
+                         as.integer(Q),
+                         as.integer(N),
+                         val = double(p * Q),
+                         PACKAGE = "nlme")[["val"]]), c(p, Qp1),
+                    list(namX, stratNam))
     ## strata in which columns of X are estimated
     ## ignoring fractional inner percentages for now
     stratX <- stratNam[apply(innP, 1, function(el, index) max(index[el > 0]),

@@ -1,9 +1,9 @@
-% $Id: Names.pdMat.Rd,v 1.9 2002/03/05 14:59:39 bates Exp $
+% $Id: Names.pdMat.Rd,v 1.9.2.1 2003/08/09 22:45:17 bates Exp $
 \name{Names.pdMat}
 \title{Names of a pdMat Object}
 \usage{
 \method{Names}{pdMat}(object, \dots)
-Names(object, \dots) <- value
+\method{Names}{pdMat}(object, \dots) <- value
 }
 \alias{Names.pdMat}
 \alias{Names<-.pdMat}

@@ -1,8 +1,8 @@
-% $Id: Covariate.varFunc.Rd,v 1.2 2002/03/05 14:59:39 bates Exp $
+% $Id: Covariate.varFunc.Rd,v 1.2.2.1 2003/08/09 22:45:17 bates Exp $
 \name{Covariate.varFunc}
 \title{Assign varFunc Covariate}
 \usage{
-covariate(object) <- value
+\method{covariate}{varFunc}(object) <- value
 }
 \alias{covariate<-.varFunc}
 \arguments{

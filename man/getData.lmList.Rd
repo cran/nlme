@@ -1,8 +1,8 @@
-% $Id: getData.lmList.Rd,v 1.5 2002/03/05 14:59:39 bates Exp $
+% $Id: getData.lmList.Rd,v 1.5.2.1 2003/08/09 22:45:17 bates Exp $
 \name{getData.lmList}
 \title{Extract lmList Object Data}
 \usage{
-getData(object)
+\method{getData}{lmList}(object)
 }
 \alias{getData.lmList}
 \arguments{

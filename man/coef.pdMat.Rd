@@ -1,9 +1,9 @@
-% $Id: coef.pdMat.Rd,v 1.6.2.2 2003/05/16 22:36:53 bates Exp $
+% $Id: coef.pdMat.Rd,v 1.6.2.3 2003/08/09 22:45:17 bates Exp $
 \name{coef.pdMat}
 \title{pdMat Object Coefficients}
 \usage{
 \method{coef}{pdMat}(object, unconstrained, \dots)
-coef(object, \dots) <- value
+\method{coef}{pdMat}(object, \dots) <- value
 }
 \alias{coef.pdMat}
 \alias{coef.pdBlocked}

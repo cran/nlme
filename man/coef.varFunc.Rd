@@ -1,9 +1,9 @@
-% $Id: coef.varFunc.Rd,v 1.6.2.1 2003/05/16 22:36:53 bates Exp $
+% $Id: coef.varFunc.Rd,v 1.6.2.2 2003/08/09 22:45:17 bates Exp $
 \name{coef.varFunc}
 \title{varFunc Object Coefficients}
 \usage{
 \method{coef}{varFunc}(object, unconstrained, allCoef, \dots)
-coef(object, \dots) <- value
+\method{coef}{varIdent}(object, \dots) <- value
 }
 \alias{coef.varFunc}
 \alias{coef.varComb}
