@@ -24,7 +24,7 @@
 \examples{
 data(Orthodont)
 vf1 <- varPower(0.3, form = ~age)
-vf1 <- initialize(vf1, Orthodont)
+vf1 <- Initialize(vf1, Orthodont)
 print(vf1)
 }
 \keyword{models}

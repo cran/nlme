@@ -1,10 +1,10 @@
 % $Id: initialize.lmeStruct.Rd,v 1.6 2002/03/05 14:59:39 bates Exp $
-\name{initialize.lmeStruct}
+\name{Initialize.lmeStruct}
 \title{Initialize an lmeStruct Object}
 \usage{
-\method{initialize}{lmeStruct}(object, data, groups, conLin, control, \dots)
+\method{Initialize}{lmeStruct}(object, data, groups, conLin, control, \dots)
 }
-\alias{initialize.lmeStruct}
+\alias{Initialize.lmeStruct}
 \arguments{
  \item{object}{an object inheriting from class \code{lmeStruct},
    representing a list of linear mixed-effects model components, such as
@@ -41,7 +41,7 @@
 
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 
-\seealso{\code{\link{lme}}, \code{\link{initialize.reStruct}},
-  \code{\link{initialize.corStruct}} , \code{\link{initialize.varFunc}}}
+\seealso{\code{\link{lme}}, \code{\link{Initialize.reStruct}},
+  \code{\link{Initialize.corStruct}} , \code{\link{Initialize.varFunc}}}
 
 \keyword{models}

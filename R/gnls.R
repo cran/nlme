@@ -1,4 +1,4 @@
-### $Id: gnls.R,v 1.7 2002/03/05 15:36:27 bates Exp $
+### $Id: gnls.R,v 1.7.2.1 2002/07/23 22:23:28 bates Exp $
 ###
 ###  Fit a general nonlinear regression model with correlated and/or
 ###  heteroscedastic errors
@@ -350,7 +350,7 @@ gnls <-
   attr(gnlsSt, "local") <- nlEnv
   attr(gnlsSt, "NReal") <- NReal
   ## initialization
-  gnlsSt <- initialize(gnlsSt, dataModShrunk)
+  gnlsSt <- Initialize(gnlsSt, dataModShrunk)
   parMap <- attr(gnlsSt, "pmap")
 
   numIter <- 0				# number of iterations
@@ -805,11 +805,11 @@ fitted.gnlsStruct <-
   attr(object, "resp") - resid(object)
 }
 
-initialize.gnlsStruct <-
+Initialize.gnlsStruct <-
   function(object, data, ...)
 {
   if (length(object)) {
-    object[] <- lapply(object, initialize, data)
+    object[] <- lapply(object, Initialize, data)
     theta <- lapply(object, coef)
     len <- unlist(lapply(theta, length))
     num <- seq(along = len)

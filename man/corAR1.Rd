@@ -26,7 +26,7 @@ corAR1(value, form, fixed)
   This function is a constructor for the \code{corAR1} class,
   representing an autocorrelation structure of order 1. Objects
   created using this constructor must later be initialized using the
-  appropriate \code{initialize} method. 
+  appropriate \code{Initialize} method. 
 }
 \value{
   an object of class \code{corAR1}, representing an autocorrelation
@@ -37,7 +37,7 @@ corAR1(value, form, fixed)
   Analysis: Forecasting and Control", 3rd Edition, Holden-Day. 
 }
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
-\seealso{\code{\link{initialize.corStruct}}}
+\seealso{\code{\link{Initialize.corStruct}}}
 \examples{
 ## covariate is observation order and grouping factor is Mare
 cs1 <- corAR1(0.2, form = ~ 1 | Mare)

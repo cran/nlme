@@ -25,6 +25,12 @@ Glucose                 Glucose levels over time
 Glucose2                Glucose Levels Following Alcohol Ingestion
 Gun                     Methods for firing naval guns
 IGF                     Radioimmunoassay of IGF-I Protein
+Initialize              Initialize Object
+Initialize.corStruct    Initialize corStruct Object
+initialize.glsStruct    Initialize a glsStruct Object
+Initialize.lmeStruct    Initialize an lmeStruct Object
+Initialize.reStruct     Initialize reStruct Object
+Initialize.varFunc      Initialize varFunc Object
 LDEsysMat               Generate system matrix for LDEs
 MEEM                    EM iterations for mixed-effects
 MEdecomp                Decompose a mixed-effects model
@@ -193,12 +199,6 @@ gnlsObject              Fitted gnls Object
 gnlsStruct              Generalized Nonlinear Least Squares Structure
 groupedData             Construct a groupedData Object
 gsummary                Summarize by Groups
-initialize              Initialize Object
-initialize.corStruct    Initialize corStruct Object
-initialize.glsStruct    Initialize a glsStruct Object
-initialize.lmeStruct    Initialize an lmeStruct Object
-initialize.reStruct     Initialize reStruct Object
-initialize.varFunc      Initialize varFunc Object
 intervals               Confidence Intervals on Coefficients
 intervals.gls           Confidence Intervals on gls Parameters
 intervals.lmList        Confidence Intervals on lmList Coefficients

@@ -138,7 +138,7 @@ simulate.lme <-
   {
     lmeSt <- lmeStruct(reStruct = reStruct(reSt, REML = REML))
     attr(lmeSt, "conLin") <- conLin
-    lmeSt <- initialize(lmeSt, data = NULL, groups = NULL, control = control)
+    lmeSt <- Initialize(lmeSt, data = NULL, groups = NULL, control = control)
     attr(lmeSt, "conLin") <- MEdecomp(attr(lmeSt, "conLin"))
     aMs <- ms( ~ -logLik(lmeSt, lmePars),
               start = list(lmePars = c(coef(lmeSt))),

@@ -42,7 +42,7 @@
 library(mva)
 data(BodyWeight)
 cs1 <- corExp(3, form = ~ Time | Rat)
-cs1 <- initialize(cs1, BodyWeight)
+cs1 <- Initialize(cs1, BodyWeight)
 Variogram(cs1)[1:10,]
 }
 \keyword{models}

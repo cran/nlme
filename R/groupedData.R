@@ -70,9 +70,7 @@ nfGroupedData <-
     vnames <- all.vars(asOneFormula(formula, inner, outer))
     alist <- lapply(as.list(vnames), as.name)
     names(alist) <- vnames
-    alist <- c(as.list(as.name("data.frame")), alist)
-    mode(alist) <- "call"
-    data <- eval(alist, sys.parent(1))
+    data <- do.call('data.frame', alist)
   } else {
     if (!inherits(data, "data.frame")) {
       stop("second argument to groupedData must inherit from data.frame")
@@ -181,9 +179,7 @@ nmGroupedData <-
     vnames <- all.vars(asOneFormula(formula, outer, inner))
     alist <- lapply(as.list(vnames), as.name)
     names(alist) <- vnames
-    alist <- c(as.list(as.name("data.frame")), alist)
-    mode(alist) <- "call"
-    data <- eval(alist, sys.parent(1))
+    data <- do.call('data.frame', alist)
   } else {
     if (!inherits(data, "data.frame")) {
       stop("second argument to groupedData must inherit from data.frame")

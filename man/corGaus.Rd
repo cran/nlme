@@ -50,7 +50,7 @@ corGaus(value, form, nugget, metric, fixed)
   effect is present and \eqn{(1-n) \exp(-(r/d)^2)}{(1-n)*exp(-(r/d)^2)}
   when a nugget effect is assumed. Objects created using this
   constructor must later be initialized using the appropriate
-  \code{initialize} method. 
+`  \code{Initialize} method. 
 }
 \value{
   an object of class \code{corGaus}, also inheriting from class
@@ -66,7 +66,7 @@ corGaus(value, form, nugget, metric, fixed)
 }
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 
-\seealso{\code{\link{initialize.corStruct}}, \code{\link{dist}}
+\seealso{\code{\link{Initialize.corStruct}}, \code{\link[mva]{dist}}
 }
 \examples{
 sp1 <- corGaus(form = ~ x + y + z)

@@ -12,7 +12,7 @@ isInitialized(object)
 }
 \description{
   Checks if \code{object} has been initialized (generally through a call
-  to \code{initialize}), by searching for components and attributes
+  to \code{Initialize}), by searching for components and attributes
   which are modified during initialization.
 }
 \value{
@@ -21,7 +21,7 @@ isInitialized(object)
 }
 \author{Jose Pinheiro and Douglas Bates }
 
-\seealso{\code{\link{initialize}}}
+\seealso{\code{\link{Initialize}}}
 
 \examples{
 pd1 <- pdDiag(~age)

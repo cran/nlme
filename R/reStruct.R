@@ -229,7 +229,7 @@ getGroupsFormula.reStruct <-
 isInitialized.reStruct <-
   function(object) all(unlist(lapply(object, isInitialized)))
 
-initialize.reStruct <-
+Initialize.reStruct <-
   function(object, data, conLin, control = list(niterEM = 20), ...)
 {
   ## initialize reStruct object, possibly getting initial estimates

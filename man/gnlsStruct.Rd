@@ -5,7 +5,7 @@
 gnlsStruct(corStruct, varStruct)
 }
 \alias{gnlsStruct}
-\alias{initialize.gnlsStruct}
+\alias{Initialize.gnlsStruct}
 \arguments{
  \item{corStruct}{an optional \code{corStruct} object, representing a
    correlation structure. Default is \code{NULL}.}

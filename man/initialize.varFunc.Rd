@@ -1,16 +1,16 @@
 % $Id: initialize.varFunc.Rd,v 1.6 2002/03/05 14:59:39 bates Exp $
-\name{initialize.varFunc}
+\name{Initialize.varFunc}
 \title{Initialize varFunc Object}
 \usage{
-\method{initialize}{varFunc}(object, data, ...)
+\method{Initialize}{varFunc}(object, data, ...)
 }
-\alias{initialize.varFunc}
-\alias{initialize.varComb}
-\alias{initialize.varConstPower}
-\alias{initialize.varExp}
-\alias{initialize.varFixed}
-\alias{initialize.varIdent}
-\alias{initialize.varPower}
+\alias{Initialize.varFunc}
+\alias{Initialize.varComb}
+\alias{Initialize.varConstPower}
+\alias{Initialize.varExp}
+\alias{Initialize.varFixed}
+\alias{Initialize.varIdent}
+\alias{Initialize.varPower}
 \arguments{
  \item{object}{an object inheriting from class \code{varFunc},
    representing a variance function structure.} 
@@ -37,6 +37,6 @@
 \examples{
 data(Orthodont)
 vf1 <- varPower( form = ~ age | Sex )
-vf1 <- initialize( vf1, Orthodont )
+vf1 <- Initialize( vf1, Orthodont )
 }
 \keyword{models}

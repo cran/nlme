@@ -1,10 +1,10 @@
 % $Id: initialize.glsStruct.Rd,v 1.6 2002/03/05 14:59:39 bates Exp $
-\name{initialize.glsStruct}
+\name{Initialize.glsStruct}
 \title{Initialize a glsStruct Object}
 \usage{
-\method{initialize}{glsStruct}(object, data, control, \dots)
+\method{Initialize}{glsStruct}(object, data, control, \dots)
 }
-\alias{initialize.glsStruct}
+\alias{Initialize.glsStruct}
 \arguments{
  \item{object}{an object inheriting from class \code{glsStruct},
    representing a list of linear model components, such as
@@ -33,7 +33,7 @@
 
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 
-\seealso{\code{\link{gls}}, \code{\link{initialize.corStruct}} ,
-  \code{\link{initialize.varFunc}}} 
+\seealso{\code{\link{gls}}, \code{\link{Initialize.corStruct}} ,
+  \code{\link{Initialize.varFunc}}} 
 
 \keyword{models}

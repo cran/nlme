@@ -1,4 +1,4 @@
-### $Id: pdMat.R,v 1.6 2002/03/05 15:36:27 bates Exp $
+### $Id: pdMat.R,v 1.6.2.1 2002/07/23 22:23:28 bates Exp $
 ###
 ###              Classes of positive-definite matrices
 ###

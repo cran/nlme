@@ -1,4 +1,4 @@
-### $Id: lme.R,v 1.11 2002/03/27 23:21:23 bates Exp $
+### $Id: lme.R,v 1.11.2.1 2002/07/23 22:23:28 bates Exp $
 ###
 ###            Fit a general linear mixed effects model
 ###
@@ -294,7 +294,7 @@ lme.formula <-
   fixDF <- getFixDF(X, grps, attr(lmeSt, "conLin")$dims$ngrps,
                     terms = terms(fixed))
   ## initialization
-  lmeSt <- initialize(lmeSt, dataMix, grps, control = controlvals)
+  lmeSt <- Initialize(lmeSt, dataMix, grps, control = controlvals)
   parMap <- attr(lmeSt, "pmap")
   ## Checking possibility of single decomposition
   if (length(lmeSt) == 1)  {	# reStruct only, can do one decomposition
@@ -2784,11 +2784,11 @@ fitted.lmeStruct <-
   fit[, level + 1]
 }
 
-initialize.lmeStruct <-
+Initialize.lmeStruct <-
   function(object, data, groups, conLin = attr(object, "conLin"),
 	   control= list(niterEM = 20, gradHess = TRUE), ...)
 {
-  object[] <- lapply(object, initialize, data, conLin, control)
+  object[] <- lapply(object, Initialize, data, conLin, control)
   theta <- lapply(object, coef)
   len <- unlist(lapply(theta, length))
   num <- seq(along = len)

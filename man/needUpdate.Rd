@@ -28,7 +28,7 @@ needUpdate(object)
 \examples{
 data(Orthodont)
 vf1 <- varExp()
-vf1 <- initialize(vf1, data = Orthodont)
+vf1 <- Initialize(vf1, data = Orthodont)
 needUpdate(vf1)
 }
 \keyword{models}

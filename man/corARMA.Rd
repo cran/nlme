@@ -32,7 +32,7 @@ corARMA(value, form, p, q, fixed)
   This function is a constructor for the \code{corARMA} class,
   representing an autocorrelation-moving average correlation structure
   of order (p, q). Objects created using this constructor must later
-  be initialized using the appropriate \code{initialize} method. 
+  be initialized using the appropriate \code{Initialize} method. 
 }
 \value{
   an object of class \code{corARMA}, representing an
@@ -44,7 +44,7 @@ corARMA(value, form, p, q, fixed)
   Analysis: Forecasting and Control", 3rd Edition, Holden-Day. 
 }
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
-\seealso{\code{\link{initialize.corStruct}}}
+\seealso{\code{\link{Initialize.corStruct}}}
 \examples{
 ## ARMA(1,2) structure, with observation order as a covariate and
 ## Mare as grouping factor

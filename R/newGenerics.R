@@ -103,9 +103,9 @@ isInitialized <-
   ## Determine if the object has been assigned a value
   function(object) UseMethod("isInitialized")
 
-initialize <-
+Initialize <-
   ## Initialize  objects
-  function(object, data, ...) UseMethod("initialize")
+  function(object, data, ...) UseMethod("Initialize")
 
 intervals <-
   ## generate confidence intervals for the parameters in object

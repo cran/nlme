@@ -1,4 +1,4 @@
-### $Id: nlme.R,v 1.8 2002/04/20 03:56:27 saikat Exp $
+### $Id: nlme.R,v 1.8.2.1 2002/07/23 22:23:28 bates Exp $
 ###
 ###            Fit a general nonlinear mixed effects model
 ###
@@ -790,7 +790,7 @@ nlme.formula <-
   attr(nlmeSt, "local") <- nlEnv
   attr(nlmeSt, "NReal") <- NReal
   ## initialization
-  nlmeSt <- initialize(nlmeSt, dataMixShrunk, grpShrunk,
+  nlmeSt <- Initialize(nlmeSt, dataMixShrunk, grpShrunk,
                        control = controlvals)
   parMap <- attr(nlmeSt, "pmap")
 

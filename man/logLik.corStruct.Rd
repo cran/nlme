@@ -32,7 +32,7 @@
 \examples{
 data(Orthodont)
 cs1 <- corAR1(0.2)
-cs1 <- initialize(cs1, data = Orthodont)
+cs1 <- Initialize(cs1, data = Orthodont)
 logLik(cs1)
 }
 \keyword{models}

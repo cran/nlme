@@ -48,7 +48,7 @@
 }
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 
-\seealso{\code{\link{corFactor.corStruct}}, \code{\link{initialize.corStruct}}}
+\seealso{\code{\link{corFactor.corStruct}}, \code{\link{Initialize.corStruct}}}
 
 \examples{
 cs1 <- corAR1(0.3)

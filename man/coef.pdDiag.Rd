@@ -31,7 +31,7 @@ coef(object) <- value
 \section{SIDE EFFECTS}{
   On the left side of an assignment, sets the values of the coefficients
   of \code{object} to \code{value}. \code{Object} must be initialized (using
-  \code{initialize}) before new values can be assigned to its
+  \code{Initialize}) before new values can be assigned to its
   coefficients. 
 }
 

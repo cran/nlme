@@ -25,7 +25,7 @@
 \examples{
 data(Orthodont)
 cst1 <- corAR1(form = ~1|Subject)
-cst1 <- initialize(cst1, data = Orthodont)
+cst1 <- Initialize(cst1, data = Orthodont)
 as.matrix(cst1)
 }
 \keyword{models}

@@ -55,7 +55,7 @@ coef(object) <- value
 \section{SIDE EFFECTS}{
   On the left side of an assignment, sets the values of the coefficients
   of \code{object} to \code{value}. \code{Object} must be initialized (using
-  \code{initialize}) before new values can be assigned to its
+  \code{Initialize}) before new values can be assigned to its
   coefficients. 
 }
 
@@ -63,7 +63,7 @@ coef(object) <- value
     \code{\link{corCAR1}}, \code{\link{corCompSymm}},
     \code{\link{corExp}}, \code{\link{corGaus}}, \code{\link{corLin}},
     \code{\link{corRatio}}, \code{\link{corSpatial}}, \code{\link{corSpher}},
-    \code{\link{corSymm}},\code{\link{initialize}}}
+    \code{\link{corSymm}},\code{\link{Initialize}}}
 \examples{
 cst1 <- corARMA(p = 1, q = 1)
 coef(cst1)

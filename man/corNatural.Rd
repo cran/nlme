@@ -30,14 +30,14 @@ corNatural(value, form, fixed)
   representing a general correlation structure in the ``natural''
   parameterization, which is described under \code{\link{pdNatural}}.
   Objects created using this constructor must later be
-  initialized using the  appropriate \code{initialize} method. 
+  initialized using the  appropriate \code{Initialize} method. 
 }
 \value{
   an object of class \code{corNatural} representing a general correlation
   structure.
 }
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
-\seealso{\code{\link{initialize.corNatural}}, \code{\link{pdNatural}}}
+\seealso{\code{\link{Initialize.corNatural}}, \code{\link{pdNatural}}}
 \examples{
 ## covariate is observation order and grouping factor is Subject
 cs1 <- corNatural(form = ~ 1 | Subject)

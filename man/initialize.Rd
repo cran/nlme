@@ -1,10 +1,10 @@
 % $Id: initialize.Rd,v 1.4 2002/03/05 14:59:39 bates Exp $
-\name{initialize}
+\name{Initialize}
 \title{Initialize Object}
 \usage{
-initialize(object, data, ...)
+Initialize(object, data, ...)
 }
-\alias{initialize}
+\alias{Initialize}
 \arguments{
  \item{object}{any object requiring initialization, e.g. "plug-in"
    structures such as \code{corStruct} and \code{varFunc} objects. }

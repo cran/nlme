@@ -30,7 +30,7 @@ corSymm(value, form, fixed)
   representation of this structure, in terms of unconstrained
   parameters, uses the spherical parametrization defined in Pinheiro and
   Bates (1996).  Objects created using this constructor must later be
-  initialized using the  appropriate \code{initialize} method. 
+  initialized using the  appropriate \code{Initialize} method. 
 }
 \value{
   an object of class \code{corSymm} representing a general correlation
@@ -43,7 +43,7 @@ Computing, 6, 289-296.
 }
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 
-\seealso{\code{\link{initialize.corSymm}}}
+\seealso{\code{\link{Initialize.corSymm}}}
 
 \examples{
 ## covariate is observation order and grouping factor is Subject

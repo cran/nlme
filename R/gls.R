@@ -1,4 +1,4 @@
-### $Id: gls.R,v 1.6 2002/03/05 15:36:27 bates Exp $
+### $Id: gls.R,v 1.6.2.1 2002/07/23 22:23:28 bates Exp $
 ###
 ###  Fit a linear model with correlated errors and/or heteroscedasticity
 ###
@@ -110,7 +110,7 @@ gls <-
 
   ## initialization
   glsEstControl <- controlvals[c("singular.ok","qrTol")]
-  glsSt <- initialize(glsSt, dataMod, glsEstControl)
+  glsSt <- Initialize(glsSt, dataMod, glsEstControl)
   parMap <- attr(glsSt, "pmap")
 
   ##
@@ -1231,12 +1231,12 @@ fitted.glsStruct <-
   glsFit[["fitted"]]
 }
 
-initialize.glsStruct <-
+Initialize.glsStruct <-
   function(object, data, control = list(singular.ok = FALSE,
                            qrTol = .Machine$single.eps), ...)
 {
   if (length(object)) {
-    object[] <- lapply(object, initialize, data)
+    object[] <- lapply(object, Initialize, data)
     theta <- lapply(object, coef)
     len <- unlist(lapply(theta, length))
     num <- seq(along = len)

@@ -49,7 +49,7 @@ corExp(value, form, nugget, metric, fixed)
   \eqn{r} apart is \eqn{\exp(-r/d)}{exp(-r/d)} when no nugget effect
   is present and \eqn{(1-n) \exp(-r/d)}{(1-n)*exp(-r/d)} when a nugget
   effect is assumed. Objects created using this constructor must later be
-  initialized using the appropriate \code{initialize} method.
+  initialized using the appropriate \code{Initialize} method.
 }
 \value{
   an object of class \code{corExp}, also inheriting from class
@@ -65,7 +65,7 @@ corExp(value, form, nugget, metric, fixed)
 }
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 
-\seealso{\code{\link{initialize.corStruct}}, \code{\link{dist}}
+\seealso{\code{\link{Initialize.corStruct}}, \code{\link[mva]{dist}}
 }
 \examples{
 sp1 <- corExp(form = ~ x + y + z)

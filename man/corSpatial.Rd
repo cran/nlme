@@ -59,7 +59,7 @@ corSpatial(value, form, nugget, type, metric, fixed)
   "real" classes, determined by the \code{type} argument, and from the
   "virtual" \code{corSpatial} class. Objects created using this
   constructor must later be initialized using the appropriate
-  \code{initialize} method. 
+  \code{Initialize} method. 
 }
 \value{
   an object of class determined by the \code{type} argument and also
@@ -77,7 +77,7 @@ corSpatial(value, form, nugget, type, metric, fixed)
 
 \seealso{\code{\link{corExp}}, \code{\link{corGaus}},
     \code{\link{corLin}}, \code{\link{corRatio}}, \code{\link{corSpher}},
-    \code{\link{initialize.corStruct}}, \code{\link{dist}}
+    \code{\link{Initialize.corStruct}}, \code{\link[mva]{dist}}
 }
 \examples{
 sp1 <- corSpatial(form = ~ x + y + z, type = "g", metric = "man")

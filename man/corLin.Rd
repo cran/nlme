@@ -50,7 +50,7 @@ corLin(value, form, nugget, metric, fixed)
   is present and \eqn{(1-n) (1 -(r/d))}{(1-n)*(1-(r/d))} when a nugget
   effect is assumed. If \eqn{r \geq d}{r >= d} the correlation is
   zero. Objects created using this constructor must later be
-  initialized using the appropriate \code{initialize} method. 
+  initialized using the appropriate \code{Initialize} method. 
 }
 \value{
   an object of class \code{corLin}, also inheriting from class
@@ -66,7 +66,7 @@ corLin(value, form, nugget, metric, fixed)
 }
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 
-\seealso{\code{\link{initialize.corStruct}}, \code{\link{dist}}}
+\seealso{\code{\link{Initialize.corStruct}}, \code{\link[mva]{dist}}}
 }
 \examples{
 sp1 <- corLin(form = ~ x + y)

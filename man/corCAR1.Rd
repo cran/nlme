@@ -26,7 +26,7 @@ corCAR1(value, form, fixed)
   This function is a constructor for the \code{corCAR1} class,
   representing an autocorrelation structure of order 1, with a
   continuous time covariate. Objects created using this constructor must
-  be later initialized using the appropriate \code{initialize}
+  be later initialized using the appropriate \code{Initialize}
   method.  
 }
 \value{
@@ -41,7 +41,7 @@ corCAR1(value, form, fixed)
   State-space Approach", Chapman and Hall
 }
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
-\seealso{\code{\link{initialize.corStruct}}}
+\seealso{\code{\link{Initialize.corStruct}}}
 \examples{
 ## covariate is Time and grouping factor is Mare
 cs1 <- corCAR1(0.2, form = ~ Time | Mare)

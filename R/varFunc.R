@@ -109,7 +109,7 @@ getCovariate.varFunc <-
 getGroups.varFunc <-
   function(object, form, level, data, sep) attr(object, "groups")
 
-initialize.varFunc <-
+Initialize.varFunc <-
   function(object, data, ...)
 {
   if (is.null(varWeights(object))) {
@@ -224,7 +224,7 @@ coef.varFixed <-
 "coef<-.varFixed" <-
   function(object, value) object
 
-initialize.varFixed <-
+Initialize.varFixed <-
   function(object, data, ...)
 {
   form <- formula(object)
@@ -345,7 +345,7 @@ coef.varIdent <-
   object
 }
 
-initialize.varIdent <-
+Initialize.varIdent <-
   function(object, data, ...)
 {
   if (!is.null(form <- formula(object)) &&
@@ -359,7 +359,7 @@ initialize.varIdent <-
                              sep = "*"))
     if (length((uStrat <- unique(strat))) == 1) {
       ## equal variances structure
-      return(initialize(varIdent(), data))
+      return(Initialize(varIdent(), data))
     }
     if (!is.null(fix <- attr(object, "fixed"))) {
       fixNames <- names(fix)
@@ -418,7 +418,7 @@ initialize.varIdent <-
     if (all(attr(object, "whichFix"))) {
       if (all(attr(object, "fixed") == 0)) {
 	## equal variances structure
-	return(initialize(varIdent(), data))
+	return(Initialize(varIdent(), data))
       } else {
 	oldAttr <- attributes(object)
 	object <- numeric(0)
@@ -540,7 +540,7 @@ coef.varPower <-
   object
 }
 
-initialize.varPower <-
+Initialize.varPower <-
   function(object, data, ...)
 {
   form <- formula(object)
@@ -599,7 +599,7 @@ initialize.varPower <-
       } else {				# all parameters are fixed
 	if (all(attr(object, "fixed") == 0)) {
 	  ## equal variances structure
-	  return(initialize(varIdent(), data))
+	  return(Initialize(varIdent(), data))
 	} else {
 	  oldAttr <- attributes(object)
 	  object <- numeric(0)
@@ -617,7 +617,7 @@ initialize.varPower <-
     if (attr(object, "whichFix")) {
       if (attr(object, "fixed") == 0) {
         ## equal variances structure
-        return(initialize(varIdent(), data))
+        return(Initialize(varIdent(), data))
       } else {				# fixed power
         oldAttr <- attributes(object)
         object <- numeric(0)
@@ -753,7 +753,7 @@ coef.varExp <-
   object
 }
 
-initialize.varExp <-
+Initialize.varExp <-
   function(object, data, ...)
 {
   form <- formula(object)
@@ -812,7 +812,7 @@ initialize.varExp <-
       } else {
 	if (all(attr(object, "fixed") == 0)) {
 	  ## equal variances structure
-	  return(initialize(varIdent(), data))
+	  return(Initialize(varIdent(), data))
 	} else {
 	  oldAttr <- attributes(object)
 	  object <- numeric(0)
@@ -830,7 +830,7 @@ initialize.varExp <-
     if (attr(object, "whichFix")) {
       if (!attr(object, "fixed")) {
         ## equal variances structure
-        return(initialize(varIdent(), data))
+        return(Initialize(varIdent(), data))
       } else {
         oldAttr <- attributes(object)
         object <- numeric(0)
@@ -1031,7 +1031,7 @@ coef.varConstPower <-
   object
 }
 
-initialize.varConstPower <-
+Initialize.varConstPower <-
   function(object, data, ...)
 {
   form <- formula(object)
@@ -1095,7 +1095,7 @@ initialize.varConstPower <-
 	  all(attr(object[["const"]], "fixed") == 0) &&
 	  all(attr(object[["power"]], "fixed") == 0)) {
 	## equal variances structure
-	return(initialize(varIdent(), data))
+	return(Initialize(varIdent(), data))
       }
       for(i in names(object)) {
 	if (all(whichFix[i,])) {
@@ -1114,7 +1114,7 @@ initialize.varConstPower <-
   if (all(whichFix) &&
       !any(unlist(lapply(object, function(el) attr(el, "fixed"))))) {
     ## equal variances structure
-    return(initialize(varIdent(), data))
+    return(Initialize(varIdent(), data))
   }
   for(i in names(object)) {
     if (all(whichFix[i,])) {
@@ -1218,10 +1218,10 @@ coef.varComb <-
 formula.varComb <-
   function(x, ...) lapply(x, formula)
 
-initialize.varComb <-
+Initialize.varComb <-
   function(object, data, ...)
 {
-  val <- lapply(object, initialize, data)
+  val <- lapply(object, Initialize, data)
   attr(val, "plen") <- unlist(lapply(val, function(el) length(coef(el))))
   class(val) <- c("varComb", "varFunc")
   val

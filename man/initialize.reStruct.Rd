@@ -1,10 +1,10 @@
 % $Id: initialize.reStruct.Rd,v 1.6 2002/03/05 14:59:39 bates Exp $
-\name{initialize.reStruct}
+\name{Initialize.reStruct}
 \title{Initialize reStruct Object}
 \usage{
-\method{initialize}{reStruct}(object, data, conLin, control, \dots)
+\method{Initialize}{reStruct}(object, data, conLin, control, \dots)
 }
-\alias{initialize.reStruct}
+\alias{Initialize.reStruct}
 \arguments{
  \item{object}{an object inheriting from class \code{reStruct},
    representing a random effects structure and consisting of a list of
@@ -19,7 +19,7 @@
  \item{control}{an optional list with a single component \code{niterEM}
    controlling the number of iterations for the EM algorithm used to
    refine initial parameter estimates. It is given as a list for
-   compatibility with other \code{initialize} methods. Defaults to
+   compatibility with other \code{Initialize} methods. Defaults to
    \code{list(niterEM = 20)}.}
  \item{\dots}{some methods for this generic require additional
     arguments.  None are used in this method.} 

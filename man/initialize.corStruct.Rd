@@ -1,21 +1,21 @@
 % $Id: initialize.corStruct.Rd,v 1.7 2002/03/05 14:59:39 bates Exp $
-\name{initialize.corStruct}
+\name{Initialize.corStruct}
 \title{Initialize corStruct Object}
 \usage{
-\method{initialize}{corStruct}(object, data, \dots)
+\method{Initialize}{corStruct}(object, data, \dots)
 }
-\alias{initialize.corStruct}
-\alias{initialize.corAR1}
-\alias{initialize.corARMA}
-\alias{initialize.corCAR1}
-\alias{initialize.corCompSymm}
-\alias{initialize.corHF}
-\alias{initialize.corIdent}
-\alias{initialize.corLin}
-\alias{initialize.corNatural}
-\alias{initialize.corSpatial}
-\alias{initialize.corSpher}
-\alias{initialize.corSymm}
+\alias{Initialize.corStruct}
+\alias{Initialize.corAR1}
+\alias{Initialize.corARMA}
+\alias{Initialize.corCAR1}
+\alias{Initialize.corCompSymm}
+\alias{Initialize.corHF}
+\alias{Initialize.corIdent}
+\alias{Initialize.corLin}
+\alias{Initialize.corNatural}
+\alias{Initialize.corSpatial}
+\alias{Initialize.corSpher}
+\alias{Initialize.corSymm}
 \arguments{
  \item{object}{an object inheriting from class \code{corStruct}
    representing a correlation structure.}
@@ -43,6 +43,6 @@
 \examples{
 data(Orthodont)
 cs1 <- corAR1(form = ~ 1 | Subject)
-cs1 <- initialize(cs1, data = Orthodont)
+cs1 <- Initialize(cs1, data = Orthodont)
 }
 \keyword{models}

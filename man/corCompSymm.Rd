@@ -25,7 +25,7 @@ corCompSymm(value, form, fixed)
   This function is a constructor for the \code{corCompSymm} class,
   representing a compound symmetry structure corresponding to uniform
   correlation. Objects created using this constructor must later be
-  initialized using the appropriate \code{initialize} method. 
+  initialized using the appropriate \code{Initialize} method. 
 }
 \value{
   an object of class \code{corCompSymm}, representing a compound
@@ -36,7 +36,7 @@ corCompSymm(value, form, fixed)
   Volume I: Designed Experiments", Van Nostrand Reinhold.
 }
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
-\seealso{\code{\link{initialize.corStruct}}}
+\seealso{\code{\link{Initialize.corStruct}}}
 \examples{
 ## covariate is observation order and grouping factor is Subject
 cs1 <- corCompSymm(0.5, form = ~ 1 | Subject)

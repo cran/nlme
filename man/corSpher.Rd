@@ -51,7 +51,7 @@ corSpher(value, form, nugget, metric, fixed)
     (1-1.5(r/d)+0.5(r/d)^3)}{(1-n)*(1-1.5(r/d)+0.5(r/d)^3)}  
   when a nugget effect is assumed. If \eqn{r \geq d}{r >= d} the
   correlation is zero. Objects created using this constructor must later
-  be initialized using the appropriate \code{initialize} method. 
+  be initialized using the appropriate \code{Initialize} method. 
 }
 \value{
   an object of class \code{corSpher}, also inheriting from class
@@ -66,7 +66,7 @@ corSpher(value, form, nugget, metric, fixed)
   Models", SAS Institute.
 }
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
-\seealso{\code{\link{initialize.corStruct}}, \code{\link{dist}}}
+\seealso{\code{\link{Initialize.corStruct}}, \code{\link[mva]{dist}}}
 \examples{
 sp1 <- corSpher(form = ~ x + y)
 }

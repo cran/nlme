@@ -15,7 +15,7 @@
 \arguments{
  \item{object}{an object inheriting from class \code{corStruct}
    representing a correlation structure, which must have been
-   initialized (using \code{initialize}).}
+   initialized (using \code{Initialize}).}
  \item{\dots}{some methods for this generic require additional
     arguments.  None are used in this method.} 
 }
@@ -46,12 +46,12 @@
   transpose inverse square-root factors in matrix form.
 }
 \seealso{\code{\link{corMatrix.corStruct}},
-  \code{\link{recalc.corStruct}}, \code{\link{initialize.corStruct}}}
+  \code{\link{recalc.corStruct}}, \code{\link{Initialize.corStruct}}}
 
 \examples{
 data(Orthodont)
 cs1 <- corAR1(form = ~1 | Subject)
-cs1 <- initialize(cs1, data = Orthodont)
+cs1 <- Initialize(cs1, data = Orthodont)
 corFactor(cs1)
 }
 \keyword{models}

@@ -223,7 +223,7 @@ getGroups.corStruct <-
   }
 }
 
-initialize.corStruct <-
+Initialize.corStruct <-
   ## Initializes some attributes of corStruct objects
   function(object, data, ...)
 {
@@ -444,7 +444,7 @@ coef.corSymm <-
   object
 }
 
-initialize.corSymm <-
+Initialize.corSymm <-
   function(object, data, ...)
 {
   if (!is.null(attr(object, "maxCov"))) {# initialized - nothing to do
@@ -691,7 +691,7 @@ coef.corNatural <-
   object
 }
 
-initialize.corNatural <-
+Initialize.corNatural <-
   function(object, data, ...)
 {
   if (!is.null(attr(object, "maxCov"))) {# initialized - nothing to do
@@ -843,7 +843,7 @@ coef.corIdent <-
 "coef<-.corIdent" <-
   function(object, value) object
 
-initialize.corIdent <-
+Initialize.corIdent <-
   function(object, data, ...)
 {
   attr(object, "logDet") <- 0
@@ -983,7 +983,7 @@ coef.corAR1 <-
   object
 }
 
-initialize.corAR1 <-
+Initialize.corAR1 <-
   ## Initializes corAR1 objects
   function(object, data, ...)
 {
@@ -1002,7 +1002,7 @@ initialize.corAR1 <-
     attr(object, "p") <- 1
     attr(object, "q") <- 0
     class(object) <- c("corARMA", "corStruct")
-    initialize(object, data)
+    Initialize(object, data)
   } else {
     ## obtaining the factor list and logDet
     attr(object, "factor") <- corFactor(object)
@@ -1156,7 +1156,7 @@ coef.corCAR1 <-
   object
 }
 
-initialize.corCAR1 <-
+Initialize.corCAR1 <-
   ## Initializes corCAR1 objects
   function(object, data, ...)
 {
@@ -1365,7 +1365,7 @@ coef.corARMA <-
   object
 }
 
-initialize.corARMA <-
+Initialize.corARMA <-
   function(object, data, ...)
 {
   ## Initializes corARMA objects
@@ -1382,7 +1382,7 @@ initialize.corARMA <-
      all(unlist(lapply(covar, diff)) == 1)) {
     ## Use AR1 methods instead
     class(object) <- c("corAR1", "corStruct")
-    initialize(object, data)
+    Initialize(object, data)
   } else {
     attr(object, "maxLag") <-
       max(unlist(lapply(covar, function(el) max(abs(outer(el,el,"-"))))))
@@ -1541,7 +1541,7 @@ coef.corCompSymm <-
   object
 }
 
-initialize.corCompSymm <-
+Initialize.corCompSymm <-
   ## Initializes corCompSymm objects
   function(object, data, ...)
 {
@@ -1977,13 +1977,13 @@ getCovariate.corSpatial <-
   covar
 }
 
-initialize.corSpatial <-
+Initialize.corSpatial <-
   function(object, data, ...)
 {
   if (!is.null(attr(object, "minD"))) { #already initialized
     return(object)
   }
-  object <- initialize.corStruct(object, data)
+  object <- Initialize.corStruct(object, data)
   nug <- attr(object, "nugget")
 
   val <- as.vector(object)
@@ -2147,13 +2147,13 @@ coef.corLin <-
   val
 }
 
-initialize.corLin <-
+Initialize.corLin <-
   function(object, data, ...)
 {
   if (!is.null(attr(object, "minD"))) { #already initialized
     return(object)
   }
-  object <- initialize.corStruct(object, data)
+  object <- Initialize.corStruct(object, data)
   nug <- attr(object, "nugget")
 
   minD <- min(unlist(attr(object, "covariate")))
@@ -2269,13 +2269,13 @@ coef.corSpher <-
   val
 }
 
-initialize.corSpher <-
+Initialize.corSpher <-
   function(object, data, ...)
 {
   if (!is.null(attr(object, "minD"))) { #already initialized
     return(object)
   }
-  object <- initialize.corStruct(object, data)
+  object <- Initialize.corStruct(object, data)
   nug <- attr(object, "nugget")
 
   minD <- min(unlist(attr(object, "covariate")))
