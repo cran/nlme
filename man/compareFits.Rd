@@ -30,11 +30,13 @@ compareFits(object1, object2, which)
  \code{compareFits}. 
 }
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
-
-\seealso{\code{\link{plot.compareFits}},
-  \code{\link{pairs.compareFits}}, \code{\link{comparePred}},
-  \code{\link{coef}}, \code{\link{random.effects}}}
-
+\seealso{
+  \code{\link{plot.compareFits}},
+  \code{\link{pairs.compareFits}},
+  \code{\link{comparePred}},
+  \code{\link{coef}},
+  \code{\link{random.effects}}
+}
 \examples{
 data(Orthodont)
 fm1 <- lmList(Orthodont)

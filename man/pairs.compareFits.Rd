@@ -33,8 +33,12 @@
   symbols (colors) used for each object under comparison.
 }
 \author{Jose Pinheiro and Douglas Bates }
-\seealso{\code{\link{compareFits}}, \code{\link{plot.compareFits}}},
-\code{\link[lattice]{xyplot}}, \code{\link[lattice]{splom}}}
+\seealso{
+  \code{\link{compareFits}},
+  \code{\link{plot.compareFits}},
+  \code{\link[lattice]{xyplot}},
+  \code{\link[lattice]{splom}}
+}
 \examples{
 data(Orthodont)
 fm1 <- lmList(Orthodont)

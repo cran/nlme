@@ -115,7 +115,7 @@ http://nlme.stat.wisc.edu/
 \author{Douglas Bates and Jose Pinheiro}
 
 \seealso{\code{\link{formula}}, \code{\link{gapply}},
-  \code{\link{gsummary}}, \code{\link{lme}}}
+  \code{\link{gsummary}}, \code{\link{lme}}
 }
 \examples{
 data(Orthodont)

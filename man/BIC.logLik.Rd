@@ -30,7 +30,7 @@
   Statistics, 6, 461-464.
 }
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
-\seealso{\code{\link{BIC}}, \code{\link{logLik}}, \code{\link{AIC}}}.
+\seealso{\code{\link{BIC}}, \code{\link{logLik}}, \code{\link{AIC}}.}
 \examples{
 data(Orthodont)
 fm1 <- lm(distance ~ age, data = Orthodont) 

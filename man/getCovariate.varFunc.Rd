@@ -1,4 +1,4 @@
-% $Id: getCovariate.varFunc.Rd,v 1.7 2002/03/05 14:59:39 bates Exp $
+% $Id: getCovariate.varFunc.Rd,v 1.7.2.1 2004/01/14 21:12:17 bates Exp $
 \name{getCovariate.varFunc}
 \title{Extract varFunc Covariate}
 \usage{

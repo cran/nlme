@@ -1,6 +1,6 @@
 Package: nlme
-Version: 3.1-48
-Date: 2004/01/14
+Version: 3.1-50
+Date: 2004/08/11
 Priority: recommended
 Title: Linear and nonlinear mixed effects models
 Author: Jose Pinheiro <Jose.Pinheiro@pharma.novartis.com>,
@@ -11,4 +11,4 @@ Maintainer: Douglas Bates <bates@stat.wisc.edu>
 Description: Fit and compare Gaussian linear and nonlinear mixed-effects models.
 Depends: graphics, stats, lattice, R(>= 1.9.0)
 License: GPL version 2 or later
-Packaged: Wed Jan 14 15:02:11 2004; bates
+Packaged: Tue Aug 10 13:36:23 2004; bates
