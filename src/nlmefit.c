@@ -1096,16 +1096,14 @@ void
 gls_loglik(double *Xy, longint *pdims, double *logLik, double *lRSS)
 {
     longint i, N = pdims[0], p = pdims[1], RML = pdims[2],
-	Np1 = N + 1, Nr = N - RML * p, rnkm1;
+	Np1 = N + 1, Nr = N - RML * p;
     QRptr dmQR;
 
     dmQR = QR(Xy, N, N, p + 1);
-    rnkm1 = (dmQR->rank) - 1;
-    if (rnkm1 < 0) error("Deficient rank in gls_loglik");
-    *lRSS = log(fabs(dmQR->mat[rnkm1 * Np1]));
+    *lRSS = log(fabs(dmQR->mat[p * Np1]));
     *logLik -= Nr * (*lRSS);
     if (RML == 1) {
-	for(i = 0; i < rnkm1; i++) {
+	for(i = 0; i < p; i++) {
 	    *logLik -= log(fabs(dmQR->mat[i * Np1]));
 	}
     }

@@ -36,10 +36,8 @@
 \seealso{\code{\link{gls}}, \code{\link{corClasses}}}
 
 \examples{
-\dontrun{
 fm1 <- gls(follicles ~ sin(2*pi*Time) + cos(2*pi*Time), Ovary,
            correlation = corAR1(form = ~ 1 | Mare))
 getGroups(fm1)
-}
 }
 \keyword{models}
