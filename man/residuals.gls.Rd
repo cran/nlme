@@ -1,4 +1,4 @@
-% $Id: residuals.gls.Rd,v 1.8.2.1 2003/04/17 22:28:45 bates Exp $
+% $Id: residuals.gls.Rd,v 1.8.2.2 2003/05/17 22:04:29 bates Exp $
 \name{residuals.gls}
 \title{Extract gls Residuals}
 \usage{
@@ -34,7 +34,7 @@
 
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 
-\seealso{\code{\link{gls}}, \code{\link{fitted.gls}} }
+\seealso{\code{\link{gls}}}
 
 \examples{
 data(Ovary)

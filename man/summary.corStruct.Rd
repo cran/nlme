@@ -40,7 +40,7 @@
 }
 \author{Jose Pinheiro and Douglas Bates }
 
-\seealso{\code{\link{print.summary.corStruct}}}
+%\seealso{\code{\link{print.summary.corStruct}}}
 
 \examples{
 cs1 <- corAR1(0.2)

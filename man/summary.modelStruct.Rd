@@ -1,4 +1,4 @@
-% $Id: summary.modelStruct.Rd,v 1.8 2002/03/05 14:59:39 bates Exp $
+% $Id: summary.modelStruct.Rd,v 1.8.2.1 2003/05/17 22:07:48 bates Exp $
 \name{summary.modelStruct}
 \alias{summary.modelStruct}
 \alias{summary.reStruct}
@@ -25,7 +25,7 @@
   \code{object}.
 }
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
-\seealso{\code{\link{print.summary.modelStruct}}}
+%\seealso{\code{\link{print.summary.modelStruct}}}
 \examples{
 lms1 <- lmeStruct(reStruct = reStruct(pdDiag(diag(2), ~age)),
    corStruct = corAR1(0.3))

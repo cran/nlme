@@ -1,4 +1,4 @@
-% $Id: summary.lmList.Rd,v 1.7 2002/03/05 14:59:39 bates Exp $
+% $Id: summary.lmList.Rd,v 1.7.2.1 2003/05/17 22:06:46 bates Exp $
 \name{summary.lmList}
 \title{Summarize an lmList Object}
 \usage{
@@ -86,7 +86,7 @@
 
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 
-\seealso{\code{\link{lmList}}, \code{\link{print.summary.lmList}}}
+\seealso{\code{\link{lmList}}}
 
 \examples{
 data(Orthodont)

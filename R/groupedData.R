@@ -579,7 +579,7 @@ update.groupedData <-
   ## check if any columns used in formulas were deleted
   if( any( is.na( match( allV, names(data) ) ) ) ) { # return data frame
     cols <- ncol(data)
-    return( data[, 1:ncol(data), drop = drop] )
+    return( data[, seq(length=ncol(data)), drop = drop] )
   }
   args <- as.list(oAttr)
   args <- args[ is.na( match( names( args ), c( "names", "row.names" ) ) ) ]

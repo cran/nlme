@@ -1,4 +1,4 @@
-% $Id: coef.lme.Rd,v 1.9 2002/03/05 14:59:39 bates Exp $
+% $Id: coef.lme.Rd,v 1.9.2.1 2003/05/17 21:50:21 bates Exp $
 \name{coef.lme}
 \title{Extract lme Coefficients}
 \usage{
@@ -64,7 +64,7 @@
   \code{ranef.lme} and \code{data.frame}.
 }
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
-\seealso{\code{\link{lme}}, \code{\link{fixef.lme}},
+\seealso{\code{\link{lme}}, %\code{\link{fixef.lme}},
   \code{\link{ranef.lme}},
   \code{\link{plot.ranef.lme}}, \code{\link{gsummary}}
 }

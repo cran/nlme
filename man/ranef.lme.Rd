@@ -1,4 +1,4 @@
-% $Id: ranef.lme.Rd,v 1.4 2002/03/05 14:59:39 bates Exp $
+% $Id: ranef.lme.Rd,v 1.4.2.1 2003/05/17 22:03:12 bates Exp $
 \name{ranef.lme}
 \title{Extract lme Random Effects}
 \usage{
@@ -73,7 +73,7 @@
 
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 
-\seealso{\code{\link{lme}}, \code{\link{fixed.effects.lme}},
+\seealso{\code{\link{lme}}, %\code{\link{fixed.effects.lme}},
   \code{\link{coef.lme}}, \code{\link{plot.ranef.lme}},
   \code{\link{gsummary}}}  
 

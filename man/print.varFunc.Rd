@@ -1,4 +1,4 @@
-% $Id: print.varFunc.Rd,v 1.6.2.2 2003/04/17 22:28:45 bates Exp $
+% $Id: print.varFunc.Rd,v 1.6.2.3 2003/05/17 22:02:03 bates Exp $
 \name{print.varFunc}
 \title{Print a varFunc Object}
 \usage{
@@ -18,8 +18,7 @@
 
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 
-\seealso{\code{\link{summary.varFunc}},
-  \code{\link{print.summary.varFunc}}} 
+\seealso{\code{\link{summary.varFunc}}}
 
 \examples{
 data(Orthodont)

@@ -1,4 +1,4 @@
-% $Id: summary.varFunc.Rd,v 1.7.2.1 2002/08/09 19:45:29 bates Exp $
+% $Id: summary.varFunc.Rd,v 1.7.2.2 2003/05/17 22:08:34 bates Exp $
 \name{summary.varFunc}
 \title{Summarize varFunc Object}
 \usage{
@@ -37,10 +37,7 @@
 }
 
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
-
-
-\seealso{\code{\link{print.summary.varFunc}}}
-
+%\seealso{\code{\link{print.summary.varFunc}}}
 \examples{
 data(Orthodont)
 vf1 <- varPower(0.3, form = ~age)

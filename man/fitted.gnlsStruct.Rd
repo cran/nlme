@@ -1,4 +1,4 @@
-% $Id: fitted.gnlsStruct.Rd,v 1.6 2002/03/05 14:59:39 bates Exp $
+% $Id: fitted.gnlsStruct.Rd,v 1.6.2.1 2003/05/17 21:52:25 bates Exp $
 \name{fitted.gnlsStruct}
 \title{Calculate gnlsStruct Fitted Values}
 \usage{
@@ -28,7 +28,7 @@
   \code{fitted.gnls}.
 }
 
-\seealso{\code{\link{gnls}}, \code{\link{fitted.gnls}},
+\seealso{\code{\link{gnls}}, %\code{\link{fitted.gnls}},
   \code{\link{residuals.gnlsStruct}} } 
 
 \keyword{models}

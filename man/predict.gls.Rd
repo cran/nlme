@@ -1,4 +1,4 @@
-% $Id: predict.gls.Rd,v 1.8 2002/03/05 14:59:39 bates Exp $
+% $Id: predict.gls.Rd,v 1.8.2.1 2003/05/17 21:59:38 bates Exp $
 \name{predict.gls}
 \title{Predictions from a gls Object}
 \usage{
@@ -28,7 +28,7 @@
 
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 
-\seealso{\code{\link{gls}}, \code{\link{fitted.gls}}}
+\seealso{\code{\link{gls}}}
 
 \examples{
 data(Ovary)

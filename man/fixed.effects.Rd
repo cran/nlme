@@ -1,4 +1,4 @@
-% $Id: fixed.effects.Rd,v 1.3.4.1 2003/04/17 22:28:45 bates Exp $
+% $Id: fixed.effects.Rd,v 1.3.4.2 2003/05/17 21:57:49 bates Exp $
 \name{fixed.effects}
 \title{Extract Fixed Effects}
 \usage{
@@ -21,7 +21,7 @@ fixef(object, \dots)
 \value{
   will depend on the method function used; see the appropriate documentation.
 }
-\seealso{\code{\link{fixef.lmList}}, \code{\link{fixef.lme}}} 
+\seealso{\code{\link{fixef.lmList}}} 
 \examples{
 ## see the method function documentation
 }

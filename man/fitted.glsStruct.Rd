@@ -1,4 +1,4 @@
-% $Id: fitted.glsStruct.Rd,v 1.6.2.1 2003/04/17 22:28:45 bates Exp $
+% $Id: fitted.glsStruct.Rd,v 1.6.2.2 2003/05/17 21:51:26 bates Exp $
 \name{fitted.glsStruct}
 \title{Calculate glsStruct Fitted Values}
 \usage{
@@ -32,7 +32,7 @@
   \code{fitted.gls}.
 }
 
-\seealso{\code{\link{gls}}, \code{\link{fitted.gls}},
+\seealso{\code{\link{gls}}, %\code{\link{fitted.gls}},
   \code{\link{residuals.glsStruct}} } 
 
 \keyword{models}
