@@ -1,4 +1,4 @@
-% $Id: Variogram.default.Rd,v 1.8 2002/03/05 14:59:39 bates Exp $
+% $Id: Variogram.default.Rd,v 1.8.2.1 2003/04/17 22:28:45 bates Exp $
 \name{Variogram.default}
 \title{Calculate Semi-variogram}
 \usage{
@@ -12,7 +12,7 @@
   \item{distance}{a numeric vector with the pairwise distances
     corresponding to the elements of \code{object}. The order of the
     elements in \code{distance} must correspond to the pairs
-    \code{(1,2), (1,3), ..., (n-1,n)}, with \code{n} representing the
+    \code{(1,2), (1,3), \dots, (n-1,n)}, with \code{n} representing the
     length of \code{object}, and must have length \code{n(n-1)/2}.}
  \item{\dots}{some methods for this generic require additional
     arguments.  None are used in this method.} 

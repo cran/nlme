@@ -1,25 +1,7 @@
-### $Id: gls.R,v 1.6.2.5 2003/02/10 19:03:22 bates Exp $
-###
 ###  Fit a linear model with correlated errors and/or heteroscedasticity
 ###
-### Copyright 1997-2001  Jose C. Pinheiro <jcp@research.bell-labs.com>,
+### Copyright 1997-2003  Jose C. Pinheiro <Jose.Pinheiro@pharma.novartis.com>,
 ###                      Douglas M. Bates <bates@stat.wisc.edu>
-###
-### This file is part of the nlme library for S and related languages.
-### It is made available under the terms of the GNU General Public
-### License, version 2, or at your option, any later version,
-### incorporated herein by reference.
-###
-### This program is distributed in the hope that it will be
-### useful, but WITHOUT ANY WARRANTY; without even the implied
-### warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
-### PURPOSE.  See the GNU General Public License for more
-### details.
-###
-### You should have received a copy of the GNU General Public
-### License along with this program; if not, write to the Free
-### Software Foundation, Inc., 59 Temple Place - Suite 330, Boston,
-### MA 02111-1307, USA
 
 gls <-
   ## fits linear model with serial correlation and variance functions,
@@ -1044,24 +1026,30 @@ summary.gls <- function(object, verbose = FALSE, ...) {
 }
 
 update.gls <-
-  function(object, model, data, correlation, weights, subset, method,
-	   na.action, control, verbose, ...)
+    function (object, model., ..., evaluate = TRUE)
 {
-  thisCall <- as.list(match.call())[-(1:2)]
-  nextCall <- as.list(object$call)[-1]
-  if (is.na(match("correlation", names(thisCall))) &&
-      !is.null(thCor <- object$modelStruct$corStruct)) {
-    thisCall$correlation <- thCor
-  }
-  if (is.na(match("weights", names(thisCall))) &&
-      !is.null(thWgt <- object$modelStruct$varStruct)) {
-    thisCall$weights <- thWgt
-  }
-  if (!is.null(thisCall$model)) {
-    thisCall$model <- update(as.formula(nextCall$model), model)
-  }
-  nextCall[names(thisCall)] <- thisCall
-  do.call("gls", nextCall)
+    call <- object$call
+    if (is.null(call))
+	stop("need an object with call component")
+    extras <- match.call(expand.dots = FALSE)$...
+    if (!missing(model.))
+	call$model <- update.formula(formula(object), model.)
+    if(length(extras) > 0) {
+        ## the next two lines allow partial matching of argument names
+        ## in the update.  This is nonstandard but required for examples
+        ## in chapter 5 of Pinheiro and Bates (2000).
+        glsa <- names(as.list(args(gls)))
+        names(extras) <- glsa[pmatch(names(extras), glsa[-length(glsa)])]
+	existing <- !is.na(match(names(extras), names(call)))
+	## do these individually to allow NULL to remove entries.
+	for (a in names(extras)[existing]) call[[a]] <- extras[[a]]
+	if(any(!existing)) {
+	    call <- c(as.list(call), extras[!existing])
+	    call <- as.call(call)
+	}
+    }
+    if(evaluate) eval(call, parent.frame())
+    else call
 }
 
 Variogram.gls <-
@@ -1111,7 +1099,7 @@ Variogram.gls <-
         ## making sure grps is consistent
         wchRows <- !is.na(match(row.names(data), row.names(covar)))
         if (!is.null(grps)) {
-          grps <- pruneLevels(grps[wchRows])
+          grps <- grps[wchRows, drop = TRUE]
         }
         covar <- as.data.frame(unclass(model.matrix(covForm, covar)))
       } else {
@@ -1195,7 +1183,7 @@ Variogram.gls <-
                     data.frame(variog = vrg, dist = dst)
                   }, robust = robust)
     val <- do.call("rbind", as.list(val))
-    val$n.pairs <- table(na.omit(cutDist))
+    val$n.pairs <- unclass(table(na.omit(cutDist)))
   }
   row.names(val) <- 1:nrow(val)
   if (inherits(csT, "corSpatial") && resType != "normalized") {

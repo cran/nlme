@@ -1,8 +1,8 @@
-% $Id: anova.gls.Rd,v 1.6 2002/03/05 14:59:39 bates Exp $
+% $Id: anova.gls.Rd,v 1.6.2.1 2003/04/17 22:28:45 bates Exp $
 \name{anova.gls}
 \title{Compare Likelihoods of Fitted Objects}
 \usage{
-\method{anova}{gls}(object, ..., test, type, adjustSigma, Terms, L, verbose)
+\method{anova}{gls}(object, \dots, test, type, adjustSigma, Terms, L, verbose)
 }
 \alias{anova.gls}
 \arguments{
@@ -13,7 +13,7 @@
    \code{lmList}, \code{nlme}, \code{nlsList}, or \code{nls}.}
  \item{test}{an optional logical value controlling whether likelihood
    ratio tests should be used to compare the fitted models represented
-   by \code{object} and the objects in \code{...}. Defaults to
+   by \code{object} and the objects in \code{\dots}. Defaults to
    \code{TRUE}.}
  \item{type}{an optional character string specifying the type of sum of
    squares to be used in F-tests for the terms in the model. If 

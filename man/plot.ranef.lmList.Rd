@@ -1,8 +1,8 @@
-% $Id: plot.ranef.lmList.Rd,v 1.9 2002/04/16 14:28:53 bates Exp $
+% $Id: plot.ranef.lmList.Rd,v 1.9.2.1 2003/04/17 22:28:45 bates Exp $
 \name{plot.ranef.lmList}
 \title{Plot a ranef.lmList Object}
 \usage{
-\method{plot}{ranef.lmList}(x, form, grid, control, ...)
+\method{plot}{ranef.lmList}(x, form, grid, control, \dots)
 }
 \alias{plot.ranef.lmList}
 \arguments{

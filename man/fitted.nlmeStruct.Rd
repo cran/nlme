@@ -1,8 +1,8 @@
-% $Id: fitted.nlmeStruct.Rd,v 1.5 2002/03/05 14:59:39 bates Exp $
+% $Id: fitted.nlmeStruct.Rd,v 1.5.2.1 2003/04/17 22:28:45 bates Exp $
 \name{fitted.nlmeStruct}
 \title{Calculate nlmeStruct Fitted Values}
 \usage{
-\method{fitted}{nlmeStruct}(object, level, conLin, ...)
+\method{fitted}{nlmeStruct}(object, level, conLin, \dots)
 }
 \alias{fitted.nlmeStruct}
 \arguments{

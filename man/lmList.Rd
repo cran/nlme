@@ -1,13 +1,15 @@
-% $Id: lmList.Rd,v 1.7 2002/01/27 23:27:10 bates Exp $
+% $Id: lmList.Rd,v 1.7.2.1 2003/04/17 22:28:45 bates Exp $
 \name{lmList}
 \title{List of lm Objects with a Common Model}
 \usage{
 lmList(object, data, level, subset, na.action, pool)
-\method{update}{lmList}(object, formula, data, level, subset, na.action,
-pool, \dots)
+\method{update}{lmList}(object, formula, data, level, subset,
+   na.action, pool, \dots)
+\method{print}{lmList}(x, pool, \dots)
 }
 \alias{lmList}
 \alias{lmList.formula}
+\alias{print.lmList}
 \alias{update.lmList}
 \arguments{
   \item{object}{For \code{lmList},
@@ -46,10 +48,12 @@ pool, \dots)
    incomplete observations.
  }
  \item{pool}{
-   an optional logical value that is preserved as an attribute of the
-   returned value.  This will be used as the default for \code{pool} in
-   calculations of standard deviations or standard errors for summaries.
+   an optional logical value indicating whether a pooled
+   estimate of the residual standard error should be used 
+   in calculations of standard deviations or standard errors for
+   summaries.
  }
+ \item{x}{an object inheriting from class \code{lmList} to be printed.}
  \item{\dots}{some methods for this generic require additional
     arguments.  None are used in this method.} 
 }

@@ -1,7 +1,7 @@
 \name{ACF}
 \title{Autocorrelation Function}
 \usage{
-ACF(object, maxLag, ...)
+ACF(object, maxLag, \dots)
 }
 \alias{ACF}
 \arguments{

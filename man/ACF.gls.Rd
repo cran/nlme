@@ -1,8 +1,8 @@
-% $Id: ACF.gls.Rd,v 1.7 2002/03/05 14:59:39 bates Exp $
+% $Id: ACF.gls.Rd,v 1.7.2.1 2003/04/17 22:28:45 bates Exp $
 \name{ACF.gls}
 \title{Autocorrelation Function for gls Residuals}
 \usage{
-\method{ACF}{gls}(object, maxLag, resType, form, na.action, ...)
+\method{ACF}{gls}(object, maxLag, resType, form, na.action, \dots)
 }
 \alias{ACF.gls}
 \arguments{

@@ -1,8 +1,8 @@
-% $Id: print.summary.pdMat.Rd,v 1.7 2002/03/05 14:59:39 bates Exp $
+% $Id: print.summary.pdMat.Rd,v 1.7.2.1 2003/04/17 22:28:45 bates Exp $
 \name{print.summary.pdMat}
 \title{Print a summary.pdMat Object}
 \usage{
-\method{print}{summary.pdMat}(x, sigma, rdig, Level, resid, ...)
+\method{print}{summary.pdMat}(x, sigma, rdig, Level, resid, \dots)
 }
 \alias{print.summary.pdMat}
 \arguments{

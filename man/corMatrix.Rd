@@ -1,8 +1,8 @@
-% $Id: corMatrix.Rd,v 1.4 2002/03/05 14:59:39 bates Exp $
+% $Id: corMatrix.Rd,v 1.4.2.1 2003/04/17 22:28:45 bates Exp $
 \name{corMatrix}
 \title{Extract Correlation Matrix}
 \usage{
-corMatrix(object, ...)
+corMatrix(object, \dots)
 }
 \alias{corMatrix}
 \arguments{

@@ -1,9 +1,9 @@
-% $Id: plot.nfnGroupedData.Rd,v 1.7 2002/04/16 14:28:53 bates Exp $
+% $Id: plot.nfnGroupedData.Rd,v 1.7.2.1 2003/04/17 22:28:45 bates Exp $
 \name{plot.nfnGroupedData}
 \title{Plot an nfnGroupedData Object}
 \usage{
 \method{plot}{nfnGroupedData}(x, outer, inner, innerGroups, xlab, ylab, strip, aspect, panel,
-     key, grid, ...)
+     key, grid, \dots)
 }
 \alias{plot.nfnGroupedData}
 \arguments{
@@ -40,7 +40,7 @@
      "labels")} and \code{attr(object, "units")} pasted together.
  }
  \item{strip}{an optional function passed as the \code{strip} argument to
-   the \code{xyplot} function. Default is \code{strip.default(..., style
+   the \code{xyplot} function. Default is \code{strip.default(\dots, style
      = 1)} (see \code{trellis.args}).
    }
  \item{aspect}{an optional character string indicating the aspect ratio

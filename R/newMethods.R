@@ -1,26 +1,7 @@
-### $Id: newMethods.R,v 1.8.2.3 2003/03/25 15:23:05 bates Exp $
-###
 ###      Methods for generics from newGenerics.q for some standard classes
 ###
-### Copyright 1997-2001  Jose C. Pinheiro <jcp@research.bell-labs.com>,
+### Copyright 1997-2003  Jose C. Pinheiro <Jose.Pinheiro@pharma.novartis.com>,
 ###                      Douglas M. Bates <bates@stat.wisc.edu>
-###
-### This file is part of the nlme library for S and related languages.
-### It is made available under the terms of the GNU General Public
-### License, version 2, or at your option, any later version,
-### incorporated herein by reference.
-###
-### This program is distributed in the hope that it will be
-### useful, but WITHOUT ANY WARRANTY; without even the implied
-### warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
-### PURPOSE.  See the GNU General Public License for more
-### details.
-###
-### You should have received a copy of the GNU General Public
-### License along with this program; if not, write to the Free
-### Software Foundation, Inc., 59 Temple Place - Suite 330, Boston,
-### MA 02111-1307, USA
-
 
 ##*## Methods for some of the generics in newGenerics.q for standard classes
 
@@ -118,7 +99,7 @@ getGroups.data.frame <-
                     if (length(val) == 1) {             # repeat groups
                       return(as.factor(rep(val, N)))
                     } else {
-                      return(pruneLevels(as.factor(val)))
+                      return(as.factor(val)[drop = TRUE])
                     }
                   }, dat = object, N = nrow(object))
   if (length(vlist) == 1) return(vlist[[1]]) # ignore level - only one choice
@@ -506,21 +487,7 @@ plot.nls <-
   do.call(plotFun, as.list(args))
 }
 
-pruneLevels.factor <-
-  function(object)
-{
-  levs <- levels(object)
-  factor(as.character(object),
-         levels = levs[!is.na(match(levs, as.character(object)))])
-}
-
-pruneLevels.ordered <-
-  function(object)
-{
-  levs <- levels(object)
-  ordered(as.character(object),
-          levels = levs[!is.na(match(levs, as.character(object)))])
-}
+#pruneLevels.factor <- function(object) object[drop = TRUE]
 
 ##*## Plot method for ACF objects
 plot.ACF <-

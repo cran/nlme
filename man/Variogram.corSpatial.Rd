@@ -1,4 +1,4 @@
-% $Id: Variogram.corSpatial.Rd,v 1.7.2.1 2002/08/09 19:45:29 bates Exp $
+% $Id: Variogram.corSpatial.Rd,v 1.7.2.2 2003/04/17 22:28:45 bates Exp $
 \name{Variogram.corSpatial}
 \title{Calculate Semi-variogram for a corSpatial Object}
 \usage{
@@ -48,6 +48,6 @@
 data(BodyWeight)
 cs1 <- corExp(3, form = ~ Time | Rat)
 cs1 <- Initialize(cs1, BodyWeight)
-Variogram.corSpatial(cs1, FUN = function(x, y) (1 - exp(-x/y)))[1:10,]
+Variogram(cs1, FUN = function(x, y) (1 - exp(-x/y)))[1:10,]
 }
 \keyword{models}

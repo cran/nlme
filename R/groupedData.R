@@ -1,25 +1,7 @@
-### $Id: groupedData.R,v 1.7.2.1 2002/08/09 19:44:25 bates Exp $
-###
 ###           groupedData - data frame with a grouping structure
 ###
-### Copyright 1997-2001  Jose C. Pinheiro <jcp@research.bell-labs.com>,
+### Copyright 1997-2003  Jose C. Pinheiro <Jose.Pinheiro@pharma.novartis.com>,
 ###                      Douglas M. Bates <bates@stat.wisc.edu>
-###
-### This file is part of the nlme library for S and related languages.
-### It is made available under the terms of the GNU General Public
-### License, version 2, or at your option, any later version,
-### incorporated herein by reference.
-###
-### This program is distributed in the hope that it will be
-### useful, but WITHOUT ANY WARRANTY; without even the implied
-### warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
-### PURPOSE.  See the GNU General Public License for more
-### details.
-###
-### You should have received a copy of the GNU General Public
-### License along with this program; if not, write to the Free
-### Software Foundation, Inc., 59 Temple Place - Suite 330, Boston,
-### MA 02111-1307, USA
 
 groupedData <-
   ## Constructor for the groupedData class.  Takes a formula and a frame
@@ -37,14 +19,10 @@ groupedData <-
   if (is.null(grpForm <- getGroupsFormula(formula, asList = TRUE))) {
     stop("Right hand side of first argument must be a conditional expression")
   }
-
-  mCall <- as.list(match.call())[-1]
-  if (length(grpForm) == 1) {
-    ## single grouping variable
-    do.call("nfGroupedData", mCall)
-  } else {				        # multiple nesting
-    do.call("nmGroupedData", mCall)
-  }
+  mCall <- match.call()
+  mCall[[1]] <- as.name(ifelse(length(grpForm) == 1, "nfGroupedData",
+                               "nmGroupedData"))
+  eval(mCall, envir = parent.frame())
 }
 
 nfGroupedData <-
@@ -248,7 +226,7 @@ collapse.groupedData <-
     }
     object <- object[auxSubset, , drop = FALSE]
     groups <- groups[auxSubset, , drop = FALSE]
-    groups[] <- lapply(groups, pruneLevels)
+    groups[] <- lapply(groups, function(x) x[drop = TRUE])
   }
   if (length(displayLevel) != 1) {
     stop("Only one display level allowed")
@@ -357,7 +335,7 @@ collapse.groupedData <-
     groups <- eval(form[[3]][[3]], value)
     rnams <- unlist(split(1:nrow(value), groups))
     cGroups <- unlist(lapply(split(value[[".collapseGroups"]], groups),
-                             function(el) as.integer(pruneLevels(el))))
+                             function(el) as.integer(el[drop = TRUE])))
     value[[".collapseGroups"]] <- cGroups[order(rnams)]
     attr(value, "innerGroups") <- ~.collapseGroups
   }
@@ -611,7 +589,7 @@ update.groupedData <-
   }
   ## pruning the levels of factors
   whichFact <- unlist(lapply(data, is.factor))
-  data[whichFact] <- lapply(data[whichFact], pruneLevels)
+  data[whichFact] <- lapply(data[whichFact], function(x) x[drop = TRUE])
   args <- c(args[!is.na(match(names( args ), c("formula", "order.groups",
             "FUN", "outer", "inner", "labels", "units")))], list(data = data))
   do.call("groupedData", args)

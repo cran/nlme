@@ -1,10 +1,12 @@
-% $Id: anova.lme.Rd,v 1.6 2002/03/05 14:59:39 bates Exp $
+% $Id: anova.lme.Rd,v 1.6.2.1 2003/04/17 22:28:45 bates Exp $
 \name{anova.lme}
+\alias{anova.lme}
+\alias{print.anova.lme}
 \title{Compare Likelihoods of Fitted Objects}
 \usage{
-\method{anova}{lme}(object, ..., test, type, adjustSigma, Terms, L, verbose)
+\method{anova}{lme}(object, \dots, test, type, adjustSigma, Terms, L, verbose)
+\method{print}{anova.lme}(x, verbose, \dots)
 }
-\alias{anova.lme}
 \arguments{
  \item{object}{a fitted model object inheriting from class \code{lme},
    representing a mixed-effects model.}
@@ -13,7 +15,7 @@
    \code{lmList}, \code{nlme}, \code{nlsList}, or \code{nls}.}
  \item{test}{an optional logical value controlling whether likelihood
    ratio tests should be used to compare the fitted models represented
-   by \code{object} and the objects in \code{...}. Defaults to
+   by \code{object} and the objects in \code{\dots}. Defaults to
    \code{TRUE}.}
  \item{type}{an optional character string specifying the type of sum of
    squares to be used in F-tests for the terms in the model. If 
@@ -48,6 +50,7 @@
    (array columns) are assumed in the same order as the coefficients
    appear in the model. This argument is only used when a single fitted
    object is passed to the function. Default is \code{NULL}.}
+ \item{x}{an object inheriting from class \code{anova.lme}}
  \item{verbose}{an optional logical value. If \code{TRUE}, the calling
    sequences for each fitted model object are printed with the rest of
    the output, being omitted if \code{verbose = FALSE}. Defaults to

@@ -1,8 +1,8 @@
-% $Id: plot.lmList.Rd,v 1.10 2002/04/16 14:28:53 bates Exp $
+% $Id: plot.lmList.Rd,v 1.10.2.1 2003/04/17 22:28:45 bates Exp $
 \name{plot.lmList}
 \title{Plot an lmList Object}
 \usage{
-\method{plot}{lmList}(x, form, abline, id, idLabels, grid, ...)
+\method{plot}{lmList}(x, form, abline, id, idLabels, grid, \dots)
 }
 \alias{plot.lmList}
 \arguments{

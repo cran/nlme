@@ -2,9 +2,9 @@
 
 library( nlme )
 library( SASmixed )   # needed for the PBIB data
-library( lattice )
 options( width = 65, digits = 5 )
 options( contrasts = c(unordered = "contr.helmert", ordered = "contr.poly") )
+postscript( file = 'ch02.ps' )
 
 # Chapter 2    Theory and Computational Methods for Linear Mixed-Effects Models
 
@@ -35,11 +35,11 @@ fm1OrthF <- lme( distance ~ age, data = OrthoFem,
     random = ~ 1 | Subject )
 fm2OrthF <- update( fm1OrthF, random = ~ age | Subject )
 orthLRTsim <- simulate.lme( fm1OrthF, fm2OrthF, nsim = 1000 )
-#plot( orthLRTsim, df = c(1, 2) )    # produces Figure 2.3
+plot( orthLRTsim, df = c(1, 2) )    # produces Figure 2.3
 
 machineLRTsim <- simulate.lme(fm1Machine, fm2Machine, nsim= 1000)
-#plot( machineLRTsim, df = c(0, 1),      # produces Figure 2.4
-# layout = c(4,1), between = list(x = c(0, 0.5)) )
+plot( machineLRTsim, df = c(0, 1),      # produces Figure 2.4
+ layout = c(4,1), between = list(x = c(0, 0.5)) )
 
 data( ergoStool )
 stoolLRTsim <-
@@ -47,14 +47,14 @@ stoolLRTsim <-
                           random = ~ 1 | Subject),
                 m2 = list(fixed = effort ~ Type),
                 method = "ML", nsim = 1000 )
-#plot( stoolLRTsim, df = c(3, 4) )    # Figure 2.5
+plot( stoolLRTsim, df = c(3, 4) )    # Figure 2.5
 data( PBIB )
 pbibLRTsim <-
     simulate.lme( m1 = list( fixed = response ~ 1, data = PBIB,
                     random = ~ 1 | Block ),
                  m2 = list( fixed = response ~ Treatment ),
                  method = "ML", nsim = 1000 )
-#plot( pbibLRTsim, df = c(14,16,18), weights = FALSE )    # Figure 2.6
+plot( pbibLRTsim, df = c(14,16,18), weights = FALSE )    # Figure 2.6
 
 summary( fm2Machine )
 

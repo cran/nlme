@@ -1,6 +1,7 @@
 #-*- R -*-
 
 library( nlme )
+postscript(file = 'ch01.ps')
 options( width = 65, digits = 5 )
 options( contrasts = c(unordered = "contr.helmert", ordered = "contr.poly") )
 
@@ -25,7 +26,7 @@ anova( fm1Rail.lme )
 # 1.2 A Randomized Block Design
 
 data( ergoStool )
-#plot.design( ergoStool )   # produces Figure 1.6
+plot.design( ergoStool )   # produces Figure 1.6
 contrasts( ergoStool$Type )
 ergoStool1 <- ergoStool[ ergoStool$Subject == "1", ]
 model.matrix( effort ~ Type, ergoStool1 )   # X matrix for Subject 1
@@ -103,11 +104,8 @@ anova( fm1OrthF, fm2OrthF )
 random.effects( fm1OrthF )
 ranef( fm1OrthFM )
 coef( fm1OrthF )
-plot(
-###############
-     
-     compareFits(coef(fm1OrthF), coef(fm1OrthFM)))   # Figure 1.15
-plot( augPred(fm1OrthF), aspect = "xy", grid = T )   # Figure 1.16
+plot( compareFits(coef(fm1OrthF), coef(fm1OrthFM)))   # Figure 1.15
+plot( augPred(fm1OrthF), aspect = "xy", grid = TRUE )   # Figure 1.16
 
 # 1.5  Models for Nested Classification Factors
 

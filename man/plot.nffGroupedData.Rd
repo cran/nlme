@@ -1,9 +1,9 @@
-% $Id: plot.nffGroupedData.Rd,v 1.7 2002/04/16 14:28:53 bates Exp $
+% $Id: plot.nffGroupedData.Rd,v 1.7.2.1 2003/04/17 22:28:45 bates Exp $
 \name{plot.nffGroupedData}
 \title{Plot an nffGroupedData Object}
 \usage{
 \method{plot}{nffGroupedData}(x, outer, inner, innerGroups, xlab, ylab, strip, panel, key,
-     grid, ...)
+     grid, \dots)
 }
 \alias{plot.nffGroupedData}
 \arguments{

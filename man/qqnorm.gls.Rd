@@ -1,8 +1,8 @@
-% $Id: qqnorm.gls.Rd,v 1.9 2002/04/16 14:28:53 bates Exp $
+% $Id: qqnorm.gls.Rd,v 1.9.2.1 2003/04/17 22:28:45 bates Exp $
 \name{qqnorm.gls}
 \title{Normal Plot of Residuals from a gls Object}
 \usage{
-\method{qqnorm}{gls}(y, form, abline, id, idLabels, grid, ...)
+\method{qqnorm}{gls}(y, form, abline, id, idLabels, grid, \dots)
 }
 \alias{qqnorm.gls}
 \arguments{

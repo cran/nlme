@@ -1,9 +1,9 @@
-% $Id: plot.nmGroupedData.Rd,v 1.7 2002/04/16 14:28:53 bates Exp $
+% $Id: plot.nmGroupedData.Rd,v 1.7.2.1 2003/04/17 22:28:45 bates Exp $
 \name{plot.nmGroupedData}
 \title{Plot an nmGroupedData Object}
 \usage{
 \method{plot}{nmGroupedData}(x, collapseLevel, displayLevel, outer, inner,
-    preserve, FUN, subset, key, grid, ...) 
+    preserve, FUN, subset, key, grid, \dots)
 }
 \alias{plot.nmGroupedData}
 \arguments{

@@ -1,11 +1,13 @@
-% $Id: reStruct.Rd,v 1.6 2002/03/05 14:59:39 bates Exp $
+% $Id: reStruct.Rd,v 1.6.2.1 2003/04/17 22:28:45 bates Exp $
 \name{reStruct}
 \title{Random Effects Structure}
 \usage{
 reStruct(object, pdClass, REML, data)
+\method{print}{reStruct}(x, sigma, reEstimates, verbose, \dots)
 }
 \alias{reStruct}
 \alias{[.reStruct}
+\alias{print.reStruct}
 \arguments{
  \item{object}{any of the following: (i) a one-sided formula of the form
    \code{~x1+...+xn | g1/.../gm}, with \code{x1+...+xn} specifying the
@@ -40,6 +42,17 @@ reStruct(object, pdClass, REML, data)
    \code{NULL}, no attempt is made to obtain information on
    \code{factors} appearing in the formulas. Defaults to the
    parent frame from which the function was called.}
+ \item{x}{an object inheriting from class \code{reStruct} to be printed.}
+ \item{sigma}{an optional numeric value used as a multiplier for
+   the square-root factors of the \code{pdMat} components (usually the
+   estimated within-group standard deviation from a mixed-effects
+   model). Defaults to 1.} 
+ \item{reEstimates}{an optional list with the random effects estimates
+   for each level of grouping. Only used when \code{verbose = TRUE}.}
+ \item{verbose}{an optional logical value determining if the random
+   effects estimates should be printed. Defaults to \code{FALSE}.}
+ \item{\dots}{Optional arguments can be given to other methods for this
+   generic.  None are used in this method.}
 }
 \description{
   This function is a constructor for the \code{reStruct} class,

@@ -1,8 +1,8 @@
-% $Id: qqnorm.lme.Rd,v 1.8 2002/03/05 14:59:39 bates Exp $
+% $Id: qqnorm.lme.Rd,v 1.8.2.1 2003/04/17 22:28:45 bates Exp $
 \name{qqnorm.lme}
 \title{Normal Plot of Residuals or Random Effects from an lme Object}
 \usage{
-\method{qqnorm}{lme}(y, form, abline, id, idLabels, grid, ...)
+\method{qqnorm}{lme}(y, form, abline, id, idLabels, grid, \dots)
 }
 \alias{qqnorm.lm}
 \alias{qqnorm.lme}

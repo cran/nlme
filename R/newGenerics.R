@@ -1,25 +1,7 @@
-### $Id: newGenerics.R,v 1.3.2.1 2002/08/09 19:45:29 bates Exp $
-###
 ###    New generics used with corStruct, varFunc, groupedData, and reStruct
 ###
-### Copyright 1997-2001  Jose C. Pinheiro <jcp@research.bell-labs.com>,
+### Copyright 1997-2003  Jose C. Pinheiro <Jose.Pinheiro@pharma.novartis.com>,
 ###                      Douglas M. Bates <bates@stat.wisc.edu>
-###
-### This file is part of the nlme library for S and related languages.
-### It is made available under the terms of the GNU General Public
-### License, version 2, or at your option, any later version,
-### incorporated herein by reference.
-###
-### This program is distributed in the hope that it will be
-### useful, but WITHOUT ANY WARRANTY; without even the implied
-### warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
-### PURPOSE.  See the GNU General Public License for more
-### details.
-###
-### You should have received a copy of the GNU General Public
-### License along with this program; if not, write to the Free
-### Software Foundation, Inc., 59 Temple Place - Suite 330, Boston,
-### MA 02111-1307, USA
 
 ACF <-
   ## autocorrelation function - needed not exist if acf were generic
@@ -40,7 +22,7 @@ augPred <-
 
 "coef<-" <- "coefficients<-" <-
   ## Assignment of the unconstrained parameter
-  function(object, value) UseMethod("coef<-")
+  function(object, ..., value) UseMethod("coef<-")
 
 collapse <-
   ## collapse a data frame according to a factor, or several nested factors
@@ -131,10 +113,10 @@ needUpdate <-
   ## Checks if model plug-in needs to be updated after an estimation cycle
   function(object) UseMethod("needUpdate")
 
-pruneLevels <-
-  ## Returns the factor with the levels attribute truncated to only those
-  ## levels occuring in the factor
-  function(object) UseMethod("pruneLevels")
+#pruneLevels <-
+#  ## Returns the factor with the levels attribute truncated to only those
+#  ## levels occuring in the factor
+#  function(object) UseMethod("pruneLevels")
 
 random.effects <-
   ## Generic function for extracting the random effects

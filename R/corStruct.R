@@ -1,26 +1,7 @@
-### $Id: corStruct.R,v 1.5.2.3 2002/12/27 17:00:26 bates Exp $
-###
 ###              Classes of correlation structures
 ###
-### Copyright 1997-2001  Jose C. Pinheiro <jcp@research.bell-labs.com>,
+### Copyright 1997-2003  Jose C. Pinheiro <Jose.Pinheiro@pharma.novartis.com>,
 ###                      Douglas M. Bates <bates@stat.wisc.edu>
-###
-### This file is part of the nlme library for S and related languages.
-### It is made available under the terms of the GNU General Public
-### License, version 2, or at your option, any later version,
-### incorporated herein by reference.
-###
-### This program is distributed in the hope that it will be
-### useful, but WITHOUT ANY WARRANTY; without even the implied
-### warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
-### PURPOSE.  See the GNU General Public License for more
-### details.
-###
-### You should have received a copy of the GNU General Public
-### License along with this program; if not, write to the Free
-### Software Foundation, Inc., 59 Temple Place - Suite 330, Boston,
-### MA 02111-1307, USA
-
 
 ##*## Generics that should be implemented for any corStruct class
 
@@ -126,7 +107,7 @@ coef.corStruct <-
 }
 
 "coef<-.corStruct" <-
-  function(object, value)
+  function(object, ..., value)
 {
   ## Assignment of the unconstrained parameter of corStruct objects
   value <- as.numeric(value)
@@ -423,7 +404,7 @@ coef.corSymm <-
 }
 
 "coef<-.corSymm" <-
-  function(object, value)
+  function(object, ..., value)
 {
   if (length(value) != length(object)) {
     stop("Cannot change the length of the parameter of a corStruct object")
@@ -670,7 +651,7 @@ coef.corNatural <-
 }
 
 "coef<-.corNatural" <-
-  function(object, value)
+  function(object, ..., value)
 {
   if (length(value) != length(object)) {
     stop("Cannot change the length of the parameter of a corStruct object")
@@ -841,7 +822,7 @@ coef.corIdent <-
   function(object, unconstrained = TRUE, ...) numeric(0)
 
 "coef<-.corIdent" <-
-  function(object, value) object
+  function(object, ..., value) object
 
 Initialize.corIdent <-
   function(object, data, ...)
@@ -964,7 +945,7 @@ coef.corAR1 <-
 }
 
 "coef<-.corAR1" <-
-  function(object, value)
+  function(object, ..., value)
 {
   if (length(value) != length(object)) {
     stop("Cannot change the length of the parameter of a corStruct object")
@@ -1136,7 +1117,7 @@ coef.corCAR1 <-
 }
 
 "coef<-.corCAR1" <-
-  function(object, value)
+  function(object, ..., value)
 {
   if (length(value) != length(object)) {
     stop("Cannot change the length of the parameter of a corStruct object")
@@ -1340,7 +1321,7 @@ coef.corARMA <-
 }
 
 "coef<-.corARMA" <-
-  function(object, value)
+  function(object, ..., value)
 {
   if (length(value) != length(object)) {
     stop("Cannot change the length of the parameter of a corStruct object")
@@ -1521,7 +1502,7 @@ coef.corCompSymm <-
 }
 
 "coef<-.corCompSymm" <-
-  function(object, value)
+  function(object, ..., value)
 {
   if (length(value) != length(object)) {
     stop("Cannot change the length of the parameter of a corStruct object")
@@ -1889,7 +1870,7 @@ coef.corSpatial <-
 }
 
 "coef<-.corSpatial" <-
-  function(object, value)
+  function(object, ..., value)
 {
   if (length(value) != length(object)) {
     stop("Cannot change the length of the parameter after initialization")

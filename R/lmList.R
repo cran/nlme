@@ -1,27 +1,7 @@
-## $Id: lmList.R,v 1.8.2.2 2002/12/11 23:56:35 bates Exp $
-###
 ###                  Create a list of lm objects
 ###
-### Copyright 1997-2001  Jose C. Pinheiro <jcp@research.bell-labs.com>,
+### Copyright 1997-2003  Jose C. Pinheiro <Jose.Pinheiro@pharma.novartis.com>,
 ###                      Douglas M. Bates <bates@stat.wisc.edu>
-###
-### This file is part of the nlme library for S and related languages.
-### It is made available under the terms of the GNU General Public
-### License, version 2, or at your option, any later version,
-### incorporated herein by reference.
-###
-### This program is distributed in the hope that it will be
-### useful, but WITHOUT ANY WARRANTY; without even the implied
-### warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
-### PURPOSE.  See the GNU General Public License for more
-### details.
-###
-### You should have received a copy of the GNU General Public
-### License along with this program; if not, write to the Free
-### Software Foundation, Inc., 59 Temple Place - Suite 330, Boston,
-### MA 02111-1307, USA
-
-###*# Constructors
 
 lmList <-
   ## a list of lm objects from a formula or a groupedData object
@@ -61,7 +41,7 @@ lmList.formula <-
       else if (length(level) > 1) {
 	stop("Multiple levels not allowed")
       }
-      groups <- pruneLevels(getGroups(data, level = level))
+      groups <- getGroups(data, level = level)[drop = TRUE]
       grpForm <- getGroupsFormula(data)
       Call$object <-
         as.vector(eval(parse(text=paste(deparse(Call$object),
@@ -76,7 +56,7 @@ lmList.formula <-
     else if (length(level) > 1) {
       stop("Multiple levels not allowed")
     }
-    groups <- pruneLevels(getGroups(data, form = grpForm, level = level))
+    groups <- getGroups(data, form = grpForm, level = level)[drop = TRUE]
     object <- eval(parse(text=paste(deparse(getResponseFormula(object)[[2]]),
                        deparse(getCovariateFormula(object)[[2]]), sep = "~")))
   }
@@ -844,7 +824,7 @@ predict.lmList <-
       ## newdata contains groups definition
       grps <- getGroups(newdata, getGroupsFormula(object, asList = TRUE),
 			level = attr(object, "level"))
-      grps <- pruneLevels(grps)
+      grps <- grps[drop = TRUE]
       subset <- as.character(unique(grps))
       if(any(is.na(match(subset, names(object))))) {
 	stop("Non-existent group in \"newdata\".")
@@ -1404,21 +1384,44 @@ summary.lmList <-
   val
 }
 
+# based on R's update.default
 update.lmList <-
-  function(object, formula, data, level, subset, na.action, pool, ...)
+    function (object, formula., ..., evaluate = TRUE)
 {
-  thisCall <- as.list(match.call())[-(1:2)]
-  if (!missing(formula)) {
-    names(thisCall)[match(names(thisCall), "formula")] <- "object"
-  }
-  nextCall <- attr(object, "call")
-  nextCall[names(thisCall)] <- thisCall
-  if (!is.null(thisCall$object)) {
-    nextCall$object <- update(as.formula(nextCall$object), nextCall$object)
-  }
-  nextCall[[1]] <- as.name("lmList")
-  eval(nextCall, envir = parent.frame(1))
+    call <- attr(object, "call")
+    if (is.null(call))
+	stop("need an object with call component")
+    extras <- match.call(expand.dots = FALSE)$...
+    if (!missing(formula.))
+	call$object <- update.formula(formula(object), formula.)
+    if(length(extras) > 0) {
+	existing <- !is.na(match(names(extras), names(call)))
+	## do these individually to allow NULL to remove entries.
+	for (a in names(extras)[existing]) call[[a]] <- extras[[a]]
+	if(any(!existing)) {
+	    call <- c(as.list(call), extras[!existing])
+	    call <- as.call(call)
+	}
+    }
+    if(evaluate) eval(call, parent.frame())
+    else call
 }
+
+#update.lmList <-
+#  function(object, formula, data, level, subset, na.action, pool, ...)
+#{
+#  thisCall <- as.list(match.call())[-(1:2)]
+#  if (!missing(formula)) {
+#    names(thisCall)[match(names(thisCall), "formula")] <- "object"
+#  }
+#  nextCall <- attr(object, "call")
+#  nextCall[names(thisCall)] <- thisCall
+#  if (!is.null(thisCall$object)) {
+#    nextCall$object <- update(as.formula(nextCall$object), nextCall$object)
+#  }
+#  nextCall[[1]] <- as.name("lmList")
+#  eval(nextCall, envir = parent.frame(1))
+#}
 
 ### Local variables:
 ### mode: S

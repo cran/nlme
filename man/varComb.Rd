@@ -1,8 +1,8 @@
-% $Id: varComb.Rd,v 1.5 2002/03/05 14:59:39 bates Exp $
+% $Id: varComb.Rd,v 1.5.2.1 2003/04/17 22:28:45 bates Exp $
 \name{varComb}
 \title{Combination of Variance Functions}
 \usage{
-varComb(...)
+varComb(\dots)
 }
 \alias{varComb}
 \arguments{

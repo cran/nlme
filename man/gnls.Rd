@@ -1,4 +1,4 @@
-% $Id: gnls.Rd,v 1.7.2.1 2002/09/10 17:17:27 bates Exp $
+% $Id: gnls.Rd,v 1.7.2.3 2003/05/15 17:04:57 bates Exp $
 \name{gnls}
 \title{Fit Nonlinear Model Using Generalized Least Squares}
 \usage{
@@ -8,7 +8,7 @@ gnls(model, data, params, start, correlation, weights, subset,
        weights, subset, na.action, naPattern, control, verbose, \dots) 
 }
 \alias{gnls}
-\alias{update.gnls}
+%\alias{update.gnls}
 \arguments{
  \item{object}{an object inheriting from class \code{gnls}, representing
    a generalized nonlinear least squares fitted model.}
@@ -24,7 +24,7 @@ gnls(model, data, params, start, correlation, weights, subset,
  \item{params}{an optional two-sided linear formula of the form
    \code{p1+...+pn~x1+...+xm}, or list of two-sided formulas of the form
    \code{p1~x1+...+xm}, with possibly different models for each
-   parameter. The \code{p1,...,pn} represent parameters included on the
+   parameter. The \code{p1,\dots,pn} represent parameters included on the
    right hand side of \code{model} and \code{x1+...+xm} define a linear
    model for the parameters (when the left hand side of the formula
    contains several parameters, they are all assumed to follow the same
@@ -119,7 +119,5 @@ data(Soybean)
 fm1 <- gnls(weight ~ SSlogis(Time, Asym, xmid, scal), Soybean,
             weights = varPower())
 summary(fm1)
-# errors follow an auto-regressive process of order 1
-fm2 <- update(fm1, correlation = corAR1(0.6))
 }
 \keyword{models}

@@ -1,8 +1,8 @@
-% $Id: plot.ranef.lme.Rd,v 1.8 2002/03/05 14:59:39 bates Exp $
+% $Id: plot.ranef.lme.Rd,v 1.8.2.1 2003/04/17 22:28:45 bates Exp $
 \name{plot.ranef.lme}
 \title{Plot a ranef.lme Object}
 \usage{
-\method{plot}{ranef.lme}(x, form, omitFixed, level, grid, control, ...)
+\method{plot}{ranef.lme}(x, form, omitFixed, level, grid, control, \dots)
 }
 \alias{plot.ranef.lme}
 \arguments{

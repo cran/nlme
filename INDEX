@@ -30,10 +30,6 @@ Initialize.lmeStruct    Initialize an lmeStruct Object
 Initialize.reStruct     Initialize reStruct Object
 Initialize.varFunc      Initialize varFunc Object
 LDEsysMat               Generate system matrix for LDEs
-MEEM                    EM iterations for mixed-effects
-MEdecomp                Decompose a mixed-effects model
-MEdims                  Calculate dimensions in mixed-effects
-MEestimate              Estimate mixed-effects parameters
 Machines                Productivity Scores for Machines and Workers
 MathAchSchool           School demographic data for MathAchieve
 MathAchieve             Mathematics achievement scores
@@ -95,14 +91,10 @@ augPred                 Augmented Predictions
 balancedGrouped         Create a groupedData object from a matrix
 bdf                     Language scores
 coef.corStruct          Coefficients of a corStruct Object
-coef.gls                Extract gls Coefficients
 coef.gnls               Extract gnls Coefficients
 coef.lmList             Extract lmList Coefficients
 coef.lme                Extract lme Coefficients
 coef.modelStruct        Extract modelStruct Object Coefficients
-coef.pdCompSymm         pdCompSymm Object Coefficients
-coef.pdDiag             pdDiag Object Coefficients
-coef.pdIdent            pdIdent Object Coefficients
 coef.pdMat              pdMat Object Coefficients
 coef.reStruct           reStruct Object Coefficients
 coef.varFunc            varFunc Object Coefficients
@@ -134,9 +126,7 @@ corSpher                Spherical Correlation Structure
 corSymm                 General Correlation Structure
 ergoStool               Ergometrics experiment with stool types
 fdHess                  Finite difference Hessian
-fitted.gls              Extract gls Fitted Values
 fitted.glsStruct        Calculate glsStruct Fitted Values
-fitted.gnls             Extract gnls Fitted Values
 fitted.gnlsStruct       Calculate gnlsStruct Fitted Values
 fitted.lmList           Extract lmList Fitted Values
 fitted.lme              Extract lme Fitted Values
@@ -144,20 +134,9 @@ fitted.lmeStruct        Calculate lmeStruct Fitted Values
 fitted.nlmeStruct       Calculate nlmeStruct Fitted Values
 fixed.effects           Extract Fixed Effects
 fixef.lmList            Extract lmList Fixed Effects
-fixef.lme               Extract lme Fixed Effects
-formula.corStruct       Extract corStruct Object Formula
-formula.gls             Extract gls Object Formula
-formula.gnls            Extract gnls Object Formula
-formula.groupedData     Extract groupedData Formula
-formula.lmList          Extract lmList Object Formula
-formula.lme             Extract lme Object Formula
-formula.modelStruct     Extract modelStruct Object Formula
-formula.nlme            Extract nlme Object Formula
-formula.nlsList         Extract nlsList Object Formula
 formula.pdBlocked       Extract pdBlocked Formula
 formula.pdMat           Extract pdMat Formula
 formula.reStruct        Extract reStruct Object Formula
-formula.varFunc         Extract varFunc Formula
 gapply                  Apply a Function by Groups
 getCovariate            Extract Covariate from an Object
 getCovariate.corStruct
@@ -179,11 +158,6 @@ getGroups.lme           Extract lme Object Groups
 getGroups.varFunc       Extract varFunc Groups
 getGroupsFormula        Extract Grouping Formula
 getResponse             Extract Response Variable from an Object
-getResponse.data.frame
-                        Extract Response from a Data Frame
-getResponse.gls         Extract gls Object Response
-getResponse.lmList      Extract lmList Object Response
-getResponse.lme         Extract lme Object Response
 getResponseFormula      Extract Formula Specifying Response Variable
 getVarCov               Extract variance-covariance matrix
 gls                     Fit Linear Model Using Generalized Least
@@ -204,8 +178,6 @@ intervals.lmList        Confidence Intervals on lmList Coefficients
 intervals.lme           Confidence Intervals on lme Parameters
 isBalanced              Check a Design for Balance
 isInitialized           Check if Object is Initialized
-isInitialized.reStruct
-                        Check if an reStruct Object is Initialized
 lmList                  List of lm Objects with a Common Model
 lmList.groupedData      lmList Fit from a groupedData Object
 lme                     Linear Mixed-Effects Models
@@ -220,7 +192,6 @@ logDet.corStruct        Extract corStruct Log-Determinant
 logDet.pdMat            Extract Log-Determinant from a pdMat Object
 logDet.reStruct         Extract reStruct Log-Determinants
 logLik.corStruct        Extract corStruct Log-Likelihood
-logLik.gls              Log-Likelihood of a gls Object
 logLik.glsStruct        Log-Likelihood of a glsStruct Object
 logLik.gnls             Log-Likelihood of a gnls Object
 logLik.gnlsStruct       Log-Likelihood of a gnlsStruct Object
@@ -285,26 +256,8 @@ predict.gnls            Predictions from a gnls Object
 predict.lmList          Predictions from an lmList Object
 predict.lme             Predictions from an lme Object
 predict.nlme            Predictions from an nlme Object
-print.anova.lme         Print an anova.lme Object
-print.corStruct         Print a corStruct Object
-print.gls               Print a gls Object
-print.groupedData       Print a groupedData Object
-print.lmList            Print an lmList Object
-print.lme               Print an lme Object
-print.modelStruct       Print a modelStruct Object
-print.pdMat             Print a pdMat Object
-print.reStruct          Print an reStruct Object
-print.summary.corStruct
-                        Print a summary.corStruct Object
-print.summary.gls       Print a summary.gls Object
-print.summary.lmList    Print a summary.lmList Object
-print.summary.lme       Print a summary.lme Object
-print.summary.modelStruct
-                        Print a summary.modelStruct Object
 print.summary.pdMat     Print a summary.pdMat Object
-print.summary.varFunc   Print a summary.varFunc Object
 print.varFunc           Print a varFunc Object
-pruneLevels             Prune Factor Levels
 qqnorm.gls              Normal Plot of Residuals from a gls Object
 qqnorm.lme              Normal Plot of Residuals or Random Effects
                         from an lme Object

@@ -1,8 +1,8 @@
-% $Id: Initialize.varFunc.Rd,v 1.1.2.1 2002/08/09 19:45:29 bates Exp $
+% $Id: Initialize.varFunc.Rd,v 1.1.2.2 2003/04/17 22:28:45 bates Exp $
 \name{Initialize.varFunc}
 \title{Initialize varFunc Object}
 \usage{
-\method{Initialize}{varFunc}(object, data, ...)
+\method{Initialize}{varFunc}(object, data, \dots)
 }
 \alias{Initialize.varFunc}
 \alias{Initialize.varComb}

@@ -1,25 +1,7 @@
-### $Id: varFunc.R,v 1.8.2.2 2002/12/11 23:56:35 bates Exp $
-###
 ###              Classes of variance functions
 ###
-### Copyright 1997-2001  Jose C. Pinheiro <jcp@research.bell-labs.com>,
+### Copyright 1997-2003  Jose C. Pinheiro <Jose.Pinheiro@pharma.novartis.com>,
 ###                      Douglas M. Bates <bates@stat.wisc.edu>
-###
-### This file is part of the nlme library for S and related languages.
-### It is made available under the terms of the GNU General Public
-### License, version 2, or at your option, any later version,
-### incorporated herein by reference.
-###
-### This program is distributed in the hope that it will be
-### useful, but WITHOUT ANY WARRANTY; without even the implied
-### warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
-### PURPOSE.  See the GNU General Public License for more
-### details.
-###
-### You should have received a copy of the GNU General Public
-### License along with this program; if not, write to the Free
-### Software Foundation, Inc., 59 Temple Place - Suite 330, Boston,
-### MA 02111-1307, USA
 
 ##*## Generics that should be implemented for any varFunc class
 
@@ -222,7 +204,7 @@ coef.varFixed <-
   function(object, ...) numeric(0)
 
 "coef<-.varFixed" <-
-  function(object, value) object
+  function(object, ..., value) object
 
 Initialize.varFixed <-
   function(object, data, ...)
@@ -323,7 +305,7 @@ coef.varIdent <-
 }
 
 "coef<-.varIdent" <-
-  function(object, value)
+  function(object, ..., value)
 {
   if (!(is.null(grps <- getGroups(object)) ||
        all(attr(object, "whichFix")))) {
@@ -516,7 +498,7 @@ coef.varPower <-
 }
 
 "coef<-.varPower" <-
-  function(object, value)
+  function(object, ..., value)
 {
   if ((len <- length(object)) > 0) {		# varying parameters
     value <- as.numeric(value)
@@ -731,7 +713,7 @@ coef.varExp <-
 }
 
 "coef<-.varExp" <-
-  function(object, value)
+  function(object, ..., value)
 {
   if ((len <- length(object)) > 0) {		# varying parameters
     value <- as.numeric(value)
@@ -1002,7 +984,7 @@ coef.varConstPower <-
 }
 
 "coef<-.varConstPower" <-
-  function(object, value)
+  function(object, ..., value)
 {
   if ((len <- length(unlist(object))) > 0) {	# varying parameters
     value <- as.numeric(value)
@@ -1197,7 +1179,7 @@ coef.varComb <-
 }
 
 "coef<-.varComb" <-
-  function(object, value)
+  function(object, ..., value)
 {
   plen <- attr(object, "plen")
   if ((len <- sum(plen)) > 0) {		# varying parameters

@@ -1,8 +1,8 @@
-% $Id: Initialize.Rd,v 1.1.2.1 2002/08/09 19:45:29 bates Exp $
+% $Id: Initialize.Rd,v 1.1.2.2 2003/04/17 22:28:45 bates Exp $
 \name{Initialize}
 \title{Initialize Object}
 \usage{
-Initialize(object, data, ...)
+Initialize(object, data, \dots)
 }
 \alias{Initialize}
 \arguments{

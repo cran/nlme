@@ -1,8 +1,8 @@
-% $Id: allCoef.Rd,v 1.4 2000/07/03 18:22:46 bates Exp $
+% $Id: allCoef.Rd,v 1.4.4.1 2003/04/17 22:28:45 bates Exp $
 \name{allCoef}
 \title{Extract Coefficients from a Set of Objects}
 \usage{
-allCoef(..., extract)
+allCoef(\dots, extract)
 }
 \alias{allCoef}
 \arguments{
@@ -12,14 +12,14 @@ allCoef(..., extract)
  \item{extract}{an optional extractor function. Defaults to \code{coef}.}
 }
 \description{
-  The extractor function is applied to each object in \code{...}, with
+  The extractor function is applied to each object in \code{\dots}, with
   the result being converted to a vector. A \code{map} attribute is
   included to indicate which pieces of the returned vector correspond to
-  the original objects in \code{...}.
+  the original objects in \code{dots}.
 }
 \value{
   a vector with all elements, generally coefficients, obtained by
-  applying \code{extract} to the objects in \code{...}. 
+  applying \code{extract} to the objects in \code{\dots}. 
 }
 \author{Jose' Pinheiro and Douglas Bates}
 

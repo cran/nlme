@@ -1,25 +1,7 @@
-### $Id: nlsList.R,v 1.4.2.2 2003/01/18 20:49:28 saikat Exp $
-###
 ###                  Create a list of nls objects
 ###
-### Copyright 1997-2001  Jose C. Pinheiro <jcp@research.bell-labs.com>,
+### Copyright 1997-2003  Jose C. Pinheiro <Jose.Pinheiro@pharma.novartis.com>,
 ###                      Douglas M. Bates <bates@stat.wisc.edu>
-###
-### This file is part of the nlme library for S and related languages.
-### It is made available under the terms of the GNU General Public
-### License, version 2, or at your option, any later version,
-### incorporated herein by reference.
-###
-### This program is distributed in the hope that it will be
-### useful, but WITHOUT ANY WARRANTY; without even the implied
-### warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
-### PURPOSE.  See the GNU General Public License for more
-### details.
-###
-### You should have received a copy of the GNU General Public
-### License along with this program; if not, write to the Free
-### Software Foundation, Inc., 59 Temple Place - Suite 330, Boston,
-### MA 02111-1307, USA
 
 nlsList <-
   ## A list of nls objects
@@ -66,7 +48,7 @@ nlsList.formula <-
       else if (length(level) > 1) {
 	stop("Multiple levels not allowed")
       }
-      groups <- pruneLevels(getGroups(data, level = level))
+      groups <- getGroups(data, level = level)[drop = TRUE]
       grpForm <- getGroupsFormula(data)
     } else {
       stop (paste("Data must be a groupedData object if formula",
@@ -80,7 +62,7 @@ nlsList.formula <-
     }
     model <- eval(parse(text = paste(deparse(model[[2]]),
                         deparse(getCovariateFormula(model)[[2]]), sep = "~")))
-    groups <- pruneLevels(getGroups(data, form = grpForm, level = level))
+    groups <- getGroups(data, form = grpForm, level = level)[drop = TRUE]
   }
   if (is.null(start) && is.null(attr(data, "parameters"))) {
     ## no starting values
@@ -155,17 +137,39 @@ summary.nlsList <-
 }
 
 update.nlsList <-
-  function(object, model, data, start, control, level, subset, na.action,
-	   pool, ...)
+    function (object, model., ..., evaluate = TRUE)
 {
-  thisCall <- as.list(match.call())[-(1:2)]
-  if (!missing(model)) {
-    names(thisCall)[match(names(thisCall), "model")] <- "object"
-  }
-  nextCall <- as.list(attr(object, "call")[-1])
-  nextCall[names(thisCall)] <- thisCall
-  do.call("nlsList", nextCall)
+    call <- attr(object, "call")
+    if (is.null(call))
+	stop("missing call attribute in nlsList object")
+    extras <- match.call(expand.dots = FALSE)$...
+    if (!missing(model.))
+	call$model <- update.formula(formula(object), model.)
+    if(length(extras) > 0) {
+	existing <- !is.na(match(names(extras), names(call)))
+	## do these individually to allow NULL to remove entries.
+	for (a in names(extras)[existing]) call[[a]] <- extras[[a]]
+	if(any(!existing)) {
+	    call <- c(as.list(call), extras[!existing])
+	    call <- as.call(call)
+	}
+    }
+    if(evaluate) eval(call, parent.frame())
+    else call
 }
+
+#update.nlsList <-
+#  function(object, model, data, start, control, level, subset, na.action,
+#	   pool, ...)
+#{
+#  thisCall <- as.list(match.call())[-(1:2)]
+#  if (!missing(model)) {
+#    names(thisCall)[match(names(thisCall), "model")] <- "object"
+#  }
+#  nextCall <- as.list(attr(object, "call")[-1])
+#  nextCall[names(thisCall)] <- thisCall
+#  do.call("nlsList", nextCall)
+#}
 
 ### Local variables:
 ### mode: S

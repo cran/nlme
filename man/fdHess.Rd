@@ -6,7 +6,7 @@
   using finite differences.
 }
 \usage{
-fdHess(pars, fun, ..., .relStep=(.Machine$double.eps)^(1/3), minAbsPar=0)
+fdHess(pars, fun, \dots, .relStep=(.Machine$double.eps)^(1/3), minAbsPar=0)
 }
 \arguments{
   \item{pars}{the numeric values of the parameters at which to evaluate the

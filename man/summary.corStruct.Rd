@@ -1,6 +1,4 @@
-% $Id: summary.corStruct.Rd,v 1.7 2001/10/30 20:51:15 bates Exp $
 \name{summary.corStruct}
-%\title{Summarize \code{corStruct} Object}
 \title{Summarize a corStruct Object}
 \usage{
 \method{summary}{corStruct}(object, structName, \dots)
@@ -12,7 +10,6 @@
 \alias{summary.corCompSymm}
 \alias{summary.corExp}
 \alias{summary.corGaus}
-\alias{summary.corHF}
 \alias{summary.corIdent}
 \alias{summary.corLin}
 \alias{summary.corNatural}

@@ -1,26 +1,8 @@
-### $Id: gnls.R,v 1.7.2.5 2003/02/10 19:03:22 bates Exp $
-###
 ###  Fit a general nonlinear regression model with correlated and/or
 ###  heteroscedastic errors
 ###
-### Copyright 1997-2001  Jose C. Pinheiro <jcp@research.bell-labs.com>,
+### Copyright 1997-2003  Jose C. Pinheiro <Jose.Pinheiro@pharma.novartis.com>,
 ###                      Douglas M. Bates <bates@stat.wisc.edu>
-###
-### This file is part of the nlme library for S and related languages.
-### It is made available under the terms of the GNU General Public
-### License, version 2, or at your option, any later version,
-### incorporated herein by reference.
-###
-### This program is distributed in the hope that it will be
-### useful, but WITHOUT ANY WARRANTY; without even the implied
-### warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
-### PURPOSE.  See the GNU General Public License for more
-### details.
-###
-### You should have received a copy of the GNU General Public
-### License along with this program; if not, write to the Free
-### Software Foundation, Inc., 59 Temple Place - Suite 330, Boston,
-### MA 02111-1307, USA
 
 gnls <-
   function(model,
@@ -753,32 +735,54 @@ predict.gnls <-
   val
 }
 
+#based on R's update.default
 update.gnls <-
-  function(object, model, data = sys.frame(sys.parent()), params, start ,
-           correlation = NULL, weights = NULL, subset,
-           na.action = na.fail, naPattern, control = list(),
-	   verbose = FALSE, ...)
+    function (object, model., ..., evaluate = TRUE)
 {
-  thisCall <- as.list(match.call())[-(1:2)]
-  nextCall <- as.list(object$call)[-1]
-  if (!is.null(thisCall$model)) {
-    thisCall$model <- update(formula(object), model)
-  } else {                              # same model
-    if (is.null(thisCall$start)) {
-      thisCall$start <- coef(object)
+    call <- object$call
+    if (is.null(call))
+	stop("need an object with call component")
+    extras <- match.call(expand.dots = FALSE)$...
+    if (!missing(model.))
+	call$model <- update.formula(formula(object), model.)
+    if(length(extras) > 0) {
+	existing <- !is.na(match(names(extras), names(call)))
+	## do these individually to allow NULL to remove entries.
+	for (a in names(extras)[existing]) call[[a]] <- extras[[a]]
+	if(any(!existing)) {
+	    call <- c(as.list(call), extras[!existing])
+	    call <- as.call(call)
+	}
     }
-  }
-  if (is.na(match("correlation", names(thisCall))) &&
-      !is.null(thCor <- object$modelStruct$corStruct)) {
-    thisCall$correlation <- thCor
-  }
-  if (is.na(match("weights", names(thisCall))) &&
-      !is.null(thWgt <- object$modelStruct$varStruct)) {
-    thisCall$weights <- thWgt
-  }
-  nextCall[names(thisCall)] <- thisCall
-  do.call("gnls", nextCall)
+    if(evaluate) eval(call, parent.frame())
+    else call
 }
+#update.gnls <-
+#  function(object, model, data = sys.frame(sys.parent()), params, start ,
+#           correlation = NULL, weights = NULL, subset,
+#           na.action = na.fail, naPattern, control = list(),
+#	   verbose = FALSE, ...)
+#{
+#  thisCall <- as.list(match.call())[-(1:2)]
+#  nextCall <- as.list(object$call)[-1]
+#  if (!is.null(thisCall$model)) {
+#    thisCall$model <- update(formula(object), model)
+#  } else {                              # same model
+#    if (is.null(thisCall$start)) {
+#      thisCall$start <- coef(object)
+#    }
+#  }
+#  if (is.na(match("correlation", names(thisCall))) &&
+#      !is.null(thCor <- object$modelStruct$corStruct)) {
+#    thisCall$correlation <- thCor
+#  }
+#  if (is.na(match("weights", names(thisCall))) &&
+#      !is.null(thWgt <- object$modelStruct$varStruct)) {
+#    thisCall$weights <- thWgt
+#  }
+#  nextCall[names(thisCall)] <- thisCall
+#  do.call("gnls", nextCall)
+#}
 
 ###*### gnlsStruct - a model structure for gnls fits
 

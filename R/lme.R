@@ -1,25 +1,7 @@
-### $Id: lme.R,v 1.11.2.7 2003/02/10 19:03:22 bates Exp $
-###
 ###            Fit a general linear mixed effects model
 ###
-### Copyright 1997-2001  Jose C. Pinheiro <jcp@research.bell-labs.com>,
+### Copyright 1997-2003  Jose C. Pinheiro <Jose.Pinheiro@pharma.novartis.com>,
 ###                      Douglas M. Bates <bates@stat.wisc.edu>
-###
-### This file is part of the nlme library for S and related languages.
-### It is made available under the terms of the GNU General Public
-### License, version 2, or at your option, any later version,
-### incorporated herein by reference.
-###
-### This program is distributed in the hope that it will be
-### useful, but WITHOUT ANY WARRANTY; without even the implied
-### warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
-### PURPOSE.  See the GNU General Public License for more
-### details.
-###
-### You should have received a copy of the GNU General Public
-### License along with this program; if not, write to the Free
-### Software Foundation, Inc., 59 Temple Place - Suite 330, Boston,
-### MA 02111-1307, USA
 
 lme <-
   ## fits general linear mixed effects model by maximum likelihood, or
@@ -721,7 +703,7 @@ MEdims <-
   isLast <- array(FALSE, dim(groups) + c(0, 2),
                   list(NULL, c(rev(names(groups)), "X", "y")))
   for(i in 1:Q) {
-    isLast[, Q + 1 - i] <- c(0 != diff(codes(groups[[i]])), TRUE)
+    isLast[, Q + 1 - i] <- c(0 != diff(as.integer(groups[[i]])), TRUE)
   }
   isLast[N,  ] <- TRUE
   lastRow <- apply(isLast, 2, function(x) seq(along = x)[x])
@@ -1874,7 +1856,7 @@ predict.lme <-
 	      eval(parse(text = paste("~1", deparse(groups[[2]]), sep = "|"))))
     ## ordering data by groups
     if (inherits(grps, "factor")) {	# single level
-      grps <- pruneLevels(grps[whichRows])
+      grps <- grps[whichRows]
       oGrps <- data.frame(grps)
       ## checking if there are missing groups
       if (any(naGrps <- is.na(grps))) {
@@ -1886,7 +1868,7 @@ predict.lme <-
       names(grps) <- names(oGrps) <- as.character(deparse((groups[[2]])))
     } else {
       grps <- oGrps <-
-	do.call("data.frame", lapply(grps[whichRows, ], pruneLevels))
+	do.call("data.frame", lapply(grps[whichRows, ], function(x) x[drop = TRUE]))
       ## checking for missing groups
       if (any(naGrps <- is.na(grps))) {
 	## need to input missing groups
@@ -1897,7 +1879,7 @@ predict.lme <-
       }
       ord <- do.call("order", grps)
       ## making group levels unique
-      grps[, 1] <- pruneLevels(grps[, 1])
+      grps[, 1] <- grps[, 1][drop = TRUE]
       for(i in 2:ncol(grps)) {
 	grps[, i] <-
           as.factor(paste(as.character(grps[, i-1]), as.character(grps[,i]),
@@ -2581,40 +2563,63 @@ summary.lme <- function(object, adjustSigma = TRUE, verbose = FALSE, ...)
   object
 }
 
+# based on R's update.default
 update.lme <-
-  function(object, fixed, data, random, correlation, weights, subset,
-           method, na.action, control, contrasts, ...)
+    function (object, fixed., ..., evaluate = TRUE)
 {
-  thisCall <- as.list(match.call())[-(1:2)]
-  if (is.null(nextCall <- object$origCall) ||
-      !is.null(thisCall$fixed) ||
-      is.null(thisCall$random)) {
-    nextCall <- object$call
-  }
-  nextCall <- as.list(nextCall)[-1]
-  if (is.null(thisCall$random)  && is.null(thisCall$subset)) {
-    ## no changes in ranef model and no subsetting
-    thisCall$random <- object$modelStruct$reStruct
-  }
-  if (is.na(match("correlation", names(thisCall))) &&
-      !is.null(thCor <- object$modelStruct$corStruct)) {
-    thisCall$correlation <- thCor
-  }
-  if (is.na(match("weights", names(thisCall))) &&
-      !is.null(thWgt <- object$modelStruct$varStruct)) {
-    thisCall$weights <- thWgt
-  }
-    argNams <- unique( c(names(nextCall), names(thisCall)) )
-    args <- vector("list", length(argNams))
-    names(args) <- argNams
-    args[ names(nextCall) ] <- nextCall
-    nextCall <- args
-  if (!is.null(thisCall$fixed)) {
-    thisCall$fixed <- update(as.formula(nextCall$fixed), fixed)
-  }
-  nextCall[names(thisCall)] <- thisCall
-  do.call("lme", nextCall)
+    call <- object$call
+    if (is.null(call))
+	stop("need an object with call component")
+    extras <- match.call(expand.dots = FALSE)$...
+    if (!missing(fixed.))
+	call$fixed <- update.formula(formula(object), fixed.)
+    if(length(extras) > 0) {
+	existing <- !is.na(match(names(extras), names(call)))
+	## do these individually to allow NULL to remove entries.
+	for (a in names(extras)[existing]) call[[a]] <- extras[[a]]
+	if(any(!existing)) {
+	    call <- c(as.list(call), extras[!existing])
+	    call <- as.call(call)
+	}
+    }
+    if(evaluate) eval(call, parent.frame())
+    else call
 }
+
+#update.lme <-
+#  function(object, fixed, data, random, correlation, weights, subset,
+#           method, na.action, control, contrasts, ...)
+#{
+#  thisCall <- as.list(match.call())[-(1:2)]
+#  if (is.null(nextCall <- object$origCall) ||
+#      !is.null(thisCall$fixed) ||
+#      is.null(thisCall$random)) {
+#    nextCall <- object$call
+#  }
+#  nextCall <- as.list(nextCall)[-1]
+#  if (is.null(thisCall$random)  && is.null(thisCall$subset)) {
+#    ## no changes in ranef model and no subsetting
+#    thisCall$random <- object$modelStruct$reStruct
+#  }
+#  if (is.na(match("correlation", names(thisCall))) &&
+#      !is.null(thCor <- object$modelStruct$corStruct)) {
+#    thisCall$correlation <- thCor
+#  }
+#  if (is.na(match("weights", names(thisCall))) &&
+#      !is.null(thWgt <- object$modelStruct$varStruct)) {
+#    thisCall$weights <- thWgt
+#  }
+#    argNams <- unique( c(names(nextCall), names(thisCall)) )
+#    args <- vector("list", length(argNams))
+#    names(args) <- argNams
+#    args[ names(nextCall) ] <- nextCall
+#    nextCall <- args
+#  if (!is.null(thisCall$fixed)) {
+#    thisCall$fixed <- update(as.formula(nextCall$fixed), fixed)
+#  }
+#  nextCall[names(thisCall)] <- thisCall
+#  do.call("lme", nextCall)
+#}
 
 Variogram.lme <-
   function(object, distance, form = ~1,
@@ -2657,7 +2662,7 @@ Variogram.lme <-
         covar <- model.frame(covForm, data, na.action = na.action)
         ## making sure grps is consistent
         wchRows <- !is.na(match(row.names(data), row.names(covar)))
-        grps <- pruneLevels(grps[wchRows])
+        grps <- grps[wchRows, drop = TRUE]
         covar <- as.data.frame(unclass(model.matrix(covForm, covar)))
       } else {
         covar <-

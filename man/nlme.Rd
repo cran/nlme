@@ -1,19 +1,14 @@
-% $Id: nlme.Rd,v 1.8 2002/03/05 14:59:39 bates Exp $
+% $Id: nlme.Rd,v 1.8.2.2 2003/05/15 17:04:57 bates Exp $
 \name{nlme}
 \title{Nonlinear Mixed-Effects Models}
 \usage{
 nlme(model, data, fixed, random, groups, start, correlation, weights,
      subset, method, na.action, naPattern, control, verbose)
-\method{update}{nlme}(object, model, data, fixed, random, groups, start,
-       correlation, weights, subset, method, na.action, naPattern,
-       control, verbose, \dots)
 }
 \alias{nlme}
 \alias{nlme.formula}
-\alias{update.nlme}
+%\alias{update.nlme}
 \arguments{
- \item{object}{an object inheriting from class \code{nlme}, representing
-   a fitted nonlinear mixed-effects model.}
   \item{model}{a nonlinear model formula, with the response on the left
     of a \code{~} operator and an expression involving parameters and
     covariates on the right, or an \code{nlsList} object.  If
@@ -29,7 +24,7 @@ nlme(model, data, fixed, random, groups, start, correlation, weights,
    \code{f1+...+fn~x1+...+xm}, or a list of two-sided formulas of the form
    \code{f1~x1+...+xm}, with possibly different models for different
    parameters. The \code{f1,...,fn} are the names of parameters included on
-   the  right hand side of \code{model} and the \code{x1+...+xm}
+   the right hand side of \code{model} and the \code{x1+...+xm}
    expressions define linear models for these parameters (when the left
    hand side of the formula contains several parameters, they all are
    assumed to follow the same linear model, described by the right hand

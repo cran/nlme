@@ -3,27 +3,23 @@
 # initialization
 
 library( nlme )
-library( lattice )
 options( width = 65, digits = 5 )
 options( contrasts = c(unordered = "contr.helmert", ordered = "contr.poly") )
+postscript( file = 'ch03.ps' )
 
 # Chapter 3    Describing the Structure of Grouped Data
 
 # 3.1 The Display Formula and Its Components
 
-data( Rail )
+data(Rail, ergoStool, Machines, Orthodont, Pixel, Oats, Oxboys,
+     PBG, BodyWeight, Soybean, DNase, CO2, Spruce, Spruce,
+     Wafer, Theoph, Quinidine)
 formula( Rail )
-data( ergoStool )
 formula( ergoStool )
-data( Machines )
 formula( Machines )
-data( Orthodont )
 formula( Orthodont )
-data( Pixel )
 formula( Pixel )
-data( Oats )
 formula( Oats )
-data( Oxboys )
 table( Oxboys$Subject )
 table( getGroups( Oxboys ) )
 unique( table( getGroups( Oxboys ) ) )  # a more concise result
@@ -35,7 +31,6 @@ Pixel.groups <- getGroups( Pixel, level = 1:2 )
 class( Pixel.groups )
 names( Pixel.groups )
 unique( Pixel.groups[["Side"]] )
-data( PBG )
 formula( PBG )
 PBG.log <- update( PBG, formula = deltaBP ~ log(dose) | Rabbit )
 formula(PBG.log)
@@ -58,10 +53,8 @@ Oxboys <- groupedData( height ~ age | Subject,
    units = list(y = "(cm)") )
 Oxboys                     # display the object
 unique( getGroups( Oxboys ) )
-data( BodyWeight )
 plot( BodyWeight, outer = ~ Diet, aspect = 3 )  # Figure 3.3
 plot( BodyWeight, outer = TRUE, aspect = 3 )
-data( Soybean )
 plot( Soybean, outer = ~ Year * Variety )       # Figure 6.10
 plot( Soybean, outer = ~ Variety * Year )
 gsummary( BodyWeight, invar = TRUE )
@@ -74,22 +67,18 @@ ergoStool.new
 
 # 3.3 Controlling Trellis Graphics Presentations of Grouped Data
 
-data( CO2 )
 plot(CO2, layout=c(6,2), between=list(x=c(0,0,0.5,0,0)))
-data( Spruce )
 plot( Spruce, layout = c(7, 4, 3),
        skip = c(rep(FALSE, 27), TRUE, rep(FALSE, 27), TRUE,
                 rep(FALSE, 12), rep(TRUE, 2), rep(FALSE,13)) )
 plot( Spruce, layout = c(9, 3, 3),
        skip = c(rep(FALSE, 66), TRUE, TRUE, rep(FALSE, 13)) )
-data( DNase )
 unique( getCovariate(DNase) )
 log( unique(getCovariate(DNase)), 2 )
 plot( DNase, layout=c(6,2), scales = list(x=list(log=2)) )
 plot( Pixel, layout = c(4,5),
        between = list(x = c(0, 0.5), y = 0.5) )
 plot( Pixel, displayLevel = 1 )
-data( Wafer )
 plot( Wafer, display = 1, collapse = 1 )
 plot( Wafer, display = 1, collapse = 1,
        FUN = function(x) sqrt(var(x)), layout = c(10,1) )
@@ -97,14 +86,12 @@ plot( Wafer, display = 1, collapse = 1,
 # 3.4 Summaries
 
 sapply( ergoStool, data.class )
-data( Theoph )
 gsummary( Theoph, inv = TRUE )
 gsummary( Theoph, omit = TRUE, inv = TRUE )
-is.null(gsummary(Theoph, inv = T, omit = T)) # invariants present
-is.null(gsummary(Oxboys, inv = T, omit = T)) # no invariants
+is.null(gsummary(Theoph, inv = TRUE, omit = TRUE)) # invariants present
+is.null(gsummary(Oxboys, inv = TRUE, omit = TRUE)) # no invariants
 gsummary( Theoph )
 gsummary( Theoph, FUN = max, omit = TRUE )
-data( Quinidine )
 Quin.sum <- gsummary( Quinidine, omit = TRUE, FUN = mean )
 dim( Quin.sum )
 Quin.sum[1:10, ]

@@ -1,8 +1,8 @@
-% $Id: logDet.Rd,v 1.4 2002/03/05 14:59:39 bates Exp $
+% $Id: logDet.Rd,v 1.4.2.1 2003/04/17 22:28:45 bates Exp $
 \name{logDet}
 \title{Extract the Logarithm of the Determinant}
 \usage{
-logDet(object, ...)
+logDet(object, \dots)
 }
 \alias{logDet}
 \arguments{

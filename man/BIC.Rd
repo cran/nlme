@@ -1,8 +1,8 @@
-% $Id: BIC.Rd,v 1.5 2002/03/05 14:59:39 bates Exp $
+% $Id: BIC.Rd,v 1.5.2.1 2003/04/17 22:28:45 bates Exp $
 \name{BIC}
 \title{Bayesian Information Criterion}
 \usage{
-BIC(object, ...)
+BIC(object, \dots)
 }
 \alias{BIC}
 \alias{BIC.lm}

@@ -1,9 +1,9 @@
-% $Id: coef.modelStruct.Rd,v 1.7.2.1 2002/08/09 19:45:29 bates Exp $
+% $Id: coef.modelStruct.Rd,v 1.7.2.2 2003/05/16 22:36:53 bates Exp $
 \name{coef.modelStruct}
 \title{Extract modelStruct Object Coefficients}
 \usage{
 \method{coef}{modelStruct}(object, unconstrained, \dots)
-coef(object) <- value
+coef(object, \dots) <- value
 }
 \alias{coef.modelStruct}
 \alias{coef<-.modelStruct}

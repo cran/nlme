@@ -1,8 +1,8 @@
-% $Id: augPred.Rd,v 1.7 2002/03/05 14:59:39 bates Exp $
+% $Id: augPred.Rd,v 1.7.2.1 2003/04/17 22:28:45 bates Exp $
 \name{augPred}
 \title{Augmented Predictions}
 \usage{
-augPred(object, primary, minimum, maximum, length.out, ...)
+augPred(object, primary, minimum, maximum, length.out, \dots)
 }
 \alias{augPred}
 \alias{augPred.gls}

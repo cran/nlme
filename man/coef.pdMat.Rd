@@ -1,12 +1,15 @@
-% $Id: coef.pdMat.Rd,v 1.6 2001/10/30 20:51:15 bates Exp $
+% $Id: coef.pdMat.Rd,v 1.6.2.2 2003/05/16 22:36:53 bates Exp $
 \name{coef.pdMat}
 \title{pdMat Object Coefficients}
 \usage{
 \method{coef}{pdMat}(object, unconstrained, \dots)
-coef(object) <- value
+coef(object, \dots) <- value
 }
 \alias{coef.pdMat}
 \alias{coef.pdBlocked}
+\alias{coef.pdCompSymm}
+\alias{coef.pdDiag}
+\alias{coef.pdIdent}
 \alias{coef.pdNatural}
 \alias{coef.pdSymm}
 \alias{coef<-.pdMat}

@@ -1,8 +1,8 @@
-% $Id: pdConstruct.Rd,v 1.7 2002/03/05 14:59:39 bates Exp $
+% $Id: pdConstruct.Rd,v 1.7.2.1 2003/04/17 22:28:45 bates Exp $
 \name{pdConstruct}
 \title{Construct pdMat Objects}
 \usage{
-pdConstruct(object, value, form, nam, data, ...)
+pdConstruct(object, value, form, nam, data, \dots)
 }
 \alias{pdConstruct}
 \alias{pdConstruct.pdCompSymm}

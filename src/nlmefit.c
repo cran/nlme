@@ -1,4 +1,4 @@
-/* $Id: nlmefit.c,v 1.10.2.1 2002/09/13 05:54:00 saikat Exp $ 
+/* $Id: nlmefit.c,v 1.10.2.2 2003/05/16 18:13:02 bates Exp $ 
 
    Routines for calculation of the log-likelihood or restricted
    log-likelihood with mixed-effects models.
@@ -750,16 +750,15 @@ internal_EM(dimPTR dd, double *ZXy, double *DmHalf, int nn,
 	break;
       case 3:			/* compound symmetry */
 	{
-	  double trA = 0.0, trAJ = 0.0, *auxRes = res;
+	  double trA = 0.0, trAJ = 0.0, *auxRes;
 	  longint l;
 	  for(j = 0; j < ncol; j++) {
 	    for(k = 0; k <= j; k++) {
-	      trA += auxRes[k] * auxRes[k];
+	      trA += res[k + j * nrow] * res[k + j * nrow];
 	      for(l = j + 1; l < ncol; l++) {
-		trAJ += auxRes[k] * auxRes[k + l * nrow];
+		trAJ += res[k + j * nrow] * res[k + l * nrow];
 	      }
 	    }
-	    auxRes += nrow;
 	  }
 	  trAJ = 2 * trAJ + trA;
 	  trA = (ncol - 1) / (ncol * trA - trAJ);

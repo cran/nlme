@@ -1,4 +1,4 @@
-% $Id: fitted.glsStruct.Rd,v 1.6 2002/03/05 14:59:39 bates Exp $
+% $Id: fitted.glsStruct.Rd,v 1.6.2.1 2003/04/17 22:28:45 bates Exp $
 \name{fitted.glsStruct}
 \title{Calculate glsStruct Fitted Values}
 \usage{
@@ -10,7 +10,6 @@
    representing a list of linear model components, such as
    \code{corStruct} and \code{varFunc} objects.}
  \item{glsFit}{an optional list with components \code{logLik}
-   
    (log-likelihood), \code{beta} (coefficients), \code{sigma} (standard
    deviation for error term), \code{varBeta} (coefficients' covariance
    matrix), \code{fitted} (fitted values), and \code{residuals}

@@ -1,25 +1,7 @@
-### $Id: nlme.R,v 1.8.2.4 2003/03/25 16:17:05 bates Exp $
-###
 ###            Fit a general nonlinear mixed effects model
 ###
-### Copyright 1997-2001  Jose C. Pinheiro <jcp@research.bell-labs.com>,
+### Copyright 1997-2003  Jose C. Pinheiro <Jose.Pinheiro@pharma.novartis.com>,
 ###                      Douglas M. Bates <bates@stat.wisc.edu>
-###
-### This file is part of the nlme library for S and related languages.
-### It is made available under the terms of the GNU General Public
-### License, version 2, or at your option, any later version,
-### incorporated herein by reference.
-###
-### This program is distributed in the hope that it will be
-### useful, but WITHOUT ANY WARRANTY; without even the implied
-### warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
-### PURPOSE.  See the GNU General Public License for more
-### details.
-###
-### You should have received a copy of the GNU General Public
-### License along with this program; if not, write to the Free
-### Software Foundation, Inc., 59 Temple Place - Suite 330, Boston,
-### MA 02111-1307, USA
 
 nlme <-
   function(model,
@@ -1119,7 +1101,7 @@ predict.nlme <-
 	      eval(parse(text = paste("~1", deparse(groups[[2]]), sep = "|"))))
     ## ordering data by groups
     if (inherits(grps, "factor")) {	# single level
-      grps <- pruneLevels(grps[whichRows])
+      grps <- grps[whichRows, drop = TRUE]
       oGrps <- data.frame(grps)
       ## checking if there are missing groups
       if (any(naGrps <- is.na(grps))) {
@@ -1131,7 +1113,7 @@ predict.nlme <-
       names(grps) <- names(oGrps) <- as.character(deparse((groups[[2]])))
     } else {
       grps <- oGrps <-
-	do.call("data.frame", lapply(grps[whichRows, ], pruneLevels))
+	do.call("data.frame", lapply(grps[whichRows, ], function(x) x[drop = TRUE]))
       ## checking for missing groups
       if (any(naGrps <- is.na(grps))) {
 	## need to input missing groups
@@ -1142,7 +1124,7 @@ predict.nlme <-
       }
       ord <- do.call("order", grps)
       ## making group levels unique
-      grps[, 1] <- pruneLevels(grps[, 1])
+      grps[, 1] <- grps[, 1][drop = TRUE]
       for(i in 2:ncol(grps)) {
 	grps[, i] <-
           as.factor(paste(as.character(grps[, i-1]), as.character(grps[,i]),
@@ -1311,51 +1293,74 @@ predict.nlme <-
   val
 }
 
+# based on R's update.default
 update.nlme <-
-  function(object, model, data, fixed, random, groups, start, correlation,
-           weights, subset, method, na.action, naPattern, control,
-           verbose, ...)
+    function (object, model., ..., evaluate = TRUE)
 {
-  thisCall <- as.list(match.call())[-(1:2)]
-  if (!is.null(thisCall$start) && is.numeric(start)) {
-    thisCall$start <- list(fixed = start)
-  }
-  if (!is.null(nextCall <- object$origCall) &&
-      (is.null(thisCall$fixed) && !is.null(thisCall$random))) {
-    nextCall <- as.list(nextCall)[-1]
-  } else {
-    nextCall <- as.list(object$call)[-1]
-    if (is.null(thisCall$fixed)) {        # no changes in fixef model
-      if (is.null(thisCall$start)) {
-        thisCall$start <- list(fixed = fixef(object))
-      } else {
-        if (is.null(thisCall$start$fixed)) {
-          thisCall$start$fixed <- fixef(object)
-        }
-      }
+    call <- object$call
+    if (is.null(call))
+	stop("need an object with call component")
+    extras <- match.call(expand.dots = FALSE)$...
+    if (!missing(model.))
+	call$model <- update.formula(formula(object), model.)
+    if(length(extras) > 0) {
+	existing <- !is.na(match(names(extras), names(call)))
+	## do these individually to allow NULL to remove entries.
+	for (a in names(extras)[existing]) call[[a]] <- extras[[a]]
+	if(any(!existing)) {
+	    call <- c(as.list(call), extras[!existing])
+	    call <- as.call(call)
+	}
     }
-    if (!is.null(thisCall$start$random)) {  # making start random NULL
-      thisCall$start$random <- NULL
-    }
-    if (is.null(thisCall$random) && is.null(thisCall$subset)) {
-      ## no changes in ranef model and no subsetting
-      thisCall$random <- object$modelStruct$reStruct
-    }
-  }
-  if (!is.null(thisCall$model)) {
-    thisCall$model <- update(formula(object), model)
-  }
-  if (is.na(match("correlation", names(thisCall))) &&
-      !is.null(thCor <- object$modelStruct$corStruct)) {
-    thisCall$correlation <- thCor
-  }
-  if (is.na(match("weights", names(thisCall))) &&
-      !is.null(thWgt <- object$modelStruct$varStruct)) {
-    thisCall$weights <- thWgt
-  }
-  nextCall[names(thisCall)] <- thisCall
-  do.call("nlme", nextCall)
+    if(evaluate) eval(call, parent.frame())
+    else call
 }
+
+#update.nlme <-
+#  function(object, model, data, fixed, random, groups, start, correlation,
+#           weights, subset, method, na.action, naPattern, control,
+#           verbose, ...)
+#{
+#  thisCall <- as.list(match.call())[-(1:2)]
+#  if (!is.null(thisCall$start) && is.numeric(start)) {
+#    thisCall$start <- list(fixed = start)
+#  }
+#  if (!is.null(nextCall <- object$origCall) &&
+#      (is.null(thisCall$fixed) && !is.null(thisCall$random))) {
+#    nextCall <- as.list(nextCall)[-1]
+#  } else {
+#    nextCall <- as.list(object$call)[-1]
+#    if (is.null(thisCall$fixed)) {        # no changes in fixef model
+#      if (is.null(thisCall$start)) {
+#        thisCall$start <- list(fixed = fixef(object))
+#      } else {
+#        if (is.null(thisCall$start$fixed)) {
+#          thisCall$start$fixed <- fixef(object)
+#        }
+#      }
+#    }
+#    if (!is.null(thisCall$start$random)) {  # making start random NULL
+#      thisCall$start$random <- NULL
+#    }
+#    if (is.null(thisCall$random) && is.null(thisCall$subset)) {
+#      ## no changes in ranef model and no subsetting
+#      thisCall$random <- object$modelStruct$reStruct
+#    }
+#  }
+#  if (!is.null(thisCall$model)) {
+#    thisCall$model <- update(formula(object), model)
+#  }
+#  if (is.na(match("correlation", names(thisCall))) &&
+#      !is.null(thCor <- object$modelStruct$corStruct)) {
+#    thisCall$correlation <- thCor
+#  }
+#  if (is.na(match("weights", names(thisCall))) &&
+#      !is.null(thWgt <- object$modelStruct$varStruct)) {
+#    thisCall$weights <- thWgt
+#  }
+#  nextCall[names(thisCall)] <- thisCall
+#  do.call("nlme", nextCall)
+#}
 
 ###*### nlmeStruct - a model structure for nlme fits
 

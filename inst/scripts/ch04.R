@@ -5,17 +5,17 @@
 library( nlme )
 options( width = 65, digits = 5 )
 options( contrasts = c(unordered = "contr.helmert", ordered = "contr.poly") )
+postscript( file = 'ch04.ps' )
 
 # Chapter 4    Fitting Linear Mixed-Effects Models
 
 # 4.1 Fitting Linear Models in S with lm and lmList
 
-data( Orthodont )
+data(Orthodont, IGF, Oats, Assay, Oxide, Wafer, Machines)
 fm1Orth.lm <- lm( distance ~ age, Orthodont )
 fm1Orth.lm
 par( mfrow=c(2,2) )
 plot( fm1Orth.lm )                               # Figure 4.1
-library( lattice )
 fm2Orth.lm <- update( fm1Orth.lm, formula = distance ~ Sex*age )
 summary( fm2Orth.lm )
 fm3Orth.lm <- update( fm2Orth.lm, formula = . ~ . - Sex )
@@ -32,7 +32,6 @@ pairs( fm1Orth.lis, id = 0.01, adj = -0.5 )      # Figure 4.3
 fm2Orth.lis <- update( fm1Orth.lis, distance ~ I(age-11) )
 intervals( fm2Orth.lis )
 plot( intervals(fm2Orth.lis) )                   # Figure 4.5
-data( IGF )
 IGF
 plot( IGF )                                      # Figure 4.6
 fm1IGF.lis <- lmList( IGF )
@@ -86,7 +85,6 @@ pd2 <- pdDiag( value = diag(2), form = ~ age )
 pd2
 formula( pd2 )
 lme( conc ~ age, IGF, pdDiag(diag(2), ~age) )
-data( Oats )
 fm4OatsB <- lme( yield ~ nitro, data = Oats,
                  random =list(Block = pdCompSymm(~ Variety - 1)))
 summary( fm4OatsB )
@@ -97,13 +95,11 @@ fm4OatsC <- lme( yield ~ nitro, data = Oats,
 summary( fm4OatsC )
 ## establishing the desired parameterization for contrasts
 options( contrasts = c("contr.treatment", "contr.poly") )
-data( Assay )
 fm1Assay <- lme( logDens ~ sample * dilut, Assay,
    random = pdBlocked(list(pdIdent(~ 1), pdIdent(~ sample - 1),
                       pdIdent(~ dilut - 1))) )
 fm1Assay
 anova( fm1Assay )
-data( Oxide )
 formula( Oxide )
 fm1Oxide <- lme( Thickness ~ 1, Oxide )
 fm1Oxide
@@ -113,7 +109,6 @@ anova( fm1Oxide, fm2Oxide )
 coef( fm1Oxide, level = 1 )
 coef( fm1Oxide, level = 2 )
 ranef( fm1Oxide, level = 1:2 )
-data( Wafer )
 fm1Wafer <- lme( current ~ voltage + I(voltage^2), data = Wafer,
               random = list(Wafer = pdDiag(~voltage + I(voltage^2)),
                             Site = pdDiag(~voltage + I(voltage^2))))
@@ -187,7 +182,6 @@ fm4Wafer
 anova( fm3Wafer, fm4Wafer )
 qqnorm( fm4Wafer, ~ranef(., level = 2), id = 0.05,
         cex = 0.7, layout = c(3, 1) )
-data( Machines )
 
 # The next line is not in the book but is needed to get fm1Machine
 

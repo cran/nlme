@@ -1,8 +1,8 @@
-% $Id: asOneFormula.Rd,v 1.5 2002/03/05 14:59:39 bates Exp $
+% $Id: asOneFormula.Rd,v 1.5.2.1 2003/04/17 22:28:45 bates Exp $
 \name{asOneFormula}
 \title{Combine Formulas of a Set of Objects}
 \usage{
-asOneFormula(..., omit)
+asOneFormula(\dots, omit)
 }
 \alias{asOneFormula}
 \arguments{
@@ -13,12 +13,12 @@ asOneFormula(..., omit)
 }
 \description{
   The names of all variables used in the formulas extracted from the
-  objects defined in \code{...} are converted into a single linear
+  objects defined in \code{\dots} are converted into a single linear
   formula, with the variables names separated by \code{+}. 
 }
 \value{
   a one-sided linear formula with all variables named in the formulas
-  extracted from the objects in \code{...}, except the ones listed in
+  extracted from the objects in \code{\dots}, except the ones listed in
   \code{omit}. 
 }
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}

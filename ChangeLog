@@ -1,3 +1,24 @@
+2003-05-16  Douglas Bates  <bates@stat.wisc.edu>
+
+	* src/nlmefit.c (internal_EM): Fix by Peter Dalgaard for compound
+	symmetry EM calculations (PR#2985)
+
+2003-05-05  Douglas Bates  <bates@stat.wisc.edu>
+
+	* R/lmList.R (update.lmList): Changed this and several other
+	update methods.
+
+	* R/groupedData.R: Use eval instead of do.call (Dieter Menne)
+
+2003-04-17  Douglas Bates  <bates@stat.wisc.edu>
+
+	* NAMESPACE: contributed by Brian Ripley
+	
+	* man/print.corStruct.Rd: Removed this and many other redundant
+	documentation files for S3 methods.
+
+	* R/<many files> Remove redundant GPL notices.
+
 2003-03-25  Douglas Bates  <bates@stat.wisc.edu>
 
 	* R/nlme.R (nonlinModel): Moved definition from AAA.R to here

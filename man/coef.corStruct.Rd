@@ -1,9 +1,9 @@
-% $Id: coef.corStruct.Rd,v 1.6.2.1 2002/08/09 19:45:29 bates Exp $
+% $Id: coef.corStruct.Rd,v 1.6.2.2 2003/05/16 22:36:53 bates Exp $
 \name{coef.corStruct}
 \title{Coefficients of a corStruct Object}
 \usage{
 \method{coef}{corStruct}(object, unconstrained, \dots)
-coef(object) <- value
+coef(object, \dots) <- value
 }
 \alias{coef.corStruct}
 \alias{coef.corAR1}

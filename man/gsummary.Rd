@@ -1,9 +1,9 @@
-% $Id: gsummary.Rd,v 1.7 2002/03/05 14:59:39 bates Exp $
+% $Id: gsummary.Rd,v 1.7.2.1 2003/04/17 22:28:45 bates Exp $
 \name{gsummary}
 \title{Summarize by Groups}
 \usage{
 gsummary(object, FUN, omitGroupingFactor, form, level,
-   groups, invariantsOnly, ...)
+   groups, invariantsOnly, \dots)
 }
 \alias{gsummary}
 \arguments{

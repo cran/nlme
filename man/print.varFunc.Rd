@@ -1,8 +1,8 @@
-% $Id: print.varFunc.Rd,v 1.6.2.1 2002/08/09 19:45:29 bates Exp $
+% $Id: print.varFunc.Rd,v 1.6.2.2 2003/04/17 22:28:45 bates Exp $
 \name{print.varFunc}
 \title{Print a varFunc Object}
 \usage{
-\method{print}{varFunc}(x, ...)
+\method{print}{varFunc}(x, \dots)
 }
 \alias{print.varFunc}
 \alias{print.varComb}

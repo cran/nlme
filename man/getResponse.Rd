@@ -1,10 +1,11 @@
-% $Id: getResponse.Rd,v 1.5 2002/03/05 14:59:39 bates Exp $
+% $Id: getResponse.Rd,v 1.5.2.1 2003/04/17 22:28:45 bates Exp $
 \name{getResponse}
 \title{Extract Response Variable from an Object}
 \usage{
 getResponse(object, form)
 }
 \alias{getResponse}
+\alias{getResponse.data.frame}
 \arguments{
  \item{object}{any object}
  \item{form}{an optional two-sided formula. Defaults to
@@ -24,6 +25,7 @@ getResponse(object, form)
 
 \seealso{\code{\link{getResponseFormula}}}
 \examples{
-## see the method function documentation
+data(Orthodont)
+getResponse(Orthodont)
 }
 \keyword{models}

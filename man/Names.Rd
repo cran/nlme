@@ -1,4 +1,4 @@
-% $Id: Names.Rd,v 1.5 2002/03/05 14:59:39 bates Exp $
+% $Id: Names.Rd,v 1.5.2.1 2003/05/16 21:49:21 bates Exp $
 \name{Names}
 \title{Names Associated with an Object}
 \usage{
@@ -11,6 +11,7 @@ Names(object, \dots) <- value
  \item{object}{any object for which names can be extracted and/or assigned.}
  \item{\dots}{some methods for this generic function require additional
    arguments.}
+ \item{value}{names to be assigned to \code{object}.}
 }
 \description{
   This function is generic; method functions can be written to handle

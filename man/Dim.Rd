@@ -1,8 +1,8 @@
-% $Id: Dim.Rd,v 1.4 2002/03/05 14:59:39 bates Exp $
+% $Id: Dim.Rd,v 1.4.2.1 2003/04/17 22:28:45 bates Exp $
 \name{Dim}
 \title{Extract Dimensions from an Object}
 \usage{
-Dim(object, ...)
+Dim(object, \dots)
 }
 \alias{Dim}
 \alias{Dim.default}

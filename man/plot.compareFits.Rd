@@ -1,8 +1,8 @@
-% $Id: plot.compareFits.Rd,v 1.8 2002/03/05 14:59:39 bates Exp $
+% $Id: plot.compareFits.Rd,v 1.8.2.1 2003/04/17 22:28:45 bates Exp $
 \name{plot.compareFits}
 \title{Plot a compareFits Object}
 \usage{
-\method{plot}{compareFits}(x, subset, key, mark, ...)
+\method{plot}{compareFits}(x, subset, key, mark, \dots)
 }
 \alias{plot.compareFits}
 \arguments{

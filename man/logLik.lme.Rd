@@ -1,10 +1,11 @@
-% $Id: logLik.lme.Rd,v 1.7 2002/03/05 14:59:39 bates Exp $
+% $Id: logLik.lme.Rd,v 1.7.2.1 2003/04/17 22:28:45 bates Exp $
 \name{logLik.lme}
 \title{Log-Likelihood of an lme Object}
 \usage{
 \method{logLik}{lme}(object, REML, \dots)
 }
 \alias{logLik.lme}
+\alias{logLik.gls}
 \arguments{
  \item{object}{an object inheriting from class \code{lme}, representing
    a fitted linear mixed-effects model.}
@@ -21,17 +22,15 @@
   at the estimated coefficients is returned.
 }
 \value{
-  the (restricted) log-likelihood of the linear mixed-effects model
-  represented by \code{object} evaluated at the estimated coefficients. 
+  the (restricted) log-likelihood of the model represented by
+  \code{object} evaluated at the estimated coefficients.
 }
 \references{
-  Harville, D.A. (1974) "Bayesian Inference for Variance Components
-  Using Only Error Contrasts", Biometrika, 61, 383-385.
+  Harville, D.A. (1974) ``Bayesian Inference for Variance Components
+  Using Only Error Contrasts'', \emph{Biometrika}, \bold{61}, 383--385.
 }
-\author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
-
-\seealso{\code{\link{lme}}}
-
+\author{Jose Pinheiro and Douglas Bates}
+\seealso{\code{\link{lme}},\code{\link{gls}}}
 \examples{
 data(Orthodont)
 fm1 <- lme(distance ~ Sex * age, Orthodont, random = ~ age, method = "ML")

@@ -1,9 +1,9 @@
-% $Id: fixed.effects.Rd,v 1.3 2000/07/03 18:22:46 bates Exp $
+% $Id: fixed.effects.Rd,v 1.3.4.1 2003/04/17 22:28:45 bates Exp $
 \name{fixed.effects}
 \title{Extract Fixed Effects}
 \usage{
-fixed.effects(object, ...)
-fixef(object, ...)
+fixed.effects(object, \dots)
+fixef(object, \dots)
 }
 \alias{fixed.effects}
 \alias{fixef}

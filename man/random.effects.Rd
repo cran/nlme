@@ -1,9 +1,9 @@
-% $Id: random.effects.Rd,v 1.4 2000/07/03 21:13:47 bates Exp $
+% $Id: random.effects.Rd,v 1.4.4.1 2003/04/17 22:28:45 bates Exp $
 \name{random.effects}
 \title{Extract Random Effects}
 \usage{
-random.effects(object, ...)
-ranef(object, ...)
+random.effects(object, \dots)
+ranef(object, \dots)
 }
 \alias{random.effects}
 \alias{ranef}
