@@ -1,4 +1,4 @@
-% $Id: varConstPower.Rd,v 1.4 2000/07/03 18:22:49 bates Exp $
+% $Id: varConstPower.Rd,v 1.5 2002/03/05 14:59:39 bates Exp $
 \name{varConstPower}
 \title{Constant Plus Power Variance Function}
 \usage{

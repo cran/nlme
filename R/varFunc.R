@@ -1,4 +1,4 @@
-### $Id: varFunc.R,v 1.5 2001/10/30 20:51:14 bates Exp $
+### $Id: varFunc.R,v 1.8 2002/03/05 16:15:51 bates Exp $
 ###
 ###              Classes of variance functions
 ###
@@ -427,10 +427,11 @@ initialize.varIdent <-
     }
     ## initializing weights and logDet
     attr(object, "logLik") <-
-      sum(log(attr(object, "weights") <- 1/coef(object,F,allCoef = TRUE)[strat]))
+      sum(log(attr(object, "weights") <-
+              1/coef(object, FALSE, allCoef = TRUE)[strat]))
     object
   } else {				# no strata
-    attr(object, "whichFix") <- T
+    attr(object, "whichFix") <- TRUE
     NextMethod()
   }
 }
@@ -758,10 +759,10 @@ initialize.varExp <-
   form <- formula(object)
   if (all(!is.na(match(all.vars(getCovariateFormula(form)), names(data))))) {
     ## can evaluate covariate on data
-    attr(object, "needUpdate") <- F
+    attr(object, "needUpdate") <- FALSE
     attr(object, "covariate") <- getCovariate(data, form)
   } else {
-    attr(object, "needUpdate") <- T
+    attr(object, "needUpdate") <- TRUE
   }
   if (!is.null(grpForm <- getGroupsFormula(form))) {
     strat <- as.character(getGroups(data, form,
@@ -953,7 +954,7 @@ varConstPower <-
     attr(value[[i]], "fixed") <- c(fixed[[i]])
   }
   if (is.null(getGroupsFormula(form))) {   # no groups
-    whichFix <- array(F, c(2,1), list(c("const", "power"), NULL))
+    whichFix <- array(FALSE, c(2,1), list(c("const", "power"), NULL))
     whichFix[,1] <- unlist(lapply(value,
                                   function(el) !is.null(attr(el, "fixed"))))
     attr(value, "whichFix") <- whichFix
@@ -965,38 +966,39 @@ varConstPower <-
 ###*# Methods for standard generics
 
 coef.varConstPower <-
-  function(object, unconstrained = TRUE, allCoef = FALSE, ...)
+    function (object, unconstrained = TRUE, allCoef = FALSE, ...)
 {
-  wPar <- attr(object, "whichFix")
-  nonInit <- !unlist(lapply(object, length))
-  nonInit <- is.null(wPar) || (any(nonInit) && !all(c(wPar[nonInit,])))
-
-  if (nonInit || (!allCoef && (length(unlist(object)) == 0))) {
-    return(numeric(0))
-  }
-  val <- array(0, dim(wPar), dimnames(wPar))
-  for (i in names(object)) {
-    if (any(wPar[i,])) {
-      val[i, wPar[i,]] <- attr(object[[i]], "fixed")
+    wPar <- attr(object, "whichFix")
+    nonInit <- !unlist(lapply(object, length))
+    nonInit <- is.null(wPar) || (any(nonInit) && !all(c(wPar[nonInit,
+                                                             ])))
+    if (nonInit || (!allCoef && (length(unlist(object)) == 0))) {
+        return(numeric(0))
     }
-    if (any(!wPar[i,])) {
-      val[i, !wPar[i,]] <- c(object[[i]])
+    val <- array(0, dim(wPar), dimnames(wPar))
+    for (i in names(object)) {
+        if (any(wPar[i, ])) {
+            val[i, wPar[i, ]] <- attr(object[[i]], "fixed")
+        }
+        if (any(!wPar[i, ])) {
+            val[i, !wPar[i, ]] <- c(object[[i]])
+        }
     }
-  }
-  if (!unconstrained) {
-    val[1,] <- exp(val[1,])
-  }
-  if (!allCoef) {
-    val <- list(const = if (!all(wPar[1,])) val[1,!wPar[1,]] else NULL,
-		power = if (!all(wPar[2,])) val[2,!wPar[2,]] else NULL)
-    ## getting rid of name repetition
-    val <- lapply(val, function(el)
-                  ifelse(length(el) == 1, as.vector(el), el))
-    val <- unlist(val[!unlist(lapply(val, is.null))])
-  } else {
-    val <- val[, 1:ncol(val)]
-  }
-  val
+    if (!unconstrained) {
+        val[1, ] <- exp(val[1, ])
+    }
+    if (!allCoef) {
+        val <- list(const = if (!all(wPar[1, ])) val[1, !wPar[1,
+                    ]] else NULL, power = if (!all(wPar[2, ])) val[2,
+                                  !wPar[2, ]] else NULL)
+        val <- lapply(val, function(el) if(length(el) == 1) as.vector(el)
+        else el)
+        val <- unlist(val[!unlist(lapply(val, is.null))])
+    }
+    else {
+        val <- val[, 1:ncol(val)]
+    }
+    val
 }
 
 "coef<-.varConstPower" <-

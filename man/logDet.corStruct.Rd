@@ -1,4 +1,4 @@
-% $Id: logDet.corStruct.Rd,v 1.6 2001/10/30 20:51:15 bates Exp $
+% $Id: logDet.corStruct.Rd,v 1.7 2002/03/05 14:59:39 bates Exp $
 \name{logDet.corStruct}
 \title{Extract corStruct Log-Determinant}
 \usage{

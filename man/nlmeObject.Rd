@@ -1,4 +1,4 @@
-% $Id: nlmeObject.Rd,v 1.3 2000/07/03 18:22:47 bates Exp $
+% $Id: nlmeObject.Rd,v 1.4 2002/03/05 14:59:39 bates Exp $
 \name{nlmeObject}
 \title{Fitted nlme Object}
 \alias{nlmeObject}

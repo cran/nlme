@@ -1,4 +1,4 @@
-% $Id: logLik.gls.Rd,v 1.7 2001/10/30 20:51:15 bates Exp $
+% $Id: logLik.gls.Rd,v 1.8 2002/03/05 14:59:39 bates Exp $
 \name{logLik.gls}
 \title{Log-Likelihood of a gls Object}
 \usage{

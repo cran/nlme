@@ -1,4 +1,4 @@
-% $Id: Names.reStruct.Rd,v 1.7 2001/10/30 20:51:14 bates Exp $
+% $Id: Names.reStruct.Rd,v 1.8 2002/03/05 14:59:39 bates Exp $
 \name{Names.reStruct}
 \title{Names of an reStruct Object}
 \usage{

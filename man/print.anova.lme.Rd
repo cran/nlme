@@ -1,4 +1,4 @@
-% $Id: print.anova.lme.Rd,v 1.7 2001/10/30 20:51:15 bates Exp $
+% $Id: print.anova.lme.Rd,v 1.8 2002/03/05 14:59:39 bates Exp $
 \name{print.anova.lme}
 \title{Print an anova.lme Object}
 \usage{

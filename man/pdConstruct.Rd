@@ -1,4 +1,4 @@
-% $Id: pdConstruct.Rd,v 1.6 2001/06/20 16:55:20 bates Exp $
+% $Id: pdConstruct.Rd,v 1.7 2002/03/05 14:59:39 bates Exp $
 \name{pdConstruct}
 \title{Construct pdMat Objects}
 \usage{

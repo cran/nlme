@@ -1,4 +1,4 @@
-% $Id: corRatio.Rd,v 1.4 2000/07/03 18:22:46 bates Exp $
+% $Id: corRatio.Rd,v 1.5 2002/03/05 14:59:39 bates Exp $
 \name{corRatio}
 \title{Rational Quadratic Correlation Structure}
 \usage{

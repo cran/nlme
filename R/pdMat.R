@@ -1,4 +1,4 @@
-### $Id: pdMat.R,v 1.5 2001/10/30 20:51:14 bates Exp $
+### $Id: pdMat.R,v 1.6 2002/03/05 15:36:27 bates Exp $
 ###
 ###              Classes of positive-definite matrices
 ###
@@ -568,7 +568,7 @@ summary.pdMat <-
 
   if ((li + lj == 0) ||
       (li == lj) && ((mode(i) == mode(j)) && all(i == j))) {
-    drop <- F				# even for a 1 by 1 submatrix,
+    drop <- FALSE			# even for a 1 by 1 submatrix,
 					# you want it to be a matrix
     pdConstruct(xx, NextMethod())
   } else {
@@ -2139,7 +2139,7 @@ summary.pdBlocked <-
   mCall[["x"]] <- x
   mCall[["drop"]] <- drop
   if (length(i) == length(j) && mode(i) == mode(j) && all(i == j)) {
-    mCall[["drop"]] <- F		# even for a 1 by 1 submatrix,
+    mCall[["drop"]] <- FALSE		# even for a 1 by 1 submatrix,
 					# you want it to be a matrix
     val <- eval(mCall)
     vNames <- colnames(val)

@@ -1,4 +1,4 @@
-% $Id: logDet.pdMat.Rd,v 1.7 2001/10/30 20:51:15 bates Exp $
+% $Id: logDet.pdMat.Rd,v 1.8 2002/03/05 14:59:39 bates Exp $
 \name{logDet.pdMat}
 \title{Extract Log-Determinant from a pdMat Object}
 \usage{

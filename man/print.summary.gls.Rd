@@ -1,4 +1,4 @@
-% $Id: print.summary.gls.Rd,v 1.7 2001/08/25 20:00:51 bates Exp $
+% $Id: print.summary.gls.Rd,v 1.8 2002/03/05 14:59:39 bates Exp $
 \name{print.summary.gls}
 \title{Print a summary.gls Object}
 \usage{

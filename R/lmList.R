@@ -1,4 +1,4 @@
-## $Id: lmList.R,v 1.7 2001/10/30 20:51:14 bates Exp $
+## $Id: lmList.R,v 1.8 2002/03/05 15:36:27 bates Exp $
 ###
 ###                  Create a list of lm objects
 ###
@@ -210,7 +210,7 @@ coef.lmList <-
       attr(coefs, "level") <- attr(object, "level")
       attr(coefs, "label") <- "Coefficients"
       attr(coefs, "effectNames") <- effectNames
-      attr(coefs, "standardized") <- F
+      attr(coefs, "standardized") <- FALSE
       attr(coefs, "grpNames") <- deparse(getGroupsFormula(object)[[2]])
       class(coefs) <- c("coef.lmList", "ranef.lmList", class(coefs))
     }
@@ -808,7 +808,7 @@ plot.lmList <-
   }
   ## defining grid
   if (missing(grid)) {
-    if (plotFun == "xyplot") grid <- T
+    if (plotFun == "xyplot") grid <- TRUE
     else grid <- FALSE
   }
   assign("grid", grid)

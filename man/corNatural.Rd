@@ -1,4 +1,4 @@
-% $Id: corNatural.Rd,v 1.1 2001/08/25 21:24:57 bates Exp $
+% $Id: corNatural.Rd,v 1.2 2002/03/05 14:59:39 bates Exp $
 \name{corNatural}
 \title{General correlation in natural parameterization}
 \usage{

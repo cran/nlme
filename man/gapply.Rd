@@ -1,4 +1,4 @@
-% $Id: gapply.Rd,v 1.6 2000/07/07 16:06:48 bates Exp $
+% $Id: gapply.Rd,v 1.7 2002/03/05 14:59:39 bates Exp $
 \name{gapply}
 \title{Apply a Function by Groups}
 \usage{

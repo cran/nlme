@@ -1,4 +1,4 @@
-% $Id: corMatrix.corStruct.Rd,v 1.7 2001/10/30 20:51:15 bates Exp $
+% $Id: corMatrix.corStruct.Rd,v 1.8 2002/03/05 14:59:39 bates Exp $
 \name{corMatrix.corStruct}
 \title{Matrix of a corStruct Object}
 \usage{
@@ -53,6 +53,6 @@
 \examples{
 cs1 <- corAR1(0.3)
 corMatrix(cs1, covariate = 1:4)
-corMatrix(cs1, covariate = 1:4, corr = F)
+corMatrix(cs1, covariate = 1:4, corr = FALSE)
 }
 \keyword{models}

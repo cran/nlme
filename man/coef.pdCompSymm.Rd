@@ -41,6 +41,6 @@ coef(object) <- value
 \seealso{\code{\link{coef.pdMat}}, \code{\link{pdMat}}}
 
 \examples{
-coef(pdCompSymm(diag(3)), F)
+coef(pdCompSymm(diag(3)), FALSE)
 }
 \keyword{models}

@@ -1,4 +1,4 @@
-## $Id: newFunc.R,v 1.5 2001/10/30 20:51:14 bates Exp $
+## $Id: newFunc.R,v 1.6 2002/03/05 15:36:27 bates Exp $
 ###
 ###       Functions that are used in several parts of the nlme library
 ###                 but do not belong to any specific part
@@ -359,7 +359,7 @@ phenoModel <-
      as.integer(length(time)),
      resp = as.double(dose),
      as.double(cbind(Subject, time, dose, exp(lV), exp(lCl))),
-     NAOK = T, PACKAGE = "nlme")$resp
+     NAOK = TRUE, PACKAGE = "nlme")$resp
 }
 
 ##*## quinModel - one-compartment open model with first order
@@ -373,7 +373,7 @@ quinModel <-
      resp = as.double(dose),
      as.double(cbind(Subject, time, conc, dose, interval,
                      exp(lV), exp(lKa), exp(lCl - lV))),
-     NAOK = T, PACKAGE = "nlme")$resp
+     NAOK = TRUE, PACKAGE = "nlme")$resp
 }
 
 LDEsysMat <-

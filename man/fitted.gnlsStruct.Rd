@@ -1,4 +1,4 @@
-% $Id: fitted.gnlsStruct.Rd,v 1.5 2001/10/30 20:51:15 bates Exp $
+% $Id: fitted.gnlsStruct.Rd,v 1.6 2002/03/05 14:59:39 bates Exp $
 \name{fitted.gnlsStruct}
 \title{Calculate gnlsStruct Fitted Values}
 \usage{

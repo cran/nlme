@@ -1,4 +1,4 @@
-% $Id: pdLogChol.Rd,v 1.1 2001/08/25 21:24:57 bates Exp $
+% $Id: pdLogChol.Rd,v 1.2 2002/03/05 14:59:39 bates Exp $
 \name{pdLogChol}
 \title{General Positive-Definite Matrix}
 \usage{

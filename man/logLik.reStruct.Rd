@@ -1,4 +1,4 @@
-% $Id: logLik.reStruct.Rd,v 1.5 2001/10/30 20:51:15 bates Exp $
+% $Id: logLik.reStruct.Rd,v 1.6 2002/03/05 14:59:39 bates Exp $
 \name{logLik.reStruct}
 \title{Calculate reStruct Log-Likelihood}
 \usage{

@@ -1,4 +1,4 @@
-### $Id: lme.R,v 1.9 2001/12/14 21:31:57 bates Exp $
+### $Id: lme.R,v 1.10 2002/03/05 15:36:27 bates Exp $
 ###
 ###            Fit a general linear mixed effects model
 ###
@@ -910,7 +910,7 @@ anova.lme <-
       attr(aod, "rt") <- rt
       attr(aod, "label") <- lab
       if (!Lmiss) {
-        if (nrow(L) > 1) attr(aod, "L") <- L[, noZeroColL, drop = F]
+        if (nrow(L) > 1) attr(aod, "L") <- L[, noZeroColL, drop = FALSE]
         else attr(aod, "L") <- L[, noZeroColL]
       }
     }
@@ -1159,7 +1159,7 @@ coef.lme <-
   attr(effs, "level") <- level
   attr(effs, "label") <- "Coefficients"
   attr(effs, "effectNames") <- effNams
-  attr(effs, "standardized") <- F
+  attr(effs, "standardized") <- FALSE
   attr(effs, "grpNames") <- grpNames
   class(effs) <- unique(c("coef.lme", "ranef.lme", class(effs)))
   effs
@@ -1263,7 +1263,7 @@ intervals.lme <-
       aux <- lmeSt[whichKeep]
       class(aux) <- class(lmeSt)
       attr(aux, "settings") <- attr(lmeSt, "settings")
-      attr(aux, "pmap") <- attr(lmeSt, "pmap")[, whichKeep, drop = F]
+      attr(aux, "pmap") <- attr(lmeSt, "pmap")[, whichKeep, drop = FALSE]
       lmeSt <- aux
     }
     cSt <- lmeSt[["corStruct"]]

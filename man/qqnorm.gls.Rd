@@ -1,4 +1,4 @@
-% $Id: qqnorm.gls.Rd,v 1.7 2001/10/30 20:51:15 bates Exp $
+% $Id: qqnorm.gls.Rd,v 1.8 2002/03/05 14:59:39 bates Exp $
 \name{qqnorm.gls}
 \title{Normal Plot of Residuals from a gls Object}
 \usage{

@@ -1,4 +1,4 @@
-% $Id: AIC.lmList.Rd,v 1.1 2001/10/30 20:51:14 bates Exp $
+% $Id: AIC.lmList.Rd,v 1.2 2002/03/05 14:59:39 bates Exp $
 \name{AIC}
 \title{Akaike Information Criterion}
 \usage{

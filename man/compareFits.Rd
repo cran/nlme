@@ -1,4 +1,4 @@
-% $Id: compareFits.Rd,v 1.6 2001/01/10 19:21:04 bates Exp $
+% $Id: compareFits.Rd,v 1.7 2002/03/05 14:59:39 bates Exp $
 \name{compareFits}
 \title{Compare Fitted Objects}
 \usage{

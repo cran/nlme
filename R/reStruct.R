@@ -1,4 +1,4 @@
-### $Id: reStruct.R,v 1.5 2001/10/30 20:51:14 bates Exp $
+### $Id: reStruct.R,v 1.6 2002/03/05 15:36:27 bates Exp $
 ###
 ###      Methods for the class of random-effects structures.
 ###
@@ -385,7 +385,7 @@ Names.reStruct <-
 }
 
 needUpdate.reStruct <-
-  function(object) F
+  function(object) FALSE
 
 print.reStruct <-
   function(x, sigma = 1, reEstimates, verbose = FALSE, ...)

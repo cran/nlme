@@ -1,4 +1,4 @@
-% $Id: plot.nffGroupedData.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
+% $Id: plot.nffGroupedData.Rd,v 1.6 2002/03/05 14:59:39 bates Exp $
 \name{plot.nffGroupedData}
 \title{Plot an nffGroupedData Object}
 \usage{

@@ -1,4 +1,4 @@
-% $Id: Matrix.pdMat.Rd,v 1.1 2000/07/03 18:22:46 bates Exp $
+% $Id: Matrix.pdMat.Rd,v 1.2 2002/03/05 14:59:39 bates Exp $
 \name{Matrix.pdMat}
 \title{Assign Matrix to a pdMat Object}
 \usage{

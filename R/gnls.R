@@ -1,4 +1,4 @@
-### $Id: gnls.R,v 1.6 2002/01/27 23:27:10 bates Exp $
+### $Id: gnls.R,v 1.7 2002/03/05 15:36:27 bates Exp $
 ###
 ###  Fit a general nonlinear regression model with correlated and/or
 ###  heteroscedastic errors
@@ -475,7 +475,7 @@ gnls <-
   attr(gnlsSt, "conLin") <- recalc(gnlsSt)
   sigma <-
     sqrt(sum((attr(gnlsSt,"conLin")$Xy[,pLen+1])^2)/(NReal - pLen))
-  varBeta <- qr(attr(gnlsSt, "conLin")$Xy[,1:pLen,drop=F])
+  varBeta <- qr(attr(gnlsSt, "conLin")$Xy[ , 1:pLen, drop = FALSE])
   if (varBeta$rank < pLen) {
     stop(paste("Approx. covariance matrix for parameter estimates",
                "not of full rank"))

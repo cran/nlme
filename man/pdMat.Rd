@@ -1,4 +1,4 @@
-% $Id: pdMat.Rd,v 1.5 2000/07/03 21:13:47 bates Exp $
+% $Id: pdMat.Rd,v 1.6 2002/03/05 14:59:39 bates Exp $
 \name{pdMat}
 \title{Positive-Definite Matrix}
 \usage{

@@ -1,4 +1,4 @@
-% $Id: fitted.nlmeStruct.Rd,v 1.4 2001/06/18 21:16:50 bates Exp $
+% $Id: fitted.nlmeStruct.Rd,v 1.5 2002/03/05 14:59:39 bates Exp $
 \name{fitted.nlmeStruct}
 \title{Calculate nlmeStruct Fitted Values}
 \usage{

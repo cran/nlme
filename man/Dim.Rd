@@ -1,4 +1,4 @@
-% $Id: Dim.Rd,v 1.3 2000/07/03 18:22:45 bates Exp $
+% $Id: Dim.Rd,v 1.4 2002/03/05 14:59:39 bates Exp $
 \name{Dim}
 \title{Extract Dimensions from an Object}
 \usage{

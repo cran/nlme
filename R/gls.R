@@ -1,4 +1,4 @@
-### $Id: gls.R,v 1.5 2001/10/30 20:51:14 bates Exp $
+### $Id: gls.R,v 1.6 2002/03/05 15:36:27 bates Exp $
 ###
 ###  Fit a linear model with correlated errors and/or heteroscedasticity
 ###
@@ -493,7 +493,7 @@ anova.gls <-
       aod <- data.frame(nDF, Fval, Pval)
       names(aod) <- c("numDF", "F-value", "p-value")
       if (!missing(L)) {
-        if (nrow(L) > 1) attr(aod, "L") <- L[, noZeroColL, drop = F]
+        if (nrow(L) > 1) attr(aod, "L") <- L[, noZeroColL, drop = FALSE]
         else attr(aod, "L") <- L[, noZeroColL]
       }
     }
@@ -623,7 +623,7 @@ comparePred.gls <-
   dm2 <- dim(val2)
   c2 <- deparse(substitute(object2))
   levels(val2[, 4])[1] <- c2
-  val2 <- val2[val2[, 4] != "original", , drop = F]
+  val2 <- val2[val2[, 4] != "original", , drop = FALSE]
   names(val2) <- names(val1)
 
   if (dm1[1] == dm2[1]) {
@@ -756,7 +756,7 @@ intervals.gls <-
         aux <- glsSt[whichKeep]
         class(aux) <- class(glsSt)
         attr(aux, "settings") <- attr(lmeSt, "settings")
-        attr(aux, "pmap") <- attr(glsSt, "pmap")[, whichKeep, drop = F]
+        attr(aux, "pmap") <- attr(glsSt, "pmap")[, whichKeep, drop = FALSE]
         glsSt <- aux
       }
       cSt <- glsSt[["corStruct"]]

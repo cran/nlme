@@ -1,4 +1,4 @@
-% $Id: formula.groupedData.Rd,v 1.6 2001/10/30 20:51:15 bates Exp $
+% $Id: formula.groupedData.Rd,v 1.7 2002/03/05 14:59:39 bates Exp $
 \name{formula.groupedData}
 \title{Extract groupedData Formula}
 \usage{

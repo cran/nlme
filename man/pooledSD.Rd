@@ -1,4 +1,4 @@
-% $Id: pooledSD.Rd,v 1.4 2000/07/03 18:22:48 bates Exp $
+% $Id: pooledSD.Rd,v 1.5 2002/03/05 14:59:39 bates Exp $
 \name{pooledSD}
 \title{Extract Pooled Standard Deviation}
 \usage{

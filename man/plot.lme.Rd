@@ -1,4 +1,4 @@
-% $Id: plot.lme.Rd,v 1.9 2002/01/27 23:27:10 bates Exp $
+% $Id: plot.lme.Rd,v 1.10 2002/03/05 14:59:39 bates Exp $
 \name{plot.lme}
 \title{Plot an lme or nls object}
 \alias{plot.lme}

@@ -1,4 +1,4 @@
-% $Id: logLik.lmeStruct.Rd,v 1.5 2001/10/30 20:51:15 bates Exp $
+% $Id: logLik.lmeStruct.Rd,v 1.6 2002/03/05 14:59:39 bates Exp $
 \name{logLik.lmeStruct}
 \title{Log-Likelihood of an lmeStruct Object}
 \usage{

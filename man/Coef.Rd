@@ -1,4 +1,4 @@
-% $Id: Coef.Rd,v 1.1 2000/07/03 18:22:45 bates Exp $
+% $Id: Coef.Rd,v 1.2 2002/03/05 14:59:39 bates Exp $
 \name{Coef}
 \title{Assign Values to Coefficients}
 \usage{

@@ -1,4 +1,4 @@
-### $Id: groupedData.R,v 1.6 2001/10/30 20:51:14 bates Exp $
+### $Id: groupedData.R,v 1.7 2002/03/05 15:36:27 bates Exp $
 ###
 ###           groupedData - data frame with a grouping structure
 ###
@@ -413,7 +413,7 @@ plot.nfnGroupedData <-
     if (is.logical(inner) && inner) {	# get the default inner formula
       inner <- attr(x, "inner")
     }
-    args[["subscripts"]] <- T
+    args[["subscripts"]] <- TRUE
     trll.set <- trellis.par.get("superpose.line")[c("lty", "col")]
     if (length(innerGroups) == 0) {
       args[["groups"]] <- asOneSidedFormula(inner)[[2]]

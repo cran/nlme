@@ -1,4 +1,4 @@
-% $Id: plot.lmList.Rd,v 1.8 2001/10/30 20:51:15 bates Exp $
+% $Id: plot.lmList.Rd,v 1.9 2002/03/05 14:59:39 bates Exp $
 \name{plot.lmList}
 \title{Plot an lmList Object}
 \usage{

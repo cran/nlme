@@ -1,4 +1,4 @@
-% $Id: varWeights.lmeStruct.Rd,v 1.4 2001/06/18 21:16:50 bates Exp $
+% $Id: varWeights.lmeStruct.Rd,v 1.5 2002/03/05 14:59:39 bates Exp $
 \name{varWeights.lmeStruct}
 \title{Variance Weights for lmeStruct Object}
 \usage{
