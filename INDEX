@@ -1,8 +1,6 @@
 ACF                     Autocorrelation Function
 ACF.gls                 Autocorrelation Function for gls Residuals
 ACF.lme                 Autocorrelation Function for lme Residuals
-AIC                     Akaike Information Criterion
-AIC.lme                 Akaike Information Criterion
 Alfalfa                 Split-Plot Experiment on Varieties of Alfalfa
 Assay                   Bioassay on Cell Culture Plate
 BIC                     Bayesian Information Criterion

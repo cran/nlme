@@ -1,4 +1,4 @@
-### $Id: newMethods.R,v 1.8.2.2 2002/12/11 23:56:35 bates Exp $
+### $Id: newMethods.R,v 1.8.2.3 2003/03/25 15:23:05 bates Exp $
 ###
 ###      Methods for generics from newGenerics.q for some standard classes
 ###
@@ -23,34 +23,6 @@
 
 
 ##*## Methods for some of the generics in newGenerics.q for standard classes
-
-if(R.version$major <= 1 && R.version$minor < 3) {
- ## not needed in R 1.3 and later
-
- AIC.logLik <-
-   ## AIC for logLik objects
-   function(object)
- {
-   -2 * (c(object) - attr(object, "df"))
- }
-
- AIC.lm <- AIC.nls <-
-   ## AIC for various fitted objects
-   function(object, ...)
- {
-   if((rt <- nargs()) > 1) {
-     object <- list(object, ...)
-     val <- lapply(object, logLik)
-     val <-
-       as.data.frame(t(sapply(val, function(el) c(attr(el, "df"), AIC(el)))))
-     names(val) <- c("df", "AIC")
-     row.names(val) <- as.character(match.call()[-1])
-     val
-   } else {
-     AIC(logLik(object))
-   }
- }
-}
 
 BIC.logLik <-
   ## BIC for logLik objects

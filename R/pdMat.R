@@ -1,4 +1,4 @@
-### $Id: pdMat.R,v 1.6.2.2 2002/12/11 23:56:35 bates Exp $
+### $Id: pdMat.R,v 1.6.2.3 2003/03/25 15:06:49 bates Exp $
 ###
 ###              Classes of positive-definite matrices
 ###
@@ -759,7 +759,7 @@ pdConstruct.pdLogChol <-
 pdFactor.pdLogChol <-
   function(object)
 {
-  round(Ncol <- (-1 + sqrt(1 + 8 * length(object))) / 2)
+  Ncol <- round((-1 + sqrt(1 + 8 * length(object))) / 2)
   .C("logChol_pd",
      Factor = double(Ncol * Ncol),
      as.integer(Ncol),

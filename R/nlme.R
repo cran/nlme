@@ -1,4 +1,4 @@
-### $Id: nlme.R,v 1.8.2.3 2002/12/27 17:00:26 bates Exp $
+### $Id: nlme.R,v 1.8.2.4 2003/03/25 16:17:05 bates Exp $
 ###
 ###            Fit a general nonlinear mixed effects model
 ###
@@ -1422,6 +1422,31 @@ nlmeControl <-
        gradHess = gradHess, apVar = apVar, .relStep = .relStep,
        nlmStepMax = nlmStepMax,
        minAbsParApVar = minAbsParApVar, natural = natural)
+}
+
+nonlinModel <- function( modelExpression, env,
+                        paramNames = get(".parameters", envir = env)) {
+  modelExpression <- modelExpression[[2]]
+  thisEnv <- environment()
+  offset <- 0
+  ind <- vector("list", length(paramNames))
+  names(ind) <- paramNames
+  for( i in paramNames ) {
+    ind[[ i ]] <- offset + seq( along = get(i, envir = env))
+    offset <- offset + length( get(i, envir = env) )
+  }
+  modelValue <- eval(modelExpression, env)
+  on.exit(remove(i, offset, paramNames))
+  function( newPars) {
+    if(!missing(newPars)) {
+      for( i in names(ind) ) {
+        assign( i, clearNames(newPars[ ind[[i]] ]), envir = env)
+      }
+      assign("modelValue", eval(modelExpression, env),
+             envir = thisEnv)
+    }
+    modelValue
+  }
 }
 
 ### Local Variables:

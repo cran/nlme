@@ -1,3 +1,13 @@
+2003-03-25  Douglas Bates  <bates@stat.wisc.edu>
+
+	* R/nlme.R (nonlinModel): Moved definition from AAA.R to here
+
+	* man/summary.nlsList.Rd: Remove references to summary.nls
+
+	* R/newMethods.R: Remove vestigial definitions of AIC.lm
+
+	* R/zzMethods.R: Remove references to AIC.lm
+
 2003-02-08  Douglas Bates  <bates@stat.wisc.edu>
 
 	* R/lme.R (lme.formula): Removed hessian=TRUE in calls to optim as

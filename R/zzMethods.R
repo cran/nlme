@@ -1,4 +1,4 @@
-### $Id: zzMethods.R,v 1.5 2001/12/10 00:24:13 bates Exp $
+### $Id: zzMethods.R,v 1.5.2.1 2003/03/25 15:23:54 bates Exp $
 ###
 ###   Miscellaneous methods that must be defined last in the library
 ###
@@ -23,7 +23,6 @@
 
 ## Note that  require( nls )  has already happened ...
 
-AIC.lme <- AIC.lmList <- AIC.gls <- AIC.lm
 BIC.lme <- BIC.lmList <- BIC.gls <- BIC.lm
 
 comparePred.lme <- comparePred.lmList <- comparePred.gls

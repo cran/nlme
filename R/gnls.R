@@ -1,4 +1,4 @@
-### $Id: gnls.R,v 1.7.2.4 2002/12/27 17:00:26 bates Exp $
+### $Id: gnls.R,v 1.7.2.5 2003/02/10 19:03:22 bates Exp $
 ###
 ###  Fit a general nonlinear regression model with correlated and/or
 ###  heteroscedastic errors

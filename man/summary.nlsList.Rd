@@ -1,4 +1,4 @@
-% $Id: summary.nlsList.Rd,v 1.7 2002/03/05 14:59:39 bates Exp $
+% $Id: summary.nlsList.Rd,v 1.7.2.1 2003/03/25 15:15:35 bates Exp $
 \name{summary.nlsList}
 \title{Summarize an nlsList Object}
 \usage{
@@ -16,14 +16,14 @@
  }
 }
 \description{
-  The \code{summary.nls} method is applied to each \code{nls} component of
+  The \code{summary} function is applied to each \code{nls} component of
   \code{object} to produce summary information on the individual fits,
   which is organized into a list of summary statistics. The returned
   object is suitable for printing with the \code{print.summary.nlsList}
   method. 
 }
 \value{
-  a list with summary statistics obtained by applying \code{summary.nls}
+  a list with summary statistics obtained by applying \code{summary}
   to the elements of \code{object}, inheriting from class
   \code{summary.nlsList}. The components of \code{value} are:
   \item{call}{a list containing an image of the \code{nlsList} call that
@@ -73,7 +73,7 @@
 
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 
-\seealso{\code{\link{nlsList}}, \code{\link{summary.nls}}}
+\seealso{\code{\link{nlsList}}, \code{\link{summary}}}
 
 \examples{
 data(Loblolly)

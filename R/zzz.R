@@ -1,4 +1,4 @@
-### $Id: zzz.R,v 1.6.2.1 2002/08/09 19:45:29 bates Exp $
+### $Id: zzz.R,v 1.6.2.2 2003/03/25 16:17:05 bates Exp $
 ###
 ### nlme for R
 ###
@@ -24,5 +24,6 @@
 .First.lib <- function(lib, pkg) {
   library.dynam(pkg, pkg, lib )
   require(lattice)
+  require(nls)
   autoload("dist", "mva")
 }
