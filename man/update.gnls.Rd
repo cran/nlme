@@ -1,4 +1,4 @@
-% $Id: update.gnls.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: update.gnls.Rd,v 1.3 2000/02/14 16:43:07 bates Exp $
 \name{update.gnls}
 \title{Update a gnls Object}
 \usage{

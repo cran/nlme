@@ -22,7 +22,3 @@
 ### MA 02111-1307, USA
 
 require( "nls" )
-
-if(R.version$minor < 90) {
-  stop("The nlme package requires R-0.90.0 or later.  Please upgrade.")
-}
