@@ -556,10 +556,10 @@ plot.intervals.lmList <-
   dn <- dimnames(object)
   ## changed definition of what to ordered to preserve order of parameters
   tt <- data.frame(group = ordered(rep(dn[[1]], dims[2] * dims[3]),
-                     levels = dn[[1]]),
+                   levels = dn[[1]]),
 		   intervals = as.vector(object),
 		   what = ordered(rep(dn[[3]],
-                     rep(dims[1] * dims[2], dims[3])), levels = dn[[3]]))
+                   rep(dims[1] * dims[2], dims[3])), levels = dn[[3]]))
   strip <- list(...)[["strip"]]
   if ( is.null( strip ) ) {
     strip <- function(...) strip.default(..., style = 1)

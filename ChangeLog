@@ -1,3 +1,8 @@
+2005-04-04  Douglas Bates  <bates@bates1-home>
+
+	* R/newFunc.R: Removed contr.SAS definition as it has been revised
+	and moved into the stats package for R-2.1.0 
+
 2005-03-02  Douglas Bates  <bates@bates1-home>
 
 	* src/nlmefit.c (gls_loglik): Replaced rnkm1 by p.

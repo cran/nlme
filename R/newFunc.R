@@ -81,26 +81,6 @@ compareFits <-
   out
 }
 
-contr.SAS<-
-  function(n, contrasts = TRUE)
-  ## similar to contr.treatment but dropping last column, not first column
-{
-  if (is.numeric(n) && length(n) == 1)
-    levs <- 1:n
-  else {
-    levs <- n
-    n <- length(n)
-  }
-  contr <- array(0, c(n, n), list(levs, levs))
-  contr[seq(1, n^2, n + 1)] <- 1
-  if (contrasts) {
-    if (n < 2)
-      stop(paste("Contrasts not defined for", n - 1, "degrees of freedom"))
-    contr <- contr[,  - n, drop = FALSE]
-  }
-  contr
-}
-
 fdHess <- function(pars, fun, ..., .relStep = (.Machine$double.eps)^(1/3),
                    minAbsPar = 0)
   ## Use a Koschal design to establish a second order model for the response
