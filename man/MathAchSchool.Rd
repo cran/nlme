@@ -40,8 +40,7 @@
   These variables give the school-level demographic data to accompany
   the \code{MathAchieve} data.
 }
-\source{
-}
+%\source{}
 \examples{
 data(MathAchSchool)
 }

@@ -75,7 +75,7 @@ nfGroupedData <-
         ## paste together all variables in outer with a character
         ## unlikely to be in a name
         combined <-
-          do.call("paste", c(data[all.vars(outer), drop = FALSE], sep='\007'))
+          do.call("paste", c(data[, all.vars(outer), drop = FALSE], sep='\007'))
         levs <-
           as.vector(unlist(lapply(split(data.frame(response = response,
                                                    groups = groups),

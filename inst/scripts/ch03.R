@@ -13,7 +13,7 @@ postscript( file = 'ch03.ps' )
 
 data(Rail, ergoStool, Machines, Orthodont, Pixel, Oats, Oxboys,
      PBG, BodyWeight, Soybean, DNase, CO2, Spruce, Spruce,
-     Wafer, Theoph, Quinidine)
+     Wafer, Theoph, Quinidine, package = "nlme")
 formula( Rail )
 formula( ergoStool )
 formula( Machines )

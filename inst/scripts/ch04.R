@@ -11,7 +11,7 @@ postscript( file = 'ch04.ps' )
 
 # 4.1 Fitting Linear Models in S with lm and lmList
 
-data(Orthodont, IGF, Oats, Assay, Oxide, Wafer, Machines)
+data(Orthodont, IGF, Oats, Assay, Oxide, Wafer, Machines, package = "nlme")
 fm1Orth.lm <- lm( distance ~ age, Orthodont )
 fm1Orth.lm
 par( mfrow=c(2,2) )
@@ -47,7 +47,7 @@ fm1Orth.lme <- lme( distance ~ I(age-11), data = Orthodont,
 fm1Orth.lme <- lme( distance ~ I(age-11), data = Orthodont )
 fm1Orth.lme <- lme( fm2Orth.lis )
 fm1Orth.lme
-fm2Orth.lme <- update(fm1Orth.lme,fixed = distance~Sex*I(age-11))
+fm2Orth.lme <- update(fm1Orth.lme, distance~Sex*I(age-11))
 summary( fm2Orth.lme )
 fitted( fm2Orth.lme, level = 0:1 )
 resid( fm2Orth.lme, level = 1 )
@@ -154,7 +154,7 @@ nls( resid(fm1Wafer) ~ b3*cos(w*voltage) + b4*sin(w*voltage),
       start = list(b3 = -0.0519, b4 = 0.1304, w = 4.19) )
 detach( )
 fm2Wafer <- update( fm1Wafer,
-      fixed = . ~ . + cos(4.5679*voltage) + sin(4.5679*voltage),
+      . ~ . + cos(4.5679*voltage) + sin(4.5679*voltage),
       random = list(Wafer=pdDiag(~voltage+I(voltage^2)),
              Site=pdDiag(~voltage+I(voltage^2))) )
 summary( fm2Wafer )

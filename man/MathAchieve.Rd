@@ -36,9 +36,9 @@
 \details{
   Each row in this data frame contains the data for one student.
 }
-\source{
-}
+%\source{}
 \examples{
 data(MathAchieve)
+summary(MathAchieve)
 }
 \keyword{datasets}

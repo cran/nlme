@@ -1509,7 +1509,7 @@ pairs.lme <-
     }
   }
 
-  assign("id", as.logical(as.character(id)))# , where = 1)
+  if (!is.null(id)) assign("id", as.logical(as.character(id)))# , where = 1)
   assign("idLabels", as.character(idLabels))#, where = 1)
   #assign("grid", grid, where = 1)
   ## adding to args list
@@ -1574,72 +1574,6 @@ plot.ranef.lme <-
            cex.axis = cex.axis,
            srt.axis = srt.axis,
            mgp.axis = mgp.axis)
-    }
-  panel.bwplot2 <-
-    function(x, y, box.ratio = 1, font = box.dot$font, pch = box.dot$pch,
-             cex = box.dot$cex, col = box.dot$col, drawLine = TRUE, levs,
-             cex.axis = 0.8, srt.axis = 0, mgp.axis = c(2, 0.5, 0), ...)
-    {
-      x <- as.numeric(x)
-      y <- as.numeric(y)
-      ok <- !is.na(x) & !is.na(y)
-      x <- x[ok]
-      y <- y[ok]
-      x.unique <- sort(unique(x))
-      width <- box.ratio/(1 + box.ratio)
-      w <- width/2
-      e <- par("cxy")[2]
-      for(X in x.unique) {
-        Y <- y[x == X]
-        q <- quantile(Y, c(0.75, 0.5, 0.25))
-        iqr <- q[1] - q[3]
-        d <- q[c(1, 3)] + c(1, -1) * 1.5 * iqr
-        up.w <- max(Y[Y <= d[1]], q[1])
-        lo.w <- min(Y[Y >= d[2]], q[3])
-        outliers <- Y[Y < lo.w | Y > up.w]
-        Y <- c(up.w, q, lo.w)
-        median.value <- list(x = X, y = Y[3])
-        Box <- list(x1 = X + c( - w,  - w, w, w),
-                    y1 = Y[c(2, 4, 4, 2)],
-                    x2 = X + c( - w, w, w,  - w),
-                    y2 = Y[c(4, 4, 2, 2)])
-        e <- par("cxy")[2]
-        e.l <- min(e, (Y[4] - Y[5])/2)
-        ## prevent lower staple ends from touching box
-        e.u <- min(e, (Y[1] - Y[2])/2)
-        ## prevent upper staple ends from touching box
-        staple.ends <-
-          list(x1 = c(rep(X - w, 2), rep(X + w, 2)),
-               y1 = rep(c(Y[5], max(Y[1] - e.u, Y[2])), 2),
-               x2 = c(rep(X - w, 2), rep(X + w, 2)),
-               y2 = rep(c(min(Y[5] + e.l, Y[4]), Y[1]), 2))
-        staple.body <- list(x1 = rep(X - w, 2), y1 = Y[c(1, 5)],
-                            x2 = rep(X + w, 2), y2 = Y[c(1, 5)])
-        dotted.line <- list(x1 = c(X, X), y1 = Y[c(1, 4)],
-                            x2 = c(X, X), y2 = Y[c(2, 5)])
-        box.umbrella <- trellis.par.get("box.umbrella")
-        box.dot <- trellis.par.get("box.dot")
-        box.dot.par <- c(list(pch = pch, cex = cex, col = col, font =
-                              font), ...)
-        do.call("lsegments", c(staple.ends, box.umbrella))
-        do.call("lsegments", c(staple.body, box.umbrella))
-        do.call("lsegments", c(dotted.line, box.umbrella))
-        do.call("lsegments", c(Box, trellis.par.get("box.rectangle")))
-        do.call("lpoints", c(median.value, box.dot.par))
-        if(length(outliers) > 0) {
-          outliers <- list(x = rep(X, length(outliers)), y = outliers)
-          do.call("lpoints", c(outliers, trellis.par.get("plot.symbol")))
-        }
-      }
-      if (drawLine) {
-        nX <- length(x.unique)
-        aux <- (1:nX)[as.logical(1 - is.na(match(x.unique, 1:nX)))[1:nX]]
-        llines(x.unique[aux], tapply(y, x, median)[aux], lwd = 0.5)
-      }
-      if (!missing(levs)) {
-        axis(1, at = x.unique, labels = levs, srt = srt.axis, cex = cex.axis,
-             mgp = mgp.axis, ...)
-      }
     }
 
   pControl <- plotControl()
@@ -1788,11 +1722,33 @@ plot.ranef.lme <-
     }
     strip <- dots$strip
     if (is.null(strip)) {
-      strip <- function(...) strip.default(..., style = 1)
+      strip <- strip.default
+    }
+
+    ## this is a hack to make this work, it's probably possible to
+    ## implement the whole thing much more succintly -- ds
+
+    ## The idea here is that the limits component of scales$x is going
+    ## to be a list -- and character vectors have special meaning as
+    ## limits, controlling both limits and the tick mark
+    ## positions/labels
+
+    condvar <- eval(expression(g), argData)
+    xscales.lim <- as.list(levels(condvar))
+    subsc <- seq(along = condvar)
+
+    for (i in seq(along = xscales.lim)) {
+        subscripts <- subsc[condvar == xscales.lim[[i]]]
+        vN <- .vNam[subscripts][1]
+        if (.vType[vN] == "numeric") {
+            xscales.lim[[i]] <- range(argData$x[subscripts])
+        }
+        else
+            xscales.lim[[i]] <- .vLevs[vN][[1]]
     }
 
     xyplot(y ~ x | g, data = argData, subscripts = TRUE,
-           scales = list(x = list(relation = "free", draw = FALSE)),
+           scales = list(x = list(relation = "free", limits = xscales.lim)),
            panel = function(x, y, subscripts, ...) {
              vN <- .vNam[subscripts][1]
              if (.grid) panel.grid()
@@ -1801,11 +1757,15 @@ plot.ranef.lme <-
                if (.drawLine) {
                  panel.loess(x, y, span = .span, degree = .degree)
                }
-               axis(1, cex = .cex, mgp = .mgp)
              } else {
-               panel.bwplot2(x, y, levs = .vLevs[vN], drawLine = .drawLine,
-                             cex.axis = .cex, srt.axis = .srt,
-                             mgp.axis = .mgp, ...)
+                 panel.bwplot(x, y, horizontal = FALSE)
+                 if (.drawLine) {
+                     plot.line <- trellis.par.get("plot.line")
+                     panel.linejoin(x, y, fun = median, horizontal = FALSE,
+                                    col.line = plot.line$col,
+                                    lwd = plot.line$lwd,
+                                    lty = plot.line$lty)
+                 }
              }
            }, xlab = "", ylab = ylab, strip = strip, ...)
   }

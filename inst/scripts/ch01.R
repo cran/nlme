@@ -9,7 +9,7 @@ options( contrasts = c(unordered = "contr.helmert", ordered = "contr.poly") )
 
 # 1.1 A Simple Example of Random Effects
 
-data( Rail )
+data(Rail, ergoStool, Machines, Orthodont, Pixel, Oats, package="nlme")
 Rail
 fm1Rail.lm <- lm( travel ~ 1, data = Rail )
 fm1Rail.lm
@@ -25,7 +25,6 @@ anova( fm1Rail.lme )
 
 # 1.2 A Randomized Block Design
 
-data( ergoStool )
 plot.design( ergoStool )   # produces Figure 1.6
 contrasts( ergoStool$Type )
 ergoStool1 <- ergoStool[ ergoStool$Subject == "1", ]
@@ -53,7 +52,6 @@ plot( fm1Stool,   # produces Figure 1.8
 
 # 1.3  Mixed-effects Models for Replicated, Blocked Designs
 
-data( Machines )
 attach( Machines )      # make variables in Machines available by name
 interaction.plot( Machine, Worker, score, las = 1)   # Figure 1.10
 detach()                # undo the effect of `attach( Machines )'
@@ -84,7 +82,6 @@ anova( fm1Machine, fm2Machine, fm3Machine )
 
 # 1.4 An Analysis of Covariance Model
 
-data( Orthodont )
 names( Orthodont )
 levels( Orthodont$Sex )
 OrthoFem <- Orthodont[ Orthodont$Sex == "Female", ]
@@ -109,7 +106,6 @@ plot( augPred(fm1OrthF), aspect = "xy", grid = TRUE )   # Figure 1.16
 
 # 1.5  Models for Nested Classification Factors
 
-data(Pixel)
 fm1Pixel <- lme( pixel ~ day + I(day^2), data = Pixel,
   random = list( Dog = ~ day, Side = ~ 1 ) )
 intervals( fm1Pixel )
@@ -120,12 +116,11 @@ fm2Pixel <- update( fm1Pixel, random = ~ day | Dog)
 anova( fm1Pixel, fm2Pixel )
 fm3Pixel <- update( fm1Pixel, random = ~ 1 | Dog/Side )
 anova( fm1Pixel, fm3Pixel )
-fm4Pixel <- update( fm1Pixel, pixel ~ day + day^2 + Side )
+fm4Pixel <- update( fm1Pixel, pixel ~ day + I(day^2) + Side )
 summary( fm4Pixel )
 
 # 1.6  A Split-Plot Experiment
 
-data(Oats)
 fm1Oats <- lme( yield ~ ordered(nitro) * Variety, data = Oats,
   random = ~ 1 | Block/Variety )
 anova( fm1Oats )

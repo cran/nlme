@@ -1,3 +1,8 @@
+2003-06-10  Douglas Bates  <bates@stat.wisc.edu>
+
+	* R/groupedData.R: Fixed bug in groupedData constructor when outer
+	is not missing.
+
 2003-05-16  Douglas Bates  <bates@stat.wisc.edu>
 
 	* src/nlmefit.c (internal_EM): Fix by Peter Dalgaard for compound
