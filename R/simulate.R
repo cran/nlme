@@ -1,4 +1,4 @@
-### $Id: simulate.R,v 1.4 2001/03/30 16:50:52 bates Exp $
+### $Id: simulate.R,v 1.5 2001/08/19 21:38:55 deepayan Exp $
 ###
 ###            Fit a general linear mixed effects model
 ###
@@ -501,9 +501,9 @@ plot.simulate.lme <-
     }
   }
   xyplot(form, data = frm,
-	 panel = function(x, y) {
-           panel.grid();
-           panel.xyplot(x, y, type = "l")
+	 panel = function(x, y, ...) {
+           panel.grid()
+           panel.xyplot(x, y, type = "l", ...)
            if ((dfType <- as.double(names(x)[1])) == 1) {
              panel.abline( 0, as.double(names(x)[1]), lty = 2 )
            } else {

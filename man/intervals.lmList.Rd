@@ -1,4 +1,4 @@
-% $Id: intervals.lmList.Rd,v 1.5 2001/06/18 21:16:50 bates Exp $
+% $Id: intervals.lmList.Rd,v 1.6 2001/06/20 18:04:02 bates Exp $
 \name{intervals.lmList}
 \title{Confidence Intervals on lmList Coefficients}
 \usage{

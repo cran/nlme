@@ -1,4 +1,4 @@
-### $Id: groupedData.R,v 1.4 2001/03/30 16:50:52 bates Exp $
+### $Id: groupedData.R,v 1.5 2001/08/19 21:38:55 deepayan Exp $
 ###
 ###           groupedData - data frame with a grouping structure
 ###
@@ -380,9 +380,9 @@ plot.nfnGroupedData <-
            ylab = paste(attr(x, "labels")$y, attr(x, "units")$y),
            strip = function(...) strip.default(..., style = 1),
            aspect = "xy",
-           panel = function(x, y) {
+           panel = function(x, y, ...) {
              if (grid) panel.grid()
-             panel.xyplot(x, y)
+             panel.xyplot(x, y, ...)
              y.avg <- tapply(y, x, mean) # lines through average y
              y.avg <- y.avg[!is.na(y.avg)]
              if (length(y.avg) > 0) {
@@ -423,20 +423,20 @@ plot.nfnGroupedData <-
         trll.col <- trll.set[["col"]][1]
         assign("trll.lty", trll.lty)
         assign("trll.col", trll.col)
-        args[["panel"]] <- function(x, y, subscripts, groups)
+        args[["panel"]] <- function(x, y, subscripts, groups, ...)
           {
             panel.grid()
-            panel.xyplot(x, y)
+            panel.xyplot(x, y, ...)
             panel.superpose(x, y, subscripts, groups, type = "l",
                             col = trll.col, lty = trll.lty)
           }
       } else {
         Inner <- as.factor(eval(asOneSidedFormula(inner)[[2]], x))
         levInn <- levels(Inner)
-        args[["panel"]] <- function(x, y, subscripts, groups)
+        args[["panel"]] <- function(x, y, subscripts, groups, ...)
           {
             panel.grid()
-            panel.xyplot(x, y)
+            panel.xyplot(x, y, ...)
             panel.superpose(x, y, subscripts, groups, type = "l")
           }
       }
@@ -449,10 +449,10 @@ plot.nfnGroupedData <-
       trll.col <- trll.set[["col"]][Inner]
       assign("trll.lty", trll.lty)
       assign("trll.col", trll.col)
-      args[["panel"]] <- function(x, y, subscripts, groups)
+      args[["panel"]] <- function(x, y, subscripts, groups, ...)
 	{
 	  panel.grid()
-	  panel.xyplot(x, y)
+	  panel.xyplot(x, y, ...)
           aux <- match(unique(groups), groups)
           panel.superpose(x, y, subscripts, groups, type = "l",
 			  col = trll.col[aux],
@@ -547,7 +547,7 @@ plot.nffGroupedData <-
   }
   dots <- list(...)
   args[names(dots)] <- dots
-  do.call("dtplot", args)
+  do.call("dotplot", args)
 }
 
 plot.nmGroupedData <-

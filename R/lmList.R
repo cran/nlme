@@ -1,4 +1,4 @@
-## $Id: lmList.R,v 1.4 2001/03/30 16:50:52 bates Exp $
+## $Id: lmList.R,v 1.5 2001/08/19 21:38:55 deepayan Exp $
 ###
 ###                  Create a list of lm objects
 ###
@@ -572,10 +572,10 @@ plot.intervals.lmList <-
   dn <- dimnames(object)
   ## changed definition of what to ordered to preserve order of parameters
   tt <- data.frame(group = ordered(rep(dn[[1]], dims[2] * dims[3]),
-		       levels = dn[[1]]),
+                     levels = dn[[1]]),
 		   intervals = as.vector(object),
 		   what = ordered(rep(dn[[3]],
-		       rep(dims[1] * dims[2], dims[3])), levels = dn[[3]]))
+                     rep(dims[1] * dims[2], dims[3])), levels = dn[[3]]))
   strip <- list(...)[["strip"]]
   if ( is.null( strip ) ) {
     strip <- function(...) strip.default(..., style = 1)
@@ -589,9 +589,9 @@ plot.intervals.lmList <-
   if ( is.null( ylab ) ) {
     ylab <- attr(object, "groupsName")
   }
-  dtplot(group ~ intervals | what,
+  dotplot(group ~ intervals | what,
 	  data = tt,
-	  scales = list(x=list(relation="free")),
+	  scales = list(x="free"),
 	  strip = strip,
 	  xlab = xlab, ylab = ylab,
 	  panel = function(x, y, pch = dot.symbol$pch,
@@ -603,18 +603,18 @@ plot.intervals.lmList <-
 	    xx <- x[ok]
 	    dot.symbol <- trellis.par.get("dot.symbol")
 	    dot.line <- trellis.par.get("dot.line")
-	    abline(h = yy, lwd = dot.line$lwd, lty = dot.line$lty, col =
-		   dot.line$col)
-	    points(xx, yy, pch = "|", col = col, cex = cex, font = font, ...)
+	    panel.abline(h = yy, lwd = dot.line$lwd, lty = dot.line$lty, col =
+                         dot.line$col)
+	    lpoints(xx, yy, pch = "|", col = col, cex = cex, font = font, ...)
 	    lower <- tapply(xx, yy, min)
 	    upper <- tapply(xx, yy, max)
 	    nams <- as.numeric(names(lower))
-	    segments(lower, nams, upper, nams, col = 1, lty = 1, lwd =
-		     if(dot.line$lwd) {
-		       dot.line$lwd
-		     } else {
-		       1
-		     })
+	    lsegments(lower, nams, upper, nams, col = 1, lty = 1, lwd =
+                      if (dot.line$lwd) {
+                        dot.line$lwd
+                      } else {
+                        1
+                      })
 	  }, ...)
 }
 
@@ -775,8 +775,8 @@ plot.lmList <-
 		      panel.xyplot(x, y)
                       if (!all(is.na(aux <- id[subscripts])) &&
                           !is.null(aux) && any(aux)) {
-			text(x[aux], y[aux], idLabels[subscripts][aux],
-                             cex = dots$cex, adj = dots$adj)
+			ltext(x[aux], y[aux], idLabels[subscripts][aux],
+                              cex = dots$cex, adj = dots$adj)
 		      }
 		      if (!is.null(abl)) {
 			panel.abline(abl, ...)

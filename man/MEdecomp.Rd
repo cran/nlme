@@ -10,7 +10,7 @@ MEdecomp(conLin)
 }
 \arguments{
   \item{conLin}{a condensed linear model object representing the model
-    matrices and response from a mixed-effects model.
+    matrices and response from a mixed-effects model.}
 }
 \value{
   another condensed linear model object that provides an equivalent

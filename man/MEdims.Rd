@@ -3,7 +3,7 @@
 \title{Calculate dimensions in mixed-effects}
 \description{
   Calculate the dimensions of various arrays used to represent a
-  mixed-effects model.}
+  mixed-effects model.
 }
 \usage{
 MEdims(groups, ncols)
@@ -13,7 +13,7 @@ MEdims(groups, ncols)
     the observations}
   \item{ncols}{a vector of positive integers listing the number of
     columns in the model matrices at each level of random effects terms
-    or fixed effects
+    or fixed effects}
 }
 \value{
   a list of dimensions
@@ -57,7 +57,6 @@ MEdims(groups, ncols)
     lengths (number of rows) in the block to be decomposed for each
     group at each level.}
 }
-\author{Douglas Bates \email{bates@stat.wisc.edu}}
+\author{Jose Pinheiro \email{jcp@research.bell-labs.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 \seealso{\code{\link{MEestimate}}}
 \keyword{models}
-

@@ -18,5 +18,5 @@ MEEM(object, conLin, niter=0)
   the updated \code{object}
 }
 \author{Douglas Bates \email{bates@stat.wisc.edu}}
-\seealso{\code{\link{MEestimate}}
+\seealso{\code{\link{MEestimate}}}
 \keyword{models}

@@ -1,4 +1,4 @@
-% $Id: VarCorr.Rd,v 1.6 2001/06/18 21:16:50 bates Exp $
+% $Id: VarCorr.Rd,v 1.7 2001/08/25 20:00:51 bates Exp $
 \name{VarCorr}
 \title{Extract variance and correlation components}
 \usage{
@@ -40,7 +40,7 @@ VarCorr(x, sigma, rdig)
     the last row in the matrix. 
 }
 \author{Jose Pinheiro and Douglas Bates}
-\seealso{\code{\link{lme}}, \code{\link{nlme}}.
+\seealso{\code{\link{lme}}, \code{\link{nlme}}}
 \examples{
 data(Orthodont)
 fm1 <- lme(distance ~ age, data = Orthodont, random = ~age)

@@ -1,4 +1,4 @@
-% $Id: print.summary.gls.Rd,v 1.6 2001/06/18 21:16:50 bates Exp $
+% $Id: print.summary.gls.Rd,v 1.7 2001/08/25 20:00:51 bates Exp $
 \name{print.summary.gls}
 \title{Print a summary.gls Object}
 \usage{
@@ -12,7 +12,7 @@
    printed output. Defaults to \code{FALSE}.}
  \item{digits}{an optional integer value specifying the number of
    significant digits to print for numeric values.  Defaults to
-   \code{options("digits").  Probably not used.}
+   \code{options("digits")}.  Probably not used.}
  \item{\dots}{optional arguments passed to \code{print.default}; see
    the documentation on that method function.}
 }
@@ -24,11 +24,9 @@
   function parameters, if any are present, and the residual standard
   error. 
 }
-
 \author{Jose Pinheiro and Douglas Bates}
-
-\seealso{\code{\link{summary.gls}}, \code{\link{gls}} }
-
+\seealso{\code{\link{summary.gls}}, \code{\link{gls}}
+}
 \examples{
 data(Ovary)
 fm1 <- gls(follicles ~ sin(2*pi*Time) + cos(2*pi*Time), Ovary,

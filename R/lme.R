@@ -1,4 +1,4 @@
-### $Id: lme.R,v 1.5 2001/03/30 16:50:52 bates Exp $
+### $Id: lme.R,v 1.6 2001/08/19 21:38:55 deepayan Exp $
 ###
 ###            Fit a general linear mixed effects model
 ###
@@ -1626,20 +1626,20 @@ plot.ranef.lme <-
         box.dot <- trellis.par.get("box.dot")
         box.dot.par <- c(list(pch = pch, cex = cex, col = col, font =
                               font), ...)
-        do.call("segments", c(staple.ends, box.umbrella))
-        do.call("segments", c(staple.body, box.umbrella))
-        do.call("segments", c(dotted.line, box.umbrella))
-        do.call("segments", c(Box, trellis.par.get("box.rectangle")))
-        do.call("points", c(median.value, box.dot.par))
+        do.call("lsegments", c(staple.ends, box.umbrella))
+        do.call("lsegments", c(staple.body, box.umbrella))
+        do.call("lsegments", c(dotted.line, box.umbrella))
+        do.call("lsegments", c(Box, trellis.par.get("box.rectangle")))
+        do.call("lpoints", c(median.value, box.dot.par))
         if(length(outliers) > 0) {
           outliers <- list(x = rep(X, length(outliers)), y = outliers)
-          do.call("points", c(outliers, trellis.par.get("plot.symbol")))
+          do.call("lpoints", c(outliers, trellis.par.get("plot.symbol")))
         }
       }
       if (drawLine) {
         nX <- length(x.unique)
         aux <- (1:nX)[as.logical(1 - is.na(match(x.unique, 1:nX)))[1:nX]]
-        lines(x.unique[aux], tapply(y, x, median)[aux], lwd = 0.5)
+        llines(x.unique[aux], tapply(y, x, median)[aux], lwd = 0.5)
       }
       if (!missing(levs)) {
         axis(1, at = x.unique, labels = levs, srt = srt.axis, cex = cex.axis,
@@ -1723,7 +1723,7 @@ plot.ranef.lme <-
     if (is.null(args$strip)) {
       args$strip <- function(...) strip.default(..., style = 1)
     }
-    do.call("dtplot", as.list(args))
+    do.call("dotplot", as.list(args))
   } else {
     if (!inherits(form, "formula")) {
       stop("Form must be a formula, when not NULL.")
@@ -1797,8 +1797,7 @@ plot.ranef.lme <-
     }
 
     xyplot(y ~ x | g, data = argData, subscripts = TRUE,
-           scales = list(x = list(relation = "free", tck = 0,
-                           labels = FALSE)),
+           scales = list(x = list(relation = "free", draw = FALSE)),
            panel = function(x, y, subscripts, ...) {
              vN <- .vNam[subscripts][1]
              if (.grid) panel.grid()

@@ -1,4 +1,4 @@
-% $Id: coef.lme.Rd,v 1.6 2001/06/18 21:16:50 bates Exp $
+% $Id: coef.lme.Rd,v 1.7 2001/08/25 20:00:51 bates Exp $
 \name{coef.lme}
 \title{Extract lme Coefficients}
 \usage{
@@ -44,7 +44,7 @@
    summary of \code{data} but the levels of the grouping factor will
    continue to be used as the row names for the returned data frame.
    Defaults to \code{FALSE}.}
- \item{subset}{an optional expression specifying a subset
+ \item{subset}{an optional expression specifying a subset}
 }
 \description{
   The estimated coefficients at level \eqn{i} are obtained by adding
@@ -61,13 +61,11 @@
   summarized over groups. The returned object also inherits from classes
   \code{ranef.lme} and \code{data.frame}.
 }
-
 \author{Jose Pinheiro and Douglas Bates}
-
 \seealso{\code{\link{lme}}, \code{\link{fixef.lme}},
   \code{\link{ranef.lme}},
-  \code{\link{plot.ranef.lme}}, \code{\link{gsummary}}} 
-
+  \code{\link{plot.ranef.lme}}, \code{\link{gsummary}}
+}
 \examples{
 data(Orthodont)
 fm1 <- lme(distance ~ age, Orthodont, random = ~ age | Subject)

@@ -1,4 +1,4 @@
-### $Id: newMethods.R,v 1.5 2001/06/18 21:16:49 bates Exp $
+### $Id: newMethods.R,v 1.6 2001/08/19 21:38:55 deepayan Exp $
 ###
 ###      Methods for generics from newGenerics.q for some standard classes
 ###
@@ -482,8 +482,8 @@ plot.nls <-
 		      panel.xyplot(x, y, ...)
                       if (!all(is.na(aux <- id[subscripts])) &&
                           !is.null(aux) && any(aux)) {
-			text(x[aux], y[aux], idLabels[subscripts][aux],
-                             cex = dots$cex, adj = dots$adj)
+			ltext(x[aux], y[aux], idLabels[subscripts][aux],
+                              cex = dots$cex, adj = dots$adj)
 		      }
 		      if (!is.null(abl)) {
 			panel.abline(abl, ...)
@@ -508,10 +508,10 @@ plot.nls <-
     plotFun <- "histogram"
     if (is.null(args$panel)) {
       args <- c(args,
-                panel = list(function(x, y, ...)
+                panel = list(function(x, ...)
 		  {
 		    if (grid) panel.grid()
-		    panel.histogram(x, y, ...)
+		    panel.histogram(x, ...)
 		    if (!is.null(abl)) {
 		      panel.abline(v = abl[1], ...)
 		    }
@@ -559,13 +559,13 @@ plot.ACF <-
   assign("alpha", as.logical(alpha))
   assign("grid", grid)
   xyplot(ACF ~ lag, object, ylim = ylim,
-         panel = function(x, y) {
+         panel = function(x, y, ...) {
            if (grid) panel.grid()
            panel.xyplot(x, y, type = "h")
            panel.abline(0, 0)
            if (alpha) {
-             lines(x, stdv, lty = 2)
-             lines(x, -stdv, lty = 2)
+             llines(x, stdv, lty = 2)
+             llines(x, -stdv, lty = 2)
            }
          }, xlab = xlab, ylab = ylab, ...)
 }
@@ -665,7 +665,7 @@ plot.compareFits <-
   } else {
     args[["key"]] <- key
   }
-  do.call("dtplot", args)
+  do.call("dotplot", args)
 }
 
 plot.Variogram <-
