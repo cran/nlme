@@ -86,7 +86,6 @@
   \code{\link{print.anova.lme}} }  
 
 \examples{
-data(Orthodont)
 fm1 <- lme(distance ~ age, Orthodont, random = ~ age | Subject)
 anova(fm1)
 fm2 <- update(fm1, random = pdDiag(~age))

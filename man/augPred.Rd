@@ -63,7 +63,6 @@ augPred(object, primary, minimum, maximum, length.out, \dots)
   \code{\link{predict}}} 
 
 \examples{
-data(Orthodont)
 fm1 <- lme(Orthodont, random = ~1)
 augPred(fm1, length.out = 2, level = c(0,1))
 }

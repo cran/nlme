@@ -78,7 +78,6 @@
 \seealso{\code{\link{lme}}, \code{\link[lattice]{xyplot}},
    \code{\link[lattice]{bwplot}}, \code{\link[lattice]{histogram}}}
 \examples{
-data(Orthodont)
 fm1 <- lme(distance ~ age, Orthodont, random = ~ age | Subject)
 # standardized residuals versus fitted values by gender
 plot(fm1, resid(., type = "p") ~ fitted(.) | Sex, abline = 0)

@@ -36,7 +36,5 @@
   dynamics during the estrus cycle of the mare, \emph{Animal
     Reproduction Science}, \bold{14}, 219-231.
 }
-\examples{
-data(Ovary)
-}
+%\examples{}
 \keyword{datasets}

@@ -71,7 +71,6 @@
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 \seealso{\code{\link{lmList}}, \code{\link[lattice]{dotplot}}}
 \examples{
-data(Orthodont)
 fm1 <- lmList(distance ~ age | Subject, Orthodont)
 plot(ranef(fm1))
 fm1RE <- ranef(fm1, aug = TRUE)

@@ -63,7 +63,6 @@
   \code{\link{nlme.nlsList}}, \code{\link{nlsList.formula}}
 }
 \examples{
-data(CO2)
 fm1 <- nlsList(SSasympOff, CO2)
 summary(fm1)
 }

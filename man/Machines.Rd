@@ -36,7 +36,5 @@
   Milliken, G. A. and Johnson, D. E. (1992), \emph{Analysis of Messy Data,
     Volume I: Designed Experiments}, Chapman and Hall, London.
 }
-\examples{
-data(Machines)
-}
+%\examples{}
 \keyword{datasets}

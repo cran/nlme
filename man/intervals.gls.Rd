@@ -54,7 +54,6 @@
 \seealso{\code{\link{gls}}, \code{\link{print.intervals.gls}}}
 
 \examples{
-data(Ovary)
 fm1 <- gls(follicles ~ sin(2*pi*Time) + cos(2*pi*Time), Ovary,
            correlation = corAR1(form = ~ 1 | Mare))
 intervals(fm1)

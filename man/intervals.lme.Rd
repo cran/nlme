@@ -57,7 +57,6 @@
     \code{\link{pdNatural}}}
 
 \examples{
-data(Orthodont)
 fm1 <- lme(distance ~ age, Orthodont, random = ~ age | Subject)
 intervals(fm1)
 }

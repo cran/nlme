@@ -39,7 +39,6 @@
 \seealso{\code{\link{lmList}}}
 
 \examples{
-data(Orthodont)
 fm1 <- lmList(distance ~ age | Subject, Orthodont)
 logLik(fm1)   # returns NA when it should not
 }

@@ -28,7 +28,6 @@
 }
 \seealso{\code{\link{pdMatrix.reStruct}}, \code{\link{pdFactor.pdMat}}}
 \examples{
-data(Orthodont)
 rs1 <- reStruct(pdSymm(diag(3), ~age+Sex, data = Orthodont))
 pdFactor(rs1)
 }

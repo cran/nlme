@@ -112,7 +112,6 @@ Mixed-Effects Software: Design of NLME 3.0" available at
   \code{\link{plot.nfnGroupedData}}, \code{\link{plot.nffGroupedData}}
 }  
 \examples{
-data(Pixel)
 # no collapsing, panels by Dog
 plot(Pixel, display = "Dog", inner = ~Side)
 # collapsing by Dog, preserving day

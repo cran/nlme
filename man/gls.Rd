@@ -100,7 +100,6 @@ gls(model, data, correlation, weights, subset, method, na.action,
   \code{\link{varFunc}}, \code{\link{corClasses}}, \code{\link{varClasses}}
 }
 \examples{
-data(Ovary)
 # AR(1) errors within each Mare
 fm1 <- gls(follicles ~ sin(2*pi*Time) + cos(2*pi*Time), Ovary,
            correlation = corAR1(form = ~ 1 | Mare))

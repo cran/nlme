@@ -24,7 +24,6 @@ pooledSD(object)
 \seealso{\code{\link{lmList}}, \code{\link{lm}}}
 
 \examples{
-data(Orthodont)
 fm1 <- lmList(Orthodont)
 pooledSD(fm1)
 }

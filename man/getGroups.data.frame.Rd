@@ -36,7 +36,6 @@
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 \seealso{\code{\link{getGroupsFormula}}}
 \examples{
-data(Pixel)
 getGroups(Pixel)
 getGroups(Pixel, level = 2)
 }

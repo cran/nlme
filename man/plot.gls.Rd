@@ -76,7 +76,6 @@
    \code{\link[lattice]{bwplot}},
    \code{\link[lattice]{histogram}}}
 \examples{
-data(Ovary)
 fm1 <- gls(follicles ~ sin(2*pi*Time) + cos(2*pi*Time), Ovary,
            correlation = corAR1(form = ~ 1 | Mare))
 # standardized residuals versus fitted values by Mare

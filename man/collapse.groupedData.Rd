@@ -99,7 +99,6 @@ http://franz.stat.wisc.edu/pub/NLME.
 }  
 
 \examples{
-data(Pixel)
 # collapsing by Dog
 collapse(Pixel, collapse = 1)  # same as collapse(Pixel, collapse = "Dog")
 }

@@ -72,7 +72,6 @@
 \seealso{\code{\link{lmList}}, \code{\link[lattice]{xyplot}},
    \code{\link[lattice]{bwplot}}, \code{\link[lattice]{histogram}} }
 \examples{
-data(Orthodont)
 fm1 <- lmList(distance ~ age | Subject, Orthodont)
 # standardized residuals versus fitted values by gender
 plot(fm1, resid(., type = "pool") ~ fitted(.) | Sex, abline = 0, id = 0.05)

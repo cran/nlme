@@ -40,7 +40,6 @@
 \seealso{\code{\link{lmList}}, \code{\link{plot.intervals.lmList}}}
 
 \examples{
-data(Orthodont)
 fm1 <- lmList(distance ~ age | Subject, Orthodont)
 intervals(fm1)
 }

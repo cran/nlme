@@ -37,7 +37,6 @@
 \seealso{\code{\link{lmList}}, \code{\link{residuals.lmList}}}
 
 \examples{
-data(Orthodont)
 fm1 <- lmList(distance ~ age | Subject, Orthodont)
 fitted(fm1)
 }

@@ -35,7 +35,6 @@
 \seealso{\code{\link{augPred}}, \code{\link[lattice]{xyplot}}}
 
 \examples{
-data(Orthodont)
 fm1 <- lme(Orthodont)
 plot(augPred(fm1, level = 0:1, length.out = 2))
 }

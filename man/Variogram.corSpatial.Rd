@@ -45,7 +45,6 @@
   \code{\link{Variogram.corLin}}, \code{\link{Variogram.corRatio}},
   \code{\link{Variogram.corSpher}}, \code{\link{plot.Variogram}}}
 \examples{
-data(BodyWeight)
 cs1 <- corExp(3, form = ~ Time | Rat)
 cs1 <- Initialize(cs1, BodyWeight)
 Variogram(cs1, FUN = function(x, y) (1 - exp(-x/y)))[1:10,]

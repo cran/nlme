@@ -48,7 +48,6 @@ scores from grade 8 pupils in elementary schools in The Netherlands.
     Introduction to Basic and Advanced Multilevel Modeling}, Sage.
 }
 \examples{
-data(bdf)
 summary(bdf)
 }
 \keyword{datasets}

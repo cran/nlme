@@ -57,7 +57,5 @@
     Brillinger, D. (1987), Comment on a paper by C. R. Rao,
     \emph{Statistical Science}, \bold{2}, 448-450.
 }
-\examples{
-data(Earthquake)
-}
+%\examples{}
 \keyword{datasets}

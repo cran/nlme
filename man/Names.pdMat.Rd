@@ -36,7 +36,6 @@
 \seealso{\code{\link{Names}}, \code{\link{Names.pdBlocked}}}
 
 \examples{
-data(Orthodont)
 pd1 <- pdSymm(~age, data = Orthodont)
 Names(pd1)
 }

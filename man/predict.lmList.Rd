@@ -58,7 +58,6 @@
 \seealso{\code{\link{lmList}}, \code{\link{predict.lm}}}
 
 \examples{
-data(Orthodont)
 fm1 <- lmList(distance ~ age | Subject, Orthodont)
 predict(fm1, se.fit = TRUE)
 }

@@ -50,7 +50,6 @@
   \code{\link{recalc.corStruct}}, \code{\link{Initialize.corStruct}}}
 
 \examples{
-data(Orthodont)
 cs1 <- corAR1(form = ~1 | Subject)
 cs1 <- Initialize(cs1, data = Orthodont)
 corFactor(cs1)

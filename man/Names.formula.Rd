@@ -33,7 +33,6 @@
 }
 
 \examples{
-data(Orthodont)
 Names(distance ~ Sex * age, data = Orthodont)
 }
 \keyword{models}

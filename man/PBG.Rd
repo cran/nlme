@@ -48,7 +48,5 @@ the HD5-antagonist MDL 72222 administered.
     in cardiovascular research, \emph{Cardiovascular Research},
     \bold{28}, 303-311.
 }
-\examples{
-data(PBG)
-}
+%\examples{}
 \keyword{datasets}

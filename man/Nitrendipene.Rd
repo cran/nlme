@@ -30,7 +30,5 @@
   Bates, D. M. and Watts, D. G. (1988), \emph{Nonlinear Regression
     Analysis and Its Applications}, Wiley, New York.
 }
-\examples{
-data(Nitrendipene)
-}
+%\examples{}
 \keyword{datasets}

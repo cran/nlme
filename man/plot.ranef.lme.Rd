@@ -78,7 +78,6 @@
   \code{\link{dotplot}}} 
 \examples{
 \dontrun{
-data(Orthodont)
 fm1 <- lme(distance ~ age, Orthodont, random = ~ age | Subject)
 plot(ranef(fm1))
 fm1RE <- ranef(fm1, aug = TRUE)

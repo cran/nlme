@@ -126,7 +126,6 @@
   \code{\link{lmeObject}} } 
 
 \examples{
-data(Orthodont)
 fm1 <- lme(Orthodont)
 summary(fm1)
 }

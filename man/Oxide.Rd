@@ -48,7 +48,5 @@
   R. D. (1996), \emph{SAS System for Mixed Models}, SAS Institute,
   Cary, NC.
 }
-\examples{
-data(Oxide)
-}
+%\examples{}
 \keyword{datasets}

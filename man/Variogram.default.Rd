@@ -39,7 +39,6 @@
 \seealso{\code{\link{Variogram.gls}}, \code{\link{Variogram.lme}},
   \code{\link{plot.Variogram}}} 
 \examples{
-data(Ovary)
 \dontrun{
 fm1 <- lm(follicles ~ sin(2 * pi * Time) + cos(2 * pi * Time), Ovary,
           subset = Mare == 1)

@@ -32,7 +32,6 @@
 \author{Jose Pinheiro and Douglas Bates}
 \seealso{\code{\link{lme}},\code{\link{gls}}}
 \examples{
-data(Orthodont)
 fm1 <- lme(distance ~ Sex * age, Orthodont, random = ~ age, method = "ML")
 logLik(fm1)
 logLik(fm1, REML = TRUE)

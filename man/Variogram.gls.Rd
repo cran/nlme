@@ -109,7 +109,6 @@
 \seealso{\code{\link{gls}}, \code{\link{Variogram.default}},
   \code{\link{Variogram.lme}}, \code{\link{plot.Variogram}}}
 \examples{
-data(BodyWeight)
 \dontrun{
 fm1 <- gls(weight ~ Time * Diet, BodyWeight)
 Variogram(fm1, form = ~ Time | Rat)[1:10,]

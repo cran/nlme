@@ -38,7 +38,6 @@
 }
 %\source{}
 \examples{
-data(MathAchieve)
 summary(MathAchieve)
 }
 \keyword{datasets}

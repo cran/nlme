@@ -33,7 +33,6 @@
 \seealso{\code{\link{getGroups}}}
 
 \examples{
-data(Orthodont)
 cs1 <- corAR1(form = ~ 1 | Subject)
 getGroups(cs1, data = Orthodont)
 }

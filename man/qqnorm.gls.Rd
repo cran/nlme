@@ -58,7 +58,6 @@
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 \seealso{\code{\link{gls}}, \code{\link{plot.gls}}}
 \examples{
-data(Ovary)
 fm1 <- gls(follicles ~ sin(2*pi*Time) + cos(2*pi*Time), Ovary,
            correlation = corAR1(form = ~ 1 | Mare))
 qqnorm(fm1, abline = c(0,1))

@@ -25,7 +25,6 @@ getResponse(object, form)
 
 \seealso{\code{\link{getResponseFormula}}}
 \examples{
-data(Orthodont)
 getResponse(Orthodont)
 }
 \keyword{models}

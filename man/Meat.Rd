@@ -43,7 +43,5 @@
   Cochran, W. G. and Cox, G. M. (1957), \emph{Experimental Designs},
   Wiley, New York.
 }
-\examples{
-data(Meat)
-}
+%\examples{}
 \keyword{datasets}

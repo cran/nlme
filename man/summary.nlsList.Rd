@@ -76,7 +76,6 @@
 \seealso{\code{\link{nlsList}}, \code{\link{summary}}}
 
 \examples{
-data(Loblolly)
 fm1 <- nlsList(SSasymp, Loblolly)
 summary(fm1)
 }

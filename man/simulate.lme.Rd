@@ -71,7 +71,6 @@ simulate.lme(m1, m2, Random.seed, method, nsim, niterEM, useGen)
 \seealso{\code{\link{lme}}
 }
 \examples{
-data(Orthodont)
 \dontrun{
 orthSim <-
  simulate.lme(m1 = list(fixed = distance ~ age, data = Orthodont,

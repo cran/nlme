@@ -23,7 +23,6 @@
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 \seealso{\code{\link{corClasses}}, \code{\link{corMatrix}}}
 \examples{
-data(Orthodont)
 cst1 <- corAR1(form = ~1|Subject)
 cst1 <- Initialize(cst1, data = Orthodont)
 as.matrix(cst1)

@@ -54,7 +54,6 @@ naPattern, \dots)
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 \seealso{\code{\link{nlme}}, \code{\link{fitted.lme}}}
 \examples{
-data(Loblolly)
 fm1 <- nlme(height ~ SSasymp(age, Asym, R0, lrc),
             data = Loblolly,
             fixed = Asym + R0 + lrc ~ 1,

@@ -71,7 +71,6 @@ nlsList(model, data, start, control, level, subset, na.action, pool)
 \code{\link{nls}}, \code{\link{nlme.nlsList}}.
 }
 \examples{
-data(CO2)
 fm1 <- nlsList(uptake ~ SSasympOff(conc, Asym, lrc, c0),
    data = CO2, start = c(Asym = 30, lrc = -4.5, c0 = 52))
 summary(fm1)

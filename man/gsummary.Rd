@@ -80,7 +80,6 @@ gsummary(object, FUN, omitGroupingFactor, form, level,
   \code{\link{getGroups}}} 
 
 \examples{
-data(Orthodont)
 gsummary(Orthodont)  # default summary by Subject
 ## gsummary with invariantsOnly = TRUE and omitGroupingFactor = TRUE
 ## determines whether there are covariates like Sex that are invariant

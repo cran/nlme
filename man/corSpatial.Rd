@@ -77,7 +77,7 @@ corSpatial(value, form, nugget, type, metric, fixed)
 
 \seealso{\code{\link{corExp}}, \code{\link{corGaus}},
     \code{\link{corLin}}, \code{\link{corRatio}}, \code{\link{corSpher}},
-    \code{\link{Initialize.corStruct}}, \code{\link[mva]{dist}}
+    \code{\link{Initialize.corStruct}}, \code{\link[stats]{dist}}
 }
 \examples{
 sp1 <- corSpatial(form = ~ x + y + z, type = "g", metric = "man")

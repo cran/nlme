@@ -71,7 +71,6 @@
   \code{\link{plot.ranef.lmList}}, \code{\link{gsummary}}} 
 
 \examples{
-data(Orthodont)
 fm1 <- lmList(distance ~ age|Subject, data = Orthodont)
 coef(fm1)
 coef(fm1, augFrame = TRUE)

@@ -47,7 +47,5 @@
    Hand, D. and Crowder, M. (1996), \emph{Practical Longitudinal Data
        Analysis}, Chapman and Hall, London.
 }
-\examples{
-data(BodyWeight)
-}
+%\examples{}
 \keyword{datasets}

@@ -56,7 +56,6 @@
   \code{print.summary.lme}}
 
 \examples{
-data(Orthodont)
 fm1 <- lme(distance ~ age, Orthodont, random = ~ age | Subject)
 summary(fm1)
 }

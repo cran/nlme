@@ -144,7 +144,6 @@ lme(fixed, data, random, correlation, weights, subset, method,
   \code{\link{corClasses}}, \code{\link{varClasses}}
 }
 \examples{
-data(Orthodont)
 fm1 <- lme(distance ~ age, data = Orthodont) # random is ~ age
 fm2 <- lme(distance ~ age + Sex, data = Orthodont, random = ~ 1)
 summary(fm1)

@@ -62,7 +62,6 @@ comparePred(object1, object2, primary, minimum, maximum,
 }
 \seealso{\code{\link{augPred}}, \code{\link{getGroups}}}
 \examples{
-data(Orthodont)
 fm1 <- lme(distance ~ age * Sex, data = Orthodont, random = ~ age)
 fm2 <- update(fm1, distance ~ age)
 comparePred(fm1, fm2, length.out = 2)

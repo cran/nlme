@@ -51,7 +51,6 @@
   \code{\link{lmList.formula}}
 }
 \examples{
-data(Orthodont)
 fm1 <- lmList(Orthodont)
 summary(fm1)
 }

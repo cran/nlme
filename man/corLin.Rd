@@ -66,7 +66,7 @@ corLin(value, form, nugget, metric, fixed)
 }
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 
-\seealso{\code{\link{Initialize.corStruct}}, \code{\link[mva]{dist}}}
+\seealso{\code{\link{Initialize.corStruct}}, \code{\link[stats]{dist}}}
 \examples{
 sp1 <- corLin(form = ~ x + y)
 }

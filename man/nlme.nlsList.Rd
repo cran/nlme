@@ -137,7 +137,6 @@
   \code{\link{nlmeObject}} } 
 
 \examples{
-data(Loblolly)
 fm1 <- nlsList(SSasymp, data = Loblolly)
 fm2 <- nlme(fm1, random = Asym ~ 1)
 summary(fm1)

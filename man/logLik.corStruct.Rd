@@ -30,7 +30,6 @@
 \seealso{\code{\link{logDet.corStruct}} }
 
 \examples{
-data(Orthodont)
 cs1 <- corAR1(0.2)
 cs1 <- Initialize(cs1, data = Orthodont)
 logLik(cs1)

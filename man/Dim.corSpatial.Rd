@@ -36,7 +36,6 @@
 \seealso{\code{\link{Dim}}, \code{\link{Dim.corStruct}}}
 
 \examples{
-data(Orthodont)
 Dim(corGaus(), getGroups(Orthodont))
 }
 \keyword{models}

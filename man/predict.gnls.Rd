@@ -33,7 +33,6 @@
 \seealso{\code{\link{gnls}}}
 
 \examples{
-data(Soybean)
 fm1 <- gnls(weight ~ SSlogis(Time, Asym, xmid, scal), Soybean,
             weights = varPower())
 newSoybean <- data.frame(Time = c(10,30,50,80,100))

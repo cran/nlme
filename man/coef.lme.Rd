@@ -69,7 +69,6 @@
   \code{\link{plot.ranef.lme}}, \code{\link{gsummary}}
 }
 \examples{
-data(Orthodont)
 fm1 <- lme(distance ~ age, Orthodont, random = ~ age | Subject)
 coef(fm1)
 coef(fm1, augFrame = TRUE)

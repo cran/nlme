@@ -82,7 +82,6 @@
   \code{\link{AIC}}, \code{\link{BIC}}, \code{\link{print.anova.lme}} }
 
 \examples{
-data(Ovary)
 %\dontrun{
 # AR(1) errors within each Mare
 fm1 <- gls(follicles ~ sin(2*pi*Time) + cos(2*pi*Time), Ovary,

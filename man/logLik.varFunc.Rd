@@ -29,7 +29,6 @@
 
 
 \examples{
-data(Orthodont)
 vf1 <- varPower(form = ~age)
 vf1 <- Initialize(vf1, Orthodont)
 coef(vf1) <- 0.1

@@ -29,7 +29,5 @@
     ions et de l'acetylcholine, \emph{Helvetica Physiologica Acta},
     \bold{21}.
 }
-\examples{
-data(Muscle)
-}
+%\examples{}
 \keyword{datasets}

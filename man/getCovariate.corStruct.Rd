@@ -32,7 +32,6 @@
 \seealso{\code{\link{getCovariate}}}
 
 \examples{
-data(Orthodont)
 cs1 <- corAR1(form = ~ 1 | Subject)
 getCovariate(cs1, data = Orthodont)
 }

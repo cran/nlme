@@ -72,7 +72,6 @@ reStruct(object, pdClass, REML, data)
   \code{\link{groupedData}}} 
 
 \examples{
-data(Pixel)
 rs1 <- reStruct(list(Dog = ~day, Side = ~1), data = Pixel)
 rs1
 }

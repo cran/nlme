@@ -32,7 +32,5 @@
     Devore, J. L. (2000), \emph{Probability and Statistics for
       Engineering and the Sciences (5th ed)}, Duxbury, Boston, MA.
 }
-\examples{
-data(Rail)
-}
+%\examples{}
 \keyword{datasets}

@@ -38,7 +38,6 @@ compareFits(object1, object2, which)
   \code{\link{random.effects}}
 }
 \examples{
-data(Orthodont)
 fm1 <- lmList(Orthodont)
 fm2 <- lme(fm1)
 compareFits(coef(fm1), coef(fm2))

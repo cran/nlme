@@ -43,7 +43,5 @@
   Venables, W. N. and Ripley, B. D. (1999) \emph{Modern Applied
     Statistics with S-PLUS (3rd ed)}, Springer, New York.
 }
-\examples{
-data(Oats)
-}
+%\examples{}
 \keyword{datasets}

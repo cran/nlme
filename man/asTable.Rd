@@ -29,7 +29,6 @@ asTable(object)
 \seealso{\code{\link{groupedData}}, \code{\link{isBalanced}},
   \code{\link{balancedGrouped}}}
 \examples{
-data(Orthodont)
 asTable(Orthodont)
 }
 \keyword{manip}

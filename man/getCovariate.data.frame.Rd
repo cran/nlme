@@ -27,7 +27,6 @@
 \seealso{\code{\link{getCovariateFormula}}}
 
 \examples{
-data(Orthodont)
 getCovariate(Orthodont)
 }
 \keyword{models}

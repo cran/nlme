@@ -41,7 +41,5 @@
   the \code{MathAchieve} data.
 }
 %\source{}
-\examples{
-data(MathAchSchool)
-}
+%\examples{}
 \keyword{datasets}

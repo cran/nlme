@@ -37,7 +37,5 @@
   \emph{Analysis of longitudinal data}, Oxford University Press,
   Oxford.
 }
-\examples{
-data(Spruce)
-}
+%\examples{}
 \keyword{datasets}

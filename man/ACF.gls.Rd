@@ -57,7 +57,6 @@
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 \seealso{\code{\link{ACF.gls}}, \code{\link{plot.ACF}}}
 \examples{
-data(Ovary)
 fm1 <- gls(follicles ~ sin(2*pi*Time) + cos(2*pi*Time), Ovary)
 ACF(fm1, form = ~ 1 | Mare)
 }

@@ -51,7 +51,6 @@ gapply(object, which, FUN, form, level, groups, \dots)
 \seealso{\code{\link{gsummary}}}
 
 \examples{
-data( Phenobarb )
 ## Find number of non-missing "conc" observations for each Subject
 gapply( Phenobarb, FUN = function(x) sum(!is.na(x$conc)) )
 }

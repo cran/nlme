@@ -27,7 +27,6 @@
 \seealso{\code{\link{lmList}}, \code{\link{random.effects.lmList}}}
 
 \examples{
-data(Orthodont)
 fm1 <- lmList(distance ~ age | Subject, Orthodont)
 fixed.effects(fm1)
 }

@@ -35,7 +35,6 @@
 \seealso{\code{\link{lme}}}
 
 \examples{
-data(Pixel)
 fm1 <- lme(pixel ~ day + day^2, Pixel,
   random = list(Dog = ~day, Side = ~1))
 getGroups(fm1, level = 1:2)

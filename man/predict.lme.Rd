@@ -55,7 +55,6 @@
 \seealso{\code{\link{lme}}, \code{\link{fitted.lme}}}
 
 \examples{
-data(Orthodont)
 fm1 <- lme(distance ~ age, Orthodont, random = ~ age | Subject)
 newOrth <- data.frame(Sex = c("Male","Male","Female","Female","Male","Male"),
                       age = c(15, 20, 10, 12, 2, 4),

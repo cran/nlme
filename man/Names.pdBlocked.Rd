@@ -33,7 +33,6 @@
 \seealso{\code{\link{Names}}, \code{\link{Names.pdMat}}}
 
 \examples{
-data(Orthodont)
 pd1 <- pdBlocked(list(~Sex - 1, ~age - 1), data = Orthodont)
 Names(pd1)
 }

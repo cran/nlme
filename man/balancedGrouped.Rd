@@ -33,7 +33,6 @@ balancedGrouped(form, data, labels=NULL, units=NULL)
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 \seealso{\code{\link{groupedData}}, \code{\link{isBalanced}}, \code{\link{asTable}}}
 \examples{
-data(Orthodont)
 OrthoMat <- asTable( Orthodont )
 Orth2 <- balancedGrouped(distance ~ age | Subject, data = OrthoMat,
     labels = list(x = "Age",

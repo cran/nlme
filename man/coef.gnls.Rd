@@ -25,7 +25,6 @@
 \seealso{\code{\link{gnls}}} 
 
 \examples{
-data(Soybean)
 fm1 <- gnls(weight ~ SSlogis(Time, Asym, xmid, scal), Soybean,
             weights = varPower())
 coef(fm1)

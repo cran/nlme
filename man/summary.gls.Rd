@@ -48,7 +48,6 @@
   \code{print.summary.gls}}
 
 \examples{
-data(Ovary)
 fm1 <- gls(follicles ~ sin(2*pi*Time) + cos(2*pi*Time), Ovary,
            correlation = corAR1(form = ~ 1 | Mare))
 summary(fm1)

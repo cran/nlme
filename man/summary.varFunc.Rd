@@ -39,7 +39,6 @@
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 %\seealso{\code{\link{print.summary.varFunc}}}
 \examples{
-data(Orthodont)
 vf1 <- varPower(0.3, form = ~age)
 vf1 <- Initialize(vf1, Orthodont)
 summary(vf1)

@@ -38,7 +38,6 @@
       Engineering and the Sciences (5th ed)}, Duxbury, Boston, MA.
 }
 \examples{
-data(ergoStool)
 fm1 <-
    lme(effort ~ Type, data = ergoStool, random = ~ 1 | Subject)
 anova( fm1 )

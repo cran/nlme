@@ -27,7 +27,6 @@
 \seealso{\code{\link{getCovariate.varFunc}}}
 
 \examples{
-data(Orthodont)
 vf1 <- varPower(1.1, form = ~age)
 covariate(vf1) <- Orthodont[["age"]]
 }

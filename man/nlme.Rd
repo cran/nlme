@@ -165,7 +165,6 @@ nlme(model, data, fixed, random, groups, start, correlation, weights,
   \code{\link{corClasses}}, \code{\link{varClasses}}
 }
 \examples{
-data(Loblolly)
 fm1 <- nlme(height ~ SSasymp(age, Asym, R0, lrc),
             data = Loblolly,
             fixed = Asym + R0 + lrc ~ 1,

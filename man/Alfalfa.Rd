@@ -54,7 +54,5 @@
   Snedecor, G. W. and Cochran, W. G. (1980), \emph{Statistical Methods (7th
     ed)}, Iowa State University Press, Ames, IA
 }
-\examples{
-data(Alfalfa)
-}
+%\examples{}
 \keyword{datasets}

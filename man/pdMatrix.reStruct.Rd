@@ -33,7 +33,6 @@
   \code{\link{pdMatrix.pdMat}}}
 
 \examples{
-data(Orthodont)
 rs1 <- reStruct(pdSymm(diag(3), ~age+Sex, data = Orthodont))
 pdMatrix(rs1)
 }

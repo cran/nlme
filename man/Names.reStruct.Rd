@@ -36,7 +36,6 @@
   \code{\link{Names.pdMat}}
 } 
 \examples{
-data(Pixel)
 rs1 <- reStruct(list(Dog = ~day, Side = ~1), data = Pixel)
 Names(rs1)
 }

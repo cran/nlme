@@ -39,7 +39,5 @@
   Hicks, C. R. (1993), \emph{Fundamental Concepts in the Design of
     Experiments (4th ed)}, Harcourt Brace, New York.
 }
-\examples{
-data(Gun)
-}
+%\examples{}
 \keyword{datasets}

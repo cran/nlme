@@ -49,7 +49,6 @@
 \seealso{\code{\link{lme}}, \code{\link{residuals.lme}} }
 
 \examples{
-data(Orthodont)
 fm1 <- lme(distance ~ age + Sex, data = Orthodont, random = ~ 1)
 fitted(fm1, level = 0:1)
 }

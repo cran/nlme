@@ -66,7 +66,6 @@
 \seealso{\code{\link{lme}}, \code{\link{plot.lme}}}
 \examples{
 \dontrun{
-data(Orthodont)
 fm1 <- lme(distance ~ age, Orthodont, random = ~ age | Subject)
 # normal plot of standardized residuals by gender
 qqnorm(fm1, ~ resid(., type = "p") | Sex, abline = c(0, 1))

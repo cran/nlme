@@ -35,7 +35,6 @@
 \seealso{\code{\link{lmList}}}
 
 \examples{
-data(Orthodont)
 fm1 <- lmList(distance ~ age | Subject, Orthodont)
 getGroups(fm1)
 }

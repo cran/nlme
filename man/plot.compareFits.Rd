@@ -37,7 +37,6 @@
   \code{\link{dotplot}} }
 \examples{
 \dontrun{
-data(Orthodont)
 fm1 <- lmList(Orthodont)
 fm2 <- lme(Orthodont)
 plot(compareFits(coef(fm1), coef(fm2)))

@@ -39,8 +39,7 @@
 
 \seealso{\code{\link{corExp}}, \code{\link{plot.Variogram}}}
 \examples{
-library(mva)
-data(BodyWeight)
+stopifnot(require("stats", quietly = TRUE))
 cs1 <- corExp(3, form = ~ Time | Rat)
 cs1 <- Initialize(cs1, BodyWeight)
 Variogram(cs1)[1:10,]

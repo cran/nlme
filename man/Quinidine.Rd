@@ -99,7 +99,5 @@
   population analysis, \emph{Clinical Pharmacokinetics}, \bold{22},
   468-480.
 }
-\examples{
-data(Quinidine)
-}
+%\examples{}
 \keyword{datasets}

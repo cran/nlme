@@ -78,7 +78,6 @@
   \code{\link{gsummary}}}  
 
 \examples{
-data(Orthodont)
 fm1 <- lme(distance ~ age, Orthodont, random = ~ age | Subject)
 ranef(fm1)
 random.effects(fm1)             # same as above

@@ -78,7 +78,6 @@ lmList(object, data, level, subset, na.action, pool)
 \code{\link{lm}}, \code{\link{lme.lmList}}.
 }
 \examples{
-data(Orthodont)
 fm1 <- lmList(distance ~ age | Subject, Orthodont)
 summary(fm1)
 }

@@ -35,7 +35,6 @@
 \seealso{\code{\link{intervals.lmList}}, \code{\link{lmList}},
   \code{\link{dotplot}}} 
 \examples{
-data(Orthodont)
 fm1 <- lmList(distance ~ age | Subject, Orthodont)
 plot(intervals(fm1))
 }

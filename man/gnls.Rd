@@ -112,7 +112,6 @@ gnls(model, data, params, start, correlation, weights, subset,
   \code{\link{varFunc}}, \code{\link{corClasses}}, \code{\link{varClasses}}
 }
 \examples{
-data(Soybean)
 # variance increases with a power of the absolute fitted values
 fm1 <- gnls(weight ~ SSlogis(Time, Asym, xmid, scal), Soybean,
             weights = varPower())

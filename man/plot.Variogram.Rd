@@ -58,7 +58,6 @@
 \seealso{\code{\link{Variogram}}, \code{\link[lattice]{xyplot}},
   \code{\link[modreg]{loess}}}
 \examples{
-data(Ovary)
 fm1 <- lme(follicles ~ sin(2*pi*Time) + cos(2*pi*Time), Ovary)
 plot(Variogram(fm1, form = ~ Time | Mare, maxDist = 0.7))
 }

@@ -43,10 +43,8 @@ or not
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 \seealso{\code{\link{table}}, \code{\link{groupedData}}}
 \examples{
-data(Orthodont)
 isBalanced(Orthodont)                    # should return TRUE
 isBalanced(Orthodont, countOnly = TRUE)  # should return TRUE
-data(Pixel)
 isBalanced(Pixel)                        # should return FALSE
 isBalanced(Pixel, level = 1)             # should return FALSE
 }

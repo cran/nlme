@@ -35,7 +35,6 @@
 \seealso{\code{\link{Dim}}, \code{\link{Dim.corSpatial}}}
 
 \examples{
-data(Orthodont)
 Dim(corAR1(), getGroups(Orthodont))
 }
 \keyword{models}

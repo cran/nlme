@@ -43,7 +43,5 @@
   measures to estimate a time-to-failure distribution,
   \emph{Technometrics}, \bold{35}, 161-174 
 }
-\examples{
-data(Fatigue)
-}
+%\examples{}
 \keyword{datasets}

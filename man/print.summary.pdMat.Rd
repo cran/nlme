@@ -36,11 +36,8 @@
 \seealso{\code{\link{summary.pdMat}},\code{\link{pdMat}}}
 
 \examples{
-data(Orthodont)
-%\dontrun{
 pd1 <- pdCompSymm(3 * diag(2) + 1, form = ~age + age^2,
          data = Orthodont)
 print(summary(pd1), sigma = 1.2, resid = TRUE)
-%}
 }
 \keyword{models}

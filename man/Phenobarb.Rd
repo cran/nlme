@@ -67,7 +67,5 @@
   R. D. (1996), \emph{SAS System for Mixed Models}, SAS Institute,
   Cary, NC.
 }
-\examples{
-data(Phenobarb)
-}
+%\examples{}
 \keyword{datasets}

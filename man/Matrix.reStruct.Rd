@@ -30,7 +30,6 @@
 \seealso{\code{\link{reStruct}}, \code{\link{pdMat}}}
 
 \examples{
-data(Pixel)
 rs1 <- reStruct(list(Dog = ~day, Side = ~1), data = Pixel)
 matrix(rs1) <- list(diag(2), 3)
 }

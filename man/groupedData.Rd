@@ -118,7 +118,6 @@ http://nlme.stat.wisc.edu/
   \code{\link{gsummary}}, \code{\link{lme}}
 }
 \examples{
-data(Orthodont)
 Orth.new <-  # create a new copy of the groupedData object
   groupedData( distance ~ age | Subject,
               data = as.data.frame( Orthodont ),
