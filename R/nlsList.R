@@ -30,7 +30,7 @@ nlsList.selfStart <-
   function (model, data, start, control, level, subset, na.action = na.fail, 
             pool = TRUE) 
 {
-  mCall <- as.list(match.call())[-1]
+  mCall <- match.call()
   if (!inherits(data, "groupedData")) {
     stop("second argument must be a groupedData object")
   }
@@ -46,7 +46,8 @@ nlsList.selfStart <-
   form <- formula(data)
   form[[3]][[2]] <- m
   mCall$model <- form
-  do.call("nlsList.formula", mCall)
+  mCall[[1]] <- as.name("nlsList.formula")
+  eval(mCall, parent.frame(1))
 }
 
 nlsList.formula <-
@@ -165,9 +166,10 @@ update.nlsList <-
   if (!missing(model)) {
     names(thisCall)[match(names(thisCall), "model")] <- "object"
   }
-  nextCall <- as.list(attr(object, "call")[-1])
+  nextCall <- attr(object, "call")
   nextCall[names(thisCall)] <- thisCall
-  do.call("nlsList", nextCall)
+  nextCall[[1]] <- as.name("nlsList")
+  eval(nextCall, parent.frame(1))
 }
 
 ### Local variables:

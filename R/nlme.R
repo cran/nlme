@@ -56,7 +56,7 @@ nlme.nlsList <-
 	   control = list(),
 	   verbose= FALSE)
 {
-  thisCall <- as.list(match.call())[-1]
+  thisCall <- match.call()
   ## checking the use of arguments defined within the function
   if (any(!is.na(match(names(thisCall),
 		       c("fixed", "data", "start"))))) {
@@ -128,7 +128,8 @@ nlme.nlsList <-
   }
   thisCall[["start"]] <- start
   thisCall[["random"]] <- reSt
-  val <- do.call("nlme.formula", thisCall)
+  thisCall[[1]] <- as.name("nlme.formula")
+  val <- eval(thisCall, parent.frame(1))
   val$origCall <- match.call()
   val
 }
@@ -1300,11 +1301,9 @@ update.nlme <-
   if (!is.null(thisCall$start) && is.numeric(start)) {
     thisCall$start <- list(fixed = start)
   }
-  if (!is.null(nextCall <- object$origCall) &&
-      (is.null(thisCall$fixed) && !is.null(thisCall$random))) {
-    nextCall <- as.list(nextCall)[-1]
-  } else {    
-    nextCall <- as.list(object$call)[-1]
+  if (is.null(nextCall <- object$origCall) ||
+      !is.null(thisCall$fixed) || is.null(thisCall$random)) {
+    nextCall <- object$call
     if (is.null(thisCall$fixed)) {        # no changes in fixef model
       if (is.null(thisCall$start)) {
         thisCall$start <- list(fixed = fixef(object))
@@ -1334,7 +1333,8 @@ update.nlme <-
     thisCall$weights <- thWgt
   }
   nextCall[names(thisCall)] <- thisCall
-  do.call("nlme", nextCall)
+  nextCall[[1]] <- as.name("nlme")
+  eval(nextCall, parent.frame(1))
 }
 
 ###*### nlmeStruct - a model structure for nlme fits

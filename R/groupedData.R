@@ -38,12 +38,14 @@ groupedData <-
     stop("Right hand side of first argument must be a conditional expression")
   }
   
-  mCall <- as.list(match.call())[-1]
+  mCall <- match.call()
   if (length(grpForm) == 1) {	
     ## single grouping variable
-    do.call("nfGroupedData", mCall)
+    mCall[[1]] <- as.name("nfGroupedData")
+    eval(mCall, parent.frame(1))
   } else {				        # multiple nesting
-    do.call("nmGroupedData", mCall)
+    mCall[[1]] <- as.name("nmGroupedData")
+    eval(mCall, parent.frame(1))
   }
 }
 
@@ -165,8 +167,9 @@ nmGroupedData <-
     stop("Right hand side of first argument must be a conditional expression")
   }
   if (length(grpForm) == 1) {           # single group
-    mCall <- match.call()[-1]
-    do.call("nfGroupedData", mCall)
+    mCall <- match.call()
+    mCall[[1]] <- as.name("nfGroupedData")
+    eval(mCall, parent.frame(1))
   }
 
   grpNames <- names(grpForm)

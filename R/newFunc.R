@@ -383,9 +383,12 @@ quinModel <-
 
 xyplot <- function (formula, data = list(), groups = NULL, ..., subset = TRUE)
 {
-  args <- as.list(match.call())[-1]
-  do.call("coplot", c(args[match(c("formula", "data", "xlab", "ylab", "panel"),
-                     names(args), 0)], list(show.given = FALSE) ) )
+  args <- match.call()
+  args <- c(args[c(1, match(c("formula", "data", "xlab", "ylab", "panel"),
+                     names(args), 0))])
+  args[["show.given"]] <- FALSE
+  args[[1]] <- as.name("coplot")
+  eval(args, parent.frame(1))
 }
 
 ## Local Variables:

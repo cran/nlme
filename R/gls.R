@@ -506,7 +506,11 @@ anova.gls <-
   ## Otherwise construct the likelihood ratio and information table
   ## objects in ... may inherit from gls, lm, lmList, and lme (for now)
   ##
-  else do.call("anova.lme", as.list(match.call()[-1]))
+  else {
+      mCall <- match.call()
+      mCall[[1]] <- as.name("anova.lme")
+      eval(mCall, envir = parent.frame(1))
+  }
 }
 
 augPred.gls <-
@@ -828,7 +832,9 @@ plot.gls <-
            grid, ...)
   ## Diagnostic plots based on residuals and/or fitted values
 {
-  do.call("plot.lme", as.list(match.call()[-1]))
+    mCall <- match.call()
+    mCall[[1]] <- as.name("plot.lme")
+    eval(mCall, envir = parent.frame(1))
 }
 
 predict.gls <-
@@ -1046,7 +1052,7 @@ update.gls <-
 	   na.action, control, verbose)
 {
   thisCall <- as.list(match.call())[-(1:2)]
-  nextCall <- as.list(object$call)[-1]
+  nextCall <- object$call
   if (is.na(match("correlation", names(thisCall))) &&
       !is.null(thCor <- object$modelStruct$corStruct)) {
     thisCall$correlation <- thCor
@@ -1056,10 +1062,11 @@ update.gls <-
     thisCall$weights <- thWgt
   }
   if (!is.null(thisCall$model)) {
-    thisCall$model <- update(as.formula(nextCall$model), thisCall$model)
+    thisCall$model <- update(as.formula(nextCall[["model"]], thisCall$model))
   }
   nextCall[names(thisCall)] <- thisCall
-  do.call("gls", nextCall)
+  nextCall[[1]] <- as.name("gls")
+  eval(nextCall, envir = parent.frame())
 }
 
 Variogram.gls <-

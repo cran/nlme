@@ -156,16 +156,18 @@ simulate.lme <-
 
   if (inherits(m1, "lme")) {            # given as an lme object
     fit1 <- m1
-    m1 <- as.list(m1$call[-1])
+    m1 <- m1$call
   } else {
-    m1 <- as.list(match.call(lme, substitute(m1))[ -1 ])
-    fit1 <- do.call("lme", m1)
+    m1 <- match.call(lme, substitute(m1))
+    m1[[1]] <- as.name("lme")
+    fit1 <- eval(m1, parent.frame(1))
   }
   if (length(fit1$modelStruct) > 1) {
     stop("Models with corStruct and/or varFunc objects not allowed.")
   }
   reSt1 <- fit1$modelStruct$reStruct
-  condL1 <- do.call("createConLin", m1)
+  m1[[1]] <- as.name("createConlin")
+  condL1 <- eval(m1, parent.frame(1))
   pdClass1 <- unlist(lapply(reSt1, data.class))
   pdClass1 <- match(pdClass1, c("pdSymm", "pdDiag", "pdIdent",
                                 "pdCompSymm"), 0) - 1
@@ -216,21 +218,23 @@ simulate.lme <-
     ALT <- TRUE
     if (inherits(m2, "lme")) {            # given as an lme object
       fit2 <- m2
-      m2 <- as.list(m2$call[-1])
+      m2 <- m2$call
     } else {
-      m2 <- as.list(match.call(lme, substitute(m2))[ -1 ])
+      m2 <- match.call(lme, substitute(m2))
       if (is.null(m2$random)) {
         m2$random <- asOneSidedFormula(m1$fixed[-2])
       }
       aux <- m1
       aux[names(m2)] <- m2
       m2 <- aux
-      fit2 <- do.call("lme", m2)
+      m2[[1]] <- as.name("lme")
+      fit2 <- eval(m2, parent.frame(1))
     }
     if (length(fit2$modelStruct) > 1) {
       stop("Models with corStruct and/or varFunc objects not allowed.")
     }
-    condL2 <- do.call("createConLin", m2)
+    m2[[1]] <- as.name("createConLin")
+    condL2 <- eval(m2, parent.frame(1))
     reSt2 <- fit2$modelStruct$reStruct
     control2 <- lmeControl()
     if (!is.null(m2$control)) {

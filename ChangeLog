@@ -1,3 +1,7 @@
+2000-07-24  Saikat DebRoy <saikat@stat.wisc.edu>
+
+	* Changed various uses of do.call to eval 
+
 2000-07-03  Douglas Bates  <bates@stat.wisc.edu>
 
 	* man/corFactor.corStruct.Rd: Added an alias for

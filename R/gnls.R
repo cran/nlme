@@ -794,7 +794,7 @@ update.gnls <-
 	   verbose = FALSE)
 {
   thisCall <- as.list(match.call())[-(1:2)]
-  nextCall <- as.list(object$call)[-1]
+  nextCall <- object$call
   if (!is.null(thisCall$model)) {
     thisCall$model <- update(formula(object), thisCall$model)
   } else {                              # same model
@@ -811,7 +811,8 @@ update.gnls <-
     thisCall$weights <- thWgt
   }
   nextCall[names(thisCall)] <- thisCall
-  do.call("gnls", nextCall)
+  nextCall[[1]] <- as.name("gnls")
+  eval(nextCall, parent.frame())
 }
 
 ###*### gnlsStruct - a model structure for gnls fits

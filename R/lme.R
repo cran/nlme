@@ -46,11 +46,13 @@ lme.groupedData <-
 	   na.action = na.fail,
 	   control = list())
 {
-  args <- as.list(match.call())[-1]
-  names(args)[1] <- "data"
+  args <- match.call()
+  names(args)[2] <- "data"
   form <- getResponseFormula(fixed)
   form[[3]] <- getCovariateFormula(fixed)[[2]]
-  do.call("lme", c(list(fixed = form), args))
+  args[["fixed"]] <- form
+  args[[1]] <- as.name("lme")
+  eval(args, parent.frame(1))
 }
 
 lme.lmList <-
@@ -67,7 +69,7 @@ lme.lmList <-
   if (length(grpForm <- getGroupsFormula(fixed, asList = TRUE)) > 1) {
     stop("Can only fit lmList objects with single grouping variable")
   }
-  this.call <- as.list(match.call())[-1]
+  this.call <- match.call()
   ## warn "data" is passed to this function
   if (!is.na(match("data", names(this.call)))) {
     warning("lme.lmList will redefine \"data\"")
@@ -118,7 +120,8 @@ lme.lmList <-
     matrix(reSt) <- diag((madRan/madRes)^2, ncol = length(rNames))
   }
   this.call[["random"]] <- reSt
-  val <- do.call("lme.formula", this.call)
+  this.call[[1]] <- as.name("lme.formula")
+  val <- eval(this.call, parent.frame(1))
   val$origCall <- match.call()
   val
 }
@@ -2573,7 +2576,6 @@ update.lme <-
       is.null(thisCall$random)) {
     nextCall <- object$call
   }
-  nextCall <- as.list(nextCall)[-1]
   if (is.null(thisCall$random)  && is.null(thisCall$subset)) {
     ## no changes in ranef model and no subsetting
     thisCall$random <- object$modelStruct$reStruct
@@ -2586,16 +2588,17 @@ update.lme <-
       !is.null(thWgt <- object$modelStruct$varStruct)) {
     thisCall$weights <- thWgt
   }
-    argNams <- unique( c(names(nextCall), names(thisCall)) )
-    args <- vector("list", length(argNams))
-    names(args) <- argNams
-    args[ names(nextCall) ] <- nextCall
-    nextCall <- args
+#  argNams <- unique( c(names(nextCall), names(thisCall)) )
+#  args <- vector("list", length(argNams))
+#  names(args) <- argNams
+#  args[ names(nextCall) ] <- nextCall
+#  nextCall <- args
   if (!is.null(thisCall$fixed)) {
     thisCall$fixed <- update(as.formula(nextCall$fixed), thisCall$fixed)
   }
   nextCall[names(thisCall)] <- thisCall
-  do.call("lme", nextCall)
+  nextCall[[1]] <- as.name("lme")
+  eval(nextCall, parent.frame(1))
 }
 
 Variogram.lme <-

@@ -28,20 +28,18 @@ lmList <-
   function(object, data, level, subset, na.action = na.fail, pool = TRUE)
   UseMethod("lmList")
 
+### FIXME: match.call problem
 lmList.groupedData <-
   function(object, data, level, subset, na.action = na.fail, pool = TRUE)
 {
   ### object will provide the formula, the data, and the groups
   form <- formula(object)
-  args <- as.list(match.call())[-1]
+  args <- match.call()
   args[["object"]] <- as.vector(eval(parse(text = paste(deparse(form[[2]]),
                                              "~", deparse(form[[3]][[2]])))))
-  if (!missing(data)) {
-    args[["data"]] <- substitute(object)
-  } else {
-    args <- as.list(c(args, list(data = substitute(object))))
-  }
-  do.call("lmList.formula", args)
+  args[["data"]] <- substitute(object)
+  args[[1]] <- as.name("lmList.formula")
+  eval(args, parent.frame(1))
 }
 
 lmList.formula <- 
@@ -621,8 +619,9 @@ plot.intervals.lmList <-
 plot.ranef.lmList <-
   function(object, form = NULL, grid = TRUE, control, ...)   
 {
-  fArgs <- as.list(match.call())[-1]
-  do.call("plot.ranef.lme", fArgs)
+  fArgs <- match.call()
+  fArgs[[1]] <- as.name("plot.ranef.lme")
+  eval(fArgs, envir = parent.frame(1))
 }
 
 plot.lmList <- 
@@ -1401,12 +1400,13 @@ update.lmList <-
   if (!missing(formula)) {
     names(thisCall)[match(names(thisCall), "formula")] <- "object"
   }
-  nextCall <- as.list(attr(object, "call")[-1])
+  nextCall <- attr(object, "call")
   nextCall[names(thisCall)] <- thisCall
   if (!is.null(thisCall$object)) {
     nextCall$object <- update(as.formula(nextCall$object), nextCall$object)
   }
-  do.call("lmList", nextCall)
+  nextCall[[1]] <- as.name("lmList")
+  do.call(nextCall, envir = parent.frame(1))
 }
 
 ### Local variables:
