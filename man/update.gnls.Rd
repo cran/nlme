@@ -31,10 +31,10 @@ update(object, model, data, params, start, correlation, weights, subset,
 \examples{
 library(nlme)
 data(Soybean)
-%\dontrun{
 fm1 <- gnls(weight ~ SSlogis(Time, Asym, xmid, scal), Soybean,
             weights = varPower())
+\dontrun{
 fm2 <- update(fm1, correlation = corAR1())
-%}
+}
 }
 \keyword{models}
