@@ -1,4 +1,4 @@
-% $Id: pdMatrix.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: pdMatrix.Rd,v 1.2 2000/04/17 19:03:39 bates Exp $
 \name{pdMatrix}
 \title{Extract Matrix or Square-Root Factor from a pdMat Object}
 \usage{
@@ -42,7 +42,6 @@ pdMatrix(object, fact, ...)
   \code{\link{corMatrix}}}
 
 \examples{
-library(nlme)
 pd1 <- pdSymm(diag(1:4))
 pdMatrix(pd1)
 }

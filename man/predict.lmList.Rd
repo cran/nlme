@@ -1,4 +1,4 @@
-% $Id: predict.lmList.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: predict.lmList.Rd,v 1.2 2000/04/17 19:03:40 bates Exp $
 \name{predict.lmList}
 \title{Predictions from an lmList Object}
 \usage{
@@ -56,7 +56,6 @@ predict(object, newdata, subset, pool, asList, se.fit)
 \seealso{\code{\link{lmList}}, \code{\link{predict.lm}}}
 
 \examples{
-library(nlme)
 data(Orthodont)
 fm1 <- lmList(distance ~ age | Subject, Orthodont)
 predict(fm1, se.fit = TRUE)

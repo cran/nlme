@@ -1,4 +1,4 @@
-% $Id: anova.gls.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: anova.gls.Rd,v 1.2 2000/04/17 19:03:38 bates Exp $
 \name{anova.gls}
 \title{Compare Likelihoods of Fitted Objects}
 \usage{
@@ -82,7 +82,6 @@ anova(object, ..., test, type, adjustSigma, Terms, L, verbose)
   \code{\link{AIC}}, \code{\link{BIC}}, \code{\link{print.anova.lme}} }
 
 \examples{
-library(nlme)
 data(Ovary)
 %\dontrun{
 # AR(1) errors within each Mare

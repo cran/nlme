@@ -1,4 +1,4 @@
-% $Id: getGroupsFormula.lme.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: getGroupsFormula.lme.Rd,v 1.2 2000/04/17 19:03:39 bates Exp $
 \name{getGroupsFormula.lme}
 \title{Extract lme Object Grouping Formula}
 \usage{
@@ -30,7 +30,6 @@ getGroupsFormula(object, asList)
 \seealso{ \code{\link{reStruct}}, \code{\link{getGroups.lme}}}
 
 \examples{
-library(nlme)
 data(Orthodont)
 fm1 <- lme(distance ~ age + Sex, data = Orthodont, random = ~ 1)
 getGroupsFormula(fm1)

@@ -22,7 +22,6 @@ getCovariateFormula(object)
 \seealso{\code{\link{getCovariate}}}
 
 \examples{
-library(nlme)
 getCovariateFormula(y ~ x | g)
 getCovariateFormula(y ~ x)
 }

@@ -1,4 +1,4 @@
-% $Id: lmeStruct.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: lmeStruct.Rd,v 1.2 2000/04/17 19:03:39 bates Exp $
 \name{lmeStruct}
 \title{Linear Mixed-Effects Structure}
 \usage{
@@ -33,7 +33,6 @@ lmeStruct(reStruct, corStruct, varStruct)
   \code{\link{corClasses}}, \code{\link{varFunc}} }
 
 \examples{
-library(nlme)
 lms1 <- lmeStruct(reStruct(~age), corAR1(), varPower())
 }
 \keyword{models}

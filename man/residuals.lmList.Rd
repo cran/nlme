@@ -1,4 +1,4 @@
-% $Id: residuals.lmList.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: residuals.lmList.Rd,v 1.2 2000/04/17 19:03:40 bates Exp $
 \name{residuals.lmList}
 \title{Extract lmList Residuals}
 \usage{
@@ -45,7 +45,6 @@ residuals(object, type, subset, asList)
 \seealso{\code{\link{lmList}}, \code{\link{fitted.lmList}}}
 
 \examples{
-library(nlme)
 data(Orthodont)
 fm1 <- lmList(distance ~ age | Subject, Orthodont)
 residuals(fm1)

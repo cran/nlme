@@ -1,4 +1,4 @@
-% $Id: print.summary.varFunc.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: print.summary.varFunc.Rd,v 1.2 2000/04/17 19:03:40 bates Exp $
 \name{print.summary.varFunc}
 \title{Print a summary.varFunc Object}
 \usage{
@@ -27,7 +27,6 @@ print(x, header, ...)
 \seealso{\code{\link{summary.varFunc}}}
 
 \examples{
-library(nlme)
 data(Orthodont)
 vf1 <- varPower(0.3, form = ~age)
 vf1 <- initialize(vf1, Orthodont)

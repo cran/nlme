@@ -1,4 +1,4 @@
-% $Id: Dim.corStruct.Rd,v 1.2 1999/11/04 16:38:58 saikat Exp $
+% $Id: Dim.corStruct.Rd,v 1.2 2000/04/17 19:03:38 bates Exp $
 \name{Dim.corStruct}
 \title{Dimensions of a corStruct Object}
 \usage{
@@ -33,7 +33,6 @@ Dim(object, groups)
 \seealso{\code{\link{Dim}}, \code{\link{Dim.corSpatial}}}
 
 \examples{
-library(nlme)
 data(Orthodont)
 Dim(corAR1(), getGroups(Orthodont))
 }

@@ -1,4 +1,4 @@
-% $Id: varExp.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: varExp.Rd,v 1.2 2000/04/17 19:03:40 bates Exp $
 \name{varExp}
 \title{Exponential Variance Function}
 \usage{
@@ -63,7 +63,6 @@ varExpon(value, form, fixed)
 \seealso{\code{\link{varWeights.varFunc}}, \code{\link{coef.varExp}}}
 
 \examples{
-library(nlme)
 vf1 <- varExp(0.2, form = ~age|Sex)
 }
 \keyword{models}

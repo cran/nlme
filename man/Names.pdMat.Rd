@@ -1,4 +1,4 @@
-% $Id: Names.pdMat.Rd,v 1.2 1999/11/04 16:38:58 saikat Exp $
+% $Id: Names.pdMat.Rd,v 1.2 2000/04/17 19:03:38 bates Exp $
 \name{Names.pdMat}
 \title{Names of a pdMat Object}
 \usage{
@@ -34,7 +34,6 @@ Names(object) <- value
 \seealso{\code{\link{Names}}, \code{\link{Names.pdBlocked}}}
 
 \examples{
-library(nlme)
 data(Orthodont)
 pd1 <- pdSymm(~age, data = Orthodont)
 Names(pd1)

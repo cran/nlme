@@ -1,4 +1,4 @@
-### $Id: BodyWeight.R,v 1.1 1999/11/04 16:45:55 saikat Exp $
+### $Id: BodyWeight.R,v 1.1 2000/03/17 22:21:21 saikat Exp $
 ### Data over time on the bodyweight of rats on different diets
 ### Hand and Crowder (1996), Table A.1, p. 171
 "BodyWeight" <-

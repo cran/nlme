@@ -1,4 +1,4 @@
-% $Id: print.lmList.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: print.lmList.Rd,v 1.2 2000/04/17 19:03:40 bates Exp $
 \name{print.lmList}
 \title{Print an lmList Object}
 \usage{
@@ -28,7 +28,6 @@ print(x, pool, ...)
 \seealso{\code{\link{lmList}}}
 
 \examples{
-library(nlme)
 data(Orthodont)
 fm1 <- lmList(Orthodont)
 print(fm1)

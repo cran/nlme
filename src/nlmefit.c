@@ -1,4 +1,4 @@
-/* $Id: nlmefit.c,v 1.1 1999/11/04 16:40:30 saikat Exp $ 
+/* $Id: nlmefit.c,v 1.1 2000/03/17 22:21:24 saikat Exp $ 
 
    Routines for calculation of the log-likelihood or restricted
    log-likelihood with mixed-effects models.
@@ -28,6 +28,7 @@
 #include "nlmefit.h"
 #include "matrix.h"
 #include "pdMat.h"
+#include "R_ext/Arith.h"
 
 #ifndef SPLUS_VERSION
 #ifdef S_VERSION
@@ -286,8 +287,11 @@ internal_loglik(dimPTR dd, double *ZXy, double *DmHalf, longint *RML,
 			(dd->ZXlen)[i][j], (dd->ncol)[i] + (dd->nrot)[i],
 			DmHalf + (dd->DmOff)[i], qi, (dd->ncol)[i],
 			lglk + i, dc + (dd->SToff)[i][j], ldstr))
-	{ PROBLEM "Singular precision matrix in level %ld, block %ld",
-		  (long int) (i - (dd->Q)), j + 1L  RECOVER(NULL_ENTRY); }
+      { 
+	PROBLEM "Singular precision matrix in level %ld, block %ld",
+	  (long int) (i - (dd->Q)), j + 1L  WARNING(NULL_ENTRY);
+	return R_NegInf;
+      }
     }
   }
   for(i = 0, accum = 0; i < Q; i++) {

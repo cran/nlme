@@ -1,4 +1,4 @@
-% $Id: isBalanced.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: isBalanced.Rd,v 1.2 2000/04/17 19:03:39 bates Exp $
 \name{isBalanced}
 \alias{isBalanced}
 \alias{isBalanced.groupedData}
@@ -43,7 +43,6 @@ or not
 \author{Jose Pinheiro and Douglas Bates}
 \seealso{\code{\link{table}}, \code{\link{groupedData}}}
 \examples{
-library(nlme)
 data(Orthodont)
 isBalanced(Orthodont)                    # should return TRUE
 isBalanced(Orthodont, countOnly = TRUE)  # should return TRUE

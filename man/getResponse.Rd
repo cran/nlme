@@ -1,4 +1,4 @@
-% $Id: getResponse.Rd,v 1.1 1999/10/13 00:50:11 saikat Exp $
+% $Id: getResponse.Rd,v 1.1 2000/03/17 22:21:22 saikat Exp $
 \name{getResponse}
 \title{Extract Response Variable from an Object}
 \usage{

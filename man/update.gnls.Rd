@@ -1,4 +1,4 @@
-% $Id: update.gnls.Rd,v 1.3 2000/02/14 16:43:07 bates Exp $
+% $Id: update.gnls.Rd,v 1.2 2000/04/17 19:03:40 bates Exp $
 \name{update.gnls}
 \title{Update a gnls Object}
 \usage{
@@ -29,7 +29,6 @@ update(object, model, data, params, start, correlation, weights, subset,
 \seealso{\code{\link{gnls}}}
 
 \examples{
-library(nlme)
 data(Soybean)
 fm1 <- gnls(weight ~ SSlogis(Time, Asym, xmid, scal), Soybean,
             weights = varPower())

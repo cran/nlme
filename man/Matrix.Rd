@@ -1,5 +1,5 @@
-% $Id: matrix<-.Rd,v 1.1 1999/10/13 00:50:12 saikat Exp $
-\name{matrix<-}
+% $Id: Matrix.Rd,v 1.2 2000/04/05 18:43:21 bates Exp $
+\name{Matrix}
 \title{Assign Matrix Values}
 \usage{
 matrix(object) <- value

@@ -1,4 +1,4 @@
-% $Id: update.groupedData.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: update.groupedData.Rd,v 1.2 2000/04/17 19:03:40 bates Exp $
 \name{update.groupedData}
 \title{Update a groupedData Object}
 \usage{
@@ -26,7 +26,6 @@ update(object, formula, data, order.groups, FUN, outer, inner, labels, units)
 \seealso{\code{\link{groupedData}}}
 
 \examples{
-library(nlme)
 data(Orthodont)
 Orthodont2 <- update(Orthodont, FUN = mean)
 }

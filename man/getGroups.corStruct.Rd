@@ -1,4 +1,4 @@
-% $Id: getGroups.corStruct.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: getGroups.corStruct.Rd,v 1.2 2000/04/17 19:03:39 bates Exp $
 \name{getGroups.corStruct}
 \title{Extract corStruct Groups}
 \usage{
@@ -31,7 +31,6 @@ getGroups(object, form, data, level)
 \seealso{\code{\link{getGroups}}}
 
 \examples{
-library(nlme)
 data(Orthodont)
 cs1 <- corAR1(form = ~ 1 | Subject)
 getGroups(cs1, data = Orthodont)

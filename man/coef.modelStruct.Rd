@@ -1,4 +1,4 @@
-% $Id: coef.modelStruct.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: coef.modelStruct.Rd,v 1.2 2000/04/17 19:03:39 bates Exp $
 \name{coef.modelStruct}
 \title{Extract modelStruct Object Coefficients}
 \usage{
@@ -39,7 +39,6 @@ coef(object) <- value
 \seealso{\code{\link{initialize}}}
 
 \examples{
-library(nlme)
 lms1 <- lmeStruct(reStruct = reStruct(pdDiag(diag(2), ~age)),
    corStruct = corAR1(0.3))
 coef(lms1)

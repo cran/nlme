@@ -1,4 +1,4 @@
-% $Id: summary.corStruct.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: summary.corStruct.Rd,v 1.2 2000/04/17 19:03:40 bates Exp $
 \name{summary.corStruct}
 %\title{Summarize \code{corStruct} Object}
 \title{Summarize a corStruct Object}
@@ -42,7 +42,6 @@ summary(object, structName)
 \seealso{\code{\link{print.summary.corStruct}}}
 
 \examples{
-library(nlme)
 cs1 <- corAR1(0.2)
 summary(cs1)
 }

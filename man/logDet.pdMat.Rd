@@ -1,4 +1,4 @@
-% $Id: logDet.pdMat.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: logDet.pdMat.Rd,v 1.2 2000/04/17 19:03:39 bates Exp $
 \name{logDet.pdMat}
 \title{Extract Log-Determinant from a pdMat Object}
 \usage{
@@ -29,7 +29,6 @@ logDet(object)
 \seealso{\code{\link{pdMat}}}
 
 \examples{
-library(nlme)
 pd1 <- pdSymm(diag(1:3))
 logDet(pd1)
 }

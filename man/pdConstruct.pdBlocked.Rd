@@ -1,4 +1,4 @@
-% $Id: pdConstruct.pdBlocked.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: pdConstruct.pdBlocked.Rd,v 1.2 2000/04/17 19:03:39 bates Exp $
 \name{pdConstruct.pdBlocked}
 \title{Construct pdBlocked Objects}
 \usage{
@@ -73,7 +73,6 @@ pdConstruct(object, value, form, nam, data, pdClass)
   \code{\link{matrix<-.pdMat}}} 
 
 \examples{
-library(nlme)
 pd1 <- pdBlocked(list(c("A","B"), c("a1", "a2", "a3")))
 pdConstruct(pd1, list(diag(1:2), diag(c(0.1, 0.2, 0.3))))
 }

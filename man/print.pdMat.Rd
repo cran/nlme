@@ -1,4 +1,4 @@
-% $Id: print.pdMat.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: print.pdMat.Rd,v 1.2 2000/04/17 19:03:40 bates Exp $
 \name{print.pdMat}
 \title{Print a pdMat Object}
 \usage{
@@ -22,7 +22,6 @@ print(x, ...)
 \seealso{\code{\link{print.summary.pdMat}}}
 
 \examples{
-library(nlme)
 pd1 <- pdSymm(diag(1:3), nam = c("A","B","C"))
 print(pd1)
 }

@@ -1,4 +1,4 @@
-### $Id: groupedData.q,v 1.2 1999/11/17 22:09:19 saikat Exp $
+### $Id: groupedData.R,v 1.1 2000/03/17 22:21:20 saikat Exp $
 ###
 ###           groupedData - data frame with a grouping structure
 ###

@@ -1,4 +1,4 @@
-% $Id: Extract.pdMat.Rd,v 1.1 1999/11/04 16:40:53 saikat Exp $
+% $Id: Extract.pdMat.Rd,v 1.2 2000/04/17 19:03:38 bates Exp $
 \name{[.pdMat}
 \title{Subscript a pdMat Object}
 \usage{
@@ -36,7 +36,6 @@ x[i, j] <- value
 \seealso{\code{\link{[}}, \code{\link{pdMat}}}
 
 \examples{
-library(nlme)
 pd1 <- pdSymm(diag(3))
 pd1[1, , drop = FALSE]
 %\dontrun{

@@ -1,4 +1,4 @@
-% $Id: allCoef.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: allCoef.Rd,v 1.2 2000/04/17 19:03:38 bates Exp $
 \name{allCoef}
 \title{Extract Coefficients from a Set of Objects}
 \usage{
@@ -26,7 +26,6 @@ allCoef(..., extract)
 \seealso{\code{\link{lmeStruct}},\code{\link{nlmeStruct}}}
 
 \examples{
-library(nlme)
 cs1 <- corAR1(0.1)
 vf1 <- varPower(0.5)
 allCoef(cs1, vf1)

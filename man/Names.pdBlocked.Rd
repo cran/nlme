@@ -1,10 +1,11 @@
-% $Id: Names.pdBlocked.Rd,v 1.2 1999/11/04 16:38:58 saikat Exp $
+% $Id: Names.pdBlocked.Rd,v 1.3 2000/04/17 19:03:38 bates Exp $
 \name{Names.pdBlocked}
 \title{Names of a pdBlocked Object}
 \usage{
 Names(object, asList)
 }
 \alias{Names.pdBlocked}
+\alias{Names<-.pdBlocked}
 \arguments{
  \item{object}{an object inheriting from class \code{pdBlocked}
    representing a positive-definite matrix with block diagonal
@@ -30,7 +31,6 @@ Names(object, asList)
 \seealso{\code{\link{Names}}, \code{\link{Names.pdMat}}}
 
 \examples{
-library(nlme)
 data(Orthodont)
 pd1 <- pdBlocked(list(~Sex - 1, ~age - 1), data = Orthodont)
 Names(pd1)

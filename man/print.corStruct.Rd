@@ -1,4 +1,4 @@
-% $Id: print.corStruct.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: print.corStruct.Rd,v 1.2 2000/04/17 19:03:40 bates Exp $
 \name{print.corStruct}
 \title{Print a corStruct Object}
 \usage{
@@ -26,7 +26,6 @@ print(x, ...)
 \seealso{\code{\link{print.default}}, \code{\link{coef.corStruct}}}
 
 \examples{
-library(nlme)
 cs1 <- corAR1(0.3)
 print(cs1)
 }

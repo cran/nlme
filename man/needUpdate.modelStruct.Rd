@@ -1,4 +1,4 @@
-% $Id: needUpdate.modelStruct.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: needUpdate.modelStruct.Rd,v 1.2 2000/04/17 19:03:39 bates Exp $
 \name{needUpdate.modelStruct}
 %\title{Check if \code{modelStruct} Object Needs Update}
 \title{Check if a modelStruct Object Needs Updating}
@@ -24,7 +24,6 @@ needUpdate(object)
 \author{Jose Pinheiro and Douglas Bates}
 
 \examples{
-library(nlme)
 lms1 <- lmeStruct(reStruct = reStruct(pdDiag(diag(2), ~age)),
    varStruct = varPower(form = ~age))
 needUpdate(lms1)

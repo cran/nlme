@@ -1,4 +1,4 @@
-% $Id: formula.pdBlocked.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: formula.pdBlocked.Rd,v 1.2 2000/04/17 19:03:39 bates Exp $
 \name{formula.pdBlocked}
 \title{Extract pdBlocked Formula}
 \usage{
@@ -32,7 +32,6 @@ formula(object, asList)
 \seealso{\code{\link{pdBlocked}}, \code{\link{pdMat}}}
 
 \examples{
-library(nlme)
 pd1 <- pdBlocked(list(~ age, ~ Sex - 1))
 formula(pd1)
 formula(pd1, asList = TRUE)

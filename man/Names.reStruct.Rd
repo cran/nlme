@@ -1,4 +1,4 @@
-% $Id: Names.reStruct.Rd,v 1.2 1999/11/04 16:38:58 saikat Exp $
+% $Id: Names.reStruct.Rd,v 1.2 2000/04/17 19:03:38 bates Exp $
 \name{Names.reStruct}
 \title{Names of an reStruct Object}
 \usage{
@@ -34,7 +34,6 @@ Names(object) <- value
   \code{\link{Names.pdMat}}
 } 
 \examples{
-library(nlme)
 data(Pixel)
 rs1 <- reStruct(list(Dog = ~day, Side = ~1), data = Pixel)
 Names(rs1)

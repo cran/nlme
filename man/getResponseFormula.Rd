@@ -21,7 +21,6 @@ getResponseFormula(object)
 \seealso{\code{\link{getResponse}}}
 
 \examples{
-library(nlme)
 getResponseFormula(y ~ x | g)
 }
 \keyword{models}

@@ -1,4 +1,4 @@
-% $Id: Variogram.corSpher.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: Variogram.corSpher.Rd,v 1.2 2000/04/17 19:03:38 bates Exp $
 \name{Variogram.corSpher}
 \title{Calculate Semi-variogram for a corSpher Object}
 \usage{
@@ -37,7 +37,6 @@ Variogram(object, distance, sig2, length.out)
 
 \seealso{\code{\link{corSpher}}, \code{\link{plot.Variogram}}}
 \examples{
-library(nlme)
 data(BodyWeight)
 cs1 <- corSpher(15, form = ~ Time | Rat)
 cs1 <- initialize(cs1, BodyWeight)

@@ -1,4 +1,4 @@
-% $Id: formula.gls.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: formula.gls.Rd,v 1.2 2000/04/17 19:03:39 bates Exp $
 \name{formula.gls}
 \title{Extract gls Object Formula}
 \usage{
@@ -23,7 +23,6 @@ formula(object)
 \seealso{\code{\link{gls}}}
 
 \examples{
-library(nlme)
 data(Ovary)
 %\dontrun{
 fm1 <- gls(follicles ~ sin(2*pi*Time) + cos(2*pi*Time), Ovary,

@@ -1,4 +1,4 @@
-% $Id: print.summary.pdMat.Rd,v 1.3 1999/11/08 17:43:43 saikat Exp $
+% $Id: print.summary.pdMat.Rd,v 1.2 2000/04/17 19:03:40 bates Exp $
 \name{print.summary.pdMat}
 \title{Print a summary.pdMat Object}
 \usage{
@@ -36,7 +36,6 @@ print(x, sigma, rdig, Level, resid, ...)
 \seealso{\code{\link{summary.pdMat}},\code{\link{pdMat}}}
 
 \examples{
-library(nlme)
 data(Orthodont)
 %\dontrun{
 pd1 <- pdCompSymm(3 * diag(2) + 1, form = ~age + age^2,

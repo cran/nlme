@@ -1,5 +1,5 @@
-% $Id: covariate<-.varFunc.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
-\name{covariate<-.varFunc}
+% $Id: Covariate.varFunc.Rd,v 1.3 2000/04/17 19:03:38 bates Exp $
+\name{Covariate.varFunc}
 \title{Assign varFunc Covariate}
 \usage{
 covariate(object) <- value
@@ -27,7 +27,6 @@ covariate(object) <- value
 \seealso{\code{\link{getCovariate.varFunc}}}
 
 \examples{
-library(nlme)
 data(Orthodont)
 vf1 <- varPower(1.1, form = ~age)
 covariate(vf1) <- Orthodont[["age"]]

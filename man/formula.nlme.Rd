@@ -1,4 +1,4 @@
-% $Id: formula.nlme.Rd,v 1.3 1999/11/18 22:31:04 saikat Exp $
+% $Id: formula.nlme.Rd,v 1.2 2000/04/17 19:03:39 bates Exp $
 \name{formula.nlme}
 \title{Extract nlme Object Formula}
 \usage{
@@ -23,7 +23,6 @@ formula(object)
 \seealso{\code{\link{nlme}}}
 
 \examples{
-library(nlme)
 data(Soybean)
 %\dontrun{
 fm1 <- nlme(weight ~ SSlogis(Time, Asym, xmid, scal), data = Soybean,

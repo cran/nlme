@@ -1,4 +1,4 @@
-% $Id: random.effects.lmList.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: random.effects.lmList.Rd,v 1.2 2000/04/17 19:03:40 bates Exp $
 \name{random.effects.lmList}
 \title{Extract lmList Random Effects}
 \usage{
@@ -25,7 +25,6 @@ random.effects(object)
 \seealso{\code{\link{lmList}}, \code{\link{fixed.effects.lmList}}}
  
 \examples{
-library(nlme)
 data(Orthodont)
 fm1 <- lmList(distance ~ age | Subject, Orthodont)
 random.effects(fm1)

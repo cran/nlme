@@ -1,4 +1,4 @@
-% $Id: recalc.varFunc.Rd,v 1.1 1999/10/13 00:50:12 saikat Exp $
+% $Id: recalc.varFunc.Rd,v 1.1 2000/03/17 22:21:24 saikat Exp $
 \name{recalc.varFunc}
 \title{Recalculate for varFunc Object}
 \usage{

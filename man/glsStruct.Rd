@@ -1,4 +1,4 @@
-% $Id: glsStruct.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: glsStruct.Rd,v 1.2 2000/04/17 19:03:39 bates Exp $
 \name{glsStruct}
 \title{Generalized Least Squares Structure}
 \usage{
@@ -29,7 +29,6 @@ glsStruct(corStruct, varStruct)
   \code{\link{varFunc}} } 
 
 \examples{
-library(nlme)
 gls1 <- glsStruct(corAR1(), varPower())
 }
 \keyword{models}

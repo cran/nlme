@@ -1,4 +1,4 @@
-% $Id: Variogram.corSpatial.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: Variogram.corSpatial.Rd,v 1.2 2000/04/17 19:03:38 bates Exp $
 \name{Variogram.corSpatial}
 \title{Calculate Semi-variogram for a corSpatial Object}
 \usage{
@@ -43,7 +43,6 @@ Variogram(object, distance, sig2, length.out, FUN)
   \code{\link{Variogram.corLin}}, \code{\link{Variogram.corRatio}},
   \code{\link{Variogram.corSpher}}, \code{\link{plot.Variogram}}}
 \examples{
-library(nlme)
 data(BodyWeight)
 cs1 <- corExp(3, form = ~ Time | Rat)
 cs1 <- initialize(cs1, BodyWeight)

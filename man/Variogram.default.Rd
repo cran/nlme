@@ -1,4 +1,4 @@
-% $Id: Variogram.default.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: Variogram.default.Rd,v 1.2 2000/04/17 19:03:38 bates Exp $
 \name{Variogram.default}
 \title{Calculate Semi-variogram}
 \usage{
@@ -37,7 +37,6 @@ Variogram(object, distance)
 \seealso{\code{\link{Variogram.gls}}, \code{\link{Variogram.lme}},
   \code{\link{plot.Variogram}}} 
 \examples{
-library(nlme)
 data(Ovary)
 fm1 <- lm(follicles ~ sin(2 * pi * Time) + cos(2 * pi * Time), Ovary,
           subset = Mare == 1)

@@ -1,4 +1,4 @@
-% $Id: Variogram.Rd,v 1.1 1999/10/13 00:50:10 saikat Exp $
+% $Id: Variogram.Rd,v 1.1 2000/03/17 22:21:21 saikat Exp $
 \name{Variogram}
 \title{Calculate Semi-variogram}
 \usage{

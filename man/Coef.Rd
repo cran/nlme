@@ -1,10 +1,11 @@
-% $Id: coef<-.Rd,v 1.1 1999/10/13 00:50:11 saikat Exp $
-\name{coef<-}
+% $Id: Coef.Rd,v 1.3 2000/04/05 18:43:21 bates Exp $
+\name{Coef}
 \title{Assign Values to Coefficients}
 \usage{
 coef(object, ...) <-  value
 }
 \alias{coef<-}
+\alias{coefficients<-}
 \arguments{
  \item{object}{any object representing a fitted model, or, by default,
    any object with a \code{coef} component.}

@@ -1,4 +1,4 @@
-### $Id: nlme.q,v 1.5 1999/11/18 23:56:57 saikat Exp $
+### $Id: nlme.R,v 1.1 2000/03/17 22:21:20 saikat Exp $
 ###
 ###            Fit a general nonlinear mixed effects model
 ###
@@ -812,21 +812,21 @@ nlme.formula <-
       attr(nlmeSt, "conLin") <- MEdecomp(oldConLin)
     }
     oldPars <- coef(nlmeSt)
-    aNlm <- nlm(f = function(nlmePars) -logLik(nlmeSt, nlmePars),
-                p = c(coef(nlmeSt)),
-                hessian = TRUE,
-                print = ifelse(controlvals$msVerbose, 2, 0),
-                stepmax = controlvals$nlmStepMax*max(sqrt(sum(coef(nlmeSt)^2)),
-                  1.0),
-                check.analyticals=FALSE)
-    aConv <- coef(nlmeSt) <- aNlm$estimate
-    convIter <- aNlm$iterations # undocumented in nlm!
+    aNlm <- optim(fn = function(nlmePars) -logLik(nlmeSt, nlmePars),
+                  par = c(coef(nlmeSt)), hessian = TRUE,
+                  method = "BFGS",
+                  control = list(trace = controlvals$msVerbose,
+                      reltol = if(numIter == 1) controlvals$msTol
+                               else 100*.Machine$double.eps,
+                      maxit = if(numIter < 10) 10 else controlvals$msMaxIter))
+    aConv <- coef(nlmeSt) <- aNlm$par
+    convIter <- aNlm$counts[2]
     nlmeFit <- attr(nlmeSt, "lmeFit") <- MEestimate(nlmeSt, grpShrunk)
     if (verbose) {
       cat("\n**Iteration", numIter)
       cat("\n")
       cat("LME step: Loglik:", format(nlmeFit$logLik),
-          ", nlm iterations:", aNlm$iterations, "\n")
+          ", nlm iterations:", convIter, "\n")
       print(nlmeSt)
     }
 
@@ -911,7 +911,7 @@ nlme.formula <-
     }
 
     if ((max(aConv) <= controlvals$tolerance) ||
-        (aConv["fixed"] <= controlvals$tolerance && aNlm$iterations == 1)) {
+        (aConv["fixed"] <= controlvals$tolerance && convIter == 1)) {
       convResult <- 0
       break
     }

@@ -1,4 +1,4 @@
-% $Id: isInitialized.reStruct.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: isInitialized.reStruct.Rd,v 1.2 2000/04/17 19:03:39 bates Exp $
 \name{isInitialized.reStruct}
 \title{Check if an reStruct Object is Initialized}
 \usage{
@@ -24,7 +24,6 @@ isInitialized(object)
 \seealso{\code{\link{initialize}}, \code{\link{reStruct}}}
 
 \examples{
-library(nlme)
 rs1 <- reStruct(~age|Subject)
 isInitialized(rs1)
 }

@@ -1,4 +1,4 @@
-% $Id: getGroupsFormula.lmList.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: getGroupsFormula.lmList.Rd,v 1.2 2000/04/17 19:03:39 bates Exp $
 \name{getGroupsFormula.lmList}
 \title{Extract lmList Object Grouping Formula}
 \usage{
@@ -30,7 +30,6 @@ getGroupsFormula(object, asList)
 \seealso{ \code{\link{lmList}}, \code{\link{getGroups.lmList}}}
 
 \examples{
-library(nlme)
 data(Orthodont)
 fm1 <- lmList(distance ~ age | Subject, Orthodont)
 getGroupsFormula(fm1)

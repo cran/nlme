@@ -1,4 +1,4 @@
-% $Id: coef.lme.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: coef.lme.Rd,v 1.2 2000/04/17 19:03:39 bates Exp $
 \name{coef.lme}
 \title{Extract lme Coefficients}
 \usage{
@@ -67,7 +67,6 @@ coef(object, augFrame, level, data, which, FUN, omitGroupingFactor)
   \code{\link{plot.ranef.lme}}, \code{\link{gsummary}}} 
 
 \examples{
-library(nlme)
 data(Orthodont)
 fm1 <- lme(distance ~ age, Orthodont, random = ~ age | Subject)
 %\dontrun{

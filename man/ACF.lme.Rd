@@ -1,4 +1,4 @@
-% $Id: ACF.lme.Rd,v 1.2 1999/11/04 16:38:58 saikat Exp $
+% $Id: ACF.lme.Rd,v 1.2 2000/04/17 19:03:38 bates Exp $
 \name{ACF.lme}
 \title{Autocorrelation Function for lme Residuals}
 \usage{
@@ -41,7 +41,6 @@ ACF(object, maxLag, resType)
 \author{Jose Pinheiro and Douglas Bates}
 \seealso{\code{\link{ACF.gls}}, \code{\link{plot.ACF}}}
 \examples{
-library(nlme)
 data(Ovary)
 fm1 <- lme(follicles ~ sin(2*pi*Time) + cos(2*pi*Time), Ovary,
            random = ~ sin(2*pi*Time) | Mare)

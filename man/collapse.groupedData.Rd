@@ -1,4 +1,4 @@
-% $Id: collapse.groupedData.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: collapse.groupedData.Rd,v 1.2 2000/04/17 19:03:39 bates Exp $
 \name{collapse.groupedData}
 \title{Collapse a groupedData Object}
 \usage{
@@ -97,7 +97,6 @@ http://franz.stat.wisc.edu/pub/NLME.
 }  
 
 \examples{
-library(nlme)
 data(Pixel)
 # collapsing by Dog
 collapse(Pixel, collapse = 1)  # same as collapse(Pixel, collapse = "Dog")

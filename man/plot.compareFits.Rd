@@ -1,4 +1,4 @@
-% $Id: plot.compareFits.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: plot.compareFits.Rd,v 1.2 2000/04/17 19:03:39 bates Exp $
 \name{plot.compareFits}
 \title{Plot a compareFits Object}
 \usage{
@@ -36,7 +36,6 @@ plot(object, subset, key, mark, ...)
 \seealso{\code{\link{compareFits}}, \code{\link{pairs.compareFits}},
   \code{\link{dotplot}} }
 \examples{
-library(nlme)
 data(Orthodont)
 fm1 <- lmList(Orthodont)
 fm2 <- lme(Orthodont)

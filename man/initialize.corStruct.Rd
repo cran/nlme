@@ -1,4 +1,4 @@
-% $Id: initialize.corStruct.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: initialize.corStruct.Rd,v 1.3 2000/04/17 19:03:39 bates Exp $
 \name{initialize.corStruct}
 \title{Initialize corStruct Object}
 \usage{
@@ -12,6 +12,7 @@ initialize(object, data, ...)
 \alias{initialize.corHF}
 \alias{initialize.corIdent}
 \alias{initialize.corLin}
+\alias{initialize.corNatural}
 \alias{initialize.corSpatial}
 \alias{initialize.corSpher}
 \alias{initialize.corSymm}
@@ -40,7 +41,6 @@ initialize(object, data, ...)
 \seealso{\code{\link{Dim.corStruct}}}
 
 \examples{
-library(nlme)
 data(Orthodont)
 cs1 <- corAR1(form = ~ 1 | Subject)
 cs1 <- initialize(cs1, data = Orthodont)

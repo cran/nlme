@@ -1,7 +1,8 @@
-% $Id: corClasses.Rd,v 1.1 1999/10/13 00:50:11 saikat Exp $
+% $Id: corClasses.Rd,v 1.2 2000/04/04 22:40:54 bates Exp $
 \name{corClasses}
 \title{Correlation Structure Classes}
 \alias{corClasses}
+\alias{corIdent}
 \description{
   Standard classes of correlation structures (\code{corStruct})
   available in the \code{nlme} library. 

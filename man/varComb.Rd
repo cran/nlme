@@ -1,4 +1,4 @@
-% $Id: varComb.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: varComb.Rd,v 1.2 2000/04/17 19:03:40 bates Exp $
 \name{varComb}
 \title{Combination of Variance Functions}
 \usage{
@@ -25,7 +25,6 @@ varComb(...)
 \seealso{\code{\link{varWeights.varComb}}, \code{\link{coef.varComb}}}
 
 \examples{
-library(nlme)
 vf1 <- varComb(varIdent(form = ~1|Sex), varPower())
 }
 \keyword{models}

@@ -1,4 +1,4 @@
-% $Id: corMatrix.reStruct.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: corMatrix.reStruct.Rd,v 1.2 2000/04/17 19:03:39 bates Exp $
 \name{corMatrix.reStruct}
 \title{Extract Correlation Matrix from Components of an reStruct Object}
 \usage{
@@ -26,7 +26,6 @@ corMatrix(object)
   \code{\link{pdMat}}}
 
 \examples{
-library(nlme)
 data(Orthodont)
 rs1 <- reStruct(pdSymm(diag(3), ~age+Sex, data = Orthodont))
 corMatrix(rs1)

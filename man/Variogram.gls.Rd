@@ -1,4 +1,4 @@
-% $Id: Variogram.gls.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: Variogram.gls.Rd,v 1.2 2000/04/17 19:03:38 bates Exp $
 \name{Variogram.gls}
 \title{Calculate Semi-variogram for Residuals from a gls Object}
 \usage{
@@ -106,7 +106,6 @@ Variogram(object, distance, form, resType, data, na.action, maxDist,
 \seealso{\code{\link{gls}}, \code{\link{Variogram.default}},
   \code{\link{Variogram.lme}}, \code{\link{plot.Variogram}}}
 \examples{
-library(nlme)
 data(BodyWeight)
 \dontrun{
 fm1 <- gls(weight ~ Time * Diet, BodyWeight)

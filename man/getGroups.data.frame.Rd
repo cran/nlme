@@ -1,4 +1,4 @@
-% $Id: getGroups.data.frame.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: getGroups.data.frame.Rd,v 1.2 2000/04/17 19:03:39 bates Exp $
 \name{getGroups.data.frame}
 \title{Extract Groups from a Data Frame}
 \usage{
@@ -33,7 +33,6 @@ getGroups(object, form, level)
 \author{Jose Pinheiro and Douglas Bates}
 \seealso{\code{\link{getGroupsFormula}}}
 \examples{
-library(nlme)
 data(Pixel)
 getGroups(Pixel)
 getGroups(Pixel, level = 2)

@@ -1,4 +1,4 @@
-% $Id: as.matrix.pdMat.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: as.matrix.pdMat.Rd,v 1.2 2000/04/17 19:03:38 bates Exp $
 \name{as.matrix.pdMat}
 \title{Matrix of a pdMat Object}
 \usage{
@@ -22,7 +22,6 @@ as.matrix(x)
 \seealso{\code{\link{pdMat}}, \code{\link{corMatrix}}}
 
 \examples{
-library(nlme)
 as.matrix(pdSymm(diag(4)))
 }
 

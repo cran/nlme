@@ -1,4 +1,4 @@
-% $Id: getCovariate.corStruct.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: getCovariate.corStruct.Rd,v 1.2 2000/04/17 19:03:39 bates Exp $
 \name{getCovariate.corStruct}
 \title{Extract corStruct Object Covariate}
 \usage{
@@ -32,7 +32,6 @@ getCovariate(object, form, data)
 \seealso{\code{\link{getCovariate}}}
 
 \examples{
-library(nlme)
 data(Orthodont)
 cs1 <- corAR1(form = ~ 1 | Subject)
 getCovariate(cs1, data = Orthodont)

@@ -1,4 +1,4 @@
-% $Id: corGaus.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: corGaus.Rd,v 1.2 2000/04/17 19:03:39 bates Exp $
 \name{corGaus}
 \title{Gaussian Correlation Structure}
 \usage{
@@ -69,7 +69,6 @@ corGaus(value, form, nugget, metric, fixed)
 \seealso{\code{\link{initialize.corStruct}}, \code{\link{dist}}
 }
 \examples{
-library(nlme)
 sp1 <- corGaus(form = ~ x + y + z)
 }
 \keyword{models}

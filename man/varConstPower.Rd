@@ -1,4 +1,4 @@
-% $Id: varConstPower.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: varConstPower.Rd,v 1.2 2000/04/17 19:03:40 bates Exp $
 \name{varConstPower}
 \title{Constant Plus Power Variance Function}
 \usage{
@@ -68,7 +68,6 @@ varConstPower(const, power, form, fixed)
 \seealso{\code{\link{varWeights.varFunc}}, \code{\link{coef.varConstPower}}}
 
 \examples{
-library(nlme)
 vf1 <- varConstPower(1.2, 0.2, form = ~age|Sex)
 }
 \keyword{models}

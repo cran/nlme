@@ -1,4 +1,4 @@
-% $Id: nlme.Rd,v 1.3 1999/11/18 22:31:04 saikat Exp $
+% $Id: nlme.Rd,v 1.2 2000/04/17 19:03:39 bates Exp $
 \name{nlme}
 \title{Nonlinear Mixed-Effects Models}
 \usage{
@@ -165,7 +165,6 @@ nlme(model, data, fixed, random, groups, start, correlation, weights,
   \code{\link{corClasses}}, \code{\link{varClasses}}
 }
 \examples{
-library(nlme)
 data(Soybean)
 %\dontrun{
 ## all parameters as fixed and random effects

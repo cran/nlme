@@ -1,4 +1,4 @@
-% $Id: print.anova.lme.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: print.anova.lme.Rd,v 1.2 2000/04/17 19:03:40 bates Exp $
 \name{print.anova.lme}
 \title{Print an anova.lme Object}
 \usage{
@@ -31,7 +31,6 @@ print(x, verbose)
 \seealso{\code{\link{anova.lme}}, \code{\link{lme}}}
 
 \examples{
-library(nlme)
 data(Orthodont)
 fm1 <- lme(distance ~ age * Sex, Orthodont, random = ~ age | Subject)
 fm2 <- update(fm1, random = ~ 1 | Subject)

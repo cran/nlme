@@ -1,10 +1,11 @@
-% $Id: logDet.corStruct.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: logDet.corStruct.Rd,v 1.3 2000/04/17 19:03:39 bates Exp $
 \name{logDet.corStruct}
 \title{Extract corStruct Log-Determinant}
 \usage{
 logDet(object, covariate)
 }
 \alias{logDet.corStruct}
+\alias{logDet.corIdent}
 \arguments{
  \item{object}{an object inheriting from class \code{corStruct},
    representing a correlation structure.}
@@ -31,7 +32,6 @@ logDet(object, covariate)
 \seealso{\code{\link{logLik.corStruct}}, \code{\link{corMatrix.corStruct}}}
 
 \examples{
-library(nlme)
 cs1 <- corAR1(0.3)
 logDet(cs1, covariate = 1:4)
 }

@@ -1,4 +1,4 @@
-% $Id: solve.pdMat.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: solve.pdMat.Rd,v 1.2 2000/04/17 19:03:40 bates Exp $
 \name{solve.pdMat}
 \title{Calculate Inverse of a Positive-Definite Matrix}
 \usage{
@@ -34,7 +34,6 @@ solve(a, b, tol)
 \seealso{\code{\link{pdMat}}}
 
 \examples{
-library(nlme)
 pd1 <- pdCompSymm(3 * diag(3) + 1)
 solve(pd1)
 }

@@ -1,4 +1,4 @@
-% $Id: print.summary.lmList.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: print.summary.lmList.Rd,v 1.2 2000/04/17 19:03:40 bates Exp $
 \name{print.summary.lmList}
 \title{Print a summary.lmList Object}
 \usage{
@@ -25,7 +25,6 @@ print(x, ...)
 \seealso{\code{\link{summary.lmList}}, \code{\link{lmList}}}
 
 \examples{
-library(nlme)
 data(Orthodont)
 fm1 <- lmList(distance ~ age | Subject, Orthodont)
 print(summary(fm1))

@@ -1,4 +1,4 @@
-% $Id: plot.ranef.lme.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: plot.ranef.lme.Rd,v 1.2 2000/04/17 19:03:40 bates Exp $
 \name{plot.ranef.lme}
 \title{Plot a ranef.lme Object}
 \usage{
@@ -77,7 +77,6 @@ plot(object, form, omitFixed, level, grid, control, ...)
 \seealso{\code{\link{ranef.lme}}, \code{\link{lme}},
   \code{\link{dotplot}}} 
 \examples{
-library(nlme)
 data(Orthodont)
 \dontrun{
 fm1 <- lme(distance ~ age, Orthodont, random = ~ age | Subject)

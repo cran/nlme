@@ -1,11 +1,11 @@
-% $Id: corARMA.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: corARMA.Rd,v 1.3 2000/04/17 19:03:39 bates Exp $
 \name{corARMA}
 \title{ARMA(p,q) Correlation Structure}
 \usage{
 corARMA(value, form, p, q, fixed)
 }
 \alias{corARMA}
-%- Also NEED an `\alias' for EACH other function documented here.
+\alias{coef.corARMA}
 \arguments{
   \item{value}{a vector with the values of the autoregressive and moving
    average parameters, which must have length \code{p + q} and all
@@ -46,7 +46,6 @@ corARMA(value, form, p, q, fixed)
 \author{Jose Pinheiro and Douglas Bates}
 \seealso{\code{\link{initialize.corStruct}}}
 \examples{
-library(nlme)
 ## ARMA(1,2) structure, with observation order as a covariate and
 ## Mare as grouping factor
 cs1 <- corARMA(c(0.2, 0.3, -0.1), form = ~ 1 | Mare, p = 1, q = 2)

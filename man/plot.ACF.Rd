@@ -1,4 +1,4 @@
-% $Id: plot.ACF.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: plot.ACF.Rd,v 1.2 2000/04/17 19:03:39 bates Exp $
 \name{plot.ACF}
 \title{Plot an ACF Object}
 \usage{
@@ -37,7 +37,6 @@ plot(object, alpha, xlab, ylab, grid, ...)
 \author{Jose Pinheiro and Douglas Bates}
 \seealso{\code{\link{ACF}}, \code{\link{xyplot}}}
 \examples{
-library(nlme)
 data(Ovary)
 fm1 <- lme(follicles ~ sin(2*pi*Time) + cos(2*pi*Time), Ovary)
 \dontrun{

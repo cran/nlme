@@ -1,4 +1,4 @@
-% $Id: logDet.reStruct.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: logDet.reStruct.Rd,v 1.2 2000/04/17 19:03:39 bates Exp $
 \name{logDet.reStruct}
 \title{Extract reStruct Log-Determinants}
 \usage{
@@ -24,7 +24,6 @@ logDet(object)
 \seealso{\code{\link{reStruct}}, \code{\link{pdMat}}}
 
 \examples{
-library(nlme)
 rs1 <- reStruct(list(A = pdSymm(diag(1:3), form = ~Score),
   B = pdDiag(2 * diag(4), form = ~Educ)))
 logDet(rs1)

@@ -1,4 +1,4 @@
-% $Id: getCovariate.varFunc.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: getCovariate.varFunc.Rd,v 1.2 2000/04/17 19:03:39 bates Exp $
 \name{getCovariate.varFunc}
 \title{Extract varFunc Covariate}
 \usage{
@@ -23,7 +23,6 @@ getCovariate(object)
 \seealso{\code{\link{covariate<-.varFunc}}}
 
 \examples{
-library(nlme)
 data(Orthodont)
 vf1 <- varPower(1.1, form = ~age)
 covariate(vf1) <- Orthodont[["age"]]

@@ -1,4 +1,4 @@
-% $Id: BIC.Rd,v 1.2 1999/11/04 16:38:58 saikat Exp $
+% $Id: BIC.Rd,v 1.2 2000/04/17 19:03:38 bates Exp $
 \name{BIC}
 \title{Bayesian Information Criterion}
 \usage{
@@ -42,7 +42,6 @@ BIC(object, ...)
 \author{Jose Pinheiro and Douglas Bates}
 \seealso{\code{\link{logLik}}, \code{\link{AIC}}, \code{\link{BIC.logLik}}}
 \examples{
-library(nlme)
 data(Orthodont)
 fm1 <- lm(distance ~ age, data = Orthodont) # no random effects
 BIC(fm1)

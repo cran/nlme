@@ -1,4 +1,4 @@
-% $Id: getData.lmList.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: getData.lmList.Rd,v 1.2 2000/04/17 19:03:39 bates Exp $
 \name{getData.lmList}
 \title{Extract lmList Object Data}
 \usage{
@@ -27,7 +27,6 @@ getData(object)
 \seealso{\code{\link{lmList}}}
 
 \examples{
-library(nlme)
 data(Orthodont)
 fm1 <- lmList(distance ~ age | Subject, Orthodont)
 getData(fm1)

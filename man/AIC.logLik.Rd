@@ -1,4 +1,4 @@
-% $Id: AIC.logLik.Rd,v 1.2 1999/11/04 16:38:58 saikat Exp $
+% $Id: AIC.logLik.Rd,v 1.2 2000/04/17 19:03:38 bates Exp $
 \name{AIC.logLik}
 \title{AIC of a logLik Object}
 \usage{
@@ -28,7 +28,6 @@ the fit.
 \author{Jose Pinheiro and Douglas Bates}
 \seealso{\code{\link{AIC}}, \code{\link{logLik}}, \code{\link{BIC}}}.
 \examples{
-library(nlme)
 data(Orthodont)
 fm1 <- lm(distance ~ age, data = Orthodont) 
 AIC(logLik(fm1))

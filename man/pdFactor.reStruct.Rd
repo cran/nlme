@@ -1,4 +1,4 @@
-% $Id: pdFactor.reStruct.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: pdFactor.reStruct.Rd,v 1.2 2000/04/17 19:03:39 bates Exp $
 \name{pdFactor.reStruct}
 \title{Extract Square-Root Factor from Components of an reStruct Object}
 \usage{
@@ -29,7 +29,6 @@ pdFactor(object)
 }
 \seealso{\code{\link{pdMatrix.reStruct}}, \code{\link{pdFactor.pdMat}}}
 \examples{
-library(nlme)
 data(Orthodont)
 rs1 <- reStruct(pdSymm(diag(3), ~age+Sex, data = Orthodont))
 pdFactor(rs1)

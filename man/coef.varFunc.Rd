@@ -1,4 +1,4 @@
-% $Id: coef.varFunc.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: coef.varFunc.Rd,v 1.2 2000/04/17 19:03:39 bates Exp $
 \name{coef.varFunc}
 \title{varFunc Object Coefficients}
 \usage{
@@ -49,7 +49,6 @@ coef(object) <- value
 \seealso{\code{\link{varFunc}}}
 
 \examples{
-library(nlme)
 vf1 <- varPower(1)
 coef(vf1)
 %\dontrun{

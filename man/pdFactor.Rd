@@ -1,4 +1,4 @@
-% $Id: pdFactor.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: pdFactor.Rd,v 1.2 2000/04/17 19:03:39 bates Exp $
 \name{pdFactor}
 \title{Square-Root Factor of a Positive-Definite Matrix}
 \usage{
@@ -40,7 +40,6 @@ pdFactor(object, ...)
 }
 \seealso{\code{\link{pdMatrix}}}
 \examples{
-library(nlme)
 pd1 <- pdCompSymm(4 * diag(3) + 1)
 pdFactor(pd1)
 }

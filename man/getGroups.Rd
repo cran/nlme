@@ -1,4 +1,4 @@
-% $Id: getGroups.Rd,v 1.1 1999/10/13 00:50:11 saikat Exp $
+% $Id: getGroups.Rd,v 1.1 2000/03/17 22:21:22 saikat Exp $
 \name{getGroups}
 \title{Extract Grouping Factors from an Object}
 \usage{

@@ -1,4 +1,4 @@
-% $Id: anova.lme.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: anova.lme.Rd,v 1.2 2000/04/17 19:03:38 bates Exp $
 \name{anova.lme}
 \title{Compare Likelihoods of Fitted Objects}
 \usage{
@@ -83,7 +83,6 @@ anova(object, ..., test, type, adjustSigma, Terms, L, verbose)
   \code{\link{print.anova.lme}} }  
 
 \examples{
-library(nlme)
 data(Orthodont)
 fm1 <- lme(distance ~ age, Orthodont, random = ~ age | Subject)
 anova(fm1)

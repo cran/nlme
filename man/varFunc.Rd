@@ -1,4 +1,4 @@
-% $Id: varFunc.Rd,v 1.2 1999/11/04 16:39:00 saikat Exp $
+% $Id: varFunc.Rd,v 1.2 2000/04/17 19:03:40 bates Exp $
 \name{varFunc}
 \title{Variance Function Structure}
 \usage{
@@ -28,7 +28,6 @@ varFunc(object)
   \code{\link{coef.varFunc}}} 
 
 \examples{
-library(nlme)
 vf1 <- varFunc(~age)
 }
 \keyword{models}

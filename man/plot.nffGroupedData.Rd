@@ -1,4 +1,4 @@
-% $Id: plot.nffGroupedData.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: plot.nffGroupedData.Rd,v 1.2 2000/04/17 19:03:39 bates Exp $
 \name{plot.nffGroupedData}
 \title{Plot an nffGroupedData Object}
 \usage{
@@ -87,7 +87,6 @@ http://franz.stat.wisc.edu/pub/NLME.
 \seealso{\code{\link{groupedData}}, \code{\link{dotplot}}}
 \examples{
 \dontrun{
-library(nlme)
 data(Machines)
 plot(Machines)
 plot(Machines, inner = TRUE)

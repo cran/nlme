@@ -1,4 +1,4 @@
-% $Id: varPower.Rd,v 1.2 1999/11/04 16:39:00 saikat Exp $
+% $Id: varPower.Rd,v 1.2 2000/04/17 19:03:40 bates Exp $
 \name{varPower}
 \title{Power Variance Function}
 \usage{
@@ -63,7 +63,6 @@ varPower(value, form, fixed)
 \seealso{\code{\link{varWeights.varFunc}}, \code{\link{coef.varPower}}}
 
 \examples{
-library(nlme)
 vf1 <- varPower(0.2, form = ~age|Sex)
 }
 \keyword{models}

@@ -1,4 +1,4 @@
-% $Id: nlsList.selfStart.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: nlsList.selfStart.Rd,v 1.2 2000/04/17 19:03:39 bates Exp $
 \name{nlsList.selfStart}
 \title{nlsList Fit from a selfStart Function}
 \usage{
@@ -40,7 +40,6 @@ nlsList(model, data, start, control, level, na.action, pool)
   \code{\link{nlme.nlsList}}, \code{\link{nlsList.formula}}
 }
 \examples{
-library(nlme)
 data(CO2)
 fm1 <- nlsList(SSasympOff, CO2)
 fm1

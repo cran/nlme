@@ -1,4 +1,4 @@
-% $Id: predict.gnls.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: predict.gnls.Rd,v 1.2 2000/04/17 19:03:40 bates Exp $
 \name{predict.gnls}
 \title{Predictions from a gnls Object}
 \usage{
@@ -31,7 +31,6 @@ predict(object, newdata, na.action, naPattern)
 \seealso{\code{\link{gnls}}, \code{\link{fitted.gnls}}}
 
 \examples{
-library(nlme)
 data(Soybean)
 %\dontrun{
 fm1 <- gnls(weight ~ SSlogis(Time, Asym, xmid, scal), Soybean,

@@ -1,4 +1,4 @@
-% $Id: fixed.effects.Rd,v 1.1 1999/10/13 00:50:11 saikat Exp $
+% $Id: fixed.effects.Rd,v 1.1 2000/03/17 22:21:22 saikat Exp $
 \name{fixed.effects}
 \title{Extract Fixed Effects}
 \usage{

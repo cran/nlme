@@ -1,4 +1,4 @@
-% $Id: print.intervals.gls.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: print.intervals.gls.Rd,v 1.2 2000/04/17 19:03:40 bates Exp $
 \name{print.intervals.gls}
 \title{Print an intervals.gls Object}
 \usage{
@@ -22,7 +22,6 @@ print(x, ...)
 \seealso{\code{\link{intervals.gls}}}
 
 \examples{
-library(nlme)
 data(Ovary)
 %\dontrun{
 fm1 <- gls(follicles ~ sin(2*pi*Time) + cos(2*pi*Time), Ovary,

@@ -1,4 +1,4 @@
-% $Id: pdMat.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: pdMat.Rd,v 1.2 2000/04/17 19:03:39 bates Exp $
 \name{pdMat}
 \title{Positive-Definite Matrix}
 \usage{
@@ -57,7 +57,6 @@ pdMat(value, form, nam, data, pdClass)
   \code{\link{pdIdent}}, \code{\link{pdNatural}}, \code{\link{pdSymm}}}
 
 \examples{
-library(nlme)
 pd1 <- pdMat(diag(1:4), pdClass = "pdDiag")
 pd1
 }

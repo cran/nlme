@@ -1,4 +1,4 @@
-% $Id: lme.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: lme.Rd,v 1.2 2000/04/17 19:03:39 bates Exp $
 \name{lme}
 \title{Linear Mixed-Effects Models}
 \usage{
@@ -133,7 +133,6 @@ lme(fixed, data, random, correlation, weights, subset, method,
   \code{\link{corClasses}}, \code{\link{varClasses}}
 }
 \examples{
-library(nlme)
 data(Orthodont)
 fm1 <- lme(distance ~ age, data = Orthodont) # random is ~ age
 fm2 <- lme(distance ~ age + Sex, data = Orthodont, random = ~ 1)

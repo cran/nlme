@@ -1,4 +1,4 @@
-### $Id: gnls.q,v 1.5 1999/11/18 23:56:57 saikat Exp $
+### $Id: gnls.R,v 1.1 2000/03/17 22:21:20 saikat Exp $
 ###
 ###  Fit a general nonlinear regression model with correlated and/or
 ###  heteroscedastic errors
@@ -365,19 +365,20 @@ gnls <-
       gnlsSt <- update(gnlsSt, dataModShrunk)
     }
     if (length(oldPars <- coef(gnlsSt)) > 0) {
-      aNlm <- nlm(f = function(gnlsPars) -logLik(gnlsSt, gnlsPars),
-                  p = c(coef(gnlsSt)),
-                  hessian = TRUE,
-                  print = ifelse(controlvals$msVerbose, 2, 0),
-                  stepmax = controlvals$nlmStepMax*max(sqrt(sum(coef(gnlsSt)^2)), 1.0),
-                  check = FALSE)
-      aConv <- coef(gnlsSt) <- aNlm$estimate
-      convIter <- aNlm$iterations # undocumented in nlm!
+      aNlm <- optim(fn = function(gnlsPars) -logLik(gnlsSt, gnlsPars),
+                    par = c(coef(gnlsSt)), hessian = TRUE,
+                    method = "BFGS",
+                    control = list(trace = controlvals$msVerbose,
+                       reltol = if(numIter == 1) controlvals$msTol
+                                else 100*.Machine$double.eps,
+                       maxit = controlvals$msMaxIter))
+      aConv <- coef(gnlsSt) <- aNlm$par
+      convIter <- aNlm$count[2]
       if (verbose) {
         cat("\n**Iteration", numIter)
         cat("\n")
-        cat("GLS step: Objective:", format(aNlm$minimum),
-            ", nlm iterations:", aNlm$iterations, "\n")
+        cat("GLS step: Objective:", format(aNlm$value),
+            ", optim iterations:", convIter, "\n")
         print(gnlsSt)
       }
     } else {
@@ -452,7 +453,7 @@ gnls <-
     }
 
     if ((max(aConv) <= controlvals$tolerance) ||
-        (aConv["params"] <= controlvals$tolerance && aNlm$iterations == 1)) {
+        (aConv["params"] <= controlvals$tolerance && convIter == 1)) {
       convResult <- 0
       break
     }

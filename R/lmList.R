@@ -1,4 +1,4 @@
-## $Id: lmList.q,v 1.2 1999/11/04 16:46:39 saikat Exp $
+## $Id: lmList.R,v 1.1 2000/03/17 22:21:20 saikat Exp $
 ###
 ###                  Create a list of lm objects
 ###

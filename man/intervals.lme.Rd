@@ -1,4 +1,4 @@
-% $Id: intervals.lme.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: intervals.lme.Rd,v 1.2 2000/04/17 19:03:39 bates Exp $
 \name{intervals.lme}
 \title{Confidence Intervals on lme Parameters}
 \usage{
@@ -54,7 +54,6 @@ intervals(object, level, which)
     \code{\link{pdNatural}}}
 
 \examples{
-library(nlme)
 data(Orthodont)
 fm1 <- lme(distance ~ age, Orthodont, random = ~ age | Subject)
 intervals(fm1)

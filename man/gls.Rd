@@ -1,4 +1,4 @@
-% $Id: gls.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: gls.Rd,v 1.2 2000/04/17 19:03:39 bates Exp $
 \name{gls}
 \title{Fit Linear Model Using Generalized Least Squares}
 \usage{
@@ -91,7 +91,6 @@ gls(model, data, correlation, weights, subset, method, na.action,
   \code{\link{varFunc}}, \code{\link{corClasses}}, \code{\link{varClasses}}
 }
 \examples{
-library(nlme)
 data(Ovary)
 %\dontrun{
 # AR(1) errors within each Mare

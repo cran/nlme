@@ -1,4 +1,4 @@
-% $Id: logLik.glsStruct.Rd,v 1.1 1999/10/13 00:50:11 saikat Exp $
+% $Id: logLik.glsStruct.Rd,v 1.1 2000/03/17 22:21:23 saikat Exp $
 \name{logLik.glsStruct}
 \title{Log-Likelihood of a glsStruct Object}
 \usage{

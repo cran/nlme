@@ -1,4 +1,4 @@
-% $Id: pooledSD.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: pooledSD.Rd,v 1.2 2000/04/17 19:03:40 bates Exp $
 \name{pooledSD}
 \title{Extract Pooled Standard Deviation}
 \usage{
@@ -24,7 +24,6 @@ pooledSD(object)
 \seealso{\code{\link{lmList}}, \code{\link{lm}}}
 
 \examples{
-library(nlme)
 data(Orthodont)
 fm1 <- lmList(Orthodont)
 pooledSD(fm1)

@@ -1,4 +1,4 @@
-% $Id: Variogram.corLin.Rd,v 1.2 1999/11/04 16:38:58 saikat Exp $
+% $Id: Variogram.corLin.Rd,v 1.2 2000/04/17 19:03:38 bates Exp $
 \name{Variogram.corLin}
 \title{Calculate Semi-variogram for a corLin Object}
 \usage{
@@ -37,7 +37,6 @@ Variogram(object, distance, sig2, length.out)
 
 \seealso{\code{\link{corLin}}, \code{\link{plot.Variogram}}}
 \examples{
-library(nlme)
 data(BodyWeight)
 cs1 <- corLin(15, form = ~ Time | Rat)
 cs1 <- initialize(cs1, BodyWeight)

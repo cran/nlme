@@ -1,4 +1,4 @@
-% $Id: Names.Rd,v 1.1 1999/10/13 00:50:10 saikat Exp $
+% $Id: Names.Rd,v 1.1 2000/03/17 22:21:21 saikat Exp $
 \name{Names}
 \title{Names Associated with an Object}
 \usage{

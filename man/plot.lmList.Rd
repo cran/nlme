@@ -1,4 +1,4 @@
-% $Id: plot.lmList.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: plot.lmList.Rd,v 1.2 2000/04/17 19:03:39 bates Exp $
 \name{plot.lmList}
 \title{Plot an lmList Object}
 \usage{
@@ -72,7 +72,6 @@ plot(object, form, abline, id, idLabels, grid, ...)
 \seealso{\code{\link{lmList}}, \code{\link{xyplot}}, \code{\link{bwplot}},
   \code{\link{histogram}} }
 \examples{
-library(nlme)
 data(Orthodont)
 \dontrun{
 fm1 <- lmList(distance ~ age | Subject, Orthodont)

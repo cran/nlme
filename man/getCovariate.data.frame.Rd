@@ -1,4 +1,4 @@
-% $Id: getCovariate.data.frame.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: getCovariate.data.frame.Rd,v 1.2 2000/04/17 19:03:39 bates Exp $
 \name{getCovariate.data.frame}
 \title{Extract Data Frame Covariate}
 \usage{
@@ -25,7 +25,6 @@ getCovariate(object, form)
 \seealso{\code{\link{getCovariateFormula}}}
 
 \examples{
-library(nlme)
 data(Orthodont)
 getCovariate(Orthodont)
 }

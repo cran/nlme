@@ -1,4 +1,4 @@
-### $Id: reStruct.q,v 1.2 1999/11/17 22:09:19 saikat Exp $
+### $Id: reStruct.R,v 1.2 2000/03/30 00:07:26 bates Exp $
 ###
 ###      Methods for the class of random-effects structures.
 ###
@@ -286,6 +286,7 @@ logDet.reStruct <-
 logLik.reStruct <-
   function(object, conLin)
 {
+  if(any(!is.finite(conLin$Xy))) return(-Inf)
   .C("mixed_loglik",
      as.double(conLin$Xy),
      as.integer(unlist(conLin$dims)),

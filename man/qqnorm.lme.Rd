@@ -1,4 +1,4 @@
-% $Id: qqnorm.lme.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: qqnorm.lme.Rd,v 1.2 2000/04/17 19:03:40 bates Exp $
 \name{qqnorm.lme}
 \title{Normal Plot of Residuals or Random Effects from an lme Object}
 \usage{
@@ -59,7 +59,6 @@ qqnorm(object, form, abline, id, idLabels, grid, ...)
 \author{Jose Pinheiro and Douglas Bates}
 \seealso{\code{\link{lme}}, \code{\link{plot.lme}}}
 \examples{
-library(nlme)
 data(Orthodont)
 \dontrun{
 fm1 <- lme(distance ~ age, Orthodont, random = ~ age | Subject)

@@ -1,4 +1,4 @@
-% $Id: comparePred.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: comparePred.Rd,v 1.2 2000/04/17 19:03:39 bates Exp $
 \name{comparePred}
 \title{Compare Predictions}
 \usage{
@@ -62,7 +62,6 @@ level, ...)
 }
 \seealso{\code{\link{augPred}}, \code{\link{getGroups}}}
 \examples{
-library(nlme)
 data(Orthodont)
 fm1 <- lme(distance ~ age * Sex, data = Orthodont, random = ~ age)
 fm2 <- update(fm1, distance ~ age)

@@ -1,4 +1,4 @@
-% $Id: balancedGrouped.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: balancedGrouped.Rd,v 1.2 2000/04/17 19:03:39 bates Exp $
 \name{balancedGrouped}
 \alias{balancedGrouped}
 \title{Create a groupedData object from a matrix}
@@ -33,7 +33,6 @@ balancedGrouped(form, data, labels=NULL, units=NULL)
 \author{Jose Pinheiro and Douglas Bates}
 \seealso{\code{\link{groupedData}}, \code{\link{isBalanced}}, \code{\link{asTable}}}
 \examples{
-library(nlme)
 data(Orthodont)
 OrthoMat <- asTable( Orthodont )
 Orth2 <- balancedGrouped(distance ~ age | Subject, data = OrthoMat,

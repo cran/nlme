@@ -1,4 +1,4 @@
-% $Id: summary.gls.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: summary.gls.Rd,v 1.2 2000/04/17 19:03:40 bates Exp $
 \name{summary.gls}
 \title{Summarize a gls Object}
 \usage{
@@ -46,7 +46,6 @@ summary(object, verbose)
   \code{print.summary.gls}}
 
 \examples{
-library(nlme)
 data(Ovary)
 %\dontrun{
 fm1 <- gls(follicles ~ sin(2*pi*Time) + cos(2*pi*Time), Ovary,

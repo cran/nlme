@@ -1,10 +1,11 @@
-% $Id: Dim.Rd,v 1.1 1999/10/13 00:50:10 saikat Exp $
+% $Id: Dim.Rd,v 1.2 2000/04/04 22:26:01 bates Exp $
 \name{Dim}
 \title{Extract Dimensions from an Object}
 \usage{
 Dim(object, ...)
 }
 \alias{Dim}
+\alias{Dim.default}
 \arguments{
  \item{object}{any object for which dimensions can be extracted.}
  \item{\dots}{some methods for this generic function require additional

@@ -1,4 +1,4 @@
-% $Id: fitted.lmList.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: fitted.lmList.Rd,v 1.2 2000/04/17 19:03:39 bates Exp $
 \name{fitted.lmList}
 \title{Extract lmList Fitted Values}
 \usage{
@@ -35,7 +35,6 @@ fitted(object, subset, asList)
 \seealso{\code{\link{lmList}}, \code{\link{residuals.lmList}}}
 
 \examples{
-library(nlme)
 data(Orthodont)
 fm1 <- lmList(distance ~ age | Subject, Orthodont)
 fitted(fm1)

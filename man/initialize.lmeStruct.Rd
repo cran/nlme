@@ -1,4 +1,4 @@
-% $Id: initialize.lmeStruct.Rd,v 1.1 1999/10/13 00:50:11 saikat Exp $
+% $Id: initialize.lmeStruct.Rd,v 1.1 2000/03/17 22:21:23 saikat Exp $
 \name{initialize.lmeStruct}
 \title{Initialize an lmeStruct Object}
 \usage{

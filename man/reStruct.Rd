@@ -1,10 +1,11 @@
-% $Id: reStruct.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: reStruct.Rd,v 1.3 2000/04/17 19:03:40 bates Exp $
 \name{reStruct}
 \title{Random Effects Structure}
 \usage{
 reStruct(object, pdClass, RML, data)
 }
 \alias{reStruct}
+\alias{[.reStruct}
 \arguments{
  \item{object}{any of the following: (i) a one-sided formula of the form
    \code{~x1+...+xn | g1/.../gm}, with \code{x1+...+xn} specifying the
@@ -58,7 +59,6 @@ reStruct(object, pdClass, RML, data)
   \code{\link{groupedData}}} 
 
 \examples{
-library(nlme)
 data(Pixel)
 rs1 <- reStruct(list(Dog = ~day, Side = ~1), data = Pixel)
 rs1

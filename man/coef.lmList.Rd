@@ -1,4 +1,4 @@
-% $Id: coef.lmList.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: coef.lmList.Rd,v 1.2 2000/04/17 19:03:39 bates Exp $
 \name{coef.lmList}
 \title{Extract lmList Coefficients}
 \usage{
@@ -68,7 +68,6 @@ coef(object, augFrame, data, which, FUN, omitGroupingFactor)
   \code{\link{plot.ranef.lmList}}, \code{\link{gsummary}}} 
 
 \examples{
-library(nlme)
 data(Orthodont)
 fm1 <- lmList(distance ~ age|Subject, data = Orthodont)
 coef(fm1)

@@ -1,4 +1,4 @@
-% $Id: augPred.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: augPred.Rd,v 1.2 2000/04/17 19:03:39 bates Exp $
 \name{augPred}
 \title{Augmented Predictions}
 \usage{
@@ -63,7 +63,6 @@ augPred(object, primary, minimum, maximum, length.out, level, ...)
   \code{\link{predict}}} 
 
 \examples{
-library(nlme)
 data(Orthodont)
 fm1 <- lme(Orthodont)
 augPred(fm1, length.out = 2, level = c(0,1))

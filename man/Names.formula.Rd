@@ -1,10 +1,11 @@
-% $Id: Names.formula.Rd,v 1.1 1999/10/13 00:50:10 saikat Exp $
+% $Id: Names.formula.Rd,v 1.2 2000/04/04 22:26:02 bates Exp $
 \name{Names.formula}
 \title{Extract Names from a formula}
 \usage{
 Names(object, data, exclude)
 }
 \alias{Names.formula}
+\alias{Names.listForm}
 \arguments{
  \item{object}{an object inheriting from class \code{formula}.}
  \item{data}{an optional data frame containing the variables specified

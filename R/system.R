@@ -1,4 +1,4 @@
-### $Id: system.q,v 1.1 1999/10/13 00:50:10 saikat Exp $
+### $Id: system.R,v 1.1 2000/03/17 22:21:21 saikat Exp $
 ###
 ###                 System-dependent routines
 ###

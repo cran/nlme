@@ -1,4 +1,4 @@
-% $Id: plot.gls.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: plot.gls.Rd,v 1.2 2000/04/17 19:03:39 bates Exp $
 \name{plot.gls}
 \title{Plot a gls Object}
 \usage{
@@ -76,7 +76,6 @@ plot(object, form, abline, id, idLabels, idResType, grid, ...)
 \seealso{\code{\link{gls}}, \code{\link{xyplot}}, \code{\link{bwplot}},
   \code{\link{histogram}} }
 \examples{
-library(nlme)
 data(Ovary)
 fm1 <- gls(follicles ~ sin(2*pi*Time) + cos(2*pi*Time), Ovary,
            correlation = corAR1(form = ~ 1 | Mare))

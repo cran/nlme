@@ -1,4 +1,4 @@
-% $Id: intervals.lmList.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: intervals.lmList.Rd,v 1.2 2000/04/17 19:03:39 bates Exp $
 \name{intervals.lmList}
 \title{Confidence Intervals on lmList Coefficients}
 \usage{
@@ -37,7 +37,6 @@ intervals(object, level, pool)
 \seealso{\code{\link{lmList}}, \code{\link{plot.intervals.lmList}}}
 
 \examples{
-library(nlme)
 data(Orthodont)
 fm1 <- lmList(distance ~ age | Subject, Orthodont)
 intervals(fm1)

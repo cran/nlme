@@ -1,4 +1,4 @@
-% $Id: print.summary.corStruct.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: print.summary.corStruct.Rd,v 1.2 2000/04/17 19:03:40 bates Exp $
 \name{print.summary.corStruct}
 \title{Print a summary.corStruct Object}
 \usage{
@@ -26,7 +26,6 @@ print(x, ...)
 \seealso{\code{\link{summary.corStruct}} }
 
 \examples{
-library(nlme)
 cs1 <- corAR1(0.3)
 print(summary(cs1))
 }

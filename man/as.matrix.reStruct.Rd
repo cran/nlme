@@ -1,4 +1,4 @@
-% $Id: as.matrix.reStruct.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: as.matrix.reStruct.Rd,v 1.2 2000/04/17 19:03:38 bates Exp $
 \name{as.matrix.reStruct}
 \title{Matrices of an reStruct Object}
 \usage{
@@ -24,7 +24,6 @@ as.matrix(object)
   \code{\link{pdMat}}}
 
 \examples{
-library(nlme)
 data(Orthodont)
 rs1 <- reStruct(pdSymm(diag(3), ~age+Sex, data = Orthodont))
 as.matrix(rs1)

@@ -1,4 +1,4 @@
-% $Id: Dim.corSpatial.Rd,v 1.2 1999/11/04 16:38:58 saikat Exp $
+% $Id: Dim.corSpatial.Rd,v 1.2 2000/04/17 19:03:38 bates Exp $
 \name{Dim.corSpatial}
 \title{Dimensions of a corSpatial Object}
 \usage{
@@ -35,7 +35,6 @@ Dim(object, groups)
 \seealso{\code{\link{Dim}}, \code{\link{Dim.corStruct}}}
 
 \examples{
-library(nlme)
 data(Orthodont)
 Dim(corGaus(), getGroups(Orthodont))
 }

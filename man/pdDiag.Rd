@@ -1,4 +1,4 @@
-% $Id: pdDiag.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: pdDiag.Rd,v 1.2 2000/04/17 19:03:39 bates Exp $
 \name{pdDiag}
 \title{Diagonal Positive-Definite Matrix}
 \usage{
@@ -63,7 +63,6 @@ pdDiag(value, form, nam, data)
   \code{\link{matrix<-.pdMat}}} 
 
 \examples{
-library(nlme)
 pd1 <- pdDiag(diag(1:3), nam = c("A","B","C"))
 pd1
 }

@@ -1,4 +1,4 @@
-% $Id: AIC.Rd,v 1.2 1999/11/04 16:38:58 saikat Exp $
+% $Id: AIC.Rd,v 1.2 2000/04/17 19:03:38 bates Exp $
 \name{AIC}
 \title{Akaike Information Criterion}
 \usage{
@@ -40,7 +40,6 @@ fitted objects, the smaller the AIC, the better the fit.
 \author{Jose Pinheiro and Douglas Bates}
 \seealso{\code{\link{logLik}}, \code{\link{BIC}}, \code{\link{AIC.logLik}}}.
 \examples{
-library(nlme)
 data(Orthodont)
 fm1 <- lm(distance ~ age, data = Orthodont) # no random effects
 AIC(fm1)

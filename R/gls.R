@@ -1,4 +1,4 @@
-### $Id: gls.q,v 1.6 1999/11/19 00:16:32 bates Exp $
+### $Id: gls.R,v 1.2 2000/03/30 00:07:26 bates Exp $
 ###
 ###  Fit a linear model with correlated errors and/or heteroscedasticity
 ###
@@ -120,15 +120,14 @@ gls <-
   repeat {
     oldPars <- c(attr(glsSt, "glsFit")[["beta"]], coef(glsSt))
     if (length(coef(glsSt))) {		# needs ms()
-      aNlm <- nlm(f = function(glsPars) -logLik(glsSt, glsPars),
-                  p = c(coef(glsSt)),
-                  hessian = TRUE,
-                  print = ifelse(controlvals$msVerbose, 2, 0),
-                  stepmax = controlvals$nlmStepMax*max(sqrt(sum(coef(glsSt)^2)),
-                    1.0),
-                  check = FALSE)
-      numIter0 <- NULL
-      coef(glsSt) <- aNlm$estimate
+      aNlm <- optim(fn = function(glsPars) -logLik(glsSt, glsPars),
+                    par = c(coef(glsSt)), hessian = TRUE,
+                    method = "BFGS",
+                    control = list(trace = controlvals$msVerbose,
+                       reltol = if(numIter == 0) controlvals$msTol
+                                else 100*.Machine$double.eps,
+                       maxit = controlvals$msMaxIter))
+      coef(glsSt) <- aNlm$par
     }
     attr(glsSt, "glsFit") <- glsEstimate(glsSt, control = glsEstControl)
     ## checking if any updating is needed
@@ -149,7 +148,7 @@ gls <-
     }
     if (verbose) {
       cat("\nIteration:",numIter)
-      cat("\nObjective:", format(aNlm$minimum), "\n")
+      cat("\nObjective:", format(aNlm$value), "\n")
       print(glsSt)
       cat("\nConvergence:\n")
       print(aConv)

@@ -1,5 +1,5 @@
-% $Id: matrix<-.reStruct.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
-\name{matrix<-.reStruct}
+% $Id: Matrix.reStruct.Rd,v 1.3 2000/04/17 19:03:38 bates Exp $
+\name{Matrix.reStruct}
 \title{Assign reStruct Matrices}
 \usage{
 matrix(object) <-  value
@@ -30,7 +30,6 @@ matrix(object) <-  value
 \seealso{\code{\link{reStruct}}, \code{\link{pdMat}}}
 
 \examples{
-library(nlme)
 data(Pixel)
 rs1 <- reStruct(list(Dog = ~day, Side = ~1), data = Pixel)
 matrix(rs1) <- list(diag(2), 3)

@@ -1,4 +1,4 @@
-% $Id: logLik.lm.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: logLik.lm.Rd,v 1.2 2000/04/17 19:03:39 bates Exp $
 \name{logLik.lm}
 \title{Extract Log-Likelihood from an lm Object}
 \usage{
@@ -30,7 +30,6 @@ logLik(object, REML)
 \seealso{\code{\link{lm}}}
 
 \examples{
-library(nlme)
 data(Orthodont)
 fm1 <- lm(distance ~ Sex * age, Orthodont)
 logLik(fm1)

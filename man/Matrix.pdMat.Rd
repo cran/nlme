@@ -1,5 +1,5 @@
-% $Id: matrix<-.pdMat.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
-\name{matrix<-.pdMat}
+% $Id: Matrix.pdMat.Rd,v 1.3 2000/04/17 19:03:38 bates Exp $
+\name{Matrix.pdMat}
 \title{Assign Matrix to a pdMat Object}
 \usage{
 matrix(object) <- value
@@ -29,7 +29,6 @@ matrix(object) <- value
 \seealso{\code{\link{pdMat}}}
 
 \examples{
-library(nlme)
 pd1 <- pdSymm(diag(3))
 matrix(pd1) <- diag(1:3)
 pd1

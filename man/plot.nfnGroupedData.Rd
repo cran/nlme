@@ -1,4 +1,4 @@
-% $Id: plot.nfnGroupedData.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: plot.nfnGroupedData.Rd,v 1.2 2000/04/17 19:03:39 bates Exp $
 \name{plot.nfnGroupedData}
 \title{Plot an nfnGroupedData Object}
 \usage{
@@ -89,7 +89,6 @@ http://franz.stat.wisc.edu/pub/NLME.
 \author{Jose Pinheiro and Douglas Bates}
 \seealso{\code{\link{groupedData}}, \code{\link{xyplot}}}
 \examples{
-library(nlme)
 data(Orthodont)
 \dontrun{
 # different panels per Subject

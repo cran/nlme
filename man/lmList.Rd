@@ -1,4 +1,4 @@
-% $Id: lmList.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: lmList.Rd,v 1.2 2000/04/17 19:03:39 bates Exp $
 \name{lmList}
 \title{List of lm Objects with a Common Model}
 \usage{
@@ -56,7 +56,6 @@ lmList(object, data, level, na.action, pool)
 \code{\link{lm}}, \code{\link{lme.lmList}}.
 }
 \examples{
-library(nlme)
 data(Orthodont)
 fm1 <- lmList(distance ~ age | Subject, Orthodont)
 }

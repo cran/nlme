@@ -1,4 +1,4 @@
-### $Id: Soybean.R,v 1.1 1999/11/04 16:45:56 saikat Exp $
+### $Id: Soybean.R,v 1.1 2000/03/17 22:21:21 saikat Exp $
 ### Soybean growth for two varieties in three different crop years
 ### Davidian and Giltinan (1995), section 1.1.3, p. 7
 "Soybean" <-

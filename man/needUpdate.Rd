@@ -1,4 +1,4 @@
-% $Id: needUpdate.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: needUpdate.Rd,v 1.2 2000/04/17 19:03:39 bates Exp $
 \name{needUpdate}
 \title{Check if Update is Needed}
 \usage{
@@ -26,7 +26,6 @@ needUpdate(object)
 \author{Jose Pinheiro and Douglas Bates}
 
 \examples{
-library(nlme)
 data(Orthodont)
 vf1 <- varExp()
 vf1 <- initialize(vf1, data = Orthodont)

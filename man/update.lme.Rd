@@ -1,4 +1,4 @@
-% $Id: update.lme.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: update.lme.Rd,v 1.2 2000/04/17 19:03:40 bates Exp $
 \name{update.lme}
 \title{Update an lme Object}
 \usage{
@@ -28,7 +28,6 @@ update(object, fixed, data, random, correlation, weights, subset, method,
 \seealso{\code{\link{lme}}}
 
 \examples{
-library(nlme)
 data(Orthodont)
 fm1 <- lme(distance ~ age, Orthodont, random = ~ age | Subject)
 fm2 <- update(fm1, distance ~ age * Sex)

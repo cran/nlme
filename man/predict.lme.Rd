@@ -1,4 +1,4 @@
-% $Id: predict.lme.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: predict.lme.Rd,v 1.2 2000/04/17 19:03:40 bates Exp $
 \name{predict.lme}
 \title{Predictions from an lme Object}
 \usage{
@@ -53,7 +53,6 @@ predict(object, newdata, level, asList, na.action)
 \seealso{\code{\link{lme}}, \code{\link{fitted.lme}}}
 
 \examples{
-library(nlme)
 data(Orthodont)
 fm1 <- lme(distance ~ age, Orthodont, random = ~ age | Subject)
 newOrth <- data.frame(Sex = c("Male","Male","Female","Female","Male","Male"),

@@ -1,4 +1,4 @@
-% $Id: update.nlme.Rd,v 1.5 1999/11/19 16:42:38 bates Exp $
+% $Id: update.nlme.Rd,v 1.2 2000/04/17 19:03:40 bates Exp $
 \name{update.nlme}
 \title{Update an nlme Object}
 \usage{
@@ -29,7 +29,6 @@ update(object, model, data, fixed, random, groups, start,
 \seealso{\code{\link{nlme}}}
 
 \examples{
-library(nlme)
 data(Soybean)
 fm1 <- nlme(weight ~ SSlogis(Time, Asym, xmid, scal), data = Soybean,
             fixed = Asym + xmid + scal ~ 1, start = c(18, 52, 7.5),

@@ -1,4 +1,4 @@
-% $Id: varIdent.Rd,v 1.2 1999/11/04 16:39:00 saikat Exp $
+% $Id: varIdent.Rd,v 1.2 2000/04/17 19:03:40 bates Exp $
 \name{varIdent}
 \title{Constant Variance Function}
 \usage{
@@ -62,7 +62,6 @@ varIdent(value, form, fixed)
 \seealso{\code{\link{varWeights.varFunc}}, \code{\link{coef.varIdent}}}
 
 \examples{
-library(nlme)
 vf1 <- varIdent(c(Female = 0.5), form = ~ 1 | Sex)
 }
 \keyword{models}

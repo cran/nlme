@@ -1,4 +1,4 @@
-% $Id: gnls.Rd,v 1.3 2000/02/14 16:43:07 bates Exp $
+% $Id: gnls.Rd,v 1.2 2000/04/17 19:03:39 bates Exp $
 \name{gnls}
 \title{Fit Nonlinear Model Using Generalized Least Squares}
 \usage{
@@ -108,7 +108,6 @@ gnls(model, data, params, start, correlation, weights, subset,
   \code{\link{varFunc}}, \code{\link{corClasses}}, \code{\link{varClasses}}
 }
 \examples{
-library(nlme)
 data(Soybean)
 # variance increases with a power of the absolute fitted values
 fm1 <- gnls(weight ~ SSlogis(Time, Asym, xmid, scal), Soybean,

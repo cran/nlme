@@ -1,4 +1,4 @@
-% $Id: pdNatural.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: pdNatural.Rd,v 1.2 2000/04/17 19:03:39 bates Exp $
 \name{pdNatural}
 \title{General Positive-Definite Matrix in Natural Parametrization}
 \usage{
@@ -72,7 +72,6 @@ pdNatural(value, form, nam, data)
 \seealso{\code{\link{as.matrix.pdMat}}, \code{\link{coef.pdMat}},
   \code{\link{matrix<-.pdMat}}} 
 \examples{
-library(nlme)
 pdNatural(diag(1:3))
 }
 \keyword{models}

@@ -1,4 +1,4 @@
-% $Id: getGroups.lmList.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: getGroups.lmList.Rd,v 1.2 2000/04/17 19:03:39 bates Exp $
 \name{getGroups.lmList}
 \title{Extract lmList Object Groups}
 \usage{
@@ -25,7 +25,6 @@ getGroups(object)
 \seealso{\code{\link{lmList}}}
 
 \examples{
-library(nlme)
 data(Orthodont)
 fm1 <- lmList(distance ~ age | Subject, Orthodont)
 getGroups(fm1)

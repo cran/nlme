@@ -1,4 +1,4 @@
-% $Id: plot.ranef.lmList.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: plot.ranef.lmList.Rd,v 1.2 2000/04/17 19:03:40 bates Exp $
 \name{plot.ranef.lmList}
 \title{Plot a ranef.lmList Object}
 \usage{
@@ -71,7 +71,6 @@ plot(object, form, grid, control, ...)
 \author{Jose Pinheiro and Douglas Bates}
 \seealso{\code{\link{lmList}}, \code{\link{dotplot}}}
 \examples{
-library(nlme)
 data(Orthodont)
 \dontrun{
 fm1 <- lmList(distance ~ age | Subject, Orthodont)

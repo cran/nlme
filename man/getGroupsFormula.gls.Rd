@@ -1,4 +1,4 @@
-% $Id: getGroupsFormula.gls.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: getGroupsFormula.gls.Rd,v 1.2 2000/04/17 19:03:39 bates Exp $
 \name{getGroupsFormula.gls}
 \title{Extract gls Object Grouping Formula}
 \usage{
@@ -30,7 +30,6 @@ getGroupsFormula(object, asList)
 \seealso{ \code{\link{corClasses}}, \code{\link{getGroups.gls}}}
 
 \examples{
-library(nlme)
 data(Ovary)
 %\dontrun{
 fm1 <- gls(follicles ~ sin(2*pi*Time) + cos(2*pi*Time), Ovary,

@@ -1,4 +1,4 @@
-% $Id: summary.lme.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: summary.lme.Rd,v 1.2 2000/04/17 19:03:40 bates Exp $
 \name{summary.lme}
 \title{Summarize an lme Object}
 \usage{
@@ -47,7 +47,6 @@ summary(object, verbose)
   \code{print.summary.lme}}
 
 \examples{
-library(nlme)
 data(Orthodont)
 fm1 <- lme(distance ~ age, Orthodont, random = ~ age | Subject)
 summary(fm1)

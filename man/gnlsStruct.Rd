@@ -1,10 +1,11 @@
-% $Id: gnlsStruct.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: gnlsStruct.Rd,v 1.3 2000/04/17 19:03:39 bates Exp $
 \name{gnlsStruct}
 \title{Generalized Nonlinear Least Squares Structure}
 \usage{
 gnlsStruct(corStruct, varStruct)
 }
 \alias{gnlsStruct}
+\alias{initialize.gnlsStruct}
 \arguments{
  \item{corStruct}{an optional \code{corStruct} object, representing a
    correlation structure. Default is \code{NULL}.}
@@ -29,7 +30,6 @@ gnlsStruct(corStruct, varStruct)
   \code{\link{varFunc}} } 
 
 \examples{
-library(nlme)
 gnls1 <- gnlsStruct(corAR1(), varPower())
 }
 \keyword{models}

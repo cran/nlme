@@ -1,4 +1,4 @@
-% $Id: print.summary.modelStruct.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: print.summary.modelStruct.Rd,v 1.2 2000/04/17 19:03:40 bates Exp $
 \name{print.summary.modelStruct}
 %\title{Use \code{print} on a \code{summary.modelStruct} Object}
 \title{Print a summary.modelStruct Object}
@@ -27,7 +27,6 @@ print(x, ...)
 \seealso{\code{\link{summary.modelStruct}} }
 
 \examples{
-library(nlme)
 cs1 <- corAR1(0.3)
 print(summary(cs1))
 }

@@ -3,28 +3,60 @@ ACF.gls                  Autocorrelation Function for gls Residuals
 ACF.lme                  Autocorrelation Function for lme Residuals
 AIC                      Akaike Information Criterion
 AIC.logLik               AIC of a logLik Object
+Alfalfa                  Split-Plot Experiment on Varieties of Alfalfa
+Assay                    Bioassay on Cell Culture Plate
 BIC                      Bayesian Information Criterion
 BIC.logLik               BIC of a logLik Object
+BodyWeight               Rat weight over time for different diets
+Cefamandole              Pharmacokinetics of Cefamandole
+Coef                     Assign Values to Coefficients
+Covariate                Assign Covariate Values
+Covariate.varFunc        Assign varFunc Covariate
+Dialyzer                 High-Flux Hemodialyzer
 Dim                      Extract Dimensions from an Object
 Dim.corSpatial           Dimensions of a corSpatial Object
 Dim.corStruct            Dimensions of a corStruct Object
 Dim.pdMat                Dimensions of a pdMat Object
-NLSstClosestX            Inverse Interpolation
-NLSstLfAsymptote         Guess the horizontal asymptote on the left side
-NLSstRtAsymptote         Horizontal Asymptote on the Right Side
+Earthquake               Earthquake Intensity
+[.pdMat                  Subscript a pdMat Object
+Fatigue                  Cracks caused by metal fatigue
+Gasoline                 Refinery yield of gasoline
+Glucose                  Glucose levels over time
+Glucose2                 Glucose Levels Following Alcohol Ingestion
+Gun                      Methods for firing naval guns
+IGF                      Radioimmunoassay of IGF-I Protein
+Machines                 Productivity Scores for Machines and Workers
+MathAchSchool            School demographic data for MathAchieve
+MathAchieve              Mathematics achievement scores
+Matrix                   Assign Matrix Values
+Matrix.pdMat             Assign Matrix to a pdMat Object
+Matrix.reStruct          Assign reStruct Matrices
+Meat                     Tenderness of meat
+Milk                     Protein content of cows' milk
+Muscle                   Contraction of heart muscle sections
 Names                    Names Associated with an Object
 Names.formula            Extract Names from a formula
 Names.pdBlocked          Names of a pdBlocked Object
 Names.pdMat              Names of a pdMat Object
 Names.reStruct           Names of an reStruct Object
-SSasymp                  Asymptotic Regression Model
-SSasympOff               Asymptotic Regression Model with an Offset
-SSasympOrig              Asymptotic Regression Model through the Origin
-SSbiexp                  Biexponential model
-SSfol                    First-order Compartment Model
-SSfpl                    Four-parameter Logistic Model
-SSlogis                  Logistic model
-SSmicmen                 Michaelis-Menten model
+Nitrendipene             Assay of nitrendipene
+Oats                     Split-plot Experiment on Varieties of Oats
+Orthodont                Growth curve data on an orthdontic measurement
+Ovary                    Counts of Ovarian Follicles
+Oxboys                   Heights of Boys in Oxford
+Oxide                    Variability in Semiconductor Manufacturing
+PBG                      Effect of Phenylbiguanide on Blood Pressure
+Phenobarb                Phenobarbitol Kinetics
+Pixel                    X-ray pixel intensities over time
+Quinidine                Quinidine Kinetics
+Rail                     Evaluation of Stress in Railway Rails
+RatPupWeight             RatPupWeight
+Relaxin                  Relaxin
+Remifentanil             Pharmacokinetics of remifentanil
+Soybean                  Soybean
+Spruce                   Growth of Spruce Trees
+Tetracycline1            Pharmacokinetics of tetracycline
+Tetracycline2            Pharmacokinetics of tetracycline
 VarCorr                  Extract variance and correlation components
 Variogram                Calculate Semi-variogram
 Variogram.corExp         Calculate Semi-variogram for a corExp Object
@@ -38,7 +70,9 @@ Variogram.gls            Calculate Semi-variogram for Residuals from a
                          gls Object
 Variogram.lme            Calculate Semi-variogram for Residuals from an
                          lme Object
-[.pdMat                  Subscript a pdMat Object
+Wafer                    Modeling of Analog MOS Circuits
+Wheat                    Yields by growing conditions
+Wheat2                   Wheat Yield Trials
 allCoef                  Extract Coefficients from a Set of Objects
 anova.gls                Compare Likelihoods of Fitted Objects
 anova.lme                Compare Likelihoods of Fitted Objects
@@ -46,7 +80,6 @@ as.matrix.corStruct      Matrix of a corStruct Object
 as.matrix.pdMat          Matrix of a pdMat Object
 as.matrix.reStruct       Matrices of an reStruct Object
 asOneFormula             Combine Formulas of a Set of Objects
-asOneSidedFormula        Convert to One-Sided Formula
 asTable                  Convert groupedData to a matrix
 augPred                  Augmented Predictions
 balancedGrouped          Create a groupedData object from a matrix
@@ -62,7 +95,6 @@ coef.pdIdent             pdIdent Object Coefficients
 coef.pdMat               pdMat Object Coefficients
 coef.reStruct            reStruct Object Coefficients
 coef.varFunc             varFunc Object Coefficients
-coef<-                   Assign Values to Coefficients
 collapse                 Collapse According to Groups
 collapse.groupedData     Collapse a groupedData Object
 compareFits              Compare Fitted Objects
@@ -86,8 +118,7 @@ corRatio                 Rational Quadratic Correlation Structure
 corSpatial               Spatial Correlation Structure
 corSpher                 Spherical Correlation Structure
 corSymm                  General Correlation Structure
-covariate<-              Assign Covariate Values
-covariate<-.varFunc      Assign varFunc Covariate
+ergoStool                Ergometrics experiment with stool types
 fitted.gls               Extract gls Fitted Values
 fitted.glsStruct         Calculate glsStruct Fitted Values
 fitted.gnls              Extract gnls Fitted Values
@@ -99,9 +130,6 @@ fitted.nlmeStruct        Calculate nlmeStruct Fitted Values
 fixed.effects            Extract Fixed Effects
 fixed.effects.lmList     Extract lmList Fixed Effects
 fixed.effects.lme        Extract lme Fixed Effects
-fixef                    Extract Fixed Effects
-fixef.lmList             Extract lmList Fixed Effects
-fixef.lme                Extract lme Fixed Effects
 formula.corStruct        Extract corStruct Object Formula
 formula.gls              Extract gls Object Formula
 formula.gnls             Extract gnls Object Formula
@@ -139,7 +167,6 @@ getGroupsFormula.lmList  Extract lmList Object Grouping Formula
 getGroupsFormula.lme     Extract lme Object Grouping Formula
 getGroupsFormula.reStruct
                          Extract reStruct Grouping Formula
-getInitial               get initial parameter estimates
 getResponse              Extract Response Variable from an Object
 getResponse.data.frame   Extract Response from a Data Frame
 getResponse.gls          Extract gls Object Response
@@ -183,7 +210,6 @@ logDet                   Extract the Logarithm of the Determinant
 logDet.corStruct         Extract corStruct Log-Determinant
 logDet.pdMat             Extract Log-Determinant from a pdMat Object
 logDet.reStruct          Extract reStruct Log-Determinants
-logLik                   Extract Log-Likelihood
 logLik.corStruct         Extract corStruct Log-Likelihood
 logLik.gls               Log-Likelihood of a gls Object
 logLik.glsStruct         Log-Likelihood of a glsStruct Object
@@ -195,9 +221,6 @@ logLik.lme               Log-Likelihood of an lme Object
 logLik.lmeStruct         Log-Likelihood of an lmeStruct Object
 logLik.reStruct          Calculate reStruct Log-Likelihood
 logLik.varFunc           Extract varFunc logLik
-matrix<-                 Assign Matrix Values
-matrix<-.pdMat           Assign Matrix to a pdMat Object
-matrix<-.reStruct        Assign reStruct Matrices
 model.matrix.reStruct    reStruct Model Matrix
 needUpdate               Check if Update is Needed
 needUpdate.modelStruct   Check if \code{modelStruct
@@ -277,9 +300,6 @@ qqnorm.lme               Normal Plot of Residuals or Random Effects from
 random.effects           Extract Random Effects
 random.effects.lmList    Extract lmList Random Effects
 random.effects.lme       Extract lme Random Effects
-ranef                    Extract Random Effects
-ranef.lmList             Extract lmList Random Effects
-ranef.lme                Extract lme Random Effects
 reStruct                 Random Effects Structure
 recalc                   Recalculate Condensed Linear Model Object
 recalc.corStruct         Recalculate for corStruct Object
@@ -295,13 +315,9 @@ residuals.lmList         Extract lmList Residuals
 residuals.lme            Extract lme Residuals
 residuals.lmeStruct      Calculate lmeStruct Residuals
 residuals.nlmeStruct     Calculate nlmeStruct Residuals
-selfStart                Construct Self-starting Nonlinear Models
-selfStart.default        Construct Self-starting Nonlinear Models
-selfStart.formula        Construct Self-starting Nonlinear Models
 simulate.lme             simulate lme models
 solve.pdMat              Calculate Inverse of a Positive-Definite Matrix
 solve.reStruct           Apply Solve to an reStruct Object
-sortedXyData             Create a sortedXyData object
 splitFormula             Split a Formula
 summary.corStruct        Summarize \code{corStruct
 summary.gls              Summarize a gls Object

@@ -1,4 +1,4 @@
-% $Id: plot.nmGroupedData.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: plot.nmGroupedData.Rd,v 1.2 2000/04/17 19:03:40 bates Exp $
 \name{plot.nmGroupedData}
 \title{Plot an nmGroupedData Object}
 \usage{
@@ -107,7 +107,6 @@ http://franz.stat.wisc.edu/pub/NLME.
   \code{\link{plot.nfnGroupedData}}, \code{\link{plot.nffGroupedData}}
 }  
 \examples{
-library(nlme)
 data(Pixel)
 \dontrun{
 # no collapsing, panels by Dog

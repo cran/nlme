@@ -1,4 +1,4 @@
-% $Id: print.reStruct.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: print.reStruct.Rd,v 1.2 2000/04/17 19:03:40 bates Exp $
 \name{print.reStruct}
 \title{Print an reStruct Object}
 \usage{
@@ -30,7 +30,6 @@ print(x, sigma, reEstimates, verbose=F, ...)
 \seealso{\code{\link{reStruct}}}
 
 \examples{
-library(nlme)
 data(Pixel)
 rs1 <- reStruct(list(Dog = ~day, Side = ~1), data = Pixel)
 matrix(rs1) <- list(diag(2), 3)

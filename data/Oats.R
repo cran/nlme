@@ -1,0 +1,37 @@
+### $Id: Oats.R,v 1.1 2000/03/17 22:21:21 saikat Exp $
+### Yields of different varieties of oats under different fertilizer conditions.
+### Originally in Yates (1935).  Also analysed in Venables and Ripley (1996).
+"Oats" <-
+  structure(list
+  (Block = structure(ordered(c(6, 6, 6, 6, 6, 6, 
+     6, 6, 6, 6, 6, 6, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 3, 3, 3, 
+     3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+     2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 
+     1, 1, 1), levels=1:6), class = c("ordered", "factor"),
+     .Label = c("VI", "V", "III", "IV", "II", "I")),
+   Variety = structure(factor(c(3, 
+     3, 3, 3, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 1, 1, 1, 1, 2, 2, 
+     2, 2, 3, 3, 3, 3, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 1, 1, 1, 
+     1, 2, 2, 2, 2, 3, 3, 3, 3, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 
+     1, 1, 1, 1, 2, 2, 2, 2), levels=1:3),
+     class = "factor",
+     .Label = c("Golden Rain", "Marvellous", "Victory")),
+   nitro = c(0, 0.2, 0.4, 0.6, 0, 0.2, 
+     0.4, 0.6, 0, 0.2, 0.4, 0.6, 0, 0.2, 0.4, 0.6, 0, 0.2, 0.4, 0.6, 
+     0, 0.2, 0.4, 0.6, 0, 0.2, 0.4, 0.6, 0, 0.2, 0.4, 0.6, 0, 0.2, 
+     0.4, 0.6, 0, 0.2, 0.4, 0.6, 0, 0.2, 0.4, 0.6, 0, 0.2, 0.4, 0.6, 
+     0, 0.2, 0.4, 0.6, 0, 0.2, 0.4, 0.6, 0, 0.2, 0.4, 0.6, 0, 0.2, 
+     0.4, 0.6, 0, 0.2, 0.4, 0.6, 0, 0.2, 0.4, 0.6),
+   yield = c(111, 
+     130, 157, 174, 117, 114, 161, 141, 105, 140, 118, 156, 61, 91, 
+     97, 100, 70, 108, 126, 149, 96, 124, 121, 144, 68, 64, 112, 86, 
+     60, 102, 89, 96, 89, 129, 132, 124, 74, 89, 81, 122, 64, 103, 
+     132, 133, 70, 89, 104, 117, 62, 90, 100, 116, 80, 82, 94, 126, 
+     63, 70, 109, 99, 53, 74, 118, 113, 89, 82, 86, 104, 97, 99, 119, 
+     121)),
+row.names = 1:72,
+class = c("nfnGroupedData", "nfGroupedData", "groupedData", "data.frame"),
+formula = yield ~ nitro | Block,
+labels = list(y = "Yield", x = "Nitrogen concentration"),
+units = list(y = "(bushels/acre)", x = "(cwt/acre)"),
+inner = ~Variety)

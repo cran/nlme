@@ -1,4 +1,4 @@
-% $Id: lme.lmList.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: lme.lmList.Rd,v 1.2 2000/04/17 19:03:39 bates Exp $
 \name{lme.lmList}
 \title{LME fit from lmList Object}
 \usage{
@@ -86,7 +86,6 @@ lme(fixed, data, random, correlation, weights, subset, method,
   \code{\link{lmeObject}} } 
 
 \examples{
-library(nlme)
 data(Orthodont)
 fm1 <- lmList(Orthodont)
 fm2 <- lme(fm1)

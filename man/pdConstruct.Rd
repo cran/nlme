@@ -1,4 +1,4 @@
-% $Id: pdConstruct.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: pdConstruct.Rd,v 1.2 2000/04/17 19:03:39 bates Exp $
 \name{pdConstruct}
 \title{Construct pdMat Objects}
 \usage{
@@ -59,7 +59,6 @@ pdConstruct(object, value, form, nam, data)
   \code{\link{pdIdent}}, \code{\link{pdNatural}}, \code{\link{pdSymm}}}
 
 \examples{
-library(nlme)
 pd1 <- pdSymm()
 pdConstruct(pd1, diag(1:4))
 }

@@ -1,4 +1,4 @@
-% $Id: VarCorr.Rd,v 1.2 1999/11/04 16:38:58 saikat Exp $
+% $Id: VarCorr.Rd,v 1.3 2000/04/17 19:03:38 bates Exp $
 \name{VarCorr}
 \title{Extract variance and correlation components}
 \usage{
@@ -6,6 +6,8 @@ VarCorr(object, sigma, rdig)
 }
 \alias{VarCorr}
 \alias{VarCorr.lme}
+\alias{VarCorr.pdMat}
+\alias{VarCorr.pdBlocked}
 \alias{summary.VarCorr.lme}
 \arguments{
  \item{object}{a fitted model object, usually an object inheriting from
@@ -39,7 +41,6 @@ VarCorr(object, sigma, rdig)
 \author{Jose Pinheiro and Douglas Bates}
 \seealso{\code{\link{lme}}, \code{\link{nlme}}.
 \examples{
-library(nlme)
 data(Orthodont)
 fm1 <- lme(distance ~ age, data = Orthodont, random = ~age)
 VarCorr(fm1)

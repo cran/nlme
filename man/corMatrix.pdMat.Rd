@@ -1,4 +1,4 @@
-% $Id: corMatrix.pdMat.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: corMatrix.pdMat.Rd,v 1.2 2000/04/17 19:03:39 bates Exp $
 \name{corMatrix.pdMat}
 \title{Extract Correlation Matrix from a pdMat Object}
 \usage{
@@ -30,7 +30,6 @@ corMatrix(object)
 \seealso{\code{\link{as.matrix.pdMat}}, \code{\link{pdMatrix}}}
 
 \examples{
-library(nlme)
 pd1 <- pdSymm(diag(1:4))
 corMatrix(pd1)
 }

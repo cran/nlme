@@ -1,4 +1,4 @@
-% $Id: Dim.pdMat.Rd,v 1.2 1999/11/04 16:38:58 saikat Exp $
+% $Id: Dim.pdMat.Rd,v 1.3 2000/04/17 19:03:38 bates Exp $
 \name{Dim.pdMat}
 \title{Dimensions of a pdMat Object}
 \usage{
@@ -8,6 +8,8 @@ Dim(object)
 \alias{Dim.pdCompSymm}
 \alias{Dim.pdDiag}
 \alias{Dim.pdIdent}
+\alias{Dim.pdNatural}
+\alias{Dim.pdSymm}
 \arguments{
  \item{object}{an object inheriting from class \code{pdMat},
    representing a positive-definite matrix.}
@@ -24,7 +26,6 @@ Dim(object)
 \seealso{\code{\link{Dim}}}
 }
 \examples{
-library(nlme)
 Dim(pdSymm(diag(3)))
 }
 \keyword{models}

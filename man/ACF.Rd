@@ -1,4 +1,4 @@
-% $Id: ACF.Rd,v 1.1 1999/10/13 00:50:10 saikat Exp $
+% $Id: ACF.Rd,v 1.1 2000/03/17 22:21:21 saikat Exp $
 \name{ACF}
 \title{Autocorrelation Function}
 \usage{

@@ -1,4 +1,4 @@
-% $Id: pairs.lmList.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: pairs.lmList.Rd,v 1.2 2000/04/17 19:03:39 bates Exp $
 \name{pairs.lmList}
 \title{Pairs Plot of an lmList Object}
 \usage{
@@ -63,7 +63,6 @@ pairs(object, form, label, id, idLabels, grid, ...)
 \author{Jose Pinheiro and Douglas Bates}
 \seealso{\code{\link{lmList}}, \code{\link{xyplot}}, \code{\link{splom}}} 
 \examples{
-library(nlme)
 data(Orthodont)
 fm1 <- lmList(distance ~ age | Subject, Orthodont)
 \dontrun{

@@ -1,4 +1,4 @@
-% $Id: coef.corStruct.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: coef.corStruct.Rd,v 1.3 2000/04/17 19:03:39 bates Exp $
 \name{coef.corStruct}
 \title{Coefficients of a corStruct Object}
 \usage{
@@ -13,12 +13,13 @@ coef(object) <- value
 \alias{coef.corHF}
 \alias{coef.corIdent}  
 \alias{coef.corLin}
+\alias{coef.corNatural}
 \alias{coef.corSpatial}
 \alias{coef.corSpher}
 \alias{coef.corSymm}
 \alias{coef<-.corStruct}
 \alias{coef<-.corAR1}
-\alias{coef<-.corARMAd}   
+\alias{coef<-.corARMA}   
 \alias{coef<-.corCAR1}   
 \alias{coef<-.corCompSymm}
 \alias{coef<-.corHF}
@@ -27,6 +28,7 @@ coef(object) <- value
 \alias{coef<-.corSpatial}
 \alias{coef<-.corSpher}
 \alias{coef<-.corSymm}
+\alias{coef.summary.nlsList}
 
 \arguments{
  \item{object}{an object inheriting from class \code{corStruct},
@@ -60,7 +62,6 @@ coef(object) <- value
     \code{\link{corRatio}}, \code{\link{corSpatial}}, \code{\link{corSpher}},
     \code{\link{corSymm}},\code{\link{initialize}}}
 \examples{
-library(nlme)
 cst1 <- corARMA(p = 1, q = 1)
 coef(cst1)
 }

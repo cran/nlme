@@ -1,4 +1,4 @@
-% $Id: pruneLevels.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: pruneLevels.Rd,v 1.2 2000/04/17 19:03:40 bates Exp $
 \name{pruneLevels}
 \title{Prune Factor Levels}
 \usage{
@@ -23,7 +23,6 @@ pruneLevels(object)
 \seealso{\code{\link{factor}}, \code{\link{ordered}}}
 
 \examples{
-library(nlme)
 f1 <- factor(c(1,1,2,3,3,4,5))
 levels(f1)
 f2 <- f1[4:7]

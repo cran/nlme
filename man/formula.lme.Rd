@@ -1,4 +1,4 @@
-% $Id: formula.lme.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: formula.lme.Rd,v 1.2 2000/04/17 19:03:39 bates Exp $
 \name{formula.lme}
 \title{Extract lme Object Formula}
 \usage{
@@ -23,7 +23,6 @@ formula(object)
 \seealso{\code{\link{lme}}}
 
 \examples{
-library(nlme)
 data(Orthodont)
 fm1 <- lme(distance ~ age, Orthodont, random = ~ age | Subject)
 formula(fm1)

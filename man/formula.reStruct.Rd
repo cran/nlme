@@ -1,4 +1,4 @@
-% $Id: formula.reStruct.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: formula.reStruct.Rd,v 1.2 2000/04/17 19:03:39 bates Exp $
 \name{formula.reStruct}
 \title{Extract reStruct Object Formula}
 \usage{
@@ -22,7 +22,6 @@ formula(object)
 \seealso{\code{\link{formula}}}
 
 \examples{
-library(nlme)
 rs1 <- reStruct(list(A = pdDiag(diag(2), ~age), B = ~1))
 formula(rs1)
 }

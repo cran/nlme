@@ -1,4 +1,4 @@
-% $Id: corAR1.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: corAR1.Rd,v 1.2 2000/04/17 19:03:39 bates Exp $
 \name{corAR1}
 \title{AR(1) Correlation Structure}
 \usage{
@@ -39,7 +39,6 @@ corAR1(value, form, fixed)
 \author{Jose Pinheiro and Douglas Bates}
 \seealso{\code{\link{initialize.corStruct}}}
 \examples{
-library(nlme)
 ## covariate is observation order and grouping factor is Mare
 cs1 <- corAR1(0.2, form = ~ 1 | Mare)
 }

@@ -1,4 +1,4 @@
-### $Id: varFunc.q,v 1.2 1999/11/04 16:46:39 saikat Exp $
+### $Id: varFunc.R,v 1.1 2000/03/17 22:21:21 saikat Exp $
 ###
 ###              Classes of variance functions
 ###

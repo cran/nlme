@@ -1,4 +1,4 @@
-% $Id: BIC.logLik.Rd,v 1.2 1999/11/04 16:38:58 saikat Exp $
+% $Id: BIC.logLik.Rd,v 1.2 2000/04/17 19:03:38 bates Exp $
 \name{BIC.logLik}
 \title{BIC of a logLik Object}
 \usage{
@@ -30,7 +30,6 @@ BIC(object)
 \author{Jose Pinheiro and Douglas Bates}
 \seealso{\code{\link{BIC}}, \code{\link{logLik}}, \code{\link{AIC}}}.
 \examples{
-library(nlme)
 data(Orthodont)
 fm1 <- lm(distance ~ age, data = Orthodont) 
 BIC(logLik(fm1))

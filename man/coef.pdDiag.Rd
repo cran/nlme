@@ -1,4 +1,4 @@
-% $Id: coef.pdDiag.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: coef.pdDiag.Rd,v 1.2 2000/04/17 19:03:39 bates Exp $
 \name{coef.pdDiag}
 \title{pdDiag Object Coefficients}
 \usage{
@@ -36,7 +36,6 @@ coef(object) <- value
 \seealso{\code{\link{coef.pdMat}}, \code{\link{pdMat}}}
 
 \examples{
-library(nlme)
 coef(pdDiag(diag(3)))
 }
 \keyword{models}

@@ -1,4 +1,4 @@
-% $Id: coef.gnls.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: coef.gnls.Rd,v 1.2 2000/04/17 19:03:39 bates Exp $
 \name{coef.gnls}
 \title{Extract gnls Coefficients}
 \usage{
@@ -23,12 +23,9 @@ coef(object)
 \seealso{\code{\link{gnls}}} 
 
 \examples{
-library(nlme)
 data(Soybean)
-%\dontrun{
 fm1 <- gnls(weight ~ SSlogis(Time, Asym, xmid, scal), Soybean,
             weights = varPower())
 coef(fm1)
-%}
 }
 \keyword{models}

@@ -1,5 +1,5 @@
-% $Id: covariate<-.Rd,v 1.1 1999/10/13 00:50:11 saikat Exp $
-\name{covariate<-}
+% $Id: Covariate.Rd,v 1.2 2000/04/05 18:43:21 bates Exp $
+\name{Covariate}
 \title{Assign Covariate Values}
 \usage{
 covariate(object) <- value

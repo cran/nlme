@@ -1,4 +1,4 @@
-% $Id: print.summary.gls.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: print.summary.gls.Rd,v 1.2 2000/04/17 19:03:40 bates Exp $
 \name{print.summary.gls}
 \title{Print a summary.gls Object}
 \usage{
@@ -27,7 +27,6 @@ print(x, verbose, ...)
 \seealso{\code{\link{summary.gls}}, \code{\link{gls}} }
 
 \examples{
-library(nlme)
 data(Ovary)
 %\dontrun{
 fm1 <- gls(follicles ~ sin(2*pi*Time) + cos(2*pi*Time), Ovary,

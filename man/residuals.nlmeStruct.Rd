@@ -1,4 +1,4 @@
-% $Id: residuals.nlmeStruct.Rd,v 1.1 1999/10/13 00:50:12 saikat Exp $
+% $Id: residuals.nlmeStruct.Rd,v 1.1 2000/03/17 22:21:24 saikat Exp $
 \name{residuals.nlmeStruct}
 \title{Calculate nlmeStruct Residuals}
 \usage{

@@ -1,4 +1,4 @@
-% $Id: model.matrix.reStruct.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: model.matrix.reStruct.Rd,v 1.2 2000/04/17 19:03:39 bates Exp $
 \name{model.matrix.reStruct}
 \title{reStruct Model Matrix}
 \usage{
@@ -37,7 +37,6 @@ model.matrix(object, data, contr)
   \code{\link{reStruct}}, \code{\link{formula.reStruct}}} 
 
 \examples{
-library(nlme)
 data(Pixel)
 rs1 <- reStruct(list(Dog = ~day, Side = ~1), data = Pixel)
 model.matrix(rs1, Pixel)

@@ -1,4 +1,4 @@
-% $Id: residuals.lme.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: residuals.lme.Rd,v 1.2 2000/04/17 19:03:40 bates Exp $
 \name{residuals.lme}
 \title{Extract lme Residuals}
 \usage{
@@ -58,7 +58,6 @@ residuals(object, level, type, asList)
 \seealso{\code{\link{lme}}, \code{\link{fitted.lme}} }
 
 \examples{
-library(nlme)
 data(Orthodont)
 fm1 <- lme(distance ~ age + Sex, data = Orthodont, random = ~ 1)
 residuals(fm1, level = 0:1)

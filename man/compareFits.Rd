@@ -1,4 +1,4 @@
-% $Id: compareFits.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: compareFits.Rd,v 1.2 2000/04/17 19:03:39 bates Exp $
 \name{compareFits}
 \title{Compare Fitted Objects}
 \usage{
@@ -35,7 +35,6 @@ compareFits(object1, object2, which)
   \code{\link{coef}}, \code{\link{random.effects}}}
 
 \examples{
-library(nlme)
 data(Orthodont)
 fm1 <- lmList(Orthodont)
 fm2 <- lme(fm1)

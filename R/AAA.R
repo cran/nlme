@@ -1,4 +1,4 @@
-### $Id: AAA.R,v 1.1 1999/11/04 16:42:28 saikat Exp $
+### $Id: AAA.R,v 1.1 2000/03/17 22:21:20 saikat Exp $
 ###
 ### nlme for R
 ###

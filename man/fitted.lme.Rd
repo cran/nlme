@@ -1,4 +1,4 @@
-% $Id: fitted.lme.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: fitted.lme.Rd,v 1.2 2000/04/17 19:03:39 bates Exp $
 \name{fitted.lme}
 \title{Extract lme Fitted Values}
 \usage{
@@ -47,7 +47,6 @@ fitted(object, level, asList)
 \seealso{\code{\link{lme}}, \code{\link{residuals.lme}} }
 
 \examples{
-library(nlme)
 data(Orthodont)
 fm1 <- lme(distance ~ age + Sex, data = Orthodont, random = ~ 1)
 fitted(fm1, level = 0:1)

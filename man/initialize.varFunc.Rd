@@ -1,4 +1,4 @@
-% $Id: initialize.varFunc.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: initialize.varFunc.Rd,v 1.2 2000/04/17 19:03:39 bates Exp $
 \name{initialize.varFunc}
 \title{Initialize varFunc Object}
 \usage{
@@ -35,7 +35,6 @@ initialize(object, data, ...)
 }
 \author{Jose Pinheiro and Douglas Bates}
 \examples{
-library(nlme)
 data(Orthodont)
 vf1 <- varPower( form = ~ age | Sex )
 vf1 <- initialize( vf1, Orthodont )

@@ -1,4 +1,4 @@
-% $Id: Variogram.corExp.Rd,v 1.2 1999/11/04 16:38:58 saikat Exp $
+% $Id: Variogram.corExp.Rd,v 1.2 2000/04/17 19:03:38 bates Exp $
 \name{Variogram.corExp}
 \title{Calculate Semi-variogram for a corExp Object}
 \usage{
@@ -37,7 +37,6 @@ Variogram(object, distance, sig2, length.out)
 
 \seealso{\code{\link{corExp}}, \code{\link{plot.Variogram}}}
 \examples{
-library(nlme)
 library(mva)
 data(BodyWeight)
 cs1 <- corExp(3, form = ~ Time | Rat)

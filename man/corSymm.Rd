@@ -1,4 +1,4 @@
-% $Id: corSymm.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: corSymm.Rd,v 1.2 2000/04/17 19:03:39 bates Exp $
 \name{corSymm}
 \title{General Correlation Structure}
 \usage{
@@ -46,7 +46,6 @@ Computing, 6, 289-296.
 \seealso{\code{\link{initialize.corSymm}}}
 
 \examples{
-library(nlme)
 ## covariate is observation order and grouping factor is Subject
 cs1 <- corSymm(form = ~ 1 | Subject)
 }

@@ -1,4 +1,4 @@
-% $Id: nlmeStruct.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: nlmeStruct.Rd,v 1.2 2000/04/17 19:03:39 bates Exp $
 \name{nlmeStruct}
 \title{Nonlinear Mixed-Effects Structure}
 \usage{
@@ -32,7 +32,6 @@ nlmeStruct(reStruct, corStruct, varStruct)
   \code{\link{corClasses}}, \code{\link{varFunc}} }
 
 \examples{
-library(nlme)
 nlms1 <- nlmeStruct(reStruct(~age), corAR1(), varPower())
 }
 \keyword{models}

@@ -1,4 +1,4 @@
-% $Id: groupedData.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: groupedData.Rd,v 1.2 2000/04/04 22:26:02 bates Exp $
 \name{groupedData}
 \title{Construct a groupedData Object}
 \usage{
@@ -6,6 +6,8 @@ groupedData(formula, data, order.groups, FUN, outer, inner,
  labels, units)
 }
 \alias{groupedData}
+\alias{[.groupedData}
+\alias{as.data.frame.groupedData}
 \arguments{
  \item{formula}{a formula of the form \code{resp ~ cov | group} where
    \code{resp} is the response, \code{cov} is the primary covariate, and

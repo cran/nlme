@@ -1,67 +1,40 @@
-Alfalfa         Yields of three varieties of Alfalfa
-Animal          Animal breeding data from "SAS System for Mixed Models"
-Assay           Laboratory data on a biochemical assay
-AvgDGain        Average daily weight gain from "SAS System ..."
-BIB             Balanced Incomplete Block design from "SAS System ..."
-BodyWeight      Rat weight over time for different diets (Hand and Crowder, 1996)
-Bond            Metal bonding data from "SAS System ..."
-CO2             Carbon dioxide uptake by species in different conditions
-Cephamadole     Pharmacokinetic data from Davidian and Giltinan 1995 p. 2
-ChickWeight     Growth of chicks on different diets (Hand and Crowder, 1996)
-Cultivation     A split-plot design - data set 2.2(a) from "SAS System ..."
-DNase           Assay of DNase - Davidian and Giltinan (1995) 5.2.4, p. 134
-Demand          Per-capita demand deposits - example 3.6 in "SAS System ..."
-Dialyzer	Dialyzer efficiency - data set 8.2 in "SAS System ..."
-Earthquake	Severity of earthquakes - originally from Joyner and Boore (1981)
-Fatigue		Metal fatique data given in Lu and Meeker (1993)
-Gasoline	Gasoline yields for different crude samples (Prater, 1955)
-Genetics        RCBD of wheat families in blocks; data set 4.5 in "SAS ..."
-Glucose		Glucose levels over time - Hand and Crowder (1996), Table B.12
-Gun		Naval gun firing data from Hicks (1993)
-HR              Heart rate data - example 3.5 from "SAS System ..."
-IGF		Assay data on Insulin-like Growth Factor - Davidian and Giltinan
-IncBlk          Incomplete block design - data set 5.5 from "SAS System ..."
-Indometh	Pharmacokinetic data on Indomethicin - Davidian and Giltinan
-Loblolly	Growth of Loblolly pines - Kung (1986)
-Machines	Productivity of workers by machine - Milliken and Johnson (1992)
-MathAchSchool	Demographic data on schools - Bryk and Raudenbush (1992)
-MathAchieve	Mathematics achievement scores - Bryk and Raudenbush (1992)
-Meat		Tenderness by storage and block - Cochran and Cox (1957)
-Milk		Milk production by diet - Diggle, Liang and Zeger (1994)
-Mississippi     Nitrogen conc in Mississippi R.; data set 4.2 in "SAS ..."
-Multilocation   Multilocation agricultural trial; d. set 2.8.1 in "SAS ..."
-Muscle		Muscle response by conc of CaCl2 - Baumann and Waldvogel (1963)
-Nitrendipene	Assay of nitrendipene - Bates and Watts (1988), Appendix A4.2
-Oats		Yield under different fertilizers - Yates (1935)
-Orange		Growth of orange trees - Draper and Smith (1998) Ex. 24 N
-Orthodont	Orthodontic measurement over time - Pothoff and Roy (1964)
-Ovary		No. of large ovarian follicles over time, Lindstrom and Bates (1988)
-Oxboys		Heights of boys in Oxford, England - Goldstein (1987)
-Oxide           Oxide coating on a semiconductor - d.s. 4.4 in "SAS ..."
-PBG		Change in blood pressure vs dose of phenylbiguanide, Ludbrook (1994)
-PBIB            Partially balanced incomplete block; d.s. 1.5.1 in "SAS..."
-Phenobarb	Neonatal pharmacokinetics of phenobarbitol - Davidian and Giltinan
-Pixel		X-ray pixel intensities over time from Deborah Darien
-Puromycin	Reaction rate versus concentration - Bates and Watts (1988), A1.1
-Quinidine	Pharmacokinetic study of quinidine - Davidian and Giltinan
-Rail		Travel times of ultrasonic waves in railway rails - Devore (1995)
-RatPupWeight	Wt. of rat pups by litter - Davidian and Giltinan (1995)
-Relaxin		Assays of relaxin - Davidian and Giltinan (1995)
-Remifentanil	Pharmacokinetics of remifentanil
-SIMS            Second Int'l Math Study - used in section 7.2.2 of "SAS ..."
-Semi2           Oxide coating on a semiconductor - d.s. 4.4 in "SAS ..."
-Semiconductor   Resistance in a semiconductor - d.s. 2.2(b) in "SAS ..."
-Soybean		Soybean growth by variety - Davidian and Giltinan (1995)
-Spruce		Spruce tree growth - Diggle, Liang and Zeger (1994)
-TeachingI       Split-plot of teachers and methods - d.s. 5.6 in "SAS ..."
-TeachingII      Split-plot of teachers and methods - d.s. 5.7 in "SAS ..."
-Tetracycline1	Pharmacokinetics of tetracycline - Hand and Crowder (1996) B.8
-Tetracycline2	Pharmacokinetics of tetracycline - Hand and Crowder (1996) B.8
-Theoph		Pharmacokinetics of theophylline - Boeckmann, Sheiner and Beal
-WWheat          Winter wheat yields - d.s. 7.2 in "SAS System ..."
-Wafer		Voltage vs current at 8 sites on 10 wafers - Lucent Technologies
-WaferTypes      Split-plot of wafer fabrication - d.s. 5.8 in "SAS ..."
-Weights         Weight-training program results - d.s. 3.2(a) in "SAS ..."
-Wheat		Yields by growing conditions - Milliken and Johnson (1992)
-Wheat2		Yields from a RCB design - d.s. 9.6.2 in "SAS System ..."
-ergoStool       Ergometrics experiment with stool types - Devore (1995)
+Alfalfa                  Split-Plot Experiment on Varieties of Alfalfa
+Assay                    Bioassay on Cell Culture Plate
+BodyWeight               Rat weight over time for different diets
+Cefamandole              Pharmacokinetics of Cefamandole
+Dialyzer                 High-Flux Hemodialyzer
+Earthquake               Earthquake Intensity
+Fatigue                  Cracks caused by metal fatigue
+Gasoline                 Refinery yield of gasoline
+Glucose                  Glucose levels over time
+Glucose2                 Glucose Levels Following Alcohol Ingestion
+Gun                      Methods for firing naval guns
+IGF                      Radioimmunoassay of IGF-I Protein
+Machines                 Productivity Scores for Machines and Workers
+MathAchSchool            School demographic data for MathAchieve
+MathAchieve              Mathematics achievement scores
+Meat                     Tenderness of meat
+Milk                     Protein content of cows' milk
+Muscle                   Contraction of heart muscle sections
+Nitrendipene             Assay of nitrendipene
+Oats                     Split-plot Experiment on Varieties of Oats
+Orthodont                Growth curve data on an orthdontic measurement
+Ovary                    Counts of Ovarian Follicles
+Oxboys                   Heights of Boys in Oxford
+Oxide                    Variability in Semiconductor Manufacturing
+PBG                      Effect of Phenylbiguanide on Blood Pressure
+Phenobarb                Phenobarbitol Kinetics
+Pixel                    X-ray pixel intensities over time
+Quinidine                Quinidine Kinetics
+Rail                     Evaluation of Stress in Railway Rails
+RatPupWeight             RatPupWeight
+Relaxin                  Relaxin
+Remifentanil             Pharmacokinetics of remifentanil
+Soybean                  Soybean
+Spruce                   Growth of Spruce Trees
+Tetracycline1            Pharmacokinetics of tetracycline
+Tetracycline2            Pharmacokinetics of tetracycline
+Wafer                    Modeling of Analog MOS Circuits
+Wheat                    Yields by growing conditions
+Wheat2                   Wheat Yield Trials
+ergoStool                Ergometrics experiment with stool types

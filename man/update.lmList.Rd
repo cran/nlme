@@ -1,4 +1,4 @@
-% $Id: update.lmList.Rd,v 1.2 1999/11/04 16:38:59 saikat Exp $
+% $Id: update.lmList.Rd,v 1.2 2000/04/17 19:03:40 bates Exp $
 \name{update.lmList}
 \title{Update an lmList Object}
 \usage{
@@ -34,7 +34,6 @@ update(object, formula, data, level, subset, na.action, control, pool)
 \seealso{\code{\link{lmList}}}
 
 \examples{
-library(nlme)
 data(Orthodont)
 fm1 <- lmList(Orthodont)
 fm2 <- update(fm1, distance ~ I(age - 11))

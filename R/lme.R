@@ -1,4 +1,4 @@
-### $Id: lme.q,v 1.6 1999/11/18 23:56:57 saikat Exp $
+### $Id: lme.R,v 1.2 2000/03/30 00:07:26 bates Exp $
 ###
 ###            Fit a general linear mixed effects model
 ###
@@ -310,14 +310,15 @@ lme.formula <-
   numIter <- 0
   repeat {
     oldPars <- coef(lmeSt)
-      aNlm <- nlm(f = function(lmePars) -logLik(lmeSt, lmePars),
-                  p = c(coef(lmeSt)),
-                  hessian = TRUE,
-                  print = ifelse(controlvals$msVerbose, 2, 0),
-                  stepmax = controlvals$nlmStepMax*max(sqrt(sum(coef(lmeSt)^2)), 1.0),
-                  check = FALSE)
-      numIter0 <- NULL
-      coef(lmeSt) <- aNlm$estimate
+    aNlm <- optim(fn = function(lmePars) -logLik(lmeSt, lmePars),
+                  par = c(coef(lmeSt)), hessian = TRUE,
+                  method = "BFGS",
+                  control = list(trace = controlvals$msVerbose,
+                  reltol = if(numIter == 0) controlvals$msTol
+                           else 100*.Machine$double.eps,
+                  maxit = controlvals$msMaxIter))
+    numIter0 <- NULL
+    coef(lmeSt) <- aNlm$par
     attr(lmeSt, "lmeFit") <- MEestimate(lmeSt, grps)
     ## checking if any updating is needed
     if (!needUpdate(lmeSt)) break
