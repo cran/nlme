@@ -1,4 +1,4 @@
-## $Id: lmList.R,v 1.8 2002/03/05 15:36:27 bates Exp $
+## $Id: lmList.R,v 1.8.2.2 2002/12/11 23:56:35 bates Exp $
 ###
 ###                  Create a list of lm objects
 ###
@@ -64,7 +64,7 @@ lmList.formula <-
       groups <- pruneLevels(getGroups(data, level = level))
       grpForm <- getGroupsFormula(data)
       Call$object <-
-        as.vector(eval(parse(text=paste(deparse(as.vector(Call$object)),
+        as.vector(eval(parse(text=paste(deparse(Call$object),
                                deparse(grpForm[[2]]), sep = "|"))))
 
     } else {
@@ -546,7 +546,7 @@ pairs.lmList <-
 		    panel.xyplot(x, y)
                     if (any(ids <- id[subscripts])) {
                         ltext(x[ids], y[ids], idLabels[subscripts][ids],
-                              cex = dots$cex, adj = dots$adj)
+                             cex = dots$cex, adj = dots$adj)
 		    }
 		  }))
   } else {				# splom
@@ -807,8 +807,6 @@ plot.lmList <-
     args <- c(args,
 	      panel = list(function(x, y, ...)
 		  {
-                    x <- as.numeric(x)
-                    y <- as.numeric(y)
 		    if (grid) panel.grid()
 		    panel.histogram(x, y)
 		    if (!is.null(abl)) {

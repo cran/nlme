@@ -1,7 +1,6 @@
 #-*- R -*-
 
 library( nlme )
-library( lattice )
 options( width = 65, digits = 5 )
 options( contrasts = c(unordered = "contr.helmert", ordered = "contr.poly") )
 
@@ -104,7 +103,10 @@ anova( fm1OrthF, fm2OrthF )
 random.effects( fm1OrthF )
 ranef( fm1OrthFM )
 coef( fm1OrthF )
-plot(compareFits(coef(fm1OrthF), coef(fm1OrthFM)))   # Figure 1.15
+plot(
+###############
+     
+     compareFits(coef(fm1OrthF), coef(fm1OrthFM)))   # Figure 1.15
 plot( augPred(fm1OrthF), aspect = "xy", grid = T )   # Figure 1.16
 
 # 1.5  Models for Nested Classification Factors

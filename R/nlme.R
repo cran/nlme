@@ -372,6 +372,7 @@ nlme.formula <-
   if (!missing(subset)) {
     mfArgs[["subset"]] <- asOneSidedFormula(Call[["subset"]])[[2]]
   }
+  mfArgs$drop.unused.levels <- TRUE
   dataMix <- do.call("model.frame", mfArgs)
 
   origOrder <- row.names(dataMix)	# preserve the original order
@@ -1106,6 +1107,7 @@ predict.nlme <-
                    omit = c(names(object$plist), "pi",
                      deparse(getResponseFormula(object)[[2]]))),
                  data = newdata, na.action = na.action)
+  mfArgs$drop.unused.levels <- TRUE
   dataMix <- do.call("model.frame", mfArgs)
   origOrder <- row.names(dataMix)	# preserve the original order
   whichRows <- match(origOrder, row.names(newdata))

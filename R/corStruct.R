@@ -1,4 +1,4 @@
-### $Id: corStruct.R,v 1.5.2.1 2002/08/09 19:45:28 bates Exp $
+### $Id: corStruct.R,v 1.5.2.2 2002/12/11 23:56:35 bates Exp $
 ###
 ###              Classes of correlation structures
 ###
@@ -285,7 +285,7 @@ print.summary.corStruct <-
 {
   class(x) <- attr(x, "oClass")
   cat(paste("Correlation Structure: ", attr(x, "structName"), "\n", sep = ""))
-  cat(paste(" Formula:", deparse(as.vector(formula(x))),"\n"))
+  cat(paste(" Formula:", deparse(formula(x)),"\n"))
   cat(" Parameter estimate(s):\n")
   print(coef(x, unconstrained = FALSE))
 }
@@ -528,7 +528,7 @@ print.summary.corSymm <-
   if (length(as.vector(x)) > 0 &&
       !is.null(mC <- attr(x, "maxCov"))) {
     cat("Correlation Structure: General\n")
-    cat(paste(" Formula:", deparse(as.vector(formula(x))),"\n"))
+    cat(paste(" Formula:", deparse(formula(x)),"\n"))
     cat(" Parameter estimate(s):\n")
     val <- diag(mC)
     dimnames(val) <- list(1:mC, 1:mC)
@@ -769,7 +769,7 @@ print.summary.corNatural <-
   if (length(as.vector(x)) > 0 &&
       !is.null(mC <- attr(x, "maxCov"))) {
     cat("Correlation Structure: General\n")
-    cat(paste(" Formula:", deparse(as.vector(formula(x))),"\n"))
+    cat(paste(" Formula:", deparse(formula(x)),"\n"))
     cat(" Parameter estimate(s):\n")
     aux <- coef(x, FALSE)
     val <- diag(mC)
@@ -1939,8 +1939,10 @@ getCovariate.corSpatial <-
 	covForm <-
           eval(parse(text = paste("~", deparse(covForm[[2]]),"-1",sep="")))
       }
-      covar <- as.data.frame(unclass(model.matrix(covForm,
-					      model.frame(covForm, data))))
+      covar <-
+          as.data.frame(unclass(model.matrix(covForm,
+                                             model.frame(covForm, data,
+                                                         drop.unused.levels = TRUE))))
     } else {
       covar <- NULL
     }

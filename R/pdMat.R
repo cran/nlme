@@ -1,4 +1,4 @@
-### $Id: pdMat.R,v 1.6.2.1 2002/07/23 22:23:28 bates Exp $
+### $Id: pdMat.R,v 1.6.2.2 2002/12/11 23:56:35 bates Exp $
 ###
 ###              Classes of positive-definite matrices
 ###
@@ -416,9 +416,6 @@ plot.pdMat <-
     groups <- c(groups, rep(0, nrow(additional)))
   }
   splom(~ dataMat, panel = function(x, y, subscripts, groups, ...) {
-    x <- as.numeric(x)
-    y <- as.numeric(y)
-
     groups <- groups[subscripts]	# should be a no-op but
     if (any(g0 <- groups == 0)) {	# plot as points
       panel.xyplot(x[g0], y[g0], ..., type = "p")
@@ -464,15 +461,15 @@ print.summary.pdMat <-
     if (!(is.null(form <- attr(x, "formula")))) {
       cat(paste(" Formula: "))
       if (inherits(form, "formula")) {
-        cat(deparse(as.vector(form)))
+        cat(deparse(form))
         if (!is.null(Level)) { cat( paste( " |", Level ) ) }
       } else {
         if (length(form) == 1) {
-          cat(deparse(as.vector(form[[1]])))
+          cat(deparse(form[[1]]))
           if (!is.null(Level)) { cat( paste( " |", Level ) ) }
         } else {
           cat(deparse(lapply(form,
-                             function(el) as.name(deparse(as.vector(el))))))
+                             function(el) as.name(deparse(el)))))
           cat("\n Level:", Level)
         }
       }

@@ -1,4 +1,4 @@
-### $Id: gnls.R,v 1.7.2.2 2002/08/09 19:45:28 bates Exp $
+### $Id: gnls.R,v 1.7.2.3 2002/12/11 23:56:35 bates Exp $
 ###
 ###  Fit a general nonlinear regression model with correlated and/or
 ###  heteroscedastic errors
@@ -187,6 +187,7 @@ gnls <-
   if (!missing(subset)) {
     mfArgs[["subset"]] <- asOneSidedFormula(Call[["subset"]])[[2]]
   }
+  mfArgs$drop.unused.levels <- TRUE
   dataMod <- do.call("model.frame", mfArgs)
 
   origOrder <- row.names(dataMod)	# preserve the original order
@@ -677,6 +678,7 @@ predict.gnls <-
                    omit = c(names(object$plist), "pi",
                      deparse(getResponseFormula(object)[[2]]))),
                  data = newdata, na.action = na.action)
+  mfArgs$drop.unused.levels <- TRUE
   dataMod <- do.call("model.frame", mfArgs)
 
   ## making sure factor levels are the same as in contrasts

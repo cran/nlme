@@ -1,4 +1,4 @@
-### $Id: varFunc.R,v 1.8.2.1 2002/08/09 19:45:29 bates Exp $
+### $Id: varFunc.R,v 1.8.2.2 2002/12/11 23:56:35 bates Exp $
 ###
 ###              Classes of variance functions
 ###
@@ -137,7 +137,7 @@ print.summary.varFunc <-
   if (length(aux <- coef(x, uncons = FALSE, allCoef = TRUE)) > 0) {
     if (header) cat("Variance function:\n")
     cat(paste(" Structure: ", attr(x, "structName"), "\n", sep = ""))
-    cat(paste(" Formula:", deparse(as.vector(formula(x))),"\n"))
+    cat(paste(" Formula:", deparse(formula(x)),"\n"))
     cat(" Parameter estimates:\n")
     print(aux)
   } else {
@@ -244,7 +244,7 @@ print.summary.varFixed <-
 {
   cat("Variance function:\n")
   cat(" Structure: fixed weights\n")
-  cat(paste(" Formula:", deparse(as.vector(formula(x))),"\n"))
+  cat(paste(" Formula:", deparse(formula(x)),"\n"))
 }
 
 summary.varFixed <-

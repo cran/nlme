@@ -1,4 +1,4 @@
-### $Id: newMethods.R,v 1.8 2001/10/30 20:51:14 bates Exp $
+### $Id: newMethods.R,v 1.8.2.2 2002/12/11 23:56:35 bates Exp $
 ###
 ###      Methods for generics from newGenerics.q for some standard classes
 ###
@@ -157,13 +157,13 @@ getGroups.data.frame <-
     nlevel <- match(level, names(flist))
     if (any(aux <- is.na(nlevel))) {
       stop(paste("Level of", level[aux],"does not match formula \"",
-		 deparse(as.vector(form)), "\""))
+		 deparse(form), "\""))
     }
   } else {
     nlevel <- as.numeric(level)
     if (any(aux <- is.na(match(nlevel, 1:ncol(value))))) {
       stop(paste("level of ", level[aux]," does not match formula \"",
-	       deparse(as.vector(form)), "\""))
+	       deparse(form), "\""))
     }
   }
   if (length(nlevel) > 1)  return(value[, nlevel]) # multicolumn selection
@@ -288,7 +288,7 @@ pairs.compareFits <-
 		  data = tt,
 		  groups = tt$grp,
 		  panel = function(x, y, subscripts, groups, ...)
-		  {
+                  {
                     x <- as.numeric(x)
                     y <- as.numeric(y)
 		    panel.superpose(x, y, subscripts, groups)
@@ -314,7 +314,7 @@ pairs.compareFits <-
 		    aux <- aux == unique(aux)[1]
 		    lsegments(x[aux], y[aux], x[!aux], y[!aux],
                               lty = 2, lwd = 0.5)
-                }, xlab = dn[[3]][1], ylab = dn[[3]][2])
+		  }, xlab = dn[[3]][1], ylab = dn[[3]][2])
   }
   dots <- list(...)
   args[names(dots)] <- dots
@@ -502,8 +502,6 @@ plot.nls <-
         args <- c(args,
                   panel = list(function(x, y, ...)
 		    {
-                      x <- as.numeric(x)
-                      y <- as.numeric(y)
 		      if (grid) panel.grid()
 		      panel.bwplot(x, y, ...)
 		      if (!is.null(abl)) {
@@ -518,8 +516,6 @@ plot.nls <-
       args <- c(args,
                 panel = list(function(x, ...)
 		  {
-                    x <- as.numeric(x)
-                    y <- as.numeric(y)
 		    if (grid) panel.grid()
 		    panel.histogram(x, ...)
 		    if (!is.null(abl)) {
@@ -658,6 +654,8 @@ plot.compareFits <-
 	       groups = tt$grp,
 	       panel = function(x, y, subscripts, groups, ...)
 	       {
+                 x <- as.numeric(x)
+                 y <- as.numeric(y)
 		 dot.line <- trellis.par.get("dot.line")
 		 panel.abline(h = y, lwd = dot.line$lwd,
 			      lty = dot.line$lty, col = dot.line$col)

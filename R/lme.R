@@ -1,4 +1,4 @@
-### $Id: lme.R,v 1.11.2.2 2002/08/09 19:45:28 bates Exp $
+### $Id: lme.R,v 1.11.2.4 2002/12/11 23:56:35 bates Exp $
 ###
 ###            Fit a general linear mixed effects model
 ###
@@ -231,6 +231,7 @@ lme.formula <-
   if (!missing(subset)) {
     mfArgs[["subset"]] <- asOneSidedFormula(Call[["subset"]])[[2]]
   }
+  mfArgs$drop.unused.levels <- TRUE
   dataMix <- do.call("model.frame", mfArgs)
   origOrder <- row.names(dataMix)	# preserve the original order
   ## sort the model.frame by groups and get the matrices and parameters
@@ -1805,9 +1806,6 @@ plot.ranef.lme <-
     xyplot(y ~ x | g, data = argData, subscripts = TRUE,
            scales = list(x = list(relation = "free", draw = FALSE)),
            panel = function(x, y, subscripts, ...) {
-             x <- as.numeric(x)
-             y <- as.numeric(y)
-               
              vN <- .vNam[subscripts][1]
              if (.grid) panel.grid()
              if (.vType[vN] == "numeric") {
@@ -1857,7 +1855,8 @@ predict.lme <-
   }
 
   mfArgs <- list(formula = asOneFormula(formula(reSt), fixed),
-		 data = newdata, na.action = na.action)
+		 data = newdata, na.action = na.action,
+                 drop.unused.levels = TRUE)
   dataMix <- do.call("model.frame", mfArgs)
   origOrder <- row.names(dataMix)	# preserve the original order
   whichRows <- match(origOrder, row.names(newdata))
@@ -2071,7 +2070,7 @@ print.lme <-
   if (inherits(x, "nlme")) {	# nlme object
     cat( "Nonlinear mixed-effects model fit by " )
     cat( ifelse( x$method == "REML", "REML\n", "maximum likelihood\n") )
-    cat("  Model:", deparse(as.vector(x$call$model)),"\n")
+    cat("  Model:", deparse(x$call$model),"\n")
   } else {				# lme objects
     cat( "Linear mixed-effects model fit by " )
     cat( ifelse( x$method == "REML", "REML\n", "maximum likelihood\n") )
@@ -2083,11 +2082,11 @@ print.lme <-
   cat("  Log-", ifelse(x$method == "REML", "restricted-", ""),
              "likelihood: ", format(x$logLik), "\n", sep = "")
   fixF <- x$call$fixed
-  if (inherits(fixF, "formula") || is.call(fixF)) {
-    cat("  Fixed:", deparse(as.vector(x$call$fixed)), "\n")
+  if (inherits(fixF, "formula") || is.call(fixF) || is.name(fixF)) {
+    cat("  Fixed:", deparse(x$call$fixed), "\n")
   } else {
     cat("  Fixed:", deparse(lapply(fixF, function(el)
-                                   as.name(deparse(as.vector(el))))), "\n")
+                                   as.name(deparse(el)))), "\n")
   }
   print(fixef(x))
   cat("\n")
@@ -2131,7 +2130,7 @@ print.summary.lme <-
   if (inherits(x, "nlme")) {	# nlme object
     cat( "Nonlinear mixed-effects model fit by " )
     cat( ifelse( x$method == "REML", "REML\n", "maximum likelihood\n") )
-    cat("  Model:", deparse(as.vector(x$call$model)),"\n")
+    cat("  Model:", deparse(x$call$model),"\n")
   } else {				# lme objects
     cat( "Linear mixed-effects model fit by " )
     cat( ifelse( x$method == "REML", "REML\n", "maximum likelihood\n") )
@@ -2150,9 +2149,9 @@ print.summary.lme <-
   cat("Fixed effects: ")
   fixF <- x$call$fixed
   if (inherits(fixF, "formula") || is.call(fixF)) {
-    cat(deparse(as.vector(x$call$fixed)), "\n")
+    cat(deparse(x$call$fixed), "\n")
   } else {
-    cat(deparse(lapply(fixF, function(el) as.name(deparse(as.vector(el))))),
+    cat(deparse(lapply(fixF, function(el) as.name(deparse(el)))),
         "\n")
   }
   ## fixed effects t-table and correlations

@@ -1,4 +1,4 @@
-### $Id: gls.R,v 1.6.2.2 2002/08/09 19:45:28 bates Exp $
+### $Id: gls.R,v 1.6.2.3 2002/12/11 23:56:35 bates Exp $
 ###
 ###  Fit a linear model with correlated errors and/or heteroscedasticity
 ###
@@ -68,6 +68,7 @@ gls <-
   if (!missing(subset)) {
     mfArgs[["subset"]] <- asOneSidedFormula(Call[["subset"]])[[2]]
   }
+  mfArgs$drop.unused.levels <- TRUE
   dataMod <- do.call("model.frame", mfArgs)
   origOrder <- row.names(dataMod)	# preserve the original order
   if (!is.null(groups)) {
@@ -84,7 +85,7 @@ gls <-
     revOrder <- match(origOrder, row.names(dataMod)) # putting in orig. order
   } else grps <- NULL
 
-  ## obtaing basic model matrices
+  ## obtaining basic model matrices
   X <- model.frame(model, dataMod)
   ## keeping the contrasts for later use in predict
   contr <- lapply(X, function(el)
@@ -842,6 +843,7 @@ predict.gls <-
   }
   form <- getCovariateFormula(object)
   mfArgs <- list(formula = form, data = newdata, na.action = na.action)
+  mfArgs$drop.unused.levels <- TRUE
   dataMod <- do.call("model.frame", mfArgs)
   ## making sure factor levels are the same as in contrasts
   contr <- object$contrasts
@@ -904,7 +906,7 @@ print.gls <-
     cat("Generalized least squares fit by ")
     cat(ifelse(x$method == "REML", "REML\n", "maximum likelihood\n"))
   }
-  cat("  Model:", deparse(as.vector(mCall$model)), "\n")
+  cat("  Model:", deparse(mCall$model), "\n")
   cat("  Data:", deparse( mCall$data ), "\n")
   if (!is.null(mCall$subset)) {
     cat("  Subset:", deparse(asOneSidedFormula(mCall$subset)[[2]]),"\n")
@@ -938,7 +940,7 @@ print.summary.gls <-
     cat("Generalized least squares fit by ")
     cat(ifelse(x$method == "REML", "REML\n", "maximum likelihood\n"))
   }
-  cat("  Model:", deparse(as.vector(mCall$model)), "\n")
+  cat("  Model:", deparse(mCall$model), "\n")
   cat("  Data:", deparse( mCall$data ), "\n")
   if (!is.null(mCall$subset)) {
     cat("  Subset:", deparse(asOneSidedFormula(mCall$subset)[[2]]),"\n")

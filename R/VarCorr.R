@@ -1,4 +1,4 @@
-### $Id: VarCorr.R,v 1.2 2001/01/10 19:04:03 bates Exp $
+### $Id: VarCorr.R,v 1.2.2.1 2002/12/11 23:56:35 bates Exp $
 ###
 ###          Extract variance components of lme models.
 ###
@@ -100,11 +100,11 @@ VarCorr.pdMat <- function( x, sigma = 1., rdig = 3)
     if ( inherits( attr(x, "formula"), "listForm" ) ) {# an nlme'ism
       paste(class(x)[[1]], "(list(",
             paste( sapply( attr(x, "formula"),
-                          function(x) as.character(deparse(as.vector(x)))),
+                          function(x) as.character(deparse(x))),
                   collapse=","), "))", sep = "")
     } else {
       paste(class(x)[[1]], "(",
-            substring(deparse(as.vector(attr(x, "formula"))), 2), ")", sep = "")
+            substring(deparse(attr(x, "formula")), 2), ")", sep = "")
     }
       if ( attr(sx, "noCorrelation") | (p <= 1) ) {
     return(v)

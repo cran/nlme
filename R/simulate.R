@@ -61,7 +61,8 @@ createConLin <-
   ## extract a data frame with enough information to evaluate
   ## fixed, groups, reStruct, corStruct, and varStruct
   dataMix <-
-    model.frame(formula = asOneFormula(formula(lmeSt), fixed, groups), data = data)
+    model.frame(formula = asOneFormula(formula(lmeSt), fixed, groups),
+                data = data, drop.unused.levels = TRUE)
   origOrder <- row.names(dataMix)	# preserve the original order
   ## sort the model.frame by groups and get the matrices and parameters
   ## used in the estimation procedures
@@ -502,8 +503,6 @@ plot.simulate.lme <-
   }
   xyplot(form, data = frm,
 	 panel = function(x, y, ...) {
-           x <- as.numeric(x)
-           y <- as.numeric(y)
            panel.grid()
            panel.xyplot(x, y, type = "l", ...)
            if ((dfType <- as.double(names(x)[1])) == 1) {
