@@ -1,3 +1,8 @@
+2001-12-18  Douglas Bates  <bates@stat.wisc.edu>
+
+	* R/corStruct.R: Finally resolved the print.summary.corSymm
+	controversy so it prints and it prints the correct value.
+
 2001-12-10  Douglas Bates  <bates@stat.wisc.edu>
 
 	* R/lme.R: unclassed the logLik component of an lme summary before

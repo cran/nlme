@@ -272,7 +272,7 @@ needUpdate.corStruct <-
 print.corStruct <-
   function(x, ...)
 {
-  if (length(aux <- coef(x, FALSE)) > 0) {
+  if (length(aux <- coef(x, unconstrained = FALSE)) > 0) {
     cat("Correlation structure of class", class(x)[1], "representing\n")
     print(invisible(aux), ...)
   } else {
@@ -287,7 +287,7 @@ print.summary.corStruct <-
   cat(paste("Correlation Structure: ", attr(x, "structName"), "\n", sep = ""))
   cat(paste(" Formula:", deparse(as.vector(formula(x))),"\n"))
   cat(" Parameter estimate(s):\n")
-  print(coef(x, FALSE))
+  print(coef(x, unconstrained = FALSE))
 }
 
 
@@ -511,7 +511,7 @@ print.corSymm <-
 {
   if (length(as.vector(x)) > 0 &&
       !is.null(mC <- attr(x, "maxCov"))) {
-    aux <- coef(x, FALSE)
+    aux <- coef.corSymm(x, unconstrained = FALSE)
     val <- diag(mC)
     dimnames(val) <- list(1:mC, 1:mC)
     val[lower.tri(val)] <- aux
@@ -530,11 +530,9 @@ print.summary.corSymm <-
     cat("Correlation Structure: General\n")
     cat(paste(" Formula:", deparse(as.vector(formula(x))),"\n"))
     cat(" Parameter estimate(s):\n")
-#    aux <- coef(x, FALSE)
     val <- diag(mC)
     dimnames(val) <- list(1:mC, 1:mC)
-#    val[lower.tri(val)] <- aux
-    val[lower.tri(val)] <- x
+    val[lower.tri(val)] <- coef.corSymm(x, unconstrained = FALSE)
     class(val) <- "correlation"
     print(val, ...)
   } else cat("Unitialized correlation structure of class corSymm\n")
