@@ -5,7 +5,7 @@ importFrom(graphics, pairs, plot)
 
 export(ACF, allCoef, asOneFormula, asTable, augPred, balancedGrouped,
        BIC, "coef<-", "coefficients<-", collapse, compareFits,
-       comparePred, contr.SAS, corAR1, corARMA, corCAR1, corCompSymm,
+       comparePred, corAR1, corARMA, corCAR1, corCompSymm,
        corExp, corFactor, corGaus, corIdent, corLin, corMatrix,
        corNatural, corRatio, corSpatial, corSpher, corSymm,
        "covariate<-", Dim, fdHess, fixed.effects, fixef, gapply,

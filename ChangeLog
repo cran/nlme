@@ -1,3 +1,7 @@
+2005-05-20  Douglas Bates  <bates@bates1-home>
+
+	* man/contr.SAS.Rd: Removed
+
 2005-04-04  Douglas Bates  <bates@bates1-home>
 
 	* R/newFunc.R: Removed contr.SAS definition as it has been revised

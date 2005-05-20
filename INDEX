@@ -31,7 +31,6 @@ collapse                Collapse According to Groups
 collapse.groupedData    Collapse a groupedData Object
 compareFits             Compare Fitted Objects
 comparePred             Compare Predictions
-contr.SAS               Contrast Matrices
 corAR1                  AR(1) Correlation Structure
 corARMA                 ARMA(p,q) Correlation Structure
 corCAR1                 Continuous AR(1) Correlation Structure
