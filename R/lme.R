@@ -1794,7 +1794,7 @@ predict.lme <-
   }
   maxQ <- max(level)			# maximum level for predictions
   mCall <- object$call
-  fixed <- eval(mCall[["fixed"]][-2])
+  fixed <- eval(eval(mCall$fixed)[-2])
   newdata <- as.data.frame(newdata)
 
   if (maxQ > 0) {			# predictions with random effects

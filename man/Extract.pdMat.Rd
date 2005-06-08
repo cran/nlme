@@ -2,8 +2,8 @@
 \name{[.pdMat}
 \title{Subscript a pdMat Object}
 \usage{
-x[i, j, drop]
-x[i, j] <- value
+\method{[}{pdMat}(x, i, j, drop = TRUE)
+\method{[}{pdMat}(x, i, j) <- value
 }
 \alias{[.pdMat}
 \alias{[.pdBlocked}
@@ -38,8 +38,7 @@ x[i, j] <- value
 \examples{
 pd1 <- pdSymm(diag(3))
 pd1[1, , drop = FALSE]
-%\dontrun{
 pd1[1:2, 1:2] <- 3 * diag(2)
-%}
+}
 }
 \keyword{models}

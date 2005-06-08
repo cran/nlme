@@ -1,3 +1,8 @@
+2005-06-08  Douglas Bates  <bates@bates1-home>
+
+	* R/lme.R (predict.lme): Fixed bug when using a name for a formula
+	in original fit. (Reported by Arne.Mueller@sanofi-aventis.com)
+
 2005-05-20  Douglas Bates  <bates@bates1-home>
 
 	* man/contr.SAS.Rd: Removed
