@@ -103,14 +103,21 @@ gls <-
   repeat {
     oldPars <- c(attr(glsSt, "glsFit")[["beta"]], coef(glsSt))
     if (length(coef(glsSt))) {		# needs ms()
-      aNlm <- optim(fn = function(glsPars) -logLik(glsSt, glsPars),
-                    par = c(coef(glsSt)),
-                    method = "BFGS",
-                    control = list(trace = controlvals$msVerbose,
-                       reltol = if(numIter == 0) controlvals$msTol
-                                else 100*.Machine$double.eps,
-                       maxit = controlvals$msMaxIter))
-      coef(glsSt) <- aNlm$par
+        optRes <- if (exists("nlminb", mode = "function")) {
+            nlminb(c(coef(glsSt)),
+                   function(glsPars) -logLik(glsSt, glsPars),
+                   control = list(trace = controlvals$msVerbose,
+                   iter.max = controlvals$msMaxIter))
+        } else {
+            optim(c(coef(glsSt)),
+                  function(glsPars) -logLik(glsSt, glsPars),
+                  method = "BFGS",
+                  control = list(trace = controlvals$msVerbose,
+                  maxit = controlvals$msMaxIter,
+                  reltol = if(numIter == 0) controlvals$msTol
+                  else 100*.Machine$double.eps))
+        }
+        coef(glsSt) <- optRes$par
     }
     attr(glsSt, "glsFit") <- glsEstimate(glsSt, control = glsEstControl)
     ## checking if any updating is needed
@@ -131,7 +138,7 @@ gls <-
     }
     if (verbose) {
       cat("\nIteration:",numIter)
-      cat("\nObjective:", format(aNlm$value), "\n")
+      cat("\nObjective:", format(optRes$value), "\n")
       print(glsSt)
       cat("\nConvergence:\n")
       print(aConv)

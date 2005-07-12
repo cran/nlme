@@ -799,15 +799,24 @@ nlme.formula <-
       attr(nlmeSt, "conLin") <- MEdecomp(oldConLin)
     }
     oldPars <- coef(nlmeSt)
-    aNlm <- nlm(f = function(nlmePars) -logLik(nlmeSt, nlmePars),
-                p = c(coef(nlmeSt)), hessian = TRUE,
-                print.level = controlvals$msVerbose,
-                gradtol = if(numIter == 1) controlvals$msTol
-                          else 100*.Machine$double.eps,
-                iterlim = if(numIter < 10) 10 else controlvals$msMaxIter,
-                check.analyticals = FALSE)
-    aConv <- coef(nlmeSt) <- aNlm$estimate
-    convIter <- aNlm$iterations
+    if (exists("nlminb", mode = "function")) {
+        optRes <- nlminb(c(coef(nlmeSt)),
+                         function(nlmePars) -logLik(nlmeSt, nlmePars),
+                         control = list(trace = controlvals$msVerbose,
+                         iter.max = controlvals$msMaxIter))
+        aConv <- coef(nlmeSt) <- optRes$par
+        convIter <- optRes$par
+    } else {
+        aNlm <- nlm(f = function(nlmePars) -logLik(nlmeSt, nlmePars),
+                    p = c(coef(nlmeSt)), hessian = TRUE,
+                    print.level = controlvals$msVerbose,
+                    gradtol = if(numIter == 1) controlvals$msTol
+                    else 100*.Machine$double.eps,
+                    iterlim = if(numIter < 10) 10 else controlvals$msMaxIter,
+                    check.analyticals = FALSE)
+        aConv <- coef(nlmeSt) <- aNlm$estimate
+        convIter <- aNlm$iterations
+    }
     nlmeFit <- attr(nlmeSt, "lmeFit") <- MEestimate(nlmeSt, grpShrunk)
     if (verbose) {
       cat("\n**Iteration", numIter)

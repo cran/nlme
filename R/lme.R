@@ -299,15 +299,22 @@ lme.formula <-
   numIter <- 0
   repeat {
     oldPars <- coef(lmeSt)
-    aNlm <- optim(fn = function(lmePars) -logLik(lmeSt, lmePars),
-                  par = c(coef(lmeSt)),
-                  method = "BFGS",
-                  control = list(trace = controlvals$msVerbose,
-                  reltol = if(numIter == 0) controlvals$msTol
-                           else 100*.Machine$double.eps,
-                  maxit = controlvals$msMaxIter))
+    optRes <- if (exists("nlminb", mode = "function")) {
+        nlminb(c(coef(lmeSt)),
+               function(lmePars) -logLik(lmeSt, lmePars),
+               control = list(iter.max = controlvals$msMaxIter,
+               trace = controlvals$msVerbose))
+    } else {
+        optim(c(coef(lmeSt)),
+              function(lmePars) -logLik(lmeSt, lmePars),
+              control = list(trace = controlvals$msVerbose,
+              maxit = controlvals$msMaxIter,
+              reltol = if(numIter == 0) controlvals$msTol
+              else 100*.Machine$double.eps),
+              method = "BFGS")
+    }
     numIter0 <- NULL
-    coef(lmeSt) <- aNlm$par
+    coef(lmeSt) <- optRes$par
     attr(lmeSt, "lmeFit") <- MEestimate(lmeSt, grps)
     ## checking if any updating is needed
     if (!needUpdate(lmeSt)) break

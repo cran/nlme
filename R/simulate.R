@@ -476,24 +476,24 @@ plot.simulate.lme <-
   Mdf <- ordered(Mdf, levels = unique(Mdf))
   frm <- data.frame(x = c(MLx, REMLx)[auxInd], y = c(MLy, REMLy)[auxInd],
 		    df = Mdf,  method = meth)
-  names(frm$x) <- rep(1, nrow(frm))
-  if (df[1] == 0) {
-    names(frm$x)[substring(frm$df,1,3) == "Mix"] <- 1 - weights[1]
-    if (missing(ylim)) {
-      ylim <- c(0.0384, 1)
-    }
-  }
-  xyplot(form, data = frm,
-	 panel = function(x, y, ...) {
-           panel.grid()
-           panel.xyplot(x, y, type = "l", ...)
-           if ((dfType <- as.double(names(x)[1])) == 1) {
-             panel.abline( 0, as.double(names(x)[1]), lty = 2 )
-           } else {
-             panel.xyplot(c(0,dfType,dfType,1), c(0,dfType,1,1),
-                          type="l", lty = 2, col = 1)
-           }
-         },
+##  names(frm$x) <- rep(1, nrow(frm))
+##  if (df[1] == 0) {
+##    names(frm$x)[substring(frm$df,1,3) == "Mix"] <- 1 - weights[1]
+##    if (missing(ylim)) {
+##      ylim <- c(0.0384, 1)
+##    }
+##  }
+  xyplot(form, data = frm, type = c('g', 'l'),
+##	 panel = function(x, y, ...) {
+##           panel.grid()
+##           panel.xyplot(x, y, type = "l", ...)
+##           if ((dfType <- as.double(names(x)[1])) == 1) {
+##             panel.abline( 0, as.double(names(x)[1]), lty = 2 )
+##           } else {
+##             panel.xyplot(c(0,dfType,dfType,1), c(0,dfType,1,1),
+##                          type="l", lty = 2, col = 1)
+##           }
+##         },
 	 strip = strip, xlab = xlab, ylab = ylab, aspect = aspect,
          xlim = xlim, ylim = ylim, ...)
 }

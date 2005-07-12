@@ -1,6 +1,6 @@
 #-*- R -*-
 
-library( nlme )
+library(nlme)
 postscript(file = 'ch01.ps')
 options( width = 65, digits = 5 )
 options( contrasts = c(unordered = "contr.helmert", ordered = "contr.poly") )
@@ -134,8 +134,8 @@ fm4Oats <-
 summary( fm4Oats )
 VarCorr( fm4Oats )
 intervals( fm4Oats )
-plot( augPred( fm4Oats ), aspect = 2.5, layout = c(6, 3),
-      between = list( x = c(0, 0, 0.5) ) )   # produces Figure 1.21
+plot(augPred(fm4Oats), aspect = 2.5, layout = c(6, 3),
+     between = list(x = c(0, 0, 0.5, 0, 0))) # produces Figure 1.21
 
 # cleanup
 

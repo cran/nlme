@@ -1,6 +1,7 @@
 
 R : Copyright 2005, The R Foundation for Statistical Computing
-Version 2.2.0 Under development (unstable) (2005-05-11), ISBN 3-900051-07-0
+Version 2.2.0 Under development (unstable) (2005-07-11 r34926)
+ISBN 3-900051-07-0
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -66,10 +67,45 @@ Random effects:
  Formula: ~age | Subject
  Structure: General positive-definite, Log-Cholesky parametrization
             StdDev   Corr  
-(Intercept) 8.081077 (Intr)
+(Intercept) 8.081078 (Intr)
 age         1.680717 0.641 
 Residual    0.659889       
 
 Number of Observations: 234
 Number of Groups: 26 
+> 
+> # bug report from Arne.Mueller@sanofi-aventis.com
+> mod <- distance ~ age + Sex
+> fm3 <- lme(mod, Orthodont, random = ~ 1)
+> predict(fm3, Orthodont)
+     M01      M01      M01      M01      M02      M02      M02      M02 
+25.39237 26.71274 28.03311 29.35348 21.61052 22.93089 24.25126 25.57163 
+     M03      M03      M03      M03      M04      M04      M04      M04 
+22.36689 23.68726 25.00763 26.32800 24.41990 25.74027 27.06064 28.38101 
+     M05      M05      M05      M05      M06      M06      M06      M06 
+21.28636 22.60673 23.92710 25.24747 24.20379 25.52416 26.84453 28.16490 
+     M07      M07      M07      M07      M08      M08      M08      M08 
+21.93468 23.25505 24.57542 25.89579 22.04273 23.36310 24.68347 26.00384 
+     M09      M09      M09      M09      M10      M10      M10      M10 
+23.12326 24.44363 25.76400 27.08437 26.90511 28.22548 29.54585 30.86622 
+     M11      M11      M11      M11      M12      M12      M12      M12 
+21.82663 23.14700 24.46737 25.78774 22.36689 23.68726 25.00763 26.32800 
+     M13      M13      M13      M13      M14      M14      M14      M14 
+22.36689 23.68726 25.00763 26.32800 22.90715 24.22753 25.54790 26.86827 
+     M15      M15      M15      M15      M16      M16      M16      M16 
+23.77158 25.09195 26.41232 27.73269 21.28636 22.60673 23.92710 25.24747 
+     F01      F01      F01      F01      F02      F02      F02      F02 
+19.56700 20.88737 22.20774 23.52811 20.97168 22.29205 23.61243 24.93280 
+     F03      F03      F03      F03      F04      F04      F04      F04 
+21.62000 22.94037 24.26074 25.58111 22.59248 23.91285 25.23322 26.55359 
+     F05      F05      F05      F05      F06      F06      F06      F06 
+20.64753 21.96790 23.28827 24.60864 19.35089 20.67126 21.99163 23.31200 
+     F07      F07      F07      F07      F08      F08      F08      F08 
+20.97168 22.29205 23.61243 24.93280 21.29584 22.61621 23.93658 25.25695 
+     F09      F09      F09      F09      F10      F10      F10      F10 
+19.35089 20.67126 21.99163 23.31200 17.08178 18.40215 19.72252 21.04289 
+     F11      F11      F11      F11 
+23.88911 25.20948 26.52985 27.85022 
+attr(,"label")
+[1] "Predicted values (mm)"
 > 

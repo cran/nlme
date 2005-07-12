@@ -2,18 +2,18 @@
 
 # initialization
 
-library( nlme )
-options( width = 65, digits = 5 )
-options( contrasts = c(unordered = "contr.helmert", ordered = "contr.poly") )
-postscript( file = 'ch03.ps' )
+library(nlme)
+options(width = 65, digits = 5)
+options(contrasts = c(unordered = "contr.helmert", ordered = "contr.poly"))
+postscript(file = 'ch03.ps')
 
 # Chapter 3    Describing the Structure of Grouped Data
 
 # 3.1 The Display Formula and Its Components
 
-data(Rail, ergoStool, Machines, Orthodont, Pixel, Oats, Oxboys,
-     PBG, BodyWeight, Soybean, DNase, CO2, Spruce, Spruce,
-     Wafer, Theoph, Quinidine, package = "nlme")
+##data(Rail, ergoStool, Machines, Orthodont, Pixel, Oats, Oxboys,
+##     PBG, BodyWeight, Soybean, Spruce, Spruce,
+##     Wafer, Theoph, Quinidine, package = "nlme")
 formula( Rail )
 formula( ergoStool )
 formula( Machines )
@@ -76,8 +76,8 @@ plot( Spruce, layout = c(9, 3, 3),
 unique( getCovariate(DNase) )
 log( unique(getCovariate(DNase)), 2 )
 plot( DNase, layout=c(6,2), scales = list(x=list(log=2)) )
-plot( Pixel, layout = c(4,5),
-       between = list(x = c(0, 0.5), y = 0.5) )
+plot(Pixel, layout = c(4,5),
+     between = list(x = c(0, 0.5, 0), y = 0.5))
 plot( Pixel, displayLevel = 1 )
 plot( Wafer, display = 1, collapse = 1 )
 plot( Wafer, display = 1, collapse = 1,

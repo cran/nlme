@@ -348,24 +348,29 @@ gnls <-
       gnlsSt <- update(gnlsSt, dataModShrunk)
     }
     if (length(oldPars <- coef(gnlsSt)) > 0) {
-      aNlm <- optim(fn = function(gnlsPars) -logLik(gnlsSt, gnlsPars),
-                    par = c(coef(gnlsSt)),
-                    method = "BFGS",
-                    control = list(trace = controlvals$msVerbose,
-                       reltol = if(numIter == 1) controlvals$msTol
-                                else 100*.Machine$double.eps,
-                       maxit = controlvals$msMaxIter))
-      aConv <- coef(gnlsSt) <- aNlm$par
-      convIter <- aNlm$count[2]
-      if (verbose) {
-        cat("\n**Iteration", numIter)
-        cat("\n")
-        cat("GLS step: Objective:", format(aNlm$value),
-            ", optim iterations:", convIter, "\n")
-        print(gnlsSt)
-      }
+        optRes <- if (exists("nlminb", mode = "function")) {
+            nlminb(c(coef(gnlsSt)),
+                   function(gnlsPars) -logLik(gnlsSt, gnlsPars),
+                   control = list(trace = controlvals$msVerbose,
+                   iter.max = controlvals$msMaxIter))
+        } else {
+            optim(c(coef(gnlsSt)),
+                  function(gnlsPars) -logLik(gnlsSt, gnlsPars),
+                  method = "BFGS",
+                  control = list(trace = controlvals$msVerbose,
+                  maxit = controlvals$msMaxIter,
+                  reltol = if(numIter == 0) controlvals$msTol
+                  else 100*.Machine$double.eps))
+        }
+        aConv <- coef(gnlsSt) <- optRes$par
+        if (verbose) {
+            cat("\n**Iteration", numIter)
+            cat("\n")
+            cat("GLS step: Objective:", format(optRes$value))
+            print(gnlsSt)
+        }
     } else {
-      aConv <- oldPars <- NULL
+        aConv <- oldPars <- NULL
     }
 
     ## NLS step
