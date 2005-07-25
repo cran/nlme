@@ -26,6 +26,7 @@
 #define NLME_MATRIC_H
 #include "base.h"
 #include <R_ext/Applic.h>
+#include <R_ext/Linpack.h>
 
 typedef struct QR_struct {
   double *mat, *qraux;

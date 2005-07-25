@@ -317,7 +317,12 @@ lme.formula <-
     coef(lmeSt) <- optRes$par
     attr(lmeSt, "lmeFit") <- MEestimate(lmeSt, grps)
     ## checking if any updating is needed
-    if (!needUpdate(lmeSt)) break
+    if (!needUpdate(lmeSt)) {
+        if (optRes$convergence)
+            stop(optRes$message)
+        break
+    }
+
     ## updating the fit information
     numIter <- numIter + 1
     lmeSt <- update(lmeSt, dataMix)

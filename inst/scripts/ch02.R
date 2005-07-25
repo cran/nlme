@@ -17,19 +17,19 @@ qr.R( Xqr )                     # returns R
 qr.Q( Xqr )                     # returns Q-truncated
 qr.Q( Xqr, complete = TRUE )    # returns the full Q
 
-data( Rail )
+#data( Rail )
 fm1Rail.lme <- lme( travel ~ 1, data = Rail, random = ~ 1 | Rail,
        control = list( msVerbose = TRUE ) )
 fm1Rail.lme <- lme( travel ~ 1, data = Rail, random = ~ 1 | Rail,
    control = list( msVerbose = TRUE, niterEM = 0 ))
 
-data( Machines )
+#data( Machines )
 fm1Machine <-
   lme( score ~ Machine, data = Machines, random = ~ 1 | Worker )
 fm2Machine <- update( fm1Machine, random = ~ 1 | Worker/Machine )
 anova( fm1Machine, fm2Machine )
 
-data( Orthodont )
+#data( Orthodont )
 OrthoFem <- Orthodont[ Orthodont$Sex == "Female", ]
 fm1OrthF <- lme( distance ~ age, data = OrthoFem,
     random = ~ 1 | Subject )
@@ -41,7 +41,7 @@ machineLRTsim <- simulate.lme(fm1Machine, fm2Machine, nsim= 1000)
 plot( machineLRTsim, df = c(0, 1),      # produces Figure 2.4
  layout = c(4,1), between = list(x = c(0, 0.5, 0)) )
 
-data( ergoStool )
+#data( ergoStool )
 stoolLRTsim <-
   simulate.lme( m1 = list(fixed = effort ~ 1, data = ergoStool,
                           random = ~ 1 | Subject),

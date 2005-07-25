@@ -3,6 +3,7 @@
 # initialization
 
 library(nlme)
+library(lattice)
 options(width = 65, digits = 5)
 options(contrasts = c(unordered = "contr.helmert", ordered = "contr.poly"))
 postscript(file = "ch08.ps")
@@ -81,7 +82,7 @@ fm1Oran.nlme <- nlme(fm1Oran.lis, control = list(tolerance = 2e-3))
 fm1Oran.nlme
 summary(fm1Oran.nlme)
 summary(fm1Oran.nls)
-if (interactive()) pairs(fm1Oran.nlme)  # FIXME: check with Deepayan
+pairs(fm1Oran.nlme)
 fm2Oran.nlme <- update(fm1Oran.nlme, random = Asym ~ 1)
 anova(fm1Oran.nlme, fm2Oran.nlme)
 plot(fm1Oran.nlme)
@@ -89,12 +90,10 @@ plot(fm1Oran.nlme)
 plot(augPred(fm2Oran.nlme, level = 0:1),
      layout = c(5,1))
 qqnorm(fm2Oran.nlme, abline = c(0,1))
-fm1Theo.nlme <- nlme(fm1Theo.lis, control = list(tolerance = 1e-2))
-fm1Theo.nlme
+(fm1Theo.nlme <- nlme(fm1Theo.lis, control = list(tolerance = 1e-2)))
 if (interactive()) intervals(fm1Theo.nlme, which = "var-cov")
-fm2Theo.nlme <- update(fm1Theo.nlme,
-  random = pdDiag(lKe + lKa + lCl ~ 1))
-fm2Theo.nlme
+(fm2Theo.nlme <- update(fm1Theo.nlme,
+  random = pdDiag(lKe + lKa + lCl ~ 1)))
 fm3Theo.nlme <-
   update(fm2Theo.nlme, random = pdDiag(lKa + lCl ~ 1))
 anova(fm1Theo.nlme, fm3Theo.nlme, fm2Theo.nlme)
@@ -102,12 +101,9 @@ plot(fm3Theo.nlme)
 qqnorm(fm3Theo.nlme, ~ ranef(.))
 CO2
 plot(CO2, outer = ~Treatment*Type, layout = c(4,1))
-fm1CO2.lis <- nlsList(SSasympOff, CO2)
-fm1CO2.lis
-fm1CO2.nlme <- nlme(fm1CO2.lis, control = list(tolerance = 1e-2))
-fm1CO2.nlme
-fm2CO2.nlme <- update(fm1CO2.nlme, random = Asym + lrc ~ 1)
-fm2CO2.nlme
+(fm1CO2.lis <- nlsList(SSasympOff, CO2))
+(fm1CO2.nlme <- nlme(fm1CO2.lis, control = list(tolerance = 1e-2)))
+(fm2CO2.nlme <- update(fm1CO2.nlme, random = Asym + lrc ~ 1))
 anova(fm1CO2.nlme, fm2CO2.nlme)
 plot(fm2CO2.nlme,id = 0.05,cex = 0.8,adj = -0.5)
 fm2CO2.nlmeRE <- ranef(fm2CO2.nlme, augFrame = TRUE)
@@ -184,43 +180,49 @@ fm2Quin.fix <- fixef(fm2Quin.nlme)
 #  fixed = list(lCl ~ glyco + Creatinine + Weight, lKa + lV ~ 1),
 #  start = c(fm3Quin.fix[1:3], 0, fm3Quin.fix[4:5]))
 #summary(fm4Quin.nlme)
-fm1Wafer.nlmeR <-
-    nlme(current ~ A + B * cos(4.5679 * voltage) +
-         C * sin(4.5679 * voltage), data = Wafer,
-         fixed = list(A ~ voltage + I(voltage^2), B + C ~ 1),
-         random = list(Wafer = A ~ voltage + I(voltage^2),
-         Site = pdBlocked(list(A~1, A~voltage+I(voltage^2)-1))),
-#  start = fixef(fm4Wafer), method = "REML", control = list(tolerance=1e-2))
-         start = c(-4.255, 5.622, 1.258, -0.09555, 0.10434),
-         method = "REML", control = list(tolerance = 1e-2))
-fm1Wafer.nlmeR
-fm1Wafer.nlme <- update(fm1Wafer.nlmeR, method = "ML")
-fm2Wafer.nlme <- nlme(current ~ A + B * cos(w * voltage + pi/4),
-  data = Wafer, fixed = list(A ~ voltage + I(voltage^2), B + w ~ 1),
-  random = list(Wafer = pdDiag(list(A ~ voltage + I(voltage^2),
-                                    B + w ~ 1)),
-              Site = pdDiag(list(A ~ voltage+I(voltage^2), B ~ 1))),
-  start = c(fixef(fm1Wafer.nlme)[-5], 4.5679))
-# this fit is way off
-## fm2Wafer.nlme
+## This fit just ping-pongs
+##fm1Wafer.nlmeR <-
+##    nlme(current ~ A + B * cos(4.5679 * voltage) +
+##         C * sin(4.5679 * voltage), data = Wafer,
+##         fixed = list(A ~ voltage + I(voltage^2), B + C ~ 1),
+##         random = list(Wafer = A ~ voltage + I(voltage^2),
+##         Site = pdBlocked(list(A~1, A~voltage+I(voltage^2)-1))),
+###  start = fixef(fm4Wafer), method = "REML", control = list(tolerance=1e-2))
+##         start = c(-4.255, 5.622, 1.258, -0.09555, 0.10434),
+##         method = "REML", control = list(tolerance = 1e-2))
+##fm1Wafer.nlmeR
+##fm1Wafer.nlme <- update(fm1Wafer.nlmeR, method = "ML")
+
+if (exists("nlminb", mode = "function")) {
+    print(fm2Wafer.nlme <- nlme(current ~ A + B * cos(w * voltage + pi/4),
+                                data = Wafer,
+                                fixed = list(A ~ voltage + I(voltage^2), B + w ~ 1),
+                                random = list(Wafer = pdDiag(list(A ~ voltage + I(voltage^2),
+                                              B + w ~ 1)),
+                                Site = pdDiag(list(A ~
+                                voltage+I(voltage^2),
+                                B ~ 1))),
+                                start = c(-4.255, 5.622, 1.258,
+                                -0.09555, 4.5679)))
+    plot(fm2Wafer.nlme, resid(.) ~ voltage | Wafer,
+         panel = function(x, y, ...) {
+             panel.grid()
+             panel.xyplot(x, y)
+             panel.loess(x, y, lty = 2)
+             panel.abline(0, 0)
+         })
+}
 ## anova(fm1Wafer.nlme, fm2Wafer.nlme, test = FALSE)
 # intervals(fm2Wafer.nlme)
-#plot(fm2Wafer.nlme, resid(.) ~ voltage | Wafer,
-#       panel = function(x, y, ...) {
-#                 panel.grid()
-#                 panel.xyplot(x, y)
-#                 panel.loess(x, y, lty = 2)
-#                 panel.abline(0, 0)
-#               })
 
 # 8.3  Extending the Basic nlme Model
 
-fm4Theo.nlme <- update(fm3Theo.nlme,
-   weights = varConstPower(power = 0.1))
+#fm4Theo.nlme <- update(fm3Theo.nlme,
+#   weights = varConstPower(power = 0.1))
 # this fit is way off
-fm4Theo.nlme
-anova(fm3Theo.nlme, fm4Theo.nlme)
-plot(fm4Theo.nlme)
+#fm4Theo.nlme
+#anova(fm3Theo.nlme, fm4Theo.nlme)
+#plot(fm4Theo.nlme)
 ## xlim used to hide an unusually high fitted value and enhance
 ## visualization of the heteroscedastic pattern
 # plot(fm4Quin.nlme, xlim = c(0, 6.2))
@@ -228,11 +230,13 @@ plot(fm4Theo.nlme)
 #summary(fm5Quin.nlme)
 #anova(fm4Quin.nlme, fm5Quin.nlme)
 #plot(fm5Quin.nlme, xlim = c(0, 6.2))
-fm1Ovar.nlme <- nlme(follicles ~ A + B * sin(2 * pi * w * Time) +
-  C * cos(2 * pi * w *Time), data = Ovary,
-  fixed = A + B + C + w ~ 1, random = pdDiag(A + B + w ~ 1),
-#  start = c(fixef(fm5Ovar.lme), 1))
-  start = c(12.18, -3.298, -0.862, 1))
+if (exists("nlminb", mode = "function")) {
+    fm1Ovar.nlme <- nlme(follicles ~ A + B * sin(2 * pi * w * Time) +
+                         C * cos(2 * pi * w *Time), data = Ovary,
+                         fixed = A + B + C + w ~ 1, random = pdDiag(A + B + w ~ 1),
+                                        #  start = c(fixef(fm5Ovar.lme), 1))
+                         start = c(12.18, -3.298, -0.862, 1))
+}
 ##fm1Ovar.nlme
 ##ACF(fm1Ovar.nlme)
 ##plot(ACF(fm1Ovar.nlme,  maxLag = 10), alpha = 0.05)
@@ -275,7 +279,7 @@ fm2Dial.gnls <- update(fm1Dial.gnls,
 anova(fm1Dial.gnls, fm2Dial.gnls)
 ACF(fm2Dial.gnls, form = ~ 1 | Subject)
 plot(ACF(fm2Dial.gnls, form = ~ 1 | Subject),
-      alpha = 0.05)
+     alpha = 0.05)
 fm3Dial.gnls <-
  update(fm2Dial.gnls, corr = corAR1(0.716, form = ~ 1 | Subject))
 fm3Dial.gnls

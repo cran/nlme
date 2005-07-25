@@ -9,7 +9,7 @@ options( contrasts = c(unordered = "contr.helmert", ordered = "contr.poly") )
 
 # 1.1 A Simple Example of Random Effects
 
-data(Rail, ergoStool, Machines, Orthodont, Pixel, Oats, package="nlme")
+#data(Rail, ergoStool, Machines, Orthodont, Pixel, Oats, package="nlme")
 Rail
 fm1Rail.lm <- lm( travel ~ 1, data = Rail )
 fm1Rail.lm

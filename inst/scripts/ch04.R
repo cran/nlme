@@ -73,17 +73,19 @@ plot(compareFits(ranef(fm2Orth.lme), ranef(fm2Orth.lmeM)),
 fm4Orth.lm <- lm(distance ~ Sex * I(age-11), Orthodont)
 summary(fm4Orth.lm)
 anova(fm2Orth.lme, fm4Orth.lm)
-fm1IGF.lme <- lme(fm1IGF.lis)
-fm1IGF.lme
-intervals(fm1IGF.lme)
-summary(fm1IGF.lme)
+#fm1IGF.lme <- lme(fm1IGF.lis)
+#fm1IGF.lme
+#intervals(fm1IGF.lme)
+#summary(fm1IGF.lme)
 pd1 <- pdDiag(~ age)
 pd1
 formula(pd1)
-fm2IGF.lme <- update(fm1IGF.lme, random = pdDiag(~age))
-fm2IGF.lme
-anova(fm1IGF.lme, fm2IGF.lme)
-update(fm1IGF.lme, random = list(Lot = pdDiag(~ age)))
+#fm2IGF.lme <- update(fm1IGF.lme, random = pdDiag(~age))
+(fm2IGF.lme <- lme(conc ~ age, IGF,
+                   random = pdDiag(~age)))
+#anova(fm1IGF.lme, fm2IGF.lme)
+anova(fm2IGF.lme)
+#update(fm1IGF.lme, random = list(Lot = pdDiag(~ age)))
 pd2 <- pdDiag(value = diag(2), form = ~ age)
 pd2
 formula(pd2)
@@ -173,25 +175,30 @@ fm3IGF.lme <- update(fm2IGF.lme, random = ~ age - 1)
 anova(fm2IGF.lme, fm3IGF.lme)
 qqnorm(fm1Oxide, ~ranef(., level = 1), id=0.10)
 qqnorm(fm1Oxide, ~ranef(., level = 2), id=0.10)
-fm3Wafer <- update(fm2Wafer,
-              random = list(Wafer = ~voltage+I(voltage^2),
-                            Site = pdDiag(~voltage+I(voltage^2))))
-fm3Wafer
-anova(fm2Wafer, fm3Wafer)
-fm4Wafer <- update(fm3Wafer,
-   random = list(Wafer = ~ voltage + I(voltage^2),
-            Site = pdBlocked(list(~1, ~voltage+I(voltage^2) - 1))))
-fm4Wafer
-anova(fm3Wafer, fm4Wafer)
-qqnorm(fm4Wafer, ~ranef(., level = 2), id = 0.05,
-        cex = 0.7, layout = c(3, 1))
+#fm3Wafer <- update(fm2Wafer,
+#              random = list(Wafer = ~voltage+I(voltage^2),
+#                            Site = pdDiag(~voltage+I(voltage^2))),
+#                   control = list(msVerbose = TRUE, msMaxIter = 200)
+#                   )
+#fm3Wafer
+#anova(fm2Wafer, fm3Wafer)
+#fm4Wafer <- update(fm2Wafer,
+#                   random = list(Wafer = ~ voltage + I(voltage^2),
+#                   Site = pdBlocked(list(~1,
+#                   ~voltage+I(voltage^2) - 1))),
+#                   control = list(msVerbose = TRUE,
+#                   msMaxIter = 200))
+#fm4Wafer
+#anova(fm3Wafer, fm4Wafer)
+#qqnorm(fm4Wafer, ~ranef(., level = 2), id = 0.05,
+#        cex = 0.7, layout = c(3, 1))
 
 # The next line is not in the book but is needed to get fm1Machine
 
 fm1Machine <-
   lme(score ~ Machine, data = Machines, random = ~ 1 | Worker)
 
-fm3Machine <- update(fm1Machine, random = ~Machine-1|Worker)
+(fm3Machine <- update(fm1Machine, random = ~Machine-1|Worker))
 
 # cleanup
 

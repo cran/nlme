@@ -348,19 +348,21 @@ gnls <-
       gnlsSt <- update(gnlsSt, dataModShrunk)
     }
     if (length(oldPars <- coef(gnlsSt)) > 0) {
-        optRes <- if (exists("nlminb", mode = "function")) {
-            nlminb(c(coef(gnlsSt)),
-                   function(gnlsPars) -logLik(gnlsSt, gnlsPars),
-                   control = list(trace = controlvals$msVerbose,
-                   iter.max = controlvals$msMaxIter))
+        if (exists("nlminb", mode = "function")) {
+            optRes <- nlminb(c(coef(gnlsSt)),
+                             function(gnlsPars) -logLik(gnlsSt, gnlsPars),
+                             control = list(trace = controlvals$msVerbose,
+                             iter.max = controlvals$msMaxIter))
+            convIter <- optRes$iterations
         } else {
-            optim(c(coef(gnlsSt)),
-                  function(gnlsPars) -logLik(gnlsSt, gnlsPars),
-                  method = "BFGS",
-                  control = list(trace = controlvals$msVerbose,
-                  maxit = controlvals$msMaxIter,
-                  reltol = if(numIter == 0) controlvals$msTol
-                  else 100*.Machine$double.eps))
+            optRes <- optim(c(coef(gnlsSt)),
+                            function(gnlsPars) -logLik(gnlsSt, gnlsPars),
+                            method = "BFGS",
+                            control = list(trace = controlvals$msVerbose,
+                            maxit = controlvals$msMaxIter,
+                            reltol = if(numIter == 0) controlvals$msTol
+                            else 100*.Machine$double.eps))
+            convIter <- optRes$count[2]
         }
         aConv <- coef(gnlsSt) <- optRes$par
         if (verbose) {

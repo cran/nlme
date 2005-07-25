@@ -805,7 +805,7 @@ nlme.formula <-
                          control = list(trace = controlvals$msVerbose,
                          iter.max = controlvals$msMaxIter))
         aConv <- coef(nlmeSt) <- optRes$par
-        convIter <- optRes$par
+        convIter <- optRes$iterations
     } else {
         aNlm <- nlm(f = function(nlmePars) -logLik(nlmeSt, nlmePars),
                     p = c(coef(nlmeSt)), hessian = TRUE,

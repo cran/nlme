@@ -1,3 +1,9 @@
+2005-07-25  Douglas Bates  <bates@bates1-home>
+
+	* inst/scripts/ch08.R: Cleaned up examples in ch04, ch06, ch08.
+
+	* src/matrix.h: Include R_Ext/Linpack.h in addition to R_Ext/Applic.h
+
 2005-07-12  Douglas Bates  <bates@bates1-home>
 
 	* inst/scripts/ch01.R: Clean up and check these scripts

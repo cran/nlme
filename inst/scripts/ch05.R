@@ -11,7 +11,6 @@ postscript(file = "ch05.ps")
 
 # 5.1 General Formulation of the Extended Model
 
-# data(Orthodont)
 vf1Fixed <- varFixed(~ age)
 vf1Fixed <- Initialize(vf1Fixed, data = Orthodont)
 varWeights(vf1Fixed)
@@ -36,7 +35,6 @@ vf1Comb <- varComb(varIdent(c(Female = 0.5), ~ 1 | Sex),
                      varExp(1, ~ age))
 vf1Comb <- Initialize(vf1Comb, Orthodont)
 varWeights(vf1Comb)
-#data(Dialyzer)
 fm1Dial.lme <-
   lme(rate ~(pressure + I(pressure^2) + I(pressure^3) + I(pressure^4))*QB,
       Dialyzer, ~ pressure + I(pressure^2))
@@ -61,7 +59,6 @@ plot(augPred(fm2Dial.lme), grid = TRUE)
 anova(fm2Dial.lme)
 anova(fm2Dial.lme, Terms = 8:10)
 options(contrasts = c("contr.treatment", "contr.poly"))
-## data(BodyWeight)
 fm1BW.lme <- lme(weight ~ Time * Diet, BodyWeight,
                    random = ~ Time)
 fm1BW.lme
@@ -112,30 +109,37 @@ anova(fm2Ovar.lme, fm3Ovar.lme, test = F)
 fm4Ovar.lme <- update(fm1Ovar.lme,
                        correlation = corCAR1(form = ~Time))
 anova(fm2Ovar.lme, fm4Ovar.lme, test = F)
-# fm5Ovar.lme <- update(fm1Ovar.lme, corr = corARMA(p = 1, q = 1))
-# fm5Ovar.lme
-# anova(fm2Ovar.lme, fm5Ovar.lme)
-# plot(ACF(fm5Ovar.lme,  maxLag = 10, resType = "n"),
-#          alpha = 0.01)
+if (exists("nlminb", mode = "function")) {
+    print(fm5Ovar.lme <- update(fm1Ovar.lme,
+                                corr = corARMA(p = 1, q = 1)))
+    print(anova(fm2Ovar.lme, fm5Ovar.lme))
+    print(plot(ACF(fm5Ovar.lme,  maxLag = 10, resType = "n"),
+               alpha = 0.01))
+}
 Variogram(fm2BW.lme, form = ~ Time)
-plot(Variogram(fm2BW.lme, form = ~ Time,
-                maxDist = 42))
-# fm3BW.lme <- update(fm2BW.lme, corr = corExp(form = ~ Time))
-# fm3BW.lme
-# intervals(fm3BW.lme)
-# anova(fm2BW.lme, fm3BW.lme)
-# fm4BW.lme <- update(fm3BW.lme,
-#                      corr = corExp(form =  ~ Time, nugget = TRUE))
-# anova(fm3BW.lme, fm4BW.lme)
-# plot(Variogram(fm3BW.lme, form = ~ Time,
-#                 maxDist = 42))
-# plot(Variogram(fm3BW.lme, form = ~ Time, maxDist = 42,
-#                 resType = "n", robust = TRUE))
-# fm5BW.lme <- update(fm3BW.lme, corr = corRatio(form = ~ Time))
-# fm6BW.lme <- update(fm3BW.lme, corr = corSpher(form = ~ Time))
-# nfm7BW.lme <- update(fm3BW.lme, corr = corLin(form = ~ Time))
-# fm8BW.lme <- update(fm3BW.lme, corr = corGaus(form = ~ Time))
-# anova(fm3BW.lme, fm5BW.lme, fm6BW.lme, fm7BW.lme, fm8BW.lme)
+plot(Variogram(fm2BW.lme, form = ~ Time, maxDist = 42))
+if (exists("nlminb", mode = "function")) {
+    print(fm3BW.lme <- update(fm2BW.lme,
+                              correlation = corExp(form = ~ Time)))
+    print(intervals(fm3BW.lme))
+    print(anova(fm2BW.lme, fm3BW.lme))
+    print(fm4BW.lme <-
+          update(fm3BW.lme, correlation = corExp(form =  ~ Time,
+                            nugget = TRUE)))
+    print(anova(fm3BW.lme, fm4BW.lme))
+    print(plot(Variogram(fm3BW.lme, form = ~ Time, maxDist = 42)))
+    print(plot(Variogram(fm3BW.lme, form = ~ Time, maxDist = 42,
+                         resType = "n", robust = TRUE)))
+    print(fm5BW.lme <-
+          update(fm3BW.lme, correlation = corRatio(form = ~ Time)))
+    print(fm6BW.lme <-
+          update(fm3BW.lme, correlation = corSpher(form = ~ Time)))
+    print(fm7BW.lme <- update(fm3BW.lme,
+                               correlation = corLin(form = ~ Time)))
+    print(fm8BW.lme <- update(fm3BW.lme,
+                              correlation = corGaus(form = ~ Time)))
+    print(anova(fm3BW.lme, fm5BW.lme, fm6BW.lme, fm7BW.lme, fm8BW.lme))
+}
 fm1Orth.gls <- gls(distance ~ Sex * I(age - 11), Orthodont,
                      correlation = corSymm(form = ~ 1 | Subject),
                      weights = varIdent(form = ~ 1 | age))
@@ -164,7 +168,7 @@ fm1Dial.gls <-
 plot(fm1Dial.gls, resid(.) ~ pressure,
        abline = 0)
 fm2Dial.gls <- update(fm1Dial.gls,
-                        weights = varPower(form = ~ pressure))
+                      weights = varPower(form = ~ pressure))
 anova(fm1Dial.gls, fm2Dial.gls)
 ACF(fm2Dial.gls, form = ~ 1 | Subject)
 plot(ACF(fm2Dial.gls, form = ~ 1 | Subject),
@@ -181,17 +185,18 @@ Variogram(fm1Wheat2, form = ~ latitude + longitude)
 plot(Variogram(fm1Wheat2, form = ~ latitude + longitude,
       maxDist = 32), xlim = c(0,32))
 fm2Wheat2 <- update(fm1Wheat2, corr = corSpher(c(28, 0.2),
-                  form = ~ latitude + longitude, nugget = TRUE))
+                               form = ~ latitude + longitude,
+                               nugget = TRUE))
 fm2Wheat2
 fm3Wheat2 <- update(fm1Wheat2,
-                corr = corRatio(c(12.5, 0.2),
-                  form = ~ latitude + longitude, nugget = TRUE))
+                    corr = corRatio(c(12.5, 0.2),
+                    form = ~ latitude + longitude, nugget = TRUE))
 fm3Wheat2
 anova(fm2Wheat2, fm3Wheat2)
 anova(fm1Wheat2, fm3Wheat2)
 plot(Variogram(fm3Wheat2, resType = "n"))
 plot(fm3Wheat2, resid(., type = "n") ~ fitted(.),
-       abline = 0)
+     abline = 0)
 qqnorm(fm3Wheat2, ~ resid(., type = "n"))
 fm4Wheat2 <- update(fm3Wheat2, model = yield ~ variety)
 anova(fm4Wheat2)
