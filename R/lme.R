@@ -2025,7 +2025,7 @@ print.intervals.lme <-
       }
     } else {
       if (i == "sigma") print(c(aux), ...)
-      else print.matrix(aux, ...)
+      else print(as.matrix(aux), ...)
     }
   }
 }

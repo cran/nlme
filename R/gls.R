@@ -885,7 +885,7 @@ print.intervals.gls <-
         aux <- x[[i]]
         cat("\n ",attr(aux, "label"), "\n", sep = "")
         if (i == "sigma") print(c(aux), ...)
-        else print.matrix(aux, ...)
+        else print(as.matrix(aux), ...)
     }
 }
 
