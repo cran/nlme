@@ -111,7 +111,7 @@ gls <-
             } else {
                 optim(c(coef(glsSt)),
                       function(glsPars) -logLik(glsSt, glsPars),
-                      method = "BFGS",
+                      method = controlvals$optimMethod,
                       control = list(trace = controlvals$msVerbose,
                       maxit = controlvals$msMaxIter,
                       reltol = if(numIter == 0) controlvals$msTol
@@ -1294,7 +1294,7 @@ glsControl <-
              msScale = lmeScale, msVerbose = FALSE, singular.ok = FALSE,
              qrTol = .Machine$single.eps, returnObject = FALSE,
              apVar = TRUE, .relStep = (.Machine$double.eps)^(1/3),
-             nlmStepMax = 100.0,
+             nlmStepMax = 100.0, optimMethod = "BFGS",
              minAbsParApVar = 0.05, natural = TRUE)
 {
     list(maxIter = maxIter, msMaxIter = msMaxIter, tolerance = tolerance,
@@ -1302,7 +1302,7 @@ glsControl <-
          singular.ok = singular.ok, qrTol = qrTol,
          returnObject = returnObject, apVar = apVar,
          minAbsParApVar = minAbsParApVar, .relStep = .relStep,
-         nlmStepMax = nlmStepMax,
+         nlmStepMax = nlmStepMax, optimMethod,
          natural = natural)
 }
 

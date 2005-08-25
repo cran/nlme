@@ -311,7 +311,7 @@ lme.formula <-
               maxit = controlvals$msMaxIter,
               reltol = if(numIter == 0) controlvals$msTol
               else 100*.Machine$double.eps),
-              method = "BFGS")
+              method = controlvals$optimMethod)
     }
     numIter0 <- NULL
     coef(lmeSt) <- optRes$par
@@ -2882,14 +2882,14 @@ lmeControl <-
 	   msTol = 1e-7, msScale = lmeScale, msVerbose = FALSE,
            returnObject = FALSE, gradHess = TRUE, apVar = TRUE,
 	   .relStep = (.Machine$double.eps)^(1/3), minAbsParApVar = 0.05,
-           nlmStepMax = 100.0,
+           nlmStepMax = 100.0, optimMethod = "BFGS",
            natural = TRUE)
 {
   list(maxIter = maxIter, msMaxIter = msMaxIter, tolerance = tolerance,
        niterEM = niterEM, msTol = msTol, msScale = msScale,
        msVerbose = msVerbose, returnObject = returnObject,
        gradHess = gradHess , apVar = apVar, .relStep = .relStep,
-       nlmStepMax = nlmStepMax,
+       nlmStepMax = nlmStepMax, optimMethod = optimMethod,
        minAbsParApVar = minAbsParApVar, natural = natural)
 }
 

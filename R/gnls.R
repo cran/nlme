@@ -357,7 +357,7 @@ gnls <-
         } else {
             optRes <- optim(c(coef(gnlsSt)),
                             function(gnlsPars) -logLik(gnlsSt, gnlsPars),
-                            method = "BFGS",
+                            method = controlvals$optimMethod,
                             control = list(trace = controlvals$msVerbose,
                             maxit = controlvals$msMaxIter,
                             reltol = if(numIter == 0) controlvals$msTol
@@ -862,14 +862,14 @@ gnlsControl <-
            msTol = 1e-7, msScale = lmeScale,
            returnObject = FALSE, msVerbose = FALSE,
            apVar = TRUE, .relStep = (.Machine$double.eps)^(1/3),
-           nlmStepMax = 100.0,
+           nlmStepMax = 100.0, optimMethod = "BFGS",
            minAbsParApVar = 0.05)
 {
   list(maxIter = maxIter, nlsMaxIter = nlsMaxIter, msMaxIter = msMaxIter,
        minScale = minScale, tolerance = tolerance, nlsTol = nlsTol,
        msTol = msTol, msScale = msScale, returnObject = returnObject,
        msVerbose = msVerbose, apVar = apVar,
-       nlmStepMax = nlmStepMax,
+       nlmStepMax = nlmStepMax, optimMethod = optimMethod,
        .relStep = .relStep, minAbsParApVar = minAbsParApVar)
 }
 

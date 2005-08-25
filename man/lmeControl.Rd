@@ -4,7 +4,8 @@
 \usage{
 lmeControl(maxIter, msMaxIter, tolerance, niterEM, msTol,
            msScale, msVerbose, returnObject, gradHess, apVar,
-           .relStep, minAbsParApVar, nlmStepMax, natural)
+           .relStep, minAbsParApVar, nlmStepMax, optimMethod,
+           natural)
 }
 \alias{lmeControl}
 \arguments{
@@ -45,10 +46,13 @@ lmeControl(maxIter, msMaxIter, tolerance, niterEM, msTol,
    calculated. Default is \code{TRUE}.}
  \item{.relStep}{relative step for numerical derivatives
    calculations. Default is \code{.Machine$double.eps^(1/3)}.}
- \item{minAbsParApVar}{numeric value - minimum absolute parameter value
-   in the approximate variance calculation.  The default is \code{0.05}.}
  \item{nlmStepMax}{stepmax value to be passed to nlm. See
      \code{\link{nlm}} for details. Default is 100.0}
+ \item{optimMethod}{character - the optimization method to be used with
+   the \code{\link[stats]{optim}} optimizer. The default is
+   \code{"BFGS"}.  An alternative is \code{"L-BFGS-B"}.}
+ \item{minAbsParApVar}{numeric value - minimum absolute parameter value
+   in the approximate variance calculation.  The default is \code{0.05}.}
  \item{natural}{a logical value indicating whether the \code{pdNatural}
    parametrization should be used for general positive-definite matrices
    (\code{pdSymm}) in \code{reStruct}, when the approximate covariance

@@ -1,12 +1,13 @@
 % $Id: gnlsControl.Rd,v 1.8 2002/03/05 14:59:39 bates Exp $
 \name{gnlsControl}
+\alias{gnlsControl}
 \title{Control Values for gnls Fit}
 \usage{
 gnlsControl(maxIter, nlsMaxIter, msMaxIter, minScale, tolerance,
             nlsTol, msTol, msScale, returnObject, msVerbose,
-            apVar, .relStep, nlmStepMax, minAbsParApVar)
+            apVar, .relStep, nlmStepMax, optimMethod,
+            minAbsParApVar)
 }
-\alias{gnlsControl}
 \arguments{
  \item{maxIter}{maximum number of iterations for the \code{gnls}
    optimization algorithm. Default is 50.} 
@@ -41,6 +42,9 @@ gnlsControl(maxIter, nlsMaxIter, msMaxIter, minScale, tolerance,
    calculated. Default is \code{TRUE}.}
  \item{.relStep}{relative step for numerical derivatives
    calculations. Default is \code{.Machine$double.eps^(1/3)}.}
+ \item{optimMethod}{character - the optimization method to be used with
+   the \code{\link[stats]{optim}} optimizer. The default is
+   \code{"BFGS"}.  An alternative is \code{"L-BFGS-B"}.}
  \item{nlmStepMax}{stepmax value to be passed to nlm. See
      \code{\link{nlm}} for details. Default is 100.0}
  \item{minAbsParApVar}{numeric value - minimum absolute parameter value

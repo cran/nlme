@@ -4,7 +4,7 @@
 \usage{
 glsControl(maxIter, msMaxIter, tolerance, msTol, msScale, msVerbose,
            singular.ok, qrTol, returnObject, apVar, .relStep,
-           nlmStepMax, minAbsParApVar, natural)
+           nlmStepMax, optimMethod, minAbsParApVar, natural)
 }
 \alias{glsControl}
 \arguments{
@@ -41,6 +41,9 @@ glsControl(maxIter, msMaxIter, tolerance, msTol, msScale, msVerbose,
    calculations. Default is \code{.Machine$double.eps^(1/3)}.}
  \item{nlmStepMax}{stepmax value to be passed to nlm. See
    \code{\link{nlm}} for details. Default is 100.0}
+ \item{optimMethod}{character - the optimization method to be used with
+   the \code{\link[stats]{optim}} optimizer. The default is
+   \code{"BFGS"}.  An alternative is \code{"L-BFGS-B"}.}
  \item{minAbsParApVar}{numeric value - minimum absolute parameter value
    in the approximate variance calculation.  The default is \code{0.05}.}
  \item{natural}{logical.  Should the natural parameterization be used
