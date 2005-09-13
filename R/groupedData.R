@@ -368,13 +368,13 @@ plot.nfnGroupedData <-
 {
   labels <- list(xlab = xlab, ylab =  ylab)
   labels <- labels[unlist(lapply(labels, length)) > 0]
-  args <- c(list(formula = attr(x, "formula"), data = x, strip = strip,
+  args <- c(list(attr(x, "formula"), data = x, strip = strip,
 		 aspect = aspect, panel = panel), labels)
   if (length(outer) > 0) {
     if (is.logical(outer) && outer) {	# get the default outer formula
       outer <- attr(x, "outer")
     }
-    args[["formula"]][[3]][[3]] <- asOneSidedFormula(outer)[[2]]
+    args[[1]][[3]][[3]] <- asOneSidedFormula(outer)[[2]]
     if (length(innerGroups) == 0) {
       innerGroups <- getGroupsFormula(x)
     }
@@ -484,7 +484,7 @@ plot.nffGroupedData <-
     form <- formula(paste(groupExpr, "~",
                           deparse(getResponseFormula(x)[[2]])))
   }
-  args <- c(list(formula = form, data = x, strip = strip, panel = panel),
+  args <- c(list(form, data = x, strip = strip, panel = panel),
             labels)
   if ((length(innerGroups) > 0) && (length(inner) == 0)) {
     inner <- innerGroups

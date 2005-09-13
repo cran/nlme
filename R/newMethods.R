@@ -237,48 +237,48 @@ pairs.compareFits <-
     tt <- list(coefs = coefs,
 	       grp = ordered(rep(dn[[2]], rep(dims[1], dims[2])),
 		   levels  = dn[[2]]))
-    args <- list(formula = ~ coefs,
-		  data = tt,
-		  groups = tt$grp,
-		  panel = function(x, y, subscripts, groups, ...)
-                  {
-                    x <- as.numeric(x)
-                    y <- as.numeric(y)
-		    panel.superpose(x, y, subscripts, groups)
-		    aux <- groups[subscripts]
-		    aux <- aux == unique(aux)[1]
-		    lsegments(x[aux], y[aux], x[!aux], y[!aux],
-                              lty = 2, lwd = 0.5)
-		  })
-  } else {
+    args <- list(~ coefs,
+                 data = tt,
+                 groups = tt$grp,
+                 panel = function(x, y, subscripts, groups, ...)
+             {
+                 x <- as.numeric(x)
+                 y <- as.numeric(y)
+                 panel.superpose(x, y, subscripts, groups)
+                 aux <- groups[subscripts]
+                 aux <- aux == unique(aux)[1]
+                 lsegments(x[aux], y[aux], x[!aux], y[!aux],
+                           lty = 2, lwd = 0.5)
+             })
+} else {
     tt <- list(x = coefs[,1], y = coefs[,2],
 	       grp = ordered(rep(dn[[2]], rep(dims[1], dims[2])),
-		   levels = dn[[2]]))
-    args <- list(formula = y ~ x,
-		  data = tt,
-		  groups = tt$grp,
-		  panel = function(x, y, subscripts, groups, ...)
-		  {
-                    x <- as.numeric(x)
-                    y <- as.numeric(y)
-		    panel.grid()
-		    panel.superpose(x, y, subscripts, groups)
-		    aux <- groups[subscripts]
-		    aux <- aux == unique(aux)[1]
-		    lsegments(x[aux], y[aux], x[!aux], y[!aux],
-                              lty = 2, lwd = 0.5)
-		  }, xlab = dn[[3]][1], ylab = dn[[3]][2])
-  }
+               levels = dn[[2]]))
+    args <- list(y ~ x,
+                 data = tt,
+                 groups = tt$grp,
+                 panel = function(x, y, subscripts, groups, ...)
+             {
+                 x <- as.numeric(x)
+                 y <- as.numeric(y)
+                 panel.grid()
+                 panel.superpose(x, y, subscripts, groups)
+                 aux <- groups[subscripts]
+                 aux <- aux == unique(aux)[1]
+                 lsegments(x[aux], y[aux], x[!aux], y[!aux],
+                           lty = 2, lwd = 0.5)
+             }, xlab = dn[[3]][1], ylab = dn[[3]][2])
+}
   dots <- list(...)
   args[names(dots)] <- dots
   if(is.logical(key)) {
-    if(key && length(unique(tt$grp)) > 1) {
-      args[["key"]] <-
-	list(points = Rows(trellis.par.get("superpose.symbol"), 1:2),
-	     text = list(levels = levels(tt$grp)), columns = 2)
-    }
+      if(key && length(unique(tt$grp)) > 1) {
+          args[["key"]] <-
+              list(points = Rows(trellis.par.get("superpose.symbol"), 1:2),
+                   text = list(levels = levels(tt$grp)), columns = 2)
+      }
   } else {
-    args[["key"]] <- key
+      args[["key"]] <- key
   }
   if(dims[3] > 2) do.call("splom", args) else do.call("xyplot", args)
 }
@@ -373,10 +373,10 @@ plot.nls <-
     else argForm <- eval(parse(text = paste(".y ~ .x |", deparse(grpsF[[2]]))))
   }
   ## adding to args list
-  args <- c(args, formula = list(argForm), data = list(argData))
-  if (is.null(args$strip)) {
-    args$strip <- function(...) strip.default(..., style = 1)
-  }
+  args <- c(list(argForm, data = argData), args)
+##   if (is.null(args$strip)) {
+##     args$strip <- function(...) strip.default(..., style = 1)
+##   }
   if (is.null(args$cex)) args$cex <- par("cex")
   if (is.null(args$adj)) args$adj <- par("adj")
 
@@ -523,7 +523,7 @@ plot.augPred <-
   labels <- list(xlab = paste(attr(x, "labels")$x, attr(x, "units")$x),
 		 ylab = paste(attr(x, "labels")$y, attr(x, "units")$y))
   labels <- labels[unlist(lapply(labels, function(el) length(el) > 0))]
-  args <- c(list(formula = attr(x, "formula"),
+  args <- c(list(attr(x, "formula"),
 		 groups = as.name(".type"),
 		 data = x,
 		 strip = function(...) strip.default(..., style = 1),
@@ -585,7 +585,7 @@ plot.compareFits <-
 		       rep(dims[1] * dims[2], dims[3])), levels = dn[[3]]),
 		   grp = ordered(rep(rep(dn[[2]], rep(dims[1], dims[2])),
 		       dims[3]), levels = dn[[2]]))
-  args <- list(formula = group ~ coefs | what,
+  args <- list(group ~ coefs | what,
 	       data = tt,
 	       scales = list(x=list(relation="free")),
 	       strip = function(...) strip.default(..., style = 1),
@@ -800,7 +800,7 @@ qqnorm.nls <-
   if (is.null(args$cex)) args$cex <- par("cex")
   if (is.null(args$adj)) args$adj <- par("adj")
 
-  args <- c(list(formula = eval(parse(text = dform)),
+  args <- c(list(eval(parse(text = dform)),
                  data = substitute(data)),
                  args)
   if (is.null(args$panel)) {

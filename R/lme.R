@@ -1532,7 +1532,7 @@ pairs.lme <-
   assign("idLabels", as.character(idLabels))#, where = 1)
   #assign("grid", grid, where = 1)
   ## adding to args list
-  args <- c(list(formula = argForm, data = argData), args)
+  args <- c(list(argForm, data = argData), args)
   if (is.null(args$strip)) {
     args$strip <- function(...) strip.default(..., style = 1)
   }
@@ -1651,7 +1651,7 @@ plot.ranef.lme <-
     }
     argData[[".groups"]] <- ordered(argData[[".groups"]],
                                     levels = unique(argData[[".groups"]]))
-    args <- list(formula = argForm, data = argData, ...)
+    args <- list(argForm, data = argData, ...)
     if (is.null(args$xlab)) {
       args$xlab <- attr(object, "label")
     }
@@ -2341,7 +2341,7 @@ qqnorm.lme <-
   if (is.null(args$cex)) args$cex <- par("cex")
   if (is.null(args$adj)) args$adj <- par("adj")
 
-  args <- c(list(formula = eval(parse(text = dform)),
+  args <- c(list(eval(parse(text = dform)),
                  data = substitute(data)), args)
   if (is.null(args$panel)) {
     args <- c(list(panel = function(x, y, subscripts, ...){

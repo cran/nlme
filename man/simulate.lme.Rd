@@ -1,14 +1,14 @@
 % $Id: simulate.lme.Rd,v 1.6 2002/03/05 14:59:39 bates Exp $
 \name{simulate.lme}
-\title{simulate lme models}
+\title{Simulate results from lme models}
 \usage{
-simulate.lme(m1, m2, Random.seed, method, nsim, niterEM, useGen)
+simulate.lme(object, nsim, seed, m2, method, niterEM, useGen, \dots)
 }
 \alias{simulate.lme}
 \alias{plot.simulate.lme}
 \alias{print.simulate.lme}
 \arguments{
-  \item{m1}{
+  \item{object}{
     an object inheriting from class \code{lme}, representing a fitted
     linear mixed-effects model, or a list containing an lme model
     specification.  If given as a list, it should contain
@@ -22,10 +22,9 @@ simulate.lme(m1, m2, Random.seed, method, nsim, niterEM, useGen)
     If given as a list, only those parts of the specification that
     change between model \code{m1} and \code{m2} need to be specified.
   }
-  \item{Random.seed}{
-    an optional vector to seed the random number generator so as to
-    reproduce a simulation.  This vector should be the same form as the
-    \code{.Random.seed} object.
+  \item{seed}{
+    an optional integer that is passed to \code{set.seed}.  Defaults to
+    a random integer.
   }
   \item{method}{
    an optional character array.  If it includes \code{"REML"} the models
@@ -35,7 +34,8 @@ simulate.lme(m1, m2, Random.seed, method, nsim, niterEM, useGen)
   }
   \item{nsim}{
     an optional positive integer specifying the number of simulations to
-    perform.  Defaults to 1000.
+    perform.  Defaults to \bold{1}. \bold{This has changed.  Previously
+      the default was 1000.}
   }
   \item{niterEM}{
     an optional integer vector of length 2 giving the number of
@@ -52,10 +52,11 @@ simulate.lme(m1, m2, Random.seed, method, nsim, niterEM, useGen)
     depends on the \code{pdMat} classes used in \code{m1} and \code{m2}:
     if both are standard classes (see \code{\link{pdClasses}}) then
     defaults to \code{TRUE}, otherwise defaults to \code{FALSE}.
- }
+  }
+  \item{\dots}{optional additional arguments.  None are used.}
 }
 \description{
-  The model \code{m1} is fit to the data.  Using
+  The model \code{object} is fit to the data.  Using
   the fitted values of the parameters, \code{nsim} new data vectors from
   this model are simulated.  Both \code{m1} and \code{m2} are fit by
   maximum likelihood (ML) and/or by restricted maximum likelihood (REML)
@@ -68,14 +69,13 @@ simulate.lme(m1, m2, Random.seed, method, nsim, niterEM, useGen)
   the seed that was used for the random number generator.
 }
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
-\seealso{\code{\link{lme}}
-}
+\seealso{\code{\link{lme}}, \code{\link{set.seed}}}
 \examples{
 \dontrun{
 orthSim <-
- simulate.lme(m1 = list(fixed = distance ~ age, data = Orthodont,
-                        random = ~ 1 | Subject),
-              m2 = list(random = ~ age | Subject))
+   simulate.lme(list(fixed = distance ~ age, data = Orthodont,
+                     random = ~ 1 | Subject), nsim = 1000,
+                m2 = list(random = ~ age | Subject))
 }
 }
 \keyword{models}

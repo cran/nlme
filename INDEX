@@ -46,8 +46,7 @@ corMatrix.corStruct     Matrix of a corStruct Object
 corMatrix.pdMat         Extract Correlation Matrix from a pdMat Object
 corMatrix.reStruct      Extract Correlation Matrix from Components of
                         an reStruct Object
-corNatural              General correlation in natural
-                        parameterization
+corNatural              General correlation in natural parameterization
 corRatio                Rational Quadratic Correlation Structure
 corSpatial              Spatial Correlation Structure
 corSpher                Spherical Correlation Structure
@@ -186,8 +185,8 @@ pairs.lmList            Pairs Plot of an lmList Object
 PBG                     Effect of Phenylbiguanide on Blood Pressure
 pdBlocked               Positive-Definite Block Diagonal Matrix
 pdClasses               Positive-Definite Matrix Classes
-pdCompSymm              Positive-Definite Matrix with Compound
-                        Symmetry Structure
+pdCompSymm              Positive-Definite Matrix with Compound Symmetry
+                        Structure
 pdConstruct             Construct pdMat Objects
 pdConstruct.pdBlocked   Construct pdBlocked Objects
 pdDiag                  Diagonal Positive-Definite Matrix
@@ -232,8 +231,8 @@ predict.nlme            Predictions from an nlme Object
 print.summary.pdMat     Print a summary.pdMat Object
 print.varFunc           Print a varFunc Object
 qqnorm.gls              Normal Plot of Residuals from a gls Object
-qqnorm.lme              Normal Plot of Residuals or Random Effects
-                        from an lme Object
+qqnorm.lme              Normal Plot of Residuals or Random Effects from
+                        an lme Object
 Quinidine               Quinidine Kinetics
 quinModel               Model function for the Quinidine data
 Rail                    Evaluation of Stress in Railway Rails
@@ -256,9 +255,8 @@ residuals.lmeStruct     Calculate lmeStruct Residuals
 residuals.lmList        Extract lmList Residuals
 residuals.nlmeStruct    Calculate nlmeStruct Residuals
 reStruct                Random Effects Structure
-simulate.lme            simulate lme models
-solve.pdMat             Calculate Inverse of a Positive-Definite
-                        Matrix
+simulate.lme            Simulate results from lme models
+solve.pdMat             Calculate Inverse of a Positive-Definite Matrix
 solve.reStruct          Apply Solve to an reStruct Object
 Soybean                 Growth of soybean plants
 splitFormula            Split a Formula

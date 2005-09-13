@@ -506,10 +506,10 @@ pairs.lmList <-
   assign("grid", grid)
 
   ## adding to args list
-  args <- c(args, formula = list(argForm), data = list(argData))
-  if (is.null(args$strip)) {
-    args$strip <- function(...) strip.default(..., style = 1)
-  }
+  args <- c(list(argForm, data = argData), args)
+##   if (is.null(args$strip)) {
+##     args$strip <- function(...) strip.default(..., style = 1)
+##   }
   if (is.null(args$cex)) args$cex <- par("cex")
   if (is.null(args$adj)) args$adj <- par("adj")
 
@@ -699,10 +699,10 @@ plot.lmList <-
     else argForm <- eval(parse(text = paste(".y ~ .x |", deparse(grpsF[[2]]))))
   }
   ## adding to args list
-  args <- c(args, formula = list(argForm), data = list(argData))
-  if (is.null(args$strip)) {
-    args$strip <- function(...) strip.default(..., style = 1)
-  }
+  args <- c(list(argForm, data = argData), args)
+##   if (is.null(args$strip)) {
+##     args$strip <- function(...) strip.default(..., style = 1)
+##   }
   if (is.null(args$cex)) args$cex <- par("cex")
   if (is.null(args$adj)) args$adj <- par("adj")
 
@@ -1169,7 +1169,7 @@ qqnorm.lmList <-
   if (is.null(args$cex)) args$cex <- par("cex")
   if (is.null(args$adj)) args$adj <- par("adj")
 
-  args <- c(list(formula = eval(parse(text = dform)),
+  args <- c(list(eval(parse(text = dform)),
                  data = substitute(data),
                  panel = function(x, y, subscripts, ...){
                    x <- as.numeric(x)
