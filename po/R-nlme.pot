@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: R 2.1.0\n"
+"Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
-"POT-Creation-Date: 2005-02-28 14:25\n"
+"POT-Creation-Date: 2005-12-09 11:05\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -509,12 +509,6 @@ msgstr ""
 msgid "Objects must have coefficients with same row names"
 msgstr ""
 
-msgid "Contrasts not defined for"
-msgstr ""
-
-msgid "degrees of freedom"
-msgstr ""
-
 msgid "Object must inherit from data.frame"
 msgstr ""
 
@@ -957,6 +951,9 @@ msgid "Data must inherit from \"groupedData\" class"
 msgstr ""
 
 msgid "if random does not define groups"
+msgstr ""
+
+msgid "order of arguments in simulate.lme has changed to conform with generic in R-2.2.0"
 msgstr ""
 
 msgid "Models with corStruct and/or varFunc objects not allowed."

@@ -502,7 +502,11 @@ anova.gls <-
     ## Otherwise construct the likelihood ratio and information table
     ## objects in ... may inherit from gls, lm, lmList, and lme (for now)
     ##
-    else do.call("anova.lme", as.list(match.call()[-1]))
+    else {
+        Call <- match.call()
+        Call[[1]] <- as.name("anova.lme")
+        eval.parent(Call) 
+    }
 }
 
 augPred.gls <-
