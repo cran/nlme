@@ -559,7 +559,7 @@ plot.augPred <-
       args[["key"]] <-
 	list(lines = c(Rows(trellis.par.get("superpose.line"), 1:lLev),
 		       list(size = rep(3, lLev))),
-	     text = list(levels = levs), columns = lLev)
+	     text = list(levels = levs), columns = min(6, lLev))
     }
   } else {
     args[["key"]] <- key

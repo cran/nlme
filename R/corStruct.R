@@ -62,7 +62,7 @@ corMatrix.corStruct <-
 	      as.integer(unlist(corD)),
 	      factor = double(corD[["sumLenSq"]]),
 	      logDet = double(1),
-              PACKAGE="base")[c("factor", "logDet")]
+              PACKAGE="nlme")[c("factor", "logDet")]
     lD <- val[["logDet"]]
     val <- val[["factor"]]
     if (corD[["M"]] > 1) {

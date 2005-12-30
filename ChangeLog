@@ -1,5 +1,21 @@
+2005-12-31  Brian Ripley  <Brian.Ripley@r-project.org>
+
+	* DESCRIPTION: Version is 3.1-68.
+	* src/init.c: new file to register symbols
+	* R/corStruct.R: corrected one use of PACKAGE="base"
+	* R/lmList.R: remove attempted use of 'frame = 1'
+
+2005-12-09  Deepayan Sarkar  <deepayan@stat.wisc.edu>
+
+	* R/newMethods.R, R/groupedData.R: fix for problem described in
+	https://stat.ethz.ch/pipermail/r-help/2005-December/082890.html
+	(superpose.line/symbol components were being truncated to length
+	of an arbitrary component).
+
+
 2005-12-09  Brian Ripley  <Brian.Ripley@r-project.org>
 
+	* DESCRIPTION: Version is 3.1-67.
 	* R/gls.R: Replace do.call by eval.parent on massaged call.
 	* po/fr.R, po/R-fr.R, inst/po: add French translation by
 	Philippe Grosjean and automated en@quot translation.

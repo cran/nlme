@@ -1158,8 +1158,7 @@ qqnorm.lmList <-
       data <- fData
     }
   }
-  assign("id", if (is.null(id)) NULL else as.logical(as.character(id)),
-         frame = 1)
+  assign("id", if (is.null(id)) NULL else as.logical(as.character(id)))
   assign("idLabels", as.character(idLabels))
   assign("grid", grid)
   assign("abl", abline)

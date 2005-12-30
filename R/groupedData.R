@@ -438,10 +438,10 @@ plot.nfnGroupedData <-
   }
   if(is.logical(key)) {
     if(key && (!is.null(Inner) && (lInn <- length(levInn)) > 1)) {
-      lInn <- min(c(lInn, length(trll.set[["lty"]])))
+      ## lInn <- min(c(lInn, length(trll.set[["lty"]])))
       args[["key"]] <-
 	list(lines = Rows(trellis.par.get("superpose.line"), 1:lInn),
-	     text = list(levels = levInn), columns = lInn)
+	     text = list(levels = levInn), columns = min(6, lInn))
     }
   } else {
     args[["key"]] <- key
@@ -514,10 +514,10 @@ plot.nffGroupedData <-
     Inner <- eval(inner[[2]], x)
     levInn <- levels(as.factor(Inner))
     lInn <- length(levInn)
-    lInn <- min(c(lInn, length(trellis.par.get("superpose.symbol")$pch)))
+    ## lInn <- min(c(lInn, length(trellis.par.get("superpose.symbol")$pch)))
     args[["key"]] <-
       list(points = Rows(trellis.par.get("superpose.symbol"), 1:lInn),
-	     text = list(levels = levInn), columns = lInn)
+	     text = list(levels = levInn), columns = min(6, lInn))
   }
   dots <- list(...)
   args[names(dots)] <- dots
