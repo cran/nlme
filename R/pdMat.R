@@ -612,11 +612,10 @@ pdFactor.pdSymm <-
   function(object)
 {
   Ncol <- round((-1 + sqrt(1 + 8 * length(object))) / 2)
-  .C("matrixLog_pd",
+  .C(matrixLog_pd,
      Factor = double(Ncol * Ncol),
      as.integer(Ncol),
-     as.double(object),
-     PACKAGE = "nlme")$Factor
+     as.double(object))$Factor
 }
 
 pdMatrix.pdSymm <-
@@ -740,10 +739,10 @@ pdFactor.pdLogChol <-
   function(object)
 {
   Ncol <- round((-1 + sqrt(1 + 8 * length(object))) / 2)
-  .C("logChol_pd",
+  .C(logChol_pd,
      Factor = double(Ncol * Ncol),
      as.integer(Ncol),
-     as.double(object), PACKAGE = "nlme")$Factor
+     as.double(object))$Factor
 }
 
 ####* Methods for standard generics
@@ -1146,11 +1145,10 @@ pdFactor.pdNatural <-
   function(object)
 {
   Ncol <- round((-1 + sqrt(1 + 8 * length(object))) / 2)
-  .C("natural_pd",
+  .C(natural_pd,
      Factor = double(Ncol * Ncol),
      as.integer(Ncol),
-     as.double(object),
-     PACKAGE = "nlme")$Factor
+     as.double(object))$Factor
 }
 
 pdMatrix.pdNatural <-
@@ -1609,11 +1607,10 @@ pdFactor.pdCompSymm <-
   function(object)
 {
   Ncol <- attr(object, "ncol")
-  .C("compSymm_pd",
+  .C(compSymm_pd,
      Factor = double(Ncol * Ncol),
      as.integer(Ncol),
-     as.double(object),
-     PACKAGE = "nlme")$Factor
+     as.double(object))$Factor
 }
 
 pdMatrix.pdCompSymm <-

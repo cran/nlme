@@ -388,7 +388,7 @@ gnls <-
     } else {
       vW <- varWeights(gnlsSt$varStruct)
     }
-    work <- .C("fit_gnls",
+    work <- .C(fit_gnls,
 	       thetaNLS = as.double(spar),
 	       as.integer(unlist(Dims)),
 	       as.double(cF),
@@ -399,7 +399,7 @@ gnls <-
 	       as.integer(!is.null(correlation)),
 	       as.integer(!is.null(weights)),
                nlModel,
-	       NAOK = TRUE, PACKAGE = "nlme")
+	       NAOK = TRUE)
     if (work$settings[4] == 1) {
       convResult <- 2
       if (controlvals$returnObject) {

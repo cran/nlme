@@ -1,4 +1,4 @@
-useDynLib(nlme)
+useDynLib(nlme, .registration=TRUE)
 import(lattice)
 import(stats)
 importFrom(graphics, pairs, plot)

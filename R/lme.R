@@ -452,14 +452,13 @@ getFixDF <-
   if (any(notIntX <- !apply(X, 2, const))) {
       ## percentage of groups for which columns of X are inner
       innP <- array(c(rep(1, p),
-                      .C("inner_perc_table",
+                      .C(inner_perc_table,
                          as.double(X),
                          as.integer(unlist(grps)),
                          as.integer(p),
                          as.integer(Q),
                          as.integer(N),
-                         val = double(p * Q),
-                         PACKAGE = "nlme")[["val"]]), c(p, Qp1),
+                         val = double(p * Q))[["val"]]), c(p, Qp1),
                     list(namX, stratNam))
     ## strata in which columns of X are estimated
     ## ignoring fractional inner percentages for now
@@ -532,14 +531,13 @@ lmeApVar <-
 	  NULL
 	}
       }
-      val <- .C("mixed_loglik",
+      val <- .C(mixed_loglik,
 		as.double(conLin$Xy),
 		as.integer(unlist(dims)),
 		as.double(sigma * unlist(pdFactor(solve(object$reStruct)))),
 		as.integer(settings),
 		logLik = double(1),
-		lRSS = double(1),
-		PACKAGE = "nlme")[c("logLik", "lRSS")]
+		lRSS = double(1))[c("logLik", "lRSS")]
       aux <- (exp(val[["lRSS"]])/sigma)^2
       conLin[["logLik"]] + val[["logLik"]] + (N * log(aux) - aux)/2
     }
@@ -598,10 +596,9 @@ MEdecomp <-
     ## no pint in doing the decomposition
     return(conLin)
   }
-  dc <- array(.C("mixed_decomp",
+  dc <- array(.C(mixed_decomp,
 		 as.double(conLin$Xy),
-		 as.integer(unlist(dims)),
-		 PACKAGE = "nlme")[[1]],
+		 as.integer(unlist(dims)))[[1]],
 	      c(dims$StrRows, dims$ZXcols))
   dims$ZXrows <- dims$StrRows
   dims$ZXoff <- dims$DecOff
@@ -620,7 +617,7 @@ MEEM <-
     pdCl <- attr(object, "settings")[-(1:3)]
     pdCl[pdCl == -1] <- 0
     precvec <- unlist(pdFactor(object))
-    zz <- .C("mixed_EM",
+    zz <- .C(mixed_EM,
 	     as.double(conLin$Xy),
 	     as.integer(unlist(dd)),
 	     precvec = as.double(precvec),
@@ -629,8 +626,7 @@ MEEM <-
 	     as.integer(attr(object, "settings")[1]),
 	     double(1),
 	     double(length(precvec)),
-	     double(1),
-	     PACKAGE = "nlme")[["precvec"]]
+	     double(1))[["precvec"]]
     Prec <- vector("list", length(object))
     names(Prec) <- names(object)
     for (i in seq(along = object)) {
@@ -650,15 +646,14 @@ MEestimate <-
   REML <- attr(object$reStruct, "settings")[1]
   Q <- dd$Q
   rConLin <- recalc(object, conLin)
-  zz <- .C("mixed_estimate",
+  zz <- .C(mixed_estimate,
 	   as.double(rConLin$Xy),
 	   as.integer(unlist(dd)),
 	   as.double(unlist(pdFactor(object$reStruct))),
 	   as.integer(REML),
 	   double(1),
 	   estimates = double(dd$StrRows * dd$ZXcols),
-	   as.logical(FALSE),
-	   PACKAGE = "nlme")[["estimates"]]
+	   as.logical(FALSE))[["estimates"]]
   estimates <- array(zz, c(dd$StrRows, dd$ZXcols))
   resp <- estimates[ , dd$ZXcols]
   reSt <- object$reStruct
@@ -2827,14 +2822,13 @@ logLik.lmeStructInt <-
   ## logLik for objects with reStruct parameters only, with
   ## internally defined class
   q <- length(Pars)
-  aux <- .C("mixed_loglik",
+  aux <- .C(mixed_loglik,
 	    as.double(conLin[["Xy"]]),
 	    as.integer(unlist(conLin$dims)),
 	    as.double(Pars),
 	    as.integer(attr(object, "settings")),
 	    val = double(1 + q * (q + 1)),
-	    double(1),
-	    PACKAGE = "nlme")[["val"]]
+	    double(1))[["val"]]
   val <- aux[1]
   attr(val, "gradient") <- -aux[1 + (1:q)]
   attr(val, "hessian") <- -array(aux[-(1:(q+1))], c(q, q))

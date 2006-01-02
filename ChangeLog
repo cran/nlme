@@ -1,7 +1,8 @@
-2006-01-05  Brian Ripley  <Brian.Ripley@r-project.org>
+2005-12-31  Brian Ripley  <Brian.Ripley@r-project.org>
 
-	* src/init.c: missing registration for ARMA_constCoef
-	* inst/scripts/ch02.R: correct argument names in simulate.lme call
+	* DESCRIPTION: Version is 3.1-69, require 2.3.0.
+	* NAMESPACE: use registration.
+	* R/*.R: use registered symbols.
 
 2005-12-31  Brian Ripley  <Brian.Ripley@r-project.org>
 

@@ -315,11 +315,11 @@ splitFormula <-
 phenoModel <-
   function(Subject, time, dose, lCl, lV)
 {
-  .C("nlme_one_comp_first",
+  .C(nlme_one_comp_first,
      as.integer(length(time)),
      resp = as.double(dose),
      as.double(cbind(Subject, time, dose, exp(lV), exp(lCl))),
-     NAOK = TRUE, PACKAGE = "nlme")$resp
+     NAOK = TRUE)$resp
 }
 
 ##*## quinModel - one-compartment open model with first order
@@ -328,12 +328,12 @@ phenoModel <-
 quinModel <-
   function(Subject, time, conc, dose, interval, lV, lKa, lCl)
 {
-  .C("nlme_one_comp_open",
+  .C(nlme_one_comp_open,
      as.integer(length(time)),
      resp = as.double(dose),
      as.double(cbind(Subject, time, conc, dose, interval,
                      exp(lV), exp(lKa), exp(lCl - lV))),
-     NAOK = TRUE, PACKAGE = "nlme")$resp
+     NAOK = TRUE)$resp
 }
 
 LDEsysMat <-

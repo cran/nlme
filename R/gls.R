@@ -239,12 +239,11 @@ glsApVar <-
             Pars <- Pars[-npar]
             coef(object) <- Pars
             conLin <- recalc(object, conLin)
-            val <- .C("gls_loglik",
+            val <- .C(gls_loglik,
                       as.double(conLin$Xy),
                       as.integer(unlist(dims)),
                       logLik = double(1),
-                      lRSS = double(1), NAOK = TRUE,
-                      PACKAGE = "nlme")[c("logLik", "lRSS")]
+                      lRSS = double(1), NAOK = TRUE)[c("logLik", "lRSS")]
             aux <- 2 * (val[["lRSS"]] - lsigma)
             conLin[["logLik"]] + val[["logLik"]] + (N * aux - exp(aux))/2
         }
@@ -288,7 +287,7 @@ glsEstimate <-
     p <- dd$p
     oXy <- conLin$Xy
     conLin <- recalc(object, conLin)	# updating for corStruct and varFunc
-    val <- .C("gls_estimate",
+    val <- .C(gls_estimate,
               as.double(conLin$Xy),
               as.integer(unlist(dd)),
               beta = double(p),
@@ -297,8 +296,7 @@ glsEstimate <-
               varBeta = double(p * p),
               rank = integer(1),
               pivot = as.integer(1:(p + 1)),
-              NAOK = TRUE,
-              PACKAGE = "nlme")[c("beta","sigma","logLik","varBeta",
+              NAOK = TRUE)[c("beta","sigma","logLik","varBeta",
               "rank", "pivot")]
     rnk <- val[["rank"]]
     rnkm1 <- rnk - 1
@@ -505,7 +503,7 @@ anova.gls <-
     else {
         Call <- match.call()
         Call[[1]] <- as.name("anova.lme")
-        eval.parent(Call) 
+        eval.parent(Call)
     }
 }
 
@@ -1268,12 +1266,11 @@ logLik.glsStruct <-
 {
     coef(object) <- Pars			# updating parameter values
     conLin <- recalc(object, conLin)	# updating conLin
-    val <- .C("gls_loglik",
+    val <- .C(gls_loglik,
               as.double(conLin[["Xy"]]),
               as.integer(unlist(conLin[["dims"]])),
               logLik = as.double(conLin[["logLik"]]),
-              double(1), NAOK = TRUE,
-              PACKAGE = "nlme")
+              double(1), NAOK = TRUE)
     val[["logLik"]]
 }
 

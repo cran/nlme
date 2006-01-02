@@ -272,14 +272,13 @@ logLik.reStruct <-
   function(object, conLin, ...)
 {
   if(any(!is.finite(conLin$Xy))) return(-Inf)
-  .C("mixed_loglik",
+  .C(mixed_loglik,
      as.double(conLin$Xy),
      as.integer(unlist(conLin$dims)),
      as.double(pdFactor(object)),
      as.integer(attr(object, "settings")),
      loglik = double(1),
-     double(1),
-     PACKAGE = "nlme")$loglik
+     double(1))$loglik
 }
 
 "matrix<-.reStruct" <-

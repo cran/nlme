@@ -27,12 +27,11 @@ corFactor.corStruct <-
     return(aux)
   }
   corD <- Dim(object)
-  val <- .C("corStruct_factList",
+  val <- .C(corStruct_factList,
 	    as.double(unlist(corMatrix(object))),
 	    as.integer(unlist(corD)),
 	    factor = double(corD[["sumLenSq"]]),
-            logDet = double(1),
-            PACKAGE="nlme")[c("factor", "logDet")]
+            logDet = double(1))[c("factor", "logDet")]
   lD <- val[["logDet"]]
   val <- val[["factor"]]
   attr(val, "logDet") <- lD
@@ -57,12 +56,11 @@ corMatrix.corStruct <-
     } else {
       corD <- Dim(object, rep(1, length(covariate)))
     }
-    val <- .C("corStruct_factList",
+    val <- .C(corStruct_factList,
 	      as.double(unlist(corMatrix(object, covariate))),
 	      as.integer(unlist(corD)),
 	      factor = double(corD[["sumLenSq"]]),
-	      logDet = double(1),
-              PACKAGE="nlme")[c("factor", "logDet")]
+	      logDet = double(1))[c("factor", "logDet")]
     lD <- val[["logDet"]]
     val <- val[["factor"]]
     if (corD[["M"]] > 1) {
@@ -276,12 +274,11 @@ recalc.corStruct <-
   function(object, conLin, ...)
 {
   conLin[["Xy"]][] <-
-    .C("corStruct_recalc",
+    .C(corStruct_recalc,
        Xy = as.double(conLin[["Xy"]]),
        as.integer(unlist(Dim(object))),
        as.integer(ncol(conLin[["Xy"]])),
-       as.double(unlist(corFactor(object))),
-       PACKAGE="nlme")[["Xy"]]
+       as.double(unlist(corFactor(object))))[["Xy"]]
   conLin[["logLik"]] <- conLin[["logLik"]] + logLik(object)
   conLin
 }
@@ -323,14 +320,13 @@ corFactor.corSymm <-
   function(object, ...)
 {
   corD <- Dim(object)
-  val <- .C("symm_factList",
+  val <- .C(symm_factList,
 	    as.double(as.vector(object)),
 	    as.integer(unlist(attr(object, "covariate"))),
 	    as.integer(attr(object, "maxCov")),
 	    as.integer(unlist(corD)),
 	    factor = double(corD[["sumLenSq"]]),
-	    logDet = double(1),
-            PACKAGE="nlme")[c("factor", "logDet")]
+	    logDet = double(1))[c("factor", "logDet")]
   lD <- val[["logDet"]]
   val <- val[["factor"]]
   attr(val, "logDet") <- lD
@@ -350,23 +346,21 @@ corMatrix.corSymm <-
     corD <- Dim(object, rep(1, length(covariate)))
   }
   if (corr) {
-    val <- .C("symm_matList",
+    val <- .C(symm_matList,
 	      as.double(as.vector(object)),
 	      as.integer(unlist(covariate)),
 	      as.integer(attr(object, "maxCov")),
 	      as.integer(unlist(corD)),
-	      mat = double(corD[["sumLenSq"]]),
-              PACKAGE="nlme")[["mat"]]
+	      mat = double(corD[["sumLenSq"]]))[["mat"]]
     lD <- NULL
   } else {
-    val <- .C("symm_factList",
+    val <- .C(symm_factList,
               as.double(as.vector(object)),
               as.integer(unlist(covariate)),
               as.integer(attr(object, "maxCov")),
               as.integer(unlist(corD)),
               factor = double(corD[["sumLenSq"]]),
-              logDet = double(1),
-              PACKAGE="nlme")[c("factor", "logDet")]
+              logDet = double(1))[c("factor", "logDet")]
     lD <- val[["logDet"]]
     val <- val[["factor"]]
   }
@@ -398,9 +392,8 @@ coef.corSymm <-
     }
   }
   mC <- attr(object, "maxCov")
-  .C("symm_fullCorr", as.double(object),
-     as.integer(mC), corr = double(round(mC * (mC - 1) / 2)),
-     PACKAGE="nlme")[["corr"]]
+  .C(symm_fullCorr, as.double(object),
+     as.integer(mC), corr = double(round(mC * (mC - 1) / 2)))[["corr"]]
 }
 
 "coef<-.corSymm" <-
@@ -412,14 +405,13 @@ coef.corSymm <-
   object[] <- value
   corD <- attr(object, "Dim")
   ## updating the factor list and logDet
-  aux <- .C("symm_factList",
+  aux <- .C(symm_factList,
 	    as.double(as.vector(object)),
 	    as.integer(unlist(getCovariate(object))),
 	    as.integer(attr(object, "maxCov")),
 	    as.integer(unlist(corD)),
 	    factor = double(corD[["sumLenSq"]]),
-	    logDet = double(1),
-            PACKAGE="nlme")[c("factor", "logDet")]
+	    logDet = double(1))[c("factor", "logDet")]
   attr(object, "factor") <- aux[["factor"]]
   attr(object, "logDet") <- -aux[["logDet"]]
   object
@@ -523,15 +515,14 @@ recalc.corSymm <-
   function(object, conLin, ...)
 {
   val <-
-    .C("symm_recalc",
+    .C(symm_recalc,
        Xy = as.double(conLin[["Xy"]]),
        as.integer(unlist(Dim(object))),
        as.integer(ncol(conLin[["Xy"]])),
        as.double(as.vector(object)),
        as.integer(unlist(getCovariate(object))),
        as.integer(attr(object, "maxCov")),
-       logLik = double(1),
-       PACKAGE="nlme")[c("Xy", "logLik")]
+       logLik = double(1))[c("Xy", "logLik")]
   conLin[["Xy"]][] <- val[["Xy"]]
   conLin[["logLik"]] <- conLin[["logLik"]] + val[["logLik"]]
   conLin
@@ -565,14 +556,13 @@ corFactor.corNatural <-
   function(object, ...)
 {
   corD <- Dim(object)
-  val <- .C("nat_factList",
+  val <- .C(nat_factList,
 	    as.double(as.vector(object)),
 	    as.integer(unlist(attr(object, "covariate"))),
 	    as.integer(attr(object, "maxCov")),
 	    as.integer(unlist(corD)),
 	    factor = double(corD[["sumLenSq"]]),
-            logDet = double(1),
-            PACKAGE="nlme")[c("factor", "logDet")]
+            logDet = double(1))[c("factor", "logDet")]
   lD <- val[["logDet"]]
   val <- val[["factor"]]
   attr(val, "logDet") <- lD
@@ -592,23 +582,21 @@ corMatrix.corNatural <-
     corD <- Dim(object, rep(1, length(covariate)))
   }
   if (corr) {
-    val <- .C("nat_matList",
+    val <- .C(nat_matList,
 	      as.double(as.vector(object)),
 	      as.integer(unlist(covariate)),
 	      as.integer(attr(object, "maxCov")),
 	      as.integer(unlist(corD)),
-              mat = double(corD[["sumLenSq"]]),
-              PACKAGE="nlme")[["mat"]]
+              mat = double(corD[["sumLenSq"]]))[["mat"]]
     lD <- NULL
   } else {
-    val <- .C("nat_factList",
+    val <- .C(nat_factList,
               as.double(as.vector(object)),
               as.integer(unlist(covariate)),
               as.integer(attr(object, "maxCov")),
               as.integer(unlist(corD)),
               factor = double(corD[["sumLenSq"]]),
-              logDet = double(1),
-              PACKAGE="nlme")[c("factor", "logDet")]
+              logDet = double(1))[c("factor", "logDet")]
     lD <- val[["logDet"]]
     val <- val[["factor"]]
   }
@@ -640,9 +628,8 @@ coef.corNatural <-
     }
   }
   mC <- attr(object, "maxCov")
-  val <- .C("nat_fullCorr", as.double(object),
-            as.integer(mC), corr = double(round(mC * (mC - 1) / 2)),
-            PACKAGE="nlme")[["corr"]]
+  val <- .C(nat_fullCorr, as.double(object),
+            as.integer(mC), corr = double(round(mC * (mC - 1) / 2)))[["corr"]]
   names(val) <- outer(1:mC, 1:mC,
                       function(x,y) {
                         paste("cor(",y,",",x,")",sep="")
@@ -659,14 +646,13 @@ coef.corNatural <-
   object[] <- value
   corD <- attr(object, "Dim")
   ## updating the factor list and logDet
-  aux <- .C("nat_factList",
+  aux <- .C(nat_factList,
 	    as.double(as.vector(object)),
 	    as.integer(unlist(getCovariate(object))),
 	    as.integer(attr(object, "maxCov")),
 	    as.integer(unlist(corD)),
 	    factor = double(corD[["sumLenSq"]]),
-	    logDet = double(1),
-            PACKAGE="nlme")[c("factor", "logDet")]
+	    logDet = double(1))[c("factor", "logDet")]
   attr(object, "factor") <- aux[["factor"]]
   attr(object, "logDet") <- -aux[["logDet"]]
   object
@@ -765,15 +751,14 @@ recalc.corNatural <-
   function(object, conLin, ...)
 {
   val <-
-    .C("nat_recalc",
+    .C(nat_recalc,
        Xy = as.double(conLin[["Xy"]]),
        as.integer(unlist(Dim(object))),
        as.integer(ncol(conLin[["Xy"]])),
        as.double(as.vector(object)),
        as.integer(unlist(getCovariate(object))),
        as.integer(attr(object, "maxCov")),
-       logLik = double(1),
-       PACKAGE="nlme")[c("Xy", "logLik")]
+       logLik = double(1))[c("Xy", "logLik")]
   conLin[["Xy"]][] <- val[["Xy"]]
   conLin[["logLik"]] <- conLin[["logLik"]] + val[["logLik"]]
   conLin
@@ -870,12 +855,11 @@ corFactor.corAR1 <-
   function(object, ...)
 {
   corD <- Dim(object)
-  val <- .C("AR1_factList",
+  val <- .C(AR1_factList,
 	    as.double(as.vector(object)),
 	    as.integer(unlist(corD)),
 	    factor = double(corD[["sumLenSq"]]),
-	    logDet = double(1),
-            PACKAGE="nlme")[c("factor", "logDet")]
+	    logDet = double(1))[c("factor", "logDet")]
   lD <- val[["logDet"]]
   val <- val[["factor"]]
   attr(val, "logDet") <- lD
@@ -895,19 +879,17 @@ corMatrix.corAR1 <-
     corD <- Dim(object, rep(1, length(covariate)))
   }
   if (corr) {
-    val <- .C("AR1_matList",
+    val <- .C(AR1_matList,
 	      as.double(as.vector(object)),
 	      as.integer(unlist(corD)),
-	      mat = double(corD[["sumLenSq"]]),
-              PACKAGE="nlme")[["mat"]]
+	      mat = double(corD[["sumLenSq"]]))[["mat"]]
     lD <- NULL
   } else {
-    val <- .C("AR1_factList",
+    val <- .C(AR1_factList,
               as.double(as.vector(object)),
               as.integer(unlist(corD)),
               factor = double(corD[["sumLenSq"]]),
-              logDet = double(1),
-              PACKAGE="nlme")[c("factor", "logDet")]
+              logDet = double(1))[c("factor", "logDet")]
     lD <- val[["logDet"]]
     val <- val[["factor"]]
   }
@@ -953,12 +935,11 @@ coef.corAR1 <-
   object[] <- value
   corD <- attr(object, "Dim")
   ## updating the factor list and logDet
-  aux <- .C("AR1_factList",
+  aux <- .C(AR1_factList,
 	    as.double(as.vector(object)),
 	    as.integer(unlist(corD)),
 	    factor = double(corD[["sumLenSq"]]),
-	    logDet = double(1),
-	    PACKAGE = "nlme")[c("factor", "logDet")]
+	    logDet = double(1))[c("factor", "logDet")]
   attr(object, "factor") <- aux[["factor"]]
   attr(object, "logDet") <- -aux[["logDet"]]
   object
@@ -996,13 +977,12 @@ recalc.corAR1 <-
   function(object, conLin, ...)
 {
   val <-
-    .C("AR1_recalc",
+    .C(AR1_recalc,
        Xy = as.double(conLin[["Xy"]]),
        as.integer(unlist(Dim(object))),
        as.integer(ncol(conLin[["Xy"]])),
        as.double(as.vector(object)),
-       logLik = double(1),
-       PACKAGE = "nlme")[c("Xy", "logLik")]
+       logLik = double(1))[c("Xy", "logLik")]
   conLin[["Xy"]][] <- val[["Xy"]]
   conLin[["logLik"]] <- conLin[["logLik"]] + val[["logLik"]]
   conLin
@@ -1039,13 +1019,12 @@ corFactor.corCAR1 <-
   function(object, ...)
 {
   corD <- Dim(object)
-  val <- .C("CAR1_factList",
+  val <- .C(CAR1_factList,
 	    as.double(as.vector(object)),
 	    as.double(unlist(attr(object, "covariate"))),
 	    as.integer(unlist(corD)),
 	    factor = double(corD[["sumLenSq"]]),
-	    logDet = double(1),
-	    PACKAGE = "nlme")[c("factor", "logDet")]
+	    logDet = double(1))[c("factor", "logDet")]
   lD <- val[["logDet"]]
   val <- val[["factor"]]
   attr(val, "logDet") <- lD
@@ -1065,21 +1044,19 @@ corMatrix.corCAR1 <-
     corD <- Dim(object, rep(1, length(covariate)))
   }
   if (corr) {
-    val <- .C("CAR1_matList",
+    val <- .C(CAR1_matList,
 	      as.double(as.vector(object)),
 	      as.double(unlist(covariate)),
 	      as.integer(unlist(corD)),
-	      mat = double(corD[["sumLenSq"]]),
-	      PACKAGE = "nlme")[["mat"]]
+	      mat = double(corD[["sumLenSq"]]))[["mat"]]
     lD <- NULL
   } else {
-    val <- .C("CAR1_factList",
+    val <- .C(CAR1_factList,
               as.double(as.vector(object)),
               as.double(unlist(covariate)),
               as.integer(unlist(corD)),
               factor = double(corD[["sumLenSq"]]),
-              logDet = double(1),
-              PACKAGE = "nlme")[c("factor", "logDet")]
+              logDet = double(1))[c("factor", "logDet")]
     lD <- val[["logDet"]]
     val <- val[["factor"]]
   }
@@ -1125,13 +1102,12 @@ coef.corCAR1 <-
   object[] <- value
   corD <- attr(object, "Dim")
   ## updating the factor list and logDet
-  aux <- .C("CAR1_factList",
+  aux <- .C(CAR1_factList,
 	    as.double(as.vector(object)),
 	    as.double(unlist(getCovariate(object))),
 	    as.integer(unlist(corD)),
 	    factor = double(corD[["sumLenSq"]]),
-	    logDet = double(1),
-	    PACKAGE = "nlme")[c("factor", "logDet")]
+	    logDet = double(1))[c("factor", "logDet")]
   attr(object, "factor") <- aux[["factor"]]
   attr(object, "logDet") <- -aux[["logDet"]]
   object
@@ -1160,14 +1136,13 @@ recalc.corCAR1 <-
   function(object, conLin, ...)
 {
   val <-
-    .C("CAR1_recalc",
+    .C(CAR1_recalc,
      Xy = as.double(conLin[["Xy"]]),
      as.integer(unlist(Dim(object))),
      as.integer(ncol(conLin[["Xy"]])),
      as.double(as.vector(object)),
      as.double(unlist(getCovariate(object))),
-     logLik = double(1),
-     PACKAGE = "nlme")[c("Xy", "logLik")]
+     logLik = double(1))[c("Xy", "logLik")]
   conLin[["Xy"]][] <- val[["Xy"]]
   conLin[["logLik"]] <- conLin[["logLik"]] + val[["logLik"]]
   conLin
@@ -1203,11 +1178,10 @@ corARMA <-
     stop("Parameters in ARMA structure must be < 1 in absolute value")
   }
   ## unconstrained parameters
-  value <- .C("ARMA_unconstCoef",
+  value <- .C(ARMA_unconstCoef,
 	      as.integer(p),
 	      as.integer(q),
-	      pars = as.double(value),
-	      PACKAGE = "nlme")$pars
+	      pars = as.double(value))$pars
   attributes(value) <- list(formula = form, p = p, q = q, fixed = fixed)
   class(value) <- c("corARMA", "corStruct")
   value
@@ -1220,7 +1194,7 @@ corFactor.corARMA <-
   function(object, ...)
 {
   corD <- Dim(object)
-  val <- .C("ARMA_factList",
+  val <- .C(ARMA_factList,
 	    as.double(as.vector(object)),
 	    as.integer(attr(object, "p")),
 	    as.integer(attr(object, "q")),
@@ -1228,8 +1202,7 @@ corFactor.corARMA <-
 	    as.integer(attr(object, "maxLag")),
 	    as.integer(unlist(corD)),
 	    factor = double(corD[["sumLenSq"]]),
-	    logDet = double(1),
-	    PACKAGE = "nlme")[c("factor", "logDet")]
+	    logDet = double(1))[c("factor", "logDet")]
   lD <- val[["logDet"]]
   val <- val[["factor"]]
   attr(val, "logDet") <- lD
@@ -1253,18 +1226,17 @@ corMatrix.corARMA <-
   q <- attr(object, "q")
   maxLag <- attr(object, "maxLag")
   if (corr) {
-    val <- .C("ARMA_matList",
+    val <- .C(ARMA_matList,
 	      as.double(as.vector(object)),
 	      as.integer(p),
 	      as.integer(q),
 	      as.integer(unlist(covariate)),
 	      as.integer(maxLag),
 	      as.integer(unlist(corD)),
-	      mat = double(corD[["sumLenSq"]]),
-	      PACKAGE = "nlme")[["mat"]]
+	      mat = double(corD[["sumLenSq"]]))[["mat"]]
     lD <- NULL
   } else {
-    val <- .C("ARMA_factList",
+    val <- .C(ARMA_factList,
               as.double(as.vector(object)),
               as.integer(attr(object, "p")),
               as.integer(attr(object, "q")),
@@ -1272,8 +1244,7 @@ corMatrix.corARMA <-
               as.integer(attr(object, "maxLag")),
               as.integer(unlist(corD)),
               factor = double(corD[["sumLenSq"]]),
-              logDet = double(1),
-              PACKAGE = "nlme")[c("factor", "logDet")]
+              logDet = double(1))[c("factor", "logDet")]
     lD <- val[["logDet"]]
     val <- val[["factor"]]
   }
@@ -1311,10 +1282,9 @@ coef.corARMA <-
     if (q > 0) {
       nams <- c(nams, paste(rep("Theta", q), 1:q, sep=""))
     }
-    val <- c(.C("ARMA_constCoef", as.integer(attr(object,"p")),
+    val <- c(.C(ARMA_constCoef, as.integer(attr(object,"p")),
 		as.integer(attr(object,"q")),
-		pars = as.double(val),
-		PACKAGE = "nlme")$pars)
+		pars = as.double(val))$pars)
     names(val) <- nams
   }
   val
@@ -1331,7 +1301,7 @@ coef.corARMA <-
   object[] <- value
   ## updating the factor list and logDet
   corD <- Dim(object)
-  aux <- .C("ARMA_factList",
+  aux <- .C(ARMA_factList,
 	    as.double(as.vector(object)),
 	    as.integer(p),
 	    as.integer(q),
@@ -1339,8 +1309,7 @@ coef.corARMA <-
 	    as.integer(attr(object, "maxLag")),
 	    as.integer(unlist(corD)),
 	    factor = double(corD[["sumLenSq"]]),
-	    logDet = double(1),
-	    PACKAGE = "nlme")[c("factor", "logDet")]
+	    logDet = double(1))[c("factor", "logDet")]
   attr(object, "factor") <- aux[["factor"]]
   attr(object, "logDet") <- -aux[["logDet"]]
   object
@@ -1377,7 +1346,7 @@ recalc.corARMA <-
   function(object, conLin, ...)
 {
   val <-
-    .C("ARMA_recalc",
+    .C(ARMA_recalc,
      Xy = as.double(conLin[["Xy"]]),
      as.integer(unlist(Dim(object))),
      as.integer(ncol(conLin[["Xy"]])),
@@ -1386,8 +1355,7 @@ recalc.corARMA <-
      as.integer(attr(object, "q")),
      as.integer(unlist(getCovariate(object))),
      as.integer(attr(object, "maxLag")),
-     logLik = double(1),
-     PACKAGE = "nlme")[c("Xy", "logLik")]
+     logLik = double(1))[c("Xy", "logLik")]
   conLin[["Xy"]][] <- val[["Xy"]]
   conLin[["logLik"]] <- conLin[["logLik"]] + val[["logLik"]]
   conLin
@@ -1424,13 +1392,12 @@ corFactor.compSymm <-
   function(object, ...)
 {
   corD <- Dim(object)
-  val <- .C("compSymm_factList",
+  val <- .C(compSymm_factList,
 	    as.double(as.vector(object)),
 	    as.double(attr(object, "inf")),
 	    as.integer(unlist(corD)),
 	    factor = double(corD[["sumLenSq"]]),
-	    logDet = double(1),
-	    PACKAGE = "nlme")[c("factor", "logDet")]
+	    logDet = double(1))[c("factor", "logDet")]
   lD <- val[["logDet"]]
   val <- val[["factor"]]
   attr(val, "logDet") <- lD
@@ -1450,21 +1417,19 @@ corMatrix.corCompSymm <-
     corD <- Dim(object, rep(1, length(covariate)))
   }
   if (corr) {
-    val <- .C("compSymm_matList",
+    val <- .C(compSymm_matList,
 	      as.double(as.vector(object)),
 	      as.double(attr(object, "inf")),
 	      as.integer(unlist(corD)),
-	      mat = double(corD[["sumLenSq"]]),
-	      PACKAGE = "nlme")[["mat"]]
+	      mat = double(corD[["sumLenSq"]]))[["mat"]]
     lD <- NULL
   } else {
-    val <- .C("compSymm_factList",
+    val <- .C(compSymm_factList,
               as.double(as.vector(object)),
               as.double(attr(object, "inf")),
               as.integer(unlist(corD)),
               factor = double(corD[["sumLenSq"]]),
-              logDet = double(1),
-              PACKAGE = "nlme")[c("factor", "logDet")]
+              logDet = double(1))[c("factor", "logDet")]
     lD <- val[["logDet"]]
     val <- val[["factor"]]
   }
@@ -1510,13 +1475,12 @@ coef.corCompSymm <-
   object[] <- value
   corD <- attr(object, "Dim")
   ## updating the factor list and logDet
-  aux <- .C("compSymm_factList",
+  aux <- .C(compSymm_factList,
 	    as.double(as.vector(object)),
 	    as.double(attr(object, "inf")),
 	    as.integer(unlist(corD)),
 	    factor = double(corD[["sumLenSq"]]),
-	    logDet = double(1),
-	    PACKAGE = "nlme")[c("factor", "logDet")]
+	    logDet = double(1))[c("factor", "logDet")]
   attr(object, "factor") <- aux[["factor"]]
   attr(object, "logDet") <- -aux[["logDet"]]
   object
@@ -1546,14 +1510,13 @@ recalc.corCompSymm <-
   function(object, conLin, ...)
 {
   val <-
-    .C("compSymm_recalc",
+    .C(compSymm_recalc,
        Xy = as.double(conLin[["Xy"]]),
        as.integer(unlist(Dim(object))),
        as.integer(ncol(conLin[["Xy"]])),
        as.double(as.vector(object)),
        as.double(attr(object, "inf")),
-       logLik = double(1),
-       PACKAGE = "nlme")[c("Xy", "logLik")]
+       logLik = double(1))[c("Xy", "logLik")]
   conLin[["Xy"]][] <- val[["Xy"]]
   conLin[["logLik"]] <- conLin[["logLik"]] + val[["logLik"]]
   conLin
@@ -1782,15 +1745,14 @@ corFactor.corSpatial <-
   function(object, ...)
 {
   corD <- Dim(object)
-  val <- .C("spatial_factList",
+  val <- .C(spatial_factList,
 	    as.double(as.vector(object)),
 	    as.integer(attr(object, "nugget")),
 	    as.double(unlist(getCovariate(object))),
 	    as.integer(unlist(corD)),
 	    as.double(attr(object, "minD")),
 	    factor = double(corD[["sumLenSq"]]),
-	    logDet = double(1),
-	    PACKAGE = "nlme")[c("factor", "logDet")]
+	    logDet = double(1))[c("factor", "logDet")]
   lD <- val[["logDet"]]
   val <- val[["factor"]]
   attr(val, "logDet") <- lD
@@ -1811,25 +1773,23 @@ corMatrix.corSpatial <-
     corD <- Dim(object, rep(1, round((1 + sqrt(1 + 8* length(covariate)))/2)))
   }
   if (corr) {
-    val <- .C("spatial_matList",
+    val <- .C(spatial_matList,
 	      as.double(as.vector(object)),
 	      as.integer(attr(object, "nugget")),
 	      as.double(unlist(covariate)),
 	      as.integer(unlist(corD)),
 	      as.double(attr(object, "minD")),
-	      mat = double(corD[["sumLenSq"]]),
-	      PACKAGE = "nlme")[["mat"]]
+	      mat = double(corD[["sumLenSq"]]))[["mat"]]
     lD <- NULL
   } else {
-    val <- .C("spatial_factList",
+    val <- .C(spatial_factList,
               as.double(as.vector(object)),
               as.integer(attr(object, "nugget")),
               as.double(unlist(getCovariate(object))),
               as.integer(unlist(corD)),
               as.double(attr(object, "minD")),
               factor = double(corD[["sumLenSq"]]),
-              logDet = double(1),
-              PACKAGE = "nlme")[c("factor", "logDet")]
+              logDet = double(1))[c("factor", "logDet")]
     lD <- val[["logDet"]]
     val <- val[["factor"]]
   }
@@ -1878,15 +1838,14 @@ coef.corSpatial <-
   object[] <- value
   corD <- attr(object, "Dim")
   ## updating the factor list and logDet
-  aux <- .C("spatial_factList",
+  aux <- .C(spatial_factList,
 	    as.double(as.vector(object)),
 	    as.integer(attr(object, "nugget")),
 	    as.double(unlist(getCovariate(object))),
 	    as.integer(unlist(corD)),
 	    as.double(attr(object, "minD")),
 	    factor = double(corD[["sumLenSq"]]),
-	    logDet = double(1),
-	    PACKAGE = "nlme")[c("factor", "logDet")]
+	    logDet = double(1))[c("factor", "logDet")]
   attr(object, "factor") <- aux[["factor"]]
   attr(object, "logDet") <- -aux[["logDet"]]
   object
@@ -2009,7 +1968,7 @@ recalc.corSpatial <-
   function(object, conLin, ...)
 {
   val <-
-    .C("spatial_recalc",
+    .C(spatial_recalc,
        Xy = as.double(conLin[["Xy"]]),
        as.integer(unlist(Dim(object))),
        as.integer(ncol(conLin[["Xy"]])),
@@ -2017,8 +1976,7 @@ recalc.corSpatial <-
        as.double(unlist(getCovariate(object))),
        as.double(attr(object, "minD")),
        as.integer(attr(object, "nugget")),
-       logLik = double(1),
-       PACKAGE="nlme")[c("Xy", "logLik")]
+       logLik = double(1))[c("Xy", "logLik")]
   conLin[["Xy"]][] <- val[["Xy"]]
   conLin[["logLik"]] <- conLin[["logLik"]] + val[["logLik"]]
   conLin

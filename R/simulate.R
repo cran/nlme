@@ -106,7 +106,7 @@ simulate.lme <-
     getResults1 <-
         function(conLin, nIter, pdClass, REML, ssq, p, pp1)
         {
-            unlist(.C("mixed_combined",
+            unlist(.C(mixed_combined,
                       as.double(conLin$Xy),
                       as.integer(unlist(conLin$dims)),
                       double(ssq),
@@ -116,8 +116,7 @@ simulate.lme <-
                       logLik = double(1),
                       R0 = double(pp1),
                       lRSS = double(1),
-                      info = integer(1),
-                      PACKAGE = "nlme")[c("info", "logLik")])
+                      info = integer(1))[c("info", "logLik")])
         }
     getResults2 <-
         function(conLin, reSt, REML, control)
