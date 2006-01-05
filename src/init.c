@@ -27,6 +27,7 @@ extern void CAR1_matList(double *, double *, longint *, double *);
 extern void CAR1_factList(double *, double *, longint *,  double *, double *);
 extern void CAR1_recalc(double *Xy, longint *pdims, longint *ZXcol, 
 	    double *par, double *time, double *logdet);
+extern void ARMA_constCoef(longint *, longint *, double *);
 extern void ARMA_unconstCoef(longint *, longint *, double *);
 extern void ARMA_matList(double *, longint *, longint *, longint *,
 	     longint *, longint *, double *);
@@ -77,6 +78,7 @@ R_CMethodDef CEntries[] = {
     {"CAR1_factList", (DL_FUNC) &CAR1_factList, 5},
     {"CAR1_matList", (DL_FUNC) &CAR1_matList, 4},
     {"CAR1_recalc", (DL_FUNC) &CAR1_recalc, 6},
+    {"ARMA_constCoef", (DL_FUNC) &ARMA_constCoef, 3},
     {"ARMA_unconstCoef", (DL_FUNC) &ARMA_unconstCoef, 3},
     {"ARMA_factList", (DL_FUNC) &ARMA_factList, 8},
     {"ARMA_matList", (DL_FUNC) &ARMA_matList, 7},
