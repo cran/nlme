@@ -1,5 +1,5 @@
 library(nlme)
-data(bdf)
+# data(bdf)
 ## Fit the null model
 ## Compare with Table 4.1, p. 47
 fm1 <- lme(langPOST ~ 1, data = bdf, random = ~ 1 | schoolNR)

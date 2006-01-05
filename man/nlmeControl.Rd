@@ -5,7 +5,8 @@
 nlmeControl(maxIter, pnlsMaxIter, msMaxIter, minScale,
             tolerance, niterEM, pnlsTol, msTol, msScale,
             returnObject, msVerbose, gradHess, apVar, .relStep,
-            nlmStepMax, minAbsParApVar, natural)
+            nlmStepMax = 100.0, minAbsParApVar = 0.05,
+            opt = c("nlminb", "nlm"), natural = TRUE)
 }
 \alias{nlmeControl}
 \arguments{
@@ -58,6 +59,9 @@ nlmeControl(maxIter, pnlsMaxIter, msMaxIter, minScale,
      \code{\link{nlm}} for details. Default is 100.0}
  \item{minAbsParApVar}{numeric value - minimum absolute parameter value
    in the approximate variance calculation.  The default is \code{0.05}.}
+ \item{opt}{the optimizer to be used, either \code{\link{nlminb}} (the
+   default since (\R 2.2.0) or \code{\link{nlm}} (the previous
+   default).}
  \item{natural}{a logical value indicating whether the \code{pdNatural}
    parametrization should be used for general positive-definite matrices
    (\code{pdSymm}) in \code{reStruct}, when the approximate covariance

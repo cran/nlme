@@ -1,5 +1,5 @@
 library(nlme)
-data(bdf)
+# data(bdf)
 ## Model with random slope for IQ.ver.cen
 ## Compare with Table 5.1, p. 71.
 fm5 <- lme(langPOST ~ IQ.ver.cen + avg.IQ.ver.cen,

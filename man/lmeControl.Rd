@@ -4,7 +4,8 @@
 \usage{
 lmeControl(maxIter, msMaxIter, tolerance, niterEM, msTol,
            msScale, msVerbose, returnObject, gradHess, apVar,
-           .relStep, minAbsParApVar, nlmStepMax, optimMethod,
+           .relStep, minAbsParApVar, nlmStepMax,
+	   opt = c("nlminb", "optim"), optimMethod,
            natural)
 }
 \alias{lmeControl}
@@ -48,6 +49,9 @@ lmeControl(maxIter, msMaxIter, tolerance, niterEM, msTol,
    calculations. Default is \code{.Machine$double.eps^(1/3)}.}
  \item{nlmStepMax}{stepmax value to be passed to nlm. See
      \code{\link{nlm}} for details. Default is 100.0}
+ \item{opt}{the optimizer to be used, either \code{\link{nlminb}} (the
+   default since (\R 2.2.0) or \code{\link{optim}} (the previous
+   default).}
  \item{optimMethod}{character - the optimization method to be used with
    the \code{\link[stats]{optim}} optimizer. The default is
    \code{"BFGS"}.  An alternative is \code{"L-BFGS-B"}.}

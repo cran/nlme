@@ -193,25 +193,23 @@ fm2Quin.fix <- fixef(fm2Quin.nlme)
 ##fm1Wafer.nlmeR
 ##fm1Wafer.nlme <- update(fm1Wafer.nlmeR, method = "ML")
 
-if (exists("nlminb", mode = "function")) {
-    print(fm2Wafer.nlme <- nlme(current ~ A + B * cos(w * voltage + pi/4),
-                                data = Wafer,
-                                fixed = list(A ~ voltage + I(voltage^2), B + w ~ 1),
-                                random = list(Wafer = pdDiag(list(A ~ voltage + I(voltage^2),
-                                              B + w ~ 1)),
-                                Site = pdDiag(list(A ~
-                                voltage+I(voltage^2),
-                                B ~ 1))),
-                                start = c(-4.255, 5.622, 1.258,
-                                -0.09555, 4.5679)))
-    plot(fm2Wafer.nlme, resid(.) ~ voltage | Wafer,
-         panel = function(x, y, ...) {
-             panel.grid()
-             panel.xyplot(x, y)
-             panel.loess(x, y, lty = 2)
-             panel.abline(0, 0)
-         })
-}
+print(fm2Wafer.nlme <- nlme(current ~ A + B * cos(w * voltage + pi/4),
+                            data = Wafer,
+                            fixed = list(A ~ voltage + I(voltage^2), B + w ~ 1),
+                            random = list(Wafer = pdDiag(list(A ~ voltage + I(voltage^2),
+                                          B + w ~ 1)),
+                            Site = pdDiag(list(A ~
+                            voltage+I(voltage^2),
+                            B ~ 1))),
+                            start = c(-4.255, 5.622, 1.258,
+                            -0.09555, 4.5679)))
+plot(fm2Wafer.nlme, resid(.) ~ voltage | Wafer,
+     panel = function(x, y, ...) {
+         panel.grid()
+         panel.xyplot(x, y)
+         panel.loess(x, y, lty = 2)
+         panel.abline(0, 0)
+     })
 ## anova(fm1Wafer.nlme, fm2Wafer.nlme, test = FALSE)
 # intervals(fm2Wafer.nlme)
 
@@ -230,13 +228,11 @@ if (exists("nlminb", mode = "function")) {
 #summary(fm5Quin.nlme)
 #anova(fm4Quin.nlme, fm5Quin.nlme)
 #plot(fm5Quin.nlme, xlim = c(0, 6.2))
-if (exists("nlminb", mode = "function")) {
-    fm1Ovar.nlme <- nlme(follicles ~ A + B * sin(2 * pi * w * Time) +
-                         C * cos(2 * pi * w *Time), data = Ovary,
-                         fixed = A + B + C + w ~ 1, random = pdDiag(A + B + w ~ 1),
-                                        #  start = c(fixef(fm5Ovar.lme), 1))
-                         start = c(12.18, -3.298, -0.862, 1))
-}
+var.nlme <- nlme(follicles ~ A + B * sin(2 * pi * w * Time) +
+                     C * cos(2 * pi * w *Time), data = Ovary,
+                     fixed = A + B + C + w ~ 1, random = pdDiag(A + B + w ~ 1),
+                                    #  start = c(fixef(fm5Ovar.lme), 1))
+                     start = c(12.18, -3.298, -0.862, 1))
 ##fm1Ovar.nlme
 ##ACF(fm1Ovar.nlme)
 ##plot(ACF(fm1Ovar.nlme,  maxLag = 10), alpha = 0.05)

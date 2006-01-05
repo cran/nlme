@@ -348,7 +348,7 @@ gnls <-
       gnlsSt <- update(gnlsSt, dataModShrunk)
     }
     if (length(oldPars <- coef(gnlsSt)) > 0) {
-        if (exists("nlminb", mode = "function")) {
+        if (controlvals$opt == "nlminb") {
             optRes <- nlminb(c(coef(gnlsSt)),
                              function(gnlsPars) -logLik(gnlsSt, gnlsPars),
                              control = list(trace = controlvals$msVerbose,
@@ -862,14 +862,15 @@ gnlsControl <-
            msTol = 1e-7, msScale = lmeScale,
            returnObject = FALSE, msVerbose = FALSE,
            apVar = TRUE, .relStep = (.Machine$double.eps)^(1/3),
-           nlmStepMax = 100.0, optimMethod = "BFGS",
+           nlmStepMax = 100.0,
+	   opt = c("nlminb", "optim"),  optimMethod = "BFGS",
            minAbsParApVar = 0.05)
 {
   list(maxIter = maxIter, nlsMaxIter = nlsMaxIter, msMaxIter = msMaxIter,
        minScale = minScale, tolerance = tolerance, nlsTol = nlsTol,
        msTol = msTol, msScale = msScale, returnObject = returnObject,
        msVerbose = msVerbose, apVar = apVar,
-       nlmStepMax = nlmStepMax, optimMethod = optimMethod,
+       nlmStepMax = nlmStepMax, opt = match.arg(opt), optimMethod = optimMethod,
        .relStep = .relStep, minAbsParApVar = minAbsParApVar)
 }
 

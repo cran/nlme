@@ -96,7 +96,7 @@ cs3Exp <- Initialize(cs3Exp, spatDat)
 corMatrix(cs3Exp)
 data(Ovary)
 fm1Ovar.lme <- lme(follicles ~ sin(2*pi*Time) + cos(2*pi*Time),
-                 data = Ovary, random = pdDiag(~sin(2*pi*Time)))
+                   data = Ovary, random = pdDiag(~sin(2*pi*Time)))
 fm1Ovar.lme
 ACF(fm1Ovar.lme)
 plot(ACF(fm1Ovar.lme,  maxLag = 10), alpha = 0.01)
@@ -109,40 +109,32 @@ anova(fm2Ovar.lme, fm3Ovar.lme, test = F)
 fm4Ovar.lme <- update(fm1Ovar.lme,
                        correlation = corCAR1(form = ~Time))
 anova(fm2Ovar.lme, fm4Ovar.lme, test = F)
-if (exists("nlminb", mode = "function")) {
-    print(fm5Ovar.lme <- update(fm1Ovar.lme,
-                                corr = corARMA(p = 1, q = 1)))
-    print(anova(fm2Ovar.lme, fm5Ovar.lme))
-    print(plot(ACF(fm5Ovar.lme,  maxLag = 10, resType = "n"),
+print(fm5Ovar.lme <- update(fm1Ovar.lme,
+                            corr = corARMA(p = 1, q = 1)))
+print(anova(fm2Ovar.lme, fm5Ovar.lme))
+print(plot(ACF(fm5Ovar.lme,  maxLag = 10, resType = "n"),
                alpha = 0.01))
-}
 Variogram(fm2BW.lme, form = ~ Time)
 plot(Variogram(fm2BW.lme, form = ~ Time, maxDist = 42))
-if (exists("nlminb", mode = "function")) {
-    print(fm3BW.lme <- update(fm2BW.lme,
-                              correlation = corExp(form = ~ Time)))
-    print(intervals(fm3BW.lme))
-    print(anova(fm2BW.lme, fm3BW.lme))
-    print(fm4BW.lme <-
-          update(fm3BW.lme, correlation = corExp(form =  ~ Time,
-                            nugget = TRUE)))
-    print(anova(fm3BW.lme, fm4BW.lme))
-    print(plot(Variogram(fm3BW.lme, form = ~ Time, maxDist = 42)))
-    print(plot(Variogram(fm3BW.lme, form = ~ Time, maxDist = 42,
-                         resType = "n", robust = TRUE)))
-    print(fm5BW.lme <-
-          update(fm3BW.lme, correlation = corRatio(form = ~ Time)))
-    print(fm6BW.lme <-
-          update(fm3BW.lme, correlation = corSpher(form = ~ Time)))
-    print(fm7BW.lme <- update(fm3BW.lme,
-                               correlation = corLin(form = ~ Time)))
-    print(fm8BW.lme <- update(fm3BW.lme,
-                              correlation = corGaus(form = ~ Time)))
-    print(anova(fm3BW.lme, fm5BW.lme, fm6BW.lme, fm7BW.lme, fm8BW.lme))
-}
+fm3BW.lme <- update(fm2BW.lme,
+                    correlation = corExp(form = ~ Time))
+intervals(fm3BW.lme)
+anova(fm2BW.lme, fm3BW.lme)
+fm4BW.lme <-
+      update(fm3BW.lme, correlation = corExp(form =  ~ Time,
+                        nugget = TRUE))
+anova(fm3BW.lme, fm4BW.lme)
+plot(Variogram(fm3BW.lme, form = ~ Time, maxDist = 42))
+plot(Variogram(fm3BW.lme, form = ~ Time, maxDist = 42,
+               resType = "n", robust = TRUE))
+fm5BW.lme <- update(fm3BW.lme, correlation = corRatio(form = ~ Time))
+fm6BW.lme <- update(fm3BW.lme, correlation = corSpher(form = ~ Time))
+fm7BW.lme <- update(fm3BW.lme, correlation = corLin(form = ~ Time))
+fm8BW.lme <- update(fm3BW.lme, correlation = corGaus(form = ~ Time))
+anova(fm3BW.lme, fm5BW.lme, fm6BW.lme, fm7BW.lme, fm8BW.lme)
 fm1Orth.gls <- gls(distance ~ Sex * I(age - 11), Orthodont,
-                     correlation = corSymm(form = ~ 1 | Subject),
-                     weights = varIdent(form = ~ 1 | age))
+                   correlation = corSymm(form = ~ 1 | Subject),
+                   weights = varIdent(form = ~ 1 | age))
 fm1Orth.gls
 intervals(fm1Orth.gls)
 fm2Orth.gls <-

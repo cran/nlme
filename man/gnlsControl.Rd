@@ -5,7 +5,8 @@
 \usage{
 gnlsControl(maxIter, nlsMaxIter, msMaxIter, minScale, tolerance,
             nlsTol, msTol, msScale, returnObject, msVerbose,
-            apVar, .relStep, nlmStepMax, optimMethod,
+            apVar, .relStep, nlmStepMax,
+	    opt = c("nlminb", "optim"), optimMethod,
             minAbsParApVar)
 }
 \arguments{
@@ -42,6 +43,9 @@ gnlsControl(maxIter, nlsMaxIter, msMaxIter, minScale, tolerance,
    calculated. Default is \code{TRUE}.}
  \item{.relStep}{relative step for numerical derivatives
    calculations. Default is \code{.Machine$double.eps^(1/3)}.}
+ \item{opt}{the optimizer to be used, either \code{\link{nlminb}} (the
+   default since (\R 2.2.0) or \code{\link{optim}} (the previous
+   default).}
  \item{optimMethod}{character - the optimization method to be used with
    the \code{\link[stats]{optim}} optimizer. The default is
    \code{"BFGS"}.  An alternative is \code{"L-BFGS-B"}.}

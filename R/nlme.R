@@ -799,7 +799,7 @@ nlme.formula <-
       attr(nlmeSt, "conLin") <- MEdecomp(oldConLin)
     }
     oldPars <- coef(nlmeSt)
-    if (exists("nlminb", mode = "function")) {
+    if (controlvals$opt == "nlminb") {
         optRes <- nlminb(c(coef(nlmeSt)),
                          function(nlmePars) -logLik(nlmeSt, nlmePars),
                          control = list(trace = controlvals$msVerbose,
@@ -1426,16 +1426,16 @@ nlmeControl <-
            pnlsTol = 0.001, msTol = 0.000001, msScale = lmeScale,
            returnObject = FALSE, msVerbose = FALSE, gradHess = TRUE,
            apVar = TRUE, .relStep = (.Machine$double.eps)^(1/3),
-           nlmStepMax = 100.0,
-           minAbsParApVar = 0.05, natural = TRUE)
+           nlmStepMax = 100.0, minAbsParApVar = 0.05, 
+	   opt = c("nlminb", "nlm"), natural = TRUE)
 {
   list(maxIter = maxIter, pnlsMaxIter = pnlsMaxIter, msMaxIter = msMaxIter,
        minScale = minScale, tolerance = tolerance, niterEM = niterEM,
        pnlsTol = pnlsTol, msTol = msTol, msScale = msScale,
        returnObject = returnObject, msVerbose = msVerbose,
        gradHess = gradHess, apVar = apVar, .relStep = .relStep,
-       nlmStepMax = nlmStepMax,
-       minAbsParApVar = minAbsParApVar, natural = natural)
+       nlmStepMax = nlmStepMax, minAbsParApVar = minAbsParApVar,
+       opt = match.arg(opt), natural = natural)
 }
 
 nonlinModel <- function( modelExpression, env,

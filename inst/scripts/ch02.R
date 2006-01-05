@@ -34,26 +34,26 @@ OrthoFem <- Orthodont[ Orthodont$Sex == "Female", ]
 fm1OrthF <- lme( distance ~ age, data = OrthoFem,
     random = ~ 1 | Subject )
 fm2OrthF <- update( fm1OrthF, random = ~ age | Subject )
-orthLRTsim <- simulate.lme( fm1OrthF, fm2OrthF, nsim = 1000 )
+orthLRTsim <- simulate.lme( fm1OrthF, m2 = fm2OrthF, nsim = 1000 )
 plot( orthLRTsim, df = c(1, 2) )    # produces Figure 2.3
 
-machineLRTsim <- simulate.lme(fm1Machine, fm2Machine, nsim= 1000)
+machineLRTsim <- simulate.lme(fm1Machine, m2 = fm2Machine, nsim= 1000)
 plot( machineLRTsim, df = c(0, 1),      # produces Figure 2.4
  layout = c(4,1), between = list(x = c(0, 0.5, 0)) )
 
 #data( ergoStool )
 stoolLRTsim <-
-  simulate.lme( m1 = list(fixed = effort ~ 1, data = ergoStool,
-                          random = ~ 1 | Subject),
+  simulate.lme( list(fixed = effort ~ 1, data = ergoStool,
+                     random = ~ 1 | Subject),
                 m2 = list(fixed = effort ~ Type),
                 method = "ML", nsim = 1000 )
 plot( stoolLRTsim, df = c(3, 4) )    # Figure 2.5
 data( PBIB, package = 'SASmixed' )
 pbibLRTsim <-
-    simulate.lme(m1 = list( fixed = response ~ 1, data = PBIB,
-                 random = ~ 1 | Block ),
+    simulate.lme(list( fixed = response ~ 1, data = PBIB,
+                       random = ~ 1 | Block ),
                  m2 = list(fixed = response ~ Treatment, data = PBIB,
-                 random = ~ 1 | Block),
+                           random = ~ 1 | Block),
                  method = "ML", nsim = 1000 )
 plot( pbibLRTsim, df = c(14,16,18), weights = FALSE )    # Figure 2.6
 

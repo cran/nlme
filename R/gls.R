@@ -103,7 +103,7 @@ gls <-
     repeat {
         oldPars <- c(attr(glsSt, "glsFit")[["beta"]], coef(glsSt))
         if (length(coef(glsSt))) {		# needs ms()
-            optRes <- if (exists("nlminb", mode = "function")) {
+            optRes <- if (controlvals$opt == "nlminb") {
                 nlminb(c(coef(glsSt)),
                        function(glsPars) -logLik(glsSt, glsPars),
                        control = list(trace = controlvals$msVerbose,
@@ -1295,7 +1295,8 @@ glsControl <-
              msScale = lmeScale, msVerbose = FALSE, singular.ok = FALSE,
              qrTol = .Machine$single.eps, returnObject = FALSE,
              apVar = TRUE, .relStep = (.Machine$double.eps)^(1/3),
-             nlmStepMax = 100.0, optimMethod = "BFGS",
+             nlmStepMax = 100.0,
+	     opt = c("nlminb", "optim"),  optimMethod = "BFGS",
              minAbsParApVar = 0.05, natural = TRUE)
 {
     list(maxIter = maxIter, msMaxIter = msMaxIter, tolerance = tolerance,
@@ -1303,8 +1304,8 @@ glsControl <-
          singular.ok = singular.ok, qrTol = qrTol,
          returnObject = returnObject, apVar = apVar,
          minAbsParApVar = minAbsParApVar, .relStep = .relStep,
-         nlmStepMax = nlmStepMax, optimMethod,
-         natural = natural)
+         nlmStepMax = nlmStepMax, opt = match.arg(opt), 
+	 optimMethod = optimMethod, natural = natural)
 }
 
 ### local generics for objects inheriting from class lme

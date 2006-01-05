@@ -299,7 +299,7 @@ lme.formula <-
   numIter <- 0
   repeat {
     oldPars <- coef(lmeSt)
-    optRes <- if (exists("nlminb", mode = "function")) {
+    optRes <- if (controlvals$opt == "nlminb") {
         nlminb(c(coef(lmeSt)),
                function(lmePars) -logLik(lmeSt, lmePars),
                control = list(iter.max = controlvals$msMaxIter,
@@ -2876,14 +2876,15 @@ lmeControl <-
 	   msTol = 1e-7, msScale = lmeScale, msVerbose = FALSE,
            returnObject = FALSE, gradHess = TRUE, apVar = TRUE,
 	   .relStep = (.Machine$double.eps)^(1/3), minAbsParApVar = 0.05,
-           nlmStepMax = 100.0, optimMethod = "BFGS",
-           natural = TRUE)
+           nlmStepMax = 100.0, opt = c("nlminb", "optim"),
+	   optimMethod = "BFGS", natural = TRUE)
 {
   list(maxIter = maxIter, msMaxIter = msMaxIter, tolerance = tolerance,
        niterEM = niterEM, msTol = msTol, msScale = msScale,
        msVerbose = msVerbose, returnObject = returnObject,
        gradHess = gradHess , apVar = apVar, .relStep = .relStep,
-       nlmStepMax = nlmStepMax, optimMethod = optimMethod,
+       nlmStepMax = nlmStepMax, opt = match.arg(opt),
+       optimMethod = optimMethod,
        minAbsParApVar = minAbsParApVar, natural = natural)
 }
 
