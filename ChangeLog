@@ -1,3 +1,12 @@
+2006-03-10 Brian Ripley  <Brian.Ripley@r-project.org>
+
+	* DESCRIPTION: Version is 3.1-71
+
+2006-02-17 Brian Ripley  <Brian.Ripley@r-project.org>
+
+	* R/nlsList.R: need to allow for multi-line deparse.
+	* tests/deparse.R: add regression test
+
 2006-01-05  Brian Ripley  <Brian.Ripley@r-project.org>
 
 	* DESCRIPTION: Version is 3.1-70

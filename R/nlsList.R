@@ -60,8 +60,9 @@ nlsList.formula <-
     } else if (length(level) > 1) {
       stop("Multiple levels not allowed")
     }
-    model <- eval(parse(text = paste(deparse(model[[2]]),
-                        deparse(getCovariateFormula(model)[[2]]), sep = "~")))
+    model <- eval(parse(text = paste(paste(deparse(model[[2]]), collapse=" "),
+                        paste(deparse(getCovariateFormula(model)[[2]]), collapse=" "),
+			sep = "~")))
     groups <- getGroups(data, form = grpForm, level = level)[drop = TRUE]
   }
   if (is.null(start) && is.null(attr(data, "parameters"))) {
