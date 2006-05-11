@@ -302,7 +302,7 @@ plot.nls <-
     if (is.null(data)) {		# try to construct data
       alist <- lapply(as.list(allV), as.name)
       names(alist) <- allV
-      alist <- c(as.list(as.name("data.frame")), alist)
+      alist <- c(list(as.name("data.frame")), alist)
       mode(alist) <- "call"
       data <- eval(alist, sys.parent(1))
     } else {

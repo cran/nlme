@@ -43,6 +43,8 @@ gls <-
     glsSt <-
         glsStruct(corStruct = correlation, varStruct = varFunc(weights))
 
+    ## we need to resolve '.' in the formula here
+    model <- terms(model, data=data)
     ## extract a data frame with enough information to evaluate
     ## formula, groups, corStruct, and varStruct
     mfArgs <- list(formula = asOneFormula(formula(glsSt), model, groups),
@@ -78,7 +80,7 @@ gls <-
     N <- nrow(X)
     p <- ncol(X)				# number of coefficients
     parAssign <- attr(X, "assign")
-    fTerms <- terms(as.formula(model))
+    fTerms <- terms(as.formula(model), data=data)
     namTerms <- attr(fTerms, "term.labels")
     if (attr(fTerms, "intercept") > 0) {
         namTerms <- c("(Intercept)", namTerms)

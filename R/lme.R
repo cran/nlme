@@ -2679,7 +2679,7 @@ Variogram.lme <-
         breaks <- c(breaks, udist[2])
       }
       if (!missing(nint) && nint != (length(breaks) - 1)) {
-        stop("Nint is not consistent with breaks.")
+        stop("'nint' is not consistent with 'breaks'")
       }
       nint <- length(breaks) - 1
     }
@@ -2708,8 +2708,8 @@ Variogram.lme <-
                     data.frame(variog = vrg, dist = dst)
                   }, robust = robust)
     val <- do.call("rbind", val)
-    val <- na.omit(val)                 # getting rid of NAs
     val$n.pairs <- as.vector(table(na.omit(cutDist)))
+    val <- na.omit(val)                 # getting rid of NAs
   }
   row.names(val) <- 1:nrow(val)
   if (inherits(csT, "corSpatial") && resType != "normalized") {

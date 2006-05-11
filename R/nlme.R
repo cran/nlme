@@ -478,7 +478,7 @@ nlme.formula <-
       fixAssign <- c(fixAssign, currVal)
     } else {
       currVal <- attr(f, "assign")
-      fTerms <- terms(asOneSidedFormula(fixed[[nm]][[3]]))
+      fTerms <- terms(asOneSidedFormula(fixed[[nm]][[3]]), data=data)
       namTerms <- attr(fTerms, "term.labels")
       if (attr(fTerms, "intercept") > 0) {
         namTerms <- c("(Intercept)", namTerms)

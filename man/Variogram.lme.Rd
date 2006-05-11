@@ -108,9 +108,7 @@
 \seealso{\code{\link{lme}}, \code{\link{Variogram.default}},
   \code{\link{Variogram.gls}}, \code{\link{plot.Variogram}}}
 \examples{
-\dontrun{
-fm1 <- lme(weight ~ Time * Diet, BodyWeight, ~ Time | Rat)
+fm1 <- lme(weight ~ Time * Diet, data=BodyWeight, ~ Time | Rat)
 Variogram(fm1, form = ~ Time | Rat, nint = 10, robust = TRUE)
-}
 }
 \keyword{models}

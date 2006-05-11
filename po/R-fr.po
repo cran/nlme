@@ -258,8 +258,8 @@ msgstr "non autorisés pour"
 msgid "need an object with call component"
 msgstr "nécessite un objet avec une composante 'call'"
 
-msgid "Nint is not consistent with breaks."
-msgstr "'Nint' n'est pas consistant avec 'breaks'."
+msgid "'nint' is not consistent with 'breaks'"
+msgstr "'nint' n'est pas consistant avec 'breaks'"
 
 msgid "\"object\" must be a formula"
 msgstr "\"object\" doit être une formule"

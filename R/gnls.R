@@ -239,7 +239,7 @@ gnls <-
       parAssign <- c(parAssign, currVal)
     } else {
       currVal <- attr(p, "assign")
-      fTerms <- terms(asOneSidedFormula(params[[nm]][[3]]))
+      fTerms <- terms(asOneSidedFormula(params[[nm]][[3]]), data=data)
       namTerms <- attr(fTerms, "term.labels")
       if (attr(fTerms, "intercept") > 0) {
         namTerms <- c("(Intercept)", namTerms)

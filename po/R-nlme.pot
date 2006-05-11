@@ -233,7 +233,7 @@ msgstr ""
 msgid "need an object with call component"
 msgstr ""
 
-msgid "Nint is not consistent with breaks."
+msgid "'nint' is not consistent with 'breaks'"
 msgstr ""
 
 msgid "\"object\" must be a formula"
