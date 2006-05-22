@@ -239,7 +239,11 @@ gsummary <-
       if (length(aux) > 0) FUN[aux] <- auxFUN[aux]
     }
     for(nm in names(object)[varying]) {
-      dClass <- data.class(object[[nm]])
+      ## dClass <- data.class(object[[nm]])
+      ## The problem here is that dclass may find an irrelevant class,
+      ## e.g. Hmisc's "labelled"
+      dClass <- if(is.ordered(object[[nm]])) "ordered" else
+	        if(is.factor(object[[nm]])) "factor" else mode(object[[nm]])
       if (dClass == "numeric") {
 	value[[nm]] <- as.vector(tapply(object[[nm]], groups, FUN[["numeric"]],...))
       } else {

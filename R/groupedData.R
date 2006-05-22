@@ -184,7 +184,7 @@ nmGroupedData <-
 ###*# Methods for standard generics
 
 as.data.frame.groupedData <-
-  function(x, row.names = NULL, optional = FALSE)
+  function(x, row.names = NULL, optional = FALSE, ...)
 {
   attributes(x) <- attributes(x)[c("names", "row.names")]
   class(x) <- "data.frame"
