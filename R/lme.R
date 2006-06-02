@@ -15,7 +15,7 @@ lme <-
 	   method = c("REML", "ML"),
 	   na.action = na.fail,
 	   control = list(),
-           contrasts = NULL)
+           contrasts = NULL, keep.data = TRUE)
   UseMethod("lme")
 
 lme.groupedData <-
@@ -28,7 +28,7 @@ lme.groupedData <-
 	   method = c("REML", "ML"),
 	   na.action = na.fail,
 	   control = list(),
-           contrasts = NULL)
+           contrasts = NULL, keep.data = TRUE)
 {
   args <- as.list(match.call())[-1]
   names(args)[1] <- "data"
@@ -47,7 +47,7 @@ lme.lmList <-
 	   method = c("REML", "ML"),
 	   na.action = na.fail,
 	   control = list(),
-           contrasts = NULL)
+           contrasts = NULL, keep.data = TRUE)
 {
   if (length(grpForm <- getGroupsFormula(fixed, asList = TRUE)) > 1) {
     stop("Can only fit lmList objects with single grouping variable")
@@ -118,9 +118,11 @@ lme.formula <-
 	   method = c("REML", "ML"),
 	   na.action = na.fail,
 	   control = list(),
-           contrasts = NULL)
+           contrasts = NULL,
+           keep.data = TRUE)
 {
   Call <- match.call()
+  miss.data <- missing(data) || !is.data.frame(data)
 
   ## control parameters
   controlvals <- lmeControl()
@@ -258,6 +260,7 @@ lme.formula <-
   ## keeping the contrasts for later use in predict
   contr <- attr(Z, "contr")
   X <- model.frame(fixed, dataMix)
+  Terms <- attr(X, "terms")
   auxContr <- lapply(X, function(el)
 		     if (inherits(el, "factor") &&
                          length(levels(el)) > 1) contrasts(el))
@@ -281,7 +284,7 @@ lme.formula <-
   }
   ## degrees of freedom for testing fixed effects
   fixDF <- getFixDF(X, grps, attr(lmeSt, "conLin")$dims$ngrps,
-                    terms = terms(fixed))
+                    terms = Terms)
   ## initialization
   lmeSt <- Initialize(lmeSt, dataMix, grps, control = controlvals)
   parMap <- attr(lmeSt, "pmap")
@@ -401,10 +404,12 @@ lme.formula <-
 		   else numIter0,
 		 groups = grps,
 		 call = Call,
+                 terms = Terms,
 		 method = method,
 		 fitted = Fitted,
 		 residuals = Resid,
                  fixDF = fixDF)
+  if (keep.data && !miss.data) estOut$data <- data
   if (inherits(data, "groupedData")) {
     ## saving labels and units for plots
     attr(estOut, "units") <- attr(data, "units")
@@ -1802,6 +1807,7 @@ predict.lme <-
   maxQ <- max(level)			# maximum level for predictions
   mCall <- object$call
   fixed <- eval(eval(mCall$fixed)[-2])
+  Terms <- object$terms
   newdata <- as.data.frame(newdata)
 
   if (maxQ > 0) {			# predictions with random effects
@@ -1895,7 +1901,7 @@ predict.lme <-
   N <- nrow(dataMix)
   if (length(all.vars(fixed)) > 0) {
 #    X <- model.matrix(fixed, model.frame(fixed, dataMix), contr)
-    X <- model.matrix(fixed, model.frame(fixed, dataMix))
+    X <- model.matrix(fixed, model.frame(delete.response(Terms), dataMix))
   } else {
     X <- array(1, c(N, 1), list(row.names(dataMix), "(Intercept)"))
   }

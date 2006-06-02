@@ -3,7 +3,7 @@
 \title{LME fit from lmList Object}
 \usage{
 \method{lme}{lmList}(fixed, data, random, correlation, weights, subset, method,
-    na.action, control, contrasts)
+    na.action, control, contrasts, keep.data)
 }
 \alias{lme.lmList}
 \arguments{
@@ -45,6 +45,8 @@
    Defaults to an empty list.}
  \item{contrasts}{an optional list. See the \code{contrasts.arg}
    of \code{model.matrix.default}.}
+ \item{keep.data}{logical: should the \code{data} argument (if supplied
+   and a data frame) be saved as part of the model object?}
 }
 \description{
   If the random effects names defined in \code{random} are a subset of

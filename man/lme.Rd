@@ -3,7 +3,7 @@
 \title{Linear Mixed-Effects Models}
 \usage{
 lme(fixed, data, random, correlation, weights, subset, method,
-    na.action, control, contrasts = NULL)
+    na.action, control, contrasts = NULL, keep.data = TRUE)
 \method{update}{lme}(object, fixed., \dots, evaluate = TRUE)
 }
 \alias{lme}
@@ -75,6 +75,8 @@ lme(fixed, data, random, correlation, weights, subset, method,
    Defaults to an empty list.}
  \item{contrasts}{an optional list. See the \code{contrasts.arg}
    of \code{model.matrix.default}.}
+ \item{keep.data}{logical: should the \code{data} argument (if supplied
+   and a data frame) be saved as part of the model object?}
  \item{\dots}{some methods for this generic require additional
     arguments.  None are used in this method.} 
  \item{evaluate}{If \code{TRUE} evaluate the new call else return the call.}

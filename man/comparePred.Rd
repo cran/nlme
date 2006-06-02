@@ -18,9 +18,11 @@ comparePred(object1, object2, primary, minimum, maximum,
    the objects (using \code{getCovariate}), it will be used as
    \code{primary}.}
  \item{minimum}{an optional lower limit for the primary
-   covariate. Defaults to \code{min(primary)}.}
+   covariate. Defaults to \code{min(primary)}, after \code{primary} is 
+   evaluated in the \code{data} used in fitting \code{object1}.}
  \item{maximum}{an optional upper limit for the primary
-   covariate. Defaults to \code{max(primary)}.}
+   covariate. Defaults to \code{max(primary)}, after \code{primary} is
+   evaluated in the \code{data} used in fitting \code{object1}.}
  \item{length.out}{an optional integer with the number of primary
    covariate values at which to evaluate the predictions. Defaults to
    51.}

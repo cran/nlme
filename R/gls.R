@@ -611,6 +611,9 @@ comparePred.gls <-
                  level = level,
                  length.out = length.out)
     if (!is.null(primary)) {
+	  ## need to do this before forcing the evaluations
+	  primary <- eval(asOneSidedFormula(primary)[[2]], 
+                         eval(object1$call$data))
         args[["minimum"]] <- minimum
         args[["maximum"]] <- maximum
     }

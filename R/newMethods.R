@@ -50,7 +50,8 @@ getData.nls <-
   function(object)
 {
   mCall <- object$call
-  data <- eval(mCall$data)
+  ## avoid partial matches here.
+  data <- if("data" %in% names(object)) object$data else eval(mCall$data)
   if (is.null(data)) return(data)
   naAct <- eval(mCall$na.action)
   if (!is.null(naAct)) {

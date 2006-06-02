@@ -3,7 +3,7 @@
 \title{LME fit from groupedData Object}
 \usage{
 \method{lme}{groupedData}(fixed, data, random, correlation, weights, 
-    subset, method, na.action, control, contrasts)
+    subset, method, na.action, control, contrasts, keep.data = TRUE)
 }
 \alias{lme.groupedData}
 \arguments{
@@ -61,6 +61,8 @@
    Defaults to an empty list.}
  \item{contrasts}{an optional list. See the \code{contrasts.arg}
    of \code{model.matrix.default}.}
+ \item{keep.data}{logical: should the \code{data} argument (if supplied
+   and a data frame) be saved as part of the model object?} 
 }
 \description{
   The response variable and primary covariate in \code{formula(fixed)}

@@ -1,3 +1,23 @@
+2006-06-02 Brian Ripley <Brian.Ripley@R-project.org>
+
+	* DESCRIPTION: Version is 3.1-74
+
+2006-05-31 Brian Ripley <Brian.Ripley@R-project.org>
+
+	* R/lme.R: Keep terms and optional model frame in lme.formula.
+	Use terms for prediction (get safe prediction that way).
+	Add keep.data argument to lme and methods.
+	* man/lme*.Rd: update for keep.data argument.
+	* R/newMethods.R: make use of saved data in getData methods.
+	* tests/getData.R, tests/predict.lme.R: new tests.
+
+2006-05-24 Brian Ripley <Brian.Ripley@R-project.org>
+
+	* R/gls.R, man/comparePred.Rd:  'minimum' and 'maximum' were
+	evaluated on a formula in the comparePred methods.  Instead,
+	evaluate 'primary' in the 'data' used to fit object1, and document
+	what is done.  (Reported by Mark Difford.)
+
 2006-05-22 Brian Ripley <Brian.Ripley@R-project.org>
 
 	* DESCRIPTION: Version is 3.1-73
