@@ -28,8 +28,12 @@ nlmeStruct(reStruct, corStruct, varStruct)
 
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 
-\seealso{\code{\link{nlme}}, \code{\link{reStruct}},
-  \code{\link{corClasses}}, \code{\link{varFunc}} }
+\seealso{
+  \code{\link{corClasses}},
+  \code{\link{nlme}},
+  \code{\link{residuals.nlmeStruct}},
+  \code{\link{reStruct}},
+  \code{\link{varFunc}} }
 
 \examples{
 nlms1 <- nlmeStruct(reStruct(~age), corAR1(), varPower())

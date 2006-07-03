@@ -9,3 +9,8 @@ fm2
 mod <- distance ~ age + Sex
 fm3 <- lme(mod, Orthodont, random = ~ 1)
 predict(fm3, Orthodont)
+
+## bug report and fix from Dimitris Rizopoulos and Spencer Graves:
+## when 'returnObject = TRUE', do not stop() but give warning() on non-convergence:
+fm1 <- lme(distance ~ age, data = Orthodont,
+	   control = lmeControl(msMaxIter = 1, returnObject = TRUE))

@@ -24,7 +24,8 @@
 
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 
-\seealso{\code{\link{as.matrix.reStruct}}, \code{\link{reStruct}},
+\seealso{\code{\link{as.matrix.reStruct}},
+  \code{\link{corMatrix}}, \code{\link{reStruct}},
   \code{\link{pdMat}}}
 
 \examples{

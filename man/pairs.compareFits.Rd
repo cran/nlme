@@ -36,6 +36,8 @@
 \seealso{
   \code{\link{compareFits}},
   \code{\link{plot.compareFits}},
+  \code{\link{pairs.lme}},
+  \code{\link{pairs.lmList}},
   \code{\link[lattice]{xyplot}},
   \code{\link[lattice]{splom}}
 }

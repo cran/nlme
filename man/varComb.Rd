@@ -19,10 +19,17 @@ varComb(\dots)
   a \code{varComb} object representing a combination of variance
   functions, also inheriting from class \code{varFunc}.
 }
+\references{
+ Pinheiro, J.C., and Bates, D.M. (2000) "Mixed-Effects Models
+ in S and S-PLUS", Springer.  
+}
 
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 
-\seealso{\code{\link{varWeights.varComb}}, \code{\link{coef.varComb}}}
+\seealso{
+  \code{\link{varClasses}},
+  \code{\link{varWeights.varComb}},
+  \code{\link{coef.varComb}}}
 
 \examples{
 vf1 <- varComb(varIdent(form = ~1|Sex), varPower())

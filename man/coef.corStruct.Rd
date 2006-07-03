@@ -51,6 +51,10 @@
 \value{
   a vector with the coefficients corresponding to \code{object}.
 }
+\references{
+   Pinheiro, J. C. and Bates, D. M. (2000), \emph{Mixed-Effects Models in S
+     and S-PLUS}, Springer, New York.  
+}
 \author{Jose Pinheiro and Douglas Bates }
 \section{SIDE EFFECTS}{
   On the left side of an assignment, sets the values of the coefficients

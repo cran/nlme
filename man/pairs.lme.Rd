@@ -59,8 +59,12 @@
   a diagnostic Trellis plot.
 }
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
-\seealso{\code{\link{lme}}, \code{\link[lattice]{xyplot}},
-  \code{\link[lattice]{splom}}}
+\seealso{\code{\link{lme}},
+  \code{\link{pairs.compareFits}}, 
+  \code{\link{pairs.lmList}}, 
+  \code{\link[lattice]{xyplot}},
+  \code{\link[lattice]{splom}}
+}
 \examples{
 fm1 <- lme(distance ~ age, Orthodont, random = ~ age | Subject)
 # scatter plot of coefficients by gender, identifying unusual subjects

@@ -37,7 +37,11 @@
 }
 
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
-%\seealso{\code{\link{print.summary.varFunc}}}
+\seealso{
+  \code{\link{varClasses}}, 
+  \code{\link{varFunc}}
+}
+}%\seealso{\code{\link{print.summary.varFunc}}}
 \examples{
 vf1 <- varPower(0.3, form = ~age)
 vf1 <- Initialize(vf1, Orthodont)

@@ -19,6 +19,10 @@
   a vector with square-root factors of the positive-definite matrices
   corresponding to the elements of \code{object} stacked column-wise.
 }
+\references{
+ Pinheiro, J.C., and Bates, D.M. (2000) "Mixed-Effects Models
+ in S and S-PLUS", Springer.  
+}
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 \note{
   This function is used intensively in optimization
@@ -26,7 +30,9 @@
   reasons. The \code{pdMatrix} function can be used to obtain
   square-root factors in matrix form.
 }
-\seealso{\code{\link{pdMatrix.reStruct}}, \code{\link{pdFactor.pdMat}}}
+\seealso{\code{\link{pdFactor}},
+  \code{\link{pdMatrix.reStruct}},
+  \code{\link{pdFactor.pdMat}}}
 \examples{
 rs1 <- reStruct(pdSymm(diag(3), ~age+Sex, data = Orthodont))
 pdFactor(rs1)

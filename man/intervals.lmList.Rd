@@ -36,8 +36,13 @@
 }
 
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
-
-\seealso{\code{\link{lmList}}, \code{\link{plot.intervals.lmList}}}
+\references{
+  Pinheiro, J.C., and Bates, D.M. (2000) "Mixed-Effects Models
+  in S and S-PLUS", Springer.  
+}
+\seealso{\code{\link{lmList}}, \code{\link{intervals}},
+  \code{\link{plot.intervals.lmList}}
+  }
 
 \examples{
 fm1 <- lmList(distance ~ age | Subject, Orthodont)

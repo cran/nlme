@@ -37,7 +37,7 @@
 }
 \description{
   This method function calculates the empirical autocorrelation function
-  for the residuals from an \code{gls} fit. If a grouping variable is
+  for the residuals from a \code{gls} fit. If a grouping variable is
   specified in \code{form}, the autocorrelation values
   are calculated using pairs of residuals within the same group;
   otherwise all possible residual pairs are used. The autocorrelation
@@ -52,12 +52,25 @@
 }
 \references{
   Box, G.E.P., Jenkins, G.M., and Reinsel G.C. (1994) "Time Series
-  Analysis: Forecasting and Control", 3rd Edition, Holden-Day. 
+  Analysis: Forecasting and Control", 3rd Edition, Holden-Day.
+
+  Pinheiro, J.C., and Bates, D.M. (2000) "Mixed-Effects Models
+  in S and S-PLUS", Springer.  
 }
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 \seealso{\code{\link{ACF.gls}}, \code{\link{plot.ACF}}}
 \examples{
 fm1 <- gls(follicles ~ sin(2*pi*Time) + cos(2*pi*Time), Ovary)
 ACF(fm1, form = ~ 1 | Mare)
+
+# Pinheiro and Bates, p. 255-257
+fm1Dial.gls <- gls(rate ~
+  (pressure+I(pressure^2)+I(pressure^3)+I(pressure^4))*QB,
+                   Dialyzer)
+
+fm2Dial.gls <- update(fm1Dial.gls,
+                 weights = varPower(form = ~ pressure))
+
+ACF(fm2Dial.gls, form = ~ 1 | Subject)
 }
 \keyword{models}

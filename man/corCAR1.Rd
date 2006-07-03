@@ -38,12 +38,27 @@ corCAR1(value, form, fixed)
   Analysis: Forecasting and Control", 3rd Edition, Holden-Day.
 
   Jones, R.H. (1993) "Longitudinal Data with Serial Correlation: A
-  State-space Approach", Chapman and Hall
+  State-space Approach", Chapman and Hall.
+  
+  Pinheiro, J.C., and Bates, D.M. (2000) "Mixed-Effects Models
+  in S and S-PLUS", Springer, esp. pp. 236, 243.  
 }
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
-\seealso{\code{\link{Initialize.corStruct}}}
+\seealso{
+  \code{\link{corClasses}}, 
+  \code{\link{Initialize.corStruct}},
+  \code{\link{summary.corStruct}}
+}
 \examples{
 ## covariate is Time and grouping factor is Mare
 cs1 <- corCAR1(0.2, form = ~ Time | Mare)
+
+# Pinheiro and Bates, pp. 240, 243
+fm1Ovar.lme <- lme(follicles ~
+           sin(2*pi*Time) + cos(2*pi*Time),
+   data = Ovary, random = pdDiag(~sin(2*pi*Time)))
+fm4Ovar.lme <- update(fm1Ovar.lme,
+          correlation = corCAR1(form = ~Time))
+
 }
 \keyword{models}

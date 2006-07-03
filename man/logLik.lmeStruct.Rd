@@ -35,6 +35,9 @@
 
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 
-\seealso{\code{\link{lme}}, \code{\link{lmeStruct}}}
+\seealso{\code{\link{lme}},
+  \code{\link{lmeStruct}},
+  \code{\link{logLik.lme}}
+}
 
 \keyword{models}

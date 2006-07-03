@@ -73,6 +73,10 @@ gsummary(object, FUN, omitGroupingFactor, form, level,
   factor.  The number of columns is at most the number of columns in
   \code{object}.
 }
+\references{
+ Pinheiro, J.C., and Bates, D.M. (2000) "Mixed-Effects Models
+ in S and S-PLUS", Springer.  
+}
 
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 

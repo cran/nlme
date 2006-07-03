@@ -21,6 +21,9 @@ corFactor(object, \dots)
   documentation. 
 }
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
+\seealso{\code{\link{corFactor.corStruct}},
+  \code{\link{recalc.corStruct}}
+}
 \examples{
 ## see the method function documentation
 }

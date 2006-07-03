@@ -51,9 +51,14 @@
   \item{sigma}{within-group standard deviation.}
 }
 
+\references{
+  Pinheiro, J.C., and Bates, D.M. (2000) "Mixed-Effects Models
+  in S and S-PLUS", Springer.  
+}
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 
-\seealso{\code{\link{lme}}, \code{\link{print.intervals.lme}},
+\seealso{\code{\link{lme}}, \code{\link{intervals}},
+  \code{\link{print.intervals.lme}},
     \code{\link{pdNatural}}}
 
 \examples{

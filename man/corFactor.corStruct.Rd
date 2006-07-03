@@ -46,8 +46,12 @@
   reasons. The \code{corMatrix} method function can be used to obtain
   transpose inverse square-root factors in matrix form.
 }
-\seealso{\code{\link{corMatrix.corStruct}},
-  \code{\link{recalc.corStruct}}, \code{\link{Initialize.corStruct}}}
+\seealso{
+  \code{\link{corFactor}},
+  \code{\link{corMatrix.corStruct}},
+  \code{\link{recalc.corStruct}},
+  \code{\link{Initialize.corStruct}}
+}
 
 \examples{
 cs1 <- corAR1(form = ~1 | Subject)

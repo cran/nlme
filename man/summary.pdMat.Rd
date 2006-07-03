@@ -44,7 +44,9 @@
 
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 
-\seealso{\code{\link{print.summary.pdMat}}, \code{\link{pdMat}}}
+\seealso{
+  \code{\link{print.summary.pdMat}},
+  \code{\link{pdMat}}}
 
 \examples{
 summary(pdSymm(diag(4)))

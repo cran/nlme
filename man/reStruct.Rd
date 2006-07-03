@@ -68,8 +68,14 @@ reStruct(object, pdClass, REML, data)
 
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 
-\seealso{\code{\link{pdMat}}, \code{\link{lme}},
-  \code{\link{groupedData}}} 
+\seealso{
+  \code{\link{groupedData}}, 
+  \code{\link{lme}},
+  \code{\link{pdMat}},
+  \code{\link{solve.reStruct}},
+  \code{\link{summary.reStruct}},
+  \code{\link{update.reStruct}}
+} 
 
 \examples{
 rs1 <- reStruct(list(Dog = ~day, Side = ~1), data = Pixel)

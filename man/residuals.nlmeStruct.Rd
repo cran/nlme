@@ -47,5 +47,6 @@
   This method function is primarily used within the \code{nlme}
   function. 
 }
-\seealso{\code{\link{nlme}}, \code{\link{fitted.nlmeStruct}} } 
+\seealso{\code{\link{nlme}},
+  \code{\link{fitted.nlmeStruct}} } 
 \keyword{models}

@@ -24,7 +24,9 @@
 
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 
-\seealso{\code{\link{gls}}}
+\seealso{\code{\link{gls}}, 
+  \code{\link{getData}}}
+}
 
 \examples{
 fm1 <- gls(follicles ~ sin(2*pi*Time) + cos(2*pi*Time), data = Ovary,

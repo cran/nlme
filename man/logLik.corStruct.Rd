@@ -27,7 +27,9 @@
 }
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 
-\seealso{\code{\link{logDet.corStruct}} }
+\seealso{\code{\link{logDet.corStruct}},
+  \code{\link{logLik.lme}},
+}
 
 \examples{
 cs1 <- corAR1(0.2)

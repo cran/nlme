@@ -118,6 +118,9 @@
  Parametrizations for Variance-Covariance Matrices", Statistics and
  Computing, 6, 289-296.
 
+ Pinheiro, J.C., and Bates, D.M. (2000) "Mixed-Effects Models
+ in S and S-PLUS", Springer.  
+ 
  Venables, W.N. and Ripley, B.D. (1997) "Modern Applied Statistics with
  S-plus", 2nd Edition, Springer-Verlag.
 }

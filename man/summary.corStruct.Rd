@@ -39,6 +39,12 @@
   as \code{object}.
 }
 \author{Jose Pinheiro and Douglas Bates }
+\seealso{
+  \code{\link{corClasses}}, 
+  \code{\link{corNatural}},
+  \code{\link{Initialize.corStruct}}, 
+  \code{\link{summary}} 
+}
 
 %\seealso{\code{\link{print.summary.corStruct}}}
 

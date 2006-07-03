@@ -41,13 +41,46 @@ corARMA(value, form, p, q, fixed)
 
 \references{
   Box, G.E.P., Jenkins, G.M., and Reinsel G.C. (1994) "Time Series
-  Analysis: Forecasting and Control", 3rd Edition, Holden-Day. 
+  Analysis: Forecasting and Control", 3rd Edition, Holden-Day.
+
+  Pinheiro, J.C., and Bates, D.M. (2000) "Mixed-Effects Models
+  in S and S-PLUS", Springer, esp. pp. 236, 397.  
 }
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
-\seealso{\code{\link{Initialize.corStruct}}}
+\seealso{
+  \code{\link{corAR1}},
+  \code{\link{corClasses}}
+  \code{\link{Initialize.corStruct}},
+  \code{\link{summary.corStruct}}
+}
 \examples{
 ## ARMA(1,2) structure, with observation order as a covariate and
 ## Mare as grouping factor
 cs1 <- corARMA(c(0.2, 0.3, -0.1), form = ~ 1 | Mare, p = 1, q = 2)
+
+# Pinheiro and Bates, p. 237 
+cs1ARMA <- corARMA(0.4, form = ~ 1 | Subject, q = 1)
+cs1ARMA <- Initialize(cs1ARMA, data = Orthodont)
+corMatrix(cs1ARMA)
+
+cs2ARMA <- corARMA(c(0.8, 0.4), form = ~ 1 | Subject, p=1, q=1)
+cs2ARMA <- Initialize(cs2ARMA, data = Orthodont)
+corMatrix(cs2ARMA)
+
+# Pinheiro and Bates use in nlme:  
+# from p. 240 needed on p. 396
+fm1Ovar.lme <- lme(follicles ~ sin(2*pi*Time) + cos(2*pi*Time),
+                   data = Ovary, random = pdDiag(~sin(2*pi*Time)))
+fm5Ovar.lme <- update(fm1Ovar.lme,
+                corr = corARMA(p = 1, q = 1))
+# p. 396
+fm1Ovar.nlme <- nlme(follicles~
+     A+B*sin(2*pi*w*Time)+C*cos(2*pi*w*Time),
+   data=Ovary, fixed=A+B+C+w~1,
+   random=pdDiag(A+B+w~1),
+   start=c(fixef(fm5Ovar.lme), 1) )
+# p. 397
+fm3Ovar.nlme <- update(fm1Ovar.nlme,
+         corr=corARMA(p=0, q=2) )
 }
 \keyword{models}

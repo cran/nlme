@@ -90,14 +90,26 @@ gls(model, data, correlation, weights, subset, method, na.action,
  Littel, R.C., Milliken, G.A., Stroup, W.W., and Wolfinger, R.D. (1996)
  "SAS Systems for Mixed Models", SAS Institute.
 
+ Pinheiro, J.C., and Bates, D.M. (2000) "Mixed-Effects Models
+ in S and S-PLUS", Springer, esp. pp. 100, 461.  
+
  Venables, W.N. and Ripley, B.D. (1997) "Modern Applied Statistics with
  S-PLUS", 2nd Edition, Springer-Verlag.
 }
 \author{Jose Pinheiro \email{jcp@research.bell-labs.com}, Douglas Bates
   \email{bates@stat.wisc.edu}} 
 \seealso{
-  \code{\link{glsControl}}, \code{\link{glsObject}},
-  \code{\link{varFunc}}, \code{\link{corClasses}}, \code{\link{varClasses}}
+  \code{\link{corClasses}},
+  \code{\link{glsControl}},
+  \code{\link{glsObject}},
+  \code{\link{glsStruct}},
+  \code{\link{plot.gls}}, 
+  \code{\link{predict.gls}}, 
+  \code{\link{qqnorm.gls}}, 
+  \code{\link{residuals.gls}}, 
+  \code{\link{summary.gls}}, 
+  \code{\link{varClasses}},
+  \code{\link{varFunc}}
 }
 \examples{
 # AR(1) errors within each Mare

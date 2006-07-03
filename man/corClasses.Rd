@@ -25,6 +25,10 @@
     structure.} 
 }
 
+\references{
+  Pinheiro, J.C., and Bates, D.M. (2000) "Mixed-Effects Models
+  in S and S-PLUS", Springer.  
+}
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 
 \note{
@@ -34,8 +38,12 @@
   examples of these functions, see the methods for classes \code{corSymm}
   and \code{corAR1}. 
 }
-\seealso{\code{\link{corAR1}}, \code{\link{corARMA}},
+\seealso{
+  \code{\link{corAR1}}, \code{\link{corARMA}},
   \code{\link{corCAR1}}, \code{\link{corCompSymm}},
-  \code{\link{corExp}}, \code{\link{corGaus}}, \code{\link{corLin}},
-  \code{\link{corRatio}}, \code{\link{corSpher}}, \code{\link{corSymm}}}
+  \code{\link{corExp}}, \code{\link{corGaus}},
+  \code{\link{corLin}},
+  \code{\link{corRatio}}, \code{\link{corSpher}},
+  \code{\link{corSymm}},
+  \code{\link{summary.corStruct}}}
 \keyword{models}

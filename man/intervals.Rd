@@ -23,11 +23,15 @@ intervals(object, level, \dots)
 \value{
   will depend on the method function used; see the appropriate documentation.
 }
-\seealso{\code{\link{intervals.gls}}, \code{\link{intervals.lme}},
-    \code{\link{intervals.lmList}}
-} 
-
+\references{
+  Pinheiro, J.C., and Bates, D.M. (2000) "Mixed-Effects Models
+  in S and S-PLUS", Springer.  
+}
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
+\seealso{\code{\link{intervals.lme}},
+  \code{\link{intervals.lmList}},
+  \code{\link{intervals.gls}}
+}
 \examples{
 ## see the method documentation
 }

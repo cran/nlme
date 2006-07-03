@@ -105,11 +105,19 @@ gnls(model, data, params, start, correlation, weights, subset,
 
  Venables, W.N. and Ripley, B.D. (1997) "Modern Applied Statistics with
  S-plus", 2nd Edition, Springer-Verlag.
+
+ Pinheiro, J.C., and Bates, D.M. (2000) "Mixed-Effects Models
+ in S and S-PLUS", Springer.  
+
 }
 \author{Jose Pinheiro \email{jose.pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 \seealso{
+  \code{\link{corClasses}},
   \code{\link{gnlsControl}}, \code{\link{gnlsObject}},
-  \code{\link{varFunc}}, \code{\link{corClasses}}, \code{\link{varClasses}}
+  \code{\link{gnlsStruct}},
+  \code{\link{predict.gnls}},
+  \code{\link{varClasses}},
+  \code{\link{varFunc}}
 }
 \examples{
 # variance increases with a power of the absolute fitted values

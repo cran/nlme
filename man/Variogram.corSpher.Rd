@@ -37,7 +37,11 @@
 }  
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 
-\seealso{\code{\link{corSpher}}, \code{\link{plot.Variogram}}}
+\seealso{
+  \code{\link{corSpher}},
+  \code{\link{plot.Variogram}},
+  \code{\link{Variogram}}
+}
 \examples{
 cs1 <- corSpher(15, form = ~ Time | Rat)
 cs1 <- Initialize(cs1, BodyWeight)

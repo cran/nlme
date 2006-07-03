@@ -21,6 +21,10 @@ fixef(object, \dots)
 \value{
   will depend on the method function used; see the appropriate documentation.
 }
+\references{
+  Pinheiro, J.C., and Bates, D.M. (2000) "Mixed-Effects Models
+  in S and S-PLUS", Springer.  
+}
 \seealso{\code{\link{fixef.lmList}}} 
 \examples{
 ## see the method function documentation

@@ -64,6 +64,10 @@
   classes \code{ranef.lmList} and \code{data.frame}.
 }
 
+\references{
+   Pinheiro, J. C. and Bates, D. M. (2000), \emph{Mixed-Effects Models in S
+     and S-PLUS}, Springer, New York, esp. pp. 457-458.   
+}
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 
 \seealso{\code{\link{lmList}}, \code{\link{fixed.effects.lmList}},

@@ -54,11 +54,18 @@ pdCompSymm(value, form, nam, data)
   matrix with compound symmetry structure, also inheriting from class
   \code{pdMat}.  
 }
+\references{
+ Pinheiro, J.C., and Bates, D.M. (2000) "Mixed-Effects Models
+ in S and S-PLUS", Springer, esp. p. 161.  
+}
 
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 
-\seealso{\code{\link{as.matrix.pdMat}}, \code{\link{coef.pdMat}},
-  \code{\link{matrix<-.pdMat}}} 
+\seealso{\code{\link{as.matrix.pdMat}},
+  \code{\link{coef.pdMat}},
+  \code{\link{matrix<-.pdMat}},
+  \code{\link{pdClasses}}
+} 
 
 \examples{
 pd1 <- pdCompSymm(diag(3) + 1, nam = c("A","B","C"))

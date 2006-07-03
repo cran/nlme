@@ -29,6 +29,10 @@ getGroups(object, form, level, data, sep)
   will depend on the method function used; see the appropriate documentation.
 }
 
+\references{
+  Pinheiro, J.C., and Bates, D.M. (2000) "Mixed-Effects Models
+  in S and S-PLUS", Springer, esp. pp. 100, 461.  
+}
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 
 \seealso{\code{\link{getGroupsFormula}}, \code{\link{getGroups.data.frame}},

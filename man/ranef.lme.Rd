@@ -70,12 +70,19 @@
   object inherits from classes \code{random.effects.lme} and
   \code{data.frame}. 
 }
-
+\references{
+ Pinheiro, J.C., and Bates, D.M. (2000) "Mixed-Effects Models
+ in S and S-PLUS", Springer, esp. pp. 100, 461.  
+}
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 
-\seealso{\code{\link{lme}}, %\code{\link{fixed.effects.lme}},
-  \code{\link{coef.lme}}, \code{\link{plot.ranef.lme}},
-  \code{\link{gsummary}}}  
+\seealso{
+  \code{\link{coef.lme}},
+  \code{\link{gsummary}},
+  \code{\link{lme}}, %\code{\link{fixed.effects.lme}},
+  \code{\link{plot.ranef.lme}}, 
+  \code{\link{random.effects}}
+}
 
 \examples{
 fm1 <- lme(distance ~ age, Orthodont, random = ~ age | Subject)

@@ -24,6 +24,8 @@
 }
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 
+\seealso{\code{\link{needUpdate}}
+}
 \examples{
 lms1 <- lmeStruct(reStruct = reStruct(pdDiag(diag(2), ~age)),
    varStruct = varPower(form = ~age))

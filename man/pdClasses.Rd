@@ -23,6 +23,10 @@
     and correlations). The underlying coefficients are not unrestricted,
     so this class should NOT be used for optimization.}
 }
+\references{
+ Pinheiro, J.C., and Bates, D.M. (2000) "Mixed-Effects Models
+ in S and S-PLUS", Springer.  
+}
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 \note{
   Users may define their own \code{pdMat} classes by specifying a
@@ -31,8 +35,15 @@
   examples of these functions, see the methods for classes \code{pdSymm}
   and \code{pdDiag}. 
 }
-\seealso{\code{\link{pdCompSymm}}, \code{\link{pdDiag}},
-  \code{\link{pdIdent}}, \code{\link{pdNatural}}, \code{\link{pdSymm}},
+\seealso{\code{\link{pdBlocked}},
+  \code{\link{pdCompSymm}},
+  \code{\link{pdDiag}},
+  \code{\link{pdFactor}}, 
+  \code{\link{pdIdent}},
+  \code{\link{pdMat}},
+  \code{\link{pdMatrix}},
+  \code{\link{pdNatural}},
+  \code{\link{pdSymm}},
   \code{\link{pdLogChol}}
 }
 \keyword{models}

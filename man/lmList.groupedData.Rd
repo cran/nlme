@@ -47,7 +47,8 @@
 }
 
 \seealso{
-  \code{\link{groupedData}}, \code{\link{lm}}, \code{\link{lme.lmList}},
+  \code{\link{groupedData}}, \code{\link{lm}},
+  \code{\link{lme.lmList}}, \code{\link{lmList}},
   \code{\link{lmList.formula}}
 }
 \examples{

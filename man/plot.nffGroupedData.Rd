@@ -84,7 +84,8 @@ Mixed-Effects Software: Design of NLME 3.0" available at
 http://franz.stat.wisc.edu/pub/NLME.
 }
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
-\seealso{\code{\link{groupedData}}, \code{\link[lattice]{dotplot}}}
+\seealso{\code{\link{groupedData}},
+  \code{\link[lattice]{dotplot}}}
 \examples{
 plot(Machines)
 plot(Machines, inner = TRUE)

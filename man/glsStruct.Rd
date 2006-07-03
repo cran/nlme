@@ -25,7 +25,10 @@ glsStruct(corStruct, varStruct)
 
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 
-\seealso{\code{\link{gls}}, \code{\link{corClasses}},
+\seealso{
+  \code{\link{corClasses}},
+  \code{\link{gls}},
+  \code{\link{residuals.glsStruct}},
   \code{\link{varFunc}} } 
 
 \examples{

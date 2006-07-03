@@ -68,16 +68,24 @@ corSpatial(value, form, nugget, type, metric, fixed)
 }
 \references{
   Cressie, N.A.C. (1993), "Statistics for Spatial Data", J. Wiley & Sons.
+
   Venables, W.N. and Ripley, B.D. (1997) "Modern Applied Statistics with
   S-plus", 2nd Edition, Springer-Verlag.
+  
   Littel, Milliken, Stroup, and Wolfinger (1996) "SAS Systems for Mixed
   Models", SAS Institute.
 }
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 
-\seealso{\code{\link{corExp}}, \code{\link{corGaus}},
-    \code{\link{corLin}}, \code{\link{corRatio}}, \code{\link{corSpher}},
-    \code{\link{Initialize.corStruct}}, \code{\link[stats]{dist}}
+\seealso{
+  \code{\link{corExp}},
+  \code{\link{corGaus}},
+  \code{\link{corLin}},
+  \code{\link{corRatio}},
+  \code{\link{corSpher}},
+  \code{\link{Initialize.corStruct}},
+  \code{\link{summary.corStruct}},
+  \code{\link[stats]{dist}}
 }
 \examples{
 sp1 <- corSpatial(form = ~ x + y + z, type = "g", metric = "man")

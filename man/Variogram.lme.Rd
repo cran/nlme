@@ -105,8 +105,13 @@
 
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 
-\seealso{\code{\link{lme}}, \code{\link{Variogram.default}},
-  \code{\link{Variogram.gls}}, \code{\link{plot.Variogram}}}
+\seealso{
+  \code{\link{lme}},
+  \code{\link{Variogram}},
+  \code{\link{Variogram.default}},
+  \code{\link{Variogram.gls}},
+  \code{\link{plot.Variogram}}
+}
 \examples{
 fm1 <- lme(weight ~ Time * Diet, data=BodyWeight, ~ Time | Rat)
 Variogram(fm1, form = ~ Time | Rat, nint = 10, robust = TRUE)

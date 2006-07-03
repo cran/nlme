@@ -59,7 +59,8 @@
 }
 
 \seealso{
-  \code{\link{selfStart}}, \code{\link{groupedData}}, \code{\link{nls}},
+  \code{\link{selfStart}}, \code{\link{groupedData}},
+  \code{\link{nls}}, \code{\link{nlsList}},
   \code{\link{nlme.nlsList}}, \code{\link{nlsList.formula}}
 }
 \examples{

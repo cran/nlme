@@ -34,6 +34,8 @@
 
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 
-\seealso{\code{\link{gnls}}, \code{\link{gnlsStruct}}}
+\seealso{\code{\link{gnls}}, \code{\link{gnlsStruct}},
+  \code{\link{logLik.gnls}}
+}
 
 \keyword{models}

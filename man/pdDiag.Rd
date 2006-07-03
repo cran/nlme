@@ -56,10 +56,16 @@ pdDiag(value, form, nam, data)
   a \code{pdDiag} object representing a diagonal positive-definite
   matrix, also inheriting from class \code{pdMat}. 
 }
+\references{
+ Pinheiro, J.C., and Bates, D.M. (2000) "Mixed-Effects Models
+ in S and S-PLUS", Springer.  
+}
 
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 
-\seealso{\code{\link{as.matrix.pdMat}}, \code{\link{coef.pdMat}},
+\seealso{\code{\link{as.matrix.pdMat}},
+  \code{\link{coef.pdMat}},
+  \code{\link{pdClasses}},
   \code{\link{matrix<-.pdMat}}} 
 
 \examples{

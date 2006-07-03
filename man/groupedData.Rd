@@ -102,20 +102,28 @@ outer, inner, labels, units, \dots)
   from  classes \code{groupedData} and \code{data.frame}. 
 }
 \references{
-Bates, D.M. and Pinheiro, J.C. (1997), "Software Design for Longitudinal
-Data", in "Modelling Longitudinal and Spatially Correlated Data:
-Methods, Applications and Future Directions", T.G. Gregoire (ed.),
-Springer-Verlag, New York.
+  Bates, D.M. and Pinheiro, J.C. (1997), "Software Design for Longitudinal
+  Data", in "Modelling Longitudinal and Spatially Correlated Data:
+  Methods, Applications and Future Directions", T.G. Gregoire (ed.),
+  Springer-Verlag, New York.
 
-Pinheiro, J.C. and Bates, D.M. (1997) "Future Directions in
-Mixed-Effects Software: Design of NLME 3.0" available at
-http://nlme.stat.wisc.edu/
+  Pinheiro, J.C. and Bates, D.M. (1997) "Future Directions in
+  Mixed-Effects Software: Design of NLME 3.0" available at
+  http://nlme.stat.wisc.edu/
+
+  Pinheiro, J.C., and Bates, D.M. (2000) "Mixed-Effects Models
+  in S and S-PLUS", Springer.  
 }
 
 \author{Douglas Bates and Jose Pinheiro}
 
 \seealso{\code{\link{formula}}, \code{\link{gapply}},
-  \code{\link{gsummary}}, \code{\link{lme}}
+  \code{\link{gsummary}},
+  \code{\link{lme}},
+  \code{\link{plot.nffGroupedData}},
+  \code{\link{plot.nfnGroupedData}},
+  \code{\link{plot.nmGroupedData}},
+  \code{\link{reStruct}}
 }
 \examples{
 Orth.new <-  # create a new copy of the groupedData object

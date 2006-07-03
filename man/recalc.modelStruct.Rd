@@ -30,6 +30,7 @@
   functions, such as \code{lme} and \code{gls}, that allow model
   components, such as correlated error terms and variance functions.
 }
-\seealso{\code{\link{recalc.corStruct}}, \code{\link{recalc.reStruct}},
-    \code{\link{recalc.varFunc}}}
+\seealso{\code{\link{recalc.corStruct}},
+  \code{\link{recalc.reStruct}},
+  \code{\link{recalc.varFunc}}}
 \keyword{models}

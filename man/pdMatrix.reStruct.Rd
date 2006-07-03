@@ -26,11 +26,19 @@
   corresponding to the elements of \code{object}, or square-root factors
   of the positive-definite matrices.
 }
+\references{
+ Pinheiro, J.C., and Bates, D.M. (2000) "Mixed-Effects Models
+ in S and S-PLUS", Springer, esp. p. 162.  
+}
 
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 
-\seealso{\code{\link{as.matrix.reStruct}}, \code{\link{reStruct}},
-  \code{\link{pdMatrix.pdMat}}}
+\seealso{\code{\link{as.matrix.reStruct}},
+  \code{\link{reStruct}},
+  \code{\link{pdMat}}, 
+  \code{\link{pdMatrix}}, 
+  \code{\link{pdMatrix.pdMat}}
+}
 
 \examples{
 rs1 <- reStruct(pdSymm(diag(3), ~age+Sex, data = Orthodont))

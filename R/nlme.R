@@ -528,9 +528,9 @@ nlme.formula <-
   }
   Names(nlmeSt$reStruct) <- rn
   rNam <- unlist(rn)                    # unlisted names of random effects
-  rlength<- unlist(lapply(rn, length))   # number of random effects per stratum
+  rlength<- unlist(lapply(rn, length))  # number of random effects per stratum
   rLen <- sum(rlength)                  # total number of random effects
-  pLen <- rLen + fLen                # total number of parameters
+  pLen <- rLen + fLen                   # total number of parameters
   ncols <- c(rlength, fLen, 1)
   Dims <- MEdims(grpShrunk, ncols)
   if (max(Dims$ZXlen[[1]]) < Dims$qvec[1]) {
@@ -788,8 +788,7 @@ nlme.formula <-
   pnlsSettings <- c(controlvals$pnlsMaxIter, controlvals$minScale,
                     controlvals$pnlsTol, 0, 0, 0)
   nlModel <- nonlinModel(modelExpression, nlEnv)
-  repeat {
-  ## alternating algorithm
+  repeat {                              ## alternating algorithm
     numIter <- numIter + 1
     ## LME step
     if (needUpdate(nlmeSt)) {             # updating varying weights
@@ -935,7 +934,7 @@ nlme.formula <-
     }
   }
 
-  ## wraping up
+  ## wrapping up
   if (decomp) {
     nlmeFit <- MEestimate(nlmeSt, grpShrunk, oldConLin)
   } else {

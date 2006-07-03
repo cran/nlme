@@ -32,5 +32,8 @@
 \note{This method function is only used inside model fitting functions,
     such as \code{lme} and \code{gls}, that allow heteroscedastic error
     terms.}
-\seealso{\code{\link{varWeights}}, \code{\link{logLik.varFunc}}}
+\seealso{
+  \code{\link{recalc}},
+  \code{\link{varWeights}},
+  \code{\link{logLik.varFunc}}}
 \keyword{models}

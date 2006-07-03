@@ -21,7 +21,6 @@
  \item{\dots}{some methods for this generic require additional
     arguments.  None are used in this method.} 
 }
-
 \description{
   The individual linear model components of the \code{glsStruct} list
   are initialized.  
@@ -30,10 +29,9 @@
   a \code{glsStruct} object similar to \code{object}, but with
   initialized model components. 
 }
-
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
-
-\seealso{\code{\link{gls}}, \code{\link{Initialize.corStruct}} ,
-  \code{\link{Initialize.varFunc}}} 
-
+\seealso{\code{\link{gls}},
+  \code{\link{Initialize.corStruct}},
+  \code{\link{Initialize.varFunc}},
+  \code{\link{Initialize}}}
 \keyword{models}

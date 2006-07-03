@@ -60,9 +60,14 @@ pdLogChol(value, form, nam, data)
   Pinheiro, J.C. and Bates., D.M.  (1996) "Unconstrained
   Parametrizations for Variance-Covariance Matrices", Statistics and
   Computing, 6, 289-296.
+
+ Pinheiro, J.C., and Bates, D.M. (2000) "Mixed-Effects Models
+ in S and S-PLUS", Springer.  
 }
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
-\seealso{\code{\link{as.matrix.pdMat}}, \code{\link{coef.pdMat}},
+\seealso{\code{\link{as.matrix.pdMat}},
+  \code{\link{coef.pdMat}},
+  \code{\link{pdClasses}},
   \code{\link{matrix<-.pdMat}}} 
 \examples{
 pd1 <- pdLogChol(diag(1:3), nam = c("A","B","C"))

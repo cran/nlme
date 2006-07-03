@@ -52,7 +52,10 @@
 
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 
-\seealso{\code{\link{lme}}, \code{\link{AIC}}, \code{\link{BIC}},
+\seealso{
+  \code{\link{AIC}},
+  \code{\link{BIC}},
+  \code{\link{lme}},
   \code{print.summary.lme}}
 
 \examples{

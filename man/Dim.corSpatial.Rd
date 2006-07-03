@@ -33,9 +33,16 @@
     distance vectors in each group, beginning from zero}
 }
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
-\seealso{\code{\link{Dim}}, \code{\link{Dim.corStruct}}}
+\seealso{\code{\link{Dim}},
+  \code{\link{Dim.corStruct}}
+
+}
 
 \examples{
 Dim(corGaus(), getGroups(Orthodont))
+
+cs1ARMA <- corARMA(0.4, form = ~ 1 | Subject, q = 1)
+cs1ARMA <- Initialize(cs1ARMA, data = Orthodont)
+Dim(cs1ARMA)
 }
 \keyword{models}

@@ -39,12 +39,22 @@
 \references{
   Box, G.E.P., Jenkins, G.M., and Reinsel G.C. (1994) "Time Series
   Analysis: Forecasting and Control", 3rd Edition, Holden-Day. 
+
+  Pinheiro, J.C., and Bates, D.M. (2000) "Mixed-Effects Models
+  in S and S-PLUS", Springer.  
 }
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 \seealso{\code{\link{ACF.gls}}, \code{\link{plot.ACF}}}
 \examples{
-fm1 <- lme(follicles ~ sin(2*pi*Time) + cos(2*pi*Time), Ovary,
-           random = ~ sin(2*pi*Time) | Mare)
+fm1 <- lme(follicles ~ sin(2*pi*Time) + cos(2*pi*Time),
+           Ovary, random = ~ sin(2*pi*Time) | Mare)
 ACF(fm1, maxLag = 11)
+
+# Pinheiro and Bates, p240-241
+fm1Over.lme <- lme(follicles  ~ sin(2*pi*Time) +
+           cos(2*pi*Time), data=Ovary,
+     random=pdDiag(~sin(2*pi*Time)) )
+(ACF.fm1Over <- ACF(fm1Over.lme, maxLag=10))
+plot(ACF.fm1Over, alpha=0.01) 
 }
 \keyword{models}

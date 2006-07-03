@@ -133,17 +133,32 @@ lme(fixed, data, random, correlation, weights, subset, method,
  Parametrizations for Variance-Covariance Matrices", Statistics and
  Computing, 6, 289-296.
 
+ Pinheiro, J.C., and Bates, D.M. (2000) "Mixed-Effects Models
+ in S and S-PLUS", Springer.  
+
  Venables, W.N. and Ripley, B.D. (1997) "Modern Applied Statistics with
  S-plus", 2nd Edition, Springer-Verlag.
 }
 \author{Jose Pinheiro \email{jose.pinheiro@pharma.novartis.com} and
   Douglas Bates \email{bates@stat.wisc.edu}}
 \seealso{
-  \code{\link{lmeControl}}, \code{\link{lme.lmList}},
-  \code{\link{lme.groupedData}}, \code{\link{lmeObject}},
-  \code{\link{lmList}}, \code{\link{reStruct}}, \code{\link{reStruct}},
-  \code{\link{varFunc}}, \code{\link{pdClasses}},
-  \code{\link{corClasses}}, \code{\link{varClasses}}
+  \code{\link{corClasses}},
+  \code{\link{lme.lmList}},
+  \code{\link{lme.groupedData}},
+  \code{\link{lmeControl}},
+  \code{\link{lmeObject}},
+  \code{\link{lmeStruct}},
+  \code{\link{lmList}},
+  \code{\link{pdClasses}},
+  \code{\link{plot.lme}},
+  \code{\link{predict.lme}},
+  \code{\link{qqnorm.lme}},
+  \code{\link{residuals.lme}},
+  \code{\link{reStruct}},
+  \code{\link{simulate.lme}},
+  \code{\link{summary.lme}},
+  \code{\link{varClasses}}, 
+  \code{\link{varFunc}}
 }
 \examples{
 fm1 <- lme(distance ~ age, data = Orthodont) # random is ~ age

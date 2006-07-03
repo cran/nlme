@@ -1,3 +1,22 @@
+2006-07-03  Douglas Bates  <Douglas.Bates@R-project.org>
+
+	* DESCRIPTION: Version is 3.1-75
+
+	* man/{many files}: Documentation changes contributed by Spencer
+	Graves <spencer.graves@pdf.com>.  Most of the changes add Pinheiro
+	and Bates (2000) as a reference or add additional \seealso{}
+	entries.  Some examples from Pinheiro and Bates (2000) have also
+	been added.
+
+	* R/nlme.R: reformat the code, typo.
+
+2006-07-03  Martin Maechler  <maechler@stat.math.ethz.ch>
+
+	* R/lme.R (lme.formula): when control()$returnObject is TRUE, only
+	warn instead of stop() in the case of non-convergence.
+	* tests/lme.R: test the above
+	ZZ* tests/lme.Rout.save:
+
 2006-06-02 Brian Ripley <Brian.Ripley@R-project.org>
 
 	* DESCRIPTION: Version is 3.1-74
@@ -13,7 +32,7 @@
 
 2006-05-24 Brian Ripley <Brian.Ripley@R-project.org>
 
-	* R/gls.R, man/comparePred.Rd:  'minimum' and 'maximum' were
+	* R/gls.R, man/comparePred.Rd:	'minimum' and 'maximum' were
 	evaluated on a formula in the comparePred methods.  Instead,
 	evaluate 'primary' in the 'data' used to fit object1, and document
 	what is done.  (Reported by Mark Difford.)
@@ -26,7 +45,7 @@
 
 	* LICENCE, inst/LICENCE: add and install a licence file.
 
-2006-05-18 Brian Ripley  <Brian.Ripley@r-project.org>
+2006-05-18 Brian Ripley	 <Brian.Ripley@r-project.org>
 
 	* R/groupedData.R: adjust method of as.data.frame.
 	* R/newFunc.R: fix bug in gsummary with objects that have
@@ -35,27 +54,27 @@
 	https://stat.ethz.ch/pipermail/r-help/2006-May/094549.html.)
 	* tests/augPred_lab.R: tests for the above fix.
 
-2006-05-12 Brian Ripley  <Brian.Ripley@r-project.org>
+2006-05-12 Brian Ripley	 <Brian.Ripley@r-project.org>
 
 	* R/gls.R, R/gnls.R, R/nlme.R: missing data=data in terms calls,
 	needed to resolve '.' on rhs of formulae.
 
 	* DESCRIPTION: Version is 3.1-72
 
-2006-03-29 Brian Ripley  <Brian.Ripley@r-project.org>
+2006-03-29 Brian Ripley	 <Brian.Ripley@r-project.org>
 
 	* R/newMethods.R: as.list() did not work on symbols in R.
 
-2006-03-14 Brian Ripley  <Brian.Ripley@r-project.org>
+2006-03-14 Brian Ripley	 <Brian.Ripley@r-project.org>
 
 	* R/lme.R, man/Variogram.Rd: make example work (na.omit in
 	the wrong place).
 
-2006-03-10 Brian Ripley  <Brian.Ripley@r-project.org>
+2006-03-10 Brian Ripley	 <Brian.Ripley@r-project.org>
 
 	* DESCRIPTION: Version is 3.1-71
 
-2006-02-17 Brian Ripley  <Brian.Ripley@r-project.org>
+2006-02-17 Brian Ripley	 <Brian.Ripley@r-project.org>
 
 	* R/nlsList.R: need to allow for multi-line deparse.
 	* tests/deparse.R: add regression test
@@ -133,7 +152,7 @@
 	accidently deleted the email message).
 
 	* R/lme.R (lme.formula): Use nlminb if available.
-	
+
 
 2005-06-08  Douglas Bates  <bates@bates1-home>
 
@@ -147,7 +166,7 @@
 2005-04-04  Douglas Bates  <bates@bates1-home>
 
 	* R/newFunc.R: Removed contr.SAS definition as it has been revised
-	and moved into the stats package for R-2.1.0 
+	and moved into the stats package for R-2.1.0
 
 2005-03-02  Douglas Bates  <bates@bates1-home>
 
@@ -226,7 +245,7 @@
 2003-04-17  Douglas Bates  <bates@stat.wisc.edu>
 
 	* NAMESPACE: contributed by Brian Ripley
-	
+
 	* man/print.corStruct.Rd: Removed this and many other redundant
 	documentation files for S3 methods.
 
@@ -271,7 +290,7 @@
 
 	* R/lme.R (print.lme): Removed one more as.vector()
 
-	* R/varFunc.R (print.summary.varFixed): changed  instances of
+	* R/varFunc.R (print.summary.varFixed): changed	 instances of
 	deparse(as.vector(x)) to deparse(x) here and in many other places.
 
 2002-09-10  Saikat DebRoy  <saikat@stat.wisc.edu>
@@ -329,7 +348,7 @@
 2001-12-10  Douglas Bates  <bates@stat.wisc.edu>
 
 	* R/lme.R: unclassed the logLik component of an lme summary before
-	trying to put it into a data frame for printing.	
+	trying to put it into a data frame for printing.
 
 2001-12-01  Douglas Bates  <bates@stat.wisc.edu>
 
@@ -374,13 +393,13 @@
 
 2001-05-29  Martin Maechler <maechler@stat.math.ethz.ch>
 
-	* R/zzMethods.R: Use .Alias() 
-	
+	* R/zzMethods.R: Use .Alias()
+
 	* R/newGenerics.R:  Generic AIC()
-	* R/newMethods.R:   logLik.lm()   moved to "base R"
-	* man/AIC.Rd,   
+	* R/newMethods.R:   logLik.lm()	  moved to "base R"
+	* man/AIC.Rd,
 	* man/AIC.logLik.Rd: AIC.logLik() and AIC.lm() as well
-	* man/logLik.lm.Rd: 
+	* man/logLik.lm.Rd:
 
 2001-03-28  Douglas Bates  <bates@stat.wisc.edu>
 
@@ -404,7 +423,7 @@
 2001-01-10  Douglas Bates  <bates@stat.wisc.edu>
 
 	* DESCRIPTION (Maintainer): Added Maintainer entry to
-	DESCRIPTION. 
+	DESCRIPTION.
 
 2000-12-09  Douglas Bates  <bates@stat.wisc.edu>
 
@@ -425,7 +444,7 @@
 
 	* man/formula.nlme.Rd: Modified the examples in this and many
 	other .Rd files to use the Loblolly data and the SSasymp
-	self-starting function.  There were many occasions where the
+	self-starting function.	 There were many occasions where the
 	Soybean data was being fit to a default formulation of an nlme
 	model just to get things like a formula.  This fit of the Soybean
 	data is difficult and time consuming and not very illuminating.
@@ -434,7 +453,7 @@
 
 	* src/matrix.c: Removed dependency on S_compat.h by replacing
 	calls to dqrdca with the equivalent call to dqrdc2.
-	
+
 2000-07-24  Saikat DebRoy <saikat@stat.wisc.edu>
 
 	* Changed various uses of do.call to eval.  The reason for doing
@@ -452,7 +471,7 @@
 	gradient for mixed-effects log-likelihood.
 
 	* R/nlme.R (nlme.formula): Added updating of the pdFactor in the
-	PNLS step. 
+	PNLS step.
 
 	* R/reStruct.R: Made pdLogChol the default representation for
 	reStruct objects.
@@ -461,7 +480,7 @@
 
 	* R/pdMat.R: Added back the pdLogChol class and associated
 	methods.
-	
+
 
 2000-07-03  Douglas Bates  <bates@stat.wisc.edu>
 
@@ -484,7 +503,7 @@
 
 	* incorporated patches from Brian Ripley to use optim for the
 	optimization rather than nlm
-	
+
 	* src/nlmefit.c (internal_loglik): Returned R_NegInf instead of
 	generating a error on a singular precision matrix.
 

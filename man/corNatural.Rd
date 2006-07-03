@@ -37,7 +37,11 @@ corNatural(value, form, fixed)
   structure.
 }
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
-\seealso{\code{\link{Initialize.corNatural}}, \code{\link{pdNatural}}}
+\seealso{
+  \code{\link{Initialize.corNatural}},
+  \code{\link{pdNatural}}, 
+  \code{\link{summary.corNatural}}
+}
 \examples{
 ## covariate is observation order and grouping factor is Subject
 cs1 <- corNatural(form = ~ 1 | Subject)

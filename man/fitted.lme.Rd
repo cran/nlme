@@ -42,6 +42,9 @@
   Bates, D.M. and Pinheiro, J.C. (1998) "Computational methods for
   multilevel models" available in PostScript or PDF formats at
   http://nlme.stat.wisc.edu/pub/NLME/
+
+  Pinheiro, J.C., and Bates, D.M. (2000) "Mixed-Effects Models
+  in S and S-PLUS", Springer, esp. pp. 235, 397.    
 }
 
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}

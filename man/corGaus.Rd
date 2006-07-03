@@ -58,17 +58,39 @@ corGaus(value, form, nugget, metric, fixed)
   structure. 
 }
 \references{
-  Cressie, N.A.C. (1993), "Statistics for Spatial Data", J. Wiley & Sons.
+  Cressie, N.A.C. (1993), "Statistics for Spatial Data", J. Wiley &
+  Sons.
+  
   Venables, W.N. and Ripley, B.D. (1997) "Modern Applied Statistics with
   S-plus", 2nd Edition, Springer-Verlag.
+  
   Littel, Milliken, Stroup, and Wolfinger (1996) "SAS Systems for Mixed
   Models", SAS Institute.
+
+  Pinheiro, J.C., and Bates, D.M. (2000) "Mixed-Effects Models
+  in S and S-PLUS", Springer.  
 }
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 
-\seealso{\code{\link{Initialize.corStruct}}, \code{\link[stats]{dist}}
+\seealso{
+  \code{\link{Initialize.corStruct}},
+  \code{\link{summary.corStruct}},
+  \code{\link[stats]{dist}}
 }
 \examples{
 sp1 <- corGaus(form = ~ x + y + z)
+
+# example lme(..., corGaus ...)
+# Pinheiro and Bates, pp. 222-249
+fm1BW.lme <- lme(weight ~ Time * Diet, BodyWeight,
+                   random = ~ Time)
+# p. 223
+fm2BW.lme <- update(fm1BW.lme, weights = varPower())
+# p 246 
+fm3BW.lme <- update(fm2BW.lme,
+           correlation = corExp(form = ~ Time))
+# p. 249
+fm8BW.lme <- update(fm3BW.lme, correlation = corGaus(form = ~ Time))
+
 }
 \keyword{models}

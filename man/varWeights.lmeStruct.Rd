@@ -22,6 +22,10 @@
   if \code{object} includes a \code{varStruct} component, a vector with
   the corresponding variance weights; else, or a vector of ones.
 }
+\references{
+ Pinheiro, J.C., and Bates, D.M. (2000) "Mixed-Effects Models
+ in S and S-PLUS", Springer.  
+}
 
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 

@@ -30,7 +30,8 @@
   represented by \code{object}.
 }
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
-\seealso{\code{\link{Names}}, \code{\link{Names.pdMat}}}
+\seealso{\code{\link{Names}},
+  \code{\link{Names.pdMat}}}
 
 \examples{
 pd1 <- pdBlocked(list(~Sex - 1, ~age - 1), data = Orthodont)

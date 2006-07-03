@@ -37,7 +37,11 @@
 }  
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 
-\seealso{\code{\link{corExp}}, \code{\link{plot.Variogram}}}
+\seealso{
+  \code{\link{corExp}},
+  \code{\link{plot.Variogram}},
+  \code{\link{Variogram}}
+}
 \examples{
 stopifnot(require("stats", quietly = TRUE))
 cs1 <- corExp(3, form = ~ Time | Rat)

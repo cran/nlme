@@ -9,16 +9,14 @@
  \item{object}{an object inheriting from class \code{gls}, representing
    a generalized least squares fitted linear model.}
  \item{verbose}{an optional logical value used to control the amount of
-   output in the \code{print.summary.gls} method. Defaults to
-   \code{FALSE}.} 
+   output when the object is printed. Defaults to \code{FALSE}.} 
  \item{\dots}{some methods for this generic require additional
     arguments.  None are used in this method.} 
 }
 \description{
   Additional information about the linear model fit represented
   by \code{object} is extracted and included as components of
-  \code{object}. The returned object is suitable for printing with the
-  \code{print.summary.gls} method.
+  \code{object}.
 }
 \value{
   an object inheriting from class \code{summary.gls} with all components
@@ -44,9 +42,12 @@
 
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 
-\seealso{\code{\link{gls}}, \code{\link{AIC}}, \code{\link{BIC}},
-  \code{print.summary.gls}}
-
+\seealso{
+  \code{\link{AIC}},
+  \code{\link{BIC}},
+  \code{\link{gls}},
+  \code{\link{summary}}
+}
 \examples{
 fm1 <- gls(follicles ~ sin(2*pi*Time) + cos(2*pi*Time), Ovary,
            correlation = corAR1(form = ~ 1 | Mare))

@@ -53,6 +53,10 @@ augPred(object, primary, minimum, maximum, length.out, \dots)
   variable name (\code{fixed} is used for population predictions). The
   returned object inherits from class \code{augPred}.
 }
+\references{
+   Pinheiro, J. C. and Bates, D. M. (2000), \emph{Mixed-Effects Models in S
+     and S-PLUS}, Springer, New York. 
+}
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 \note{
   This function is generic; method functions can be written to handle

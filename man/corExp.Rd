@@ -60,14 +60,56 @@ corExp(value, form, nugget, metric, fixed)
   Cressie, N.A.C. (1993), "Statistics for Spatial Data", J. Wiley & Sons.
   Venables, W.N. and Ripley, B.D. (1997) "Modern Applied Statistics with
   S-plus", 2nd Edition, Springer-Verlag.
+  
   Littel, Milliken, Stroup, and Wolfinger (1996) "SAS Systems for Mixed
   Models", SAS Institute.
+
+  Pinheiro, J.C., and Bates, D.M. (2000) "Mixed-Effects Models
+  in S and S-PLUS", Springer, esp. p. 238.      
 }
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 
-\seealso{\code{\link{Initialize.corStruct}}, \code{\link[stats]{dist}}
+\seealso{
+  \code{\link{corClasses}},
+  \code{\link{Initialize.corStruct}},
+  \code{\link{summary.corStruct}},
+  \code{\link[stats]{dist}}
 }
 \examples{
 sp1 <- corExp(form = ~ x + y + z)
+
+# Pinheiro and Bates, p. 238
+spatDat <- data.frame(x = (0:4)/4, y = (0:4)/4)
+
+cs1Exp <- corExp(1, form = ~ x + y)
+cs1Exp <- Initialize(cs1Exp, spatDat)
+corMatrix(cs1Exp)
+
+cs2Exp <- corExp(1, form = ~ x + y, metric = "man")
+cs2Exp <- Initialize(cs2Exp, spatDat)
+corMatrix(cs2Exp)
+
+cs3Exp <- corExp(c(1, 0.2), form = ~ x + y,
+                 nugget = TRUE)
+cs3Exp <- Initialize(cs3Exp, spatDat)
+corMatrix(cs3Exp)
+
+# example lme(..., corExp ...)
+# Pinheiro and Bates, pp. 222-247
+# p. 222
+options(contrasts = c("contr.treatment", "contr.poly"))
+fm1BW.lme <- lme(weight ~ Time * Diet, BodyWeight,
+                   random = ~ Time)
+# p. 223
+fm2BW.lme <- update(fm1BW.lme, weights = varPower())
+# p. 246
+fm3BW.lme <- update(fm2BW.lme,
+           correlation = corExp(form = ~ Time))
+# p. 247
+fm4BW.lme <-
+      update(fm3BW.lme, correlation = corExp(form =  ~ Time,
+                        nugget = TRUE))
+anova(fm3BW.lme, fm4BW.lme)
+
 }
 \keyword{models}

@@ -50,6 +50,7 @@
   This method function is primarily used within the \code{lme}
   function. 
 }
-\seealso{\code{\link{lme}}, \code{\link{residuals.lme}},
+\seealso{\code{\link{lme}},
+  \code{\link{residuals.lme}},
   \code{\link{fitted.lmeStruct}} } 
 \keyword{models}

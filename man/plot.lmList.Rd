@@ -69,7 +69,8 @@
   a diagnostic Trellis plot.
 }
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
-\seealso{\code{\link{lmList}}, \code{\link[lattice]{xyplot}},
+\seealso{\code{\link{lmList}},\code{\link{predict.lm}},
+  \code{\link[lattice]{xyplot}},
    \code{\link[lattice]{bwplot}}, \code{\link[lattice]{histogram}} }
 \examples{
 fm1 <- lmList(distance ~ age | Subject, Orthodont)

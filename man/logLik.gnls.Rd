@@ -23,7 +23,9 @@
   \code{object} evaluated at the estimated coefficients.  
 }
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
-\seealso{\code{\link{gnls}}}
+\seealso{\code{\link{gnls}},
+  \code{\link{logLik.lme}}
+}
 \examples{
 fm1 <- gnls(weight ~ SSlogis(Time, Asym, xmid, scal), Soybean,
             weights = varPower())

@@ -22,6 +22,11 @@
   \item{varFixed}{fixed weights, determined by a variance covariate.}
   \item{varComb}{combination of variance functions.}
 }
+\references{
+ Pinheiro, J.C., and Bates, D.M. (2000) "Mixed-Effects Models
+ in S and S-PLUS", Springer.  
+}
+
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 \note{
   Users may define their own \code{varFunc} classes by specifying a
@@ -30,8 +35,13 @@
   examples of these functions, see the methods for class
   \code{varPower}. 
 }
-\seealso{\code{\link{varExp}}, \code{\link{varPower}},
-  \code{\link{varConstPower}}, \code{\link{varIdent}},
-  \code{\link{varFixed}}, \code{\link{varComb}}
+\seealso{
+  \code{\link{varComb}},
+  \code{\link{varConstPower}},
+  \code{\link{varExp}},
+  \code{\link{varFixed}},
+  \code{\link{varIdent}},
+  \code{\link{varPower}},
+  \code{\link{summary.varFunc}}
 }
 \keyword{models}

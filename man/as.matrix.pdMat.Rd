@@ -17,6 +17,10 @@
   a matrix corresponding to the positive-definite matrix represented by
   \code{x}.
 }
+\references{
+  Pinheiro, J. C. and Bates, D. M. (2000), \emph{Mixed-Effects Models in S
+    and S-PLUS}, Springer, New York.  
+}
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 
 \seealso{\code{\link{pdMat}}, \code{\link{corMatrix}}}

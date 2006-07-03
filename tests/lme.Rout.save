@@ -1,6 +1,6 @@
 
-R : Copyright 2005, The R Foundation for Statistical Computing
-Version 2.2.0 Under development (unstable) (2005-07-11 r34926)
+R : Copyright 2006, The R Foundation for Statistical Computing
+Version 2.3.1 Patched (2006-07-01 r38470)
 ISBN 3-900051-07-0
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -12,7 +12,7 @@ Type 'contributors()' for more information and
 'citation()' on how to cite R or R packages in publications.
 
 Type 'demo()' for some demos, 'help()' for on-line help, or
-'help.start()' for a HTML browser interface to help.
+'help.start()' for an HTML browser interface to help.
 Type 'q()' to quit R.
 
 > library(nlme)
@@ -67,7 +67,7 @@ Random effects:
  Formula: ~age | Subject
  Structure: General positive-definite, Log-Cholesky parametrization
             StdDev   Corr  
-(Intercept) 8.081078 (Intr)
+(Intercept) 8.081077 (Intr)
 age         1.680717 0.641 
 Residual    0.659889       
 
@@ -108,4 +108,11 @@ Number of Groups: 26
 23.88911 25.20948 26.52985 27.85022 
 attr(,"label")
 [1] "Predicted values (mm)"
+> 
+> ## bug report and fix from Dimitris Rizopoulos and Spencer Graves:
+> ## when 'returnObject = TRUE', do not stop() but give warning() on non-convergence:
+> fm1 <- lme(distance ~ age, data = Orthodont,
++ 	   control = lmeControl(msMaxIter = 1, returnObject = TRUE))
+Warning message:
+nlminb problem, convergence error code = 1; message = iteration limit reached without convergence (9) in: lme.formula(distance ~ age, data = Orthodont, control = lmeControl(msMaxIter = 1,  
 > 

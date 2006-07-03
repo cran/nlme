@@ -23,7 +23,9 @@
 
 \author{Jose Pinheiro}
 
-\seealso{\code{\link{reStruct}}, \code{\link{pdMat}}}
+\seealso{\code{\link{reStruct}},
+  \code{\link{pdMat}}, \code{\link{logDet}}
+}
 
 \examples{
 rs1 <- reStruct(list(A = pdSymm(diag(1:3), form = ~Score),

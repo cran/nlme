@@ -24,9 +24,15 @@ ACF(object, maxLag, \dots)
 \references{
   Box, G.E.P., Jenkins, G.M., and Reinsel G.C. (1994) "Time Series
   Analysis: Forecasting and Control", 3rd Edition, Holden-Day. 
+
+  Pinheiro, J.C., and Bates, D.M. (2000) "Mixed-Effects Models
+  in S and S-PLUS", Springer.  
 }
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{Bates@stat.wisc.edu}}
-\seealso{\code{\link{ACF.gls}}, \code{\link{ACF.lme}}}
+\seealso{\code{\link{ACF.gls}},
+  \code{\link{ACF.lme}},
+  \code{\link{plot.ACF}}
+}
 \examples{
 ## see the method function documentation
 }

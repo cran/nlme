@@ -22,7 +22,11 @@ logDet(object, \dots)
   documentation. 
 }
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
-\seealso{\code{\link{logLik}}}
+\seealso{\code{\link{logLik}},
+  \code{\link{logDet.corStruct}},
+  \code{\link{logDet.pdMat}},
+  \code{\link{logDet.reStruct}}
+}
 \examples{
 ## see the method function documentation
 }

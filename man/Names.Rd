@@ -31,7 +31,8 @@ Names(object, \dots) <- value
   If \code{names} were generic, there would be no need for this generic
   function. 
 }
-\seealso{\code{\link{Names.formula}}, \code{\link{Names.pdMat}}}
+\seealso{\code{\link{Names.formula}},
+  \code{\link{Names.pdMat}}}
 \examples{
 ## see the method function documentation
 }

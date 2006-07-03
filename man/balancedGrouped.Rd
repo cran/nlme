@@ -30,6 +30,10 @@ balancedGrouped(form, data, labels=NULL, units=NULL)
 \value{
   A balanced \code{groupedData} object.
 }
+\references{
+   Pinheiro, J. C. and Bates, D. M. (2000), \emph{Mixed-Effects Models in S
+     and S-PLUS}, Springer, New York. 
+}
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 \seealso{\code{\link{groupedData}}, \code{\link{isBalanced}}, \code{\link{asTable}}}
 \examples{
@@ -39,5 +43,10 @@ Orth2 <- balancedGrouped(distance ~ age | Subject, data = OrthoMat,
                   y = "Distance from pituitary to pterygomaxillary fissure"),
     units = list(x = "(yr)", y = "(mm)"))
 Orth2[ 1:10, ]        ## check the first few entries
+
+# Pinheiro and Bates, p. 109
+ergoStool.mat <- asTable(ergoStool)
+balancedGrouped(effort~Type|Subject,
+                data=ergoStool.mat)
 }
 \keyword{data}

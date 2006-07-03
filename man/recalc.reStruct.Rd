@@ -40,7 +40,11 @@
 
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 
-\seealso{\code{\link{reStruct}}, \code{\link{logLik}},
-  \code{\link{lme}}} 
+\seealso{
+  \code{\link{logLik}},
+  \code{\link{lme}}, 
+  \code{\link{recalc}},
+  \code{\link{reStruct}}
+} 
 
 \keyword{models}

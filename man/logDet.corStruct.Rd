@@ -31,7 +31,10 @@
 }
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 
-\seealso{\code{\link{logLik.corStruct}}, \code{\link{corMatrix.corStruct}}}
+\seealso{\code{\link{logLik.corStruct}},
+  \code{\link{corMatrix.corStruct}},
+  \code{\link{logDet}}
+}
 
 \examples{
 cs1 <- corAR1(0.3)

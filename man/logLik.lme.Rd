@@ -28,9 +28,19 @@
 \references{
   Harville, D.A. (1974) ``Bayesian Inference for Variance Components
   Using Only Error Contrasts'', \emph{Biometrika}, \bold{61}, 383--385.
+
+  Pinheiro, J.C., and Bates, D.M. (2000) "Mixed-Effects Models
+  in S and S-PLUS", Springer.  
 }
 \author{Jose Pinheiro and Douglas Bates}
-\seealso{\code{\link{lme}},\code{\link{gls}}}
+\seealso{\code{\link{lme}},\code{\link{gls}},
+  \code{\link{logLik.corStruct}},
+  \code{\link{logLik.glsStruct}},
+  \code{\link{logLik.lmeStruct}},
+  \code{\link{logLik.lmList}},
+  \code{\link{logLik.reStruct}},
+  \code{\link{logLik.varFunc}},
+}
 \examples{
 fm1 <- lme(distance ~ Sex * age, Orthodont, random = ~ age, method = "ML")
 logLik(fm1)

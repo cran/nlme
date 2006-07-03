@@ -65,11 +65,18 @@ pdBlocked(value, form, nam, data, pdClass)
   block-diagonal matrix, also inheriting from class \code{pdMat}.
 }
 
+\references{
+ Pinheiro, J.C., and Bates, D.M. (2000) "Mixed-Effects Models
+ in S and S-PLUS", Springer, esp. p. 162.  
+}
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 
 
-\seealso{\code{\link{as.matrix.pdMat}}, \code{\link{coef.pdMat}},
-  \code{\link{matrix<-.pdMat}}} 
+\seealso{\code{\link{as.matrix.pdMat}},
+  \code{\link{coef.pdMat}},
+  \code{\link{pdClasses}},
+  \code{\link{matrix<-.pdMat}}
+} 
 
 \examples{
 pd1 <- pdBlocked(list(diag(1:2), diag(c(0.1, 0.2, 0.3))),

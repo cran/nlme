@@ -32,10 +32,19 @@ pdMatrix(object, factor)
   represented by \code{object} is returned; else a square-root of the
   positive-definite matrix is returned.
 }
+\references{
+ Pinheiro, J.C., and Bates, D.M. (2000) "Mixed-Effects Models
+ in S and S-PLUS", Springer, esp. p. 162.  
+}
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 
-\seealso{\code{\link{as.matrix.pdMat}}, \code{\link{pdFactor}},
-  \code{\link{corMatrix}}}
+\seealso{\code{\link{as.matrix.pdMat}},
+  \code{\link{pdClasses}},
+  \code{\link{pdFactor}},
+  \code{\link{pdMat}},
+  \code{\link{pdMatrix.reStruct}},
+  \code{\link{corMatrix}}
+}
 
 \examples{
 pd1 <- pdSymm(diag(1:4))

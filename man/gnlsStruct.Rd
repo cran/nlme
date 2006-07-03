@@ -27,7 +27,9 @@ gnlsStruct(corStruct, varStruct)
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 
 \seealso{\code{\link{gnls}}, \code{\link{corClasses}},
-  \code{\link{varFunc}} } 
+  \code{\link{residuals.gnlsStruct}}
+  \code{\link{varFunc}}
+} 
 
 \examples{
 gnls1 <- gnlsStruct(corAR1(), varPower())

@@ -28,13 +28,26 @@ Variogram(object, distance, \dots)
   will depend on the method function used; see the appropriate documentation.
 }
 \references{
-  Cressie, N.A.C. (1993), "Statistics for Spatial Data", J. Wiley & Sons.
+  Cressie, N.A.C. (1993), "Statistics for Spatial Data", J. Wiley &
+  Sons.
+
+  Pinheiro, J.C., and Bates, D.M. (2000) "Mixed-Effects Models
+  in S and S-PLUS", Springer.  
 }  
 
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 
-\seealso{\code{\link{Variogram.default}},\code{\link{Variogram.gls}},
-  \code{\link{Variogram.lme}}, \code{\link{plot.Variogram}}}
+\seealso{
+  \code{\link{Variogram.corExp}},
+  \code{\link{Variogram.corGaus}},
+  \code{\link{Variogram.corLin}},
+  \code{\link{Variogram.corRatio}},
+  \code{\link{Variogram.corSpatial}},
+  \code{\link{Variogram.corSpher}},
+  \code{\link{Variogram.default}},
+  \code{\link{Variogram.gls}},
+  \code{\link{Variogram.lme}},
+  \code{\link{plot.Variogram}}}
 \examples{
 ## see the method function documentation
 }

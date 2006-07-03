@@ -30,6 +30,10 @@ recalc(object, conLin, \dots)
 \note{This function is only used inside model fitting functions, such as
     \code{lme} and \code{gls}, that require recalculation of a condensed
     linear model object.}
+\seealso{\code{\link{recalc.corStruct}},
+  \code{\link{recalc.modelStruct}},
+  \code{\link{recalc.reStruct}},
+  \code{\link{recalc.varFunc}}}
 \examples{
 ## see the method function documentation
 }

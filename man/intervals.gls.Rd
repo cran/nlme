@@ -49,9 +49,15 @@
   \item{sigma}{residual standard error.}
 }
 
+\references{
+  Pinheiro, J.C., and Bates, D.M. (2000) "Mixed-Effects Models
+  in S and S-PLUS", Springer.  
+}
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 
-\seealso{\code{\link{gls}}, \code{\link{print.intervals.gls}}}
+\seealso{\code{\link{gls}}, \code{\link{intervals}},
+  \code{\link{print.intervals.gls}}
+}
 
 \examples{
 fm1 <- gls(follicles ~ sin(2*pi*Time) + cos(2*pi*Time), Ovary,

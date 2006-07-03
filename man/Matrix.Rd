@@ -22,7 +22,10 @@ matrix(object) <- value
 }
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 
-\seealso{\code{\link{as.matrix}}}
+\seealso{\code{\link{as.matrix}}
+%  ,\code{"\link[=Matrix.pdMat]{matrix.pdMat}"}
+%  ,\code{"\link[=Matrix.reStruct]{matrix.reStruct"}}
+}
 
 \examples{
 ## see the method function documentation

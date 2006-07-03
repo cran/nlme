@@ -40,10 +40,17 @@
 }  
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 
-\seealso{\code{\link{corSpatial}}, \code{\link{Variogram.default}},
-  \code{\link{Variogram.corExp}}, \code{\link{Variogram.corGaus}},
-  \code{\link{Variogram.corLin}}, \code{\link{Variogram.corRatio}},
-  \code{\link{Variogram.corSpher}}, \code{\link{plot.Variogram}}}
+\seealso{
+  \code{\link{corSpatial}},
+  \code{\link{Variogram}},
+  \code{\link{Variogram.default}},
+  \code{\link{Variogram.corExp}},
+  \code{\link{Variogram.corGaus}},
+  \code{\link{Variogram.corLin}},
+  \code{\link{Variogram.corRatio}},
+  \code{\link{Variogram.corSpher}},
+  \code{\link{plot.Variogram}}
+}
 \examples{
 cs1 <- corExp(3, form = ~ Time | Rat)
 cs1 <- Initialize(cs1, BodyWeight)

@@ -35,5 +35,7 @@
   else \code{object} is returned unchanged.
 }
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
-\seealso{\code{\link{needUpdate}}, \code{\link{covariate<-.varFunc}}}
+\seealso{\code{\link{needUpdate}},
+  \code{\link{covariate<-.varFunc}}
+}
 \keyword{models}

@@ -30,7 +30,9 @@
   This method function is primarily used inside \code{gls} and 
   \code{residuals.gls}.
 }
-\seealso{\code{\link{gls}}, \code{\link{residuals.gls}},
+\seealso{\code{\link{gls}},
+  \code{\link{glsStruct}},
+  \code{\link{residuals.gls}},
   \code{\link{fitted.glsStruct}} } 
 
 \keyword{models}

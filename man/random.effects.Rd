@@ -22,6 +22,10 @@ ranef(object, \dots)
 \value{
   will depend on the method function used; see the appropriate documentation.
 }
+\references{
+ Pinheiro, J.C., and Bates, D.M. (2000) "Mixed-Effects Models
+ in S and S-PLUS", Springer, esp. pp. 100, 461.  
+}
 \seealso{\code{\link{ranef.lmList}},\code{\link{ranef.lme}}} 
 \examples{
 ## see the method function documentation

@@ -51,11 +51,22 @@ pdMat(value, form, nam, data, pdClass)
   inheriting from the class named in \code{pdClass}, or from
   \code{class(object)}, if \code{object} inherits from \code{pdMat}.
 }
+\references{
+ Pinheiro, J.C., and Bates, D.M. (2000) "Mixed-Effects Models
+ in S and S-PLUS", Springer.  
+}
 
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 
-\seealso{\code{\link{pdCompSymm}}, \code{\link{pdDiag}},
-  \code{\link{pdIdent}}, \code{\link{pdNatural}}, \code{\link{pdSymm}}}
+\seealso{
+  \code{\link{pdClasses}}, 
+  \code{\link{pdCompSymm}}, \code{\link{pdDiag}},
+  \code{\link{pdIdent}}, \code{\link{pdNatural}},
+  \code{\link{pdSymm}},
+  \code{\link{reStruct}},
+  \code{\link{solve.pdMat}}, 
+  \code{\link{summary.pdMat}}
+}
 
 \examples{
 pd1 <- pdMat(diag(1:4), pdClass = "pdDiag")

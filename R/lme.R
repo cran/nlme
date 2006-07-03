@@ -321,9 +321,16 @@ lme.formula <-
     attr(lmeSt, "lmeFit") <- MEestimate(lmeSt, grps)
     ## checking if any updating is needed
     if (!needUpdate(lmeSt)) {
-        if (optRes$convergence)
-            stop(optRes$message)
-        break
+	if (optRes$convergence) {
+	    msg <- paste(controlvals$opt, " problem, convergence error code = ",
+			 optRes$convergence, "; message = ", optRes$message,
+			 sep='')
+	    if(!controlvals$returnObject)
+		stop(msg)
+	    else
+		warning(msg)
+	}
+	break
     }
 
     ## updating the fit information
@@ -334,18 +341,25 @@ lme.formula <-
     conv <- abs((oldPars - aConv)/ifelse(aConv == 0, 1, aConv))
     aConv <- NULL
     for(i in names(lmeSt)) {
-      if (any(parMap[,i])) {
-	aConv <- c(aConv, max(conv[parMap[,i]]))
-	names(aConv)[length(aConv)] <- i
-      }
+	if (any(parMap[,i])) {
+	    aConv <- c(aConv, max(conv[parMap[,i]]))
+	    names(aConv)[length(aConv)] <- i
+	}
     }
     if (max(aConv) <= controlvals$tolerance) {
-      break
+	break
     }
     if (numIter > controlvals$maxIter) {
-      stop("Maximum number of iterations reached without convergence.")
+	msg <- paste("Maximum number of iterations",
+		     "(lmeControl(maxIter)) reached without convergence.")
+	if (controlvals$returnObject) {
+	    warning(msg)
+	    break
+	} else
+	    stop(msg)
     }
-  }
+
+  } ## end{repeat}
 
   ## wrapping up
   lmeFit <- attr(lmeSt, "lmeFit")
@@ -357,11 +371,8 @@ lme.formula <-
   ## fitted.values and residuals (in original order)
   ##
   Fitted <- fitted(lmeSt, level = 0:Q,
-		   conLin = if (decomp) {
-		     oldConLin
-		   } else {
-		     attr(lmeSt, "conLin")
-		   })[revOrder, , drop = FALSE]
+		   conLin = if (decomp) oldConLin else attr(lmeSt, "conLin"))[
+		   revOrder, , drop = FALSE]
   Resid <- y[revOrder] - Fitted
   attr(Resid, "std") <- lmeFit$sigma/(varWeights(lmeSt)[revOrder])
   ## putting groups back in original order

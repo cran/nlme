@@ -25,7 +25,9 @@
 
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 
-\seealso{\code{\link{lme}}}
+\seealso{\code{\link{lme}}, 
+  \code{\link{getData}}}
+}
 
 \examples{
 fm1 <- lme(follicles ~ sin(2*pi*Time) + cos(2*pi*Time), data = Ovary,

@@ -62,10 +62,17 @@ varConstPower(const, power, form, fixed)
   variance function structure, also inheriting from class
   \code{varFunc}.  
 }
+\references{
+ Pinheiro, J.C., and Bates, D.M. (2000) "Mixed-Effects Models
+ in S and S-PLUS", Springer.  
+}
 
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 
-\seealso{\code{\link{varWeights.varFunc}}, \code{\link{coef.varConstPower}}}
+\seealso{
+  \code{\link{varClasses}},
+  \code{\link{varWeights.varFunc}},
+  \code{\link{coef.varConstPower}}}
 
 \examples{
 vf1 <- varConstPower(1.2, 0.2, form = ~age|Sex)

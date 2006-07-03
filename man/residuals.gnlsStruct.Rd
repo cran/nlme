@@ -26,6 +26,7 @@
   This method function is primarily used inside \code{gnls} and 
   \code{residuals.gnls}.
 }
-\seealso{\code{\link{gnls}}, \code{\link{residuals.gnls}},
+\seealso{\code{\link{gnls}},
+  \code{\link{residuals.gnls}},
   \code{\link{fitted.gnlsStruct}} } 
 \keyword{models}

@@ -25,10 +25,17 @@ asTable(object)
   are labelled as such.  The rows correspond to the distinct levels of
   the grouping factor and are labelled as such.
 }
+\references{
+  Pinheiro, J. C. and Bates, D. M. (2000), \emph{Mixed-Effects Models in S
+    and S-PLUS}, Springer, New York.  
+}
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 \seealso{\code{\link{groupedData}}, \code{\link{isBalanced}},
   \code{\link{balancedGrouped}}}
 \examples{
 asTable(Orthodont)
+
+# Pinheiro and Bates, p. 109
+ergoStool.mat <- asTable(ergoStool)
 }
 \keyword{manip}

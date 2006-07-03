@@ -20,6 +20,11 @@ getData(object)
 }
 
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
+\seealso{
+    \code{\link{getData.gls}},
+    \code{\link{getData.lme}},
+    \code{\link{getData.lmList}}
+}
 
 \examples{
 ## see the method function documentation

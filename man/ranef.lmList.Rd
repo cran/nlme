@@ -56,10 +56,17 @@
   a vector with the differences between the individual \code{lm}
   coefficients in \code{object} and their average. 
 }
-
+\references{
+ Pinheiro, J.C., and Bates, D.M. (2000) "Mixed-Effects Models
+ in S and S-PLUS", Springer, esp. pp. 100, 461.  
+}
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 
-\seealso{\code{\link{lmList}}, \code{\link{fixed.effects.lmList}}}
+\seealso{
+  \code{\link{fixed.effects.lmList}}, 
+  \code{\link{lmList}}, 
+  \code{\link{random.effects}}
+}
  
 \examples{
 fm1 <- lmList(distance ~ age | Subject, Orthodont)

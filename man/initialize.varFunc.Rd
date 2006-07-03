@@ -34,6 +34,8 @@
   representing a variance function structure.
 }
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
+\seealso{\code{\link{Initialize}}
+}
 \examples{
 vf1 <- varPower( form = ~ age | Sex )
 vf1 <- Initialize( vf1, Orthodont )

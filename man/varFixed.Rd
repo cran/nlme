@@ -22,11 +22,18 @@ varFixed(value)
   a \code{varFixed} object representing a fixed variance function
   structure, also inheriting from class \code{varFunc}. 
 }
+\references{
+ Pinheiro, J.C., and Bates, D.M. (2000) "Mixed-Effects Models
+ in S and S-PLUS", Springer.  
+}
 
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 
 
-\seealso{\code{\link{varWeights.varFunc}}, \code{\link{varFunc}}}
+\seealso{
+  \code{\link{varClasses}},
+  \code{\link{varWeights.varFunc}},
+  \code{\link{varFunc}}}
 
 \examples{
 vf1 <- varFixed(~age)

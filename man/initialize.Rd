@@ -23,7 +23,17 @@ Initialize(object, data, \dots)
   introduced by the initialization procedure will depend on the method
   function used; see the appropriate documentation. 
 }
+\references{
+  Pinheiro, J.C., and Bates, D.M. (2000) "Mixed-Effects Models
+  in S and S-PLUS", Springer.  
+}
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
+\seealso{\code{\link{Initialize.corStruct}},
+  \code{\link{Initialize.lmeStruct}},
+  \code{\link{Initialize.glsStruct}}, 
+  \code{\link{Initialize.varFunc}}, 
+  \code{\link{isInitialized}}
+}
 \examples{
 ## see the method function documentation
 }

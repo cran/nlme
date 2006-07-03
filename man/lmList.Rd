@@ -73,9 +73,19 @@ lmList(object, data, level, subset, na.action, pool)
   and \code{update} have methods that can be applied to an \code{lmList}
   object. 
 }
+\references{
+  Pinheiro, J.C., and Bates, D.M. (2000) "Mixed-Effects Models
+  in S and S-PLUS", Springer.  
+}
 
 \seealso{
-\code{\link{lm}}, \code{\link{lme.lmList}}.
+  \code{\link{lm}},
+  \code{\link{lme.lmList}}, 
+  \code{\link{plot.lmList}},  
+  \code{\link{pooledSD}}, 
+  \code{\link{predict.lmList}}, 
+  \code{\link{residuals.lmList}}, 
+  \code{\link{summary.lmList}}    
 }
 \examples{
 fm1 <- lmList(distance ~ age | Subject, Orthodont)

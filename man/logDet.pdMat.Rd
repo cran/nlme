@@ -29,7 +29,9 @@
 
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 
-\seealso{\code{\link{pdMat}}}
+\seealso{\code{\link{pdMat}},
+  \code{\link{logDet}}
+}
 
 \examples{
 pd1 <- pdSymm(diag(1:3))

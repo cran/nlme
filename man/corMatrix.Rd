@@ -21,6 +21,8 @@ corMatrix(object, \dots)
   documentation. 
 }
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
+\seealso{\code{\link{corMatrix.corStruct}},
+  \code{\link{corMatrix.pdMat}}}
 \examples{
 ## see the method function documentation
 }

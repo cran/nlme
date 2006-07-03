@@ -29,8 +29,12 @@ lmeStruct(reStruct, corStruct, varStruct)
 
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 
-\seealso{\code{\link{lme}}, \code{\link{reStruct}},
-  \code{\link{corClasses}}, \code{\link{varFunc}} }
+\seealso{
+  \code{\link{corClasses}},
+  \code{\link{lme}},
+  \code{\link{residuals.lmeStruct}},
+  \code{\link{reStruct}},
+  \code{\link{varFunc}} }
 
 \examples{
 lms1 <- lmeStruct(reStruct(~age), corAR1(), varPower())

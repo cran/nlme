@@ -60,14 +60,45 @@ corSpher(value, form, nugget, metric, fixed)
 }
 \references{
   Cressie, N.A.C. (1993), "Statistics for Spatial Data", J. Wiley & Sons.
+
   Venables, W.N. and Ripley, B.D. (1997) "Modern Applied Statistics with
   S-plus", 2nd Edition, Springer-Verlag.
+  
   Littel, Milliken, Stroup, and Wolfinger (1996) "SAS Systems for Mixed
   Models", SAS Institute.
+
+  Pinheiro, J.C., and Bates, D.M. (2000) "Mixed-Effects Models
+  in S and S-PLUS", Springer.  
 }
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
-\seealso{\code{\link{Initialize.corStruct}}, \code{\link[stats]{dist}}}
+\seealso{
+  \code{\link{Initialize.corStruct}},
+  \code{\link{summary.corStruct}},
+  \code{\link[stats]{dist}}
+}
 \examples{
 sp1 <- corSpher(form = ~ x + y)
+
+# example lme(..., corSpher ...)
+# Pinheiro and Bates, pp. 222-249
+fm1BW.lme <- lme(weight ~ Time * Diet, BodyWeight,
+                   random = ~ Time)
+# p. 223
+fm2BW.lme <- update(fm1BW.lme, weights = varPower())
+# p 246 
+fm3BW.lme <- update(fm2BW.lme,
+           correlation = corExp(form = ~ Time))
+# p. 249
+fm6BW.lme <- update(fm3BW.lme,
+          correlation = corSpher(form = ~ Time))
+
+# example gls(..., corSpher ...)
+# Pinheiro and Bates, pp. 261, 263
+fm1Wheat2 <- gls(yield ~ variety - 1, Wheat2)
+# p. 262 
+fm2Wheat2 <- update(fm1Wheat2, corr =
+   corSpher(c(28, 0.2),
+     form = ~ latitude + longitude, nugget = TRUE))
+
 }
 \keyword{models}

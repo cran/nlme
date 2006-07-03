@@ -67,8 +67,14 @@ nlsList(model, data, start, control, level, subset, na.action, pool)
   and \code{update} have methods that can be applied to an \code{nlsList}
   object. 
 }
+\references{
+ Pinheiro, J.C., and Bates, D.M. (2000), \emph{Mixed-Effects Models
+ in S and S-PLUS}, Springer.  
+}
 \seealso{
-\code{\link{nls}}, \code{\link{nlme.nlsList}}.
+  \code{\link{nls}}, \code{\link{nlme.nlsList}},
+  \code{\link{nlsList.selfStart}}, 
+  \code{\link{summary.nlsList}}
 }
 \examples{
 fm1 <- nlsList(uptake ~ SSasympOff(conc, Asym, lrc, c0),

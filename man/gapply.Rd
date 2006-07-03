@@ -46,6 +46,10 @@ gapply(object, which, FUN, form, level, groups, \dots)
   \code{groups} argument.
 }
 
+\references{
+  Pinheiro, J.C., and Bates, D.M. (2000) "Mixed-Effects Models
+  in S and S-PLUS", Springer, esp. sec. 3.4.  
+}
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 
 \seealso{\code{\link{gsummary}}}
@@ -53,5 +57,10 @@ gapply(object, which, FUN, form, level, groups, \dots)
 \examples{
 ## Find number of non-missing "conc" observations for each Subject
 gapply( Phenobarb, FUN = function(x) sum(!is.na(x$conc)) )
+
+# Pinheiro and Bates, p. 127 
+table( gapply(Quinidine, "conc", function(x) sum(!is.na(x))) )
+changeRecords <- gapply( Quinidine, FUN = function(frm)
+    any(is.na(frm[["conc"]]) & is.na(frm[["dose"]])) )
 }
 \keyword{data}
