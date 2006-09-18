@@ -42,8 +42,8 @@
    that returns the S-language mode of the variable.}
  \item{standard}{an optional logical value indicating whether the
    estimated random effects should be "standardized" (i.e. divided by
-   the corresponding estimated standard error). Defaults to
-   \code{FALSE}.} 
+   the estimate of the standard deviation of that group of random
+   effects). Defaults to \code{FALSE}.} 
  \item{omitGroupingFactor}{an optional logical value.  When \code{TRUE}
    the grouping factor itself will be omitted from the group-wise
    summary of \code{data} but the levels of the grouping factor will

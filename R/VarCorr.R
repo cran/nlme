@@ -106,12 +106,13 @@ VarCorr.pdBlocked <- function( x, sigma = 1., rdig = 3)
 {
   m <- lapply( x, VarCorr, sigma = sigma, rdig = rdig)
   bd <- do.call("rbind", m)
-  corr <- lapply( m, attr, which = "corr")
-  maxCorr <- 0
-  if ( !all( Nulls <- sapply( corr, is.null ) ) ) {
-    maxCorr <- max( sapply( corr[!Nulls], ncol ) )
+## the following code does not appear to be used at all
+##   corr <- lapply( m, attr, which = "corr")
+##   maxCorr <- 0
+##   if ( !all( Nulls <- sapply( corr, is.null ) ) ) {
+##     maxCorr <- max( sapply( corr[!Nulls], ncol ) )
 
-  }
+##   }
   attr(bd, "formStr") <-
     paste( sapply( m, attr, which = "formStr" ), collapse = ", ")
   bd

@@ -2,7 +2,7 @@
 \name{lmeControl}
 \title{Control Values for lme Fit}
 \usage{
-lmeControl(maxIter, msMaxIter, tolerance, niterEM, msTol,
+lmeControl(maxIter, msMaxIter, tolerance, niterEM, msMaxEval, msTol,
            msScale, msVerbose, returnObject, gradHess, apVar,
            .relStep, minAbsParApVar, nlmStepMax,
 	   opt = c("nlminb", "optim"), optimMethod,
@@ -20,6 +20,8 @@ lmeControl(maxIter, msMaxIter, tolerance, niterEM, msTol,
  \item{niterEM}{number of iterations for the EM algorithm used to refine
    the initial estimates of the random effects variance-covariance
    coefficients. Default is 25.}
+ \item{msMaxEval}{maximum number of evaluations of the objective
+   function permitted for nlminb. Default is 200. }
  \item{msTol}{tolerance for the convergence criterion in \code{nlm},
    passed as the \code{rel.tolerance} argument to the function (see
    documentation on \code{nlm}). Default is 1e-7. }

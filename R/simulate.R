@@ -7,7 +7,7 @@ createConLin <-
     function(fixed, data = sys.frame(sys.parent()),
              random = pdSymm(eval(as.call(fixed[-2]))), ...)
 {
-    Call <- match.call()
+##    Call <- match.call()
     if(!inherits(fixed, "formula") || length(fixed) != 3) {
         stop("\nFixed-effects model must be a formula of the form \"resp ~ pred\"")
     }
@@ -70,7 +70,7 @@ createConLin <-
     }
     grps <- grps[ord,  , drop = FALSE]
     dataMix <- dataMix[ord,  , drop = FALSE]
-    revOrder <- match(origOrder, row.names(dataMix)) # putting in orig. order
+##    revOrder <- match(origOrder, row.names(dataMix)) # putting in orig. order
     ## obtaining basic model matrices
     N <- nrow(grps)
     Z <- model.matrix(reSt, dataMix)
@@ -125,11 +125,11 @@ simulate.lme <-
             attr(lmeSt, "conLin") <- conLin
             lmeSt <- Initialize(lmeSt, data = NULL, groups = NULL, control = control)
             attr(lmeSt, "conLin") <- MEdecomp(attr(lmeSt, "conLin"))
-            aMs <- ms( ~ -logLik(lmeSt, lmePars),
-                      start = list(lmePars = c(coef(lmeSt))),
-                      control= list(rel.tolerance = control$msTol,
-                      maxiter = control$msMaxIter,
-                      scale = control$msScale))
+            aMs <- nlminb(c(coef(lmeSt)),
+               function(lmePars) -logLik(lmeSt, lmePars),
+               control = list(iter.max = control$msMaxIter,
+               eval.max = control$msMaxEval, 
+               trace = control$msVerbose))
             c(info = aMs$flags[1], logLik = -aMs$value)
         }
 

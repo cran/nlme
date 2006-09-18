@@ -16,17 +16,16 @@ BIC.lm <- BIC.nls <-
   ## BIC for various fitted objects
   function(object, ...)
 {
-  if((rt <- nargs()) > 1) {
+  if(nargs() > 1) {
     object <- list(object, ...)
     val <- lapply(object, logLik)
     val <-
       as.data.frame(t(sapply(val, function(el) c(attr(el, "df"), BIC(el)))))
     names(val) <- c("df", "BIC")
     row.names(val) <- as.character(match.call()[-1])
-    val
-  } else {
-    BIC(logLik(object))
-  }
+    return(val)
+  } 
+  BIC(logLik(object))
 }
 
 Dim.default <- function(object, ...) dim(object)
@@ -108,7 +107,7 @@ getGroups.data.frame <-
   value <- do.call("data.frame", vlist)
   if (missing(level)) return(value)
   if (is.character(level)) {
-    nlevel <- match(level, names(flist))
+    nlevel <- match(level, names(vlist))
     if (any(aux <- is.na(nlevel))) {
       stop(paste("Level of", level[aux],"does not match formula \"",
 		 deparse(form), "\""))

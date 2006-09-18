@@ -1,3 +1,25 @@
+2006-09-18  Douglas Bates  <bates@stat.wisc.edu>
+
+	* R/VarCorr.R (VarCorr): Clean up problems in this file and
+	several others detected by codetools.
+
+2006-09-11  Douglas Bates  <bates@R-project.org>
+
+	* R/nlme.R (getParsNlme): '[[' not '[' in case start$fixed is a list
+	* R/gls.R,gnls.R,newMethods.R,nlme.R,pdMat,Rsimulate.R: fix
+	problems exposed by codetools.
+
+2006-07-31  Douglas Bates  <Douglas.Bates@R-project.org>
+
+	* man/ranef.lme.Rd: Modified the description of the `standard'
+	argument to more clearly describe its effect.
+
+2006-07-24  Douglas Bates  <Douglas.Bates@R-project.org>
+
+	* R/lme.R: Patch by Andrew Robinson <A.Robinson@ms.unimelb.edu.au>
+	and Berwin Turlach <berwin@maths.uwa.edu.au> to set maximum number
+	of function calls in nlminb.
+
 2006-07-03  Douglas Bates  <Douglas.Bates@R-project.org>
 
 	* DESCRIPTION: Version is 3.1-75

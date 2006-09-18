@@ -715,7 +715,7 @@ coef.varExp <-
 "coef<-.varExp" <-
   function(object, ..., value)
 {
-  if ((len <- length(object)) > 0) {		# varying parameters
+  if (length(object) > 0) {		# varying parameters
     value <- as.numeric(value)
     if (length(value) != length(object)) {
       stop(paste("Cannot change the length of the varStruct",
@@ -986,7 +986,7 @@ coef.varConstPower <-
 "coef<-.varConstPower" <-
   function(object, ..., value)
 {
-  if ((len <- length(unlist(object))) > 0) {	# varying parameters
+  if (length(unlist(object)) > 0) {	# varying parameters
     value <- as.numeric(value)
     if (length(value) != length(unlist(object))) {
       stop(paste("Cannot change the length of the",

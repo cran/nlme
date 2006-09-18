@@ -306,6 +306,7 @@ lme.formula <-
         nlminb(c(coef(lmeSt)),
                function(lmePars) -logLik(lmeSt, lmePars),
                control = list(iter.max = controlvals$msMaxIter,
+               eval.max = controlvals$msMaxEval, 
                trace = controlvals$msVerbose))
     } else {
         optim(c(coef(lmeSt)),
@@ -1318,7 +1319,8 @@ intervals.lme <-
       }
     }
     rownames(origInt) <-           # re-express names if necessary
-      namP <- names(coef(lmeSt, unconstrained = FALSE))
+      ## namP <-
+          names(coef(lmeSt, unconstrained = FALSE))
     for(i in 1:3) {                     # re-express intervals in constrained pars
       coef(lmeSt) <- origInt[,i]
       origInt[,i] <- coef(lmeSt, unconstrained = FALSE)
@@ -1363,7 +1365,7 @@ logLik.lme <-
 {
   p <- object$dims$ncol[object$dims$Q + 1]
   N <- object$dims$N
-  Np <- N - p
+##  Np <- N - p
   estM <- object$method
   if (missing(REML)) REML <- estM == "REML"
   val <- object[["logLik"]]
@@ -2889,7 +2891,7 @@ lmeScale <- function(start)
 
 lmeControl <-
   ## Control parameters for lme
-  function(maxIter = 50, msMaxIter = 50, tolerance = 1e-6, niterEM = 25,
+  function(maxIter = 50, msMaxIter = 50, tolerance = 1e-6, niterEM = 25, msMaxEval = 200,
 	   msTol = 1e-7, msScale = lmeScale, msVerbose = FALSE,
            returnObject = FALSE, gradHess = TRUE, apVar = TRUE,
 	   .relStep = (.Machine$double.eps)^(1/3), minAbsParApVar = 0.05,
@@ -2897,7 +2899,7 @@ lmeControl <-
 	   optimMethod = "BFGS", natural = TRUE)
 {
   list(maxIter = maxIter, msMaxIter = msMaxIter, tolerance = tolerance,
-       niterEM = niterEM, msTol = msTol, msScale = msScale,
+       niterEM = niterEM, msMaxEval = msMaxEval, msTol = msTol, msScale = msScale,
        msVerbose = msVerbose, returnObject = returnObject,
        gradHess = gradHess , apVar = apVar, .relStep = .relStep,
        nlmStepMax = nlmStepMax, opt = match.arg(opt),
