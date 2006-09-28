@@ -135,7 +135,7 @@ simulate.lme <-
 
     if(!exists(".Random.seed", envir = .GlobalEnv))
         runif(1)		     # initialize the RNG if necessary
-    RNGstate <- .Random.seed
+    RNGstate <- get(".Random.seed", envir = .GlobalEnv)
     set.seed(seed)
 
     if (inherits(object, "lme")) {      # given as an lme object

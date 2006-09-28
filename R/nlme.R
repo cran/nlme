@@ -1018,10 +1018,10 @@ getParsNlme <-
   for (nm in names(plist)) {
     if (is.logical(f <- plist[[nm]]$fixed)) {
       if (f) {
-        pars[, nm] <- beta[[fmap[[nm]]]]
+        pars[, nm] <- beta[fmap[[nm]]]
       }
     } else {
-      pars[, nm] <- f %*% beta[[fmap[[nm]]]]
+      pars[, nm] <- f %*% beta[fmap[[nm]]]
     }
     if (level > 0) {
       Q <- length(groups)
