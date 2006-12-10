@@ -1,3 +1,24 @@
+2006-12-10  Douglas Bates  <bates@stat.wisc.edu>
+
+	* DESCRIPTION (Version, Date): 3.1-78
+
+2006-12-06  Douglas Bates  <bates@stat.wisc.edu>
+
+	* R/nlme.R (contrMat): Ensure that the constrasts component is a
+	list of matrices by expanding function names if necessary.
+
+2006-11-29  Douglas Bates  <bates@stat.wisc.edu>
+
+	* DESCRIPTION: Prepare for new version.
+	* R/newMethods.R (getData.nls): getData.nls for R's nls objects
+	* inst/scripts/ch*.R: update Pinheiro and Bates (2000) scripts
+
+2006-11-29  Brian Ripley <Brian.Ripley@R-project.org>
+
+	* R/reStruct.R: fix PR#9262, multiple-line deparse.
+	* R/gls.R, groupedData.R, lme.R, lmList.R, newMethods,R, nlme.R:
+	more deparse width issues.
+
 2006-09-28  Douglas Bates  <bates@stat.wisc.edu>
 
 	* R/nlme.R (getParsNlme): backed out change that caused failure

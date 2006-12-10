@@ -6,13 +6,12 @@ library(nlme)
 library(lattice)
 options(width = 65, digits = 5)
 options(contrasts = c(unordered = "contr.helmert", ordered = "contr.poly"))
-postscript(file = "ch08.ps")
+pdf(file = "ch08.pdf")
 
 # Chapter 8    Fitting Nonlinear Mixed-Effects Models
 
 # 8.1 Fitting Nonlinear Models in S with nls and nlsList
 
-##data(Orange, Theoph, CO2, Quinidine, Wafer, Ovary, Dialyzer)
 ## outer = ~1 is used to display all five curves in one panel
 plot(Orange, outer = ~1)
 logist <-
@@ -73,13 +72,11 @@ pairs(fm1Theo.lis, id = 0.1)
 
 ## no need to specify groups, as Orange is a groupedData object
 ## random is omitted - by default it is equal to fixed
-# fm1Oran.nlme <-
-#   nlme(circumference ~ SSlogis(age, Asym, xmid, scal),
-#       data = Orange,
-#       fixed = Asym + xmid + scal ~ 1,
-#       start = fixef(fm1Oran.lis))
-fm1Oran.nlme <- nlme(fm1Oran.lis, control = list(tolerance = 2e-3))
-fm1Oran.nlme
+(fm1Oran.nlme <-
+   nlme(circumference ~ SSlogis(age, Asym, xmid, scal),
+       data = Orange,
+       fixed = Asym + xmid + scal ~ 1,
+       start = fixef(fm1Oran.lis)))
 summary(fm1Oran.nlme)
 summary(fm1Oran.nls)
 pairs(fm1Oran.nlme)
@@ -90,7 +87,7 @@ plot(fm1Oran.nlme)
 plot(augPred(fm2Oran.nlme, level = 0:1),
      layout = c(5,1))
 qqnorm(fm2Oran.nlme, abline = c(0,1))
-(fm1Theo.nlme <- nlme(fm1Theo.lis, control = list(tolerance = 1e-2)))
+(fm1Theo.nlme <- nlme(fm1Theo.lis))
 if (interactive()) intervals(fm1Theo.nlme, which = "var-cov")
 (fm2Theo.nlme <- update(fm1Theo.nlme,
   random = pdDiag(lKe + lKa + lCl ~ 1)))
@@ -102,7 +99,7 @@ qqnorm(fm3Theo.nlme, ~ ranef(.))
 CO2
 plot(CO2, outer = ~Treatment*Type, layout = c(4,1))
 (fm1CO2.lis <- nlsList(SSasympOff, CO2))
-(fm1CO2.nlme <- nlme(fm1CO2.lis, control = list(tolerance = 1e-2)))
+(fm1CO2.nlme <- nlme(fm1CO2.lis))
 (fm2CO2.nlme <- update(fm1CO2.nlme, random = Asym + lrc ~ 1))
 anova(fm1CO2.nlme, fm2CO2.nlme)
 plot(fm2CO2.nlme,id = 0.05,cex = 0.8,adj = -0.5)
@@ -140,7 +137,7 @@ fm1CO2.nls <- nls(uptake ~ SSasympOff(conc, Asym.Intercept +
     c0 = 50.126))
 anova(fm5CO2.nlme, fm1CO2.nls)
 # plot(augPred(fm5CO2.nlme, level = 0:1),  ## FIXME: problem with levels
-#      layout = c(6,2))
+#      layout = c(6,2))  ## Actually a problem with contrasts.
 ## This fit just ping-pongs.
 #fm1Quin.nlme <-
 #  nlme(conc ~ quinModel(Subject, time, conc, dose, interval,
@@ -193,16 +190,13 @@ fm2Quin.fix <- fixef(fm2Quin.nlme)
 ##fm1Wafer.nlmeR
 ##fm1Wafer.nlme <- update(fm1Wafer.nlmeR, method = "ML")
 
-print(fm2Wafer.nlme <- nlme(current ~ A + B * cos(w * voltage + pi/4),
-                            data = Wafer,
-                            fixed = list(A ~ voltage + I(voltage^2), B + w ~ 1),
-                            random = list(Wafer = pdDiag(list(A ~ voltage + I(voltage^2),
-                                          B + w ~ 1)),
-                            Site = pdDiag(list(A ~
-                            voltage+I(voltage^2),
-                            B ~ 1))),
-                            start = c(-4.255, 5.622, 1.258,
-                            -0.09555, 4.5679)))
+(fm2Wafer.nlme <-
+ nlme(current ~ A + B * cos(w * voltage + pi/4),
+      data = Wafer,
+      fixed = list(A ~ voltage + I(voltage^2), B + w ~ 1),
+      random = list(Wafer = pdDiag(list(A ~ voltage + I(voltage^2), B + w ~ 1)),
+      Site = pdDiag(list(A ~ voltage+I(voltage^2), B ~ 1))),
+      start = c(-4.255, 5.622, 1.258, -0.09555, 4.5679)))
 plot(fm2Wafer.nlme, resid(.) ~ voltage | Wafer,
      panel = function(x, y, ...) {
          panel.grid()
@@ -274,8 +268,7 @@ fm2Dial.gnls <- update(fm1Dial.gnls,
                        weights = varPower(form = ~ pressure))
 anova(fm1Dial.gnls, fm2Dial.gnls)
 ACF(fm2Dial.gnls, form = ~ 1 | Subject)
-plot(ACF(fm2Dial.gnls, form = ~ 1 | Subject),
-     alpha = 0.05)
+plot(ACF(fm2Dial.gnls, form = ~ 1 | Subject), alpha = 0.05)
 fm3Dial.gnls <-
  update(fm2Dial.gnls, corr = corAR1(0.716, form = ~ 1 | Subject))
 fm3Dial.gnls

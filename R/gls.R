@@ -524,10 +524,10 @@ augPred.gls <-
                        "without \"primary\" can only be used with fits of groupedData objects"))
         }
         primary <- getCovariate(data)
-        prName <- deparse(getCovariateFormula(data)[[2]])
+        prName <- c_deparse(getCovariateFormula(data)[[2]])
     } else{
         primary <- asOneSidedFormula(primary)[[2]]
-        prName <- deparse(primary)
+        prName <- c_deparse(primary)
         primary <- eval(primary, data)
     }
     newprimary <- seq(from = minimum, to = maximum, length.out = length.out)
@@ -612,7 +612,7 @@ comparePred.gls <-
                  length.out = length.out)
     if (!is.null(primary)) {
 	  ## need to do this before forcing the evaluations
-	  primary <- eval(asOneSidedFormula(primary)[[2]], 
+	  primary <- eval(asOneSidedFormula(primary)[[2]],
                          eval(object1$call$data))
         args[["minimum"]] <- minimum
         args[["maximum"]] <- maximum
@@ -1310,7 +1310,7 @@ glsControl <-
          singular.ok = singular.ok, qrTol = qrTol,
          returnObject = returnObject, apVar = apVar,
          minAbsParApVar = minAbsParApVar, .relStep = .relStep,
-         nlmStepMax = nlmStepMax, opt = match.arg(opt), 
+         nlmStepMax = nlmStepMax, opt = match.arg(opt),
 	 optimMethod = optimMethod, natural = natural)
 }
 

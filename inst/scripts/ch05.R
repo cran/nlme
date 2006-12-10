@@ -5,7 +5,7 @@
 library(nlme)
 options(width = 65, digits = 5)
 options(contrasts = c(unordered = "contr.helmert", ordered = "contr.poly"))
-postscript(file = "ch05.ps")
+pdf(file = "ch05.pdf")
 
 # Chapter 5    Extending the Basic Linear Mixed-Effects Models
 
@@ -36,8 +36,8 @@ vf1Comb <- varComb(varIdent(c(Female = 0.5), ~ 1 | Sex),
 vf1Comb <- Initialize(vf1Comb, Orthodont)
 varWeights(vf1Comb)
 fm1Dial.lme <-
-  lme(rate ~(pressure + I(pressure^2) + I(pressure^3) + I(pressure^4))*QB,
-      Dialyzer, ~ pressure + I(pressure^2))
+    lme(rate ~(pressure + I(pressure^2) + I(pressure^3) + I(pressure^4))*QB,
+        Dialyzer, ~ pressure + I(pressure^2))
 fm1Dial.lme
 plot(fm1Dial.lme, resid(.) ~ pressure, abline = 0)
 fm2Dial.lme <- update(fm1Dial.lme,
@@ -45,15 +45,15 @@ fm2Dial.lme <- update(fm1Dial.lme,
 fm2Dial.lme
 anova(fm1Dial.lme, fm2Dial.lme)
 plot(fm2Dial.lme, resid(., type = "p") ~ pressure,
-       abline = 0)
+     abline = 0)
 intervals(fm2Dial.lme)
 plot(fm2Dial.lme, resid(.) ~ pressure|QB, abline = 0)
 fm3Dial.lme <- update(fm2Dial.lme,
-                   weights=varPower(form = ~ pressure | QB))
+                      weights=varPower(form = ~ pressure | QB))
 fm3Dial.lme
 anova(fm2Dial.lme, fm3Dial.lme)
 fm4Dial.lme <- update(fm2Dial.lme,
-                       weights = varConstPower(form = ~ pressure))
+                      weights = varConstPower(form = ~ pressure))
 anova(fm2Dial.lme, fm4Dial.lme)
 plot(augPred(fm2Dial.lme), grid = TRUE)
 anova(fm2Dial.lme)
@@ -94,7 +94,6 @@ corMatrix(cs2Exp)
 cs3Exp <- corExp(c(1, 0.2), form = ~ x + y, nugget = TRUE)
 cs3Exp <- Initialize(cs3Exp, spatDat)
 corMatrix(cs3Exp)
-data(Ovary)
 fm1Ovar.lme <- lme(follicles ~ sin(2*pi*Time) + cos(2*pi*Time),
                    data = Ovary, random = pdDiag(~sin(2*pi*Time)))
 fm1Ovar.lme
@@ -109,11 +108,10 @@ anova(fm2Ovar.lme, fm3Ovar.lme, test = F)
 fm4Ovar.lme <- update(fm1Ovar.lme,
                        correlation = corCAR1(form = ~Time))
 anova(fm2Ovar.lme, fm4Ovar.lme, test = F)
-print(fm5Ovar.lme <- update(fm1Ovar.lme,
-                            corr = corARMA(p = 1, q = 1)))
-print(anova(fm2Ovar.lme, fm5Ovar.lme))
-print(plot(ACF(fm5Ovar.lme,  maxLag = 10, resType = "n"),
-               alpha = 0.01))
+(fm5Ovar.lme <- update(fm1Ovar.lme,
+                       corr = corARMA(p = 1, q = 1)))
+anova(fm2Ovar.lme, fm5Ovar.lme)
+plot(ACF(fm5Ovar.lme,  maxLag = 10, resType = "n"), alpha = 0.01)
 Variogram(fm2BW.lme, form = ~ Time)
 plot(Variogram(fm2BW.lme, form = ~ Time, maxDist = 42))
 fm3BW.lme <- update(fm2BW.lme,
@@ -145,7 +143,7 @@ fm3Orth.gls <- update(fm2Orth.gls, weights = NULL)
 anova(fm2Orth.gls, fm3Orth.gls)
 plot(fm3Orth.gls, resid(., type = "n") ~ age | Sex)
 fm4Orth.gls <- update(fm3Orth.gls,
-                        weights = varIdent(form = ~ 1 | Sex))
+                      weights = varIdent(form = ~ 1 | Sex))
 anova(fm3Orth.gls, fm4Orth.gls)
 qqnorm(fm4Orth.gls, ~resid(., type = "n"))
 # not in book but needed for the following command
@@ -157,21 +155,17 @@ anova(fm3Orth.lme, fm4Orth.gls, test = FALSE)
 fm1Dial.gls <-
   gls(rate ~(pressure + I(pressure^2) + I(pressure^3) + I(pressure^4))*QB,
       Dialyzer)
-plot(fm1Dial.gls, resid(.) ~ pressure,
-       abline = 0)
+plot(fm1Dial.gls, resid(.) ~ pressure, abline = 0)
 fm2Dial.gls <- update(fm1Dial.gls,
                       weights = varPower(form = ~ pressure))
 anova(fm1Dial.gls, fm2Dial.gls)
 ACF(fm2Dial.gls, form = ~ 1 | Subject)
-plot(ACF(fm2Dial.gls, form = ~ 1 | Subject),
-       alpha = 0.01)
-fm3Dial.gls <- update(fm2Dial.gls,
-                    corr = corAR1(0.771, form = ~ 1 | Subject))
-fm3Dial.gls
+plot(ACF(fm2Dial.gls, form = ~ 1 | Subject), alpha = 0.01)
+(fm3Dial.gls <- update(fm2Dial.gls,
+                      corr = corAR1(0.771, form = ~ 1 | Subject)))
 intervals(fm3Dial.gls)
 anova(fm2Dial.gls, fm3Dial.gls)
 anova(fm3Dial.gls, fm2Dial.lme, test = FALSE)
-data(Wheat2)
 fm1Wheat2 <- gls(yield ~ variety - 1, Wheat2)
 Variogram(fm1Wheat2, form = ~ latitude + longitude)
 plot(Variogram(fm1Wheat2, form = ~ latitude + longitude,
@@ -187,8 +181,7 @@ fm3Wheat2
 anova(fm2Wheat2, fm3Wheat2)
 anova(fm1Wheat2, fm3Wheat2)
 plot(Variogram(fm3Wheat2, resType = "n"))
-plot(fm3Wheat2, resid(., type = "n") ~ fitted(.),
-     abline = 0)
+plot(fm3Wheat2, resid(., type = "n") ~ fitted(.), abline = 0)
 qqnorm(fm3Wheat2, ~ resid(., type = "n"))
 fm4Wheat2 <- update(fm3Wheat2, model = yield ~ variety)
 anova(fm4Wheat2)

@@ -6,13 +6,12 @@ library(nlme)
 library(lattice)
 options(width = 65, digits = 5)
 options(contrasts = c(unordered = "contr.helmert", ordered = "contr.poly"))
-postscript(file = 'ch04.ps')
+pdf(file = 'ch04.pdf')
 
 # Chapter 4    Fitting Linear Mixed-Effects Models
 
 # 4.1 Fitting Linear Models in S with lm and lmList
 
-##data(Orthodont, IGF, Oats, Assay, Oxide, Wafer, Machines, package = "nlme")
 fm1Orth.lm <- lm(distance ~ age, Orthodont)
 fm1Orth.lm
 par(mfrow=c(2,2))
@@ -54,8 +53,8 @@ fitted(fm2Orth.lme, level = 0:1)
 resid(fm2Orth.lme, level = 1)
 resid(fm2Orth.lme, level = 1, type = "pearson")
 newOrth <- data.frame(Subject = rep(c("M11","F03"), c(3, 3)),
-                        Sex = rep(c("Male", "Female"), c(3, 3)),
-                        age = rep(16:18, 2))
+                      Sex = rep(c("Male", "Female"), c(3, 3)),
+                      age = rep(16:18, 2))
 predict(fm2Orth.lme, newdata = newOrth)
 predict(fm2Orth.lme, newdata = newOrth, level = 0:1)
 fm2Orth.lmeM <- update(fm2Orth.lme, method = "ML")
@@ -63,9 +62,9 @@ summary(fm2Orth.lmeM)
 compOrth <-
       compareFits(coef(fm2Orth.lis), coef(fm1Orth.lme))
 compOrth
-                                        # Figure 4.8
-plot(compOrth, mark = fixef(fm1Orth.lme))
-                                        # Figure 4.9
+
+plot(compOrth, mark = fixef(fm1Orth.lme)) # Figure 4.8
+## Figure 4.9
 plot(comparePred(fm2Orth.lis, fm1Orth.lme, length.out = 2),
      layout = c(8,4), between = list(y = c(0, 0.5, 0)))
 plot(compareFits(ranef(fm2Orth.lme), ranef(fm2Orth.lmeM)),
@@ -101,8 +100,8 @@ summary(fm4OatsC)
 ## establishing the desired parameterization for contrasts
 options(contrasts = c("contr.treatment", "contr.poly"))
 fm1Assay <- lme(logDens ~ sample * dilut, Assay,
-   random = pdBlocked(list(pdIdent(~ 1), pdIdent(~ sample - 1),
-                      pdIdent(~ dilut - 1))))
+                random = pdBlocked(list(pdIdent(~ 1), pdIdent(~ sample - 1),
+                pdIdent(~ dilut - 1))))
 fm1Assay
 anova(fm1Assay)
 formula(Oxide)
@@ -115,8 +114,8 @@ coef(fm1Oxide, level = 1)
 coef(fm1Oxide, level = 2)
 ranef(fm1Oxide, level = 1:2)
 fm1Wafer <- lme(current ~ voltage + I(voltage^2), data = Wafer,
-              random = list(Wafer = pdDiag(~voltage + I(voltage^2)),
-                            Site = pdDiag(~voltage + I(voltage^2))))
+                random = list(Wafer = pdDiag(~voltage + I(voltage^2)),
+                Site = pdDiag(~voltage + I(voltage^2))))
 summary(fm1Wafer)
 fitted(fm1Wafer, level = 0)
 resid(fm1Wafer, level = 1:2)
@@ -124,7 +123,7 @@ newWafer <-
     data.frame(Wafer = rep(1, 4), voltage = c(1, 1.5, 3, 3.5))
 predict(fm1Wafer, newWafer, level = 0:1)
 newWafer2 <- data.frame(Wafer = rep(1, 4), Site = rep(3, 4),
-                          voltage = c(1, 1.5, 3, 3.5))
+                        voltage = c(1, 1.5, 3, 3.5))
 predict(fm1Wafer, newWafer2, level = 0:2)
 
 # 4.3 Examining a Fitted Model
@@ -141,8 +140,7 @@ anova(fm2Orth.lme, fm3Orth.lme)
 qqnorm(fm3Orth.lme, ~resid(.) | Sex)
 plot(fm2IGF.lme, resid(., type = "p") ~ fitted(.) | Lot,
       layout = c(5,2))
-qqnorm(fm2IGF.lme, ~ resid(.),
-        id = 0.05, adj = -0.75)
+qqnorm(fm2IGF.lme, ~ resid(.), id = 0.05, adj = -0.75)
 plot(fm1Oxide)
 qqnorm(fm1Oxide)
 plot(fm1Wafer, resid(.) ~ voltage | Wafer)
@@ -153,11 +151,10 @@ plot(fm1Wafer, resid(.) ~ voltage | Wafer,
                  panel.loess(x, y, lty = 2)
                  panel.abline(0, 0)
               })
-attach(Wafer)
-coef(lm(resid(fm1Wafer) ~ cos(4.19*voltage)+sin(4.19*voltage)-1))
-nls(resid(fm1Wafer) ~ b3*cos(w*voltage) + b4*sin(w*voltage),
+with(Wafer,
+     coef(lm(resid(fm1Wafer) ~ cos(4.19*voltage)+sin(4.19*voltage)-1)))
+nls(resid(fm1Wafer) ~ b3*cos(w*voltage) + b4*sin(w*voltage), Wafer,
       start = list(b3 = -0.0519, b4 = 0.1304, w = 4.19))
-detach()
 fm2Wafer <- update(fm1Wafer,
       . ~ . + cos(4.5679*voltage) + sin(4.5679*voltage),
       random = list(Wafer=pdDiag(~voltage+I(voltage^2)),
@@ -165,10 +162,9 @@ fm2Wafer <- update(fm1Wafer,
 summary(fm2Wafer)
 intervals(fm2Wafer)
 qqnorm(fm2Wafer)
-qqnorm(fm2Orth.lme, ~ranef(.),
-         id = 0.10, cex = 0.7)
+qqnorm(fm2Orth.lme, ~ranef(.), id = 0.10, cex = 0.7)
 pairs(fm2Orth.lme, ~ranef(.) | Sex,
-        id = ~ Subject == "M13", adj = -0.3)
+      id = ~ Subject == "M13", adj = -0.3)
 fm2IGF.lme
 c(0.00031074, 0.0053722)/abs(fixef(fm2IGF.lme))
 fm3IGF.lme <- update(fm2IGF.lme, random = ~ age - 1)

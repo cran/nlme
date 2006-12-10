@@ -59,7 +59,7 @@ nlme.nlsList <-
   thisModel <- last.call[["model"]]
   thisCall[["model"]] <-
     eval(parse(text=paste(deparse(getResponseFormula(thisModel)[[2]]),
-                 deparse(getCovariateFormula(thisModel)[[2]]),sep="~")))
+                 c_deparse(getCovariateFormula(thisModel)[[2]]),sep="~")))
   ## create "fixed" and "start"
   cf <- na.omit(coef(model))
   start <- list(fixed = unlist(lapply(cf, median, na.rm = TRUE)))
@@ -322,7 +322,7 @@ nlme.formula <-
                         "the former with the latter."))
           attr(correlation, "formula") <-
             eval(parse(text = paste("~",
-                    deparse(getCovariateFormula(formula(correlation))[[2]]),
+                    c_deparse(getCovariateFormula(formula(correlation))[[2]]),
                          "|", deparse(groups[[2]]))))
         }
       } else {
@@ -335,7 +335,7 @@ nlme.formula <-
       ## using the same grouping as in random
       attr(correlation, "formula") <-
         eval(parse(text = paste("~",
-		     deparse(getCovariateFormula(formula(correlation))[[2]]),
+		     c_deparse(getCovariateFormula(formula(correlation))[[2]]),
 		     "|", deparse(groups[[2]]))))
       corQ <- lmeQ <- 1
     }
@@ -455,6 +455,17 @@ nlme.formula <-
     }
     plist[[nm]] <- this
   }
+  ## Ensure that all elements of are matrices
+  contrMat <- function(nm, contr, data)
+  {
+    levs <- levels(data[[nm]])
+    val <- do.call(contr[[nm]], list(n = length(levs)))
+    rownames(val) <- levs
+    val
+  }
+  nms <- names(contr)[sapply(contr, is.character)]
+  contr[nms] <- lapply(nms, contrMat, contr = contr, data = dataMix)
+
   if (is.null(sfix <- start$fixed))
     stop ("start must have a component called \"fixed\"")
   ##
@@ -1425,7 +1436,7 @@ nlmeControl <-
            pnlsTol = 0.001, msTol = 0.000001, msScale = lmeScale,
            returnObject = FALSE, msVerbose = FALSE, gradHess = TRUE,
            apVar = TRUE, .relStep = (.Machine$double.eps)^(1/3),
-           nlmStepMax = 100.0, minAbsParApVar = 0.05, 
+           nlmStepMax = 100.0, minAbsParApVar = 0.05,
 	   opt = c("nlminb", "nlm"), natural = TRUE)
 {
   list(maxIter = maxIter, pnlsMaxIter = pnlsMaxIter, msMaxIter = msMaxIter,

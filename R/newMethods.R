@@ -24,7 +24,7 @@ BIC.lm <- BIC.nls <-
     names(val) <- c("df", "BIC")
     row.names(val) <- as.character(match.call()[-1])
     return(val)
-  } 
+  }
   BIC(logLik(object))
 }
 
@@ -50,7 +50,7 @@ getData.nls <-
 {
   mCall <- object$call
   ## avoid partial matches here.
-  data <- if("data" %in% names(object)) object$data else eval(mCall$data)
+  data <- eval(if("data" %in% names(object)) object$data else mCall$data)
   if (is.null(data)) return(data)
   naAct <- eval(mCall$na.action)
   if (!is.null(naAct)) {
@@ -314,7 +314,7 @@ plot.nls <-
   if (inherits(data, "groupedData")) {	# save labels and units, if present
     ff <- formula(data)
     rF <- deparse(getResponseFormula(ff)[[2]])
-    cF <- deparse(getCovariateFormula(ff)[[2]])
+    cF <- c_deparse(getCovariateFormula(ff)[[2]])
     lbs <- attr(data, "labels")
     unts <- attr(data, "units")
     if (!is.null(lbs$x)) cL <- paste(lbs$x, unts$x) else cF <- NULL
@@ -834,6 +834,9 @@ Variogram.default <-
   class(val) <- c("Variogram", "data.frame")
   val
 }
+
+## local function for complete deparsing
+c_deparse <- function(...) paste(deparse(..., width=500), collapse="")
 
 ## Local Variables:
 ## mode:S

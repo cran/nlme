@@ -5,7 +5,7 @@
 library(nlme)
 options(width = 65, digits = 5)
 options(contrasts = c(unordered = "contr.helmert", ordered = "contr.poly"))
-postscript(file = "ch06.ps")
+pdf(file = "ch06.pdf")
 
 # Chapter 6    Nonlinear Mixed-Effects Models:
 #              Basic Concepts and Motivating Examples
@@ -39,7 +39,7 @@ summary(fm4Indom.nlme)
 
 # 6.3 Growth of Soybean Plants
 
-Soybean[1:3, ]
+head(Soybean)
 plot(Soybean, outer = ~ Year * Variety)
 (fm1Soy.lis <- nlsList(weight ~ SSlogis(Time, Asym, xmid, scal),
                        data = Soybean))
@@ -65,6 +65,7 @@ fm4Soy.nlme <-
          weights = varPower(0.95), control = list(verbose = TRUE))
 # FIXME: An update doesn't work for the fixed argument when fixed is a list
 summary(fm4Soy.nlme)
+plot(augPred(fm4Soy.nlme))
 
 # 6.4 Clinical Study of Phenobarbital Kinetics
 

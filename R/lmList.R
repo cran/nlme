@@ -58,7 +58,7 @@ lmList.formula <-
     }
     groups <- getGroups(data, form = grpForm, level = level)[drop = TRUE]
     object <- eval(parse(text=paste(deparse(getResponseFormula(object)[[2]]),
-                       deparse(getCovariateFormula(object)[[2]]), sep = "~")))
+                       c_deparse(getCovariateFormula(object)[[2]]), sep = "~")))
   }
   val <- lapply(split(data, groups),
 		function(dat, form, na.action)
@@ -280,7 +280,7 @@ getGroupsFormula.lmList <-
   function(object, asList = FALSE, sep)
 {
   val <- attr(object, "groupsForm")
-  getGroupsFormula(eval(parse(text=paste("~1",deparse(val[[2]]),sep="|"))),
+  getGroupsFormula(eval(parse(text=paste("~1",c_deparse(val[[2]]),sep="|"))),
 		   asList = asList)
 }
 
@@ -642,7 +642,7 @@ plot.lmList <-
   if (inherits(data, "groupedData")) {	# save labels and units, if present
     ff <- formula(data)
     rF <- deparse(getResponseFormula(ff)[[2]])
-    cF <- deparse(getCovariateFormula(ff)[[2]])
+    cF <- c_deparse(getCovariateFormula(ff)[[2]])
     lbs <- attr(data, "labels")
     unts <- attr(data, "units")
     if (!is.null(lbs$x)) cL <- paste(lbs$x, unts$x) else cF <- NULL
@@ -667,7 +667,7 @@ plot.lmList <-
   argForm <- ~ .x
   argData <- as.data.frame(.x)
   if (is.null(xlab <- attr(.x, "label"))) {
-    xlab <- deparse(covF[[2]])
+    xlab <- c_deparse(covF[[2]])
     if (!is.null(cF) && (xlab == cF)) xlab <- cL
     else if (!is.null(rF) && (xlab == rF)) xlab <- rL
   }
@@ -947,7 +947,7 @@ print.lmList <-
   cat("Call:\n")
   form <- formula(x)
   cat("  Model:", deparse(getResponseFormula(form)[[2]]),
-      "~", deparse(getCovariateFormula(form)[[2]]), "|",
+      "~", c_deparse(getCovariateFormula(form)[[2]]), "|",
       deparse(getGroupsFormula(x)[[2]]), "\n")
   if (!is.null(mCall$level)) {
     cat(" Level:", mCall$level, "\n")
@@ -973,7 +973,7 @@ print.summary.lmList <-
   cat("Call:\n")
   form <- formula(x)
   cat("  Model:", deparse(getResponseFormula(form)[[2]]),
-      "~", deparse(getCovariateFormula(form)[[2]]), "|",
+      "~", c_deparse(getCovariateFormula(form)[[2]]), "|",
       deparse(attr(x, "groupsForm")[[2]]), "\n")
   if (!is.null(x$call$level)) {
     cat(" Level:", x$call$level, "\n")

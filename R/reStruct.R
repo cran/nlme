@@ -39,7 +39,8 @@ reStruct <-
       if (length(object) == 3) {        # nlme type of formula
         object <-
           eval(parse(text = paste(deparse(getResponseFormula(object)[[2]]),
-                       deparse(getCovariateFormula(object)[[2]]), sep = "~")))
+                       deparse(getCovariateFormula(object)[[2]], width=500),
+                     sep = "~")))
       } else {
         object <- getCovariateFormula(object)
       }

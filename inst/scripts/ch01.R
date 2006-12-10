@@ -1,7 +1,7 @@
 #-*- R -*-
 
 library(nlme)
-postscript(file = 'ch01.ps')
+pdf(file = 'ch01.pdf')
 options( width = 65, digits = 5 )
 options( contrasts = c(unordered = "contr.helmert", ordered = "contr.poly") )
 
@@ -9,7 +9,6 @@ options( contrasts = c(unordered = "contr.helmert", ordered = "contr.poly") )
 
 # 1.1 A Simple Example of Random Effects
 
-#data(Rail, ergoStool, Machines, Orthodont, Pixel, Oats, package="nlme")
 Rail
 fm1Rail.lm <- lm( travel ~ 1, data = Rail )
 fm1Rail.lm
@@ -52,9 +51,7 @@ plot( fm1Stool,   # produces Figure 1.8
 
 # 1.3  Mixed-effects Models for Replicated, Blocked Designs
 
-attach( Machines )      # make variables in Machines available by name
-interaction.plot( Machine, Worker, score, las = 1)   # Figure 1.10
-detach()                # undo the effect of `attach( Machines )'
+with(Machines, interaction.plot( Machine, Worker, score, las = 1))   # Figure 1.10
 fm1Machine <-
   lme( score ~ Machine, data = Machines, random = ~ 1 | Worker )
 fm1Machine

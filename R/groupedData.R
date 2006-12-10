@@ -464,7 +464,7 @@ plot.nffGroupedData <-
              panel.dotplot(x, y)
            }, key = length(inner) > 0, grid, ...)
 {
-  groupExpr <- deparse(getGroupsFormula(x)[[2]])
+  groupExpr <- c_deparse(getGroupsFormula(x)[[2]])
   if (is.null(groupLabel <- attr(x[, groupExpr], "label"))) {
     groupLabel <- groupExpr
   }
@@ -474,11 +474,11 @@ plot.nffGroupedData <-
     if (is.logical(outer) && outer) {	# get the default outer formula
       form <- formula(paste(groupExpr,
                             "~", deparse(getResponseFormula(x)[[2]]),"|",
-			     deparse(attr(x, "outer")[[2]])))
+			     c_deparse(attr(x, "outer")[[2]])))
     } else {
       form <-  formula(paste(groupExpr,
 			    "~", deparse(getResponseFormula(x)[[2]]),"|",
-			     deparse(outer[[2]])))
+			     c_deparse(outer[[2]])))
     }
   } else {
     form <- formula(paste(groupExpr, "~",

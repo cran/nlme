@@ -66,7 +66,7 @@ lme.lmList <-
   this.call[names(last.call)] <- last.call
   this.call$fixed <-
     as.vector(eval(parse(text=paste(deparse(getResponseFormula(fixed)[[2]]),
-                   deparse(getCovariateFormula(fixed)[[2]]), sep="~"))))
+                   c_deparse(getCovariateFormula(fixed)[[2]]), sep="~"))))
   if (missing(random)) {
     random <- eval(as.call(this.call[["fixed"]][-2]))
   }
@@ -188,7 +188,7 @@ lme.formula <-
                         "the former with the latter."))
           attr(correlation, "formula") <-
             eval(parse(text = paste("~",
-                    deparse(getCovariateFormula(formula(correlation))[[2]]),
+                    c_deparse(getCovariateFormula(formula(correlation))[[2]]),
                          "|", deparse(groups[[2]]))))
         }
       } else {
@@ -201,7 +201,7 @@ lme.formula <-
       ## using the same grouping as in random
       attr(correlation, "formula") <-
         eval(parse(text = paste("~",
-		     deparse(getCovariateFormula(formula(correlation))[[2]]),
+		     c_deparse(getCovariateFormula(formula(correlation))[[2]]),
 		     "|", deparse(groups[[2]]))))
       corQ <- lmeQ <- 1
     }
@@ -306,7 +306,7 @@ lme.formula <-
         nlminb(c(coef(lmeSt)),
                function(lmePars) -logLik(lmeSt, lmePars),
                control = list(iter.max = controlvals$msMaxIter,
-               eval.max = controlvals$msMaxEval, 
+               eval.max = controlvals$msMaxEval,
                trace = controlvals$msVerbose))
     } else {
         optim(c(coef(lmeSt)),
@@ -2650,7 +2650,7 @@ Variogram.lme <-
       if (length(all.vars(covForm)) > 0) {
         if (attr(terms(covForm), "intercept") == 1) {
           covForm <-
-            eval(parse(text = paste("~", deparse(covForm[[2]]),"-1",sep="")))
+            eval(parse(text = paste("~", c_deparse(covForm[[2]]),"-1",sep="")))
         }
         covar <- model.frame(covForm, data, na.action = na.action)
         ## making sure grps is consistent

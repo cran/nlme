@@ -4,7 +4,7 @@ library( nlme )
 options( width = 65, digits = 5 )
 options( contrasts = c(unordered = "contr.helmert",
          ordered = "contr.poly") )
-postscript( file = 'ch02.ps' )
+pdf( file = 'ch02.pdf' )
 
 # Chapter 2    Theory and Computational Methods for Linear Mixed-Effects Models
 
@@ -17,19 +17,16 @@ qr.R( Xqr )                     # returns R
 qr.Q( Xqr )                     # returns Q-truncated
 qr.Q( Xqr, complete = TRUE )    # returns the full Q
 
-#data( Rail )
 fm1Rail.lme <- lme( travel ~ 1, data = Rail, random = ~ 1 | Rail,
        control = list( msVerbose = TRUE ) )
 fm1Rail.lme <- lme( travel ~ 1, data = Rail, random = ~ 1 | Rail,
    control = list( msVerbose = TRUE, niterEM = 0 ))
 
-#data( Machines )
 fm1Machine <-
   lme( score ~ Machine, data = Machines, random = ~ 1 | Worker )
 fm2Machine <- update( fm1Machine, random = ~ 1 | Worker/Machine )
 anova( fm1Machine, fm2Machine )
 
-#data( Orthodont )
 OrthoFem <- Orthodont[ Orthodont$Sex == "Female", ]
 fm1OrthF <- lme( distance ~ age, data = OrthoFem,
     random = ~ 1 | Subject )
@@ -41,7 +38,6 @@ machineLRTsim <- simulate.lme(fm1Machine, m2 = fm2Machine, nsim= 1000)
 plot( machineLRTsim, df = c(0, 1),      # produces Figure 2.4
  layout = c(4,1), between = list(x = c(0, 0.5, 0)) )
 
-#data( ergoStool )
 stoolLRTsim <-
   simulate.lme( list(fixed = effort ~ 1, data = ergoStool,
                      random = ~ 1 | Subject),

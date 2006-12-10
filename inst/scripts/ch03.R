@@ -5,15 +5,12 @@
 library(nlme)
 options(width = 65, digits = 5)
 options(contrasts = c(unordered = "contr.helmert", ordered = "contr.poly"))
-postscript(file = 'ch03.ps')
+pdf(file = 'ch03.pdf')
 
 # Chapter 3    Describing the Structure of Grouped Data
 
 # 3.1 The Display Formula and Its Components
 
-##data(Rail, ergoStool, Machines, Orthodont, Pixel, Oats, Oxboys,
-##     PBG, BodyWeight, Soybean, Spruce, Spruce,
-##     Wafer, Theoph, Quinidine, package = "nlme")
 formula( Rail )
 formula( ergoStool )
 formula( Machines )
