@@ -82,7 +82,7 @@ corMatrix.corStruct <-
 ###*# Methods for standard generics
 
 as.matrix.corStruct <-
-  function(x) corMatrix(x)
+  function(x, ...) corMatrix(x)
 
 coef.corStruct <-
   ## Accessor for constrained or unconstrained parameters of

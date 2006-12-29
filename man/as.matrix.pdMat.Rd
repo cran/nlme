@@ -1,13 +1,13 @@
-% $Id: as.matrix.pdMat.Rd,v 1.6 2002/03/05 14:59:39 bates Exp $
 \name{as.matrix.pdMat}
 \title{Matrix of a pdMat Object}
 \usage{
-\method{as.matrix}{pdMat}(x)
+\method{as.matrix}{pdMat}(x, \dots)
 }
 \alias{as.matrix.pdMat}
 \arguments{
  \item{x}{an object inheriting from class \code{pdMat}, representing a
    positive-definite matrix.}
+ \item{\dots}{further arguments passed from other methods.}
 }
 \description{
   This method function extracts the positive-definite matrix represented

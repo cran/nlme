@@ -1,13 +1,13 @@
-% $Id: as.matrix.corStruct.Rd,v 1.6.2.1 2002/08/09 19:45:29 bates Exp $
 \name{as.matrix.corStruct}
 \title{Matrix of a corStruct Object}
 \usage{
-\method{as.matrix}{corStruct}(x)
+\method{as.matrix}{corStruct}(x, \dots)
 }
 \alias{as.matrix.corStruct}
 \arguments{
  \item{x}{an object inheriting from class \code{corStruct},
    representing a correlation structure.}
+ \item{\dots}{further arguments passed from other methods.}
 }
 \description{
   This method function extracts the correlation matrix, or list of

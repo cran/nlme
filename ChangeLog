@@ -1,3 +1,11 @@
+2006-12-29  Brian Ripley <Brian.Ripley@R-project.org>
+
+	* DESCRIPTION (Version, Date): 3.1-79
+
+	* R/corStruct.R, R/pdMat.R, R/reStruct.R, man/corStruct.Rd,
+	man/pdMat.Rd, man/reStruct.Rd: add '...' argument to as.matrix()
+	methods. (Needed for 2.5.0, but works in earier versions.)
+
 2006-12-10  Douglas Bates  <bates@stat.wisc.edu>
 
 	* DESCRIPTION (Version, Date): 3.1-78
@@ -63,7 +71,7 @@
 	* R/lme.R (lme.formula): when control()$returnObject is TRUE, only
 	warn instead of stop() in the case of non-convergence.
 	* tests/lme.R: test the above
-	ZZ* tests/lme.Rout.save:
+	* tests/lme.Rout.save:
 
 2006-06-02 Brian Ripley <Brian.Ripley@R-project.org>
 

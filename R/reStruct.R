@@ -160,7 +160,7 @@ pdMatrix.reStruct <-
 ###*# Methods for standard generics
 
 as.matrix.reStruct <-
-  function(x) pdMatrix(x)
+  function(x, ...) pdMatrix(x)
 
 coef.reStruct <-
   function(object, unconstrained = TRUE, ...)

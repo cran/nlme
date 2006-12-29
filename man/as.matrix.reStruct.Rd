@@ -1,14 +1,14 @@
-% $Id: as.matrix.reStruct.Rd,v 1.7 2002/03/05 14:59:39 bates Exp $
 \name{as.matrix.reStruct}
 \title{Matrices of an reStruct Object}
 \usage{
-\method{as.matrix}{reStruct}(x)
+\method{as.matrix}{reStruct}(x, \dots)
 }
 \alias{as.matrix.reStruct}
 \arguments{
  \item{x}{an object inheriting from class \code{reStruct}, representing
    a random effects structure and consisting of a list of \code{pdMat}
    objects.}
+ \item{\dots}{further arguments passed from other methods.}
 }
 \description{
   This method function extracts the positive-definite matrices

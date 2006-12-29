@@ -224,7 +224,7 @@ pdMatrix.pdMat <-
 ###*# Methods for standard generics
 
 as.matrix.pdMat <-
-  function(x) pdMatrix(x)
+  function(x, ...) pdMatrix(x)
 
 coef.pdMat <-
   function(object, unconstrained = TRUE, ...)
