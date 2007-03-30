@@ -445,7 +445,7 @@ plot.nls <-
                                 cex = dots$cex, adj = dots$adj)
                       }
 		      if (!is.null(abl)) {
-			panel.abline(abl, ...)
+			if (length(abl) == 2) panel.abline(a = abl, ...) else panel.abline(h = abl, ...)
 		      }
 		    }))
       }
@@ -814,7 +814,7 @@ qqnorm.nls <-
           ltext(x[ids], y[ids], idLabels[subscripts][ids],
                 cex = dots$cex, adj = dots$adj)
       }
-      if (!is.null(abl)) panel.abline(abl, ...)
+      if (!is.null(abl)) { if (length(abl) == 2) panel.abline(a = abl, ...) else panel.abline(h = abl, ...) }
     }), args)
   }
   do.call("xyplot", args)

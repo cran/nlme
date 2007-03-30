@@ -767,7 +767,7 @@ plot.lmList <-
                                 cex = dots$cex, adj = dots$adj)
                       }
 		      if (!is.null(abl)) {
-			panel.abline(abl, ...)
+			if (length(abl) == 2) panel.abline(a = abl, ...) else panel.abline(h = abl, ...)
 		      }
 		    }))
     } else {				# assume factor or character

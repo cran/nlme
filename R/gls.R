@@ -76,6 +76,7 @@ gls <-
                     if (inherits(el, "factor")) contrasts(el))
     contr <- contr[!unlist(lapply(contr, is.null))]
     X <- model.matrix(model, X)
+    if(ncol(X) == 0) stop("no coefficients to fit")
     y <- eval(model[[2]], dataMod)
     N <- nrow(X)
     p <- ncol(X)				# number of coefficients

@@ -1,3 +1,16 @@
+2007-03-30  Brian Ripley <Brian.Ripley@R-project.org>
+
+	* DESCRIPTION (Version, Date): 3.1-80
+	* R/nlme.R (contrMat): Allow for expressions in 'fixed'.
+	* tests/contrMat.R: regression test for above.
+	* R/gls.R: bug fix for the case of y ~ 0.
+	* tests/gls.R: regression test for above.
+	* R/{lme,lmList,newMethods}.R: patch for lattice 0.15-x.
+
+2007-01-30  Brian Ripley <Brian.Ripley@R-project.org>
+
+	* DESCRIPTION (Title): Capitalize for consistency.
+
 2006-12-29  Brian Ripley <Brian.Ripley@R-project.org>
 
 	* DESCRIPTION (Version, Date): 3.1-79

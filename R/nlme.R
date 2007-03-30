@@ -458,7 +458,9 @@ nlme.formula <-
   ## Ensure that all elements of are matrices
   contrMat <- function(nm, contr, data)
   {
-    levs <- levels(data[[nm]])
+    ## nm is a term in a formula, and can be a call
+    x <- eval(parse(text=nm), data)
+    levs <- levels(x)
     val <- do.call(contr[[nm]], list(n = length(levs)))
     rownames(val) <- levs
     val
