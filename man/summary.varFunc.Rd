@@ -41,7 +41,7 @@
   \code{\link{varClasses}}, 
   \code{\link{varFunc}}
 }
-}%\seealso{\code{\link{print.summary.varFunc}}}
+%\seealso{\code{\link{print.summary.varFunc}}}
 \examples{
 vf1 <- varPower(0.3, form = ~age)
 vf1 <- Initialize(vf1, Orthodont)

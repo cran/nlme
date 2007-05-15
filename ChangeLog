@@ -1,3 +1,13 @@
+2007-05-15  Brian Ripley <Brian.Ripley@R-project.org>
+
+	* DESCRIPTION (Version, Date): 3.1-81
+	* NAMESPACE, R/zzMethods.R: migrate vcov methods from stats to here.
+
+2007-05-04  Brian Ripley <Brian.Ripley@R-project.org>
+
+	* man/{Extracr.pdMat,getdata.*,summary.varFunc}.Rd: remove
+	surplus }.
+
 2007-03-30  Brian Ripley <Brian.Ripley@R-project.org>
 
 	* DESCRIPTION (Version, Date): 3.1-80

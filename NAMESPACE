@@ -480,4 +480,5 @@ S3method(varWeights, glsStruct)
 S3method(varWeights, lmeStruct)
 S3method(varWeights, varComb)
 S3method(varWeights, varFunc)
-
+S3method(vcov, gls)
+S3method(vcov, lme)

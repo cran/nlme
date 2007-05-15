@@ -21,3 +21,6 @@ fitted.gnls <- fitted.gls
 
 residuals.gnls <- residuals.gls
 
+vcov.gls <- function (object, ...) object$varBeta
+
+vcov.lme <- function (object, ...) object$varFix
