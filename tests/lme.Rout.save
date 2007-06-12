@@ -1,6 +1,6 @@
 
-R : Copyright 2006, The R Foundation for Statistical Computing
-Version 2.3.1 Patched (2006-07-01 r38470)
+R version 2.5.0 Patched (2007-06-12 r41926)
+Copyright (C) 2007 The R Foundation for Statistical Computing
 ISBN 3-900051-07-0
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -114,5 +114,6 @@ attr(,"label")
 > fm1 <- lme(distance ~ age, data = Orthodont,
 + 	   control = lmeControl(msMaxIter = 1, returnObject = TRUE))
 Warning message:
-nlminb problem, convergence error code = 1; message = iteration limit reached without convergence (9) in: lme.formula(distance ~ age, data = Orthodont, control = lmeControl(msMaxIter = 1,  
+nlminb problem, convergence error code = 1
+  message = iteration limit reached without convergence (9) in: lme.formula(distance ~ age, data = Orthodont, control = lmeControl(msMaxIter = 1,  
 > 

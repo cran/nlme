@@ -12,7 +12,7 @@ allCoef <-
   dots <- list(...)
   theta <- lapply(dots, extract)
   len <- unlist(lapply(theta, length))
-  num <- seq(along = len)
+  num <- seq_along(len)
   if (sum(len) > 0) {
     which <- outer(rep(num, len), num, "==")
   } else {
@@ -92,7 +92,7 @@ fdHess <- function(pars, fun, ..., .relStep = (.Machine$double.eps)^(1/3),
   baseInd <- diag(npar)
   frac <- c(1, incr, incr^2)
   cols <- list(0, baseInd, -baseInd)
-  for ( i in seq( along = pars )[ -npar ] ) {
+  for ( i in seq_along(pars)[ -npar ] ) {
     cols <- c( cols, list( baseInd[ , i ] + baseInd[ , -(1:i) ] ) )
     frac <- c( frac, incr[ i ] * incr[ -(1:i) ] )
   }
@@ -100,13 +100,13 @@ fdHess <- function(pars, fun, ..., .relStep = (.Machine$double.eps)^(1/3),
   shifted <- pars + incr * indMat
   indMat <- t(indMat)
   Xcols <- list(1, indMat, indMat^2)
-  for ( i in seq( along = pars )[ - npar ] ) {
+  for ( i in seq_along(pars)[ - npar ] ) {
     Xcols <- c( Xcols, list( indMat[ , i ] * indMat[ , -(1:i) ] ) )
   }
   coefs <- solve( do.call( "cbind", Xcols ) , apply(shifted, 2, fun, ...) )/frac
-  Hess <- diag( coefs[ 1 + npar + seq( along = pars ) ], ncol = npar )
+  Hess <- diag( coefs[ 1 + npar + seq_along(pars) ], ncol = npar )
   Hess[ row( Hess ) > col ( Hess ) ] <- coefs[ -(1:(1 + 2 * npar)) ]
-  list( mean = coefs[ 1 ], gradient = coefs[ 1 + seq( along = pars ) ],
+  list( mean = coefs[ 1 ], gradient = coefs[ 1 + seq_along(pars) ],
        Hessian = ( Hess + t(Hess) ) )
 }
 

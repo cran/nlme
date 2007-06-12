@@ -1187,7 +1187,7 @@ coef.varComb <-
       stop("Cannot change parameter length of initialized varComb object.")
     }
     start <- 0
-    for (i in seq(along = object)) {
+    for (i in seq_along(object)) {
       if (plen[i] > 0) {
 	coef(object[[i]]) <- value[start + (1:plen[i])]
 	start <- start + plen[i]

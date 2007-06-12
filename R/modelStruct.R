@@ -60,7 +60,7 @@ print.summary.modelStruct <-
 recalc.modelStruct <-
   function(object, conLin = attr(object, "conLin"), ...)
 {
-  for(i in rev(seq(along = object))) {
+  for(i in rev(seq_along(object))) {
     conLin <- recalc(object[[i]], conLin)
     NULL
   }

@@ -46,7 +46,7 @@ VarCorr.lme <- function( x, sigma = 1., rdig = 3)
   rownames <- rep("", sum(nrows) + Q)
   rownames[trows] <- paste( names( m ), "=" )
   rr <- 1
-  for (i in seq( along = m ) ) {
+  for (i in seq_along( m ) ) {
     rownames[ rr + (1:nrows[i]) ] <- dimnames( m[[i]] )[[1]]
     if (!is.null( corr[[i]] )) {
       v[ rr + (1:nrows[i]), 2 + (1:ncol(corr[[i]])) ] <- corr[[i]]

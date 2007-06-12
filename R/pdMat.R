@@ -137,7 +137,7 @@ pdConstruct.pdMat <-
         stop("All elements of \"form\" list must be two-sided formulas")
       }
       val <- list()
-      for(i in seq(along = form)) {
+      for(i in seq_along(form)) {
         if (is.name(form[[i]][[2]])) {
           val <- c(val, list(form[[i]]))
         } else {
@@ -165,12 +165,12 @@ pdConstruct.pdMat <-
           err <- TRUE
           namCopy <- nam
           indNoMatch <- (1:length(nam))[noMatch]
-          if (any(wch1 <- (nchar(nam) > 12))) {
+          if (any(wch1 <- (nchar(nam, "c") > 12))) {
             ## possibly names with .(Intercept) in value
-            wch1 <- substring(nam, nchar(nam)-10) == "(Intercept)"
+            wch1 <- substring(nam, nchar(nam, "c")-10) == "(Intercept)"
             if (any(wch1)) {
               namCopy[indNoMatch[wch1]] <-
-                substring(nam[wch1], 1, nchar(nam[wch1]) - 12)
+                substring(nam[wch1], 1, nchar(nam[wch1], "c") - 12)
               noMatch[wch1] <- FALSE
               indNoMatch <- indNoMatch[!wch1]  # possibly not matched
             }
@@ -327,12 +327,12 @@ Names.pdMat <-
       valueCopy <- value
       indNoMatch <- (1:length(value))[noMatch]
       nam1 <- value[noMatch]            # no matching names
-      if (any(wch1 <- (nchar(nam1) > 12))) {
+      if (any(wch1 <- (nchar(nam1, "c") > 12))) {
         ## possibly names with .(Intercept) in value
-        wch1 <- substring(nam1, nchar(nam1)-10) == "(Intercept)"
+        wch1 <- substring(nam1, nchar(nam1, "c")-10) == "(Intercept)"
         if (any(wch1)) {
           valueCopy[indNoMatch[wch1]] <-
-            substring(nam1[wch1], 1, nchar(nam1[wch1]) - 12)
+            substring(nam1[wch1], 1, nchar(nam1[wch1], "c") - 12)
           noMatch[wch1] <- FALSE
           indNoMatch <- indNoMatch[!wch1]  # possibly not matched
         }
@@ -414,10 +414,10 @@ plot.pdMat <-
 		       list(x = sumDif[1,1] + .cosines * sumDif[2,1],
 			    y = sumDif[1,2] + lagged * sumDif[2,2])
 		     }, lagged = laggedCos)
-    gg <- rep(seq(along = xylist), rep(length(.angles), length(xylist)))
+    gg <- rep(seq_along(xylist), rep(length(.angles), length(xylist)))
     panel.superpose(unlist(lapply(xylist, "[[", "x")),
 		    unlist(lapply(xylist, "[[", "y")),
-		    subscripts = seq(along = gg), groups = gg, ..., type = "l")
+		    subscripts = seq_along(gg), groups = gg, ..., type = "l")
   }, subscripts = TRUE, groups = groups)
 }
 
@@ -502,7 +502,7 @@ print.summary.pdMat <-
     cat(paste(" Composite Structure: ", attr(x, "structName"), "\n", sep =""))
     elName <- attr(x, "elementName")
     compNames <- names(x)
-    for (i in seq(along = x)) {
+    for (i in seq_along(x)) {
       cat(paste("\n ", elName, " ", i, ": ", compNames[i], "\n", sep = ""))
       print.summary.pdMat(x[[i]], sigma = sigma, Level = Level,
                           resid = resid && (i == length(x)), ...)
@@ -762,7 +762,7 @@ solve.pdLogChol <-
 # 			as.integer(Ncol),
 # 			integer(1))[["val"]], c(Ncol, Ncol))
 #  val <- qr(t(val))$qr
-  val <- qr(t(solve(pdMatrix(a, fact = TRUE))))$qr
+  val <- qr(t(solve(pdMatrix(a, factor = TRUE))))$qr
   val <- sign(diag(val)) * val
   coef(a) <- c(log(diag(val)), val[c(row(val) < col(val))])
   a
@@ -1225,7 +1225,7 @@ solve.pdNatural <-
 # 			  val = as.double(diag(Ncol)),
 # 			  as.integer(Ncol),
 # 			  integer(1))[["val"]], c(Ncol, Ncol))
-    val <- solve(pdMatrix(a, fact = TRUE))
+    val <- solve(pdMatrix(a, factor = TRUE))
     val <- val %*% t(val)
     stdDev <- sqrt(diag(val))
     val <- t(val/stdDev)/stdDev
@@ -1710,7 +1710,7 @@ corMatrix.pdBlocked <-
   value <- array(0, c(Ncol, Ncol), attr(object, "Dimnames"))
   stdDev <- double(Ncol)
   names(stdDev) <- colnames(value)
-  for (i in seq(along = object)) {
+  for (i in seq_along(object)) {
     aux <- corMatrix(object[[i]])
     value[namesList[[i]], namesList[[i]]] <- as.vector(aux)
     stdDev[namesList[[i]]] <- attr(aux, "stdDev")
@@ -1951,7 +1951,7 @@ pdMatrix.pdBlocked <-
   if (factor) {
     lD <- 0
   }
-  for (i in seq(along = object)) {
+  for (i in seq_along(object)) {
     aux <- pdMatrix(object[[i]], factor)
     value[namesList[[i]], namesList[[i]]] <- as.vector(aux)
     if (factor) lD <- lD + attr(aux, "logDet")
@@ -1980,7 +1980,7 @@ coef.pdBlocked <-
   }
   ends <- cumsum(plen)
   starts <- 1 + c(0, ends[-length(ends)])
-  for (i in seq(along = object)) {
+  for (i in seq_along(object)) {
     coef(object[[i]]) <- value[(starts[i]):(ends[i])]
   }
   object
@@ -2055,7 +2055,7 @@ logDet.pdBlocked <-
     }
     attr(object, "Dimnames") <- list(vNames, vNames)
   }
-  for (i in seq(along = object)) {
+  for (i in seq_along(object)) {
     matrix(object[[i]]) <- value[namesList[[i]], namesList[[i]]]
   }
   object

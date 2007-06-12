@@ -180,6 +180,7 @@ gls <-
         Resid <- y - Fitted
         attr(Resid, "std") <- glsFit$sigma/(varWeights(glsSt))
     }
+    names(Resid) <- names(Fitted) <- origOrder
 
     ## getting the approximate var-cov of the parameters
     if (controlvals$apVar) {
@@ -213,7 +214,8 @@ gls <-
                    method = method,
                    fitted = Fitted,
                    residuals = Resid,
-                   parAssign = parAssign)
+                   parAssign = parAssign,
+                   na.action = attr(dataMod, "na.action"))
     if (inherits(data, "groupedData")) {
         ## saving labels and units for plots
         attr(estOut, "units") <- attr(data, "units")
@@ -680,7 +682,7 @@ comparePred.gls <-
 fitted.gls <-
     function(object, ...)
 {
-    val <- object$fitted
+    val <- napredict(object$na.action, object$fitted)
     lab <- "Fitted values"
     if (!is.null(aux <- attr(object, "units")$y)) {
         lab <- paste(lab, aux)
@@ -788,7 +790,7 @@ intervals.gls <-
             for(i in namG) {
                 auxVal[[i]] <- aux[pmap[,i], , drop = FALSE]
                 dimnames(auxVal[[i]])[[1]] <-
-                    substring(dimnames(auxVal[[i]])[[1]], nchar(i) + 2)
+                    substring(dimnames(auxVal[[i]])[[1]], nchar(i, "c") + 2)
                 attr(auxVal[[i]], "label") <-
                     switch(i,
                            corStruct = "Correlation structure:",
@@ -1004,7 +1006,12 @@ residuals.gls <-
         }
         attr(val, "label") <- lab
     }
-    val
+    if (!is.null(object$na.action)) {
+        res <- naresid(object$na.action, val)
+        attr(res, "std") <- naresid(object$na.action, attr(val, "std"))
+        attr(res, "label") <- attr(val, "label")
+        res
+    } else val
 }
 
 summary.gls <- function(object, verbose = FALSE, ...) {
@@ -1251,7 +1258,7 @@ Initialize.glsStruct <-
         object[] <- lapply(object, Initialize, data)
         theta <- lapply(object, coef)
         len <- unlist(lapply(theta, length))
-        num <- seq(along = len)
+        num <- seq_along(len)
         if (sum(len) > 0) {
             pmap <- outer(rep(num, len), num, "==")
         } else {

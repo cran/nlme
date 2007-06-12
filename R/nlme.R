@@ -244,7 +244,7 @@ nlme.formula <-
     fixed <- list(fixed)
   }
   val <- NULL
-  for(i in seq(along = fixed)) {
+  for(i in seq_along(fixed)) {
     if (is.name(fixed[[i]][[2]])) {
       val <- c(val, list(fixed[[i]]))
     } else {
@@ -256,7 +256,7 @@ nlme.formula <-
   }
   fixed <- as.list(val)
   fnames <- character(length(fixed))
-  for (i in seq(along = fixed)) {
+  for (i in seq_along(fixed)) {
     this <- eval(fixed[[i]])
     if (!inherits(this, "formula"))
       stop ("fixed must be a formula or list of formulae")
@@ -275,7 +275,7 @@ nlme.formula <-
   names(rnames) <- namGrp
   for(i in 1:Q) {
     rnames[[i]] <- character(length(ranForm[[i]]))
-    for (j in seq(along = ranForm[[i]])) {
+    for (j in seq_along(ranForm[[i]])) {
       this <- eval(ranForm[[i]][[j]])
       if (!inherits(this, "formula"))
         stop ("random formula must be a formula or list of formulae")
@@ -419,7 +419,7 @@ nlme.formula <-
 	this[["fixed"]] <-
           model.matrix(asOneSidedFormula(fixed[[nm]][[3]]),
                   model.frame(asOneSidedFormula(fixed[[nm]][[3]]), dataMix))
-        auxContr <- attr(this[["fixed"]], "contr")
+        auxContr <- attr(this[["fixed"]], "contrasts")
         contr <- c(contr, auxContr[is.na(match(names(auxContr), names(contr)))])
       }
     }
@@ -432,7 +432,7 @@ nlme.formula <-
               model.matrix(asOneSidedFormula(ranForm[[i]][[nm]][[3]]),
                         model.frame(asOneSidedFormula(ranForm[[i]][[nm]][[3]]),
                                     dataMix))
-            auxContr <- attr(this[["random"]][[i]], "contr")
+            auxContr <- attr(this[["random"]][[i]], "contrasts")
             contr <-
               c(contr, auxContr[is.na(match(names(auxContr), names(contr)))])
           }
@@ -443,9 +443,9 @@ nlme.formula <-
               else model.matrix(asOneSidedFormula(el[[3]]),
                                 model.frame(asOneSidedFormula(el[[3]]), data))
             }, data = dataMix))
-          for(j in seq(along = this[["random"]][[i]])) {
+          for(j in seq_along(this[["random"]][[i]])) {
             if (is.matrix(this[["random"]][[i]][[j]])) {
-              auxContr <- attr(this[["random"]][[i]][[j]], "contr")
+              auxContr <- attr(this[["random"]][[i]][[j]], "contrasts")
               contr <-
                 c(contr, auxContr[is.na(match(names(auxContr), names(contr)))])
             }
@@ -521,7 +521,7 @@ nlme.formula <-
     uRnames <- unique(rnames[[i]])
     wchRnames[[i]] <- integer(length(uRnames))
     names(wchRnames[[i]]) <- uRnames
-    for(j in seq(along = rnames[[i]])) {
+    for(j in seq_along(rnames[[i]])) {
       nm <- rnames[[i]][j]
       wchRnames[[i]][nm] <- wchRnames[[i]][nm] + 1
       r <- plist[[nm]]$random[[i]]
@@ -741,7 +741,7 @@ nlme.formula <-
           if (data.class(rmap[[i]][[nm]]) != "list") {
             Z[, rmap[[i]][[nm]]] <- gradnm * r
           } else {
-            for(j in seq(along = rmap[[i]][[nm]])) {
+            for(j in seq_along(rmap[[i]][[nm]])) {
               if (is.logical(rr <- r[[j]])) {
                 Z[, rmap[[i]][[nm]][[j]]] <- gradnm
               } else {
@@ -878,7 +878,7 @@ nlme.formula <-
     # matrix(nlmeSt$reStruct[[1]]) <- crossprod(work$pdFactor)
     # fix from Setzer.Woodrow@epamail.epa.gov for nested grouping factors
     pdFacStart <- 1
-    for (i in seq(along=nlmeSt$reStruct)) {
+    for (i in seq_along(nlmeSt$reStruct)) {
       tmppdFactor <- work$pdFactor[pdFacStart:
                                    (pdFacStart -1 +
                                     prod(dim(pdMatrix(nlmeSt$reStruct[[i]]))))]
@@ -969,6 +969,7 @@ nlme.formula <-
     Resid <- resid(nlmeSt, level = 0:Q)[revOrderShrunk, ]
   }
   Fitted <- yShrunk[revOrderShrunk] - Resid
+  rownames(Resid) <- rownames(Fitted) <- origOrderShrunk
   grpShrunk <- grpShrunk[revOrderShrunk, , drop = FALSE]
   attr(Resid, "std") <- nlmeFit$sigma/(varWeights(nlmeSt)[revOrderShrunk])
   ## inverting back reStruct
@@ -1050,7 +1051,7 @@ getParsNlme <-
               (r * t(b[[i]])[groups[[i]], rmapRel[[i]][[nm]], drop = FALSE]) %*%
                 rep(1, ncol(r))
           } else {
-            for(j in seq(along = rmapRel[[i]][[nm]])) {
+            for(j in seq_along(rmapRel[[i]][[nm]])) {
               if (is.logical(rr <- r[[j]])) {
                 pars[, nm] <- pars[, nm] +
                   b[[i]][rmapRel[[i]][[nm]][[j]], groups[[i]]]
@@ -1199,7 +1200,7 @@ predict.nlme <-
     fixed <- list(fixed)
   }
   val <- NULL
-  for(i in seq(along = fixed)) {
+  for(i in seq_along(fixed)) {
     if (is.name(fixed[[i]][[2]])) {
       val <- c(val, list(fixed[[i]]))
     } else {
@@ -1458,7 +1459,7 @@ nonlinModel <- function( modelExpression, env,
   ind <- vector("list", length(paramNames))
   names(ind) <- paramNames
   for( i in paramNames ) {
-    ind[[ i ]] <- offset + seq( along = get(i, envir = env))
+    ind[[ i ]] <- offset + seq_along(get(i, envir = env))
     offset <- offset + length( get(i, envir = env) )
   }
   modelValue <- eval(modelExpression, env)

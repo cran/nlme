@@ -39,7 +39,7 @@ reStruct <-
       if (length(object) == 3) {        # nlme type of formula
         object <-
           eval(parse(text = paste(deparse(getResponseFormula(object)[[2]]),
-                       deparse(getCovariateFormula(object)[[2]], width=500),
+                       deparse(getCovariateFormula(object)[[2]], width.cutoff=500),
                      sep = "~")))
       } else {
         object <- getCovariateFormula(object)
@@ -180,7 +180,7 @@ coef.reStruct <-
   }
   ends <- cumsum(plen)
   starts <- 1 + c(0, ends[-length(ends)])
-  for (i in seq(along = object)) {
+  for (i in seq_along(object)) {
     coef(object[[i]]) <- value[(starts[i]):(ends[i])]
   }
   object
@@ -216,7 +216,7 @@ Initialize.reStruct <-
   function(object, data, conLin, control = list(niterEM = 20), ...)
 {
   ## initialize reStruct object, possibly getting initial estimates
-  seqO <- seq(along = object)
+  seqO <- seq_along(object)
   ## check if names are defined
   lNams <- unlist(lapply(object, function(el) length(Names(el)))) == 0
   if (any(lNams)) {			# need to resolve formula names
@@ -290,7 +290,7 @@ logLik.reStruct <-
     stop("Cannot change the length of object")
   }
   value <- rev(value)                   # same order as object
-  for(i in seq(along = object)) {
+  for(i in seq_along(object)) {
     matrix(object[[i]]) <- value[[i]]
   }
   object
@@ -360,7 +360,7 @@ Names.reStruct <-
   if (length(object) != length(value)) {
     stop("Incompatible lengths for object names")
   }
-  for(i in seq(along = object)) {
+  for(i in seq_along(object)) {
     Names(object[[i]]) <- value[[i]]
   }
   object
@@ -381,7 +381,7 @@ print.reStruct <-
     names(x) <-
       rev(apply(aux, 1, function(x) paste(x[x != ""], collapse = " %in% ")))
     cat("Random effects:\n")
-    for(i in seq(along = x)) {
+    for(i in seq_along(x)) {
       print(summary(x[[i]]), sigma, Level = names(x)[i],
             resid = (i == length(x)), ...)
       if (verbose) {

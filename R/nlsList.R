@@ -24,7 +24,7 @@ nlsList.selfStart <-
   m <- call(as.character(marg))
   args <- lapply(names(formals(eval(marg))), as.name)
   args[[1]] <- getCovariateFormula(data)[[2]]
-  m[1 + seq(along = args)] <- args
+  m[1 + seq_along(args)] <- args
   form <- formula(data)
   form[[3]][[2]] <- m
   mCall$model <- form

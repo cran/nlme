@@ -200,7 +200,7 @@ Names.listForm <-
     }, data = data, exclude = exclude)
   if (is.null(nams[[1]])) return(NULL)
   val <- c()
-  for(i in seq(along = object)) {
+  for(i in seq_along(object)) {
     if ((length(nams[[i]]) == 1) && (nams[[i]] == "(Intercept)")) {
       val <- c(val, pnames[i])
     } else {
@@ -836,7 +836,7 @@ Variogram.default <-
 }
 
 ## local function for complete deparsing
-c_deparse <- function(...) paste(deparse(..., width=500), collapse="")
+c_deparse <- function(...) paste(deparse(..., width.cutoff=500), collapse="")
 
 ## Local Variables:
 ## mode:S

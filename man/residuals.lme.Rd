@@ -47,7 +47,8 @@
   (\code{asList = FALSE}); else, when multiple grouping levels are
   specified in \code{level}, the returned object is a data frame with
   columns given by the residuals at different levels and the grouping
-  factors.  
+  factors.  For a vector or data frame result the \code{\link{naresid}}
+  method is applied.
 }
 \references{
   Bates, D.M. and Pinheiro, J.C. (1998) "Computational methods for

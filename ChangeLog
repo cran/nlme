@@ -1,3 +1,24 @@
+2007-06-12  Brian Ripley <Brian.Ripley@R-project.org>
+
+	* DESCRIPTION (Version, Date): 3.1-82
+	Also, R >= 2.4.0 because of seq_along.
+	* tests/lme.Rout.save: back to 2.5.1 layout.
+
+2007-05-29  Brian Ripley <Brian.Ripley@R-project.org>
+
+	* R/{gls,lme,pdMat}.R: qualify uses of nchar() by 'type'.
+	* R/lme.R: layout of over-long error message.
+	* tests/lme.Rout.save: update for above and for 2.6.0 layout.
+	* R/{gls,gnls,lme,nlme}.R: copy row names to fitted values and
+	residuals.
+	* R/{gls,gnls,lme}.R: support naresid and napredict.
+	* man/{residuals,fitted}.lme.Rd: document this.
+	* tests/missing.{R,Rout.save}: tests of missing-value support.
+
+2007-05-20,24  Brian Ripley <Brian.Ripley@R-project.org>
+
+	* R/*.R: partial matching issues, switch to seq_along.
+
 2007-05-15  Brian Ripley <Brian.Ripley@R-project.org>
 
 	* DESCRIPTION (Version, Date): 3.1-81
@@ -35,7 +56,7 @@
 
 2006-12-06  Douglas Bates  <bates@stat.wisc.edu>
 
-	* R/nlme.R (contrMat): Ensure that the constrasts component is a
+	* R/nlme.R (contrMat): Ensure that the contrasts component is a
 	list of matrices by expanding function names if necessary.
 
 2006-11-29  Douglas Bates  <bates@stat.wisc.edu>
