@@ -1,3 +1,10 @@
+2007-06-13  Brian Ripley <Brian.Ripley@R-project.org>
+
+	* DESCRIPTION (Version, Date): 3.1-83
+	Also, update authors and email addresses where known.
+	* R/lme.R: called quantile on potentially missing values.
+	* tests/missing.{R,Rout.save}: test summary methods
+
 2007-06-12  Brian Ripley <Brian.Ripley@R-project.org>
 
 	* DESCRIPTION (Version, Date): 3.1-82

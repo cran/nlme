@@ -1,13 +1,11 @@
 
-R version 2.6.0 Under development (unstable) (2007-05-29 r41742)
+R version 2.6.0 Under development (unstable) (2007-06-13 r41937)
 Copyright (C) 2007 The R Foundation for Statistical Computing
 ISBN 3-900051-07-0
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
 Type 'license()' or 'licence()' for distribution details.
-
-  Natural language support but running in an English locale
 
 R is a collaborative project with many contributors.
 Type 'contributors()' for more information and
@@ -191,6 +189,36 @@ attr(,"std")
 [301] 4.581 4.581 4.581 4.581 4.581 4.581 4.581 4.581
 attr(,"label")
 [1] "Residuals"
+> summary(fm1)
+Generalized least squares fit by REML
+  Model: follicles ~ sin(2 * pi * Time) + cos(2 * pi * Time) 
+  Data: Ovary 
+   AIC  BIC logLik
+  1560 1579 -775.1
+
+Correlation Structure: AR(1)
+ Formula: ~1 | Mare 
+ Parameter estimate(s):
+   Phi 
+0.7498 
+
+Coefficients:
+                    Value Std.Error t-value p-value
+(Intercept)        12.133    0.6574  18.456  0.0000
+sin(2 * pi * Time) -2.679    0.6436  -4.162  0.0000
+cos(2 * pi * Time) -0.862    0.6902  -1.249  0.2126
+
+ Correlation: 
+                   (Intr) s(*p*T
+sin(2 * pi * Time) -0.007       
+cos(2 * pi * Time) -0.295  0.003
+
+Standardized residuals:
+     Min       Q1      Med       Q3      Max 
+-2.38972 -0.75655 -0.01324  0.63960  3.18298 
+
+Residual standard error: 4.581 
+Degrees of freedom: 306 total; 303 residual
 > 
 > Orthodont[100:102, 2] <- NA
 > fm2 <- lme(distance ~ age + Sex, data = Orthodont, random = ~ 1,
@@ -457,6 +485,33 @@ attr(,"label")
  0.65 -0.20  1.46  0.12 
 attr(,"label")
 [1] "Residuals (mm)"
+> summary(fm2)
+Linear mixed-effects model fit by REML
+ Data: Orthodont 
+    AIC   BIC logLik
+  436.5 449.7 -213.3
+
+Random effects:
+ Formula: ~1 | Subject
+        (Intercept) Residual
+StdDev:       1.797    1.439
+
+Fixed effects: distance ~ age + Sex 
+             Value Std.Error DF t-value p-value
+(Intercept) 17.584    0.8503 77  20.679  0.0000
+age          0.671    0.0636 77  10.562  0.0000
+SexFemale   -2.268    0.7616 25  -2.978  0.0064
+ Correlation: 
+          (Intr) age   
+age       -0.822       
+SexFemale -0.357 -0.006
+
+Standardized Within-Group Residuals:
+     Min       Q1      Med       Q3      Max 
+-3.70787 -0.54714 -0.05637  0.46661  3.63142 
+
+Number of Observations: 105
+Number of Groups: 27 
 > 
 > Soybean[1:5, "Time"] <- NA
 > fm3 <- gnls(weight ~ SSlogis(Time, Asym, xmid, scal), Soybean,
@@ -702,4 +757,35 @@ attr(,"std")
 [406] 0.15959 0.34691 0.72506 1.28057 2.33481 3.84680 4.42186
 attr(,"label")
 [1] "Residuals (g)"
+> summary(fm3)
+Generalized nonlinear least squares fit
+  Model: weight ~ SSlogis(Time, Asym, xmid, scal) 
+  Data: Soybean 
+    AIC  BIC logLik
+  987.3 1007 -488.6
+
+Variance function:
+ Structure: Power of variance covariate
+ Formula: ~fitted(.) 
+ Parameter estimates:
+ power 
+0.8783 
+
+Coefficients:
+     Value Std.Error t-value p-value
+Asym 17.38    0.5251   33.11       0
+xmid 51.93    0.5982   86.80       0
+scal  7.64    0.1415   53.96       0
+
+ Correlation: 
+     Asym  xmid 
+xmid 0.788      
+scal 0.488 0.842
+
+Standardized residuals:
+      Min        Q1       Med        Q3       Max 
+-2.306636 -0.654470 -0.001905  0.501223  4.967561 
+
+Residual standard error: 0.3692 
+Degrees of freedom: 407 total; 404 residual
 > 

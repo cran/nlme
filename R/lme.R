@@ -2546,7 +2546,7 @@ summary.lme <- function(object, adjustSigma = TRUE, verbose = FALSE, ...)
   ##
   resd <- resid(object, type = "pearson")
   if (length(resd) > 5) {
-    resd <- quantile(resd)
+    resd <- quantile(resd, na.rm = TRUE) # might have NAs from na.exclude
     names(resd) <- c("Min","Q1","Med","Q3","Max")
   }
   object$residuals <- resd

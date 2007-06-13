@@ -1039,7 +1039,7 @@ summary.gls <- function(object, verbose = FALSE, ...) {
     ##
     resd <- resid(object, type = "pearson")
     if (length(resd) > 5) {
-        resd <- quantile(resd)
+        resd <- quantile(resd, na.rm = TRUE)
         names(resd) <- c("Min","Q1","Med","Q3","Max")
     }
     object$residuals <- resd
