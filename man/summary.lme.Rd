@@ -1,3 +1,7 @@
+% File nlme/man/summary.lme.Rd
+% Part of the nlme package for R
+% Distributed under GPL 2 or later: see nlme/LICENCE
+
 % $Id: summary.lme.Rd,v 1.7 2002/03/05 14:59:39 bates Exp $
 \name{summary.lme}
 \title{Summarize an lme Object}

@@ -1,3 +1,7 @@
+% File nlme/man/as.matrix.pdMat.Rd
+% Part of the nlme package for R
+% Distributed under GPL 2 or later: see nlme/LICENCE
+
 \name{as.matrix.pdMat}
 \title{Matrix of a pdMat Object}
 \usage{

@@ -1,3 +1,7 @@
+% File nlme/man/isBalanced.Rd
+% Part of the nlme package for R
+% Distributed under GPL 2 or later: see nlme/LICENCE
+
 % $Id: isBalanced.Rd,v 1.5 2002/03/05 14:59:39 bates Exp $
 \name{isBalanced}
 \alias{isBalanced}

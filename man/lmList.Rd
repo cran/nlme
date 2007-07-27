@@ -1,3 +1,7 @@
+% File nlme/man/lmList.Rd
+% Part of the nlme package for R
+% Distributed under GPL 2 or later: see nlme/LICENCE
+
 % $Id: lmList.Rd,v 1.7.2.1 2003/04/17 22:28:45 bates Exp $
 \name{lmList}
 \title{List of lm Objects with a Common Model}

@@ -1,3 +1,7 @@
+% File nlme/man/Glucose2.Rd
+% Part of the nlme package for R
+% Distributed under GPL 2 or later: see nlme/LICENCE
+
 \name{Glucose2}
 \alias{Glucose2}
 \non_function{}

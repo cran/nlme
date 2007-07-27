@@ -1,3 +1,7 @@
+% File nlme/man/Gasoline.Rd
+% Part of the nlme package for R
+% Distributed under GPL 2 or later: see nlme/LICENCE
+
 \name{Gasoline}
 \alias{Gasoline}
 \non_function{}

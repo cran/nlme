@@ -1,3 +1,7 @@
+% File nlme/man/intervals.gls.Rd
+% Part of the nlme package for R
+% Distributed under GPL 2 or later: see nlme/LICENCE
+
 % $Id: intervals.gls.Rd,v 1.9 2002/03/05 14:59:39 bates Exp $
 \name{intervals.gls}
 \title{Confidence Intervals on gls Parameters}

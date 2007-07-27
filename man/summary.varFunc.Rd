@@ -1,3 +1,7 @@
+% File nlme/man/summary.varFunc.Rd
+% Part of the nlme package for R
+% Distributed under GPL 2 or later: see nlme/LICENCE
+
 % $Id: summary.varFunc.Rd,v 1.7.2.2 2003/05/17 22:08:34 bates Exp $
 \name{summary.varFunc}
 \title{Summarize varFunc Object}

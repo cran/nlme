@@ -1,3 +1,7 @@
+% File nlme/man/Oats.Rd
+% Part of the nlme package for R
+% Distributed under GPL 2 or later: see nlme/LICENCE
+
 \name{Oats}
 \alias{Oats}
 \non_function{}

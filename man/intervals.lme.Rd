@@ -1,3 +1,7 @@
+% File nlme/man/intervals.lme.Rd
+% Part of the nlme package for R
+% Distributed under GPL 2 or later: see nlme/LICENCE
+
 % $Id: intervals.lme.Rd,v 1.8 2002/03/05 14:59:39 bates Exp $
 \name{intervals.lme}
 \title{Confidence Intervals on lme Parameters}

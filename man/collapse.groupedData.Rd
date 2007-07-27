@@ -1,3 +1,7 @@
+% File nlme/man/collapse.groupedData.Rd
+% Part of the nlme package for R
+% Distributed under GPL 2 or later: see nlme/LICENCE
+
 % $Id: collapse.groupedData.Rd,v 1.7 2002/03/05 14:59:39 bates Exp $
 \name{collapse.groupedData}
 \title{Collapse a groupedData Object}

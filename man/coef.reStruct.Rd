@@ -1,3 +1,7 @@
+% File nlme/man/coef.reStruct.Rd
+% Part of the nlme package for R
+% Distributed under GPL 2 or later: see nlme/LICENCE
+
 % $Id: coef.reStruct.Rd,v 1.7.2.2 2003/08/09 22:45:17 bates Exp $
 \name{coef.reStruct}
 \title{reStruct Object Coefficients}

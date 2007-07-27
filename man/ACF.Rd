@@ -1,3 +1,7 @@
+% File nlme/man/ACF.Rd
+% Part of the nlme package for R
+% Distributed under GPL 2 or later: see nlme/LICENCE
+
 \name{ACF}
 \title{Autocorrelation Function}
 \usage{

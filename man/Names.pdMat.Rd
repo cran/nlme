@@ -1,3 +1,7 @@
+% File nlme/man/Names.pdMat.Rd
+% Part of the nlme package for R
+% Distributed under GPL 2 or later: see nlme/LICENCE
+
 % $Id: Names.pdMat.Rd,v 1.9.2.1 2003/08/09 22:45:17 bates Exp $
 \name{Names.pdMat}
 \title{Names of a pdMat Object}

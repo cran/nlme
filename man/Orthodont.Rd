@@ -1,3 +1,7 @@
+% File nlme/man/Orthodont.Rd
+% Part of the nlme package for R
+% Distributed under GPL 2 or later: see nlme/LICENCE
+
 \name{Orthodont}
 \alias{Orthodont}
 \non_function{}

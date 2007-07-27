@@ -1,3 +1,7 @@
+% File nlme/man/logLik.reStruct.Rd
+% Part of the nlme package for R
+% Distributed under GPL 2 or later: see nlme/LICENCE
+
 % $Id: logLik.reStruct.Rd,v 1.6 2002/03/05 14:59:39 bates Exp $
 \name{logLik.reStruct}
 \title{Calculate reStruct Log-Likelihood}

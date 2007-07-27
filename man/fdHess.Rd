@@ -1,3 +1,7 @@
+% File nlme/man/fdHess.Rd
+% Part of the nlme package for R
+% Distributed under GPL 2 or later: see nlme/LICENCE
+
 \name{fdHess}
 \alias{fdHess}
 \title{Finite difference Hessian}

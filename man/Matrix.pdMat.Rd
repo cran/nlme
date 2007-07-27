@@ -1,3 +1,7 @@
+% File nlme/man/Matrix.pdMat.Rd
+% Part of the nlme package for R
+% Distributed under GPL 2 or later: see nlme/LICENCE
+
 % $Id: Matrix.pdMat.Rd,v 1.2.2.1 2003/08/09 22:45:17 bates Exp $
 \name{Matrix.pdMat}
 \title{Assign Matrix to a pdMat Object}

@@ -1,3 +1,7 @@
+% File nlme/man/coef.lme.Rd
+% Part of the nlme package for R
+% Distributed under GPL 2 or later: see nlme/LICENCE
+
 % $Id: coef.lme.Rd,v 1.9.2.1 2003/05/17 21:50:21 bates Exp $
 \name{coef.lme}
 \title{Extract lme Coefficients}

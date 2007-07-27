@@ -1,3 +1,7 @@
+% File nlme/man/qqnorm.lme.Rd
+% Part of the nlme package for R
+% Distributed under GPL 2 or later: see nlme/LICENCE
+
 % $Id: qqnorm.lme.Rd,v 1.8.2.1 2003/04/17 22:28:45 bates Exp $
 \name{qqnorm.lme}
 \title{Normal Plot of Residuals or Random Effects from an lme Object}

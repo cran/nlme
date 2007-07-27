@@ -1,3 +1,7 @@
+% File nlme/man/phenoModel.Rd
+% Part of the nlme package for R
+% Distributed under GPL 2 or later: see nlme/LICENCE
+
 \name{phenoModel}
 \alias{phenoModel}
 \title{Model function for the Phenobarb data}

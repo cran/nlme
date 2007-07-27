@@ -1,3 +1,7 @@
+% File nlme/man/Initialize.glsStruct.Rd
+% Part of the nlme package for R
+% Distributed under GPL 2 or later: see nlme/LICENCE
+
 % $Id: Initialize.glsStruct.Rd,v 1.1.2.1 2002/08/09 19:45:29 bates Exp $
 \name{Initialize.glsStruct}
 \title{Initialize a glsStruct Object}

@@ -1,3 +1,19 @@
+2007-07-26  Brian Ripley <Brian.Ripley@R-project.org>
+
+	* DESCRIPTION (Version, Date): 3.1-84
+	* LICENCE, inst/LICENCE: clarify this is licensed under GPL >= 2.
+	* README, R/*.R, src/*.[ch]: Update source for GPL.
+	* man/*.Rd: add header with licence conditions
+
+2007-07-02  Brian Ripley <Brian.Ripley@R-project.org>
+
+	* R/varFunc.R: varIdent did not look at its 'fixed' arg, PR#9765
+	* tests/varIndent.R: test for the above.
+
+2007-06-13  Brian Ripley <Brian.Ripley@R-project.org>
+
+	* R/VarCov.R: correct getVarCov.gls, PR#9752
+
 2007-06-13  Brian Ripley <Brian.Ripley@R-project.org>
 
 	* DESCRIPTION (Version, Date): 3.1-83

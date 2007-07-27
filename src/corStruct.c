@@ -1,12 +1,11 @@
-/* $Id: corStruct.c,v 1.4.2.1 2002/09/13 05:54:00 saikat Exp $
-
+/*
    Routines dealing with correlation structures.
 
    Copyright 1997-2005  Douglas M. Bates <bates@stat.wisc.edu>,
                         Jose C. Pinheiro <jose.pinheiro@pharma.novartis.com>
 			Saikat DebRoy <saikat@stat.wisc.edu>
 
-   This file is part of the nlme library for R and related languages
+   This file is part of the nlme package for R and related languages
    and is made available under the terms of the GNU General Public
    License, version 2, or at your option, any later version,
    incorporated herein by reference.
@@ -17,11 +16,10 @@
    PURPOSE.  See the GNU General Public License for more
    details.
 
-   You should have received a copy of the GNU General Public
-   License along with this program; if not, write to the Free
-   Software Foundation, Inc., 59 Temple Place - Suite 330, Boston,
-   MA 02111-1307, USA
- 
+   You should have received a copy of the GNU General Public License
+   along with this program; if not, a copy is available at
+   http://www.r-project.org/Licenses/
+
 */
 
 #include "matrix.h"

@@ -1,3 +1,7 @@
+% File nlme/man/predict.gls.Rd
+% Part of the nlme package for R
+% Distributed under GPL 2 or later: see nlme/LICENCE
+
 % $Id: predict.gls.Rd,v 1.8.2.1 2003/05/17 21:59:38 bates Exp $
 \name{predict.gls}
 \title{Predictions from a gls Object}

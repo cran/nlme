@@ -1,3 +1,7 @@
+% File nlme/man/lme.Rd
+% Part of the nlme package for R
+% Distributed under GPL 2 or later: see nlme/LICENCE
+
 % $Id: lme.Rd,v 1.6.2.1 2003/01/30 18:34:52 bates Exp $
 \name{lme}
 \title{Linear Mixed-Effects Models}

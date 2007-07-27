@@ -1,3 +1,7 @@
+% File nlme/man/logDet.reStruct.Rd
+% Part of the nlme package for R
+% Distributed under GPL 2 or later: see nlme/LICENCE
+
 % $Id: logDet.reStruct.Rd,v 1.6 2001/10/30 20:51:15 bates Exp $
 \name{logDet.reStruct}
 \title{Extract reStruct Log-Determinants}

@@ -1,3 +1,7 @@
+% File nlme/man/plot.nfnGroupedData.Rd
+% Part of the nlme package for R
+% Distributed under GPL 2 or later: see nlme/LICENCE
+
 % $Id: plot.nfnGroupedData.Rd,v 1.7.2.1 2003/04/17 22:28:45 bates Exp $
 \name{plot.nfnGroupedData}
 \title{Plot an nfnGroupedData Object}

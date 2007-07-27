@@ -1,3 +1,7 @@
+% File nlme/man/summary.nlsList.Rd
+% Part of the nlme package for R
+% Distributed under GPL 2 or later: see nlme/LICENCE
+
 % $Id: summary.nlsList.Rd,v 1.7.2.1 2003/03/25 15:15:35 bates Exp $
 \name{summary.nlsList}
 \title{Summarize an nlsList Object}

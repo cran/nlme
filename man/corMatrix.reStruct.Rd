@@ -1,3 +1,7 @@
+% File nlme/man/corMatrix.reStruct.Rd
+% Part of the nlme package for R
+% Distributed under GPL 2 or later: see nlme/LICENCE
+
 % $Id: corMatrix.reStruct.Rd,v 1.7 2002/03/05 14:59:39 bates Exp $
 \name{corMatrix.reStruct}
 \title{Extract Correlation Matrix from Components of an reStruct Object}

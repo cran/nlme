@@ -1,3 +1,7 @@
+% File nlme/man/nlsList.selfStart.Rd
+% Part of the nlme package for R
+% Distributed under GPL 2 or later: see nlme/LICENCE
+
 % $Id: nlsList.selfStart.Rd,v 1.7 2002/01/28 03:44:17 bates Exp $
 \name{nlsList.selfStart}
 \title{nlsList Fit from a selfStart Function}

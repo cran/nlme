@@ -1,3 +1,7 @@
+% File nlme/man/getGroups.varFunc.Rd
+% Part of the nlme package for R
+% Distributed under GPL 2 or later: see nlme/LICENCE
+
 % $Id: getGroups.varFunc.Rd,v 1.6.2.1 2002/08/09 19:45:29 bates Exp $
 \name{getGroups.varFunc}
 \title{Extract varFunc Groups}

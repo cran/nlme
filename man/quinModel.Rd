@@ -1,3 +1,7 @@
+% File nlme/man/quinModel.Rd
+% Part of the nlme package for R
+% Distributed under GPL 2 or later: see nlme/LICENCE
+
 \name{quinModel}
 \alias{quinModel}
 \title{Model function for the Quinidine data}

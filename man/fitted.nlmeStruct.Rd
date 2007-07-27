@@ -1,3 +1,7 @@
+% File nlme/man/fitted.nlmeStruct.Rd
+% Part of the nlme package for R
+% Distributed under GPL 2 or later: see nlme/LICENCE
+
 % $Id: fitted.nlmeStruct.Rd,v 1.5.2.1 2003/04/17 22:28:45 bates Exp $
 \name{fitted.nlmeStruct}
 \title{Calculate nlmeStruct Fitted Values}

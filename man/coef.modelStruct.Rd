@@ -1,3 +1,7 @@
+% File nlme/man/coef.modelStruct.Rd
+% Part of the nlme package for R
+% Distributed under GPL 2 or later: see nlme/LICENCE
+
 % $Id: coef.modelStruct.Rd,v 1.7.2.3 2003/08/09 22:45:17 bates Exp $
 \name{coef.modelStruct}
 \title{Extract modelStruct Object Coefficients}

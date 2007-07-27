@@ -1,3 +1,7 @@
+% File nlme/man/lmList.groupedData.Rd
+% Part of the nlme package for R
+% Distributed under GPL 2 or later: see nlme/LICENCE
+
 % $Id: lmList.groupedData.Rd,v 1.7.2.1 2003/04/17 22:28:45 bates Exp $
 \name{lmList.groupedData}
 \title{lmList Fit from a groupedData Object}

@@ -1,3 +1,7 @@
+% File nlme/man/plot.lme.Rd
+% Part of the nlme package for R
+% Distributed under GPL 2 or later: see nlme/LICENCE
+
 % $Id: plot.lme.Rd,v 1.11 2002/04/16 14:28:53 bates Exp $
 \name{plot.lme}
 \title{Plot an lme or nls object}

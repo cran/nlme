@@ -1,3 +1,7 @@
+% File nlme/man/summary.corStruct.Rd
+% Part of the nlme package for R
+% Distributed under GPL 2 or later: see nlme/LICENCE
+
 \name{summary.corStruct}
 \title{Summarize a corStruct Object}
 \usage{

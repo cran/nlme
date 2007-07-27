@@ -1,3 +1,7 @@
+% File nlme/man/Muscle.Rd
+% Part of the nlme package for R
+% Distributed under GPL 2 or later: see nlme/LICENCE
+
 \name{Muscle}
 \alias{Muscle}
 \non_function{}

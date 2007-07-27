@@ -1,3 +1,7 @@
+% File nlme/man/residuals.gls.Rd
+% Part of the nlme package for R
+% Distributed under GPL 2 or later: see nlme/LICENCE
+
 % $Id: residuals.gls.Rd,v 1.8.2.2 2003/05/17 22:04:29 bates Exp $
 \name{residuals.gls}
 \title{Extract gls Residuals}

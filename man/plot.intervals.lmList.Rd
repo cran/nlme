@@ -1,3 +1,7 @@
+% File nlme/man/plot.intervals.lmList.Rd
+% Part of the nlme package for R
+% Distributed under GPL 2 or later: see nlme/LICENCE
+
 % $Id: plot.intervals.lmList.Rd,v 1.9.2.1 2003/04/17 22:28:45 bates Exp $
 \name{plot.intervals.lmList}
 \title{Plot lmList Confidence Intervals}

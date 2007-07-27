@@ -1,3 +1,7 @@
+% File nlme/man/coef.varFunc.Rd
+% Part of the nlme package for R
+% Distributed under GPL 2 or later: see nlme/LICENCE
+
 % $Id: coef.varFunc.Rd,v 1.6.2.2 2003/08/09 22:45:17 bates Exp $
 \name{coef.varFunc}
 \title{varFunc Object Coefficients}

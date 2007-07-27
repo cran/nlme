@@ -1,3 +1,7 @@
+% File nlme/man/summary.modelStruct.Rd
+% Part of the nlme package for R
+% Distributed under GPL 2 or later: see nlme/LICENCE
+
 % $Id: summary.modelStruct.Rd,v 1.8.2.1 2003/05/17 22:07:48 bates Exp $
 \name{summary.modelStruct}
 \alias{summary.modelStruct}

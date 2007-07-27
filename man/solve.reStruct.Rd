@@ -1,3 +1,7 @@
+% File nlme/man/solve.reStruct.Rd
+% Part of the nlme package for R
+% Distributed under GPL 2 or later: see nlme/LICENCE
+
 % $Id: solve.reStruct.Rd,v 1.7 2002/03/05 14:59:39 bates Exp $
 \name{solve.reStruct}
 \title{Apply Solve to an reStruct Object}

@@ -1,3 +1,7 @@
+% File nlme/man/lme.lmList.Rd
+% Part of the nlme package for R
+% Distributed under GPL 2 or later: see nlme/LICENCE
+
 % $Id: lme.lmList.Rd,v 1.8.2.1 2003/01/30 18:35:33 bates Exp $
 \name{lme.lmList}
 \title{LME fit from lmList Object}

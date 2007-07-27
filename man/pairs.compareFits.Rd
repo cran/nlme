@@ -1,3 +1,7 @@
+% File nlme/man/pairs.compareFits.Rd
+% Part of the nlme package for R
+% Distributed under GPL 2 or later: see nlme/LICENCE
+
 % $Id: pairs.compareFits.Rd,v 1.9 2002/04/16 14:28:53 bates Exp $
 \name{pairs.compareFits}
 \title{Pairs Plot of compareFits Object}

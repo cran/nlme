@@ -1,3 +1,7 @@
+% File nlme/man/lme.groupedData.Rd
+% Part of the nlme package for R
+% Distributed under GPL 2 or later: see nlme/LICENCE
+
 % $Id: lme.groupedData.Rd,v 1.8.2.1 2003/01/30 18:35:14 bates Exp $
 \name{lme.groupedData}
 \title{LME fit from groupedData Object}

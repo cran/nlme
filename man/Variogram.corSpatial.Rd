@@ -1,3 +1,7 @@
+% File nlme/man/Variogram.corSpatial.Rd
+% Part of the nlme package for R
+% Distributed under GPL 2 or later: see nlme/LICENCE
+
 % $Id: Variogram.corSpatial.Rd,v 1.7.2.2 2003/04/17 22:28:45 bates Exp $
 \name{Variogram.corSpatial}
 \title{Calculate Semi-variogram for a corSpatial Object}

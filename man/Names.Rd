@@ -1,3 +1,7 @@
+% File nlme/man/Names.Rd
+% Part of the nlme package for R
+% Distributed under GPL 2 or later: see nlme/LICENCE
+
 % $Id: Names.Rd,v 1.5.2.1 2003/05/16 21:49:21 bates Exp $
 \name{Names}
 \title{Names Associated with an Object}

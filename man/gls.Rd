@@ -1,3 +1,7 @@
+% File nlme/man/gls.Rd
+% Part of the nlme package for R
+% Distributed under GPL 2 or later: see nlme/LICENCE
+
 % $Id: gls.Rd,v 1.6 2002/01/28 03:44:17 bates Exp $
 \name{gls}
 \title{Fit Linear Model Using Generalized Least Squares}

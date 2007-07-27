@@ -1,3 +1,7 @@
+% File nlme/man/corMatrix.corStruct.Rd
+% Part of the nlme package for R
+% Distributed under GPL 2 or later: see nlme/LICENCE
+
 % $Id: corMatrix.corStruct.Rd,v 1.9.2.1 2002/08/09 19:45:29 bates Exp $
 \name{corMatrix.corStruct}
 \title{Matrix of a corStruct Object}

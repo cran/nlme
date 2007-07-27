@@ -1,3 +1,7 @@
+% File nlme/man/update.modelStruct.Rd
+% Part of the nlme package for R
+% Distributed under GPL 2 or later: see nlme/LICENCE
+
 % $Id: update.modelStruct.Rd,v 1.6 2002/03/05 14:59:39 bates Exp $
 \name{update.modelStruct}
 \title{Update a modelStruct Object}

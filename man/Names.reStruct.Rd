@@ -1,3 +1,7 @@
+% File nlme/man/Names.reStruct.Rd
+% Part of the nlme package for R
+% Distributed under GPL 2 or later: see nlme/LICENCE
+
 % $Id: Names.reStruct.Rd,v 1.8.2.1 2003/08/09 22:45:17 bates Exp $
 \name{Names.reStruct}
 \title{Names of an reStruct Object}

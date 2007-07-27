@@ -1,3 +1,7 @@
+% File nlme/man/plot.gls.Rd
+% Part of the nlme package for R
+% Distributed under GPL 2 or later: see nlme/LICENCE
+
 % $Id: plot.gls.Rd,v 1.10 2002/04/16 14:28:53 bates Exp $
 \name{plot.gls}
 \title{Plot a gls Object}

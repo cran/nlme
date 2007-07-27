@@ -1,3 +1,7 @@
+% File nlme/man/varComb.Rd
+% Part of the nlme package for R
+% Distributed under GPL 2 or later: see nlme/LICENCE
+
 % $Id: varComb.Rd,v 1.5.2.1 2003/04/17 22:28:45 bates Exp $
 \name{varComb}
 \title{Combination of Variance Functions}

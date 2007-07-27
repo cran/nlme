@@ -1,3 +1,7 @@
+% File nlme/man/LDEsysMat.Rd
+% Part of the nlme package for R
+% Distributed under GPL 2 or later: see nlme/LICENCE
+
 \name{LDEsysMat}
 \alias{LDEsysMat}
 \title{Generate system matrix for LDEs}
