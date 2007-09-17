@@ -329,7 +329,9 @@ coef.varIdent <-
 #    if (nGroups == 0) {
 #      stop("Cannot assign parameters of uninitialized varIdent object")
 #    }
-    if (length(value) != nGroups - 1) {
+    ## fix from PR#9831
+    nFixed  <- sum(as.numeric(attr(object,"whichFix")))
+    if (length(value) != nGroups - nFixed - 1) {
       stop(paste("Cannot change the length of the varIdent",
 		 "parameter after initialization"))
     }

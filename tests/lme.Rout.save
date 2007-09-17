@@ -1,5 +1,5 @@
 
-R version 2.5.0 Patched (2007-06-12 r41926)
+R version 2.6.0 alpha (2007-09-17 r42887)
 Copyright (C) 2007 The R Foundation for Statistical Computing
 ISBN 3-900051-07-0
 
@@ -114,6 +114,7 @@ attr(,"label")
 > fm1 <- lme(distance ~ age, data = Orthodont,
 + 	   control = lmeControl(msMaxIter = 1, returnObject = TRUE))
 Warning message:
-nlminb problem, convergence error code = 1
-  message = iteration limit reached without convergence (9) in: lme.formula(distance ~ age, data = Orthodont, control = lmeControl(msMaxIter = 1,  
+In lme.formula(distance ~ age, data = Orthodont, control = lmeControl(msMaxIter = 1,  :
+  nlminb problem, convergence error code = 1
+  message = iteration limit reached without convergence (9)
 > 

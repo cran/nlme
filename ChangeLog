@@ -1,3 +1,13 @@
+2007-09-17  Brian Ripley <Brian.Ripley@R-project.org>
+
+	* DESCRIPTION (Version, Date): 3.1-85
+	Also, use approved form of GPL (>=2).
+	* R/varFunc.R: fix for PR#9831.
+	* tests/coef.R: test for the above.
+	* tests/lme.Rout.save: update format for R >= 2.6.0.
+	* man/corRatio.Rd: wrong formula, reported to R-devel by
+	Ben Bolker on 2007-09-03.
+
 2007-07-26  Brian Ripley <Brian.Ripley@R-project.org>
 
 	* DESCRIPTION (Version, Date): 3.1-84
