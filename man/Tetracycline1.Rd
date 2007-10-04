@@ -4,7 +4,6 @@
 
 \name{Tetracycline1}
 \alias{Tetracycline1}
-\non_function{}
 \title{Pharmacokinetics of tetracycline}
 \description{
     The \code{Tetracycline1} data frame has 40 rows and 4 columns.
@@ -28,8 +27,6 @@
 	    \code{tetracyn} 
 	}
     }
-}
-\details{
 }
 \source{
     Pinheiro, J. C. and Bates, D. M. (2000), \emph{Mixed-Effects Models in S

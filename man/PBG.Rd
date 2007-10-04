@@ -4,7 +4,6 @@
 
 \name{PBG}
 \alias{PBG}
-\non_function{}
 \title{Effect of Phenylbiguanide on Blood Pressure}
 \description{
     The \code{PBG} data frame has 60 rows and 5 columns.

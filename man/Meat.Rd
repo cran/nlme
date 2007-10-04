@@ -4,7 +4,6 @@
 
 \name{Meat}
 \alias{Meat}
-\non_function{}
 \title{Tenderness of meat}
 \description{
   The \code{Meat} data frame has 30 rows and 4 columns.

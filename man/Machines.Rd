@@ -4,7 +4,6 @@
 
 \name{Machines}
 \alias{Machines}
-\non_function{}
 \title{Productivity Scores for Machines and Workers}
 \description{
   The \code{Machines} data frame has 54 rows and 3 columns.

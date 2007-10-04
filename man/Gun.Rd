@@ -4,7 +4,6 @@
 
 \name{Gun}
 \alias{Gun}
-\non_function{}
 \title{Methods for firing naval guns}
 \description{
   The \code{Gun} data frame has 36 rows and 4 columns.

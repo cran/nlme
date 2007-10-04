@@ -57,6 +57,4 @@ quinModel(Subject, time, conc, dose, interval, lV, lKa, lCl)
 \author{Jose Pinheiro \email{jose.pinheiro@pharma.novartis.com}
   and Douglas Bates \email{bates@stat.wisc.edu}
 }
-\examples{
-}
 \keyword{models}

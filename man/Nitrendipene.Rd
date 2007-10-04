@@ -4,7 +4,6 @@
 
 \name{Nitrendipene}
 \alias{Nitrendipene}
-\non_function{}
 \title{Assay of nitrendipene}
 \description{
     The \code{Nitrendipene} data frame has 89 rows and 4 columns.
@@ -26,9 +25,6 @@
 	    a numeric vector
 	}
     }
-}
-\details{
-
 }
 \source{
   Bates, D. M. and Watts, D. G. (1988), \emph{Nonlinear Regression

@@ -4,7 +4,6 @@
 
 \name{Spruce}
 \alias{Spruce}
-\non_function{}
 \title{Growth of Spruce Trees}
 \description{
   The \code{Spruce} data frame has 1027 rows and 4 columns.

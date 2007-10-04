@@ -4,7 +4,6 @@
 
 \name{Wheat2}
 \alias{Wheat2}
-\non_function{}
 \title{Wheat Yield Trials}
 \description{
     The \code{Wheat2} data frame has 224 rows and 5 columns.
@@ -85,8 +84,6 @@
 	    a numeric vector
 	}
     }
-}
-\details{
 }
 \source{
     Pinheiro, J. C. and Bates, D. M. (2000), \emph{Mixed-Effects Models in S

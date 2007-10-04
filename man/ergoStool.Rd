@@ -4,7 +4,6 @@
 
 \name{ergoStool}
 \alias{ergoStool}
-\non_function{}
 \title{Ergometrics experiment with stool types}
 \description{
     The \code{ergoStool} data frame has 36 rows and 3 columns.

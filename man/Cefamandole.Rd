@@ -4,7 +4,6 @@
 
 \name{Cefamandole}
 \alias{Cefamandole}
-\non_function{}
 \title{Pharmacokinetics of Cefamandole}
 \description{
   The \code{Cefamandole} data frame has 84 rows and 3 columns.

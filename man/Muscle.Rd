@@ -4,7 +4,6 @@
 
 \name{Muscle}
 \alias{Muscle}
-\non_function{}
 \title{Contraction of heart muscle sections}
 \description{
     The \code{Muscle} data frame has 60 rows and 3 columns.

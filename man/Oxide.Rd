@@ -4,7 +4,6 @@
 
 \name{Oxide}
 \alias{Oxide}
-\non_function{}
 \title{Variability in Semiconductor Manufacturing}
 \description{
   The \code{Oxide} data frame has 72 rows and 5 columns.

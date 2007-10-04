@@ -4,7 +4,6 @@
 
 \name{Remifentanil}
 \alias{Remifentanil}
-\non_function{}
 \title{Pharmacokinetics of remifentanil}
 \description{
     The \code{Remifentanil} data frame has 2107 rows and 12 columns.
@@ -51,8 +50,6 @@
 	    a numeric vector
 	}
     }
-}
-\details{
 }
 \source{
     Pinheiro, J. C. and Bates, D. M. (2000), \emph{Mixed-Effects Models in S

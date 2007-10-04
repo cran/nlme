@@ -4,7 +4,6 @@
 
 \name{Glucose2}
 \alias{Glucose2}
-\non_function{}
 \title{Glucose Levels Following Alcohol Ingestion}
 \description{
   The \code{Glucose2} data frame has 196 rows and 4 columns.

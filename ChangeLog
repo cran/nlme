@@ -1,3 +1,7 @@
+2007-10-04  Brian Ripley <Brian.Ripley@R-project.org>
+
+	* R/corStruct.R: check for uninitialized corARMA structures.
+
 2007-09-17  Brian Ripley <Brian.Ripley@R-project.org>
 
 	* DESCRIPTION (Version, Date): 3.1-85

@@ -4,7 +4,6 @@
 
 \name{Quinidine}
 \alias{Quinidine}
-\non_function{}
 \title{Quinidine Kinetics}
 \description{
   The \code{Quinidine} data frame has 1471 rows and 14 columns.

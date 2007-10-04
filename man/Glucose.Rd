@@ -4,7 +4,6 @@
 
 \name{Glucose}
 \alias{Glucose}
-\non_function{}
 \title{Glucose levels over time}
 \description{
     The \code{Glucose} data frame has 378 rows and 4 columns.

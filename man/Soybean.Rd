@@ -4,7 +4,6 @@
 
 \name{Soybean}
 \alias{Soybean}
-\non_function{}
 \title{Growth of soybean plants}
 \description{
   The \code{Soybean} data frame has 412 rows and 5 columns.

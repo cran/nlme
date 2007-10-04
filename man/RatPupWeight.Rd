@@ -4,7 +4,6 @@
 
 \name{RatPupWeight}
 \alias{RatPupWeight}
-\non_function{}
 \title{The weight of rat pups}
 \description{
     The \code{RatPupWeight} data frame has 322 rows and 5 columns.
@@ -32,8 +31,6 @@
 	    \code{Control} < \code{Low} < \code{High}
 	}
     }
-}
-\details{
 }
 \source{
     Pinheiro, J. C. and Bates, D. M. (2000), \emph{Mixed-Effects Models in S

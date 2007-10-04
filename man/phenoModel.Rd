@@ -41,6 +41,4 @@ phenoModel(Subject, time, dose, lCl, lV)
 \author{Jose Pinheiro \email{jose.pinheiro@pharma.novartis.com}
   and Douglas Bates \email{bates@stat.wisc.edu}
 }
-\examples{
-}
 \keyword{models}

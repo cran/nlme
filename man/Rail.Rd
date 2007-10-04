@@ -4,7 +4,6 @@
 
 \name{Rail}
 \alias{Rail}
-\non_function{}
 \title{Evaluation of Stress in Railway Rails}
 \description{
     The \code{Rail} data frame has 18 rows and 2 columns.

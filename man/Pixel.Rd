@@ -4,7 +4,6 @@
 
 \name{Pixel}
 \alias{Pixel}
-\non_function{}
 \title{X-ray pixel intensities over time}
 \description{
     The \code{Pixel} data frame has 102 rows and 4 columns of data on the

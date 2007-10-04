@@ -4,7 +4,6 @@
 
 \name{Alfalfa}
 \alias{Alfalfa}
-\non_function{}
 \title{Split-Plot Experiment on Varieties of Alfalfa}
 \description{
   The \code{Alfalfa} data frame has 72 rows and 4 columns.

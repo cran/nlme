@@ -1207,6 +1207,8 @@ corARMA <-
 corFactor.corARMA <-
   function(object, ...)
 {
+    maxLag <- attr(object, "maxLag")
+    if(is.null(maxLag)) stop("'object' has not been Initialize()d")
   corD <- Dim(object)
   val <- .C(ARMA_factList,
 	    as.double(as.vector(object)),
@@ -1239,6 +1241,7 @@ corMatrix.corARMA <-
   p <- attr(object, "p")
   q <- attr(object, "q")
   maxLag <- attr(object, "maxLag")
+  if(is.null(maxLag)) stop("'object' has not been Initialize()d")
   if (corr) {
     val <- .C(ARMA_matList,
 	      as.double(as.vector(object)),
@@ -1307,6 +1310,8 @@ coef.corARMA <-
 "coef<-.corARMA" <-
   function(object, ..., value)
 {
+  maxLag <- attr(object, "maxLag")
+  if(is.null(maxLag)) stop("'object' has not been Initialize()d")
   if (length(value) != length(object)) {
     stop("Cannot change the length of the parameter of a corStruct object")
   }
@@ -1359,6 +1364,8 @@ Initialize.corARMA <-
 recalc.corARMA <-
   function(object, conLin, ...)
 {
+    maxLag <- attr(object, "maxLag")
+    if(is.null(maxLag)) stop("'object' has not been Initialize()d")
   val <-
     .C(ARMA_recalc,
      Xy = as.double(conLin[["Xy"]]),

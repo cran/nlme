@@ -4,7 +4,6 @@
 
 \name{BodyWeight}
 \alias{BodyWeight}
-\non_function{}
 \title{Rat weight over time for different diets}
 \description{
     The \code{BodyWeight} data frame has 176 rows and 4 columns.

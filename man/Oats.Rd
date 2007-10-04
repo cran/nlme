@@ -4,7 +4,6 @@
 
 \name{Oats}
 \alias{Oats}
-\non_function{}
 \title{Split-plot Experiment on Varieties of Oats}
 \description{
   The \code{Oats} data frame has 72 rows and 4 columns.

@@ -4,7 +4,6 @@
 
 \name{bdf}
 \alias{bdf}
-\non_function{}
 \title{Language scores}
 \usage{data(bdf)}
 \description{

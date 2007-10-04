@@ -4,7 +4,6 @@
 
 \name{Gasoline}
 \alias{Gasoline}
-\non_function{}
 \title{Refinery yield of gasoline}
 \description{
   The \code{Gasoline} data frame has 32 rows and 6 columns.

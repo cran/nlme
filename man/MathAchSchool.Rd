@@ -4,7 +4,6 @@
 
 \name{MathAchSchool}
 \alias{MathAchSchool}
-\non_function{}
 \title{School demographic data for MathAchieve}
 \description{
     The \code{MathAchSchool} data frame has 160 rows and 7 columns.

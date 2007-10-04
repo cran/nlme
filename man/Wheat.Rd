@@ -4,7 +4,6 @@
 
 \name{Wheat}
 \alias{Wheat}
-\non_function{}
 \title{Yields by growing conditions}
 \description{
     The \code{Wheat} data frame has 48 rows and 4 columns.
@@ -26,8 +25,6 @@
 	    a numeric vector
 	}
     }
-}
-\details{
 }
 \source{
     Pinheiro, J. C. and Bates, D. M. (2000), \emph{Mixed-Effects Models in S

@@ -4,7 +4,6 @@
 
 \name{IGF}
 \alias{IGF}
-\non_function{}
 \title{Radioimmunoassay of IGF-I Protein}
 \description{
     The \code{IGF} data frame has 237 rows and 3 columns.

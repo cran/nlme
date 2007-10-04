@@ -4,7 +4,6 @@
 
 \name{Oxboys}
 \alias{Oxboys}
-\non_function{}
 \title{Heights of Boys in Oxford}
 \description{
   The \code{Oxboys} data frame has 234 rows and 4 columns.
