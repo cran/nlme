@@ -63,12 +63,14 @@ print.modelStruct <-
       print(aux)
     }
   }
+  invisible(x)
 }
 
 print.summary.modelStruct <-
   function(x, ...)
 {
   lapply(x, print, ...)
+  invisible(x)
 }
 
 recalc.modelStruct <-

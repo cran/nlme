@@ -679,6 +679,7 @@ print.compareFits <-
   function(x, ...)
 {			# Will need to be changed for S4!
   print(unclass(x), ...)
+  invisible(x)
 }
 
 print.correlation <-

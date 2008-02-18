@@ -22,10 +22,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: R 2.3.0\n"
+"Project-Id-Version: R 2.7.0\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
-"POT-Creation-Date: 2005-12-09 11:05\n"
-"PO-Revision-Date: 2005-12-09 11:05\n"
+"POT-Creation-Date: 2007-12-16 11:46\n"
+"PO-Revision-Date: 2007-12-16 11:46\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
 "MIME-Version: 1.0\n"
@@ -129,6 +129,9 @@ msgstr "Initial value for parameter of wrong length"
 msgid "Parameters in ARMA structure must be < 1 in absolute value"
 msgstr "Parameters in ARMA structure must be < 1 in absolute value"
 
+msgid "'object' has not been Initialize()d"
+msgstr "‘object’ has not been Initialize()d"
+
 msgid "within groups for corARMA objects"
 msgstr "within groups for corARMA objects"
 
@@ -188,6 +191,9 @@ msgstr "Negative control$nlmStepMax - using default value"
 
 msgid "Model must be a formula of the form \"resp ~ pred\""
 msgstr "Model must be a formula of the form “resp ~ pred”"
+
+msgid "no coefficients to fit"
+msgstr "no coefficients to fit"
 
 msgid "Maximum number of iterations reached without convergence."
 msgstr "Maximum number of iterations reached without convergence."
@@ -521,6 +527,9 @@ msgstr "Cannot evaluate groups for desired levels on “newdata”"
 
 msgid "Augmentation of random effects only available for single level"
 msgstr "Augmentation of random effects only available for single level"
+
+msgid "'nint' is not consistent with 'breaks'"
+msgstr "‘nint’ is not consistent with ‘breaks’"
 
 msgid "No condensed linear model"
 msgstr "No condensed linear model"

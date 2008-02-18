@@ -912,6 +912,7 @@ print.intervals.gls <-
         if (i == "sigma") print(c(aux), ...)
         else print(as.matrix(aux), ...)
     }
+    invisible(x)
 }
 
 print.gls <-
@@ -946,6 +947,7 @@ print.gls <-
     cat("Degrees of freedom:", dd[["N"]],"total;",dd[["N"]] - dd[["p"]],
         "residual\n")
     cat("Residual standard error:", format(x$sigma),"\n")
+    invisible(x)
 }
 
 print.summary.gls <-
@@ -996,6 +998,7 @@ print.summary.gls <-
     cat("Residual standard error:", format(x$sigma),"\n")
     cat("Degrees of freedom:", dd[["N"]],"total;",dd[["N"]] - dd[["p"]],
         "residual\n")
+    invisible(x)
 }
 
 residuals.gls <-

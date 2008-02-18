@@ -129,6 +129,7 @@ logLik.varFunc <-
 print.summary.varFunc <-
   function(x, header = TRUE, ...)
 {
+  ox <- x
   class(x) <- attr(x, "oClass")
   if (length(aux <- coef(x, uncons = FALSE, allCoef = TRUE)) > 0) {
     if (header) cat("Variance function:\n")
@@ -144,6 +145,7 @@ print.summary.varFunc <-
     cat("Variance function structure of class", class(x)[1],
 	"with no parameters, or uninitialized\n")
   }
+  invisible(ox)
 }
 
 print.varFunc <-
@@ -152,11 +154,12 @@ print.varFunc <-
   if (length(aux <- coef(x, uncons = FALSE, allCoef = TRUE)) > 0) {
     cat("Variance function structure of class", class(x)[1],
 	"representing\n")
-    print(invisible(aux), ...)
+    print(aux, ...)
   } else {
     cat("Variance function structure of class", class(x)[1],
 	"with no parameters, or uninitialized\n")
   }
+  invisible(x)
 }
 
 recalc.varFunc <-
@@ -241,6 +244,7 @@ print.summary.varFixed <-
   cat("Variance function:\n")
   cat(" Structure: fixed weights\n")
   cat(paste(" Formula:", deparse(formula(x)),"\n"))
+  invisible(x)
 }
 
 summary.varFixed <-
@@ -1243,7 +1247,7 @@ print.varComb <-
 {
   cat("Combination of:\n")
   lapply(x, print)
-  invisible()
+  invisible(x)
 }
 
 print.summary.varComb <-
@@ -1251,6 +1255,7 @@ print.summary.varComb <-
 {
   cat(attr(x, "structName"),"\n")
   lapply(x, print, FALSE)
+  invisible(x)
 }
 
 summary.varComb <-

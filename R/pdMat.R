@@ -440,11 +440,12 @@ print.pdMat <-
 {
   if (isInitialized(x)) {
     cat("Positive definite matrix structure of class", class(x)[1], "representing\n")
-    print(invisible(as.matrix(x)), ...)
+    print(as.matrix(x), ...)
   } else {
     cat("Uninitialized positive definite matrix structure of class ", class(x)[1],
 	".\n", sep = "")
   }
+  invisible(x)
 }
 
 print.summary.pdMat <-

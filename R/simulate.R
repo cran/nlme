@@ -331,6 +331,7 @@ simulate.lme <-
 print.simulate.lme <-
     function(x, ...)
 {
+    ox <- x
     if (is.null(attr(x, "useGen"))) {     # from simulate.lme
         attr(x$null, "dims") <- NULL
         if (!is.null(x$alt)) {
@@ -341,6 +342,7 @@ print.simulate.lme <-
     }
     attr(x, "seed") <- attr(x, "call") <- NULL
     NextMethod()
+    invisible(ox)
 }
 
 

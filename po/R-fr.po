@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nlme 3.1-65\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
-"POT-Creation-Date: 2005-12-09 11:05\n"
+"POT-Creation-Date: 2007-12-16 11:46\n"
 "PO-Revision-Date: 2005-12-08 18:58+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -120,6 +120,9 @@ msgstr "La valeur initiale du paramètre est de la mauvaise taille"
 msgid "Parameters in ARMA structure must be < 1 in absolute value"
 msgstr "Les paramètres d'une structure ARMA doivent être < 1 en valeur absolue"
 
+msgid "'object' has not been Initialize()d"
+msgstr ""
+
 msgid "within groups for corARMA objects"
 msgstr "intragroupes pour les objets 'corARMA'"
 
@@ -186,6 +189,9 @@ msgstr "control$nlmStepMax négatif - utilisation de la valeur par défaut"
 
 msgid "Model must be a formula of the form \"resp ~ pred\""
 msgstr "Le modèle doit être une formule de la forme \"rep ~ pred\""
+
+msgid "no coefficients to fit"
+msgstr ""
 
 msgid "Maximum number of iterations reached without convergence."
 msgstr "Le nombre maximum d'itérations est atteint mais pas la convergence"
@@ -258,8 +264,8 @@ msgstr "non autorisés pour"
 msgid "need an object with call component"
 msgstr "nécessite un objet avec une composante 'call'"
 
-msgid "'nint' is not consistent with 'breaks'"
-msgstr "'nint' n'est pas consistant avec 'breaks'"
+msgid "Nint is not consistent with breaks."
+msgstr "'Nint' n'est pas consistant avec 'breaks'"
 
 msgid "\"object\" must be a formula"
 msgstr "\"object\" doit être une formule"
@@ -558,6 +564,9 @@ msgstr ""
 msgid "Augmentation of random effects only available for single level"
 msgstr ""
 "L'augmentation des effets aléatoires n'est disponible que pour un seul niveau"
+
+msgid "'nint' is not consistent with 'breaks'"
+msgstr "'nint' n'est pas consistant avec 'breaks'"
 
 msgid "No condensed linear model"
 msgstr "Modèle linéaire non condensé"

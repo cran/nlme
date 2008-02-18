@@ -128,5 +128,6 @@ print.VarCov <-
             pvc(x[[nm]],class(x)[1],corr,stdevs,digits)
         }
     }
+    invisible(x)
 }
 

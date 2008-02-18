@@ -1,3 +1,24 @@
+2008-02-18  Brian Ripley <Brian.Ripley@R-project.org>
+
+	* DESCRIPTION (Version, Date): 3.1-87
+	* R/gnls.R, tests/gls.R: fix for PR#10364, missing row names
+	on predict.gnls.
+
+2008-02-11  Duncan Murdoch <murdoch@stats.uwo.ca>
+
+	* R/*.R: Return invisible(x) from numerous print methods.
+
+2007-12-30  Douglas Bates <bates@stat.wisc.edu>
+
+	* [r4884] man/plot.nffGroupedData.Rd: Correct malformed link reported
+	  by Yihui Xie <xieyihui@gmail.com>. Remove reference to nonexistent
+	  URL.
+	* [r4885] Initialize.reStruct.Rd, collapse.groupedData.Rd,
+	  fitted.lmeStruct.Rd, lme.Rd, lme.groupedData.Rd, lme.lmList.Rd,
+	  logLik.reStruct.Rd, nlme.nlsList.Rd, plot.nfnGroupedData.Rd,
+	  plot.nmGroupedData.Rd, recalc.reStruct.Rd, residuals.lme.Rd,
+	  residuals.lmeStruct.Rd: Remove reference to nonexistent URL
+	
 2007-10-04  Brian Ripley <Brian.Ripley@R-project.org>
 
 	* R/corStruct.R: check for uninitialized corARMA structures.

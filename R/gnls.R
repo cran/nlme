@@ -689,7 +689,8 @@ predict.gnls <-
   ## making sure factor levels are the same as in contrasts
   contr <- object$contrasts
   for(i in names(dataMod)) {
-    if (inherits(dataMod[,i], "factor") && !is.null(contr[[i]])) {
+    if (inherits(dataMod[,i], "factor") &&
+        !is.null(contr[[i]]) && is.matrix(contr[[i]]) ) {
       levs <- levels(dataMod[,i])
       levsC <- dimnames(contr[[i]])[[1]]
       if (any(wch <- is.na(match(levs, levsC)))) {
@@ -750,6 +751,7 @@ predict.gnls <-
   modForm <- getCovariateFormula(object)[[2]]
   val <- eval(modForm, data.frame(dataMod,
               getParsGnls(plist, object$pmap, prs, N)))[naPat]
+  names(val) <- row.names(newdata)
   lab <- "Predicted values"
   if (!is.null(aux <- attr(object, "units")$y)) {
     lab <- paste(lab, aux)

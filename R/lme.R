@@ -1997,6 +1997,7 @@ predict.lme <-
 print.anova.lme <-
   function(x, verbose = attr(x, "verbose"), ...)
 {
+  ox <- x
   if ((rt <- attr(x,"rt")) == 1) {
     if (!is.null(lab <- attr(x, "label"))) {
       cat(lab)
@@ -2039,8 +2040,9 @@ print.anova.lme <-
       }
       x[[i]] <- xx
     }
-    invisible(print(as.data.frame(x)))
+    print(as.data.frame(x))
   }
+  invisible(ox)
 }
 
 print.intervals.lme <-
@@ -2061,6 +2063,7 @@ print.intervals.lme <-
       else print(as.matrix(aux), ...)
     }
   }
+  invisible(x)
 }
 
 print.lme <-
@@ -2105,6 +2108,7 @@ print.lme <-
     cat("\n")
     print(rev(Ngrps))
   }
+  invisible(x)
 }
 
 print.ranef.lme <-
@@ -2119,7 +2123,7 @@ print.ranef.lme <-
       if (i < length(x)) cat("\n")
     }
   }
-  invisible(0)
+  invisible(x)
 }
 
 print.summary.lme <-
@@ -2189,6 +2193,7 @@ print.summary.lme <-
     cat("\n")
     print(rev(Ngrps))
   }
+  invisible(x)
 }
 
 qqnorm.lme <-

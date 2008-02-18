@@ -386,6 +386,7 @@ needUpdate.reStruct <-
 print.reStruct <-
   function(x, sigma = 1, reEstimates, verbose = FALSE, ...)
 {
+  ox <- x
   if (isInitialized(x)) {
     nobj <- length(x)
     if (is.null(namx <- names(x))) names(x) <- nobj:1
@@ -407,6 +408,7 @@ print.reStruct <-
   } else {
     cat("Uninitialized random effects structure\n")
   }
+  invisible(ox)
 }
 
 recalc.reStruct <-

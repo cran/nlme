@@ -267,10 +267,11 @@ print.corStruct <-
 {
   if (length(aux <- coef(x, unconstrained = FALSE)) > 0) {
     cat("Correlation structure of class", class(x)[1], "representing\n")
-    print(invisible(aux), ...)
+    print(aux, ...)
   } else {
     cat("Uninitialized correlation structure of class", class(x)[1], "\n")
   }
+  invisible(x)
 }
 
 print.summary.corStruct <-
@@ -281,6 +282,7 @@ print.summary.corStruct <-
   cat(paste(" Formula:", deparse(formula(x)),"\n"))
   cat(" Parameter estimate(s):\n")
   print(coef(x, unconstrained = FALSE))
+  invisible(x)
 }
 
 
@@ -507,6 +509,7 @@ print.corSymm <-
     print(val, ...)
   }
   else cat("Unitialized correlation structure of class corSymm\n")
+  invisible(x)
 }
 
 print.summary.corSymm <-
@@ -523,6 +526,7 @@ print.summary.corSymm <-
     class(val) <- "correlation"
     print(val, ...)
   } else cat("Unitialized correlation structure of class corSymm\n")
+  invisible(x)
 }
 
 recalc.corSymm <-
@@ -742,6 +746,7 @@ print.corNatural <-
     print(val, ...)
   }
   else cat("Unitialized correlation structure of class corNatural\n")
+  invisible(x)
 }
 
 print.summary.corNatural <-
@@ -759,6 +764,7 @@ print.summary.corNatural <-
     class(val) <- "correlation"
     print(val, ...)
   } else cat("Unitialized correlation structure of class corNatural\n")
+  invisible(x)
 }
 
 recalc.corNatural <-

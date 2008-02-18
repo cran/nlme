@@ -94,21 +94,17 @@
   \code{random.effects}  can be used to extract some of its components.
 }
 \references{
- The computational methods are described in Bates, D.M. and Pinheiro
- (1998) and follow on the general framework of Lindstrom, M.J. and Bates,
- D.M. (1988). The model formulation is described in Laird, N.M. and Ware,
- J.H. (1982).  The variance-covariance parametrizations are described in
- <Pinheiro, J.C. and Bates., D.M.  (1996).   The different correlation
- structures available for the \code{correlation} argument are described
- in Box, G.E.P., Jenkins, G.M., and Reinsel G.C. (1994), Littel, R.C.,
- Milliken, G.A., Stroup, W.W., and Wolfinger, R.D. (1996), and Venables,
- W.N. and Ripley, B.D. (1997). The use of variance functions for linear
- and nonlinear mixed effects models is presented in detail in Davidian,
- M. and Giltinan, D.M. (1995). 
-
- Bates, D.M. and Pinheiro, J.C. (1998) "Computational methods for
- multilevel models" available in PostScript or PDF formats at
- http://franz.stat.wisc.edu/pub/NNLME/
+ The computational methods follow on the general framework of Lindstrom,
+ M.J. and Bates, D.M. (1988). The model formulation is described in
+ Laird, N.M. and Ware, J.H. (1982).  The variance-covariance
+ parametrizations are described in <Pinheiro, J.C. and Bates., D.M.
+ (1996).  The different correlation structures available for the
+ \code{correlation} argument are described in Box, G.E.P., Jenkins,
+ G.M., and Reinsel G.C. (1994), Littel, R.C., Milliken, G.A., Stroup,
+ W.W., and Wolfinger, R.D. (1996), and Venables, W.N. and Ripley,
+ B.D. (1997). The use of variance functions for linear and nonlinear
+ mixed effects models is presented in detail in Davidian, M. and
+ Giltinan, D.M. (1995).
  
  Box, G.E.P., Jenkins, G.M., and Reinsel G.C. (1994) "Time Series
  Analysis: Forecasting and Control", 3rd Edition, Holden-Day. 

@@ -949,9 +949,11 @@ predict.lmList <-
 print.intervals.lmList <-
   function(x, ...)
 {
+  ox <- x
   x <- unclass(x)
   attr(x, "groupsName") <- NULL
   print(x, ...)
+  invisible(ox)
 }
 
 print.lmList <-
@@ -979,6 +981,7 @@ print.lmList <-
     cat("Residual standard error:", format(RSE))
     cat("\n")
   }
+  invisible(x)
 }
 
 print.summary.lmList <-
@@ -1004,6 +1007,7 @@ print.summary.lmList <-
 	x$df.residual, "degrees of freedom\n")
   }
   cat("\n")
+  invisible(x)
 }
 
 qqnorm.lmList <-

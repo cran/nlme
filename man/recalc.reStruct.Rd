@@ -36,12 +36,6 @@
   the condensed linear model with its \code{logLik} component updated.
 }
 
-\references{
-  Bates, D.M. and Pinheiro, J.C. (1998) "Computational methods for
-  multilevel models" available in PostScript or PDF formats at
-  http://franz.stat.wisc.edu/pub/NLME/
-}
-
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 
 \seealso{

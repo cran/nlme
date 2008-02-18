@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: bugs@R-project.org\n"
-"POT-Creation-Date: 2005-12-09 11:05+0000\n"
+"POT-Creation-Date: 2007-12-16 11:46+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,43 +16,43 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: corStruct.c:451
+#: corStruct.c:449
 msgid "All parameters must be less than 1 in absolute value"
 msgstr ""
 
-#: corStruct.c:562
+#: corStruct.c:560
 msgid "Coefficient matrix not invertible"
 msgstr ""
 
-#: corStruct.c:914 corStruct.c:969 corStruct.c:1036 corStruct.c:1078
+#: corStruct.c:912 corStruct.c:967 corStruct.c:1034 corStruct.c:1076
 msgid "Unknown spatial correlation class"
 msgstr ""
 
-#: nlme.c:500
+#: nlme.c:498
 msgid "First observation on an individual must have a dose"
 msgstr ""
 
-#: nlmefit.c:401
+#: nlmefit.c:400
 #, c-format
 msgid "Singularity in backsolve at level %ld, block %ld"
 msgstr ""
 
-#: nlmefit.c:558
+#: nlmefit.c:557
 msgid "analytic gradient is not available with matrix logarithm"
 msgstr ""
 
-#: nlmefit.c:581
+#: nlmefit.c:580
 msgid "analytic gradient is not available with compound symmetry"
 msgstr ""
 
-#: nlmefit.c:861
+#: nlmefit.c:860
 msgid "Unable to form eigenvalue-eigenvector decomposition"
 msgstr ""
 
-#: nlmefit.c:893
+#: nlmefit.c:892
 msgid "Unable to form Cholesky decomposition"
 msgstr ""
 
-#: nlmefit.c:924
+#: nlmefit.c:923
 msgid "Haven't written the compound symmetry case for this yet"
 msgstr ""

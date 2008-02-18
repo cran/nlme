@@ -79,6 +79,7 @@ print.VarCorr.lme <- function(x, ...)
     attr(x, "title") <- NULL
   }
   print(unclass(x), ..., quote = FALSE )
+  invisible(x)
 }
 
 
