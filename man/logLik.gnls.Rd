@@ -2,7 +2,6 @@
 % Part of the nlme package for R
 % Distributed under GPL 2 or later: see nlme/LICENCE
 
-% $Id: logLik.gnls.Rd,v 1.8 2002/03/05 14:59:39 bates Exp $
 \name{logLik.gnls}
 \title{Log-Likelihood of a gnls Object}
 \usage{
@@ -12,9 +11,8 @@
 \arguments{
  \item{object}{an object inheriting from class \code{gnls}, representing
    a generalized nonlinear least squares fitted model.}
- \item{REML}{an optional logical value. If \code{TRUE} the restricted
-   log-likelihood is returned, else, if \code{FALSE}, the log-likelihood
-   is returned. Defaults to \code{FALSE}. }
+ \item{REML}{an logical value for consistency with \code{logLik,gls},
+   but only \code{FALSE} is accepted.. }
  \item{\dots}{some methods for this generic require additional
     arguments.  None are used in this method.} 
 }

@@ -1,3 +1,17 @@
+2008-03-30  Brian Ripley <Brian.Ripley@R-project.org>
+
+	* DESCRIPTION (Version, Date): 3.1-88
+
+2008-02-19  Brian Ripley <Brian.Ripley@R-project.org>
+
+	* man/logLik.lme.Rd, man/logLik.gnls.Rd: correct description of
+	'REML' argument.
+
+2008-02-19  Brian Ripley <Brian.Ripley@R-project.org>
+
+	* inst/CITATION: add file (essentially what citation() would
+	produce, without the warning).
+
 2008-02-18  Brian Ripley <Brian.Ripley@R-project.org>
 
 	* DESCRIPTION (Version, Date): 3.1-87
@@ -19,6 +33,10 @@
 	  plot.nmGroupedData.Rd, recalc.reStruct.Rd, residuals.lme.Rd,
 	  residuals.lmeStruct.Rd: Remove reference to nonexistent URL
 	
+2007-10-04  Kurt Hornik
+
+	* DESCRIPTION (Version, Date): 3.1-86
+
 2007-10-04  Brian Ripley <Brian.Ripley@R-project.org>
 
 	* R/corStruct.R: check for uninitialized corARMA structures.

@@ -1,12 +1,12 @@
 Package: nlme
-Version: 3.1-87
-Date: 2008-02-18
+Version: 3.1-88
+Date: 2008-03-30
 Priority: recommended
 Title: Linear and Nonlinear Mixed Effects Models
 Author: Jose Pinheiro <Jose.Pinheiro@pharma.novartis.com>,
         Douglas Bates <bates@stat.wisc.edu>,
         Saikat DebRoy <saikat@stat.wisc.edu>,
-        Deepayan Sarkar <Deepayan.Sarkar@R-project.org>
+        Deepayan Sarkar <Deepayan.Sarkar@R-project.org>,
 	the R Core team.
 Maintainer: R-core <R-core@R-project.org>
 Description: Fit and compare Gaussian linear and nonlinear mixed-effects models.
@@ -15,4 +15,4 @@ Imports: lattice
 LazyLoad: yes
 LazyData: yes
 License: GPL (>=2)
-Packaged: Mon Feb 18 21:17:23 2008; ripley
+Packaged: Sun Mar 30 08:18:29 2008; ripley

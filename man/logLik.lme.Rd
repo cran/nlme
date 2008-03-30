@@ -2,7 +2,6 @@
 % Part of the nlme package for R
 % Distributed under GPL 2 or later: see nlme/LICENCE
 
-% $Id: logLik.lme.Rd,v 1.7.2.1 2003/04/17 22:28:45 bates Exp $
 \name{logLik.lme}
 \title{Log-Likelihood of an lme Object}
 \usage{
@@ -13,9 +12,11 @@
 \arguments{
  \item{object}{an object inheriting from class \code{lme}, representing
    a fitted linear mixed-effects model.}
- \item{REML}{an optional logical value. If \code{TRUE} the restricted
+ \item{REML}{an optional logical value.  If \code{TRUE} the restricted
    log-likelihood is returned, else, if \code{FALSE}, the log-likelihood
-   is returned. Defaults to \code{FALSE}. }
+   is returned. Defaults to the method of esitmation used, that is
+   \code{TRUE} if and only \code{object} was fitted with \code{method =
+     "REML"} (the default for these fitting functions) . }
  \item{\dots}{some methods for this generic require additional
     arguments.  None are used in this method.} 
 }
