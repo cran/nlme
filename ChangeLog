@@ -1,3 +1,15 @@
+2008-06-07  Brian Ripley <Brian.Ripley@R-project.org>
+
+	* DESCRIPTION (Version, Date): 3.1-89
+	* R/lme.R: fitted.lme() always dropped, when it should drop for
+	one column but not for one row.
+	* tests/lme.R, lme.Rout.save: add regression test for
+	single-row predictions.
+
+2008-04-10  Brian Ripley <Brian.Ripley@R-project.org>
+
+	* R/zzMethods.R: add .onUnload() to unload the DLL.
+
 2008-03-30  Brian Ripley <Brian.Ripley@R-project.org>
 
 	* DESCRIPTION (Version, Date): 3.1-88

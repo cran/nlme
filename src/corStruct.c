@@ -2,7 +2,7 @@
    Routines dealing with correlation structures.
 
    Copyright 1997-2005  Douglas M. Bates <bates@stat.wisc.edu>,
-                        Jose C. Pinheiro <jose.pinheiro@pharma.novartis.com>
+			Jose C. Pinheiro <jose.pinheiro@pharma.novartis.com>
 			Saikat DebRoy <saikat@stat.wisc.edu>
 
    This file is part of the nlme package for R and related languages
@@ -32,7 +32,7 @@ extern void F77_NAME(dqrdca)();
 
 /* Factor list and Recalc for general corStruct object */
 
-void 
+void
 corStruct_factList(double *mat, longint *pdims, double *FactorL, double *logdet)
 {
     longint i, j, M = pdims[1], *len = pdims + 4, job = 11L, info;
@@ -40,7 +40,7 @@ corStruct_factList(double *mat, longint *pdims, double *FactorL, double *logdet)
     longint zero = 0L;
 #endif
     double *work, *work1;
-    
+
     for(i = 0; i < M; i++) {
 	longint li = len[i], lisq = li * li, lip1 = li + 1;
 	work = Calloc(li, double);
@@ -49,7 +49,7 @@ corStruct_factList(double *mat, longint *pdims, double *FactorL, double *logdet)
 	F77_CALL(chol) (mat, &li, &li, mat, &info);
 #else
 	F77_CALL(chol) (mat, &li, work, &zero, &zero, &info);
-#endif    
+#endif
 	for(j = 0; j < li; j++) {
 	    work1[j * lip1] = 1;
 	    F77_CALL(dtrsl) (mat, &li, &li, work1 + j * li, &job, &info);
@@ -67,14 +67,14 @@ corStruct_recalc(double *Xy, longint *pdims, longint *ZXcol, double *Factor)
 {
     longint N = pdims[0], M = pdims[1], *len = pdims + 4, *start = len + M, i;
     for(i = 0; i < M;  i++) {
-	mult_mat(Xy + start[i], N, Factor, len[i], len[i], len[i], 
+	mult_mat(Xy + start[i], N, Factor, len[i], len[i], len[i],
 		 Xy + start[i], N, *ZXcol);
 	Factor += (len[i] * len[i]);
     }
 }
 
 /* symm class - unstructured correlation - based on spherical
-   parametrization */ 
+   parametrization */
 
 void
 symm_fullCorr(double *par, longint *maxC, double *crr)
@@ -111,7 +111,7 @@ symm_fullCorr(double *par, longint *maxC, double *crr)
     Free(work);
 }
 
-static void 
+static void
 symm_mat(double *crr, longint *time, longint *n, longint *maxC, double *mat)
 {
     longint i, j, k, np1 = *n + 1, n1, n2;
@@ -126,7 +126,7 @@ symm_mat(double *crr, longint *time, longint *n, longint *maxC, double *mat)
     }
 }
 
-void 
+void
 symm_matList(double *pars, longint *time, longint *maxC,
 	     longint *pdims, double *mat)
 {
@@ -142,8 +142,8 @@ symm_matList(double *pars, longint *time, longint *maxC,
     Free(crr);
 }
 
-static void 
-symm_fact(double *crr, longint *time, longint *n, longint *maxC, double *mat, 
+static void
+symm_fact(double *crr, longint *time, longint *n, longint *maxC, double *mat,
 	  double *logdet)
 {
     longint job = 11L, info, i, nsq = *n * (*n), np1 = *n + 1;
@@ -167,8 +167,8 @@ symm_fact(double *crr, longint *time, longint *n, longint *maxC, double *mat,
     Free(work); Free(work1);
 }
 
-void 
-symm_factList(double *pars, longint *time, longint *maxC, longint *pdims, 
+void
+symm_factList(double *pars, longint *time, longint *maxC, longint *pdims,
 	      double *FactorL, double *logdet)
 {
     double *crr = Calloc(*maxC * (*maxC - 1L) / 2L, double);
@@ -182,9 +182,9 @@ symm_factList(double *pars, longint *time, longint *maxC, longint *pdims,
     }
     Free(crr);
 }
-  
+
 void
-symm_recalc(double *Xy, longint *pdims, longint *ZXcol, double *pars, 
+symm_recalc(double *Xy, longint *pdims, longint *ZXcol, double *pars,
 	    longint *time, longint *maxC, double *logdet)
 {
     longint N = pdims[0], M = pdims[1], *len = pdims + 4, *start = len + M, i;
@@ -194,14 +194,14 @@ symm_recalc(double *Xy, longint *pdims, longint *ZXcol, double *pars,
     for(i = 0; i < M;  i++) {
 	double *Factor = Calloc((len[i] * len[i]), double);
 	symm_fact(crr, time + start[i], &len[i], maxC, Factor, logdet);
-	mult_mat(Xy + start[i], N, Factor, len[i], len[i], len[i], 
+	mult_mat(Xy + start[i], N, Factor, len[i], len[i], len[i],
 		 Xy + start[i], N, *ZXcol);
-	Free(Factor); 
+	Free(Factor);
     }
     Free(crr);
 }
 
-/* nat class - unstructured correlation - natural parametrization */ 
+/* nat class - unstructured correlation - natural parametrization */
 
 void
 nat_fullCorr(double *par, longint *maxC, double *crr)
@@ -216,7 +216,7 @@ nat_fullCorr(double *par, longint *maxC, double *crr)
     }
 }
 
-void 
+void
 nat_matList(double *pars, longint *time, longint *maxC,
 	    longint *pdims, double *mat)
 {
@@ -232,8 +232,8 @@ nat_matList(double *pars, longint *time, longint *maxC,
     Free(crr);
 }
 
-void 
-nat_factList(double *pars, longint *time, longint *maxC, longint *pdims, 
+void
+nat_factList(double *pars, longint *time, longint *maxC, longint *pdims,
 	     double *FactorL, double *logdet)
 {
     double *crr = Calloc(*maxC * (*maxC - 1L) / 2L, double);
@@ -247,9 +247,9 @@ nat_factList(double *pars, longint *time, longint *maxC, longint *pdims,
     }
     Free(crr);
 }
-  
+
 void
-nat_recalc(double *Xy, longint *pdims, longint *ZXcol, double *pars, 
+nat_recalc(double *Xy, longint *pdims, longint *ZXcol, double *pars,
 	   longint *time, longint *maxC, double *logdet)
 {
     longint N = pdims[0], M = pdims[1], *len = pdims + 4, *start = len + M, i;
@@ -259,9 +259,9 @@ nat_recalc(double *Xy, longint *pdims, longint *ZXcol, double *pars,
     for(i = 0; i < M;  i++) {
 	double *Factor = Calloc((len[i] * len[i]), double);
 	symm_fact(crr, time + start[i], &len[i], maxC, Factor, logdet);
-	mult_mat(Xy + start[i], N, Factor, len[i], len[i], len[i], 
+	mult_mat(Xy + start[i], N, Factor, len[i], len[i], len[i],
 		 Xy + start[i], N, *ZXcol);
-	Free(Factor); 
+	Free(Factor);
     }
     Free(crr);
 }
@@ -294,7 +294,7 @@ safe_phi(double x)		/* returns (exp(x) - 1)/(exp(x) + 1), x < 0 */
     return (1.0 - ex)/(1.0 + ex);
 }
 
-void 
+void
 AR1_matList(double *par, longint *pdims, double *mat)
 {
     longint i, M = pdims[1], *len = pdims + 4;
@@ -307,7 +307,7 @@ AR1_matList(double *par, longint *pdims, double *mat)
     }
 }
 
-static void 
+static void
 AR1_fact(double *par, longint *n, double *mat, double *logdet)
 {
     longint i, np1 = *n + 1;
@@ -322,8 +322,8 @@ AR1_fact(double *par, longint *n, double *mat, double *logdet)
     }
 }
 
-void 
-AR1_factList(double *par, longint *pdims, double *FactorL, 
+void
+AR1_factList(double *par, longint *pdims, double *FactorL,
 	     double *logdet)
 {
     longint i, M = pdims[1], *len = pdims + 4;
@@ -337,8 +337,8 @@ AR1_factList(double *par, longint *pdims, double *FactorL,
 }
 
 void
-AR1_recalc(double *Xy, longint *pdims, longint *ZXcol, double *par, 
-	   double *logdet) 
+AR1_recalc(double *Xy, longint *pdims, longint *ZXcol, double *par,
+	   double *logdet)
 {
     longint N = pdims[0], M = pdims[1], *len = pdims + 4,  *start = len + M, i;
     double *Factor;
@@ -347,7 +347,7 @@ AR1_recalc(double *Xy, longint *pdims, longint *ZXcol, double *par,
     for(i = 0; i < M;  i++) {
 	Factor = Calloc(len[i] * len[i], double);
 	AR1_fact(par, &len[i], Factor, logdet);
-	mult_mat(Xy + start[i], N, Factor, len[i], len[i], len[i], 
+	mult_mat(Xy + start[i], N, Factor, len[i], len[i], len[i],
 		 Xy + start[i], N, *ZXcol);
 	Free(Factor);
     }
@@ -369,8 +369,8 @@ CAR1_mat(double *par, double *time, longint *n, double *mat)
 	}
     }
 }
-  
-void 
+
+void
 CAR1_matList(double *par, double *time, longint *pdims, double *mat)
 {
     longint i, M = pdims[1], *len = pdims + 4;
@@ -384,7 +384,7 @@ CAR1_matList(double *par, double *time, longint *pdims, double *mat)
     }
 }
 
-static void 
+static void
 CAR1_fact(double *par, double *time, longint *n, double *mat, double *logdet)
 {
     longint job = 11L, info, i, nsq = *n * (*n), np1 = *n + 1;
@@ -405,8 +405,8 @@ CAR1_fact(double *par, double *time, longint *n, double *mat, double *logdet)
     Free(work); Free(work1);
 }
 
-void 
-CAR1_factList(double *par, double *time, longint *pdims,  
+void
+CAR1_factList(double *par, double *time, longint *pdims,
 	      double *FactorL, double *logdet)
 {
     longint i, M = pdims[1], *len = pdims + 4;
@@ -421,7 +421,7 @@ CAR1_factList(double *par, double *time, longint *pdims,
 }
 
 void
-CAR1_recalc(double *Xy, longint *pdims, longint *ZXcol, 
+CAR1_recalc(double *Xy, longint *pdims, longint *ZXcol,
 	    double *par, double *time, double *logdet)
 {
     longint N = pdims[0], M = pdims[1], *len = pdims + 4, *start = len + M, i;
@@ -431,7 +431,7 @@ CAR1_recalc(double *Xy, longint *pdims, longint *ZXcol,
     for(i = 0; i < M;  i++) {
 	double *Factor = Calloc(len[i] * len[i], double);
 	CAR1_fact(par, time + start[i], &len[i], Factor, logdet);
-	mult_mat(Xy + start[i], N, Factor, len[i], len[i], len[i], 
+	mult_mat(Xy + start[i], N, Factor, len[i], len[i], len[i],
 		 Xy + start[i], N, *ZXcol);
 	Free(Factor);
     }
@@ -439,7 +439,7 @@ CAR1_recalc(double *Xy, longint *pdims, longint *ZXcol,
 
 /* ARMA class */
 
-static void 
+static void
 ARMA_transPar(longint N, double *pars, double sgn)
 {
     longint i, j, n, n2;
@@ -464,14 +464,14 @@ ARMA_transPar(longint N, double *pars, double sgn)
     }
 }
 
-void 
+void
 ARMA_unconstCoef(longint *p, longint *q, double *pars)
 {
     ARMA_transPar(*p, pars, 1.0);
     ARMA_transPar(*q, pars + *p, -1.0);
 }
 
-static void 
+static void
 ARMA_untransPar(longint N, double *pars, double sgn)
 {
     longint i, j;
@@ -492,14 +492,14 @@ ARMA_untransPar(longint N, double *pars, double sgn)
     }
 }
 
-void 
+void
 ARMA_constCoef(longint *p, longint *q, double *pars)
 {
     ARMA_untransPar(*p, pars, -1.0);
     ARMA_untransPar(*q, pars + *p, 1.0);
 }
 
-static void 
+static void
 ARMA_cross(longint *p, longint *q, double *pars, double *psi)
 {
     longint i, j, M = *q + 1, PM;
@@ -514,15 +514,15 @@ ARMA_cross(longint *p, longint *q, double *pars, double *psi)
     }
 }
 
-static void 
-ARMA_corr(longint *p, longint *q, longint *maxlag, double *pars, double *psi, 
-	  double *crr) 
+static void
+ARMA_corr(longint *p, longint *q, longint *maxlag, double *pars, double *psi,
+	  double *crr)
 {
     longint P = *p + 1, Pp1 = P + 1, i, j, k, minPQ, Mlag, maxPQ,
 	*pivot = Calloc(P, longint);
     double *coef = Calloc(P * P, double), *src, *qraux = Calloc(P, double),
 	*work = Calloc(P * P, double), *work1;
-  
+
     if (!sqrt_eps) sqrt_eps = sqrt(DOUBLE_EPS);
     if ((maxPQ = ((*p > *q) ? *p : *q))) {
 	for(i = 0, src = coef; i < P; i++, src += Pp1) {
@@ -556,10 +556,10 @@ ARMA_corr(longint *p, longint *q, longint *maxlag, double *pars, double *psi,
 	    }
 /*        F77_CALL(dqrdca) (coef, &P, &P, &P, qraux, pivot, work, &i, &sqrt_eps); */
 	    F77_CALL(dqrdc2) (coef, &P, &P, &P,  &sqrt_eps, &i, qraux, pivot, work);
-	    if (i < P) 
+	    if (i < P)
 		error(_("Coefficient matrix not invertible" ));
 	    i = 100L;
-	    F77_CALL(dqrsl) (coef, &P, &P, &P, qraux, crr, DNULLP, crr, work1, DNULLP, 
+	    F77_CALL(dqrsl) (coef, &P, &P, &P, qraux, crr, DNULLP, crr, work1, DNULLP,
 			     DNULLP, &i, &j);
 	    Memcpy(crr, work1, Mlag);
 	}
@@ -584,7 +584,7 @@ ARMA_corr(longint *p, longint *q, longint *maxlag, double *pars, double *psi,
     crr[0] = 1;
 }
 
-static void 
+static void
 ARMA_fullCorr(longint *p, longint *q, longint *maxlag, double *pars,
 	      double *crr)
 {
@@ -597,7 +597,7 @@ ARMA_fullCorr(longint *p, longint *q, longint *maxlag, double *pars,
     Free(psi);
 }
 
-static void 
+static void
 ARMA_mat(double *crr, longint *time, longint *n, double *mat)
 {
     longint i, j, k;
@@ -610,7 +610,7 @@ ARMA_mat(double *crr, longint *time, longint *n, double *mat)
     }
 }
 
-void 
+void
 ARMA_matList(double *pars, longint *p, longint *q, longint *time,
 	     longint *maxlag, longint *pdims, double *mat)
 {
@@ -627,7 +627,7 @@ ARMA_matList(double *pars, longint *p, longint *q, longint *time,
     Free(crr);
 }
 
-static void 
+static void
 ARMA_fact(double *crr, longint *time, longint *n, double *mat, double *logdet)
 {
     longint job = 11L, info, i, nsq = *n * (*n), np1 = *n + 1;
@@ -650,7 +650,7 @@ ARMA_fact(double *crr, longint *time, longint *n, double *mat, double *logdet)
     Free(work); Free(work1);
 }
 
-void 
+void
 ARMA_factList(double *pars, longint *p, longint *q, longint *time,
 	      longint *maxlag, longint *pdims, double *FactorL,
 	      double *logdet)
@@ -667,9 +667,9 @@ ARMA_factList(double *pars, longint *p, longint *q, longint *time,
     }
     Free(crr);
 }
-  
+
 void
-ARMA_recalc(double *Xy, longint *pdims, longint *ZXcol, double *pars, 
+ARMA_recalc(double *Xy, longint *pdims, longint *ZXcol, double *pars,
 	    longint *p, longint *q, longint *time, longint *maxlag,
 	    double *logdet)
 {
@@ -681,9 +681,9 @@ ARMA_recalc(double *Xy, longint *pdims, longint *ZXcol, double *pars,
     for(i = 0; i < M;  i++) {
 	double *Factor = Calloc(len[i] * len[i], double);
 	ARMA_fact(crr, time + start[i], &len[i], Factor, logdet);
-	mult_mat(Xy + start[i], N, Factor, len[i], len[i], len[i], 
+	mult_mat(Xy + start[i], N, Factor, len[i], len[i], len[i],
 		 Xy + start[i], N, *ZXcol);
-	Free(Factor); 
+	Free(Factor);
     }
 }
 
@@ -700,8 +700,8 @@ compSymm_mat(double *par, longint *n, double *mat)
 	}
     }
 }
-  
-void 
+
+void
 compSymm_matList(double *par, double *inf, longint *pdims, double *mat)
 {
     longint i, M = pdims[1], *len = pdims + 4;
@@ -714,7 +714,7 @@ compSymm_matList(double *par, double *inf, longint *pdims, double *mat)
     }
 }
 
-static void 
+static void
 compSymm_fact(double *par, longint *n, double *mat, double *logdet)
 {
     longint i, j, np1 = *n + 1, nsq = *n * (*n);
@@ -738,8 +738,8 @@ compSymm_fact(double *par, longint *n, double *mat, double *logdet)
     Free(work);
 }
 
-void 
-compSymm_factList(double *par, double *inf, longint *pdims, 
+void
+compSymm_factList(double *par, double *inf, longint *pdims,
 		  double *FactorL, double *logdet)
 {
     longint i, M = pdims[1], *len = pdims + 4;
@@ -753,7 +753,7 @@ compSymm_factList(double *par, double *inf, longint *pdims,
 }
 
 void
-compSymm_recalc(double *Xy, longint *pdims, longint *ZXcol, double *par,  
+compSymm_recalc(double *Xy, longint *pdims, longint *ZXcol, double *par,
 		double *inf, double *logdet)
 {
     longint N = pdims[0], M = pdims[1], *len = pdims + 4, *start = len + M, i;
@@ -763,7 +763,7 @@ compSymm_recalc(double *Xy, longint *pdims, longint *ZXcol, double *par,
     for(i = 0; i < M;  i++) {
 	double *Factor = Calloc(len[i] * len[i], double);
 	compSymm_fact(par, &len[i], Factor, logdet);
-	mult_mat(Xy + start[i], N, Factor, len[i], len[i], len[i], 
+	mult_mat(Xy + start[i], N, Factor, len[i], len[i], len[i],
 		 Xy + start[i], N, *ZXcol);
 	Free(Factor);
     }
@@ -778,13 +778,13 @@ HF_mat(double *par, longint *time, longint *n, double *mat)
     for(i = 0; i < *n; i++) {
 	mat[i * np1] = par[time[i]];
 	for(j = i + 1; j < *n; j++) {
-	    *(mat + i + j * (*n)) = *(mat + j + i * (*n)) = 
+	    *(mat + i + j * (*n)) = *(mat + j + i * (*n)) =
 		0.5 * (par[time[i]] + par[time[j]]) - 1.0;
 	}
     }
 }
-  
-void 
+
+void
 HF_matList(double *par, longint *maxC, longint *time, longint *pdims,
 	   double *mat)
 {
@@ -801,7 +801,7 @@ HF_matList(double *par, longint *maxC, longint *time, longint *pdims,
     }
 }
 
-static void 
+static void
 HF_fact(double *par, longint *time, longint *n, double *mat, double *logdet)
 {
     longint job = 11L, info, i, nsq = *n * (*n), np1 = *n + 1;
@@ -824,7 +824,7 @@ HF_fact(double *par, longint *time, longint *n, double *mat, double *logdet)
     Free(work); Free(work1);
 }
 
-void 
+void
 HF_factList(double *par, longint *maxC, longint *time, longint *pdims,
 	    double *FactorL, double *logdet)
 {
@@ -842,7 +842,7 @@ HF_factList(double *par, longint *maxC, longint *time, longint *pdims,
 }
 
 void
-HF_recalc(double *Xy, longint *pdims, longint *ZXcol, double *par, 
+HF_recalc(double *Xy, longint *pdims, longint *ZXcol, double *par,
 	  longint *time, longint *maxC, double *logdet)
 {
     longint N = pdims[0], M = pdims[1], *len = pdims + 4,  *start = len + M, i;
@@ -854,7 +854,7 @@ HF_recalc(double *Xy, longint *pdims, longint *ZXcol, double *par,
     for(i = 0; i < M;  i++) {
 	double *Factor = Calloc(len[i] * len[i], double);
 	HF_fact(par, time + start[i], &len[i], Factor, logdet);
-	mult_mat(Xy + start[i], N, Factor, len[i], len[i], len[i], 
+	mult_mat(Xy + start[i], N, Factor, len[i], len[i], len[i],
 		 Xy + start[i], N, *ZXcol);
 	Free(Factor);
     }
@@ -916,7 +916,7 @@ dummy_corr(double val)
 /* methods for the virtual class */
 
 static void
-spatial_mat(double *par, double *dist, longint *n, longint *nug, 
+spatial_mat(double *par, double *dist, longint *n, longint *nug,
 	    double (*corr)(double ), double *mat)
 {
     longint i, j, np1 = *n + 1;
@@ -931,12 +931,12 @@ spatial_mat(double *par, double *dist, longint *n, longint *nug,
 	}
     }
 }
-  
-void 
+
+void
 spatial_matList(double *par, longint *nug, double *dist, longint *pdims,
 		double *minD, double *mat)
 {
-    longint i, M = pdims[1], spClass = pdims[2], *len = pdims + 4, 
+    longint i, M = pdims[1], spClass = pdims[2], *len = pdims + 4,
 	*start = len + M;
     double aux, (*corr)(double ) = dummy_corr;
     /* parameter assumed in unconstrained form */
@@ -947,14 +947,14 @@ spatial_matList(double *par, longint *nug, double *dist, longint *pdims,
     }
     switch(spClass) {
     case 1:			/* spherical */
-	corr = spher_corr;	
+	corr = spher_corr;
 	par[0] += *minD;
 	break;
     case 2:			/* exponential */
-	corr = exp_corr;	
+	corr = exp_corr;
 	break;
     case 3:			/* Gaussian */
-	corr = Gaus_corr;	
+	corr = Gaus_corr;
 	break;
     case 4:			/* linear */
 	corr = lin_corr;
@@ -973,9 +973,9 @@ spatial_matList(double *par, longint *nug, double *dist, longint *pdims,
     }
 }
 
-static void 
-spatial_fact(double *par, double *dist, longint *n, longint *nug, 
-	     double (*corr) (double ), double *mat, 
+static void
+spatial_fact(double *par, double *dist, longint *n, longint *nug,
+	     double (*corr) (double ), double *mat,
 	     double *logdet)
 {
     longint job = 11L, info, i, nsq = *n * (*n), np1 = *n + 1;
@@ -998,11 +998,11 @@ spatial_fact(double *par, double *dist, longint *n, longint *nug,
     Free(work); Free(work1);
 }
 
-void 
-spatial_factList(double *par, longint *nug, double *dist, longint *pdims,  
+void
+spatial_factList(double *par, longint *nug, double *dist, longint *pdims,
 		 double *minD, double *FactorL, double *logdet)
 {
-    longint i, M = pdims[1], spClass = pdims[2], *len = pdims + 4, 
+    longint i, M = pdims[1], spClass = pdims[2], *len = pdims + 4,
 	*start = len + M;
     double aux, (*corr)(double ) = dummy_corr;
     /* parameter assumed in unconstrained form */
@@ -1014,14 +1014,14 @@ spatial_factList(double *par, longint *nug, double *dist, longint *pdims,
 
     switch(spClass) {
     case 1:			/* spherical */
-	corr = spher_corr;	
+	corr = spher_corr;
 	par[0] += *minD;
 	break;
     case 2:			/* exponential */
-	corr = exp_corr;	
+	corr = exp_corr;
 	break;
     case 3:			/* Gaussian */
-	corr = Gaus_corr;	
+	corr = Gaus_corr;
 	break;
     case 4:			/* linear */
 	corr = lin_corr;
@@ -1041,10 +1041,10 @@ spatial_factList(double *par, longint *nug, double *dist, longint *pdims,
 }
 
 void
-spatial_recalc(double *Xy, longint *pdims, longint *ZXcol, double *par, 
+spatial_recalc(double *Xy, longint *pdims, longint *ZXcol, double *par,
 	       double *dist, double *minD, longint *nug, double *logdet)
 {
-    longint N = pdims[0], M = pdims[1], spClass = pdims[2], 
+    longint N = pdims[0], M = pdims[1], spClass = pdims[2],
 	*len = pdims + 4, *start = len + M, i;
     double aux, (*corr)(double ) = dummy_corr, *sXy;
     /* parameter assumed in unconstrained form */
@@ -1056,14 +1056,14 @@ spatial_recalc(double *Xy, longint *pdims, longint *ZXcol, double *par,
 
     switch(spClass) {
     case 1:			/* spherical */
-	corr = spher_corr;	
+	corr = spher_corr;
 	par[0] += *minD;
 	break;
     case 2:			/* exponential */
-	corr = exp_corr;	
+	corr = exp_corr;
 	break;
     case 3:			/* Gaussian */
-	corr = Gaus_corr;	
+	corr = Gaus_corr;
 	break;
     case 4:			/* linear */
 	corr = lin_corr;

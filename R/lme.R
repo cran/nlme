@@ -2821,7 +2821,10 @@ fitted.lmeStruct <-
       (conLin$Xy[, ZXstart[j]:ZXend[j], drop = FALSE] *
        ZXb[[i]][rep(1:ZXngrps[i], ZXlen[[i]]),,drop = FALSE]) %*% rep(1, nc[i])
   }
-  fit[, level + 1]
+  ## this is documented to return a vector for one level, matrix for more.
+  ## So it should be a matrix if there is only one row, but not if
+  ## there is only one columns.
+  if(length(level) > 1) fit[, level + 1, drop = FALSE] else fit[, level+1]
 }
 
 Initialize.lmeStruct <-

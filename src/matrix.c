@@ -2,7 +2,7 @@
    Basic matrix manipulations and QR decomposition
 
    Copyright 1997-2005  Douglas M. Bates <bates@stat.wisc.edu>,
-                        Jose C. Pinheiro <jose.pinheiro@pharma.novartis.com>
+			Jose C. Pinheiro <jose.pinheiro@pharma.novartis.com>
 			Saikat DebRoy <saikat@stat.wisc.edu>
 
    This file is part of the nlme package for R and related languages
@@ -19,7 +19,7 @@
    You should have received a copy of the GNU General Public License
    along with this program; if not, a copy is available at
    http://www.r-project.org/Licenses/
- 
+
 */
 
 #include "matrix.h"
@@ -48,7 +48,7 @@ d_dot_prod( double *x, longint incx, double *y, longint incy, longint n )
 
 double *
 copy_mat(double *y, longint ldy, double *x, longint ldx,
-	 longint nrow, longint ncol) 
+	 longint nrow, longint ncol)
 {				/* y <- x */
   double * ret = y;
   while (ncol-- > 0) { Memcpy(y, x, nrow); y += ldy; x += ldx; }
@@ -67,11 +67,11 @@ copy_trans(double *y, longint ldy, double *x, longint ldx,
   }
   return ret;
 }
-  
+
 double *
 mult_mat(double *z, longint ldz,
 	 double *x, longint ldx, longint xrows, longint xcols,
-	 double *y, longint ldy, longint ycols) 
+	 double *y, longint ldy, longint ycols)
 {				/* z <- x %*% y */
   double *t, *tmp = Calloc((size_t)(xrows * ycols), double);
   int i, j;			/* use tmp so z can be either x or y */
@@ -98,7 +98,7 @@ zero_mat(double *y, longint ldy, longint nrow, longint ncol)
     y += ldy;
   }
 }
-      
+
 QRptr
 QR(double *mat, longint ldmat, longint nrow, longint ncol)
 {				/* Constructor for a QR object */
@@ -114,7 +114,7 @@ QR(double *mat, longint ldmat, longint nrow, longint ncol)
   value->pivot = Calloc((size_t) ncol, longint);
   for (j = 0; j < ncol; j++) { (value->pivot)[j] = j; }
   work = Calloc( 2 * ncol, double );
-  F77_CALL(dqrdc2) (mat, &ldmat, &nrow, &ncol, &sqrt_eps, &(value->rank), 
+  F77_CALL(dqrdc2) (mat, &ldmat, &nrow, &ncol, &sqrt_eps, &(value->rank),
 		    value->qraux, value->pivot, work);
   Free(work);
   return value;
@@ -123,8 +123,8 @@ QR(double *mat, longint ldmat, longint nrow, longint ncol)
 void
 QRfree(QRptr this)
 {				/* destructor for a QR object*/
-  Free(this->pivot); 
-  Free(this->qraux); 
+  Free(this->pivot);
+  Free(this->qraux);
   Free(this);
 }
 
@@ -177,21 +177,21 @@ QRstoreR(QRptr this, double *dest, longint ldDest)
 {				/* store the R part into dest */
   int i;
   for (i = 0; i < this->ncol; i++) {
-    Memcpy(dest + this->pivot[i] * ldDest, this->mat + i * this->ldmat, 
+    Memcpy(dest + this->pivot[i] * ldDest, this->mat + i * this->ldmat,
 	   ((i + 1) > this->rank) ? this->rank : i + 1);
   }
 }
 
 longint
 QR_and_rotate(double *mat, longint ldmat, longint nrow, longint ncol,
-              double *DmHalf, longint qi, longint ndecomp,
-              double *logdet, double *store, longint ldstr)
+	      double *DmHalf, longint qi, longint ndecomp,
+	      double *logdet, double *store, longint ldstr)
      /* Append DmHalf to the bottom of mat and take a QR decomposition
-        of the first ndecomp columns.  Apply the rotations to the other
-        columns.  Return the rank and increment log(abs(det(R11))). */
+	of the first ndecomp columns.  Apply the rotations to the other
+	columns.  Return the rank and increment log(abs(det(R11))). */
 {
-  longint rank, arow = nrow + qi,  /* number of rows in augmented matrix */ 
-    ndrow = ((arow > ndecomp) ? ndecomp : arow); 
+  longint rank, arow = nrow + qi,  /* number of rows in augmented matrix */
+    ndrow = ((arow > ndecomp) ? ndecomp : arow);
   double *aug = Calloc((size_t) arow * ncol, double);
   QRptr aQR;
 
@@ -203,11 +203,11 @@ QR_and_rotate(double *mat, longint ldmat, longint nrow, longint ncol,
   if (ldstr > 0) {
     QRstoreR(aQR, store, ldstr);
     copy_mat(store + ndecomp * ldstr, ldstr, aug + ndecomp * arow,
-             arow, ndrow, ncol - ndecomp);
+	     arow, ndrow, ncol - ndecomp);
   }
   if (qi < ndecomp) { zero_mat(mat, ldmat, nrow, ncol); }
   copy_mat(mat + ndecomp * ldmat, ldmat, aug + ndecomp * (arow + 1L),
-           arow, arow - ndrow, ncol - ndecomp);
+	   arow, arow - ndrow, ncol - ndecomp);
   rank = aQR->rank;
   QRfree(aQR); Free(aug);
   return rank;

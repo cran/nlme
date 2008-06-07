@@ -2,7 +2,7 @@
    header file for the nlme package
 
    Copyright 1999-2001 Saikat DebRoy <saikat@stat.wisc.edu>,
-                       Douglas Bates <bates@stat.wisc.edu>
+		       Douglas Bates <bates@stat.wisc.edu>
 
    This file is part of the nlme package for R and related languages
    and is made available under the terms of the GNU General Public
@@ -18,7 +18,7 @@
    You should have received a copy of the GNU General Public License
    along with this program; if not, a copy is available at
    http://www.r-project.org/Licenses/
- 
+
 */
 
 #ifndef NLME_NLMEFIT_H
@@ -50,12 +50,12 @@ typedef struct state_struct {
   longint *pdClass,
     *RML;
 } *statePTR;
-    
+
 extern dimPTR dims(longint *);
 extern dimPTR dimS(SEXP);
 extern size_t count_DmHalf_pars(dimPTR, longint *);
 extern double * generate_theta(double *, dimPTR, longint *, double *);
-extern double * generate_DmHalf(double *, dimPTR, longint *, double *);	
+extern double * generate_DmHalf(double *, dimPTR, longint *, double *);
 extern void dimFree(dimPTR);
 extern void mixed_decomp(double *, longint *);
 extern void mixed_fcn(longint, double *, double *, void *);

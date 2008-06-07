@@ -17,7 +17,7 @@
    You should have received a copy of the GNU General Public License
    along with this program; if not, a copy is available at
    http://www.r-project.org/Licenses/
- 
+
 */
 #include "base.h"
 
@@ -31,7 +31,7 @@ est_delta(double *x, longint i)
   double xx;
   if(!sqrt_eps) sqrt_eps = sqrt(DOUBLE_EPS);
   if(!xlower) xlower = 100.*DOUBLE_XMIN;
-                                /* should sometime use the strategy of */
+				/* should sometime use the strategy of */
 				/* the grd routine in dmnf */
   xx = fabs(x[i]);
   if (xx < xlower) return sqrt_eps;
@@ -40,7 +40,7 @@ est_delta(double *x, longint i)
 
 void
 nls_diff_gradient(longint *pnpar, longint *pnobs, double *theta, double
-		  *base, double *gradient, longint *pneg aSEV) 
+		  *base, double *gradient, longint *pneg aSEV)
 {
   longint i, j, npar = *pnpar, nobs = *pnobs, neg = *pneg;
   double xx, *gcol, di;
@@ -57,4 +57,3 @@ nls_diff_gradient(longint *pnpar, longint *pnobs, double *theta, double
   }
 }
 #endif /* R_S_H */
-

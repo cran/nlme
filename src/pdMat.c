@@ -2,7 +2,7 @@
    Routines for dealing with pdMat objects
 
    Copyright 1997-2005 Douglas M. Bates <bates@stat.wisc.edu>,
-                       Jose C. Pinheiro <jose.pinheiro@pharma.novartis.com>
+		       Jose C. Pinheiro <jose.pinheiro@pharma.novartis.com>
 		       Saikat DebRoy <saikat@stat.wisc.edu>
 
    This file is part of the nlme package for R and related languages
@@ -27,7 +27,7 @@
 
 /* Positive definite matrices */
 
-static void 
+static void
 Chol_pd(double *L, longint *q, double *l)
 {
   longint i, qq = *q;
@@ -50,15 +50,15 @@ logChol_pd(double *L, longint *q, double *l)
   }
 }
 
-void 
+void
 matrixLog_pd(double *L, longint *q, double *l)
 {
   longint i, j, qq = *q, one = 1L, info = 0L;
   if ( qq == 1 ) {
     *L = exp( *l );
   } else {
-    double *vectors = Calloc((size_t) qq * qq, double), 
-      *work1 = Calloc((size_t) qq, double), *work2 = Calloc((size_t) qq, double), 
+    double *vectors = Calloc((size_t) qq * qq, double),
+      *work1 = Calloc((size_t) qq, double), *work2 = Calloc((size_t) qq, double),
       *values = Calloc((size_t) qq, double);
     Chol_pd(L, q, l);
     for(i = 0; i < qq - 1; i++) {
@@ -125,4 +125,3 @@ compSymm_pd(double *L, longint *q, double *l) /* compound symmetry */
     L[i * qp1] = -aux * i;
   }
 }
-

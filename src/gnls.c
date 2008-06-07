@@ -2,7 +2,7 @@
    Routines for fitting gnls models
 
    Copyright 1997-2005 Douglas M. Bates <bates@stat.wisc.edu>,
-                       Jose C. Pinheiro <jose.pinheiro@pharma.novartis.com>
+		       Jose C. Pinheiro <jose.pinheiro@pharma.novartis.com>
 		       Saikat DebRoy <saikat@stat.wisc.edu>
 
    This file is part of the nlme package for R and related languages
@@ -19,7 +19,7 @@
    You should have received a copy of the GNU General Public License
    along with this program; if not, a copy is available at
    http://www.r-project.org/Licenses/
- 
+
 */
 
 #include "nlOptimizer.h"
@@ -33,22 +33,22 @@ extern void corStruct_recalc(double *, longint *, longint *, double *);
 typedef struct gnls_struct {	/* Generalized nonlinear least squares structure */
   double *residuals, *gradient, *corFactor, *varWeights, minFactor,
     tolerance, *newtheta, *theta, *incr, *add_ons,
-    new_objective, objective; 
+    new_objective, objective;
   double *result[1];
   longint corOpt, varOpt, npar, ncol, N, nrdof, maxIter, *corDims;
 #ifdef R_S_H
   SEXP model;
-#endif  
+#endif
   int conv_failure;
 } *gnlsPtr;
 
 static gnlsPtr
-gnls_init(double *ptheta, longint *dims, double *corFactor, double *varWeights, 
+gnls_init(double *ptheta, longint *dims, double *corFactor, double *varWeights,
 	  longint *corDims, double *settings, double *additional,
 	  longint corOpt, longint varOpt aMOD)
 {
   longint nResult;
-  gnlsPtr gnls = Calloc(1, struct gnls_struct);  
+  gnlsPtr gnls = Calloc(1, struct gnls_struct);
   gnls->theta = ptheta;
   gnls->corFactor = corFactor;
   gnls->varWeights = varWeights;
@@ -133,7 +133,7 @@ gnls_increment(gnlsPtr gnls)
   }
   QRfree(aQR);
   Free(auxRes);
-  return(sqrt(((double) gnls->nrdof) * regSS / 
+  return(sqrt(((double) gnls->nrdof) * regSS /
 	      ((double) gnls->npar) * (gnls->new_objective - regSS)));
 }
 
@@ -215,4 +215,3 @@ fit_gnls(double *ptheta, longint *pdims, double *pcorFactor, double
   UNPROTECT(1);
 #endif /* R_S_H */
 }
-

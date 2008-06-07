@@ -2,7 +2,7 @@
    Routines for fitting nlme models
 
    Copyright 1997-2001  Douglas M. Bates <bates@stat.wisc.edu>,
-                        Jose C. Pinheiro <jose.pinheiro@pharma.novartis.com>
+			Jose C. Pinheiro <jose.pinheiro@pharma.novartis.com>
 			Saikat DebRoy <saikat@stat.wisc.edu>
 
    This file is part of the nlme package for R and related languages
@@ -19,7 +19,7 @@
    You should have received a copy of the GNU General Public License
    along with this program; if not, a copy is available at
    http://www.r-project.org/Licenses/
- 
+
 */
 
 #include "nlOptimizer.h"
@@ -43,7 +43,7 @@ typedef struct nlme_struct {	/* Nonlinear mixed-effects structure */
     dimPTR dd, d1;
 #ifdef R_S_H
     SEXP model;
-#endif /* R_S_H */  
+#endif /* R_S_H */
     int conv_failure;
 } *nlmePtr;
 
@@ -51,7 +51,7 @@ double sqrt_eps = 0.0;
 
 static longint *
 make_sequential(longint *dest, longint *src, longint n)
-{                    
+{
     /*  copy the pattern from src to dest */
     /*  but in sequential values starting */
     /*  from 0 */
@@ -67,7 +67,7 @@ make_sequential(longint *dest, longint *src, longint n)
 }
 
 static nlmePtr
-nlme_init(double *ptheta, double *pDmHalf, longint *pgroups, 
+nlme_init(double *ptheta, double *pDmHalf, longint *pgroups,
 	  longint *pdims, longint *pdClass, double *pcorFactor,
 	  double *pvarWeights, longint *pcorDims, double *additional,
 	  longint *pcorOpt, longint *pvarOpt aMOD)
@@ -94,7 +94,7 @@ nlme_init(double *ptheta, double *pDmHalf, longint *pgroups,
     }
     nlme->corOpt = *pcorOpt;
     nlme->varOpt = *pvarOpt;
-    nlme->theta = ptheta; 
+    nlme->theta = ptheta;
     nlme->add_ons = additional;
     nlme->ngrpTot = 0;
     for (i = 0; i < (nlme->dd->Q + 2); i++) { nlme->ngrpTot += nlme->dd->ngrp[i]; }
@@ -166,9 +166,9 @@ nlme_objective(nlmePtr nlme)
 {
     longint i;
     double RSS, *srcB;
-    
+
     RSS = nlme->RSS;
-    for(i = 0, srcB = nlme->newtheta; i < nlme->dd->Q; i++) { 
+    for(i = 0, srcB = nlme->newtheta; i < nlme->dd->Q; i++) {
 	double *work = Calloc(nlme->npar[i], double);
 	mult_mat(work, (nlme->dd->ncol)[i], nlme->DmHalf + (nlme->dd->DmOff)[i],
 		 (nlme->dd->ncol)[i], (nlme->dd->ncol)[i], (nlme->dd->ncol)[i],
@@ -185,15 +185,15 @@ nlme_workingRes(nlmePtr nlme)
 {
     longint i, j, k;
     double *theta = nlme->theta;
-    
-    
+
+
     for(j = 0; j < nlme->dd->Q; j++) {
 	longint nb = nlme->dd->ncol[j];
 	double *res =
 	    nlme->gradient + nlme->dd->ZXrows * (nlme->dd->ZXcols - 1);
 	for(k = 0; k < nlme->dd->ngrp[j]; k++) {
 	    double *Zjk = nlme->gradient + nlme->dd->ZXoff[j][k];
-	    
+
 	    for(i = 0; i < nlme->dd->ZXlen[j][k]; i++) {
 		*res += d_dot_prod(Zjk + i, nlme->dd->ZXrows, theta, 1, nb);
 		res++;
@@ -213,20 +213,20 @@ nlme_workingRes(nlmePtr nlme)
 /*    for(i = 0; i < nlme->dd->N; i++) { */
 /*      for(j = 0, nq = 0, aux = 0; j < nlme->dd->Q; j++) { */
 /*        aux += d_dot_prod(mat + (nlme->dd->ZXoff)[j][0] + i,  */
-/*  			nlme->dd->ZXrows, */
-/*  			incr+nq+(nlme->sgroups+j*nlme->dd->ZXrows)[i] */
-/*  			* nlme->dd->ncol[j], 1L, nlme->dd->ncol[j]); */
+/*			nlme->dd->ZXrows, */
+/*			incr+nq+(nlme->sgroups+j*nlme->dd->ZXrows)[i] */
+/*			* nlme->dd->ncol[j], 1L, nlme->dd->ncol[j]); */
 /*        nq += nlme->npar[j]; */
 /*      } */
 /*      aux += d_dot_prod(mat + (nlme->dd->ZXoff)[nlme->dd->Q][0] + i, */
-/*  		      nlme->dd->N, incr + nq, 1L, (nlme->dd->ncol)[nlme->dd->Q]); */
+/*		      nlme->dd->N, incr + nq, 1L, (nlme->dd->ncol)[nlme->dd->Q]); */
 /*      regSS += aux * aux; */
 /*    } */
 /*    for(i = 0, src = incr; i < nlme->dd->Q; i++) {  */
 /*      double *work = Calloc((nlme->npar)[i], double); */
 /*      mult_mat(work, (nlme->dd->ncol)[i], nlme->DmHalf + (nlme->dd->DmOff)[i], */
-/*  	     (nlme->dd->ncol)[i], (nlme->dd->ncol)[i], (nlme->dd->ncol)[i], */
-/*  	     src, (nlme->dd->ncol)[i], (nlme->dd->ngrp)[i]); */
+/*	     (nlme->dd->ncol)[i], (nlme->dd->ncol)[i], (nlme->dd->ncol)[i], */
+/*	     src, (nlme->dd->ncol)[i], (nlme->dd->ngrp)[i]); */
 /*      regSS += d_sum_sqr(work, (nlme->npar)[i]); */
 /*      src += (nlme->npar)[i]; */
 /*      Free(work); */
@@ -245,7 +245,7 @@ nlme_increment(nlmePtr nlme)
     double *incr = nlme->incr;
     double *theta = nlme->theta;
     longint i, j, start, RML = 0;
-    
+
     if (!sqrt_eps) sqrt_eps = sqrt(DOUBLE_EPS);
 /*    Memcpy(auxGrad, nlme->gradient, (nlme->dd->ZXcols - 1) * nlme->dd->N); */
     internal_decomp(nlme->dd, nlme->gradient);
@@ -263,24 +263,24 @@ nlme_increment(nlmePtr nlme)
 	    *newtheta = Calloc(ntheta, double),
 	    *a = Calloc(ntheta * ntheta, double),
 	    *work = Calloc(ntheta * 9, double);
-	
+
 	st->dd = nlme->dd;
 	st->ZXy = nlme->gradient;
 	st->pdClass = nlme->pdClass;
 	st->RML = &RML;
-	
+
 	generate_theta(theta, nlme->dd, nlme->pdClass, nlme->DmHalf);
-	
+
 	epsm = DBL_EPSILON;
 	msg = 9;		/* don't inhibit checks but suppress output */
 	for (i = 0; i < ntheta; i++) { typsiz[i] = 1.0; }
-/*  	iagflg = 1; */
-/*  	for (i = 0; i < nlme->dd->Q; i++) { */
-/*  	    if (nlme->pdClass[i] < 1 || nlme->pdClass[i] == 3 || nlme->pdClass[i] > 4) { */
-/*  		iagflg = 0; */
-/*  		break; */
-/*  	    } */
-/*  	} */
+/*	iagflg = 1; */
+/*	for (i = 0; i < nlme->dd->Q; i++) { */
+/*	    if (nlme->pdClass[i] < 1 || nlme->pdClass[i] == 3 || nlme->pdClass[i] > 4) { */
+/*		iagflg = 0; */
+/*		break; */
+/*	    } */
+/*	} */
 	iagflg = 0;		/* temporary modification */
 
 	optif9(ntheta, ntheta, theta, (fcn_p) mixed_fcn, (fcn_p)
@@ -317,11 +317,11 @@ nlme_increment(nlmePtr nlme)
 	incr[i] -= theta[i];
     }
     predObj = dc[nlme->dd->ZXcols * nlme->dd->ZXrows - 1];
-    predObj = predObj * predObj; 
+    predObj = predObj * predObj;
     /*    regSS = nlme_RegSS(nlme, auxGrad); */	/* Regression Sum of Squares */
     Free(Ra); Free(dc);
 /*    Free(auxGrad); */
-    return(sqrt(((double) nlme->nrdof) * (nlme->objective - predObj) / 
+    return(sqrt(((double) nlme->nrdof) * (nlme->objective - predObj) /
 		(((double) nlme->nparTot) * predObj)));
 }
 
@@ -339,7 +339,7 @@ nlme_iterate(nlmePtr nlme, double *settings aSEV)
     double minFactor = settings[1];
     double tolerance = settings[2];
     S_EVALUATOR
-	;	
+	;
     Memcpy(newtheta, theta, nlme->nparTot);
     evaluate(theta, nlme->nparTot MOD, nlme->result SEV);
     nlme_wtCorrAdj(nlme);
@@ -348,7 +348,7 @@ nlme_iterate(nlmePtr nlme, double *settings aSEV)
     for (factor = 1.0, iteration = 1; iteration <= maxIter;
 	 iteration++) {		/* outer iteration loop */
 				/* increment and convergence criterion */
-	criterion = nlme_increment(nlme); 
+	criterion = nlme_increment(nlme);
 	if (nlme->conv_failure) return(iteration); /* Unable to make increment  */
 	if (criterion < tolerance) return(iteration); /* successful completion */
 	do {			/* inner loop for acceptable step size */
@@ -391,7 +391,7 @@ nlme_wrapup(nlmePtr nlme aSEV)
 }
 
 void
-fit_nlme(double *ptheta, double *pDmHalf, longint *pgroups, 
+fit_nlme(double *ptheta, double *pDmHalf, longint *pgroups,
 	 longint *pdims, longint *pdClass, double *pcorFactor,
 	 double *pvarWeights, longint *pcorDims, double *settings,
 	 double *additional, longint *pcorOpt, longint *pvarOpt aMOD)
@@ -415,7 +415,7 @@ fit_nlme(double *ptheta, double *pDmHalf, longint *pgroups,
 #endif /* R_S_H */
 }
 
-void 
+void
 nlme_one_comp_open (longint *nrow, double *Resp, double *inmat)
 {
     longint i, nn = *nrow;
@@ -474,9 +474,9 @@ nlme_one_comp_open (longint *nrow, double *Resp, double *inmat)
     }
 }
 
-/* Phenobarbital Model */ 
+/* Phenobarbital Model */
 
-void 
+void
 nlme_one_comp_first (longint *nrow, double *Resp, double *inmat)
 {
     longint i, j, nn = *nrow, mm = 0;

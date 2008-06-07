@@ -14,3 +14,7 @@ predict(fm3, Orthodont)
 ## when 'returnObject = TRUE', do not stop() but give warning() on non-convergence:
 fm1 <- lme(distance ~ age, data = Orthodont,
 	   control = lmeControl(msMaxIter = 1, returnObject = TRUE))
+
+## based on bug report on R-help
+predict(fm3, Orthodont[1,])
+# failed in 3.1-88

@@ -1,8 +1,8 @@
-/* 
+/*
    header file for the nlme package
 
    Copyright 1999-2001  Saikat DebRoy <saikat@stat.wisc.edu>,
-                        Douglas Bates <bates@stat.wisc.edu>
+			Douglas Bates <bates@stat.wisc.edu>
 
    This file is part of the nlme package for S and related languages
    and is made available under the terms of the GNU General Public
@@ -24,7 +24,7 @@
 #ifndef NLME_BASE_H
 #define NLME_BASE_H
 
-#include "S.h"								     
+#include "S.h"
 #include <stdlib.h>
 
 #ifdef R_S_H
@@ -44,7 +44,7 @@
 #endif
 
 #define DNULLP (double *) 0
-				
+
 #ifndef SPLUS_VERSION		/* F77_CALL and F77_NAME used as in S-PLUS */
 #ifdef S_VERSION		/* S VERSION 4 */
 #define F77_CALL F77_SUB

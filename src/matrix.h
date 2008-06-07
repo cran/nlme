@@ -17,7 +17,7 @@
    You should have received a copy of the GNU General Public License
    along with this program; if not, a copy is available at
    http://www.r-project.org/Licenses/
- 
+
 */
 
 #ifndef NLME_MATRIX_H
@@ -39,7 +39,7 @@ extern double *copy_mat(double *, longint, double *, longint, longint,
 extern double *copy_trans(double *, longint, double *, longint,
 			  longint, longint);
 extern double *mult_mat(double *, longint, double *, longint, longint,
-			longint, double *, longint, longint); 
+			longint, double *, longint, longint);
 extern QRptr QR(double *, longint, longint, longint);
 extern void QRfree(QRptr);
 extern longint QRqty(QRptr, double *, longint, longint);

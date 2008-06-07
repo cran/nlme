@@ -6,7 +6,7 @@ vers <- paste("R package version", desc$Version)
 
 citEntry(entry="Manual",
          title = "nlme: Linear and Nonlinear Mixed Effects Models",
-         author = personList(as.person("Jose Pineiro"),
+         author = personList(as.person("Jose Pinheiro"),
                              as.person("Douglas Bates"),
                              as.person("Saikat DebRoy"),
                              as.person("Deepayan Sarkar"),

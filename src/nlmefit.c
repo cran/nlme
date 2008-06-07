@@ -65,7 +65,7 @@ dims(longint *pdims)
     value->nrot = value->ncol + Qp2;
     base = value->nrot + Qp2;
     value->ZXoff = setOffsets(&base, ngrp, Qp2);
-    value->ZXlen = setOffsets(&base, ngrp, Qp2); 
+    value->ZXlen = setOffsets(&base, ngrp, Qp2);
     value->SToff = setOffsets(&base, ngrp, Qp2);
     value->DecOff = setOffsets(&base, ngrp, Qp2);
     value->DecLen = setOffsets(&base, ngrp, Qp2);
@@ -88,7 +88,7 @@ SEXP getListElement(SEXP list, char *str)
 dimPTR				/* create a dimensions object directly */
 dimS(SEXP d)			/* from an SEXP */
 {
-    int i, Qp2;  SEXP tmp; 
+    int i, Qp2;  SEXP tmp;
     dimPTR value = Calloc((size_t) 1, struct dim_struct);
     value->N = INTEGER(coerceVector(getListElement(d, "N"), INTSXP))[0];
     value->ZXrows =
@@ -160,7 +160,7 @@ count_DmHalf_pars( dimPTR dd, longint *pdClass )
     }
     return (size_t) result;
 }
-  
+
 double *
 generate_DmHalf( double *DmHalf, dimPTR dd, longint *pdClass, double *pars )
 {				/* Expand parameters to DmHalf arrays */
@@ -275,7 +275,7 @@ invert_upper(double *mat, longint ldmat, longint ncol)
 	b[((int) i) - 1] = 1.0;
 	F77_CALL(dtrsl) (mat, &ldmat, &i, b, &ONE, &info);
 	if (info != 0) { Free(b); return info; }
-	Memcpy(mat + (i - 1) * ldmat, b, (int) i); 
+	Memcpy(mat + (i - 1) * ldmat, b, (int) i);
     }
     if (*mat == 0.0) { Free(b); return 1L; }
     *mat = 1.0 / (*mat);
@@ -350,7 +350,7 @@ internal_decomp(dimPTR dd, double *ZXy)
 
 double			/* evaluate the log-likelihood pieces */
 internal_loglik(dimPTR dd, double *ZXy, double *DmHalf, longint *RML,
-		double *dc, double *lRSS)	
+		double *dc, double *lRSS)
 {				/* if dc is NULL, don't attempt storage */
     longint i, j, Q = dd->Q,  Qp2 = Q + 2, qi,
 	ldstr = (dc != DNULLP) ? (dd->Srows) : 0L;
@@ -365,7 +365,7 @@ internal_loglik(dimPTR dd, double *ZXy, double *DmHalf, longint *RML,
 			      (dd->ZXlen)[i][j], (dd->ncol)[i] + (dd->nrot)[i],
 			      DmHalf + (dd->DmOff)[i], qi, (dd->ncol)[i],
 			      lglk + i, dc + (dd->SToff)[i][j], ldstr))
-	    { 
+	    {
 		warning("Singular precision matrix in level %ld, block %ld",
 			(long int) (i - (dd->Q)), j + 1L);
 		return -DBL_MAX;
@@ -396,7 +396,7 @@ internal_estimate(dimPTR dd, double *dc)
 	    if (backsolve(dc + (dd->SToff)[i][j], dd->Srows,
 			  (dd->SToff)[i][j] - (dd->DecOff)[i][j],
 			  (dd->ncol)[i], (dd->nrot)[i], (dd->ncol)[Qp1]) != 0)
-	    { 
+	    {
 		error(_("Singularity in backsolve at level %ld, block %ld"),
 		      (long int) (i - (dd->Q)), j + 1L);
 	    }
@@ -505,7 +505,7 @@ mixed_fcn(longint n, double *pars, double *g, void *state)
     statePTR st = (statePTR) state;
     double *zxcopy = Calloc(st->dd->ZXrows * st->dd->ZXcols, double),
 	*Delta = Calloc(st->dd->DmOff[st->dd->Q], double);
-  
+
     Memcpy(zxcopy, st->ZXy, st->dd->ZXrows * st->dd->ZXcols);
     *g = -internal_loglik(st->dd, zxcopy,
 			  generate_DmHalf(Delta, st->dd, st->pdClass, pars),
@@ -535,7 +535,7 @@ mixed_grad(longint n, double *pars, double *g, void *state)
     sigmainv = 1.0/((sigmainv < 0.0) ? - sigmainv : sigmainv);
     offset = ((st->dd->ZXcols) - 1L) * (st->dd->Srows);
     for (i = 0L; i < (st->dd->Q); i++) {
-	longint ncol = (st->dd->q)[i], 
+	longint ncol = (st->dd->q)[i],
 	    nright = (st->dd->nrot)[i] - (st->dd->nrot)[(st->dd->Q) - ( (*(st->RML)) ? 0 : 1 )];
 	longint nrow = (ncol + nright + 1L) * (st->dd->ngrp)[i];
 	QRptr qq;
@@ -596,7 +596,7 @@ mixed_grad(longint n, double *pars, double *g, void *state)
 		for (i1 = 0; i1 <= j1; i1++) {
 		    int k1;
 		    double sum = 0.0;
-		    
+
 		    for (k1 = i1; k1 < ncol; k1++) {
 			sum += DmHalf[(st->dd->DmOff)[i] + i1*ncol + k1] *
 			    col_j[k1];
@@ -623,7 +623,7 @@ static dimPTR dd;
 static longint *setngs, *pdC;
 size_t zxdim;
 
-static double 
+static double
 logLik_fun( double *pars )
 {				/* defined for finite differences */
     Memcpy( zxcopy2, zxcopy, zxdim );
@@ -631,7 +631,7 @@ logLik_fun( double *pars )
 			   setngs, DNULLP, DNULLP );
 }
 
-static double 
+static double
 negLogLik_fun( double *pars )
 {				/* defined for finite differences */
     Memcpy( zxcopy2, zxcopy, zxdim );
@@ -683,12 +683,12 @@ mixed_estimate(double *ZXy, longint *pdims, double *DmHalf, longint *RML,
     dimFree(dd);
 }
 
-void 				/* EM iterations for mixed-effects models */ 
+void				/* EM iterations for mixed-effects models */
 internal_EM(dimPTR dd, double *ZXy, double *DmHalf, int nn,
 	    longint *pdClass, longint *RML, double *logLik, double *Ra,
 	    double *lRSS)
 {
-    double sigmainv, *res, *pt, 
+    double sigmainv, *res, *pt,
 	*dc = Calloc((size_t) ((dd->Srows) * (dd->ZXcols)), double),
 	*zxcopy = Calloc((size_t) ((dd->ZXrows) * (dd->ZXcols)), double);
     double  sqrtDF = sqrt((double) (dd->N - *RML * (dd->ncol[dd->Q])));
@@ -703,7 +703,7 @@ internal_EM(dimPTR dd, double *ZXy, double *DmHalf, int nn,
 	sigmainv = 1.0/((sigmainv < 0.0) ? - sigmainv : sigmainv);
 	offset = ((dd->ZXcols) - 1L) * (dd->Srows);
 	for (i = 0L; i < (dd->Q); i++) {
-	    longint ncol = (dd->q)[i], 
+	    longint ncol = (dd->q)[i],
 		nright = (dd->nrot)[i] - (dd->nrot)[(dd->Q) - ( (*RML) ? 0 : 1 )];
 	    longint nrow = (ncol + nright + 1L) * (dd->ngrp)[i];
 	    QRptr qq;
@@ -718,7 +718,7 @@ internal_EM(dimPTR dd, double *ZXy, double *DmHalf, int nn,
 	    offset -= (dd->Srows) * ncol;
 	    qq = QR(res, nrow, nrow, ncol);
 	    QRstoreR(qq, Ra + (dd->DmOff)[i], ncol);
-	    QRfree(qq); 
+	    QRfree(qq);
 	    scale_mat(res, nrow, sqrt(1.0/((dd->ngrp)[i])),
 		      Ra + (dd->DmOff)[i], ncol, ncol, ncol);
 	    switch (pdClass[i]) {
@@ -837,7 +837,7 @@ crossprod_mat(double *y, longint ldy, double *x, longint ldx,
     }
     return y;
 }
-  
+
 /* Forming the parameter structure from the Delta matrix */
 /*  Not sure if these will ever be called from S. */
 /*  Will leave open the possibility. */
@@ -852,7 +852,7 @@ Delta2MatrixLog( double *theta, longint *q, double *Delta )
 	double *vectors = Calloc((size_t) qq * qq, double),
 	    *DtransD = Calloc((size_t) qq * qq, double),
 	    *workmat = Calloc((size_t) qq * qq, double),
-	    *work2 = Calloc((size_t) qq, double), 
+	    *work2 = Calloc((size_t) qq, double),
 	    *values = Calloc((size_t) qq, double), *pt;
 	crossprod_mat(DtransD, qq, Delta, qq, qq, qq); /* form t(Delta) %*% Delta */
 	F77_CALL(rs) (q, q, DtransD, values, &one, vectors, workmat, work2, &info);
@@ -968,7 +968,7 @@ mixed_combined(double *ZXy, longint *pdims, double *DmHalf, longint *nIter,
 	statePTR st = Calloc(1, struct state_struct);
 	int ntheta = count_DmHalf_pars( dd, pdC ), itrmcd, itncnt,
 	    p = dd->ncol[dd->Q], iagflg;
-	double 
+	double
 	    *theta = Calloc(ntheta, double),
 	    *typsiz = Calloc(ntheta, double),
 	    *grad = Calloc(ntheta, double),
@@ -982,7 +982,7 @@ mixed_combined(double *ZXy, longint *pdims, double *DmHalf, longint *nIter,
 	st->RML = RML;
 
 	generate_theta(theta, dd, pdClass, DmHalf);
-    
+
 	*info = 9;			/* don't inhibit checks but suppress output */
 	for (i = 0; i < ntheta; i++) { typsiz[i] = 1.0; }
 /*      iagflg = 1; */
@@ -1040,7 +1040,7 @@ mixed_combined(double *ZXy, longint *pdims, double *DmHalf, longint *nIter,
 	copy_mat(R0, p, dc + (dd->SToff)[(dd->Q)][0], (dd->Srows), p, p + 1);
 	Free(scale); Free(work); Free(iv); Free(values); Free(theta); Free(zxcopy);
     }
-#endif  /* USING_R */ 
+#endif  /* USING_R */
     dimFree( dd ); Free( dc ); Free( Ra );
 }
 
@@ -1076,7 +1076,7 @@ inner_perc(double *x, longint *grp, longint n)
 
 void
 inner_perc_table(double *X, longint *grps, longint *p, longint *Q,
-		 longint *n, double *pTable) 
+		 longint *n, double *pTable)
     /* constructs an p x Q "inner-percentage" table for a fixed effects
        matrix X and a set of grouping vectors grps */
 {
@@ -1133,10 +1133,10 @@ gls_loglik(double *Xy, longint *pdims, double *logLik, double *lRSS)
     }
     QRfree(dmQR);
 }
-#endif 
+#endif
 
-void 
-gls_estimate(double *Xy, longint *pdims, double *beta, double *sigma, 
+void
+gls_estimate(double *Xy, longint *pdims, double *beta, double *sigma,
 	     double *logLik, double *varBeta, longint *rank, longint *pivot)
 {
     longint i, N = pdims[0], p = pdims[1], RML = pdims[2], pp1 = p + 1,
@@ -1166,4 +1166,3 @@ gls_estimate(double *Xy, longint *pdims, double *beta, double *sigma,
     QRfree(dmQR);
     Free(R);
 }
-

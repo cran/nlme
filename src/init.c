@@ -14,7 +14,7 @@
    You should have received a copy of the GNU General Public License
    along with this program; if not, a copy is available at
    http://www.r-project.org/Licenses/
- 
+
 */
 
 #include <R.h>
@@ -29,22 +29,22 @@ extern void corStruct_factList(double *, longint *, double *, double *);
 extern void corStruct_recalc(double *, longint *, longint *, double *);
 extern void symm_fullCorr(double *, longint *, double *);
 extern void symm_matList(double *, longint *, longint *, longint *, double *);
-extern void symm_factList(double *, longint *, longint *, longint *p, 
-	          double *, double *);
-extern void symm_recalc(double *, longint *, longint *, double *, 
+extern void symm_factList(double *, longint *, longint *, longint *p,
+		  double *, double *);
+extern void symm_recalc(double *, longint *, longint *, double *,
 	    longint *, longint *, double *);
 extern void nat_fullCorr(double *, longint *, double *);
 extern void nat_matList(double *, longint *, longint *, longint *, double *);
-extern void nat_factList(double *, longint *, longint *, longint *, 
+extern void nat_factList(double *, longint *, longint *, longint *,
 	     double *, double *);
-extern void nat_recalc(double *, longint *, longint *l, double *, 
+extern void nat_recalc(double *, longint *, longint *l, double *,
 	   longint *, longint *, double *);
 extern void AR1_matList(double *, longint *, double *);
 extern void AR1_factList(double *, longint *, double *, double *);
 extern void AR1_recalc(double *, longint *, longint *, double *, double *);
 extern void CAR1_matList(double *, double *, longint *, double *);
 extern void CAR1_factList(double *, double *, longint *,  double *, double *);
-extern void CAR1_recalc(double *Xy, longint *pdims, longint *ZXcol, 
+extern void CAR1_recalc(double *Xy, longint *pdims, longint *ZXcol,
 	    double *par, double *time, double *logdet);
 extern void ARMA_constCoef(longint *, longint *, double *);
 extern void ARMA_unconstCoef(longint *, longint *, double *);
@@ -52,21 +52,21 @@ extern void ARMA_matList(double *, longint *, longint *, longint *,
 	     longint *, longint *, double *);
 extern void ARMA_factList(double *, longint *, longint *, longint *,
 	      longint *, longint *, double *, double *);
-extern void ARMA_recalc(double *, longint *, longint *, double *, 
+extern void ARMA_recalc(double *, longint *, longint *, double *,
 	    longint *, longint *, longint *, longint *, double *);
 extern void compSymm_matList(double *, double *, longint *, double *);
-extern void compSymm_factList(double *, double *, longint *, 
+extern void compSymm_factList(double *, double *, longint *,
 		  double *, double *);
-extern void compSymm_recalc(double *, longint *, longint *, double *,  
+extern void compSymm_recalc(double *, longint *, longint *, double *,
 		double *, double *);
 extern void spatial_matList(double *, longint *, double *, longint *,
 		double *, double *);
-extern void spatial_factList(double *, longint *, double *, longint *,  
+extern void spatial_factList(double *, longint *, double *, longint *,
 		 double *, double *, double *);
-extern void spatial_recalc(double *, longint *, longint *, double *, 
+extern void spatial_recalc(double *, longint *, longint *, double *,
 	       double *, double *, longint *, double *);
 
-extern void fit_nlme(double *, double *, longint *, 
+extern void fit_nlme(double *, double *, longint *,
 	 longint *, longint *, double *,
 	 double *, longint *, double *,
 	 double *, longint *, longint * aMOD);
