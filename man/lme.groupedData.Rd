@@ -46,7 +46,7 @@
    a formula, it is used as the argument to \code{varFixed},
    corresponding to fixed variance weights. See the documentation on
    \code{varClasses} for a description of the available \code{varFunc}
-   classes. Defaults to \code{NULL}, corresponding to homocesdatic
+   classes. Defaults to \code{NULL}, corresponding to homoscedastic
    within-group errors.} 
  \item{subset}{an optional expression indicating the subset of the rows of
    \code{data} that should be used in the fit. This can be a logical

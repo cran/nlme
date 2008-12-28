@@ -17,3 +17,8 @@ fm1Dial.gnls <-
 # also, missed row names as names
 stopifnot(all.equal(as.vector(p1), as.vector(p2)), # 'label' differs
           identical(names(p1), names(p2)))
+
+## PR#13418
+fm1 <- gls(weight ~ Time * Diet, BodyWeight)
+Variogram(fm1, form = ~ Time | Rat)[1:10,]
+## failed in 3.1-89

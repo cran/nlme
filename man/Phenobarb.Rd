@@ -18,7 +18,7 @@
       a numeric vector giving the birth weight of the infant (kg).
     }
     \item{Apgar}{
-      an ordered factor giving the the 5-minute Apgar score for
+      an ordered factor giving the 5-minute Apgar score for
       the infant.  This is an indication of health of the newborn
       infant.
     }

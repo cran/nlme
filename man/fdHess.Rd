@@ -34,7 +34,7 @@ fdHess(pars, fun, \dots, .relStep=(.Machine$double.eps)^(1/3), minAbsPar=0)
   \item{mean}{the value of function \code{fun} evaluated at the
     parameter values \code{pars}}
   \item{gradient}{an approximate gradient}
-  \item{Hessian}{a matrix whose upper triangle containst an approximate Hessian.}
+  \item{Hessian}{a matrix whose upper triangle contains an approximate Hessian.}
 }
 \author{Jose Pinheiro \email{jcp@research.bell-labs.com}, Douglas Bates
   \email{bates@stat.wisc.edu}} 

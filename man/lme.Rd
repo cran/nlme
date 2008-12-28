@@ -58,7 +58,7 @@ lme(fixed, data, random, correlation, weights, subset, method,
    a formula, it is used as the argument to \code{varFixed},
    corresponding to fixed variance weights. See the documentation on
    \code{varClasses} for a description of the available \code{varFunc}
-   classes. Defaults to \code{NULL}, corresponding to homocesdatic
+   classes. Defaults to \code{NULL}, corresponding to homoscedastic
    within-group errors.} 
  \item{subset}{an optional expression indicating the subset of the rows of
    \code{data} that should be used in the fit. This can be a logical
@@ -98,45 +98,43 @@ lme(fixed, data, random, correlation, weights, subset, method,
   \code{random.effects}  can be used to extract some of its components.
 }
 \references{
-
- The computational methods follow on the general framework of Lindstrom,
- M.J. and Bates, D.M. (1988). The model formulation is described in
- Laird, N.M. and Ware, J.H. (1982).  The variance-covariance
- parametrizations are described in <Pinheiro, J.C. and Bates., D.M.
- (1996).  The different correlation structures available for the
- \code{correlation} argument are described in Box, G.E.P., Jenkins,
- G.M., and Reinsel G.C. (1994), Littel, R.C., Milliken, G.A., Stroup,
- W.W., and Wolfinger, R.D. (1996), and Venables, W.N. and Ripley,
- B.D. (1997). The use of variance functions for linear and nonlinear
- mixed effects models is presented in detail in Davidian, M. and
- Giltinan, D.M. (1995).
  
- Box, G.E.P., Jenkins, G.M., and Reinsel G.C. (1994) "Time Series
- Analysis: Forecasting and Control", 3rd Edition, Holden-Day. 
+  The computational methods follow the general framework of Lindstrom
+  and Bates (1988). The model formulation is described in Laird and Ware
+  (1982).  The variance-covariance parametrizations are described in
+  Pinheiro and Bates (1996).  The different correlation structures
+  available for the \code{correlation} argument are described in Box,
+  Jenkins and Reinse (1994), Littel \emph{et al} (1996), and Venables and
+  Ripley, (1997). The use of variance functions for linear and nonlinear
+  mixed effects models is presented in detail in Davidian and Giltinan
+  (1995).
 
- Davidian, M. and Giltinan, D.M. (1995) "Nonlinear Mixed Effects Models
- for Repeated Measurement Data", Chapman and Hall.
+  Box, G.E.P., Jenkins, G.M., and Reinsel G.C. (1994) "Time Series
+  Analysis: Forecasting and Control", 3rd Edition, Holden--Day. 
 
- Laird, N.M. and Ware, J.H. (1982) "Random-Effects Models for
- Longitudinal Data", Biometrics, 38, 963-974.  
+  Davidian, M. and Giltinan, D.M. (1995) "Nonlinear Mixed Effects Models
+  for Repeated Measurement Data", Chapman and Hall.
 
- Lindstrom, M.J. and Bates, D.M. (1988) "Newton-Raphson and EM
- Algorithms for Linear Mixed-Effects Models for Repeated-Measures
- Data", Journal of the American Statistical Association, 83,
- 1014-1022. 
+  Laird, N.M. and Ware, J.H. (1982) "Random-Effects Models for
+  Longitudinal Data", Biometrics, 38, 963--974.  
 
- Littel, R.C., Milliken, G.A., Stroup, W.W., and Wolfinger, R.D. (1996)
- "SAS Systems for Mixed Models", SAS Institute.
+  Lindstrom, M.J. and Bates, D.M. (1988) "Newton-Raphson and EM
+  Algorithms for Linear Mixed-Effects Models for Repeated-Measures
+  Data", Journal of the American Statistical Association, 83,
+  1014--1022. 
 
- Pinheiro, J.C. and Bates., D.M.  (1996) "Unconstrained
- Parametrizations for Variance-Covariance Matrices", Statistics and
- Computing, 6, 289-296.
+  Littel, R.C., Milliken, G.A., Stroup, W.W., and Wolfinger, R.D. (1996)
+  "SAS Systems for Mixed Models", SAS Institute.
 
- Pinheiro, J.C., and Bates, D.M. (2000) "Mixed-Effects Models
- in S and S-PLUS", Springer.  
+  Pinheiro, J.C. and Bates., D.M.  (1996) "Unconstrained
+  Parametrizations for Variance-Covariance Matrices", Statistics and
+  Computing, 6, 289--296.
 
- Venables, W.N. and Ripley, B.D. (1997) "Modern Applied Statistics with
- S-plus", 2nd Edition, Springer-Verlag.
+  Pinheiro, J.C., and Bates, D.M. (2000) "Mixed-Effects Models
+  in S and S-PLUS", Springer.  
+
+  Venables, W.N. and Ripley, B.D. (2002) "Modern Applied Statistics with
+  S", 4th Edition, Springer-Verlag.
 }
 \author{Jose Pinheiro \email{jose.pinheiro@pharma.novartis.com} and
   Douglas Bates \email{bates@stat.wisc.edu}}

@@ -14,7 +14,7 @@
    a fitted linear mixed-effects model.}
  \item{REML}{an optional logical value.  If \code{TRUE} the restricted
    log-likelihood is returned, else, if \code{FALSE}, the log-likelihood
-   is returned. Defaults to the method of esitmation used, that is
+   is returned. Defaults to the method of estimation used, that is
    \code{TRUE} if and only \code{object} was fitted with \code{method =
      "REML"} (the default for these fitting functions) . }
  \item{\dots}{some methods for this generic require additional

@@ -39,10 +39,10 @@
   Prater (1955) provides data on crude oil properties and
   gasoline yields.  Atkinson (1985)
   uses these data to illustrate the use of diagnostics in multiple
-  regression analysis.  Three of the covariates---\textsf{API},
-  \textsf{vapor}, and \textsf{ASTM}---measure characteristics of the
+  regression analysis.  Three of the covariates---\code{API},
+  \code{vapor}, and \code{ASTM}---measure characteristics of the
   crude oil used to produce the gasoline.  The other covariate ---
-  \textsf{endpoint}---is a characteristic of the refining process.
+  \code{endpoint}---is a characteristic of the refining process.
   Daniel and Wood (1980) notice that the covariates characterizing
   the crude oil occur in only ten distinct groups and conclude that the
   data represent responses measured on ten different crude oil samples.

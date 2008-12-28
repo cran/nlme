@@ -1163,8 +1163,8 @@ Variogram.gls <-
                 ## getting rid of 1-observation groups
                 covar <- covar[sapply(covar, function(el) nrow(as.matrix(el))) > 1]
                 distance <- lapply(covar,
-                                   function(el, metric) dist(as.matrix(el), metric),
-                                   method = metric)
+                                   function(el, metric) dist(as.matrix(el), method=metric),
+                                   metric = metric)
             }
         }
     }

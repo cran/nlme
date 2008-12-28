@@ -51,7 +51,7 @@ gnls(model, data, params, start, correlation, weights, subset,
    a formula, it is used as the argument to \code{varFixed},
    corresponding to fixed variance weights. See the documentation on
    \code{varClasses} for a description of the available \code{varFunc}
-   classes. Defaults to \code{NULL}, corresponding to homoscesdatic
+   classes. Defaults to \code{NULL}, corresponding to homoscedastic
    errors.} 
  \item{subset}{an optional expression indicating which subset of the rows of
    \code{data} should  be  used in the fit. This can be a logical
