@@ -52,7 +52,7 @@ quinModel(Subject, time, conc, dose, interval, lV, lKa, lCl)
 }
 \references{
     Pinheiro, J. C. and Bates, D. M. (2000) \emph{Mixed-effects Models in
-	S and S-PLUS}, Springer. (section 8.2)
+        S and S-PLUS}, Springer. (section 8.2)
 }
 \author{Jose Pinheiro \email{jose.pinheiro@pharma.novartis.com}
   and Douglas Bates \email{bates@stat.wisc.edu}

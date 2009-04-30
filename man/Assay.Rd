@@ -11,23 +11,23 @@
 \format{
     This data frame contains the following columns:
     \describe{
-	\item{Block}{
-	    an ordered factor with levels
-	    \code{2} < \code{1} identifying the block where the wells
-	    are measured.
-	}
-	\item{sample}{
-	    a factor with levels \code{a} to \code{f} identifying the
-	    sample corresponding to the well.
-	}
-	\item{dilut}{
-	    a factor with levels
-	    \code{1} to \code{5}
-	    indicating the dilution applied to the well
-	}
-	\item{logDens}{
-	    a numeric vector of the log-optical density
-	}
+        \item{Block}{
+            an ordered factor with levels
+            \code{2} < \code{1} identifying the block where the wells
+            are measured.
+        }
+        \item{sample}{
+            a factor with levels \code{a} to \code{f} identifying the
+            sample corresponding to the well.
+        }
+        \item{dilut}{
+            a factor with levels
+            \code{1} to \code{5}
+            indicating the dilution applied to the well
+        }
+        \item{logDens}{
+            a numeric vector of the log-optical density
+        }
     }
 }
 \details{

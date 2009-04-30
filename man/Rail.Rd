@@ -11,15 +11,15 @@
 \format{
     This data frame contains the following columns:
     \describe{
-	\item{Rail}{
-	    an ordered factor identifying the rail on which the
-	    measurement was made.
-	}
-	\item{travel}{
-	  a numeric vector giving the travel time for ultrasonic
-	  head-waves in the rail (nanoseconds).  The value given is the
-	  original travel time minus 36,100 nanoseconds.
-	}
+        \item{Rail}{
+            an ordered factor identifying the rail on which the
+            measurement was made.
+        }
+        \item{travel}{
+          a numeric vector giving the travel time for ultrasonic
+          head-waves in the rail (nanoseconds).  The value given is the
+          original travel time minus 36,100 nanoseconds.
+        }
     }
 }
 \details{
@@ -30,7 +30,7 @@
 }
 \source{
     Pinheiro, J. C. and Bates, D. M. (2000), \emph{Mixed-Effects Models in S
-	and S-PLUS}, Springer, New York.  (Appendix A.26)
+        and S-PLUS}, Springer, New York.  (Appendix A.26)
 
     Devore, J. L. (2000), \emph{Probability and Statistics for
       Engineering and the Sciences (5th ed)}, Duxbury, Boston, MA.

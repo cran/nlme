@@ -1,3 +1,11 @@
+2008-01-16  Brian Ripley <Brian.Ripley@R-project.org>
+
+	* man/*.Rd: expand tabs
+
+2008-12-30  Brian Ripley <Brian.Ripley@R-project.org>
+
+	* man/summary.pdMat.Rd: avoid embedded newlines in \code strings.
+
 2008-12-27  Brian Ripley <Brian.Ripley@R-project.org>
 
 	* DESCRIPTION (Version, Date): 3.1-90

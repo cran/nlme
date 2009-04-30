@@ -17,7 +17,7 @@
     }
     \item{endpoint}{
         a numeric vector giving the temperature (degrees F) at which all
-	the gasoline is vaporized
+        the gasoline is vaporized
     }
     \item{Sample}{
       an ordered factor giving the inferred crude oil sample number
@@ -26,8 +26,8 @@
       a numeric vector giving the crude oil gravity (degrees API)
     }
     \item{vapor}{
-	a numeric vector giving the vapor pressure of the crude oil
-	\eqn{(\mathrm{lbf}/\mathrm{in}^2)}{(lbf/in^2)}
+        a numeric vector giving the vapor pressure of the crude oil
+        \eqn{(\mathrm{lbf}/\mathrm{in}^2)}{(lbf/in^2)}
     }
     \item{ASTM}{
       a numeric vector giving the crude oil 10\% point ASTM---the

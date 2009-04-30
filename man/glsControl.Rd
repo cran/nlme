@@ -9,7 +9,7 @@
 glsControl(maxIter, msMaxIter, tolerance, msTol, msScale, msVerbose,
            singular.ok, qrTol, returnObject, apVar, .relStep,
            nlmStepMax, opt=c("nlminb", "optim"), optimMethod, 
- 	   minAbsParApVar, natural)
+           minAbsParApVar, natural)
 }
 \alias{glsControl}
 \arguments{

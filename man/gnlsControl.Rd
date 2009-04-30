@@ -10,7 +10,7 @@
 gnlsControl(maxIter, nlsMaxIter, msMaxIter, minScale, tolerance,
             nlsTol, msTol, msScale, returnObject, msVerbose,
             apVar, .relStep, nlmStepMax,
-	    opt = c("nlminb", "optim"), optimMethod,
+            opt = c("nlminb", "optim"), optimMethod,
             minAbsParApVar)
 }
 \arguments{

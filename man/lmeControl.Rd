@@ -9,7 +9,7 @@
 lmeControl(maxIter, msMaxIter, tolerance, niterEM, msMaxEval, msTol,
            msScale, msVerbose, returnObject, gradHess, apVar,
            .relStep, minAbsParApVar, nlmStepMax,
-	   opt = c("nlminb", "optim"), optimMethod,
+           opt = c("nlminb", "optim"), optimMethod,
            natural)
 }
 \alias{lmeControl}

@@ -11,21 +11,21 @@
 \format{
     This data frame contains the following columns:
     \describe{
-	\item{effort}{
-	    a numeric vector giving the effort (Borg scale) required to
-	    arise from a stool.
-	}
-	\item{Type}{
-	    a factor with levels
-	    \code{T1}, 
-	    \code{T2}, 
-	    \code{T3}, and 
-	    \code{T4} giving the stool type.
-	}
-	\item{Subject}{
-	    an ordered factor giving a unique identifier for the subject
-	    in the experiment.
-	}
+        \item{effort}{
+            a numeric vector giving the effort (Borg scale) required to
+            arise from a stool.
+        }
+        \item{Type}{
+            a factor with levels
+            \code{T1}, 
+            \code{T2}, 
+            \code{T3}, and 
+            \code{T4} giving the stool type.
+        }
+        \item{Subject}{
+            an ordered factor giving a unique identifier for the subject
+            in the experiment.
+        }
     }
 }
 \details{
@@ -35,7 +35,7 @@
 }
 \source{
     Pinheiro, J. C. and Bates, D. M. (2000), \emph{Mixed-Effects Models in S
-	and S-PLUS}, Springer, New York.  (Appendix A.9)
+        and S-PLUS}, Springer, New York.  (Appendix A.9)
 
     Devore, J. L. (2000), \emph{Probability and Statistics for
       Engineering and the Sciences (5th ed)}, Duxbury, Boston, MA.

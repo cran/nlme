@@ -11,24 +11,24 @@
 \format{
     This data frame contains the following columns:
     \describe{
-	\item{weight}{
-	    a numeric vector giving the body weight of the rat (grams).
-	}
-	\item{Time}{
-	    a numeric vector giving the time at which the measurement is
-	    made (days).
-	}
-	\item{Rat}{
-	    an ordered factor with levels \code{2} < \code{3} < \code{4}
-	    < \code{1} < \code{8} < \code{5} < \code{6} < \code{7} <
-	    \code{11} < \code{9} < \code{10} < \code{12} < \code{13} <
-	    \code{15} < \code{14} < \code{16} identifying the rat whose
-	    weight is measured.
-	}
-	\item{Diet}{
-	    a factor with levels
-	    \code{1} to \code{3} indicating the diet that the rat receives.
-	}
+        \item{weight}{
+            a numeric vector giving the body weight of the rat (grams).
+        }
+        \item{Time}{
+            a numeric vector giving the time at which the measurement is
+            made (days).
+        }
+        \item{Rat}{
+            an ordered factor with levels \code{2} < \code{3} < \code{4}
+            < \code{1} < \code{8} < \code{5} < \code{6} < \code{7} <
+            \code{11} < \code{9} < \code{10} < \code{12} < \code{13} <
+            \code{15} < \code{14} < \code{16} identifying the rat whose
+            weight is measured.
+        }
+        \item{Diet}{
+            a factor with levels
+            \code{1} to \code{3} indicating the diet that the rat receives.
+        }
     }
 }
 \details{

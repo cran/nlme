@@ -63,8 +63,8 @@
    non-\code{NULL} and \code{FALSE} otherwise.
  }
  \item{grid}{this argument is included for consistency with the
-	 \code{plot.nfnGroupedData} method calling sequence. It is
-	 ignored in this method function.} 
+         \code{plot.nfnGroupedData} method calling sequence. It is
+         ignored in this method function.} 
  \item{\dots}{optional arguments passed to the \code{dotplot} function.}
 }
 \description{

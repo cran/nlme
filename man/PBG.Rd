@@ -11,25 +11,25 @@
 \format{
     This data frame contains the following columns:
     \describe{
-	\item{deltaBP}{
-	    a numeric vector
-	}
-	\item{dose}{
-	    a numeric vector
-	}
-	\item{Run}{
-	    an ordered factor with levels
-	    \code{T5} < \code{T4} < \code{T3} < \code{T2} < \code{T1} < \code{P5} < \code{P3} < \code{P2} < \code{P4} < \code{P1}
-	}
-	\item{Treatment}{
-	    a factor with levels
-	    \code{MDL 72222} 
-	    \code{Placebo} 
-	}
-	\item{Rabbit}{
-	    an ordered factor with levels
-	    \code{5} < \code{3} < \code{2} < \code{4} < \code{1}
-	}
+        \item{deltaBP}{
+            a numeric vector
+        }
+        \item{dose}{
+            a numeric vector
+        }
+        \item{Run}{
+            an ordered factor with levels
+            \code{T5} < \code{T4} < \code{T3} < \code{T2} < \code{T1} < \code{P5} < \code{P3} < \code{P2} < \code{P4} < \code{P1}
+        }
+        \item{Treatment}{
+            a factor with levels
+            \code{MDL 72222} 
+            \code{Placebo} 
+        }
+        \item{Rabbit}{
+            an ordered factor with levels
+            \code{5} < \code{3} < \code{2} < \code{4} < \code{1}
+        }
     }
 }
 \details{

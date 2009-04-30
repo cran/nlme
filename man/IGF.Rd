@@ -11,17 +11,17 @@
 \format{
     This data frame contains the following columns:
     \describe{
-	\item{Lot}{
-	    an ordered factor giving the radioactive tracer lot.
-	}
-	\item{age}{
-	    a numeric vector giving the age (in days) of the radioactive
-	    tracer.
-	}
-	\item{conc}{
-	    a numeric vector giving the estimated concentration of IGF-I
-	    protein (ng/ml)
-	}
+        \item{Lot}{
+            an ordered factor giving the radioactive tracer lot.
+        }
+        \item{age}{
+            a numeric vector giving the age (in days) of the radioactive
+            tracer.
+        }
+        \item{conc}{
+            a numeric vector giving the estimated concentration of IGF-I
+            protein (ng/ml)
+        }
     }
 }
 \details{
@@ -32,10 +32,10 @@
 }
 \source{
     Davidian, M. and Giltinan, D. M. (1995), \emph{Nonlinear Models for
-	Repeated Measurement Data},  Chapman and Hall, London.
+        Repeated Measurement Data},  Chapman and Hall, London.
     
     Pinheiro, J. C. and Bates, D. M. (2000), \emph{Mixed-Effects Models in S
-	and S-PLUS}, Springer, New York.  (Appendix A.11)
+        and S-PLUS}, Springer, New York.  (Appendix A.11)
 }
 %\examples{}
 \keyword{datasets}

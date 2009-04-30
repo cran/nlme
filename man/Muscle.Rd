@@ -11,15 +11,15 @@
 \format{
     This data frame contains the following columns:
     \describe{
-	\item{Strip}{
-	    an ordered factor indicating the strip of muscle being measured.
-	}
-	\item{conc}{
-	    a numeric vector giving the concentration of CaCl2
-	}
-	\item{length}{
-	    a numeric vector giving the shortening of the heart muscle strip.
-	}
+        \item{Strip}{
+            an ordered factor indicating the strip of muscle being measured.
+        }
+        \item{conc}{
+            a numeric vector giving the concentration of CaCl2
+        }
+        \item{length}{
+            a numeric vector giving the shortening of the heart muscle strip.
+        }
     }
 }
 \details{

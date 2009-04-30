@@ -11,21 +11,21 @@
 \format{
     This data frame contains the following columns:
     \describe{
-	\item{protein}{
-	    a numeric vector giving the protein content of the milk.
-	}
-	\item{Time}{
-	    a numeric vector giving the time since calving (weeks).
-	}
-	\item{Cow}{
-	    an ordered factor giving a unique identifier for each cow.
-	}
-	\item{Diet}{
-	    a factor with levels
-	    \code{barley}, 
-	    \code{barley+lupins}, and 
-	    \code{lupins} identifying the diet for each cow.
-	}
+        \item{protein}{
+            a numeric vector giving the protein content of the milk.
+        }
+        \item{Time}{
+            a numeric vector giving the time since calving (weeks).
+        }
+        \item{Cow}{
+            an ordered factor giving a unique identifier for each cow.
+        }
+        \item{Diet}{
+            a factor with levels
+            \code{barley}, 
+            \code{barley+lupins}, and 
+            \code{lupins} identifying the diet for each cow.
+        }
     }
 }
 \details{

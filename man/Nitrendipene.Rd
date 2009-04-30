@@ -11,19 +11,19 @@
 \format{
     This data frame contains the following columns:
     \describe{
-	\item{activity}{
-	    a numeric vector
-	}
-	\item{NIF}{
-	    a numeric vector
-	}
-	\item{Tissue}{
-	    an ordered factor with levels
-	    \code{2} < \code{1} < \code{3} < \code{4}
-	}
-	\item{log.NIF}{
-	    a numeric vector
-	}
+        \item{activity}{
+            a numeric vector
+        }
+        \item{NIF}{
+            a numeric vector
+        }
+        \item{Tissue}{
+            an ordered factor with levels
+            \code{2} < \code{1} < \code{3} < \code{4}
+        }
+        \item{log.NIF}{
+            a numeric vector
+        }
     }
 }
 \source{

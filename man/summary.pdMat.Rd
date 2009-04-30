@@ -24,10 +24,10 @@
    \code{"Blocked"} for \code{pdBlocked},
    \code{"Compound Symmetry"} for \code{pdCompSymm}, \code{"Diagonal"}
    for \code{pdDiag}, \code{"Multiple of an Identity"} for
-   \code{pdIdent}, \code{"General Positive-Definite, Natural
-     Parametrization"} for \code{pdNatural}, \code{"General
-     Positive-Definite"} for \code{pdSymm}, and
-     \code{data.class(object)} for \code{pdMat}.}
+   \code{pdIdent},
+   \code{"General Positive-Definite, Natural Parametrization"}
+   for \code{pdNatural}, \code{"General Positive-Definite"}
+   for \code{pdSymm}, and \code{data.class(object)} for \code{pdMat}.}
  \item{noCorrelation}{an optional logical value indicating whether
    correlations are to be printed in \code{print.summary.pdMat}. Default
    depends on the method function: \code{FALSE} for \code{pdDiag} and

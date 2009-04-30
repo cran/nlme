@@ -11,26 +11,26 @@
 \format{
     This data frame contains the following columns:
     \describe{
-	\item{conc}{
-	    a numeric vector
-	}
-	\item{Time}{
-	    a numeric vector
-	}
-	\item{Subject}{
-	    an ordered factor with levels
-	    \code{5} < \code{3} < \code{2} < \code{4} < \code{1}
-	}
-	\item{Formulation}{
-	    a factor with levels
-	    \code{tetrachel} 
-	    \code{tetracyn} 
-	}
+        \item{conc}{
+            a numeric vector
+        }
+        \item{Time}{
+            a numeric vector
+        }
+        \item{Subject}{
+            an ordered factor with levels
+            \code{5} < \code{3} < \code{2} < \code{4} < \code{1}
+        }
+        \item{Formulation}{
+            a factor with levels
+            \code{tetrachel} 
+            \code{tetracyn} 
+        }
     }
 }
 \source{
     Pinheiro, J. C. and Bates, D. M. (2000), \emph{Mixed-Effects Models in S
-	and S-PLUS}, Springer, New York.
+        and S-PLUS}, Springer, New York.
 }
 %\examples{}
 \keyword{datasets}
