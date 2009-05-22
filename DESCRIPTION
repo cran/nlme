@@ -1,6 +1,6 @@
 Package: nlme
-Version: 3.1-91
-Date: 2009-04-30
+Version: 3.1-92
+Date: 2009-05-22
 Priority: recommended
 Title: Linear and Nonlinear Mixed Effects Models
 Author: Jose Pinheiro <Jose.Pinheiro@pharma.novartis.com>, Douglas
@@ -15,6 +15,6 @@ Imports: lattice
 LazyLoad: yes
 LazyData: yes
 License: GPL (>= 2)
-Packaged: Thu Apr 30 12:27:43 2009; dsarkar
+Packaged: 2009-05-23 16:39:47 UTC; ripley
 Repository: CRAN
-Date/Publication: 2009-05-04 10:19:06
+Date/Publication: 2009-05-24 08:46:01
