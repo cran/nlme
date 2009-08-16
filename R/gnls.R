@@ -271,7 +271,7 @@ gnls <-
   }
   pLen <- length(pn)
   if (length(start) != pLen)
-    stop ("starting values for parameters are not the correct length")
+    stop ("starting values for parameters are not of the correct length")
   spar <- start
   names(spar) <- pn
   NReal <- sum(naPat)

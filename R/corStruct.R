@@ -2144,7 +2144,7 @@ Initialize.corLin <-
 	}
       }
       if ((val[2] <= 0) || (val[2] >= 1)) {
-	stop("Initial value of nugget ratio must be in (0,1)")
+	stop("Initial value of nugget ratio must be between 0 and 1")
       }
     } else {				# only range parameter
       if (length(val) != 1) {

@@ -403,6 +403,7 @@ anova.gls <-
     function(object, ..., test = TRUE, type = c("sequential", "marginal"),
              adjustSigma = TRUE, Terms, L, verbose = FALSE)
 {
+    Lmiss <- missing(L)
     ## returns the likelihood ratio statistics, the AIC, and the BIC
     dots <- list(...)
     if ((rt <- length(dots) + 1) == 1) {
@@ -427,7 +428,7 @@ anova.gls <-
         nTerms <- length(assign)
         dDF <- N - p
         lab <- paste("Denom. DF:", dDF,"\n")
-        if (missing(Terms) && missing(L)) {
+        if (missing(Terms) && Lmiss) {
             ## returns the F.table (Wald) for the fixed effects
             type <- match.arg(type)
             Fval <- Pval <- double(nTerms)
@@ -449,7 +450,7 @@ anova.gls <-
             dimnames(aod) <-
                 list(names(assign),c("numDF", "F-value", "p-value"))
         } else {
-            if (missing(L)) {                 # terms is given
+            if (Lmiss) {                 # terms is given
                 if (is.numeric(Terms) && all(Terms == as.integer(Terms))) {
                     if (min(Terms) < 1 || max(Terms) > nTerms) {
                         stop(paste("Terms must be between 1 and", nTerms))
@@ -505,7 +506,7 @@ anova.gls <-
             Pval <- 1 - pf(Fval, nDF, dDF)
             aod <- data.frame(nDF, Fval, Pval)
             names(aod) <- c("numDF", "F-value", "p-value")
-            if (!missing(L)) {
+            if (!Lmiss) {
                 if (nrow(L) > 1) attr(aod, "L") <- L[, noZeroColL, drop = FALSE]
                 else attr(aod, "L") <- L[, noZeroColL]
             }

@@ -14,3 +14,9 @@ anova(fm1, fm2)
 dummy <- function(obj) anova(obj[[1]], obj[[2]])
 dummy(list(fm1, fm2))
 ## last failed < 3.1-66
+
+## PR#13567
+fm1Orth.gls <- gls(distance ~ Sex * I(age - 11), Orthodont,
+                   correlation = corSymm(form = ~ 1 | Subject),
+                   weights = varIdent(form = ~ 1 | age))
+anova(fm1Orth.gls, Terms = "Sex")

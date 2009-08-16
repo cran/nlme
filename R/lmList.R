@@ -849,17 +849,16 @@ predict.lmList <-
     }
   }
   if(!is.null(subset)) {
-    if(any(is.na(match(subset, names(object))))) {
+    if(any(is.na(match(subset, names(object)))))
       stop("Non-existent group requested in \"subset\".")
-    }
     oclass <- class(object)
-    oatt <- attr(object, "call")
+    ## fix for PR#13788
+    oatt <- attributes(object)[c("call", "groupsForm", "pool")]
     object <- object[subset]
-    attr(object, "call") <- oatt
+    attributes(object) <- c(attributes(object), oatt)
     class(object) <- oclass
-    if(is.null(newdata)) {
+    if(is.null(newdata))
       myData <- myData[subset]
-    }
   }
   nmGrps <- names(object)
   noNull <- !sapply(object, is.null)
