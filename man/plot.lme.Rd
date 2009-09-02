@@ -79,8 +79,8 @@
   a diagnostic Trellis plot.
 }
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
-\seealso{\code{\link{lme}}, \code{\link[lattice]{xyplot}},
-   \code{\link[lattice]{bwplot}}, \code{\link[lattice]{histogram}}}
+\seealso{\code{\link{lme}}, \code{\link{xyplot}},
+   \code{\link{bwplot}}, \code{\link{histogram}}}
 \examples{
 fm1 <- lme(distance ~ age, Orthodont, random = ~ age | Subject)
 # standardized residuals versus fitted values by gender

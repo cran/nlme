@@ -66,8 +66,8 @@
 \seealso{\code{\link{lme}},
   \code{\link{pairs.compareFits}}, 
   \code{\link{pairs.lmList}}, 
-  \code{\link[lattice]{xyplot}},
-  \code{\link[lattice]{splom}}
+  \code{\link{xyplot}},
+  \code{\link{splom}}
 }
 \examples{
 fm1 <- lme(distance ~ age, Orthodont, random = ~ age | Subject)

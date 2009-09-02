@@ -77,7 +77,7 @@ corExp(value, form, nugget, metric, fixed)
   \code{\link{corClasses}},
   \code{\link{Initialize.corStruct}},
   \code{\link{summary.corStruct}},
-  \code{\link[stats]{dist}}
+  \code{\link{dist}}
 }
 \examples{
 sp1 <- corExp(form = ~ x + y + z)

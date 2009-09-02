@@ -74,8 +74,8 @@
 }
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
 \seealso{\code{\link{lmList}},\code{\link{predict.lm}},
-  \code{\link[lattice]{xyplot}},
-   \code{\link[lattice]{bwplot}}, \code{\link[lattice]{histogram}} }
+  \code{\link{xyplot}}, \code{\link{bwplot}}, \code{\link{histogram}}
+}
 \examples{
 fm1 <- lmList(distance ~ age | Subject, Orthodont)
 # standardized residuals versus fitted values by gender

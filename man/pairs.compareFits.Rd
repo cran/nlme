@@ -42,8 +42,8 @@
   \code{\link{plot.compareFits}},
   \code{\link{pairs.lme}},
   \code{\link{pairs.lmList}},
-  \code{\link[lattice]{xyplot}},
-  \code{\link[lattice]{splom}}
+  \code{\link{xyplot}},
+  \code{\link{splom}}
 }
 \examples{
 fm1 <- lmList(Orthodont)

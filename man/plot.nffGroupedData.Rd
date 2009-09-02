@@ -84,8 +84,7 @@ Methods, Applications and Future Directions", T.G. Gregoire (ed.),
 Springer-Verlag, New York.
 }
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
-\seealso{\code{\link{groupedData}},
-  \code{\link[lattice:xyplot]{dotplot}}}
+\seealso{\code{\link{groupedData}}, \code{\link{dotplot}}}
 \examples{
 plot(Machines)
 plot(Machines, inner = TRUE)

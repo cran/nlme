@@ -1,3 +1,9 @@
+2009-09-02  Brian Ripley <Brian.Ripley@R-project.org>
+
+	* DESCRIPTION (Version, Date): 3.1-94
+	* man/*.Rd: remove unnecessarily anchored links, including several
+	incorrect ones.
+
 2009-08-16  Brian Ripley <Brian.Ripley@R-project.org>
 
 	* DESCRIPTION (Version, Date): 3.1-93

@@ -70,8 +70,8 @@
 \seealso{\code{\link{lmList}},
   \code{\link{pairs.lme}}, 
   \code{\link{pairs.compareFits}}, 
-  \code{\link[lattice]{xyplot}},
-  \code{\link[lattice]{splom}}}
+  \code{\link{xyplot}},
+  \code{\link{splom}}}
 \examples{
 fm1 <- lmList(distance ~ age | Subject, Orthodont)
 # scatter plot of coefficients by gender, identifying unusual subjects

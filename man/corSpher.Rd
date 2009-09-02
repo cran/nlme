@@ -78,7 +78,7 @@ corSpher(value, form, nugget, metric, fixed)
 \seealso{
   \code{\link{Initialize.corStruct}},
   \code{\link{summary.corStruct}},
-  \code{\link[stats]{dist}}
+  \code{\link{dist}}
 }
 \examples{
 sp1 <- corSpher(form = ~ x + y)

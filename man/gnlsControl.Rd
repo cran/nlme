@@ -51,7 +51,7 @@ gnlsControl(maxIter, nlsMaxIter, msMaxIter, minScale, tolerance,
    default since (\R 2.2.0) or \code{\link{optim}} (the previous
    default).}
  \item{optimMethod}{character - the optimization method to be used with
-   the \code{\link[stats]{optim}} optimizer. The default is
+   the \code{\link{optim}} optimizer. The default is
    \code{"BFGS"}.  An alternative is \code{"L-BFGS-B"}.}
  \item{nlmStepMax}{stepmax value to be passed to nlm. See
      \code{\link{nlm}} for details. Default is 100.0}
