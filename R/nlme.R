@@ -1478,13 +1478,11 @@ nonlinModel <- function( modelExpression, env,
   }
   modelValue <- eval(modelExpression, env)
   on.exit(remove(i, offset, paramNames))
-  function( newPars) {
+  function (newPars) {
     if(!missing(newPars)) {
-      for( i in names(ind) ) {
-        assign( i, clearNames(newPars[ ind[[i]] ]), envir = env)
-      }
-      assign("modelValue", eval(modelExpression, env),
-             envir = thisEnv)
+      for(i in names(ind))
+	assign( i, unname(newPars[ ind[[i]] ]), envir = env)
+      assign("modelValue", eval(modelExpression, env), envir = thisEnv)
     }
     modelValue
   }

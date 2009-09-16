@@ -1,3 +1,8 @@
+2009-09-16  Martin Maechler  <maechler@stat.math.ethz.ch>
+
+	* DESCRIPTION (Version, Date): 3.1-95
+	* R/nlme.R (nonlinModel): use unname() instead of clearNames()
+
 2009-09-02  Brian Ripley <Brian.Ripley@R-project.org>
 
 	* DESCRIPTION (Version, Date): 3.1-94
@@ -87,7 +92,7 @@
 	  logLik.reStruct.Rd, nlme.nlsList.Rd, plot.nfnGroupedData.Rd,
 	  plot.nmGroupedData.Rd, recalc.reStruct.Rd, residuals.lme.Rd,
 	  residuals.lmeStruct.Rd: Remove reference to nonexistent URL
-	
+
 2007-10-04  Kurt Hornik
 
 	* DESCRIPTION (Version, Date): 3.1-86
