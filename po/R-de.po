@@ -1,16 +1,13 @@
 # Translation of R-nlme.pot to German
-# Copyright (C) 2007 The R Foundation
+# Copyright (C) 2007-2009 The R Foundation
 # This file is distributed under the same license as the nlme package.
 # Chris Leick <c.leick@vollbio.de>, 2009.
-# See also
-# http://lists.debian.org/debian-l10n-german/2009/05/msg00026.html
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: R 2.3.0\n"
+"Project-Id-Version: R 2.10.0 / nlme-3.1-95\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
 "POT-Creation-Date: 2009-05-30 08:21\n"
-"PO-Revision-Date: 2009-04-15 11:59+0100\n"
+"PO-Revision-Date: 2009-10-11 14:04+0200\n"
 "Last-Translator: Chris Leick <c.leick@vollbio.de>\n"
 "Language-Team: German <debian-l10n-german@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -221,10 +218,10 @@ msgid "Data in"
 msgstr "Daten in"
 
 msgid "call must evaluate to a data frame"
-msgstr ""
+msgstr "Der Aufruf muss sich zu einem Dataframe berechnen"
 
 msgid "without \"primary\" can only be used with fits of groupedData objects"
-msgstr ""
+msgstr "ohne \"primary\" kann nur für Anpassungen von groupedData Objekten genutzt werden"
 
 msgid "Only one level allowed for predictions"
 msgstr "Nur eine Stufe für Vorhersagen erlaubt"
@@ -334,10 +331,10 @@ msgid "for"
 msgstr "für"
 
 msgid "Undefined collapsing level"
-msgstr ""
+msgstr "Collapsing Level nicht definiert"
 
 msgid "Collapsing level cannot be smaller than display level;"
-msgstr ""
+msgstr "Der Collapsing-Level kann nicht kleiner sein, als der Anzeige Level;"
 
 msgid "setting it to the display level"
 msgstr "es wird auf die Anzeigestufe gesetzt"
@@ -601,7 +598,7 @@ msgid "At least two coefficients are needed."
 msgstr "Mindestens zwei Koeffizienten werden benötigt"
 
 msgid "No model variogram available, with showModel = TRUE"
-msgstr ""
+msgstr "Kein Variogramm mit showModel = TRUE verfügbar"
 
 msgid "Only residuals allowed"
 msgstr "Nur Residuen erlaubt"
@@ -659,7 +656,7 @@ msgid "List with starting values for random effects must have names"
 msgstr "Liste mit Startwerten für Zufallseffekte muss Namen haben"
 
 msgid "or be of length"
-msgstr ""
+msgstr "oder mit Länge"
 
 msgid "Group names not matched in starting values"
 msgstr "Gruppennamen nicht zu Startwerten passend"
@@ -1090,7 +1087,7 @@ msgid "Cannot fix variances in all groups"
 msgstr "Varianzen können nicht in allen Gruppen korrigiert werden"
 
 msgid "Initial value for \"varIdent\" should be of length"
-msgstr ""
+msgstr "Startwert von \"varIndent\" sollte folgende Länge haben"
 
 msgid "Names of starting value for \"varIdent\" object"
 msgstr "Namen des Startwertes für »varIdent«-Objekt"
@@ -1123,7 +1120,7 @@ msgid "Mismatch between group names and fixed values names"
 msgstr "Keine Übereinstimmung zwischen Gruppennamen und festen Wertnamen"
 
 msgid "Initial value for \"varPower\" should be of length"
-msgstr ""
+msgstr "Startwert von \"varPower\" sollte folgende Länge haben"
 
 msgid "Nonexistent groups names for initial values in varPower"
 msgstr "Nicht existierende Gruppennamen für Anfangswerte in varPower"
@@ -1138,7 +1135,7 @@ msgid "Fixed parameters must have groups names in varPower"
 msgstr "Feste Parameter müssen Gruppennamen in varPower haben"
 
 msgid "Initial value for \"varExp\" should be of length"
-msgstr ""
+msgstr "Startwert von \"varExp\" sollte folgende Länge haben"
 
 msgid "Nonexistent groups names for initial values in varExp"
 msgstr "Nicht existente Gruppennamen für Anfangswerte in varExp"
@@ -1162,10 +1159,10 @@ msgid "Constant in varConstPower structure must be > 0"
 msgstr "Konstante in varConstPower-Struktur muss > 0 sein"
 
 msgid "Cannot change the length of the"
-msgstr ""
+msgstr "Kann die Länge nicht ändern von"
 
 msgid "Initial value should be of length"
-msgstr ""
+msgstr "Startwert sollte folgende Länge haben"
 
 msgid "Nonexistent groups names for initial values"
 msgstr "Nicht existierende Gruppenamen für Anfangswerte"

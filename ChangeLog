@@ -1,3 +1,8 @@
+2009-10-12,16  Brian Ripley <Brian.Ripley@R-project.org>
+
+	* DESCRIPTION (Version, Date): 3.1-96
+	* po/R-de.po, po/de.po: update
+
 2009-09-16  Martin Maechler  <maechler@stat.math.ethz.ch>
 
 	* DESCRIPTION (Version, Date): 3.1-95
