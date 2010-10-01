@@ -29,9 +29,9 @@
             epicenter of the earthquake (km).
         }
         \item{soil}{
-            a factor with levels \code{0} and \code{1} 
+            a factor with levels \code{0} and \code{1}
             giving the soil condition at the measuring station, either
-            soil or rock. 
+            soil or rock.
         }
         \item{accel}{
             maximum horizontal acceleration observed (g).
@@ -52,7 +52,7 @@
     Davidian, M. and Giltinan, D. M. (1995), \emph{Nonlinear Models for
         Repeated Measurement Data},  Chapman and Hall, London.
 
-    Joyner and Boor (1981), Peak horizontal acceleration and velocity from
+    Joyner and Boore (1981), Peak horizontal acceleration and velocity from
     strong-motion records including records from the 1979 Imperial
     Valley, California, earthquake, \emph{Bulletin of the Seismological
         Society of America}, \bold{71}, 2011-2038.

@@ -1,3 +1,20 @@
+2010-10-01  Brian Ripley <Brian.Ripley@R-project.org>
+
+	* DESCRIPTION (Version, Date): 3.1-97
+
+2010-09-22  Brian Ripley <Brian.Ripley@R-project.org>
+
+	* man/residuals.gls.Rd: incorrect default, see
+	https://stat.ethz.ch/pipermail/r-devel/2010-September/058487.html
+	
+2009-12-22  Brian Ripley <Brian.Ripley@R-project.org>
+
+	* man/ACF.gls.Rd: has \seealso to itself: seems ACF.lme was meant.
+
+2009-12-18  Brian Ripley <Brian.Ripley@R-project.org>
+
+	* DESCRIPTION: add BugReports field.
+
 2009-10-12,16  Brian Ripley <Brian.Ripley@R-project.org>
 
 	* DESCRIPTION (Version, Date): 3.1-96

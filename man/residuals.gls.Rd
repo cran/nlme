@@ -2,7 +2,6 @@
 % Part of the nlme package for R
 % Distributed under GPL 2 or later: see nlme/LICENCE
 
-% $Id: residuals.gls.Rd,v 1.8.2.2 2003/05/17 22:04:29 bates Exp $
 \name{residuals.gls}
 \title{Extract gls Residuals}
 \usage{
@@ -23,7 +22,7 @@
     normalized residuals (standardized residuals pre-multiplied by the
     inverse square-root factor of the estimated error correlation
     matrix) are used. Partial matching of arguments is used, so only the
-    first character needs to be provided. Defaults to \code{"pearson"}.}
+    first character needs to be provided.  Defaults to \code{"response"}.}
   \item{\dots}{some methods for this generic function require additional
     arguments.  None are used in this method.}
 }
