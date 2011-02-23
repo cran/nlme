@@ -4,7 +4,7 @@ import(stats)
 importFrom(graphics, pairs, plot)
 
 export(ACF, allCoef, asOneFormula, asTable, augPred, balancedGrouped,
-       BIC, "coef<-", "coefficients<-", collapse, compareFits,
+       "coef<-", "coefficients<-", collapse, compareFits,
        comparePred, corAR1, corARMA, corCAR1, corCompSymm,
        corExp, corFactor, corGaus, corIdent, corLin, corMatrix,
        corNatural, corRatio, corSpatial, corSpher, corSymm,
@@ -72,12 +72,6 @@ S3method(asTable, groupedData)
 S3method(augPred, gls)
 S3method(augPred, lme)
 S3method(augPred, lmList)
-S3method(BIC, gls)
-S3method(BIC, lm)
-S3method(BIC, lme)
-S3method(BIC, lmList)
-S3method(BIC, logLik)
-S3method(BIC, nls)
 S3method(coef, corAR1)
 S3method(coef, corARMA)
 S3method(coef, corCAR1)
@@ -482,3 +476,17 @@ S3method(varWeights, varComb)
 S3method(varWeights, varFunc)
 S3method(vcov, gls)
 S3method(vcov, lme)
+
+if (!exists("BIC", envir=asNamespace("stats"))) {
+    ## pre 2.13.0
+    S3method(BIC, default)
+    S3method(BIC, logLik)
+    export(BIC)
+} else {
+    ## re-export as amer, drc, metafor, randomLCA, urca
+    ## expected to import from here
+    export(BIC)
+    S3method(nobs, gls)
+    S3method(nobs, gnls)
+    S3method(nobs, lme)
+}

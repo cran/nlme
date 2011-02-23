@@ -117,6 +117,7 @@ Initialize.varFunc <-
   object
 }
 
+## NB no nobs
 logLik.varFunc <-
   function(object, data, ...)
 {

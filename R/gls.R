@@ -844,6 +844,9 @@ logLik.gls <-
     val
 }
 
+nobs.gls <- function(object, ...) object$dims$N
+
+
 plot.gls <-
     function(x, form = resid(., type = "pearson") ~ fitted(.), abline,
              id = NULL, idLabels = NULL, idResType = c("pearson", "normalized"),

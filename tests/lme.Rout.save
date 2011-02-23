@@ -1,6 +1,6 @@
 
-R version 2.8.0 Under development (unstable) (2008-06-06 r45872)
-Copyright (C) 2008 The R Foundation for Statistical Computing
+R version 2.13.0 Under development (unstable) (2011-02-23 r54556)
+Copyright (C) 2011 The R Foundation for Statistical Computing
 ISBN 3-900051-07-0
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -116,7 +116,7 @@ attr(,"label")
 Warning message:
 In lme.formula(distance ~ age, data = Orthodont, control = lmeControl(msMaxIter = 1,  :
   nlminb problem, convergence error code = 1
-  message = iteration limit reached without convergence (9)
+  message = iteration limit reached without convergence (10)
 > 
 > ## based on bug report on R-help
 > predict(fm3, Orthodont[1,])

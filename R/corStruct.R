@@ -256,6 +256,7 @@ logDet.corStruct <-
   }
 }
 
+## NB, no "nobs"
 logLik.corStruct <-
   function(object, data, ...) -logDet(object)
 

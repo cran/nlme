@@ -21,10 +21,6 @@ ACF <-
   ## autocorrelation function - needed not exist if acf were generic
   function(object, maxLag, ...) UseMethod("ACF")
 
-BIC <-
-  ## Return the object's value of the Bayesian Information Criterion
-  function(object, ...) UseMethod("BIC")
-
 asTable <-
   ## Return the object in a tabular form
   function(object) UseMethod("asTable")

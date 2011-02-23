@@ -2,20 +2,14 @@
 % Part of the nlme package for R
 % Distributed under GPL 2 or later: see nlme/LICENCE
 
-% $Id: BIC.Rd,v 1.5.2.1 2003/04/17 22:28:45 bates Exp $
 \name{BIC}
 \title{Bayesian Information Criterion}
 \usage{
 BIC(object, \dots)
 }
 \alias{BIC}
-\alias{BIC.lm}
-\alias{BIC.lmList}
-\alias{BIC.gls}
-\alias{BIC.lme}
-\alias{BIC.nls}
-\alias{BIC.nlsList}
-\alias{BIC.nlme}
+\alias{BIC.default} % not exported
+\alias{BIC.logLik}  % exported
 \arguments{
  \item{object}{a fitted model object, for which there exists a
    \code{logLik} method to extract the corresponding log-likelihood, or
@@ -40,14 +34,17 @@ BIC(object, \dots)
  BIC.
 }
 \references{
-  Schwarz, G. (1978) "Estimating the Dimension of a Model", Annals of
-  Statistics, 6, 461-464.
+  Schwarz, G. (1978) Estimating the Dimension of a Model.
+  \emph{Annals of Statistics}, \bold{6}, 461-464.
 }
 \author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
-\seealso{\code{\link{logLik}}, \code{\link{AIC}}, \code{\link{BIC.logLik}}}
+\seealso{
+  \code{\link{logLik}}, \code{\link{AIC}}
+}
 \examples{
 fm1 <- lm(distance ~ age, data = Orthodont) # no random effects
 BIC(fm1)
+BIC(logLik(fm1))
 %\dontrun{
 fm2 <- lme(distance ~ age, data = Orthodont) # random is ~age
 BIC(fm1, fm2)

@@ -1403,6 +1403,8 @@ logLik.lme <-
   val
 }
 
+nobs.lme <- function(object, ...) object$dims$N
+
 pairs.lme <-
   function(x, form = ~coef(.), label, id = NULL, idLabels = NULL,
 	   grid = FALSE, ...)

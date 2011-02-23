@@ -19,8 +19,6 @@
 
 ## Note that  require( stats )  has already happened ...
 
-BIC.lme <- BIC.lmList <- BIC.gls <- BIC.lm
-
 comparePred.lme <- comparePred.lmList <- comparePred.gls
 
 getData.nlme <- getData.gnls

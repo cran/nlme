@@ -665,6 +665,7 @@ logLik.gnls <-
   val
 }
 
+nobs.gnls <- function(object, ...) object$dims$N
 
 predict.gnls <-
   function(object, newdata, na.action = na.fail, naPattern = NULL, ...)
