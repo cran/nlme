@@ -1,7 +1,7 @@
 /*
    nls functions used in predict.nls
 
-   Copyright 1999 Saikat DebRoy <saikat@stat.wisc.edu>
+   Copyright 1999 Saikat DebRoy
 
    This file is part of the nlme package for S and related languages
    and is made available under the terms of the GNU General Public

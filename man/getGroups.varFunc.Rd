@@ -33,7 +33,7 @@
   returned; else \code{NULL} is returned.
 }
 
-\author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
+\author{Jose Pinheiro and Douglas Bates \email{bates@stat.wisc.edu}}
 
 \examples{
 vf1 <- varPower(form = ~ age | Sex)

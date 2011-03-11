@@ -289,6 +289,9 @@ S3method(nlme, formula)
 S3method(nlme, nlsList)
 S3method(nlsList, formula)
 S3method(nlsList, selfStart)
+S3method(nobs, gls)
+S3method(nobs, gnls)
+S3method(nobs, lme)
 S3method(pairs, compareFits)
 S3method(pairs, lme)
 S3method(pairs, lmList)
@@ -476,17 +479,3 @@ S3method(varWeights, varComb)
 S3method(varWeights, varFunc)
 S3method(vcov, gls)
 S3method(vcov, lme)
-
-if (!exists("BIC", envir=asNamespace("stats"))) {
-    ## pre 2.13.0
-    S3method(BIC, default)
-    S3method(BIC, logLik)
-    export(BIC)
-} else {
-    ## re-export as amer, drc, metafor, randomLCA, urca
-    ## expected to import from here
-    export(BIC)
-    S3method(nobs, gls)
-    S3method(nobs, gnls)
-    S3method(nobs, lme)
-}

@@ -114,7 +114,7 @@ gnls(model, data, params, start, correlation, weights, subset,
  in S and S-PLUS", Springer.  
 
 }
-\author{Jose Pinheiro \email{jose.pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
+\author{Jose Pinheiro and Douglas Bates \email{bates@stat.wisc.edu}}
 \seealso{
   \code{\link{corClasses}},
   \code{\link{gnlsControl}}, \code{\link{gnlsObject}},

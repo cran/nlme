@@ -136,8 +136,7 @@ lme(fixed, data, random, correlation, weights, subset, method,
   Venables, W.N. and Ripley, B.D. (2002) "Modern Applied Statistics with
   S", 4th Edition, Springer-Verlag.
 }
-\author{Jose Pinheiro \email{jose.pinheiro@pharma.novartis.com} and
-  Douglas Bates \email{bates@stat.wisc.edu}}
+\author{Jose Pinheiro and Douglas Bates \email{bates@stat.wisc.edu}}
 \seealso{
   \code{\link{corClasses}},
   \code{\link{lme.lmList}},

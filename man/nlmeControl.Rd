@@ -79,7 +79,7 @@ nlmeControl(maxIter, pnlsMaxIter, msMaxIter, minScale,
 \value{
   a list with components for each of the possible arguments.
 }
-\author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
+\author{Jose Pinheiro and Douglas Bates \email{bates@stat.wisc.edu}}
 \seealso{\code{\link{nlme}}, \code{\link{nlm}}, \code{\link{optim}},
   \code{\link{nlmeStruct}}}
 \examples{

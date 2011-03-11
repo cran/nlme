@@ -66,7 +66,7 @@ glsControl(maxIter, msMaxIter, tolerance, msTol, msScale, msVerbose,
   a list with components for each of the possible arguments.
 }
 
-\author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
+\author{Jose Pinheiro and Douglas Bates \email{bates@stat.wisc.edu}}
 
 \seealso{\code{\link{gls}}, \code{\link{lmeScale}}}
 

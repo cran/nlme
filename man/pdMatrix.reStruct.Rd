@@ -35,7 +35,7 @@
  in S and S-PLUS", Springer, esp. p. 162.  
 }
 
-\author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
+\author{Jose Pinheiro and Douglas Bates \email{bates@stat.wisc.edu}}
 
 \seealso{\code{\link{as.matrix.reStruct}},
   \code{\link{reStruct}},

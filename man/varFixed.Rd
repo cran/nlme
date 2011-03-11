@@ -31,7 +31,7 @@ varFixed(value)
  in S and S-PLUS", Springer.  
 }
 
-\author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
+\author{Jose Pinheiro and Douglas Bates \email{bates@stat.wisc.edu}}
 
 
 \seealso{

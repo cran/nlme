@@ -25,7 +25,7 @@
   a vector with the residuals for the nonlinear model represented by
   \code{object}. 
 }
-\author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
+\author{Jose Pinheiro and Douglas Bates \email{bates@stat.wisc.edu}}
 \note{
   This method function is primarily used inside \code{gnls} and 
   \code{residuals.gnls}.

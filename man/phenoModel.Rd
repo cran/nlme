@@ -38,7 +38,6 @@ phenoModel(Subject, time, dose, lCl, lV)
     Pinheiro, J. C. and Bates, D. M. (2000) \emph{Mixed-effects Models in
         S and S-PLUS}, Springer. (section 6.4)
 }
-\author{Jose Pinheiro \email{jose.pinheiro@pharma.novartis.com}
-  and Douglas Bates \email{bates@stat.wisc.edu}
+\author{Jose Pinheiro and Douglas Bates \email{bates@stat.wisc.edu}
 }
 \keyword{models}

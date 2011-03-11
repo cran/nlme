@@ -41,7 +41,7 @@
 \value{
   the recalculated condensed linear model object.
 }
-\author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
+\author{Jose Pinheiro and Douglas Bates \email{bates@stat.wisc.edu}}
 \note{This method function is only used inside model
   fitting functions, such as \code{lme} and \code{gls},
   that allow correlated error terms.}

@@ -1,39 +1,9 @@
 ###      Methods for generics from newGenerics.q for some standard classes
 ###
-### Copyright 1997-2003  Jose C. Pinheiro <Jose.Pinheiro@pharma.novartis.com>,
+### Copyright 1997-2003  Jose C. Pinheiro,
 ###                      Douglas M. Bates <bates@stat.wisc.edu>
 
 ##*## Methods for some of the generics in newGenerics.q for standard classes
-
-if (!exists("BIC", envir=asNamespace("stats"))) {
-BIC <-
-  ## Return the object's value of the Bayesian Information Criterion
-  function(object, ...) UseMethod("BIC")
-
-BIC.logLik <-
-  ## BIC for logLik objects
-  function(object, ...)
-{
-    no <- attr(object, "nobs")
-    if(is.null(no)) stop("no \"nobs\" attribute is available")
-    -2 * c(object) + attr(object, "df") * log(no)
-}
-
-BIC.default <-
-  ## BIC for various fitted objects
-  function(object, ...)
-{
-  if(nargs() > 1L) {
-    val <- lapply(list(object, ...), logLik)
-    val <-
-      as.data.frame(t(sapply(val, function(el) c(attr(el, "df"), BIC(el)))))
-    names(val) <- c("df", "BIC")
-    row.names(val) <- as.character(match.call()[-1L])
-    return(val)
-  }
-  BIC(logLik(object))
-}
-}
 
 Dim.default <- function(object, ...) dim(object)
 

@@ -100,8 +100,7 @@ gls(model, data, correlation, weights, subset, method, na.action,
  Venables, W.N. and Ripley, B.D. (1997) "Modern Applied Statistics with
  S-PLUS", 2nd Edition, Springer-Verlag.
 }
-\author{Jose Pinheiro \email{jcp@research.bell-labs.com}, Douglas Bates
-  \email{bates@stat.wisc.edu}} 
+\author{Jose Pinheiro and Douglas Bates \email{bates@stat.wisc.edu}} 
 \seealso{
   \code{\link{corClasses}},
   \code{\link{glsControl}},

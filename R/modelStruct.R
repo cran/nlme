@@ -1,6 +1,6 @@
 ###         modelStruct - a virtual class of model structures
 ###
-### Copyright 1997-2003  Jose C. Pinheiro <Jose.Pinheiro@pharma.novartis.com>,
+### Copyright 1997-2003  Jose C. Pinheiro,
 ###                      Douglas M. Bates <bates@stat.wisc.edu>
 #
 #  This program is free software; you can redistribute it and/or modify

@@ -1,7 +1,7 @@
 /*
    header file for the nlme package
 
-   Copyright 1999-2001  Saikat DebRoy <saikat@stat.wisc.edu>,
+   Copyright 1999-2001  Saikat DebRoy,
 			Douglas Bates <bates@stat.wisc.edu>
 
    This file is part of the nlme package for S and related languages

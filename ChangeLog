@@ -1,9 +1,25 @@
+2011-05-11  Brian Ripley <Brian.Ripley@R-project.org>
+
+	* Release 3.1-100 for R 2.13.0
+
+	* NAMESPACE: no longer re-export BIC
+
+	* man/BIC.Rd: removed.
+
 2011-02-23  Brian Ripley <Brian.Ripley@R-project.org>
 
-	* DESCRIPTION: version is 3.1-99 (unreleased),
+	* DESCRIPTION: version is 3.1-100, require R >= 2.13
+
+	* man/BIC.Rd: make a stub referring to stats::BIC()
+
+	* Everywhere: remove obsolete email addresses of former authors
+
+2011-02-23  Brian Ripley <Brian.Ripley@R-project.org>
+
+	* DESCRIPTION: version is 3.1-99 (unreleased, used for R-devel),
 	remove email addresses of former authors (and JP has moved).
 
-	* R/{new,zz}Methods.R: 
+	* R/{new,zz}Methods.R:
 	Put all BIC() methods in one place, as the default method.
 
 	* man/BIC.Rd: remove aliases to methods (not all of which actually
@@ -16,7 +32,7 @@
 	* NAMESPACE, R/newMethods.R: prepare for migration of BIC() to stats.
 
 	* R/{gls,gnls,lme}.R, NAMESPACE: add nobs() methods.
-	
+
 2011-02-10  Brian Ripley <Brian.Ripley@R-project.org>
 
 	* DESCRIPTION (Version, Date): 3.1-98
@@ -579,7 +595,7 @@
 	* R/varFunc.R (print.summary.varFixed): changed	 instances of
 	deparse(as.vector(x)) to deparse(x) here and in many other places.
 
-2002-09-10  Saikat DebRoy  <saikat@stat.wisc.edu>
+2002-09-10  Saikat DebRoy
 
 	* nlsList.R (nlsList.formula): Use "try" instead of "restart".
 
@@ -740,13 +756,13 @@
 	* src/matrix.c: Removed dependency on S_compat.h by replacing
 	calls to dqrdca with the equivalent call to dqrdc2.
 
-2000-07-24  Saikat DebRoy <saikat@stat.wisc.edu>
+2000-07-24  Saikat DebRoy
 
 	* Changed various uses of do.call to eval.  The reason for doing
 	this is to allow calls to the function calling eval from within
 	another function.  It's the old scoping problem again.
 
-2000-07-07  Saikat DebRoy <saikat@stat.wisc.edu>
+2000-07-07  Saikat DebRoy
 
 	* src/nlme.c, src/nlmefit.c: Added mixed_grad in calls to optif9.
 

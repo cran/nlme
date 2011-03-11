@@ -60,7 +60,7 @@ comparePred(object1, object2, primary, minimum, maximum,
   inherits from classes \code{comparePred} and \code{augPred}.
 }
 
-\author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
+\author{Jose Pinheiro and Douglas Bates \email{bates@stat.wisc.edu}}
 \note{
   This function is generic; method functions can be written to handle
   specific classes of objects. Classes which already have methods for

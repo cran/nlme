@@ -1,7 +1,7 @@
 ###       Functions that are used in several parts of the nlme library
 ###                 but do not belong to any specific part
 ###
-### Copyright 1997-2003  Jose C. Pinheiro <Jose.Pinheiro@pharma.novartis.com>,
+### Copyright 1997-2003  Jose C. Pinheiro,
 ###                      Douglas M. Bates <bates@stat.wisc.edu>
 #
 #  This program is free software; you can redistribute it and/or modify

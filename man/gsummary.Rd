@@ -82,7 +82,7 @@ gsummary(object, FUN, omitGroupingFactor, form, level,
  in S and S-PLUS", Springer.  
 }
 
-\author{Jose Pinheiro \email{Jose.Pinheiro@pharma.novartis.com} and Douglas Bates \email{bates@stat.wisc.edu}}
+\author{Jose Pinheiro and Douglas Bates \email{bates@stat.wisc.edu}}
 
 \seealso{\code{\link{summary}}, \code{\link{groupedData}},
   \code{\link{getGroups}}} 
