@@ -81,7 +81,7 @@ matrixLog_pd(double *L, longint *q, double *l)
 void
 natural_pd(double *L, longint *q, double *l) /* natural parametrization  */
 {
-  longint i, j, qp1 = *q + 1, info, zero;
+  longint i, j, qp1 = *q + 1, info;
   double *std = l, *corr = l + *q, *work = Calloc(*q, double);
 
   for(i = 0; i < *q; i++) std[i] = exp(std[i]);
@@ -95,10 +95,10 @@ natural_pd(double *L, longint *q, double *l) /* natural parametrization  */
       corr++;
     }
   }
-  zero = 0L;
 #ifdef R_S_H
   F77_CALL(chol) (L, q, q, L, &info);
 #else
+  zero = 0L;
   F77_CALL(chol) (L, q, work, &zero, &zero, &info);
 #endif /* R_S_H */
   Free(work);

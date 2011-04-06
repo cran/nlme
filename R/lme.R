@@ -847,10 +847,9 @@ anova.lme <-
       stop("Object must inherit from class \"lme\" ")
     }
     vFix <- attr(object$fixDF, "varFixFact")
-    if (object$method == "ML" && adjustSigma == TRUE) {
+    if (adjustSigma && object$method == "ML")
       ## using REML-like estimate of sigma under ML
       vFix <- sqrt(object$dims$N/(object$dims$N - ncol(vFix))) * vFix
-    }
     c0 <- solve(t(vFix), fixef(object))
     assign <- attr(object$fixDF, "assign")
     nTerms <- length(assign)
@@ -1986,14 +1985,12 @@ predict.lme <-
       names(val) <- grps
     }
     attr(val, "label") <- "Predicted values"
-    if (!is.null(aux <- attr(object, "units")$y)) {
+    if (!is.null(aux <- attr(object, "units")$y))
       attr(val, "label") <- paste(attr(val, "label"), aux)
-    }
-    return(val)
+    val
   } else {
-    val <- data.frame(oGrps, predict = data.frame(val))
+    data.frame(oGrps, predict = data.frame(val))
   }
-  val
 }
 
 print.anova.lme <-
@@ -2550,10 +2547,9 @@ summary.lme <- function(object, adjustSigma = TRUE, verbose = FALSE, ...)
   stdFixed <- sqrt(diag(as.matrix(object$varFix)))
   object$corFixed <- array(t(object$varFix/stdFixed)/stdFixed,
                            dim(object$varFix), list(names(fixed),names(fixed)))
-  if (object$method == "ML" && adjustSigma == TRUE) {
-    stdFixed <-
-      sqrt(object$dims$N/(object$dims$N - length(stdFixed))) * stdFixed
-  }
+  if (adjustSigma && object$method == "ML")
+    stdFixed <- stdFixed *
+	sqrt(object$dims$N/(object$dims$N - length(stdFixed)))
   ## fixed effects coefficients, std. deviations and t-ratios
   ##
   tTable <- data.frame(fixed, stdFixed, object$fixDF[["X"]],

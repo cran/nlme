@@ -559,11 +559,12 @@ plot.nmGroupedData <-
   do.call("plot", args)
 }
 
-print.groupedData <-
-  function(x, ...)
+print.groupedData <- function(x, ...)
 {
   cat("Grouped Data: ")
-  print(attr(x, "formula"))
+  if(identical(emptyenv(), environment(frm <- attr(x, "formula"))))
+      environment(frm) <- globalenv()# for printing, as that will be suppressed
+  print(frm)
   print.data.frame(x, ...)
 }
 

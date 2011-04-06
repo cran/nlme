@@ -1,4 +1,19 @@
-2011-05-11  Brian Ripley <Brian.Ripley@R-project.org>
+2011-05-06  Brian Ripley <Brian.Ripley@R-project.org>
+
+	* DESCRIPTION: version is 3.1-101
+
+2011-04-23  Martin Maechler  <maechler@stat.math.ethz.ch>
+2011-04-14  Martin Maechler  <maechler@stat.math.ethz.ch>
+
+	* man/augPred.Rd, R/groupedData.R, R/gls.R, R/lme.R, R/simulate.R
+	Changes he failed to document.
+	
+2011-03-26  Brian Ripley <Brian.Ripley@R-project.org>
+
+	* src/{nlmefit,pdMat}.c: remove unused variables detected by
+	-Wunused-but-set-variable
+
+2011-03-11  Brian Ripley <Brian.Ripley@R-project.org>
 
 	* Release 3.1-100 for R 2.13.0
 

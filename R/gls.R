@@ -420,10 +420,9 @@ anova.gls <-
         REML <- dims$REML
         assign <- object$parAssign
         vBeta <- attr(assign, "varBetaFact")
-        if ((!REML) && adjustSigma == TRUE) {
-            ## using REML-like estimate of sigma under ML
-            vBeta <- sqrt(N/(N - p)) * vBeta
-        }
+	if (!REML && adjustSigma)
+	    ## using REML-like estimate of sigma under ML
+	    vBeta <- sqrt(N/(N - p)) * vBeta
         c0 <- solve(t(vBeta), coef(object))
         nTerms <- length(assign)
         dDF <- N - p

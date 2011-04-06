@@ -353,47 +353,34 @@ plot.simulate.lme <-
              ylim = c(0.037, 0.963), aspect = 1,
              strip = function(...) strip.default(..., style = 1), ...)
 {
-    if (!is.null(x$null$ML)) {
-        ML <- TRUE
-        if (is.null(x$alt$ML)) {
+    ML <- !is.null(x$null$ML)
+    if(ML) {
+        if (is.null(x$alt$ML))
             stop("Plot method only implemented for comparing models")
-        }
         okML <- x$null$ML[, "info"] < 8 & x$alt$ML[, "info"] < 8
-    } else {
-        ML <- FALSE
     }
-    if (!is.null(x$null$REML)) {
-        REML <- TRUE
-        if (is.null(x$alt$REML)) {
+    REML <- !is.null(x$null$REML)
+    if(REML) {
+        if (is.null(x$alt$REML))
             stop("Plot method only implemented for comparing models")
-        }
         okREML <- x$null$REML[, "info"] < 8 & x$alt$REML[, "info"] < 8
-    } else {
-        REML <- FALSE
     }
 
     if (is.null(df)) {
         stop("No degrees of freedom specified")
     }
-    if ((ldf <- length(df)) > 1){
+    if ((ldf <- length(df)) > 1) {
         df <- sort(unique(df))
         if (missing(weights)) {
-            weights <- rep(1/ldf, ldf)
+            weights <- rep.int(1/ldf, ldf)
         } else {
-            if (!(length(weights) == 1 && weights == FALSE) &&
-                length(weights) != ldf) {
-                stop("Degrees of freedom and weights must have the same length")
-            }
+	    if (!identical(weights,FALSE) && length(weights) != ldf)
+		stop("Degrees of freedom and weights must have the same length")
         }
     } else {
         weights <- FALSE
     }
-
-    if (length(weights) == 1) {           # no weights
-        useWgts <- FALSE
-    } else {
-        useWgts <- TRUE
-    }
+    useWgts <- (length(weights) != 1)
 
     if (any(df < 0)) {
         stop("Negative degrees of freedom not allowed")
@@ -407,13 +394,7 @@ plot.simulate.lme <-
             rev(sort(2 * pmax(0, x$alt$ML[okML, "logLik"] - x$null$ML[okML,"logLik"])))
         MLy <- lapply(df,
                       function(df, x) {
-                          if (df > 0) {
-                              1 - pchisq(x, df)
-                          } else {
-                              val <- rep(0, length(x))
-                              val[x == 0] <- 1
-                              val
-                          }
+			  if (df > 0) 1 - pchisq(x, df) else 1*(x == 0)
                       }, x = MLstat)
         dfC <- paste("df",df,sep="=")
         if (useWgts) {                      # has weights
@@ -515,8 +496,3 @@ plot.simulate.lme <-
            strip = strip, xlab = xlab, ylab = ylab, aspect = aspect,
            xlim = xlim, ylim = ylim, ...)
 }
-
-## Local Variables:
-## mode:S
-## End:
-

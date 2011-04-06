@@ -520,15 +520,15 @@ mixed_grad(longint n, double *pars, double *g, void *state)
     double *zxcopy = Calloc(st->dd->ZXrows * st->dd->ZXcols, double),
 	*Delta = Calloc(st->dd->DmOff[st->dd->Q], double),
 	*dc = Calloc((size_t) ((st->dd->Srows) * (st->dd->ZXcols)), double),
-	*DmHalf, sigmainv, logLik, *pt, *res;
+	*DmHalf, sigmainv, *pt, *res;
     double  sqrtDF = sqrt((double) (st->dd->N -
 				    *(st->RML)*(st->dd->ncol[st->dd->Q])));
     longint i, j, offset;
 
     DmHalf = generate_DmHalf(Delta, st->dd, st->pdClass, pars),
 	Memcpy(zxcopy, st->ZXy, st->dd->ZXrows * st->dd->ZXcols);
-    logLik = -internal_loglik(st->dd, zxcopy, DmHalf, st->RML, dc,
-			      DNULLP);
+    /* needed ? */
+    internal_loglik(st->dd, zxcopy, DmHalf, st->RML, dc, DNULLP);
     internal_estimate(st->dd, dc);
     internal_R_invert(st->dd, dc);
     sigmainv = *(dc + (size_t)((st->dd->Srows) * (st->dd->ZXcols)) - 1)/sqrtDF;
@@ -692,7 +692,7 @@ internal_EM(dimPTR dd, double *ZXy, double *DmHalf, int nn,
 	*dc = Calloc((size_t) ((dd->Srows) * (dd->ZXcols)), double),
 	*zxcopy = Calloc((size_t) ((dd->ZXrows) * (dd->ZXcols)), double);
     double  sqrtDF = sqrt((double) (dd->N - *RML * (dd->ncol[dd->Q])));
-    longint i, j, k, offset, zero;
+    longint i, j, k, offset;
 
     while (nn-- > 0) {
 	copy_mat(zxcopy, dd->ZXrows, ZXy, dd->ZXrows, dd->ZXrows, dd->ZXcols);
@@ -767,10 +767,10 @@ internal_EM(dimPTR dd, double *ZXy, double *DmHalf, int nn,
 			auxRes[j * ncol + k] = auxRes[j + k * ncol] = trAJ;
 		    }
 		}
-		zero = 0L;
 #ifdef USING_R
 		F77_CALL(chol)(auxRes, &ncol, &ncol, auxRes, &l);
 #else
+		zero = 0L;
 		F77_CALL(chol)(auxRes, &ncol, res, &zero, &zero, &l);
 #endif /* USING_R */
 	    }
@@ -936,7 +936,7 @@ mixed_combined(double *ZXy, longint *pdims, double *DmHalf, longint *nIter,
 	       longint *pdClass, longint *RML, double *logLik, double *R0,
 	       double *lRSS, longint *info)
 {
-    longint i, j, Qp2;
+    longint i, j;
     double *Ra, *dc, *work;
 
     dd = dims(pdims);		/* Using global dd, pdC, setngs, and Delta */
@@ -946,7 +946,6 @@ mixed_combined(double *ZXy, longint *pdims, double *DmHalf, longint *nIter,
     dc = Calloc((size_t) ((dd->Srows) * (dd->ZXcols)), double);
 
     Ra = Calloc( dd->DmOff[dd->Q], double);
-    Qp2 =  (dd->Q) + 2L;
     internal_decomp( dd, ZXy );	/* take decomp if useful */
 
 				/* check for non-zero entries in DmHalf */
