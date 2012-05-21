@@ -9,7 +9,7 @@ citEntry(entry="Manual",
                              as.person("Douglas Bates"),
                              as.person("Saikat DebRoy"),
                              as.person("Deepayan Sarkar"),
-                             person("R Development Core Team")),
+                             person("R Core Team")),
          year = year,
          note = vers,
 
