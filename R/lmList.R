@@ -53,7 +53,7 @@ lmList.formula <-
       if (missing(level))
         level <- length(getGroupsFormula(data, asList = TRUE))
       else if (length(level) > 1) {
-	stop("Multiple levels not allowed")
+	stop("multiple levels not allowed")
       }
       groups <- getGroups(data, level = level)[drop = TRUE]
       grpForm <- getGroupsFormula(data)
@@ -62,13 +62,13 @@ lmList.formula <-
                                deparse(grpForm[[2]]), sep = "|"))))
 
     } else {
-      stop ("data must be a groupedData object if groups argument is missing")
+      stop ("'data' must be a \"groupedData\" object if 'groups' argument is missing")
     }
   } else {
     if (missing(level))
       level <- length(getGroupsFormula(object, asList = TRUE))
     else if (length(level) > 1) {
-      stop("Multiple levels not allowed")
+      stop("multiple levels not allowed")
     }
     groups <- getGroups(data, form = grpForm, level = level)[drop = TRUE]
     object <- eval(parse(text=paste(deparse(getResponseFormula(object)[[2]]),
@@ -105,13 +105,13 @@ augPred.lmList <-
 {
   data <- eval(attr(object, "call")[["data"]])
   if (!inherits(data, "data.frame")) {
-    stop(paste("Data in", substitute(object),
-               "call must evaluate to a data frame"))
+      stop(gettextf("'data' in %s call must evaluate to a data frame",
+                     sQuote(substitute(object))), domain = NA)
   }
   if(is.null(primary)) {
     if (!inherits(data, "groupedData")) {
-      stop(paste(sys.call()[[1]],
-      "without \"primary\" can only be used with fits of groupedData objects"))
+        stop(gettextf("%s without \"primary\" can only be used with fits of \"groupedData\" objects",
+                      sys.call()[[1]]), domain = NA)
     }
     primary <- getCovariate(data)
     prName <- deparse(getCovariateFormula(data)[[2]])
@@ -218,15 +218,15 @@ fitted.lmList <-
   if(!is.null(subset)) {
     if(is.character(subset)) {
       if (any(is.na(match(subset, names(object))))) {
-        stop("Non-existent groups requested in \"subset\".")
+        stop("nonexistent groups requested in 'subset'")
       }
     } else {
       if (is.integer(subset)) {
         if (any(is.na(match(subset, 1:length(object))))) {
-          stop("Non-existent groups requested in \"subset\".")
+          stop("nonexistent groups requested in 'subset'")
         }
       } else {
-        stop("Subset can only be character or integer")
+        stop("'subset' can only be character or integer")
       }
     }
     oclass <- class(object)
@@ -331,7 +331,7 @@ logLik.lmList <-
   function(object, REML = FALSE, pool = attr(object, "pool"), ...)
 {
   if(any(unlist(lapply(object, is.null)))) {
-    stop("Log-likelihood not available with NULL fits.")
+    stop("log-likelihood not available with NULL fits")
   }
   if(pool) {
     aux <- apply(sapply(object, function(el) {
@@ -373,10 +373,10 @@ pairs.lmList <-
   object <- x
   ## scatter plot matrix plots, generally based on coef or random.effects
   if (!inherits(form, "formula")) {
-    stop("\"Form\" must be a formula")
+    stop("'form' must be a formula")
   }
   if (length(form) != 2) {
-    stop("\"Form\" must be a one-sided formula")
+    stop("'form' must be a one-sided formula")
   }
   ## constructing data
   allV <- all.vars(asOneFormula(form, id, idLabels))
@@ -391,8 +391,11 @@ pairs.lmList <-
       data <- eval(alist, sys.parent(1))
     } else {
       if (any(naV <- is.na(match(allV, names(data))))) {
-	stop(paste(allV[naV], "not found in data"))
-      }
+        stop(sprintf(ngettext(sum(naV),
+                              "%s not found in data",
+                              "%s not found in data"),
+                     allV[naV]), domain = NA)
+     }
     }
   } else data <- NULL
 
@@ -405,7 +408,7 @@ pairs.lmList <-
   covF <- getCovariateFormula(form)
   .x <- eval(covF[[2]], list(. = object)) # only function of "."
   if (!inherits(.x, "data.frame")) {
-    stop("Covariate must be a data frame")
+    stop("covariate must be a data frame")
   }
   if (!is.null(effNams <- attr(.x, "effectNames"))) {
     .x <- .x[, effNams, drop = FALSE]
@@ -415,7 +418,7 @@ pairs.lmList <-
   .x <- .x[, !isFixed, drop = FALSE]
   nc <- ncol(.x)
   if (nc == 1) {
-    stop("Cannot do pairs of just one variable")
+    stop("cannot do pairs of just one variable")
   }
   if (!missing(label)) {
     names(.x) <- labels
@@ -456,7 +459,7 @@ pairs.lmList <-
       switch(mode(id),
 	     numeric = {
 	       if ((id <= 0) || (id >= 1)) {
-		 stop("Id must be between 0 and 1")
+		 stop("'id' must be between 0 and 1")
 	       }
 	       aux <- as.matrix(na.omit(ranef(object)))
 	       auxV <- t(chol(var(aux)))
@@ -465,7 +468,7 @@ pairs.lmList <-
 	       aux
 	     },
 	     call = eval(asOneSidedFormula(id)[[2]], data),
-	     stop("\"Id\" can only be a formula or numeric.")
+	     stop("'id' can only be a formula or numeric")
 	     )
     if (length(id) == N) {
       ## id as a formula evaluated in data
@@ -480,11 +483,11 @@ pairs.lmList <-
 	  as.character(eval(asOneSidedFormula(idLabels)[[2]], data))
       } else if (is.vector(idLabels)) {
 	if (length(idLabels <- unlist(idLabels)) != N) {
-	  stop("\"IdLabels\" of incorrect length")
+	  stop("'idLabels' of incorrect length")
 	}
 	idLabels <- as.character(idLabels)
       } else {
-	stop("\"IdLabels\" can only be a formula or a vector")
+	stop("'idLabels' can only be a formula or a vector")
       }
     }
     if (length(idLabels) == N) {
@@ -632,7 +635,7 @@ plot.lmList <-
 {
   object <- x
   if (!inherits(form, "formula")) {
-    stop("\"Form\" must be a formula")
+    stop("'form' must be a formula")
   }
 
   ## constructing data
@@ -648,8 +651,11 @@ plot.lmList <-
       data <- eval(alist, sys.parent(1))
     } else {
       if (any(naV <- is.na(match(allV, names(data))))) {
-	stop(paste(allV[naV], "not found in data"))
-      }
+        stop(sprintf(ngettext(sum(naV),
+                              "%s not found in data",
+                              "%s not found in data"),
+                      allV[naV]), domain = NA)
+     }
     }
   } else data <- NULL
 
@@ -676,7 +682,7 @@ plot.lmList <-
   covF <- getCovariateFormula(form)
   .x <- eval(covF[[2]], data)
   if (!is.numeric(.x)) {
-    stop("Covariate must be numeric")
+    stop("covariate must be numeric")
   }
   argForm <- ~ .x
   argData <- as.data.frame(.x)
@@ -725,12 +731,12 @@ plot.lmList <-
       switch(mode(id),
 	     numeric = {
 	       if ((id <= 0) || (id >= 1)) {
-		 stop("Id must be between 0 and 1")
+		 stop("'id' must be between 0 and 1")
 	       }
 	       as.logical(abs(resid(object, type = "pooled")) > -qnorm(id / 2))
 	     },
 	     call = eval(asOneSidedFormula(id)[[2]], data),
-	     stop("\"Id\" can only be a formula or numeric.")
+	     stop("'id' can only be a formula or numeric")
 	     )
     if (is.null(idLabels)) {
       idLabels <- getGroups(object)
@@ -742,11 +748,11 @@ plot.lmList <-
 	  as.character(eval(asOneSidedFormula(idLabels)[[2]], data))
       } else if (is.vector(idLabels)) {
 	if (length(idLabels <- unlist(idLabels)) != length(id)) {
-	  stop("\"IdLabels\" of incorrect length")
+	  stop("'idLabels' of incorrect length")
 	}
 	idLabels <- as.character(idLabels)
       } else {
-	stop("\"IdLabels\" can only be a formula or a vector")
+	stop("'idLabels' can only be a formula or a vector")
       }
     }
   }
@@ -841,7 +847,7 @@ predict.lmList <-
       grps <- grps[drop = TRUE]
       subset <- as.character(unique(grps))
       if(any(is.na(match(subset, names(object))))) {
-	stop("Non-existent group in \"newdata\".")
+	stop("nonexistent group in 'newdata'")
       }
       myData <- split(newdata, grps)
       newdata <- NULL
@@ -850,7 +856,7 @@ predict.lmList <-
   }
   if(!is.null(subset)) {
     if(any(is.na(match(subset, names(object)))))
-      stop("Non-existent group requested in \"subset\".")
+      stop("nonexistent group requested in 'subset'")
     oclass <- class(object)
     ## fix for PR#13788
     oatt <- attributes(object)[c("call", "groupsForm", "pool")]
@@ -1016,7 +1022,7 @@ qqnorm.lmList <-
 {
   object <- y
   if (!inherits(form, "formula")) {
-    stop("\"Form\" must be a formula")
+    stop("'form' must be a formula")
   }
   ## constructing data
   allV <- all.vars(asOneFormula(form, id, idLabels))
@@ -1031,7 +1037,10 @@ qqnorm.lmList <-
       data <- eval(alist, sys.parent(1))
     } else {
       if (any(naV <- is.na(match(allV, names(data))))) {
-	stop(paste(allV[naV], "not found in data"))
+        stop(sprintf(ngettext(sum(naV),
+                              "%s not found in data",
+                              "%s not found in data"),
+                     allV[naV]), domain = NA)
       }
     }
   } else data <- NULL
@@ -1053,7 +1062,7 @@ qqnorm.lmList <-
                            (substring(labs, 1, 9) == "Residuals"))) {
       type <- "res"                     # residuals
     } else {
-      stop("Only residuals and random effects allowed")
+      stop("only residuals and random effects allowed")
     }
   }
   if (is.null(args$xlab)) args$xlab <- labs
@@ -1071,13 +1080,13 @@ qqnorm.lmList <-
         switch(mode(id),
                numeric = {
                  if ((id <= 0) || (id >= 1)) {
-                   stop("Id must be between 0 and 1")
+                   stop("'id' must be between 0 and 1")
                  }
                  as.logical(abs(resid(object, type=resType))
                             > -qnorm(id / 2))
                },
                call = eval(asOneSidedFormula(id)[[2]], data),
-               stop("\"Id\" can only be a formula or numeric.")
+               stop("'id' can only be a formula or numeric")
                )
       if (is.null(idLabels)) {
         idLabels <- getGroups(object)
@@ -1089,11 +1098,11 @@ qqnorm.lmList <-
             as.character(eval(asOneSidedFormula(idLabels)[[2]], data))
         } else if (is.vector(idLabels)) {
           if (length(idLabels <- unlist(idLabels)) != length(id)) {
-            stop("\"IdLabels\" of incorrect length")
+            stop("'idLabels' of incorrect length")
           }
           idLabels <- as.character(idLabels)
         } else {
-          stop("\"IdLabels\" can only be a formula or a vector")
+          stop("'idLabels' can only be a formula or a vector")
         }
       }
     }
@@ -1124,13 +1133,13 @@ qqnorm.lmList <-
         switch(mode(id),
                numeric = {
                  if ((id <= 0) || (id >= 1)) {
-                   stop("Id must be between 0 and 1")
+                   stop("'id' must be between 0 and 1")
                  }
                  aux <- ranef(object, standard = TRUE)
                  as.logical(abs(c(unlist(aux))) > -qnorm(id / 2))
                },
                call = eval(asOneSidedFormula(id)[[2]], data),
-               stop("\"Id\" can only be a formula or numeric.")
+               stop("'id' can only be a formula or numeric")
                )
       if (length(id) == N) {
         ## id as a formula evaluated in data
@@ -1145,11 +1154,11 @@ qqnorm.lmList <-
             as.character(eval(asOneSidedFormula(idLabels)[[2]], data))
         } else if (is.vector(idLabels)) {
           if (length(idLabels <- unlist(idLabels)) != N) {
-            stop("\"IdLabels\" of incorrect length")
+            stop("'idLabels' of incorrect length")
           }
           idLabels <- as.character(idLabels)
         } else {
-          stop("\"IdLabels\" can only be a formula or a vector")
+          stop("'idLabels' can only be a formula or a vector")
         }
       }
       if (length(idLabels) == N) {
@@ -1245,15 +1254,15 @@ residuals.lmList <-
   if(!is.null(subset)) {
     if(is.character(subset)) {
       if (any(is.na(match(subset, names(object))))) {
-        stop("Non-existent groups requested in \"subset\".")
+        stop("nonexistent groups requested in 'subset'")
       }
     } else {
       if (is.integer(subset)) {
         if (any(is.na(match(subset, 1:length(object))))) {
-          stop("Non-existent groups requested in \"subset\".")
+          stop("nonexistent groups requested in 'subset'")
         }
       } else {
-        stop("Subset can only be character or integer")
+        stop("'subset' can only be character or integer")
       }
     }
     oclass <- class(object)

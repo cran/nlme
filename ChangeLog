@@ -1,3 +1,16 @@
+2012-09-24  Brian Ripley <Brian.Ripley@R-project.org>
+
+	* DESCRIPTION: version is 3.1-105
+	* R: improve messages for translation.
+
+2012-09-01  Brian Ripley <Brian.Ripley@R-project.org>
+
+	* po: add Polish translations.
+	
+2012-08-30  Brian Ripley <Brian.Ripley@R-project.org>
+
+	* src/init.c: force use of registered symbols in R >= 2.16.0
+
 2012-05-23  Brian Ripley <Brian.Ripley@R-project.org>
 
 	* DESCRIPTION: version is 3.1-104
@@ -6,7 +19,7 @@
 
 2012-04-25  Brian Ripley <Brian.Ripley@R-project.org>
 
-	* src/nlmefit.c: type mismatch shown by -Wconversion
+	* src/nlmefit.c: type mismatch shown by clang's -Wconversion
 
 2012-03-29  Brian Ripley <Brian.Ripley@R-project.org>
 
