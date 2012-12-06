@@ -1,3 +1,7 @@
+2012-11-28  Brian Ripley <Brian.Ripley@R-project.org>
+
+	* NAMESPACE: import selectively from lattice and stats.
+
 2012-09-24  Brian Ripley <Brian.Ripley@R-project.org>
 
 	* DESCRIPTION: version is 3.1-105

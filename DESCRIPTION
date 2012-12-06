@@ -1,27 +1,27 @@
 Package: nlme
-Version: 3.1-105
-Date: 2012-09-24
+Version: 3.1-106
+Date: 2012-12-06
 Priority: recommended
 Title: Linear and Nonlinear Mixed Effects Models
-Authors@R: c(person("Jose", "Pinheiro", comment = "S version"),
-        person("Douglas", "Bates", comment = "up to 2007"),
-        person("Saikat", "DebRoy", comment = "up to 2002"),
-        person("Deepayan", "Sarkar", comment = "up to 2005"),
-        person("R-core", email = "R-core@R-project.org", role =
-        c("aut", "cre")))
-Author: Jose Pinheiro (S version), Douglas Bates (up to 2007), Saikat
-        DebRoy (up to 2002), Deepayan Sarkar (up to 2005), the R Core
-        team.
+Authors@R: c(person("Jose", "Pinheiro", role = "aut", comment = "S
+        version"), person("Douglas", "Bates", role = "aut", comment =
+        "up to 2007"), person("Saikat", "DebRoy", role = "ctb", comment
+        = "up to 2002"), person("Deepayan", "Sarkar", role = "ctb",
+        comment = "up to 2005"), person("R-core", email =
+        "R-core@R-project.org", role = c("aut", "cre")))
+Author: Jose Pinheiro [aut] (S version), Douglas Bates [aut] (up to
+        2007), Saikat DebRoy [ctb] (up to 2002), Deepayan Sarkar [ctb]
+        (up to 2005), R-core [aut, cre]
 Maintainer: R-core <R-core@R-project.org>
 Description: Fit and compare Gaussian linear and nonlinear
         mixed-effects models.
-Depends: graphics, stats, R (>= 2.13)
+Depends: graphics, stats, R (>= 2.14.0)
 Imports: lattice
 Suggests: Hmisc, MASS
-LazyLoad: yes
 LazyData: yes
+ByteCompile: yes
 License: GPL (>= 2)
 BugReports: http://bugs.r-project.org
-Packaged: 2012-10-11 13:26:52 UTC; ripley
+Packaged: 2012-12-06 11:00:09 UTC; hornik
 Repository: CRAN
-Date/Publication: 2012-10-11 13:27:05
+Date/Publication: 2012-12-06 12:07:07
