@@ -1,8 +1,39 @@
+2013-01-26  Brian Ripley
+
+	* DESCRIPTION: version is 3.1-109, depends on R (>= 3.0.0).
+	
+	* R/lme.R: As for opt = "optim", set a looser tolerance for the
+	first iteration of lme() when opt = "nlminb" (the default) to
+	avoid spurious reports of false convergence.
+
+2013-01-26  Brian Ripley
+
+	* DESCRIPTION: version is 3.1-108, 
+	depends on R (< 3.0.0) and has chol.f and rs.f in .Rbuildignore.
+	
+2013-01-23  Brian Ripley
+
+	* man/[n]lme.Rd: add a note about the need to scale the response.
+	* man/lmeControl.Rd: correct description of 'msTol' argument.
+	* man/[n]lmeControl.Rd: correct description of 'opt' argument (it is
+	a character string).
+	* man/*.Rd: s/Jose/José/
+	* R/[n]lme.R, man/[n]lmeControl.Rd: allow '...' for further
+	control arguments to be based though to nlminb() and optim().
+
+
+2013-01-13  Brian Ripley
+
+	* DESCRIPTION: add accent on JCP's first name (and declare
+	UTF-8 encoding). Add EISPACK authors.
+	* src/rs.f: minimal version of eigen.f containing just RS and
+	ancillaries (replacing eigen.f).
+
 2013-01-12  Brian Ripley
 
 	* DESCRIPTION: version is 3.1-107
-	* src/{chol,eigen}.f: port files from R (where they are 
-	deprecated/defunct).
+	* src/{chol,eigen}.f: port files from R (where they are
+	  deprecated/defunct).
 
 2012-12-06  Kurt Hornik
 
@@ -20,7 +51,7 @@
 2012-09-01  Brian Ripley <Brian.Ripley@R-project.org>
 
 	* po: add Polish translations.
-	
+
 2012-08-30  Brian Ripley <Brian.Ripley@R-project.org>
 
 	* src/init.c: force use of registered symbols in R >= 2.16.0
@@ -50,7 +81,7 @@
 2011-12-25  Brian Ripley <Brian.Ripley@R-project.org>
 
 	* DESCRIPTION: needs Suggests: MASS for data(package=)
-	
+
 2011-07-19  Brian Ripley <Brian.Ripley@R-project.org>
 
 	* DESCRIPTION: version is 3.1-102

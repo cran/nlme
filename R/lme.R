@@ -313,19 +313,26 @@ lme.formula <-
   repeat {
     oldPars <- coef(lmeSt)
     optRes <- if (controlvals$opt == "nlminb") {
-        nlminb(c(coef(lmeSt)),
-               function(lmePars) -logLik(lmeSt, lmePars),
-               control = list(iter.max = controlvals$msMaxIter,
-               eval.max = controlvals$msMaxEval,
-               trace = controlvals$msVerbose))
+        control <- list(iter.max = controlvals$msMaxIter,
+                        eval.max = controlvals$msMaxEval,
+                        trace = controlvals$msVerbose)
+        keep <- c("abs.tol", "rel.tol", "x.tol", "xf.tol", "step.min",
+                  "step.max", "sing.tol", "scale.init", "diff.g")
+        control <- c(control, controlvals[names(controlvals) %in% keep])
+        nlminb(c(coef(lmeSt)), function(lmePars) -logLik(lmeSt, lmePars),
+               control = control)
     } else {
-        optim(c(coef(lmeSt)),
-              function(lmePars) -logLik(lmeSt, lmePars),
-              control = list(trace = controlvals$msVerbose,
-              maxit = controlvals$msMaxIter,
-              reltol = if(numIter == 0) controlvals$msTol
-              else 100*.Machine$double.eps),
-              method = controlvals$optimMethod)
+        reltol <- controlvals$reltol
+        if(is.null(reltol))  reltol <- 100*.Machine$double.eps
+        control <- list(trace = controlvals$msVerbose,
+                        maxit = controlvals$msMaxIter,
+                        reltol = if(numIter == 0) controlvals$msTol else reltol)
+        keep <- c("fnscale", "parscale", "ndeps", "abstol", "alpha", "beta",
+                  "gamma", "REPORT", "type", "lmm", "factr", "pgtol",
+                  "temp", "tmax")
+        control <- c(control, controlvals[names(controlvals) %in% keep])
+        optim(c(coef(lmeSt)), function(lmePars) -logLik(lmeSt, lmePars),
+              control = control, method = controlvals$optimMethod)
     }
     numIter0 <- NULL
     coef(lmeSt) <- optRes$par
@@ -2942,12 +2949,14 @@ lmeScale <- function(start)
 
 lmeControl <-
   ## Control parameters for lme
-  function(maxIter = 50, msMaxIter = 50, tolerance = 1e-6, niterEM = 25, msMaxEval = 200,
+  function(maxIter = 50, msMaxIter = 50, tolerance = 1e-6, niterEM = 25,
+           msMaxEval = 200,
 	   msTol = 1e-7, msScale = lmeScale, msVerbose = FALSE,
            returnObject = FALSE, gradHess = TRUE, apVar = TRUE,
 	   .relStep = (.Machine$double.eps)^(1/3), minAbsParApVar = 0.05,
            nlmStepMax = 100.0, opt = c("nlminb", "optim"),
-	   optimMethod = "BFGS", natural = TRUE)
+	   optimMethod = "BFGS", natural = TRUE,
+           ...)
 {
   list(maxIter = maxIter, msMaxIter = msMaxIter, tolerance = tolerance,
        niterEM = niterEM, msMaxEval = msMaxEval, msTol = msTol, msScale = msScale,
@@ -2955,7 +2964,7 @@ lmeControl <-
        gradHess = gradHess , apVar = apVar, .relStep = .relStep,
        nlmStepMax = nlmStepMax, opt = match.arg(opt),
        optimMethod = optimMethod,
-       minAbsParApVar = minAbsParApVar, natural = natural)
+       minAbsParApVar = minAbsParApVar, natural = natural, ...)
 }
 
 ## Local Variables:

@@ -821,10 +821,14 @@ nlme.formula <-
     }
     oldPars <- coef(nlmeSt)
     if (controlvals$opt == "nlminb") {
+        control <-  list(trace = controlvals$msVerbose,
+                         iter.max = controlvals$msMaxIter)
+        keep <- c("eval.max", "abs.tol", "rel.tol", "x.tol", "xf.tol",
+                  "step.min", "step.max", "sing.tol", "scale.init", "diff.g")
+        control <- c(control, controlvals[names(controlvals) %in% keep])
         optRes <- nlminb(c(coef(nlmeSt)),
                          function(nlmePars) -logLik(nlmeSt, nlmePars),
-                         control = list(trace = controlvals$msVerbose,
-                         iter.max = controlvals$msMaxIter))
+                         control = control)
         aConv <- coef(nlmeSt) <- optRes$par
         convIter <- optRes$iterations
     } else {
@@ -1452,7 +1456,7 @@ nlmeControl <-
            returnObject = FALSE, msVerbose = FALSE, gradHess = TRUE,
            apVar = TRUE, .relStep = (.Machine$double.eps)^(1/3),
            nlmStepMax = 100.0, minAbsParApVar = 0.05,
-	   opt = c("nlminb", "nlm"), natural = TRUE)
+	   opt = c("nlminb", "nlm"), natural = TRUE, ...)
 {
   list(maxIter = maxIter, pnlsMaxIter = pnlsMaxIter, msMaxIter = msMaxIter,
        minScale = minScale, tolerance = tolerance, niterEM = niterEM,
@@ -1460,7 +1464,7 @@ nlmeControl <-
        returnObject = returnObject, msVerbose = msVerbose,
        gradHess = gradHess, apVar = apVar, .relStep = .relStep,
        nlmStepMax = nlmStepMax, minAbsParApVar = minAbsParApVar,
-       opt = match.arg(opt), natural = natural)
+       opt = match.arg(opt), natural = natural, ...)
 }
 
 nonlinModel <- function( modelExpression, env,
