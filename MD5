@@ -1,8 +1,7 @@
-a04320dfc71247a5853e69dd714a5592 *ChangeLog
-7b9467ec59156b9616476fba360a0be7 *DESCRIPTION
+7fdcb1c255cc40c49d411c49e52e0cbb *ChangeLog
+023042a9e1ca23bc22379d2bcc9923de *DESCRIPTION
 eb723b61539feef013de476e68b5c50a *GPL-2
 c843826752e9f806f255d79801354abb *INDEX
-63161a0a16a64cefc52314184570dcb4 *LICENCE
 3366a7aaa6da8defd9b494df600c00d3 *NAMESPACE
 a69f227702dfa422d55d1f5f4556617b *R/VarCorr.R
 bd767290af84265d2180b2949be4e03c *R/VarCov.R
@@ -65,7 +64,7 @@ c9d999719eb82ea836bb47b863fd6561 *data/Soybean.rda
 e174f8f71cab6ed341577ff31036cf7b *data/Wheat2.rda
 6526b92c436e1496d2753917e21354d9 *data/bdf.rda
 b1bd9c2311906426ed6c2e7c71b0cae6 *data/ergoStool.rda
-16dce992dbb88f408110c3a2037836ab *inst/CITATION
+baa725853611bb054c131fbee8254167 *inst/CITATION
 63161a0a16a64cefc52314184570dcb4 *inst/LICENCE
 64501fa44a098a7b4c9148de789bacf4 *inst/mlbook/README
 fd6efb34026508f27de122da7d5e712f *inst/mlbook/ch04.R
@@ -380,6 +379,7 @@ a8cee252f0498cae0afb5995464b4a95 *po/nlme.pot
 f068e14b0016735d958c7d4c8808bcc8 *po/pl.po
 4a6ee9d66b62b2838b5d54e20f04f8b0 *src/Makevars
 06be2fd684b194df86f49b209f022aae *src/base.h
+50706c74629dbfa8b03d472135e7165f *src/chol.f
 3fc9cee1510054dd47f479951194f20e *src/corStruct.c
 e5f7bf303ebf764ce4849fa43c1edc25 *src/gnls.c
 69693222d1b281ab4052d9d447c59575 *src/init.c
@@ -393,6 +393,7 @@ b491e370149a97a8c370a1bf866c7858 *src/nlmefit.c
 bcf08b36ea2299a2885f889add1a1975 *src/nls.c
 91b211d43f073f66ecb649245d6572f5 *src/pdMat.c
 89cd0aa4ea1ce163afe466c9590957b1 *src/pdMat.h
+c5807f583fefd6de83bc1fb315bd73ed *src/rs.f
 19af4748ea1e08ef3bd3d632f69f774e *tests/anova.gls.R
 71e0f19e94843d44f0c9e4f8067de9f7 *tests/augPred_lab.R
 cdced2c0665ee6e3f80188b92267e8c8 *tests/augPredmissing.R

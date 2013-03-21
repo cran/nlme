@@ -1,10 +1,15 @@
+2013-03-21  Brian Ripley
+
+	* inst/CITATION: modernize.
+
+2013-03-11  Brian Ripley
+
+	* LICENCE: remove (it was not a licence file).
+	
 2013-01-26  Brian Ripley
 
-	* DESCRIPTION: version is 3.1-109, depends on R (>= 3.0.0).
-	
-	* R/lme.R: As for opt = "optim", set a looser tolerance for the
-	first iteration of lme() when opt = "nlminb" (the default) to
-	avoid spurious reports of false convergence.
+	* DESCRIPTION: version is 3.1-109,
+	depends on R (>= 3.0.0).
 
 2013-01-26  Brian Ripley
 
