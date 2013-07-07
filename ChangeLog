@@ -1,3 +1,9 @@
+2013-07-02  Brian Ripley
+
+	* DESCRIPTION: version is 3.1-110,
+	* R/{gls,gnls,lme}.R: Replace as.name() calls by quote(stats::nls) etc.
+	* inst/LICENCE: remove.
+	
 2013-03-21  Brian Ripley
 
 	* inst/CITATION: modernize.

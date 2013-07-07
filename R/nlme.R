@@ -228,12 +228,12 @@ nlme.formula <-
   if (missing(start) && !is.null(attr(eval(model[[3]][[1]]), "initial"))) {
     nlmeCall <- Call
     nlsLCall <- nlmeCall[c("","model","data","groups")]
-    nlsLCall[[1]] <- as.name("nlsList")
+    nlsLCall[[1]] <- quote(nlme::nlsList)
     names(nlsLCall)[2] <- "model"
     for(i in c("data", "groups", "start")) {
       nlmeCall[[i]] <- NULL
     }
-    nlmeCall[[1]] <- as.name("nlme.nlsList")
+    nlmeCall[[1]] <- quote(nlme::nlme.nlsList)
     ## checking if "data" is not equal to sys.frame(sys.parent())
     if (is.null(dim(data))) {
       stop("'data' must be given explicitly to use 'nlsList'")

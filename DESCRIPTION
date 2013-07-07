@@ -1,21 +1,27 @@
 Package: nlme
-Version: 3.1-109
-Date: 2013-03-21
+Version: 3.1-110
+Date: 2013-07-07
 Priority: recommended
 Title: Linear and Nonlinear Mixed Effects Models
-Authors@R: c(person("José", "Pinheiro", role = "aut", comment = "S
-        version"), person("Douglas", "Bates", role = "aut", comment =
-        "up to 2007"), person("Saikat", "DebRoy", role = "ctb", comment
-        = "up to 2002"), person("Deepayan", "Sarkar", role = "ctb",
-        comment = "up to 2005"), person("R-core", email =
-        "R-core@R-project.org", role = c("aut", "cre")),
-        person("EISPACK authors", role = "ctb"))
-Author: José Pinheiro [aut] (S version), Douglas Bates [aut] (up to
-        2007), Saikat DebRoy [ctb] (up to 2002), Deepayan Sarkar [ctb]
-        (up to 2005), EISPACK authors [ctb], R-core [aut, cre]
+Authors@R: c(person("José", "Pinheiro", role = "aut",
+                    comment = "S version"),
+             person("Douglas", "Bates", role = "aut",
+                    comment = "up to 2007"),
+             person("Saikat", "DebRoy", role = "ctb",
+                    comment = "up to 2002"),
+             person("Deepayan", "Sarkar", role = "ctb",
+                    comment = "up to 2005"),
+	     person("R-core", email = "R-core@R-project.org",
+                    role = c("aut", "cre")),
+             person("EISPACK authors", role = "ctb"))
+Author: José Pinheiro [aut] (S version),
+  Douglas Bates [aut] (up to 2007),
+  Saikat DebRoy [ctb] (up to 2002),
+  Deepayan Sarkar [ctb] (up to 2005),
+  EISPACK authors [ctb],
+  R-core [aut, cre]
 Maintainer: R-core <R-core@R-project.org>
-Description: Fit and compare Gaussian linear and nonlinear
-        mixed-effects models.
+Description: Fit and compare Gaussian linear and nonlinear mixed-effects models.
 Depends: graphics, stats, R (>= 3.0.0)
 Imports: lattice
 Suggests: Hmisc, MASS
@@ -24,7 +30,7 @@ ByteCompile: yes
 Encoding: UTF-8
 License: GPL (>= 2)
 BugReports: http://bugs.r-project.org
-Packaged: 2013-03-21 11:10:46 UTC; ripley
+Packaged: 2013-07-07 11:49:12 UTC; ripley
 NeedsCompilation: yes
 Repository: CRAN
-Date/Publication: 2013-04-03 10:40:36
+Date/Publication: 2013-07-07 13:54:53

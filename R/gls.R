@@ -532,7 +532,7 @@ anova.gls <-
     ##
     else {
         Call <- match.call()
-        Call[[1]] <- as.name("anova.lme")
+        Call[[1]] <- quote(nlme::anova.lme)
         eval.parent(Call)
     }
 }

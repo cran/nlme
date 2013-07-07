@@ -78,7 +78,7 @@ gnls <-
   if (missing(start)) {
     if (!is.null(attr(eval(form[[3]][[1]]), "initial"))) {
       nlsCall <- Call[c("","model","data")]
-      nlsCall[[1]] <- as.name("nls")
+      nlsCall[[1]] <- quote(stats::nls)
       names(nlsCall)[2] <- "formula"
       ## checking if "data" is not equal to sys.frame(sys.parent())
       if (is.null(dim(data))) {
