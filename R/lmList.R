@@ -77,9 +77,14 @@ lmList.formula <-
   val <- lapply(split(data, groups),
 		function(dat, form, na.action)
 		{
-                  lm(formula = form, data = dat, na.action = na.action)
+			try(lm(formula = form, data = dat, na.action = na.action),
+				silent=TRUE)
 		},
 		form = object, na.action = na.action)
+  use <- sapply(val, function(x)!inherits(x, "try-error"))
+  val[!use] <- list(NULL)
+  if (sum(!use))
+	  warning("An lm fit failed, probably because a factor only had one level")
   if (inherits(data, "groupedData")) {
     ## saving labels and units for plots
     attr(val, "units") <- attr(data, "units")
@@ -167,16 +172,24 @@ coef.lmList <-
 {
   coefs <- lapply(object, coef)
   non.null <- !unlist(lapply(coefs, is.null))
+  ## size the data frame to cope with combined levels for factors
+  ## and name the columns so can fill by name
   if (sum(non.null) > 0) {
-    template <- coefs[non.null][[1]]
-    if (is.numeric(template)) {
-      co <- matrix(template,
-		      ncol = length(template),
-		      nrow = length(coefs),
-		      byrow = TRUE,
-		      dimnames = list(names(object), names(template)))
+	  coefNames <- unique(as.vector(sapply(coefs[non.null], names)))
+	  co <- matrix(NA,
+				   ncol=length(coefNames),
+				   nrow=length(coefs),
+				   byrow=TRUE, dimnames=list(names(object), coefNames))
+    ## template <- coefs[non.null][[1]]
+    ## if (is.numeric(template)) {
+    ##   co <- matrix(template,
+	## 	      ncol = length(template),
+	## 	      nrow = length(coefs),
+	## 	      byrow = TRUE,
+	## 	      dimnames = list(names(object), names(template)))
       for (i in names(object)) {
-	co[i,] <- if (is.null(coefs[[i]])) { NA } else coefs[[i]]
+		  co[i, names(coefs[[i]])] <-
+			  if (is.null(coefs[[i]])) { NA } else coefs[[i]]
       }
       coefs <- as.data.frame(co)
       effectNames <- names(coefs)
@@ -208,7 +221,7 @@ coef.lmList <-
       attr(coefs, "grpNames") <- deparse(getGroupsFormula(object)[[2]])
       class(coefs) <- c("coef.lmList", "ranef.lmList", class(coefs))
     }
-  }
+  ##}
   coefs
 }
 
@@ -517,8 +530,8 @@ pairs.lmList <-
 
     }
   }
-
-  assign("id", as.logical(as.character(id)) )
+  if (is.null(id)) assign("id", FALSE)
+  else assign("id", as.logical(as.character(id)) )
   assign("idLabels", as.character(idLabels))
   assign("grid", grid)
 
@@ -541,7 +554,7 @@ pairs.lmList <-
                     dots <- list(...)
 		    if (grid) panel.grid()
 		    panel.xyplot(x, y)
-                    if (any(ids <- id[subscripts])) {
+                    if (any(id) & any(ids <- id[subscripts])) {
                         ltext(x[ids], y[ids], idLabels[subscripts][ids],
                              cex = dots$cex, adj = dots$adj)
 		    }
@@ -556,7 +569,7 @@ pairs.lmList <-
                     dots <- list(...)
 		    if (grid) panel.grid()
 		    panel.xyplot(x, y)
-                    if (any(ids <- id[subscripts])) {
+                    if (any(id) & any(ids <- id[subscripts])) {
                         ltext(x[ids], y[ids], idLabels[subscripts][ids],
                               cex = dots$cex, adj = dots$adj)
 		    }
@@ -668,7 +681,7 @@ plot.lmList <-
     if (!is.null(lbs$x)) cL <- paste(lbs$x, unts$x) else cF <- NULL
     if (!is.null(lbs$y)) rL <- paste(lbs$y, unts$y) else rF <- NULL
   } else {
-    rF <- rC <- NULL
+    rF <- cF <- NULL
   }
 
   ## argument list
@@ -1317,96 +1330,114 @@ residuals.lmList <-
 summary.lmList <-
   function(object, pool = attr(object, "pool"), ...)
 {
-  to.3d.array <-
-    ## Convert the list to a 3d array watching for null elements
-    function(lst, template)
-      {
-	if (!is.matrix(template)) {
-	  return(lst)
-	}
-	val <- aperm(array(unlist(lapply(lst, function(el, template)
- 					 if(is.null(el)) { template }
-					 else { el }, template = template)),
-			   c(dim(template), length(lst)),
-			   c(dimnames(template), list(names(lst)))),
-		     c(3, 2, 1))
-	val[unlist(lapply(lst, is.null)), , ] <- NA
-	val
-      }
-  to.2d.array <-
-    ## Convert the list to a 2d array watching for null elements
-    function(lst, template)
-      {
-	if(is.null(template)) {
-	  return(lst)
-	}
-	template <- as.vector(template)
-	val <- t(array(unlist(lapply(lst, function(el, template)
-				     if(is.null(el)) { template }
-				     else { el }, template = template)),
-		       c(length(template), length(lst)),
-		       list(names(template), names(lst))))
-	val[unlist(lapply(lst, is.null)), ] <- NA
-	val
-      }
-  ## Create a summary by applying summary to each component of the list
-  sum.lst <- lapply(object, function(el) if(is.null(el)) {NULL}
-                                         else {summary(el)})
-  nonNull <- !unlist(lapply(sum.lst, is.null))
-  if(!any(nonNull)) {
-    return(NULL)
-  }
-  template <- sum.lst[[match(TRUE, nonNull)]]
-  val <- list()
-  for (i in names(template)) {
-    val[[i]] <- lapply(sum.lst, "[[", i)
-    class(val[[i]]) <- "listof"
-  }
-  ## re-arrange the matrices into 3d arrays
-  for(i in c("parameters", "cov.unscaled", "correlation", "coefficients")) {
-    if(length(val[[i]])) {
-      val[[i]] <- to.3d.array(val[[i]], template[[i]])
+    to.3d.array <-
+        ## Convert the list to a 3d array watching for null elements
+        function(lst, template)
+        {
+            if (!is.matrix(template)) {
+                return(lst)
+            }
+            ## make empty array:
+            dnames <- dimnames(template)
+            if (length(dnames[[1]]) == length(dnames[[2]]) &&
+		all(dnames[[1]] == dnames[[2]])) {
+		val <- array(NA, dim=c(length(coefNames), length(coefNames),
+                                 length(lst)),
+                             dimnames=c(list(coefNames), list(coefNames), list(names(lst))))
+		for (ii in 1:length(lst))
+                    if (length(lst[[ii]])) {
+                        use <- dimnames(lst[[ii]])[[1]]
+                        val[use, use, ii] <- lst[[ii]]
+                    }
+            } else {
+		val <- array(NA, dim=c(length(coefNames), dim(template)[2],
+                                 length(lst)),
+                             dimnames=c(list(coefNames), list(dimnames(template)[[2]]),
+                             list(names(lst))))
+		for (ii in 1:length(lst))
+                    if (length(lst[[ii]])) {
+                        use <- dimnames(lst[[ii]])[[1]]
+                        val[use, , ii] <- lst[[ii]]
+                    }
+            }
+            ## val <- aperm(array(unlist(lapply(lst, function(el, template)
+            ## 				 if(is.null(el)) { template }
+            ## 				 else { el }, template = template)),
+            ## 		   c(dim(template), length(lst)),
+            ## 		   c(dimnames(template), list(names(lst)))),
+            ## 	     c(3, 2, 1))
+            ## val[unlist(lapply(lst, is.null)), , ] <- NA
+
+            val <- aperm(val, c(3, 2, 1))
+            val
+        }
+    to.2d.array <-
+        ## Convert the list to a 2d array watching for null elements
+        function(lst, template)
+        {
+            if(is.null(template)) return(lst)
+            template <- as.vector(template)
+            val <- t(array(unlist(lapply(lst, function(el, template)
+                                         if(is.null(el)) { template }
+                                         else { el }, template = template)),
+                           c(length(template), length(lst)),
+                           list(names(template), names(lst))))
+            val[unlist(lapply(lst, is.null)), ] <- NA
+            val
+        }
+    ## Create a summary by applying summary to each component of the list
+    sum.lst <- lapply(object, function(el) if(is.null(el)) {NULL}
+                      else {summary(el)})
+    nonNull <- !unlist(lapply(sum.lst, is.null))
+    if(!any(nonNull)) return(NULL)
+    template <- sum.lst[[match(TRUE, nonNull)]]
+    val <- list()
+    for (i in names(template)) {
+        val[[i]] <- lapply(sum.lst, "[[", i)
+        class(val[[i]]) <- "listof"
     }
-  }
-  ## re-arrange the vectors into 2d arrays
-  for(i in c("df", "fstatistic")) {
-    val[[i]] <- to.2d.array(val[[i]], template[[i]])
-  }
-  ## re-arrange the scalars into vectors
-  for(i in c("sigma", "r.squared")) {
-    ##    val[[i]] <- unlist(val[[i]]) - this deletes NULL components
-    val[[i]] <- c(to.2d.array(val[[i]], template[[i]]))
-  }
-  ## select those attributes that do not vary with groups
-  for(i in c("terms", "formula")) {
-    val[[i]] <- template[[i]]
-  }
-  val[["call"]] <- attr(object, "call")
-  if(inherits(object, "nlsList")) {
-    names(val[["call"]]["model"]) <- "object"
-  }
-  val[["pool"]] <- pool
-  if(pool) {
-    poolSD <- pooledSD(object)
-    dfRes <- attr(poolSD, "df")
-    RSE <- c(poolSD)
-    corRSE <- RSE/val$sigma
-    if(inherits(object, "nlsList")) {
-      pname <- "parameters"
-    } else {
-      pname <- "coefficients"
+    ## get complete set of coefs
+    coefNames <-
+        unique(as.vector(sapply(sum.lst[nonNull],
+                                function(x)dimnames(x[['coefficients']])[[1]])))
+
+
+    ## re-arrange the matrices into 3d arrays
+    for(i in c("parameters", "cov.unscaled", "correlation", "coefficients"))
+        if(length(val[[i]]))
+            val[[i]] <- to.3d.array(val[[i]], template[[i]])
+    ## re-arrange the vectors into 2d arrays
+    for(i in c("df", "fstatistic"))
+        val[[i]] <- to.2d.array(val[[i]], template[[i]])
+    ## re-arrange the scalars into vectors
+    for(i in c("sigma", "r.squared")) {
+        ##    val[[i]] <- unlist(val[[i]]) - this deletes NULL components
+        val[[i]] <- c(to.2d.array(val[[i]], template[[i]]))
     }
-    val[[pname]][,2,] <- val[[pname]][,2,] * corRSE
-    val[[pname]][,3,] <- val[[pname]][,3,] / corRSE
-    if(!inherits(object, "nlsList")) {
-      val[[pname]][,4,] <- 2*(1-pt(abs(val[[pname]][,3,]), dfRes))
+    ## select those attributes that do not vary with groups
+    for(i in c("terms", "formula"))
+        val[[i]] <- template[[i]]
+    val[["call"]] <- attr(object, "call")
+    if(inherits(object, "nlsList"))
+        names(val[["call"]]["model"]) <- "object"
+    val[["pool"]] <- pool
+    if(pool) {
+        poolSD <- pooledSD(object)
+        dfRes <- attr(poolSD, "df")
+        RSE <- c(poolSD)
+        corRSE <- RSE/val$sigma
+        pname <- if(inherits(object, "nlsList")) "parameters"
+        else "coefficients"
+        val[[pname]][,2,] <- val[[pname]][,2,] * corRSE
+        val[[pname]][,3,] <- val[[pname]][,3,] / corRSE
+        if(!inherits(object, "nlsList"))
+            val[[pname]][,4,] <- 2*(1-pt(abs(val[[pname]][,3,]), dfRes))
+        val[["df.residual"]] <- dfRes
+        val[["RSE"]] <- RSE
     }
-    val[["df.residual"]] <- dfRes
-    val[["RSE"]] <- RSE
-  }
-  attr(val, "groupsForm") <- attr(object, "groupsForm")
-  class(val) <- "summary.lmList"
-  val
+    attr(val, "groupsForm") <- attr(object, "groupsForm")
+    class(val) <- "summary.lmList"
+    val
 }
 
 # based on R's update.default

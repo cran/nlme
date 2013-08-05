@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nlme 3.1-104\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
-"POT-Creation-Date: 2012-10-11 14:13\n"
+"POT-Creation-Date: 2013-08-17 08:12\n"
 "PO-Revision-Date: 2012-10-06 16:10+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -626,6 +626,9 @@ msgstr "wielokrotne poziomy nie są dozwolone"
 msgid "'data' must be a \"groupedData\" object if 'groups' argument is missing"
 msgstr ""
 "'data' musi być obiektem \"groupedData\" jeśli brakuje argumentu 'groups' "
+
+msgid "An lm fit failed, probably because a factor only had one level"
+msgstr ""
 
 # nlme/R/lmList.R: 108
 # stop(gettextf("'data' in %s call must evaluate to a data frame",

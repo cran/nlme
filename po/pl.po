@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nlme 3.1-104\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-14 16:31+0100\n"
+"POT-Creation-Date: 2013-08-17 08:12+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -18,13 +18,13 @@ msgstr ""
 
 # nlme/src/corStruct.c: 449
 # error(_("All parameters must be less than 1 in absolute value"))
-#: corStruct.c:449
+#: corStruct.c:445
 msgid "All parameters must be less than 1 in absolute value"
 msgstr "Wszystkie parametry muszą być na moduł mniejsze niż 1"
 
 # nlme/src/corStruct.c: 560
 # error(_("Coefficient matrix not invertible" ))
-#: corStruct.c:560
+#: corStruct.c:556
 msgid "Coefficient matrix not invertible"
 msgstr "Macierz współczynników nie jest odwracalna"
 
@@ -36,7 +36,7 @@ msgstr "Macierz współczynników nie jest odwracalna"
 # error(_("Unknown spatial correlation class"))
 # nlme/src/corStruct.c: 1076
 # error(_("Unknown spatial correlation class"))
-#: corStruct.c:912 corStruct.c:967 corStruct.c:1034 corStruct.c:1076
+#: corStruct.c:908 corStruct.c:963 corStruct.c:1030 corStruct.c:1072
 msgid "Unknown spatial correlation class"
 msgstr "Nieznana klasa przestrzennej korelacji"
 
