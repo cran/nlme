@@ -1,6 +1,6 @@
 % File nlme/man/residuals.gls.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
 \name{residuals.gls}
 \title{Extract gls Residuals}
@@ -10,7 +10,7 @@
 \alias{residuals.gls}
 \alias{residuals.gnls}
 \arguments{
- \item{object}{an object inheriting from class \code{gls}, representing
+ \item{object}{an object inheriting from class \code{"\link{gls}"}, representing
    a generalized least squares fitted linear model, or from class
    \code{gnls}, representing a generalized nonlinear least squares
    fitted linear model.}

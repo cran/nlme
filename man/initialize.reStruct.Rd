@@ -1,8 +1,7 @@
 % File nlme/man/Initialize.reStruct.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: Initialize.reStruct.Rd,v 1.1.2.1 2002/08/09 19:45:29 bates Exp $
 \name{Initialize.reStruct}
 \title{Initialize reStruct Object}
 \usage{
@@ -10,7 +9,7 @@
 }
 \alias{Initialize.reStruct}
 \arguments{
- \item{object}{an object inheriting from class \code{reStruct},
+ \item{object}{an object inheriting from class \code{"\link{reStruct}"},
    representing a random effects structure and consisting of a list of
    \code{pdMat} objects.} 
  \item{data}{a data frame in which to evaluate the variables defined in

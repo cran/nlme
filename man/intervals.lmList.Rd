@@ -1,8 +1,7 @@
 % File nlme/man/intervals.lmList.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: intervals.lmList.Rd,v 1.8 2002/03/05 14:59:39 bates Exp $
 \name{intervals.lmList}
 \title{Confidence Intervals on lmList Coefficients}
 \usage{
@@ -11,7 +10,7 @@
 \alias{intervals.lmList}
 \alias{print.intervals.lmList}
 \arguments{
- \item{object}{an object inheriting from class \code{lmList}, representing
+ \item{object}{an object inheriting from class \code{"\link{lmList}"}, representing
    a list of \code{lm} objects with a common model.
  }
  \item{level}{an optional numeric value with the confidence level for

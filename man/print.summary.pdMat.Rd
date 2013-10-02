@@ -1,8 +1,7 @@
 % File nlme/man/print.summary.pdMat.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: print.summary.pdMat.Rd,v 1.7.2.1 2003/04/17 22:28:45 bates Exp $
 \name{print.summary.pdMat}
 \title{Print a summary.pdMat Object}
 \usage{
@@ -10,9 +9,9 @@
 }
 \alias{print.summary.pdMat}
 \arguments{
- \item{x}{an object inheriting from class \code{summary.pdMat},
-   generally resulting from applying \code{summary} to an object
-   inheriting from class \code{pdMat}.}
+ \item{x}{an object inheriting from class \code{"\link{summary.pdMat}"},
+   generally resulting from applying \code{\link{summary}} to an object
+   inheriting from class \code{"\link{pdMat}"}.}
  \item{sigma}{an optional numeric value used as a multiplier for
    the square-root factor of the positive-definite matrix represented by
    \code{object} (usually the estimated within-group standard deviation

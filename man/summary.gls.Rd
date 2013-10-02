@@ -1,8 +1,7 @@
 % File nlme/man/summary.gls.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: summary.gls.Rd,v 1.8 2002/03/05 14:59:39 bates Exp $
 \name{summary.gls}
 \title{Summarize a gls Object}
 \usage{
@@ -10,7 +9,7 @@
 }
 \alias{summary.gls}
 \arguments{
- \item{object}{an object inheriting from class \code{gls}, representing
+ \item{object}{an object inheriting from class \code{"\link{gls}"}, representing
    a generalized least squares fitted linear model.}
  \item{verbose}{an optional logical value used to control the amount of
    output when the object is printed. Defaults to \code{FALSE}.} 

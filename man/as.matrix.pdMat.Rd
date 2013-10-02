@@ -1,6 +1,6 @@
 % File nlme/man/as.matrix.pdMat.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
 \name{as.matrix.pdMat}
 \title{Matrix of a pdMat Object}
@@ -9,8 +9,8 @@
 }
 \alias{as.matrix.pdMat}
 \arguments{
- \item{x}{an object inheriting from class \code{pdMat}, representing a
-   positive-definite matrix.}
+  \item{x}{an object inheriting from class \code{"\link{pdMat}"},
+    representing a positive-definite matrix.}
  \item{\dots}{further arguments passed from other methods.}
 }
 \description{

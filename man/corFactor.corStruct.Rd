@@ -1,8 +1,7 @@
 % File nlme/man/corFactor.corStruct.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: corFactor.corStruct.Rd,v 1.8.2.1 2002/08/09 19:45:29 bates Exp $
 \name{corFactor.corStruct}
 \title{Factor of a corStruct Object Matrix}
 \usage{
@@ -17,7 +16,7 @@
 \alias{corFactor.corStruct}
 \alias{corFactor.corSymm}
 \arguments{
- \item{object}{an object inheriting from class \code{corStruct}
+ \item{object}{an object inheriting from class \code{"\link{corStruct}"}
    representing a correlation structure, which must have been
    initialized (using \code{Initialize}).}
  \item{\dots}{some methods for this generic require additional

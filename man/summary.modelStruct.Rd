@@ -1,8 +1,7 @@
 % File nlme/man/summary.modelStruct.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: summary.modelStruct.Rd,v 1.8.2.1 2003/05/17 22:07:48 bates Exp $
 \name{summary.modelStruct}
 \alias{summary.modelStruct}
 \alias{summary.reStruct}
@@ -11,7 +10,7 @@
 \method{summary}{modelStruct}(object, \dots)
 }
 \arguments{
-  \item{object}{an object inheriting from class \code{modelStruct},
+  \item{object}{an object inheriting from class \code{"modelStruct"},
     representing a list of model components, such as \code{reStruct},
     \code{corStruct} and \code{varFunc} objects.
   }

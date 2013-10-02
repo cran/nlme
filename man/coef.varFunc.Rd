@@ -1,8 +1,7 @@
 % File nlme/man/coef.varFunc.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: coef.varFunc.Rd,v 1.6.2.2 2003/08/09 22:45:17 bates Exp $
 \name{coef.varFunc}
 \title{varFunc Object Coefficients}
 \usage{
@@ -23,7 +22,7 @@
 \alias{coef<-.varIdent}
 \alias{coef<-.varPower}
 \arguments{
- \item{object}{an object inheriting from class \code{varFunc}
+ \item{object}{an object inheriting from class \code{"\link{varFunc}"}
    representing a variance function structure.}
  \item{unconstrained}{a logical value. If \code{TRUE} the coefficients
    are returned in unconstrained form (the same used in the optimization

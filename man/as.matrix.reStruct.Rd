@@ -1,6 +1,6 @@
 % File nlme/man/as.matrix.reStruct.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
 \name{as.matrix.reStruct}
 \title{Matrices of an reStruct Object}
@@ -9,7 +9,7 @@
 }
 \alias{as.matrix.reStruct}
 \arguments{
- \item{x}{an object inheriting from class \code{reStruct}, representing
+ \item{x}{an object inheriting from class \code{"\link{reStruct}"}, representing
    a random effects structure and consisting of a list of \code{pdMat}
    objects.}
  \item{\dots}{further arguments passed from other methods.}

@@ -1,8 +1,7 @@
 % File nlme/man/summary.nlsList.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: summary.nlsList.Rd,v 1.7.2.1 2003/03/25 15:15:35 bates Exp $
 \name{summary.nlsList}
 \title{Summarize an nlsList Object}
 \usage{
@@ -10,7 +9,7 @@
 }
 \alias{summary.nlsList}
 \arguments{
- \item{object}{an object inheriting from class \code{nlsList},
+ \item{object}{an object inheriting from class \code{"\link{nlsList}"},
    representing a list of \code{nls} fitted objects.
  }
  \item{\dots}{optional arguments to the \code{summary.lmList} method.

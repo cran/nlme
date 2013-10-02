@@ -1,6 +1,6 @@
 % File nlme/man/logLik.lme.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
 \name{logLik.lme}
 \title{Log-Likelihood of an lme Object}
@@ -10,7 +10,7 @@
 \alias{logLik.lme}
 \alias{logLik.gls}
 \arguments{
- \item{object}{an object inheriting from class \code{lme}, representing
+ \item{object}{an object inheriting from class \code{"\link{lme}"}, representing
    a fitted linear mixed-effects model.}
  \item{REML}{an optional logical value.  If \code{TRUE} the restricted
    log-likelihood is returned, else, if \code{FALSE}, the log-likelihood

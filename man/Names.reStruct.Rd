@@ -1,8 +1,7 @@
 % File nlme/man/Names.reStruct.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: Names.reStruct.Rd,v 1.8.2.1 2003/08/09 22:45:17 bates Exp $
 \name{Names.reStruct}
 \title{Names of an reStruct Object}
 \usage{
@@ -12,7 +11,7 @@
 \alias{Names.reStruct}
 \alias{Names<-.reStruct}
 \arguments{
- \item{object}{an object inheriting from class \code{reStruct},
+ \item{object}{an object inheriting from class \code{"\link{reStruct}"},
    representing a random effects structure and consisting of a list of
    \code{pdMat} objects.} 
  \item{value}{a list of character vectors with the replacement values

@@ -1,8 +1,7 @@
 % File nlme/man/ACF.lme.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: ACF.lme.Rd,v 1.7.2.1 2003/04/17 22:28:45 bates Exp $
 \name{ACF.lme}
 \title{Autocorrelation Function for lme Residuals}
 \usage{
@@ -10,7 +9,7 @@
 }
 \alias{ACF.lme}
 \arguments{
-  \item{object}{an object inheriting from class \code{lme}, representing
+  \item{object}{an object inheriting from class \code{"\link{lme}"}, representing
     a fitted linear mixed-effects model.}
   \item{maxLag}{an optional integer giving the maximum lag for which the
     autocorrelation should be calculated. Defaults to maximum lag in the

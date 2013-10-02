@@ -1,8 +1,7 @@
 % File nlme/man/logLik.lmeStruct.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: logLik.lmeStruct.Rd,v 1.6 2002/03/05 14:59:39 bates Exp $
 \name{logLik.lmeStruct}
 \title{Log-Likelihood of an lmeStruct Object}
 \usage{
@@ -12,7 +11,7 @@
 \alias{logLik.lmeStructInt}
 
 \arguments{
- \item{object}{an object inheriting from class \code{lmeStruct},
+ \item{object}{an object inheriting from class \code{"\link{lmeStruct}"},
    representing a list of linear mixed-effects model components, such as
    \code{reStruct}, \code{corStruct}, and \code{varFunc} objects.}
  \item{Pars}{the parameter values at which the (restricted)

@@ -1,8 +1,7 @@
 % File nlme/man/plot.compareFits.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: plot.compareFits.Rd,v 1.8.2.1 2003/04/17 22:28:45 bates Exp $
 \name{plot.compareFits}
 \title{Plot a compareFits Object}
 \usage{
@@ -10,7 +9,7 @@
 }
 \alias{plot.compareFits}
 \arguments{
- \item{x}{an object of class \code{compareFits}.}
+ \item{x}{an object of class \code{"\link{compareFits}"}.}
  \item{subset}{an optional logical or integer vector specifying which
    rows of \code{x} should be used in the plots. If missing, all
    rows are used.}

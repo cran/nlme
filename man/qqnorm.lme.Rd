@@ -1,8 +1,7 @@
 % File nlme/man/qqnorm.lme.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: qqnorm.lme.Rd,v 1.8.2.1 2003/04/17 22:28:45 bates Exp $
 \name{qqnorm.lme}
 \title{Normal Plot of Residuals or Random Effects from an lme Object}
 \usage{
@@ -13,10 +12,10 @@
 \alias{qqnorm.lmList}
 \alias{qqnorm.nls}
 \arguments{
- \item{y}{an object inheriting from class \code{lme}, representing
-   a fitted linear mixed-effects model or from class \code{lmList},
-   representing a list of \code{lm} objects, or from class \code{lm},
-   representing a fitted linear model, or from class \code{nls},
+ \item{y}{an object inheriting from class \code{"\link{lme}"}, representing
+   a fitted linear mixed-effects model or from class \code{"\link{lmList}"},
+   representing a list of \code{lm} objects, or from class \code{"lm"},
+   representing a fitted linear model, or from class \code{"nls"},
    representing a nonlinear least squares fitted model.}
  \item{form}{an optional one-sided formula specifying the desired type of
    plot. Any variable present in the original data frame used to obtain

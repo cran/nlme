@@ -1,8 +1,7 @@
 % File nlme/man/logDet.reStruct.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: logDet.reStruct.Rd,v 1.6 2001/10/30 20:51:15 bates Exp $
 \name{logDet.reStruct}
 \title{Extract reStruct Log-Determinants}
 \usage{
@@ -10,7 +9,7 @@
 }
 \alias{logDet.reStruct}
 \arguments{
- \item{object}{an object inheriting from class \code{reStruct},
+ \item{object}{an object inheriting from class \code{"\link{reStruct}"},
    representing a random effects structure and consisting of a list of
    \code{pdMat} objects.} 
  \item{\dots}{some methods for this generic require additional

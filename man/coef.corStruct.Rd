@@ -1,8 +1,7 @@
 % File nlme/man/coef.corStruct.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: coef.corStruct.Rd,v 1.6.2.3 2003/08/09 22:45:17 bates Exp $
 \name{coef.corStruct}
 \title{Coefficients of a corStruct Object}
 \usage{
@@ -36,7 +35,7 @@
 \alias{coef.summary.nlsList}
 
 \arguments{
- \item{object}{an object inheriting from class \code{corStruct},
+ \item{object}{an object inheriting from class \code{"\link{corStruct}"},
    representing a correlation structure.}
  \item{unconstrained}{a logical value. If \code{TRUE} the coefficients
    are returned in unconstrained form (the same used in the optimization

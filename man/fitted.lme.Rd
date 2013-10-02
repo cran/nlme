@@ -1,8 +1,7 @@
 % File nlme/man/fitted.lme.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: fitted.lme.Rd,v 1.7 2002/03/05 14:59:39 bates Exp $
 \name{fitted.lme}
 \title{Extract lme Fitted Values}
 \usage{
@@ -10,7 +9,7 @@
 }
 \alias{fitted.lme}
 \arguments{
- \item{object}{an object inheriting from class \code{lme}, representing
+ \item{object}{an object inheriting from class \code{"\link{lme}"}, representing
    a fitted linear mixed-effects model.}
  \item{level}{an optional integer vector giving the level(s) of grouping
    to be used in extracting the fitted values from \code{object}. Level

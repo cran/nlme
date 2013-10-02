@@ -1,8 +1,7 @@
 % File nlme/man/coef.modelStruct.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: coef.modelStruct.Rd,v 1.7.2.3 2003/08/09 22:45:17 bates Exp $
 \name{coef.modelStruct}
 \title{Extract modelStruct Object Coefficients}
 \usage{
@@ -12,9 +11,9 @@
 \alias{coef.modelStruct}
 \alias{coef<-.modelStruct}
 \arguments{
- \item{object}{an object inheriting from class \code{modelStruct},
-   representing a list of model components, such as \code{corStruct} and
-   \code{varFunc} objects.}
+ \item{object}{an object inheriting from class \code{"modelStruct"},
+   representing a list of model components, such as \code{"\link{corStruct}"} and
+   \code{"\link{varFunc}"} objects.}
  \item{unconstrained}{a logical value. If \code{TRUE} the coefficients
    are returned in unconstrained form (the same used in the optimization
    algorithm). If \code{FALSE} the coefficients are returned in

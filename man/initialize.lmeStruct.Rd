@@ -1,8 +1,7 @@
 % File nlme/man/Initialize.lmeStruct.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: Initialize.lmeStruct.Rd,v 1.1.2.1 2002/08/09 19:45:29 bates Exp $
 \name{Initialize.lmeStruct}
 \title{Initialize an lmeStruct Object}
 \usage{
@@ -10,7 +9,7 @@
 }
 \alias{Initialize.lmeStruct}
 \arguments{
- \item{object}{an object inheriting from class \code{lmeStruct},
+ \item{object}{an object inheriting from class \code{"\link{lmeStruct}"},
    representing a list of linear mixed-effects model components, such as
    \code{reStruct}, \code{corStruct}, and \code{varFunc} objects.}
  \item{data}{a data frame in which to evaluate the variables defined in

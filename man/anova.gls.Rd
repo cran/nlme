@@ -1,8 +1,7 @@
 % File nlme/man/anova.gls.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: anova.gls.Rd,v 1.6.2.1 2003/04/17 22:28:45 bates Exp $
 \name{anova.gls}
 \title{Compare Likelihoods of Fitted Objects}
 \usage{
@@ -13,8 +12,8 @@
  \item{object}{a fitted model object inheriting from class \code{gls},
    representing a generalized least squares fit.}
  \item{\dots}{other optional fitted model objects inheriting from
-   classes \code{gls}, \code{gnls}, \code{lm}, \code{lme},
-   \code{lmList}, \code{nlme}, \code{nlsList}, or \code{nls}.}
+   classes \code{"gls"}, \code{"gnls"}, \code{"lm"}, \code{"lme"},
+   \code{"lmList"}, \code{"nlme"}, \code{"nlsList"}, or \code{"nls"}.}
  \item{test}{an optional logical value controlling whether likelihood
    ratio tests should be used to compare the fitted models represented
    by \code{object} and the objects in \code{\dots}. Defaults to
@@ -73,7 +72,7 @@
   included in the returned data frame.   
 }
 \value{
-  a data frame inheriting from class \code{anova.lme}.
+  a data frame inheriting from class \code{"anova.lme"}.
 }
 
 \references{

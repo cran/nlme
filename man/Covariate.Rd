@@ -1,8 +1,7 @@
 % File nlme/man/Covariate.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: Covariate.Rd,v 1.2 2002/03/05 14:59:39 bates Exp $
 \name{Covariate}
 \title{Assign Covariate Values}
 \usage{
@@ -17,7 +16,7 @@ covariate(object) <- value
 \description{
   This function is generic; method functions can be written to handle
   specific classes of objects. Classes which already have methods for
-  this function include all \code{varFunc} classes.
+  this function include all \code{"\link{varFunc}"} classes.
 }
 \value{
   will depend on the method function; see the appropriate documentation.

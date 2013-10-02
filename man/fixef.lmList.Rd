@@ -1,8 +1,7 @@
 % File nlme/man/fixef.lmList.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: fixef.lmList.Rd,v 1.4 2002/03/05 14:59:39 bates Exp $
 \name{fixef.lmList}
 \title{Extract lmList Fixed Effects}
 \usage{
@@ -11,7 +10,7 @@
 \alias{fixed.effects.lmList}
 \alias{fixef.lmList}
 \arguments{
- \item{object}{an object inheriting from class \code{lmList}, representing
+ \item{object}{an object inheriting from class \code{"\link{lmList}"}, representing
    a list of \code{lm} objects with a common model.
  }
  \item{\dots}{some methods for this generic require additional

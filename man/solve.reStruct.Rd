@@ -1,8 +1,7 @@
 % File nlme/man/solve.reStruct.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: solve.reStruct.Rd,v 1.7 2002/03/05 14:59:39 bates Exp $
 \name{solve.reStruct}
 \title{Apply Solve to an reStruct Object}
 \usage{
@@ -10,7 +9,7 @@
 }
 \alias{solve.reStruct}
 \arguments{
- \item{a}{an object inheriting from class \code{reStruct},
+ \item{a}{an object inheriting from class \code{"\link{reStruct}"},
    representing a random effects structure and consisting of a list of
    \code{pdMat} objects.} 
  \item{b}{this argument is only included for consistency with the

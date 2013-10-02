@@ -1,8 +1,7 @@
 % File nlme/man/Variogram.lme.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: Variogram.lme.Rd,v 1.8 2002/03/05 14:59:39 bates Exp $
 \name{Variogram.lme}
 \title{Calculate Semi-variogram for Residuals from an lme Object}
 \usage{
@@ -12,7 +11,7 @@
 }
 \alias{Variogram.lme}
 \arguments{
-  \item{object}{an object inheriting from class \code{lme}, representing
+  \item{object}{an object inheriting from class \code{"\link{lme}"}, representing
     a fitted linear mixed-effects model.}
   \item{distance}{an optional numeric vector with the distances between
     residual pairs. If a grouping variable is present, only the

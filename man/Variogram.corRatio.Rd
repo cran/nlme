@@ -1,8 +1,7 @@
 % File nlme/man/Variogram.corRatio.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: Variogram.corRatio.Rd,v 1.7.2.1 2002/08/09 19:45:29 bates Exp $
 \name{Variogram.corRatio}
 \title{Calculate Semi-variogram for a corRatio Object}
 \usage{
@@ -10,7 +9,7 @@
 }
 \alias{Variogram.corRatio}
 \arguments{
-  \item{object}{an object inheriting from class \code{corRatio},
+  \item{object}{an object inheriting from class \code{"\link{corRatio}"},
     representing an Rational Quadratic spatial correlation structure.}
   \item{distance}{an optional numeric vector with the distances at
     which the semi-variogram is to be calculated. Defaults to

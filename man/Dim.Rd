@@ -1,8 +1,7 @@
 % File nlme/man/Dim.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: Dim.Rd,v 1.4.2.1 2003/04/17 22:28:45 bates Exp $
 \name{Dim}
 \title{Extract Dimensions from an Object}
 \usage{
@@ -18,9 +17,9 @@ Dim(object, \dots)
 \description{
   This function is generic; method functions can be written to handle
   specific classes of objects. Classes which already have methods for
-  this function include: \code{corSpatial}, \code{corStruct},
-  \code{pdCompSymm}, \code{pdDiag}, \code{pdIdent}, \code{pdMat},
-  and \code{pdSymm}.
+  this function include: \code{"\link{corSpatial}"}, \code{"\link{corStruct}"},
+  \code{"pdCompSymm"}, \code{"pdDiag"}, \code{"pdIdent"}, \code{"pdMat"},
+  and \code{"pdSymm"}.
 }
 \value{
   will depend on the method function used; see the appropriate documentation.

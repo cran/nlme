@@ -1,8 +1,7 @@
 % File nlme/man/formula.pdBlocked.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: formula.pdBlocked.Rd,v 1.7 2002/03/05 14:59:39 bates Exp $
 \name{formula.pdBlocked}
 \title{Extract pdBlocked Formula}
 \usage{
@@ -10,7 +9,7 @@
 }
 \alias{formula.pdBlocked}
 \arguments{
- \item{x}{an object inheriting from class \code{pdBlocked},
+ \item{x}{an object inheriting from class \code{"pdBlocked"},
    representing a positive definite block diagonal matrix.} 
  \item{asList}{an optional logical value. If \code{TRUE}, a list with
    the formulas for the individual block diagonal elements of

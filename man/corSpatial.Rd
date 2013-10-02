@@ -1,8 +1,7 @@
 % File nlme/man/corSpatial.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: corSpatial.Rd,v 1.5.2.1 2002/08/09 19:45:29 bates Exp $
 \name{corSpatial}
 \title{Spatial Correlation Structure}
 \usage{

@@ -1,8 +1,7 @@
 % File nlme/man/balancedGrouped.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: balancedGrouped.Rd,v 1.5 2002/03/05 14:59:39 bates Exp $
 \name{balancedGrouped}
 \alias{balancedGrouped}
 \title{Create a groupedData object from a matrix}

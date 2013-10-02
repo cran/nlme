@@ -1,8 +1,7 @@
 % File nlme/man/qqnorm.gls.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: qqnorm.gls.Rd,v 1.9.2.1 2003/04/17 22:28:45 bates Exp $
 \name{qqnorm.gls}
 \title{Normal Plot of Residuals from a gls Object}
 \usage{
@@ -10,7 +9,7 @@
 }
 \alias{qqnorm.gls}
 \arguments{
- \item{y}{an object inheriting from class \code{gls}, representing
+ \item{y}{an object inheriting from class \code{"\link{gls}"}, representing
    a generalized least squares fitted model.}
  \item{form}{an optional one-sided formula specifying the desired type of
    plot. Any variable present in the original data frame used to obtain

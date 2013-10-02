@@ -1,8 +1,7 @@
 % File nlme/man/pdFactor.reStruct.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: pdFactor.reStruct.Rd,v 1.6 2002/03/05 14:59:39 bates Exp $
 \name{pdFactor.reStruct}
 \title{Extract Square-Root Factor from Components of an reStruct Object}
 \usage{
@@ -10,7 +9,7 @@
 }
 \alias{pdFactor.reStruct}
 \arguments{
- \item{object}{an object inheriting from class \code{reStruct},
+ \item{object}{an object inheriting from class \code{"\link{reStruct}"},
    representing a random effects structure and consisting of a list of
    \code{pdMat} objects.} 
 }

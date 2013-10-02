@@ -1,8 +1,7 @@
 % File nlme/man/coef.lmList.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: coef.lmList.Rd,v 1.7.2.1 2003/04/17 22:28:45 bates Exp $
 \name{coef.lmList}
 \title{Extract lmList Coefficients}
 \usage{
@@ -11,7 +10,7 @@
 }
 \alias{coef.lmList}
 \arguments{
- \item{object}{an object inheriting from class \code{lmList}, representing
+ \item{object}{an object inheriting from class \code{"\link{lmList}"}, representing
    a list of \code{lm} objects with a common model.
  }
  \item{augFrame}{an optional logical value. If \code{TRUE}, the returned
@@ -61,11 +60,11 @@
   \code{lm} components.  
 }
 \value{
-  a data frame inheriting from class \code{coef.lmList} with the estimated
-  coefficients for each \code{lm} component of \code{object} and,
+  a data frame inheriting from class \code{"coef.lmList"} with the estimated
+  coefficients for each \code{"lm"} component of \code{object} and,
   optionally, other covariates summarized over the groups corresponding
-  to the \code{lm} components. The returned object also inherits from
-  classes \code{ranef.lmList} and \code{data.frame}.
+  to the \code{"lm"} components. The returned object also inherits from
+  classes \code{"ranef.lmList"} and \code{"data.frame"}.
 }
 
 \references{

@@ -1,14 +1,13 @@
 % File nlme/man/pdClasses.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: pdClasses.Rd,v 1.6 2002/03/05 14:59:39 bates Exp $
 \name{pdClasses}
 \title{Positive-Definite Matrix Classes}
 \alias{pdClasses}
 \description{
   Standard classes of positive-definite matrices (\code{pdMat})
-  structures  available in the \code{nlme} library. 
+  structures  available in the \code{nlme} package. 
 }
 \value{
   Available standard classes:

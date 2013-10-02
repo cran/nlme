@@ -1,8 +1,7 @@
 % File nlme/man/formula.reStruct.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: formula.reStruct.Rd,v 1.7 2002/03/05 14:59:39 bates Exp $
 \name{formula.reStruct}
 \title{Extract reStruct Object Formula}
 \usage{
@@ -10,7 +9,7 @@
 }
 \alias{formula.reStruct}
 \arguments{
- \item{x}{an object inheriting from class \code{reStruct},
+ \item{x}{an object inheriting from class \code{"\link{reStruct}"},
    representing a random effects structure and consisting of a list of
    \code{pdMat} objects.}
  \item{asList}{logical.  Should the asList argument be applied to each

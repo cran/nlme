@@ -38,6 +38,9 @@ export(anova.lme, nlsList.formula, plot.lme)
 # needed as name stored in the call via match.call
 export(lme.formula, lme.lmList, lmList.formula, nlme.formula, nlme.nlsList)
 
+# exported for package rms
+export(glsApVar, glsEstimate)
+
 S3method("[", groupedData)
 S3method("[", pdBlocked)
 S3method("[", pdMat)
@@ -357,8 +360,6 @@ S3method(print, varComb)
 S3method(print, VarCorr.lme)
 S3method(print, VarCov)
 S3method(print, varFunc)
-#S3method(pruneLevels, factor)
-#S3method(pruneLevels, ordered)
 S3method(qqnorm, gls)
 S3method(qqnorm, lm)
 S3method(qqnorm, lme)

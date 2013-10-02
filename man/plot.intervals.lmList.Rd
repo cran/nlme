@@ -1,8 +1,7 @@
 % File nlme/man/plot.intervals.lmList.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: plot.intervals.lmList.Rd,v 1.9.2.1 2003/04/17 22:28:45 bates Exp $
 \name{plot.intervals.lmList}
 \title{Plot lmList Confidence Intervals}
 \usage{
@@ -10,7 +9,7 @@
 }
 \alias{plot.intervals.lmList}
 \arguments{
- \item{x}{an object inheriting from class \code{intervals.lmList},
+ \item{x}{an object inheriting from class \code{"\link{intervals.lmList}"},
    representing confidence intervals and estimates for the coefficients
    in the \code{lm} components of the \code{lmList} object used to
    produce \code{x}.

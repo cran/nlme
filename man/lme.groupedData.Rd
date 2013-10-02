@@ -1,8 +1,7 @@
 % File nlme/man/lme.groupedData.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: lme.groupedData.Rd,v 1.8.2.1 2003/01/30 18:35:14 bates Exp $
 \name{lme.groupedData}
 \title{LME fit from groupedData Object}
 \usage{
@@ -11,7 +10,7 @@
 }
 \alias{lme.groupedData}
 \arguments{
-  \item{fixed}{a data frame inheriting from class \code{groupedData}.}
+  \item{fixed}{a data frame inheriting from class \code{"\link{groupedData}"}.}
   \item{data}{this argument is included for consistency with the generic
     function. It is ignored in this method function.}
  \item{random}{optionally, any of the following: (i) a one-sided formula

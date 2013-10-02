@@ -1,8 +1,7 @@
 % File nlme/man/summary.pdMat.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: summary.pdMat.Rd,v 1.8 2002/03/05 14:59:39 bates Exp $
 \name{summary.pdMat}
 \title{Summarize a pdMat Object}
 \usage{
@@ -17,7 +16,7 @@
 \alias{summary.pdSymm}
 \alias{summary.pdLogChol}
 \arguments{
- \item{object}{an object inheriting from class \code{pdMat}, representing
+ \item{object}{an object inheriting from class \code{"\link{pdMat}"}, representing
    a positive definite matrix.} 
  \item{structName}{an optional character string with a description of
    the \code{pdMat} class. Default depends on the method function:

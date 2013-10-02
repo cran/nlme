@@ -1,8 +1,7 @@
 % File nlme/man/lmeObject.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: lmeObject.Rd,v 1.4 2002/03/05 14:59:39 bates Exp $
 \name{lmeObject}
 \title{Fitted lme Object}
 \alias{lmeObject}

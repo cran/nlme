@@ -1,8 +1,7 @@
 % File nlme/man/corExp.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: corExp.Rd,v 1.5.2.1 2002/08/09 19:45:29 bates Exp $
 \name{corExp}
 \title{Exponential Correlation Structure}
 \usage{
@@ -46,7 +45,7 @@ corExp(value, form, nugget, metric, fixed)
    the coefficients are allowed to vary.}
 }
 \description{
-  This function is a constructor for the \code{corExp} class,
+  This function is a constructor for the \code{"corExp"} class,
   representing an exponential spatial correlation structure. Letting
   \eqn{d} denote the range and \eqn{n} denote the nugget
   effect, the correlation between two observations a distance
@@ -56,8 +55,8 @@ corExp(value, form, nugget, metric, fixed)
   initialized using the appropriate \code{Initialize} method.
 }
 \value{
-  an object of class \code{corExp}, also inheriting from class
-  \code{corSpatial}, representing an exponential spatial correlation
+  an object of class \code{"corExp"}, also inheriting from class
+  \code{"corSpatial"}, representing an exponential spatial correlation
   structure. 
 }
 \references{

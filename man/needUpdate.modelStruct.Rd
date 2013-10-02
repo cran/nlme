@@ -1,8 +1,7 @@
 % File nlme/man/needUpdate.modelStruct.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: needUpdate.modelStruct.Rd,v 1.6 2002/03/05 14:59:39 bates Exp $
 \name{needUpdate.modelStruct}
 \title{Check if a modelStruct Object Needs Updating}
 \usage{
@@ -12,7 +11,7 @@
 \alias{needUpdate.corStruct}
 \alias{needUpdate.reStruct}
 \arguments{
- \item{object}{an object inheriting from class \code{modelStruct},
+ \item{object}{an object inheriting from class \code{"modelStruct"},
    representing a list of model components, such as \code{corStruct} and
    \code{varFunc} objects.}
 }

@@ -1,8 +1,7 @@
 % File nlme/man/residuals.nlmeStruct.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: residuals.nlmeStruct.Rd,v 1.5 2002/03/05 14:59:39 bates Exp $
 \name{residuals.nlmeStruct}
 \title{Calculate nlmeStruct Residuals}
 \usage{
@@ -10,7 +9,7 @@
 }
 \alias{residuals.nlmeStruct}
 \arguments{
- \item{object}{an object inheriting from class \code{nlmeStruct},
+ \item{object}{an object inheriting from class \code{"\link{nlmeStruct}"},
    representing a list of mixed-effects model components, such as
    \code{reStruct}, \code{corStruct}, and \code{varFunc} objects.}
  \item{level}{an optional integer vector giving the level(s) of grouping

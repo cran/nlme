@@ -1,8 +1,7 @@
 % File nlme/man/pairs.lmList.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: pairs.lmList.Rd,v 1.10.2.1 2003/04/17 22:28:45 bates Exp $
 \name{pairs.lmList}
 \title{Pairs Plot of an lmList Object}
 \usage{
@@ -10,7 +9,7 @@
 }
 \alias{pairs.lmList}
 \arguments{
- \item{x}{an object inheriting from class \code{lmList}, representing
+ \item{x}{an object inheriting from class \code{"\link{lmList}"}, representing
    a list of \code{lm} objects with a common model.
  }
  \item{form}{an optional one-sided formula specifying the desired type of

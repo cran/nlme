@@ -1,6 +1,6 @@
 % File nlme/man/logLik.gnls.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
 \name{logLik.gnls}
 \title{Log-Likelihood of a gnls Object}
@@ -9,7 +9,7 @@
 }
 \alias{logLik.gnls}
 \arguments{
- \item{object}{an object inheriting from class \code{gnls}, representing
+ \item{object}{an object inheriting from class \code{"\link{gnls}"}, representing
    a generalized nonlinear least squares fitted model.}
  \item{REML}{an logical value for consistency with \code{logLik,gls},
    but only \code{FALSE} is accepted.. }

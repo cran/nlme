@@ -1,8 +1,7 @@
 % File nlme/man/VarCorr.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: VarCorr.Rd,v 1.8 2002/03/05 14:59:39 bates Exp $
 \name{VarCorr}
 \title{Extract variance and correlation components}
 \usage{
@@ -16,7 +15,7 @@ VarCorr(x, sigma, rdig)
 \alias{print.VarCorr.lme}
 \arguments{
  \item{x}{a fitted model object, usually an object inheriting from
-     class \code{lme}. 
+     class \code{"\link{lme}"}. 
  }
  \item{sigma}{an optional numeric value used as a multiplier for the
      standard deviations. Default is \code{1}.
@@ -28,8 +27,8 @@ VarCorr(x, sigma, rdig)
 \description{
   This function calculates the estimated variances, standard
   deviations, and correlations between the random-effects terms in a
-  linear mixed-effects model, of class \code{lme}, or a nonlinear
-  mixed-effects model, of class \code{nlme}. The within-group error
+  linear mixed-effects model, of class \code{"\link{lme}"}, or a nonlinear
+  mixed-effects model, of class \code{"\link{nlme}"}. The within-group error
   variance and standard deviation are also calculated. 
 }
 \value{

@@ -1,8 +1,7 @@
 % File nlme/man/plot.gls.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: plot.gls.Rd,v 1.10 2002/04/16 14:28:53 bates Exp $
 \name{plot.gls}
 \title{Plot a gls Object}
 \usage{
@@ -10,7 +9,7 @@
 }
 \alias{plot.gls}
 \arguments{
- \item{x}{an object inheriting from class \code{gls}, representing
+ \item{x}{an object inheriting from class \code{"\link{gls}"}, representing
    a generalized least squares fitted linear model.}
  \item{form}{an optional formula specifying the desired type of
    plot. Any variable present in the original data frame used to obtain

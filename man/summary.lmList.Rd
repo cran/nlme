@@ -1,8 +1,7 @@
 % File nlme/man/summary.lmList.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: summary.lmList.Rd,v 1.7.2.1 2003/05/17 22:06:46 bates Exp $
 \name{summary.lmList}
 \title{Summarize an lmList Object}
 \usage{
@@ -10,7 +9,7 @@
 }
 \alias{summary.lmList}
 \arguments{
- \item{object}{an object inheriting from class \code{lmList}, representing
+ \item{object}{an object inheriting from class \code{"\link{lmList}"}, representing
    a list of \code{lm} fitted objects.
  }
  \item{pool}{an optional logical value indicating whether a pooled

@@ -1,8 +1,7 @@
 % File nlme/man/plot.Variogram.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: plot.Variogram.Rd,v 1.9.2.1 2003/04/17 22:28:45 bates Exp $
 \name{plot.Variogram}
 \title{Plot a Variogram Object}
 \usage{
@@ -11,7 +10,7 @@
 }
 \alias{plot.Variogram}
 \arguments{
- \item{x}{an object inheriting from class \code{Variogram},
+ \item{x}{an object inheriting from class \code{"\link{Variogram}"},
    consisting of a data frame with two columns named \code{variog} and
    \code{dist}, representing the semi-variogram values and the corresponding
    distances.

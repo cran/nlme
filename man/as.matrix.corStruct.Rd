@@ -1,6 +1,6 @@
 % File nlme/man/as.matrix.corStruct.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
 \name{as.matrix.corStruct}
 \title{Matrix of a corStruct Object}
@@ -9,7 +9,7 @@
 }
 \alias{as.matrix.corStruct}
 \arguments{
- \item{x}{an object inheriting from class \code{corStruct},
+ \item{x}{an object inheriting from class \code{"\link{corStruct}"},
    representing a correlation structure.}
  \item{\dots}{further arguments passed from other methods.}
 }

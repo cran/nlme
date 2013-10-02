@@ -1,8 +1,8 @@
 % File nlme/man/logDet.corStruct.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: logDet.corStruct.Rd,v 1.7 2002/03/05 14:59:39 bates Exp $
+
 \name{logDet.corStruct}
 \title{Extract corStruct Log-Determinant}
 \usage{
@@ -11,7 +11,7 @@
 \alias{logDet.corStruct}
 \alias{logDet.corIdent}
 \arguments{
- \item{object}{an object inheriting from class \code{corStruct},
+ \item{object}{an object inheriting from class \code{"\link{corStruct}"},
    representing a correlation structure.}
  \item{covariate}{an optional covariate vector (matrix), or list of
    covariate vectors (matrices), at which values the correlation matrix,

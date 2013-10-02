@@ -1,14 +1,13 @@
 % File nlme/man/glsObject.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: glsObject.Rd,v 1.4 2002/03/05 14:59:39 bates Exp $
 \name{glsObject}
 \title{Fitted gls Object}
 \alias{glsObject}
 \description{
-  An object returned by the \code{gls} function, inheriting from class
-  \code{gls} and representing a generalized least squares fitted linear 
+  An object returned by the \code{\link{gls}} function, inheriting from class
+  \code{"gls"} and representing a generalized least squares fitted linear 
   model. Objects of this class have methods for the generic functions 
   \code{anova}, \code{coef}, \code{fitted}, \code{formula},
   \code{getGroups}, \code{getResponse}, \code{intervals}, \code{logLik},
@@ -17,7 +16,7 @@
 
 }
 \value{
-  The following components must be included in a legitimate \code{gls}
+  The following components must be included in a legitimate \code{"gls"}
   object. 
   \item{apVar}{an approximate covariance matrix for the
     variance-covariance coefficients. If \code{apVar = FALSE} in the list

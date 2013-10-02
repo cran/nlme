@@ -1,8 +1,7 @@
 % File nlme/man/getCovariate.corStruct.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: getCovariate.corStruct.Rd,v 1.6 2002/03/05 14:59:39 bates Exp $
 \name{getCovariate.corStruct}
 \title{Extract corStruct Object Covariate}
 \usage{

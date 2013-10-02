@@ -1,8 +1,7 @@
 % File nlme/man/getResponse.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: getResponse.Rd,v 1.5.2.1 2003/04/17 22:28:45 bates Exp $
 \name{getResponse}
 \title{Extract Response Variable from an Object}
 \usage{

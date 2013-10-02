@@ -1,8 +1,7 @@
 % File nlme/man/residuals.gnlsStruct.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: residuals.gnlsStruct.Rd,v 1.7 2002/03/05 14:59:39 bates Exp $
 \name{residuals.gnlsStruct}
 \title{Calculate gnlsStruct Residuals}
 \usage{
@@ -10,7 +9,7 @@
 }
 \alias{residuals.gnlsStruct}
 \arguments{
- \item{object}{an object inheriting from class \code{gnlsStruct},
+ \item{object}{an object inheriting from class \code{"\link{gnlsStruct}"},
    representing a list of model components, such as
    \code{corStruct} and \code{varFunc} objects, and attributes
    specifying the underlying nonlinear model and the response variable.}

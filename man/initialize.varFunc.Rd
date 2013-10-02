@@ -1,8 +1,7 @@
 % File nlme/man/Initialize.varFunc.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: Initialize.varFunc.Rd,v 1.1.2.2 2003/04/17 22:28:45 bates Exp $
 \name{Initialize.varFunc}
 \title{Initialize varFunc Object}
 \usage{
@@ -16,7 +15,7 @@
 \alias{Initialize.varIdent}
 \alias{Initialize.varPower}
 \arguments{
- \item{object}{an object inheriting from class \code{varFunc},
+ \item{object}{an object inheriting from class \code{"\link{varFunc}"},
    representing a variance function structure.} 
  \item{data}{a data frame in which to evaluate the variables named in
    \code{formula(object)}. }

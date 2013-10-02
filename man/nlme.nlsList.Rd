@@ -1,8 +1,7 @@
 % File nlme/man/nlme.nlsList.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: nlme.nlsList.Rd,v 1.8 2002/03/05 14:59:39 bates Exp $
 \name{nlme.nlsList}
 \title{NLME fit from nlsList Object}
 \usage{
@@ -11,7 +10,7 @@
 }
 \alias{nlme.nlsList}
 \arguments{
-  \item{model}{an object inheriting from class \code{nlsList},
+  \item{model}{an object inheriting from class \code{"\link{nlsList}"},
     representing a list of \code{nls} fits with a common model.}
   \item{data}{this argument is included for consistency with the generic
     function. It is ignored in this method function.}

@@ -1,8 +1,7 @@
 % File nlme/man/update.varFunc.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: update.varFunc.Rd,v 1.7 2002/03/05 14:59:39 bates Exp $
 \name{update.varFunc}
 \title{Update varFunc Object}
 \usage{
@@ -15,7 +14,7 @@
 \alias{update.varExpon}
 \alias{update.varPower}
 \arguments{
-  \item{object}{an object inheriting from class \code{varFunc},
+  \item{object}{an object inheriting from class \code{"\link{varFunc}"},
     representing a variance function structure.} 
   \item{data}{a list with a component named \code{"."} with the current
     version of the fitted object (from which fitted values, coefficients,

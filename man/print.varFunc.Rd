@@ -1,8 +1,7 @@
 % File nlme/man/print.varFunc.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: print.varFunc.Rd,v 1.6.2.3 2003/05/17 22:02:03 bates Exp $
 \name{print.varFunc}
 \title{Print a varFunc Object}
 \usage{
@@ -11,8 +10,8 @@
 \alias{print.varFunc}
 \alias{print.varComb}
 \arguments{
- \item{x}{an object inheriting from class \code{varFunc}, representing a
- variance function structure.}
+  \item{x}{an object inheriting from class \code{"\link{varFunc}"},
+    representing a variance function structure.}
  \item{\dots}{optional arguments passed to \code{print.default}; see
    the documentation on that method function.}
 }

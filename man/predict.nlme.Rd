@@ -1,8 +1,7 @@
 % File nlme/man/predict.nlme.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: predict.nlme.Rd,v 1.9 2002/03/05 14:59:39 bates Exp $
 \name{predict.nlme}
 \title{Predictions from an nlme Object}
 \usage{
@@ -11,8 +10,8 @@ naPattern, \dots)
 }
 \alias{predict.nlme}
 \arguments{
- \item{object}{an object inheriting from class \code{nlme}, representing
-   a fitted nonlinear mixed-effects model.}
+  \item{object}{an object inheriting from class \code{"\link{nlme}"},
+    representing a fitted nonlinear mixed-effects model.}
  \item{newdata}{an optional data frame to be used for obtaining the
    predictions. All variables used in the nonlinear model, the fixed and
    the random effects models, as well as the grouping factors, must be

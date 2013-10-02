@@ -1,8 +1,7 @@
 % File nlme/man/ranef.lme.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: ranef.lme.Rd,v 1.4.2.1 2003/05/17 22:03:12 bates Exp $
 \name{ranef.lme}
 \title{Extract lme Random Effects}
 \usage{
@@ -13,7 +12,7 @@
 \alias{random.effects.lme}
 \alias{print.ranef.lme}
 \arguments{
- \item{object}{an object inheriting from class \code{lme}, representing
+ \item{object}{an object inheriting from class \code{"\link{lme}"}, representing
    a fitted linear mixed-effects model.}
  \item{augFrame}{an optional logical value. If \code{TRUE}, the returned
    data frame is augmented with variables defined in \code{data}; else,

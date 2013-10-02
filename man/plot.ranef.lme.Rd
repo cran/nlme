@@ -1,8 +1,7 @@
 % File nlme/man/plot.ranef.lme.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: plot.ranef.lme.Rd,v 1.8.2.1 2003/04/17 22:28:45 bates Exp $
 \name{plot.ranef.lme}
 \title{Plot a ranef.lme Object}
 \usage{
@@ -11,7 +10,7 @@
 \alias{plot.ranef.lme}
 \arguments{
  \item{x}{an object inheriting from class
-   \code{ranef.lme}, representing the estimated coefficients or
+   \code{"\link{ranef.lme}"}, representing the estimated coefficients or
    estimated random effects for the \code{lme} object from which it was
    produced.} 
  \item{form}{an optional formula specifying the desired type of plot. If

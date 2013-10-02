@@ -1,8 +1,7 @@
 % File nlme/man/Coef.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: Coef.Rd,v 1.2.2.1 2003/04/17 22:28:45 bates Exp $
 \name{Coef}
 \title{Assign Values to Coefficients}
 \usage{
@@ -21,8 +20,9 @@ coef(object, \dots) <-  value
 \description{
   This function is generic; method functions can be written to handle
   specific classes of objects. Classes which already have methods for
-  this function include all \code{pdMat}, \code{corStruct}, and 
-  \code{varFunc} classes, \code{reStruct}, and \code{modelStruct}.
+  this function include all \code{"\link{pdMat}"},
+  \code{"\link{corStruct}"} and \code{"\link{varFunc}"} classes,
+  \code{"\link{reStruct}"}, and \code{"modelStruct"}.
 }
 \value{
   will depend on the method function; see the appropriate documentation.

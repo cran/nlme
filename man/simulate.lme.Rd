@@ -1,6 +1,6 @@
 % File nlme/man/simulate.lme.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
 \name{simulate.lme}
 \title{Simulate Results from \code{lme} Models}
@@ -12,8 +12,8 @@
 \alias{print.simulate.lme}
 \arguments{
   \item{object}{
-    an object inheriting from class \code{lme}, representing a fitted
-    linear mixed-effects model, or a list containing an lme model
+    an object inheriting from class \code{"\link{lme}"}, representing a fitted
+    linear mixed-effects model, or a list containing an \code{lme} model
     specification.  If given as a list, it should contain
     components \code{fixed}, \code{data}, and \code{random}
     with values suitable for a call to \code{\link{lme}}. This argument
@@ -52,7 +52,7 @@
     the optimization algorithm in the \code{ms} function. If
     \code{FALSE}, the default algorithm in \code{ms} for functions that
     do not incorporate gradient and Hessian attributes is used. Default
-    depends on the \code{pdMat} classes used in \code{m1} and \code{m2}:
+    depends on the \code{"\link{pdMat}"} classes used in \code{m1} and \code{m2}:
     if both are standard classes (see \code{\link{pdClasses}}) then
     defaults to \code{TRUE}, otherwise defaults to \code{FALSE}.
   }

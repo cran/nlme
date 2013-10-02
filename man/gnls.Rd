@@ -1,8 +1,7 @@
 % File nlme/man/gnls.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: gnls.Rd,v 1.7.2.4 2003/08/09 22:45:17 bates Exp $
 \name{gnls}
 \title{Fit Nonlinear Model Using Generalized Least Squares}
 \usage{

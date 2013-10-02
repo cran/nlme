@@ -1,13 +1,12 @@
 % File nlme/man/glsControl.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: glsControl.Rd,v 1.8 2002/03/05 14:59:39 bates Exp $
 \name{glsControl}
 \title{Control Values for gls Fit}
 \usage{
 glsControl(maxIter, msMaxIter, tolerance, msTol, msScale, msVerbose,
-           singular.ok, qrTol, returnObject, apVar, .relStep,
+           singular.ok, returnObject, apVar, .relStep,
            nlmStepMax, opt=c("nlminb", "optim"), optimMethod, 
            minAbsParApVar, natural)
 }
@@ -32,9 +31,6 @@ glsControl(maxIter, msMaxIter, tolerance, msTol, msScale, msVerbose,
  \item{singular.ok}{a logical value indicating whether non-estimable
    coefficients (resulting from linear dependencies among the columns of
    the regression matrix) should be allowed. Default is \code{FALSE}.}
- \item{qrTol}{a tolerance for detecting linear dependencies among the
-   columns of the regression matrix in its QR decomposition. Default is
-   \code{.Machine$single.eps}.}
  \item{returnObject}{a logical value indicating whether the fitted
    object should be returned when the maximum number of iterations is
    reached without convergence of the algorithm. Default is

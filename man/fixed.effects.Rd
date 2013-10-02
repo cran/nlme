@@ -1,8 +1,7 @@
 % File nlme/man/fixed.effects.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: fixed.effects.Rd,v 1.3.4.2 2003/05/17 21:57:49 bates Exp $
 \name{fixed.effects}
 \title{Extract Fixed Effects}
 \usage{

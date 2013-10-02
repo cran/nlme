@@ -1,8 +1,7 @@
 % File nlme/man/coef.pdMat.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: coef.pdMat.Rd,v 1.6.2.3 2003/08/09 22:45:17 bates Exp $
 \name{coef.pdMat}
 \title{pdMat Object Coefficients}
 \usage{
@@ -19,7 +18,7 @@
 \alias{coef<-.pdMat}
 \alias{coef<-.pdBlocked}
 \arguments{
- \item{object}{an object inheriting from class \code{pdMat},
+ \item{object}{an object inheriting from class \code{"\link{pdMat}"},
    representing a positive-definite matrix.}
  \item{unconstrained}{a logical value. If \code{TRUE} the coefficients
    are returned in unconstrained form (the same used in the optimization

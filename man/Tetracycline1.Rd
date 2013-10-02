@@ -1,6 +1,6 @@
 % File nlme/man/Tetracycline1.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
 \name{Tetracycline1}
 \alias{Tetracycline1}

@@ -1,8 +1,7 @@
 % File nlme/man/Covariate.varFunc.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: Covariate.varFunc.Rd,v 1.2.2.1 2003/08/09 22:45:17 bates Exp $
 \name{Covariate.varFunc}
 \title{Assign varFunc Covariate}
 \usage{
@@ -10,7 +9,7 @@
 }
 \alias{covariate<-.varFunc}
 \arguments{
- \item{object}{an object inheriting from class \code{varFunc},
+ \item{object}{an object inheriting from class \code{"\link{varFunc}"},
    representing a variance function structure.} 
  \item{value}{a value to be assigned to the covariate associated with
    \code{object}.}

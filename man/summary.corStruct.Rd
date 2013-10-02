@@ -1,6 +1,6 @@
 % File nlme/man/summary.corStruct.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
 \name{summary.corStruct}
 \title{Summarize a corStruct Object}
@@ -22,7 +22,7 @@
 \alias{summary.corSymm}
 
 \arguments{
- \item{object}{an object inheriting from class \code{corStruct},
+ \item{object}{an object inheriting from class \code{"\link{corStruct}"},
    representing a correlation structure.}
  \item{structName}{an optional character string defining the type of
    correlation structure associated with \code{object}, to be used in

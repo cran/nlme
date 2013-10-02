@@ -1,8 +1,7 @@
 % File nlme/man/predict.gls.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: predict.gls.Rd,v 1.8.2.1 2003/05/17 21:59:38 bates Exp $
 \name{predict.gls}
 \title{Predictions from a gls Object}
 \usage{
@@ -10,7 +9,7 @@
 }
 \alias{predict.gls}
 \arguments{
- \item{object}{an object inheriting from class \code{gls}, representing
+ \item{object}{an object inheriting from class \code{"\link{gls}"}, representing
    a generalized least squares fitted linear model.}
  \item{newdata}{an optional data frame to be used for obtaining the
    predictions. All variables used in the linear model must be present

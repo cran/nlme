@@ -1,6 +1,6 @@
 % File nlme/man/Remifentanil.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
 \name{Remifentanil}
 \alias{Remifentanil}

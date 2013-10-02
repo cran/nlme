@@ -1,10 +1,32 @@
+2013-09-30, 2013-10-02  Brian Ripley
+
+	* DESCRIPTION: version is 3.1-112
+
+	* R/gls.R, man/glsControl.Rd, man/Initialize.glsStruct.Rd.
+	Remove 'qrTol', which was unused and set to the non-existent
+	.Machine$single.eps, that is to NULL.
+
+	* NAMESPACE, man/gls-internal.Rd: export glsApVar and glsEstimate
+	for use in package rms.
+
+	* R/gls.R, lme.R: more use of integer constants.
+
+	* man/*.Rd: classes in quotes, more links, remove CVS lines.
+
+	* R/lme.R, R/newFunc.R, tests/predict.lme.R: 
+	fix asOneFormula and predict.lme for y ~ 0.
+	(see https://stat.ethz.ch/pipermail/r-devel/2013-September/067600.html)
+
+	* R/lme.R: Several of the return components were incorrect for a
+	model of the form fixed = resp ~ 0. 
+
 2013-08-17  Brian Ripley
 
 	* add start on ko translations.
 
 2013-08-15  Brian Ripley
 
-	* DESCRIPTION: version is 3.1-111,
+	* DESCRIPTION: version is 3.1-111
 	* R/lmList.R: Adjust to cope with failed fits and fits with 
 	fewer coefficients returned by lm().  (Contributed by Ruth Ripley.)
 

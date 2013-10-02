@@ -1,8 +1,7 @@
 % File nlme/man/coef.reStruct.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: coef.reStruct.Rd,v 1.7.2.2 2003/08/09 22:45:17 bates Exp $
 \name{coef.reStruct}
 \title{reStruct Object Coefficients}
 \usage{
@@ -12,7 +11,7 @@
 \alias{coef.reStruct}
 \alias{coef<-.reStruct}
 \arguments{
- \item{object}{an object inheriting from class \code{reStruct},
+ \item{object}{an object inheriting from class \code{"\link{reStruct}"},
    representing a random effects structure and consisting of a list of
    \code{pdMat} objects.} 
  \item{unconstrained}{a logical value. If \code{TRUE} the coefficients

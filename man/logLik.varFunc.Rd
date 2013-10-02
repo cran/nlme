@@ -1,8 +1,7 @@
 % File nlme/man/logLik.varFunc.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: logLik.varFunc.Rd,v 1.7.2.1 2002/08/09 19:45:29 bates Exp $
 \name{logLik.varFunc}
 \title{Extract varFunc logLik}
 \usage{
@@ -11,7 +10,7 @@
 \alias{logLik.varFunc}
 \alias{logLik.varComb}
 \arguments{
- \item{object}{an object inheriting from class \code{varFunc},
+ \item{object}{an object inheriting from class \code{"\link{varFunc}"},
    representing a variance function structure.} 
  \item{data}{this argument is included to make this method function
    compatible with other \code{logLik} methods and will be ignored.} 

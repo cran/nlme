@@ -1,8 +1,7 @@
 % File nlme/man/summary.lme.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: summary.lme.Rd,v 1.7 2002/03/05 14:59:39 bates Exp $
 \name{summary.lme}
 \title{Summarize an lme Object}
 \usage{
@@ -10,7 +9,7 @@
 }
 \alias{summary.lme}
 \arguments{
- \item{object}{an object inheriting from class \code{lme}, representing
+ \item{object}{an object inheriting from class \code{"\link{lme}"}, representing
    a fitted linear mixed-effects model.}
  \item{adjustSigma}{an optional logical value. If \code{TRUE} and the
    estimation method used to obtain \code{object} was maximum

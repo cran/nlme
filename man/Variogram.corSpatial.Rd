@@ -1,8 +1,7 @@
 % File nlme/man/Variogram.corSpatial.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: Variogram.corSpatial.Rd,v 1.7.2.2 2003/04/17 22:28:45 bates Exp $
 \name{Variogram.corSpatial}
 \title{Calculate Semi-variogram for a corSpatial Object}
 \usage{
@@ -10,7 +9,7 @@
 }
 \alias{Variogram.corSpatial}
 \arguments{
-  \item{object}{an object inheriting from class \code{corSpatial},
+  \item{object}{an object inheriting from class \code{"\link{corSpatial}"},
     representing spatial correlation structure.}
   \item{distance}{an optional numeric vector with the distances at
     which the semi-variogram is to be calculated. Defaults to

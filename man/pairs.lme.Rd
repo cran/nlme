@@ -1,8 +1,7 @@
 % File nlme/man/pairs.lme.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: pairs.lme.Rd,v 1.10 2002/04/16 14:28:53 bates Exp $
 \name{pairs.lme}
 \title{Pairs Plot of an lme Object}
 \usage{
@@ -10,7 +9,7 @@
 }
 \alias{pairs.lme}
 \arguments{
- \item{x}{an object inheriting from class \code{lme}, representing
+ \item{x}{an object inheriting from class \code{"\link{lme}"}, representing
    a fitted linear mixed-effects model.}
  \item{form}{an optional one-sided formula specifying the desired type of
    plot. Any variable present in the original data frame used to obtain

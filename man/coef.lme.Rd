@@ -1,8 +1,7 @@
 % File nlme/man/coef.lme.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: coef.lme.Rd,v 1.9.2.1 2003/05/17 21:50:21 bates Exp $
 \name{coef.lme}
 \title{Extract lme Coefficients}
 \usage{
@@ -11,7 +10,7 @@
 }
 \alias{coef.lme}
 \arguments{
- \item{object}{an object inheriting from class \code{lme}, representing
+ \item{object}{an object inheriting from class \code{"\link{lme}"}, representing
    a fitted linear mixed-effects model.}
  \item{augFrame}{an optional logical value. If \code{TRUE}, the returned
    data frame is augmented with variables defined in \code{data}; else,
@@ -62,10 +61,10 @@
   groups.  
 }
 \value{
-  a data frame inheriting from class \code{coef.lme} with the estimated
+  a data frame inheriting from class \code{"coef.lme"} with the estimated
   coefficients at level \code{level} and, optionally, other covariates
   summarized over groups. The returned object also inherits from classes
-  \code{ranef.lme} and \code{data.frame}.
+  \code{"ranef.lme"} and \code{"data.frame"}.
 }
 \references{
    Pinheiro, J. C. and Bates, D. M. (2000), \emph{Mixed-Effects Models in S

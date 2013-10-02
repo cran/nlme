@@ -1,8 +1,7 @@
 % File nlme/man/predict.gnls.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: predict.gnls.Rd,v 1.8.2.1 2003/05/17 22:00:48 bates Exp $
 \name{predict.gnls}
 \title{Predictions from a gnls Object}
 \usage{
@@ -10,7 +9,7 @@
 }
 \alias{predict.gnls}
 \arguments{
- \item{object}{an object inheriting from class \code{gnls}, representing
+ \item{object}{an object inheriting from class \code{"\link{gnls}"}, representing
    a generalized nonlinear least squares fitted model.}
  \item{newdata}{an optional data frame to be used for obtaining the
    predictions. All variables used in the nonlinear model must be present

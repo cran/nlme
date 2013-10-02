@@ -1,8 +1,7 @@
 % File nlme/man/Matrix.reStruct.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: Matrix.reStruct.Rd,v 1.2.2.1 2003/08/09 22:45:17 bates Exp $
 \name{Matrix.reStruct}
 \title{Assign reStruct Matrices}
 \usage{
@@ -10,7 +9,7 @@
 }
 \alias{matrix<-.reStruct}
 \arguments{
- \item{object}{an object inheriting from class \code{reStruct},
+ \item{object}{an object inheriting from class \code{"\link{reStruct}"},
    representing a random effects structure and consisting of a list of
    \code{pdMat} objects.} 
  \item{value}{a matrix, or list of matrices, with the new values to be

@@ -1,15 +1,15 @@
 % File nlme/man/corClasses.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: corClasses.Rd,v 1.4 2002/03/05 14:59:39 bates Exp $
 \name{corClasses}
 \title{Correlation Structure Classes}
 \alias{corClasses}
 \alias{corIdent}
+\alias{corStruct}
 \description{
   Standard classes of correlation structures (\code{corStruct})
-  available in the \code{nlme} library. 
+  available in the \code{nlme} package. 
 }
 \value{
   Available standard classes:

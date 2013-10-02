@@ -1,6 +1,6 @@
 % File nlme/man/augPred.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
 \name{augPred}
 \title{Augmented Predictions}
@@ -58,7 +58,7 @@ augPred(object, primary, minimum, maximum, length.out, \dots)
   or no grouping factor) or \code{predict.groupVar} (multiple levels of
   grouping), with \code{groupVar} replaced by the actual grouping
   variable name (\code{fixed} is used for population predictions). The
-  returned object inherits from class \code{augPred}.
+  returned object inherits from class \code{"augPred"}.
 }
 \references{
    Pinheiro, J. C. and Bates, D. M. (2000), \emph{Mixed-Effects Models in S

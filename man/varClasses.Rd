@@ -1,22 +1,21 @@
 % File nlme/man/varClasses.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: varClasses.Rd,v 1.5 2002/03/05 14:59:39 bates Exp $
 \name{varClasses}
 \title{Variance Function Classes}
 \alias{varClasses}
 
 \description{
   Standard classes of variance function structures (\code{varFunc}) 
-  available in the \code{nlme} library. Covariates included in the
+  available in the \code{nlme} package. Covariates included in the
   variance function, denoted by variance covariates, may involve
   functions of the fitted model object, such as the fitted values and
   the residuals. Different coefficients may be assigned to the levels of
   a classification factor.
 }
 \value{
-  Available standard classes ():
+  Available standard classes:
   \item{varExp}{exponential of a variance covariate.}
   \item{varPower}{power of a variance covariate.}
   \item{varConstPower}{constant plus power of a variance covariate.}

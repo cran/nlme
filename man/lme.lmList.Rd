@@ -1,6 +1,6 @@
 % File nlme/man/lme.lmList.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
 \name{lme.lmList}
 \title{LME fit from lmList Object}
@@ -10,7 +10,7 @@
 }
 \alias{lme.lmList}
 \arguments{
-  \item{fixed}{an object inheriting from class \code{lmList},
+  \item{fixed}{an object inheriting from class \code{"\link{lmList}."},
     representing a list of \code{lm} fits with a common model.}
   \item{data}{this argument is included for consistency with the generic
     function. It is ignored in this method function.}

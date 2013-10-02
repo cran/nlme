@@ -1,8 +1,7 @@
 % File nlme/man/Variogram.gls.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: Variogram.gls.Rd,v 1.7 2002/03/05 14:59:39 bates Exp $
 \name{Variogram.gls}
 \title{Calculate Semi-variogram for Residuals from a gls Object}
 \usage{
@@ -12,7 +11,7 @@
 }
 \alias{Variogram.gls}
 \arguments{
-  \item{object}{an object inheriting from class \code{gls}, representing
+  \item{object}{an object inheriting from class \code{"\link{gls}"}, representing
     a generalized least squares fitted model.}
   \item{distance}{an optional numeric vector with the distances between
     residual pairs. If a grouping variable is present, only the

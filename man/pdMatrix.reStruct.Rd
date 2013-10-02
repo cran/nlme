@@ -1,8 +1,7 @@
 % File nlme/man/pdMatrix.reStruct.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: pdMatrix.reStruct.Rd,v 1.6 2002/03/05 14:59:39 bates Exp $
 \name{pdMatrix.reStruct}
 \title{Extract Matrix or Square-Root Factor from Components of an
   reStruct Object} 
@@ -12,7 +11,7 @@
 \alias{pdMatrix.reStruct}
 
 \arguments{
- \item{object}{an object inheriting from class \code{reStruct},
+ \item{object}{an object inheriting from class \code{"\link{reStruct}"},
    representing a random effects structure and consisting of a list of
    \code{pdMat} objects.} 
  \item{factor}{an optional logical value. If \code{TRUE}, square-root

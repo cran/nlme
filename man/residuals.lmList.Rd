@@ -1,8 +1,7 @@
 % File nlme/man/residuals.lmList.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: residuals.lmList.Rd,v 1.7 2002/03/05 14:59:39 bates Exp $
 \name{residuals.lmList}
 \title{Extract lmList Residuals}
 \usage{
@@ -10,7 +9,7 @@
 }
 \alias{residuals.lmList}
 \arguments{
- \item{object}{an object inheriting from class \code{lmList}, representing
+ \item{object}{an object inheriting from class \code{"\link{lmList}"}, representing
    a list of \code{lm} objects with a common model.
  }
  \item{subset}{an optional character or integer vector naming the

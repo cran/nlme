@@ -1,8 +1,7 @@
 % File nlme/man/solve.pdMat.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: solve.pdMat.Rd,v 1.7 2002/03/05 14:59:39 bates Exp $
 \name{solve.pdMat}
 \title{Calculate Inverse of a Positive-Definite Matrix}
 \usage{
@@ -16,7 +15,7 @@
 \alias{solve.pdNatural}
 \alias{solve.pdSymm}
 \arguments{
- \item{a}{an object inheriting from class \code{pdMat}, representing
+ \item{a}{an object inheriting from class \code{"\link{pdMat}"}, representing
    a positive definite matrix.} 
  \item{b}{this argument is only included for consistency with the generic
    function and is not used in this method function.}

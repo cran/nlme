@@ -1,8 +1,7 @@
 % File nlme/man/fitted.gnlsStruct.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: fitted.gnlsStruct.Rd,v 1.6.2.1 2003/05/17 21:52:25 bates Exp $
 \name{fitted.gnlsStruct}
 \title{Calculate gnlsStruct Fitted Values}
 \usage{
@@ -10,7 +9,7 @@
 }
 \alias{fitted.gnlsStruct}
 \arguments{
- \item{object}{an object inheriting from class \code{gnlsStruct},
+ \item{object}{an object inheriting from class \code{"\link{gnlsStruct}"},
    representing a list of model components, such as
    \code{corStruct} and \code{varFunc} objects, and attributes
    specifying the underlying nonlinear model and the response variable.}

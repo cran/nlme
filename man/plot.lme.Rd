@@ -1,8 +1,7 @@
 % File nlme/man/plot.lme.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: plot.lme.Rd,v 1.11 2002/04/16 14:28:53 bates Exp $
 \name{plot.lme}
 \title{Plot an lme or nls object}
 \alias{plot.lme}
@@ -12,7 +11,7 @@
 \method{plot}{nls}(x, form, abline, id, idLabels, idResType, grid, \dots)
 }
 \arguments{
- \item{x}{an object inheriting from class \code{lme}, representing
+ \item{x}{an object inheriting from class \code{"\link{lme}"}, representing
    a fitted linear mixed-effects model, or from \code{nls}, representing
    an fitted nonlinear least squares model.}
  \item{form}{an optional formula specifying the desired type of

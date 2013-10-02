@@ -1,8 +1,7 @@
 % File nlme/man/corMatrix.corStruct.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: corMatrix.corStruct.Rd,v 1.9.2.1 2002/08/09 19:45:29 bates Exp $
 \name{corMatrix.corStruct}
 \title{Matrix of a corStruct Object}
 \usage{
@@ -19,7 +18,7 @@
 \alias{corMatrix.corSpatial}
 \alias{corMatrix.corSymm}
 \arguments{
- \item{object}{an object inheriting from class \code{corStruct}
+ \item{object}{an object inheriting from class \code{"\link{corStruct}"}
    representing a correlation structure.}
  \item{covariate}{an optional covariate vector (matrix), or list of
    covariate vectors (matrices), at which values the correlation matrix,

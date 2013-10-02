@@ -1,8 +1,7 @@
 % File nlme/man/anova.lme.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: anova.lme.Rd,v 1.6.2.1 2003/04/17 22:28:45 bates Exp $
 \name{anova.lme}
 \alias{anova.lme}
 \alias{print.anova.lme}
@@ -12,11 +11,11 @@
 \method{print}{anova.lme}(x, verbose, \dots)
 }
 \arguments{
- \item{object}{a fitted model object inheriting from class \code{lme},
-   representing a mixed-effects model.}
+ \item{object}{an object inheriting from class \code{"\link{lme}"}, representing
+   a fitted linear mixed-effects model.}
  \item{\dots}{other optional fitted model objects inheriting from
-   classes \code{gls}, \code{gnls}, \code{lm}, \code{lme},
-   \code{lmList}, \code{nlme}, \code{nlsList}, or \code{nls}.}
+   classes \code{"gls"}, \code{"gnls"}, \code{"lm"}, \code{"lme"},
+   \code{"lmList"}, \code{"nlme"}, \code{"nlsList"}, or \code{"nls"}.}
  \item{test}{an optional logical value controlling whether likelihood
    ratio tests should be used to compare the fitted models represented
    by \code{object} and the objects in \code{\dots}. Defaults to
@@ -54,7 +53,7 @@
    (array columns) are assumed in the same order as the coefficients
    appear in the model. This argument is only used when a single fitted
    object is passed to the function. Default is \code{NULL}.}
- \item{x}{an object inheriting from class \code{anova.lme}}
+ \item{x}{an object inheriting from class \code{"anova.lme"}}
  \item{verbose}{an optional logical value. If \code{TRUE}, the calling
    sequences for each fitted model object are printed with the rest of
    the output, being omitted if \code{verbose = FALSE}. Defaults to
@@ -76,7 +75,7 @@
   associated p-value is included in the returned data frame.   
 }
 \value{
-  a data frame inheriting from class \code{anova.lme}.
+  a data frame inheriting from class \code{"anova.lme"}.
 }
 
 \references{

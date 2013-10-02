@@ -1,8 +1,7 @@
 % File nlme/man/nlsList.selfStart.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: nlsList.selfStart.Rd,v 1.7 2002/01/28 03:44:17 bates Exp $
 \name{nlsList.selfStart}
 \title{nlsList Fit from a selfStart Function}
 \usage{
@@ -10,12 +9,12 @@
 }
 \alias{nlsList.selfStart}
 \arguments{
-  \item{model}{a \code{selfStart} model function, which calculates
+  \item{model}{a \code{"\link{selfStart}"} model function, which calculates
     initial estimates for the model parameters from \code{data}.}
   \item{data}{a data frame in which to interpret the variables in
     \code{model}. Because no grouping factor can be specified in
     \code{model}, \code{data} must inherit from class
-    \code{groupedData}. 
+    \code{"\link{groupedData}"}. 
   }
   \item{start}{an optional named list with initial values for the
     parameters to be estimated in \code{model}. It is passed as the

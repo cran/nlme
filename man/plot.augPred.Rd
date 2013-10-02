@@ -1,8 +1,7 @@
 % File nlme/man/plot.augPred.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: plot.augPred.Rd,v 1.8.2.1 2003/04/17 22:28:45 bates Exp $
 \name{plot.augPred}
 \title{Plot an augPred Object}
 \usage{
@@ -10,7 +9,7 @@
 }
 \alias{plot.augPred}
 \arguments{
- \item{x}{an object of class \code{augPred}.}
+ \item{x}{an object of class \code{"\link{augPred}"}.}
  \item{key}{an optional logical value, or list. If \code{TRUE}, a legend
  is included at the top of the plot indicating which symbols (colors)
  correspond to which prediction levels. If \code{FALSE}, no legend

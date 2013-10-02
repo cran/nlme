@@ -1,8 +1,7 @@
 % File nlme/man/formula.pdMat.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: formula.pdMat.Rd,v 1.7 2002/03/05 14:59:39 bates Exp $
 \name{formula.pdMat}
 \title{Extract pdMat Formula}
 \usage{
@@ -10,7 +9,7 @@
 }
 \alias{formula.pdMat}
 \arguments{
- \item{x}{an object inheriting from class \code{pdMat}, representing
+ \item{x}{an object inheriting from class \code{"\link{pdMat}"}, representing
    a positive definite matrix.}
  \item{asList}{logical.  Should the asList argument be applied to each
    of the components?  Never used.}

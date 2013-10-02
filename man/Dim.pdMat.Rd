@@ -1,8 +1,7 @@
 % File nlme/man/Dim.pdMat.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: Dim.pdMat.Rd,v 1.7 2002/03/05 14:59:39 bates Exp $
 \name{Dim.pdMat}
 \title{Dimensions of a pdMat Object}
 \usage{
@@ -15,7 +14,7 @@
 \alias{Dim.pdNatural}
 \alias{Dim.pdSymm}
 \arguments{
- \item{object}{an object inheriting from class \code{pdMat},
+ \item{object}{an object inheriting from class \code{"\link{pdMat}"},
    representing a positive-definite matrix.}
  \item{\dots}{some methods for this generic require additional
     arguments.  None are used in this method.} 

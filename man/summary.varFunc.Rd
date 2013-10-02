@@ -1,8 +1,7 @@
 % File nlme/man/summary.varFunc.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: summary.varFunc.Rd,v 1.7.2.2 2003/05/17 22:08:34 bates Exp $
 \name{summary.varFunc}
 \title{Summarize varFunc Object}
 \usage{
@@ -17,7 +16,7 @@
 \alias{summary.varPower}
 
 \arguments{
- \item{object}{an object inheriting from class \code{varFunc},
+ \item{object}{an object inheriting from class \code{"\link{varFunc}"},
    representing a variance function structure.} 
  \item{structName}{an optional character string with a description of
    the \code{varFunc} class. Default depends on the method function:

@@ -1,8 +1,7 @@
 % File nlme/man/fitted.lmeStruct.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: fitted.lmeStruct.Rd,v 1.6 2002/03/05 14:59:39 bates Exp $
 \name{fitted.lmeStruct}
 \title{Calculate lmeStruct Fitted Values}
 \usage{
@@ -10,7 +9,7 @@
 }
 \alias{fitted.lmeStruct}
 \arguments{
- \item{object}{an object inheriting from class \code{lmeStruct},
+ \item{object}{an object inheriting from class \code{"\link{lmeStruct}"},
    representing a list of linear mixed-effects model components, such as
    \code{reStruct}, \code{corStruct}, and \code{varFunc} objects.}
  \item{level}{an optional integer vector giving the level(s) of grouping

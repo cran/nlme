@@ -1,8 +1,7 @@
 % File nlme/man/getData.lmList.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: getData.lmList.Rd,v 1.5.2.1 2003/08/09 22:45:17 bates Exp $
 \name{getData.lmList}
 \title{Extract lmList Object Data}
 \usage{

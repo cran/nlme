@@ -1,8 +1,7 @@
 % File nlme/man/fitted.nlmeStruct.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: fitted.nlmeStruct.Rd,v 1.5.2.1 2003/04/17 22:28:45 bates Exp $
 \name{fitted.nlmeStruct}
 \title{Calculate nlmeStruct Fitted Values}
 \usage{
@@ -10,7 +9,7 @@
 }
 \alias{fitted.nlmeStruct}
 \arguments{
- \item{object}{an object inheriting from class \code{nlmeStruct},
+ \item{object}{an object inheriting from class \code{"\link{nlmeStruct}"},
    representing a list of mixed-effects model components, such as
    \code{reStruct}, \code{corStruct}, and \code{varFunc} objects, plus
    attributes  specifying the underlying nonlinear model and the

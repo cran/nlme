@@ -55,11 +55,12 @@ asOneFormula <-
   ## list of formulas, except for the names in omit
   function(..., omit = c(".", "pi"))
 {
-  names <- unique(allVarsRec((list(...))))
+  dots <- list(...)
+  names <- unique(allVarsRec((dots)))
   names <- names[is.na(match(names, omit))]
-  if (length(names)) {
+  if (length(names))
     eval(parse(text = paste("~", paste(names, collapse = "+")))[[1]])
-  } else NULL
+  else ~1
 }
 
 compareFits <-

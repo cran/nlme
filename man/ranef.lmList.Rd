@@ -1,8 +1,7 @@
 % File nlme/man/ranef.lmList.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: ranef.lmList.Rd,v 1.4.2.1 2003/06/12 14:59:10 bates Exp $
 \name{ranef.lmList}
 \title{Extract lmList Random Effects}
 \usage{
@@ -12,7 +11,7 @@
 \alias{random.effects.lmList}
 \alias{ranef.lmList}
 \arguments{
- \item{object}{an object inheriting from class \code{lmList}, representing
+ \item{object}{an object inheriting from class \code{"\link{lmList}"}, representing
    a list of \code{lm} objects with a common model.
  }
  \item{augFrame}{an optional logical value. If \code{TRUE}, the returned

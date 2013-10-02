@@ -1,8 +1,7 @@
 % File nlme/man/Names.formula.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: Names.formula.Rd,v 1.6 2002/03/05 14:59:39 bates Exp $
 \name{Names.formula}
 \title{Extract Names from a formula}
 \usage{
@@ -11,7 +10,7 @@
 \alias{Names.formula}
 \alias{Names.listForm}
 \arguments{
- \item{object}{an object inheriting from class \code{formula}.}
+ \item{object}{an object inheriting from class \code{"\link{formula}"}.}
  \item{data}{an optional data frame containing the variables specified
    in \code{object}. By default the variables are taken from the
    environment from which \code{Names.formula} is called.}

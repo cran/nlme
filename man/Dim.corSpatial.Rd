@@ -1,8 +1,7 @@
 % File nlme/man/Dim.corSpatial.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: Dim.corSpatial.Rd,v 1.7 2002/03/05 14:59:39 bates Exp $
 \name{Dim.corSpatial}
 \title{Dimensions of a corSpatial Object}
 \usage{
@@ -10,7 +9,7 @@
 }
 \alias{Dim.corSpatial}
 \arguments{
- \item{object}{an object inheriting from class \code{corSpatial},
+ \item{object}{an object inheriting from class \code{"\link{corSpatial}"},
    representing a spatial correlation structure.}
  \item{groups}{an optional factor defining the grouping of the
    observations; observations within a group are correlated and

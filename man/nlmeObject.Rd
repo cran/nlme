@@ -1,14 +1,13 @@
 % File nlme/man/nlmeObject.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: nlmeObject.Rd,v 1.4 2002/03/05 14:59:39 bates Exp $
 \name{nlmeObject}
 \title{Fitted nlme Object}
 \alias{nlmeObject}
 \description{
-  An object returned by the \code{nlme} function, inheriting from class
-  \code{nlme}, also inheriting from class \code{lme}, and representing a
+  An object returned by the \code{\link{nlme}} function, inheriting from class
+  \code{"nlme"}, also inheriting from class \code{"lme"}, and representing a
   fitted nonlinear mixed-effects model. Objects of this class have
   methods for the generic functions  \code{anova}, \code{coef},
   \code{fitted}, \code{fixed.effects}, \code{formula}, \code{getGroups},
@@ -18,7 +17,7 @@
 
 }
 \value{
-  The following components must be included in a legitimate \code{nlme}
+  The following components must be included in a legitimate \code{"nlme"}
   object. 
   \item{apVar}{an approximate covariance matrix for the
     variance-covariance coefficients. If \code{apVar = FALSE} in the list

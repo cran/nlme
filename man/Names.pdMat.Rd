@@ -1,8 +1,7 @@
 % File nlme/man/Names.pdMat.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE
+% Distributed under GPL 2 or later: see nlme/LICENCE.note
 
-% $Id: Names.pdMat.Rd,v 1.9.2.1 2003/08/09 22:45:17 bates Exp $
 \name{Names.pdMat}
 \title{Names of a pdMat Object}
 \usage{
@@ -12,7 +11,7 @@
 \alias{Names.pdMat}
 \alias{Names<-.pdMat}
 \arguments{
- \item{object}{an object inheriting from class \code{pdMat},
+ \item{object}{an object inheriting from class \code{"\link{pdMat}"},
    representing a positive-definite matrix.}
  \item{value}{a character vector with the replacement values for the
    column and row names of the matrix represented by \code{object}. It
