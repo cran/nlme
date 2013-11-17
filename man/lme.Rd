@@ -17,11 +17,16 @@ lme(fixed, data, random, correlation, weights, subset, method,
   \item{fixed}{a two-sided linear formula object describing the
     fixed-effects part of the model, with the response on the left of a
     \code{~} operator and the terms, separated by \code{+} operators, on
-    the right, an \code{lmList} object, or a \code{groupedData}
-    object. The method functions \code{lme.lmList} and
-    \code{lme.groupedData} are documented separately.}
+    the right, an \code{"\link{lmList}"} object, or a
+    \code{"\link{groupedData}"} object.
+
+    There is limited support for formulae such as \code{resp ~ 1} and
+    \code{resp ~ 0}, and less prior to version \samp{3.1-112}.
+
+    The method functions \code{\link{lme.lmList}} and
+    \code{\link{lme.groupedData}} are documented separately.}
  \item{fixed.}{Changes to the fixed-effects formula -- see
-   \code{update.formula} for details.}
+   \code{\link{update.formula}} for details.}
  \item{data}{an optional data frame containing the variables named in
    \code{fixed}, \code{random}, \code{correlation}, \code{weights}, and
    \code{subset}.  By default the variables are taken from the
@@ -36,28 +41,28 @@ lme(fixed, data, random, correlation, weights, subset, method,
    \code{~ x1 + ... + xn | g}, with possibly different random effects models
    for each grouping level. The order of nesting will be assumed the
    same as the order of the elements in the list; (iii) a one-sided
-   formula of the form \code{~ x1 + ... + xn}, or a \code{pdMat} object with
+   formula of the form \code{~ x1 + ... + xn}, or a \code{\link{pdMat}} object with
    a formula (i.e. a non-\code{NULL} value for \code{formula(object)}),
-   or a list of such formulas or \code{pdMat} objects. In this case, the
+   or a list of such formulas or \code{\link{pdMat}} objects. In this case, the
    grouping structure formula will be derived from the data used to
    fit the linear mixed-effects model, which should inherit from class
-   \code{groupedData}; (iv) a named list of formulas or \code{pdMat}
+   \code{"\link{groupedData}"}; (iv) a named list of formulas or \code{\link{pdMat}}
    objects as in (iii), with the grouping factors as names. The order of
    nesting will be assumed the same as the order of the order of the
-   elements in the list; (v) an \code{reStruct} object. See the
+   elements in the list; (v) an \code{\link{reStruct}} object. See the
    documentation on \code{pdClasses} for a description of the available
-   \code{pdMat} classes. Defaults to a formula consisting of the right
+   \code{\link{pdMat}} classes. Defaults to a formula consisting of the right
    hand side of \code{fixed}.}  
- \item{correlation}{an optional \code{corStruct} object describing the
+ \item{correlation}{an optional \code{\link{corStruct}} object describing the
    within-group correlation structure. See the documentation of
-   \code{corClasses} for a description of the available \code{corStruct}
+   \code{\link{corClasses}} for a description of the available \code{corStruct}
    classes. Defaults to \code{NULL},
    corresponding to no within-group correlations.}
- \item{weights}{an optional \code{varFunc} object or one-sided formula
+ \item{weights}{an optional \code{\link{varFunc}} object or one-sided formula
    describing the within-group heteroscedasticity structure. If given as
-   a formula, it is used as the argument to \code{varFixed},
+   a formula, it is used as the argument to \code{\link{varFixed}},
    corresponding to fixed variance weights. See the documentation on
-   \code{varClasses} for a description of the available \code{varFunc}
+   \code{\link{varClasses}} for a description of the available \code{\link{varFunc}}
    classes. Defaults to \code{NULL}, corresponding to homoscedastic
    within-group errors.} 
  \item{subset}{an optional expression indicating the subset of the rows of
@@ -69,14 +74,14 @@ lme(fixed, data, random, correlation, weights, subset, method,
    maximizing the restricted log-likelihood.  If \code{"ML"} the
    log-likelihood is maximized.  Defaults to \code{"REML"}.}
  \item{na.action}{a function that indicates what should happen when the
-   data contain \code{NA}s.  The default action (\code{na.fail}) causes
+   data contain \code{NA}s.  The default action (\code{\link{na.fail}}) causes
    \code{lme} to print an error message and terminate if there are any
    incomplete observations.}
  \item{control}{a list of control values for the estimation algorithm to
-   replace the default values returned by the function \code{lmeControl}.
+   replace the default values returned by the function \code{\link{lmeControl}}.
    Defaults to an empty list.}
  \item{contrasts}{an optional list. See the \code{contrasts.arg}
-   of \code{model.matrix.default}.}
+   of \code{\link{model.matrix.default}}.}
  \item{keep.data}{logical: should the \code{data} argument (if supplied
    and a data frame) be saved as part of the model object?}
  \item{\dots}{some methods for this generic require additional
@@ -90,12 +95,13 @@ lme(fixed, data, random, correlation, weights, subset, method,
   and/or have unequal variances. 
 }
 \value{
-  an object of class \code{lme} representing the linear mixed-effects
+  an object of class \code{"lme"} representing the linear mixed-effects
   model fit. Generic functions such as \code{print}, \code{plot} and
   \code{summary} have methods to show the results of the fit. See
-  \code{lmeObject} for the components of the fit. The functions
-  \code{resid}, \code{coef}, \code{fitted}, \code{fixed.effects}, and
-  \code{random.effects}  can be used to extract some of its components.
+  \code{\link{lmeObject}} for the components of the fit. The functions
+  \code{\link{resid}}, \code{\link{coef}}, \code{\link{fitted}},
+  \code{\link{fixed.effects}}, and
+  \code{\link{random.effects}}  can be used to extract some of its components.
 }
 \note{
   The function does not do any scaling internally: the optimization will

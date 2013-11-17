@@ -1,5 +1,5 @@
-a892e43862ee5665d58848edcb75c03e *ChangeLog
-c2b8dfd981a4604831634db537949f63 *DESCRIPTION
+560cc3b99db97937e741133403816597 *ChangeLog
+a4eba0b2776c5f90bc837dc79402cebe *DESCRIPTION
 eb723b61539feef013de476e68b5c50a *GPL-2
 c843826752e9f806f255d79801354abb *INDEX
 63161a0a16a64cefc52314184570dcb4 *LICENCE.note
@@ -7,7 +7,7 @@ c843826752e9f806f255d79801354abb *INDEX
 a69f227702dfa422d55d1f5f4556617b *R/VarCorr.R
 bd767290af84265d2180b2949be4e03c *R/VarCov.R
 21f2feadc144029ef5491ea00e807f33 *R/corStruct.R
-f7eb6eaff420c6ffdd9a198837f6de8b *R/gls.R
+1f54c3e4351f21edf20617d5151cb9f5 *R/gls.R
 ca5726a6b9b7c8e7e4d16393cb8f7445 *R/gnls.R
 7410876e14a525c89a79066824cea443 *R/groupedData.R
 54234381731c2c3b6c54dbd02d6ab5b6 *R/lmList.R
@@ -239,8 +239,8 @@ fd60d299d1edf68fdbd0f899f3b1b0c6 *man/getGroups.varFunc.Rd
 84c5ef05614935f913194ef5ac00c207 *man/getResponse.Rd
 8fa7e2679c0096450808e7c1c605a037 *man/getResponseFormula.Rd
 e3616435bf781053aa48d2be2215848e *man/getVarCov.Rd
-71994f7ad514f7f277e9c97aee25eeb6 *man/gls-internal.Rd
-d07fb1e53ea219ded1a80e5e711832e8 *man/gls.Rd
+779f3dafb2559309735105ff42bb20f2 *man/gls-internal.Rd
+6f56c20d173a1f99128799c5eda51873 *man/gls.Rd
 8c61290791b722fec9e202cabc3c994a *man/glsControl.Rd
 9be5f59bf435cb1195eca8ae070e55ab *man/glsObject.Rd
 c1de1feec9dc68a271924825dbe6f120 *man/glsStruct.Rd
@@ -258,7 +258,7 @@ a3a54a6f6ea3258ed61dbcb9caabb538 *man/isBalanced.Rd
 b399ad8ac30ebae148c2750863b9577b *man/isInitialized.Rd
 93f3e2df8047b9e76b7e04c375125f2d *man/lmList.Rd
 dbadc79303ce96bec1bd37565822834d *man/lmList.groupedData.Rd
-059cf163a37c05d657e427618e476a70 *man/lme.Rd
+5fba3ba19aa70e6b143eaad233e5c1b7 *man/lme.Rd
 3c9fa6a9877052e389ffda741e2ba4d2 *man/lme.groupedData.Rd
 72faf3c9623f1ea10d1aaf08036a2cc9 *man/lme.lmList.Rd
 1b7bfa438192ac4335f103208d54da3a *man/lmeControl.Rd
@@ -389,9 +389,9 @@ cfb699e409633a678152a58557a502d7 *po/pl.po
 e5f7bf303ebf764ce4849fa43c1edc25 *src/gnls.c
 69693222d1b281ab4052d9d447c59575 *src/init.c
 29cf2449d5e5ff508961a842e58cb7ab *src/matrix.c
-03ea407abebdacb5e408f5cb0b526636 *src/matrix.h
+380441bd224444dcf39c2e94fb9a30a7 *src/matrix.h
 7a6192c2bfb2136b8570f9ef0d48b091 *src/nlOptimizer.c
-d41ee9cb21478cb46d65b46799c285c8 *src/nlOptimizer.h
+90646b880de3b9aeb2039fe48d951da5 *src/nlOptimizer.h
 ae25098b458851cdf85513f286db4b42 *src/nlme.c
 b491e370149a97a8c370a1bf866c7858 *src/nlmefit.c
 1a88ff31ecad828b4c1a4970f676443d *src/nlmefit.h

@@ -21,7 +21,7 @@
 */
 
 #ifndef NLME_NLOPTIMIZER_H
-#define NLME_NL_OPTIMIZER_H
+#define NLME_NLOPTIMIZER_H
 
 #include "base.h"
 

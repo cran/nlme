@@ -17,24 +17,24 @@ gls(model, data, correlation, weights, subset, method, na.action,
   \item{model}{a two-sided linear formula object describing the
     model, with the response on the left of a \code{~} operator and the
     terms, separated by \code{+} operators, on the right.}
- \item{model.}{Changes to the model -- see \code{update.formula} for
+ \item{model.}{Changes to the model -- see \code{\link{update.formula}} for
    details.}
  \item{data}{an optional data frame containing the variables named in
    \code{model}, \code{correlation}, \code{weights}, and
    \code{subset}. By default the variables are taken from the
    environment from which \code{gls} is called.}
- \item{correlation}{an optional \code{corStruct} object describing the
+ \item{correlation}{an optional \code{\link{corStruct}} object describing the
    within-group correlation structure. See the documentation of
-   \code{corClasses} for a description of the available \code{corStruct}
+   \code{\link{corClasses}} for a description of the available \code{corStruct}
    classes. If a grouping variable is to be used, it must be specified in
    the \code{form} argument to the \code{corStruct}
    constructor. Defaults to \code{NULL}, corresponding to uncorrelated 
    errors.}  
- \item{weights}{an optional \code{varFunc} object or one-sided formula
+ \item{weights}{an optional \code{\link{varFunc}} object or one-sided formula
    describing the within-group heteroscedasticity structure. If given as
-   a formula, it is used as the argument to \code{varFixed},
+   a formula, it is used as the argument to \code{\link{varFixed}},
    corresponding to fixed variance weights. See the documentation on
-   \code{varClasses} for a description of the available \code{varFunc}
+   \code{\link{varClasses}} for a description of the available \code{\link{varFunc}}
    classes. Defaults to \code{NULL}, corresponding to homoscedastic
    errors.} 
  \item{subset}{an optional expression indicating which subset of the rows of
@@ -46,11 +46,11 @@ gls(model, data, correlation, weights, subset, method, na.action,
    maximizing the restricted log-likelihood.  If \code{"ML"} the
    log-likelihood is maximized.  Defaults to \code{"REML"}.}
  \item{na.action}{a function that indicates what should happen when the
-   data contain \code{NA}s.  The default action (\code{na.fail}) causes
+   data contain \code{NA}s.  The default action (\code{\link{na.fail}}) causes
    \code{gls} to print an error message and terminate if there are any
    incomplete observations.}
  \item{control}{a list of control values for the estimation algorithm to
-   replace the default values returned by the function \code{glsControl}.
+   replace the default values returned by the function \code{\link{glsControl}}.
    Defaults to an empty list.}
  \item{verbose}{an optional logical value. If \code{TRUE} information on
    the evolution of the iterative algorithm is printed. Default is
@@ -69,8 +69,8 @@ gls(model, data, correlation, weights, subset, method, na.action,
   fit. Generic functions such as \code{print}, \code{plot}, and 
   \code{summary} have methods to show the results of the fit. See
   \code{\link{glsObject}} for the components of the fit. The functions
-  \code{resid}, \code{coef}, and \code{fitted} can be used to extract
-  some of its components. 
+  \code{\link{resid}}, \code{\link{coef}} and \code{\link{fitted}},
+  can be used to extract some of its components. 
 }
 \references{
  The different correlation structures available for the

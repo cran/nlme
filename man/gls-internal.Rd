@@ -12,7 +12,7 @@
 }
 \usage{
 glsApVar(glsSt, sigma, conLin = attr(glsSt, "conLin"),
-         .relStep = (.Machine$double.eps)^(1/3), minAbsPar = 0, natural = TRUE)
+         .relStep = .Machine$double.eps^(1/3), minAbsPar = 0, natural = TRUE)
 glsEstimate(object, conLin = attr(object, "conLin"),
             control = list(singular.ok = FALSE))
 }

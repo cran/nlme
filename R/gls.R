@@ -244,7 +244,7 @@ gls <-
 
 glsApVar <-
     function(glsSt, sigma, conLin = attr(glsSt, "conLin"),
-             .relStep = (.Machine$double.eps)^(1/3), minAbsPar = 0,
+             .relStep = .Machine$double.eps^(1/3), minAbsPar = 0,
              natural = TRUE)
 {
     ## calculate approximate variance-covariance matrix of all parameters
@@ -268,10 +268,10 @@ glsApVar <-
         }
     if (length(glsCoef <- coef(glsSt)) > 0L) {
         cSt <- glsSt[["corStruct"]]
-        if (!is.null(cSt) && inherits(cSt, "corSymm") && natural) {
+        if (natural && !is.null(cSt) && inherits(cSt, "corSymm")) {
             cStNatPar <- coef(cSt, unconstrained = FALSE)
             class(cSt) <- c("corNatural", "corStruct")
-            coef(cSt) <- log((cStNatPar + 1)/(1 - cStNatPar))
+            coef(cSt) <- log((1 + cStNatPar)/(1 - cStNatPar))
             glsSt[["corStruct"]] <- cSt
             glsCoef <- coef(glsSt)
         }
@@ -293,9 +293,7 @@ glsApVar <-
             ## problem - solution is not a maximum
             "Non-positive definite approximate variance-covariance"
         }
-    } else {
-        NULL
-    }
+    } # else NULL
 }
 
 glsEstimate <-
@@ -318,7 +316,7 @@ glsEstimate <-
               NAOK = TRUE)[c("beta","sigma","logLik","varBeta", "rank", "pivot")]
     rnk <- val[["rank"]]
     rnkm1 <- rnk - 1
-    if (!(control$singular.ok) && (rnkm1 < p )) {
+    if (!control$singular.ok && rnkm1 < p) {
         stop(gettextf("computed \"gls\" fit is singular, rank %s", rnk),
              domain = NA)
     }

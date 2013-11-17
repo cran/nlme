@@ -21,7 +21,7 @@
 */
 
 #ifndef NLME_MATRIX_H
-#define NLME_MATRIC_H
+#define NLME_MATRIX_H
 #include "base.h"
 void F77_NAME(chol)(double *a, int *lda, int *n, double *v, int *info);
 int F77_NAME(rs)(int *nm, int *n, double *a, double *w,
