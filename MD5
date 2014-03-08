@@ -1,5 +1,5 @@
-560cc3b99db97937e741133403816597 *ChangeLog
-a4eba0b2776c5f90bc837dc79402cebe *DESCRIPTION
+3cf7823a859e5c496ac9c57c0da64bd6 *ChangeLog
+9a2f60a581b1e2b624cb1166f0f59457 *DESCRIPTION
 eb723b61539feef013de476e68b5c50a *GPL-2
 c843826752e9f806f255d79801354abb *INDEX
 63161a0a16a64cefc52314184570dcb4 *LICENCE.note
@@ -11,11 +11,11 @@ bd767290af84265d2180b2949be4e03c *R/VarCov.R
 ca5726a6b9b7c8e7e4d16393cb8f7445 *R/gnls.R
 7410876e14a525c89a79066824cea443 *R/groupedData.R
 54234381731c2c3b6c54dbd02d6ab5b6 *R/lmList.R
-c7a1a185193e2be8e3be9e1285907e7a *R/lme.R
+93cd3f08a80792d4ae24ed7466e46ef1 *R/lme.R
 af2f788abe03df9e2b27cbc91466b62c *R/modelStruct.R
 f92c96df8a87efea3aa0fe6625e0731a *R/newFunc.R
 736dc3a6d393afbd18cc2b0703397ef5 *R/newGenerics.R
-eee478e649a127a38eaa92161c909cd5 *R/newMethods.R
+426519bc82f850c1649828906dd3a80c *R/newMethods.R
 95742bf508cc166c206b7f5147bc687b *R/nlme.R
 9cbca165f38f8ed2dc244ef3fe04ff90 *R/nlsList.R
 243f1e4285fc0832d03d0441ea8594e3 *R/pdMat.R
@@ -65,7 +65,7 @@ c9d999719eb82ea836bb47b863fd6561 *data/Soybean.rda
 e174f8f71cab6ed341577ff31036cf7b *data/Wheat2.rda
 6526b92c436e1496d2753917e21354d9 *data/bdf.rda
 b1bd9c2311906426ed6c2e7c71b0cae6 *data/ergoStool.rda
-baa725853611bb054c131fbee8254167 *inst/CITATION
+8c4e1465a5287934c48e653abb3b6600 *inst/CITATION
 64501fa44a098a7b4c9148de789bacf4 *inst/mlbook/README
 fd6efb34026508f27de122da7d5e712f *inst/mlbook/ch04.R
 9404575eddb8ed2cbb53d645df35210a *inst/mlbook/ch05.R
@@ -261,9 +261,9 @@ dbadc79303ce96bec1bd37565822834d *man/lmList.groupedData.Rd
 5fba3ba19aa70e6b143eaad233e5c1b7 *man/lme.Rd
 3c9fa6a9877052e389ffda741e2ba4d2 *man/lme.groupedData.Rd
 72faf3c9623f1ea10d1aaf08036a2cc9 *man/lme.lmList.Rd
-1b7bfa438192ac4335f103208d54da3a *man/lmeControl.Rd
+c4ec7317dcaa48fa0aef790185f3eaf3 *man/lmeControl.Rd
 691798241719c30cbde940fbece103c2 *man/lmeObject.Rd
-d3e104a2dc597c6b427f16b1c7878906 *man/lmeScale.Rd
+a182671936770de8cf609dd65dcab8d6 *man/lmeScale.Rd
 13dc0abcf5cefea56089b4e02e627b4d *man/lmeStruct.Rd
 0a183f1abced3b6e2e27fac21706dfff *man/logDet.Rd
 ead2832df5ec5e188e6b4ca16f4428a2 *man/logDet.corStruct.Rd
@@ -283,7 +283,7 @@ f3b113b8aedae437708a7fcd167d3d73 *man/logLik.varFunc.Rd
 3e05ee655b352dbb2f67cdc09fa80ed3 *man/needUpdate.modelStruct.Rd
 076f54ae79a2d6d5ec1a65858f44329e *man/nlme.Rd
 63489a1c7a0630b41241c2ea6fdfe2f6 *man/nlme.nlsList.Rd
-2ce0ac39a08378109b6e239c757206b1 *man/nlmeControl.Rd
+23f633d3007e3b52a451c70961948a1b *man/nlmeControl.Rd
 eddc36826c15c57ed048edd3fb4b06ea *man/nlmeObject.Rd
 dd1fd42b2801e78eb9ba1fa11326ebe5 *man/nlmeStruct.Rd
 f04f9c699dfc858085a737a59c7d2cec *man/nlsList.Rd
@@ -406,6 +406,7 @@ d5944b785f51638ca1351697139f0fc7 *tests/coef.R
 50fb7170d4685b1ceddced58287d8dbc *tests/contrMat.R
 e3cda69b561ca20c658895ee7bb072c4 *tests/data.frame.R
 02dd74b311ac0997ad1c50f25aeec001 *tests/deparse.R
+dea84bf6c5e3f953ea2c523ef749bfae *tests/fitted.R
 2d06207872197b9abd28f869ff06f086 *tests/getData.R
 9b8d3de1328a6d383e4a43214adb02e6 *tests/gls.R
 4378c87c973e3e4d865be4cbf3df3610 *tests/lmList.R

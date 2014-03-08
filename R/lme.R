@@ -1235,24 +1235,21 @@ fitted.lme <-
   } else {				# assuming integers
     level <- 1 + level
   }
-  val2 <- napredict(object$na.action, val[, level])
-  if (length(level) == 1) {
+  if (length(level) == 1L) {
     grp.nm <- row.names(object[["groups"]])
     grps <- as.character(object[["groups"]][, max(c(1, level - 1))])
     if (asList) {
       val <- as.list(split(val, ordered(grps, levels = unique(grps))))
     } else {
-      grp.nm <- row.names(object[["groups"]])
-      val <- val2
+      val <- napredict(object$na.action, val[, level])
       names(val) <- grps[match(names(val), grp.nm)]
     }
     lab <- "Fitted values"
-    if (!is.null(aux <- attr(object, "units")$y)) {
+    if (!is.null(aux <- attr(object, "units")$y))
       lab <- paste(lab, aux)
-    }
     attr(val, "label") <- lab
     val
-  } else val2
+  } else napredict(object$na.action, val[, level])
 }
 
 formula.lme <- function(x, ...) eval(x$call$fixed)

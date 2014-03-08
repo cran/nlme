@@ -67,7 +67,7 @@ nlmeControl(maxIter, pnlsMaxIter, msMaxIter, minScale,
  \item{natural}{a logical value indicating whether the \code{pdNatural}
    parametrization should be used for general positive-definite matrices
    (\code{pdSymm}) in \code{reStruct}, when the approximate covariance
-   matrix of the estimators is calculated. Default is \code{TRUE}.}
+   matrix of the estimators is calculated.  Default is \code{TRUE}.}
  \item{\dots}{Further named control arguments to be passed to
    \code{\link{nlminb}}, where used (\code{eval.max} and those from
    \code{abs.tol} down).} 

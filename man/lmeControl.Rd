@@ -16,8 +16,8 @@ lmeControl(maxIter, msMaxIter, tolerance, niterEM, msMaxEval, msTol,
  \item{maxIter}{maximum number of iterations for the \code{lme}
    optimization algorithm. Default is 50.} 
  \item{msMaxIter}{maximum number of iterations
-   for the \code{nlm} optimization step inside the \code{lme}
-   optimization. Default is 50.}
+   for the optimization step inside the \code{lme} optimization.
+   Default is 50.}
  \item{tolerance}{tolerance for the convergence criterion in the
    \code{lme} algorithm. Default is 1e-6.}
  \item{niterEM}{number of iterations for the EM algorithm used to refine
@@ -27,19 +27,17 @@ lmeControl(maxIter, msMaxIter, tolerance, niterEM, msMaxEval, msTol,
    function permitted for nlminb. Default is 200. }
  \item{msTol}{tolerance for the convergence criterion the first
    iteration.  Default is 1e-7. }
- \item{msScale}{scale function passed as the \code{scale} argument to
-   the \code{nlm} function (see documentation on that function). Default
-   is \code{lmeScale}.}
+ \item{msScale}{No longer used.}
  \item{msVerbose}{a logical value passed as the \code{trace} argument to
-   \code{nlm} (see documentation on that function). Default is
-   \code{FALSE}.} 
+   \code{\link{nlminb}} or \code{\link{optim}}.
+   Default is \code{FALSE}.} 
  \item{returnObject}{a logical value indicating whether the fitted
    object should be returned when the maximum number of iterations is
    reached without convergence of the algorithm. Default is
    \code{FALSE}.} 
  \item{gradHess}{a logical value indicating whether numerical gradient
    vectors and Hessian matrices of the log-likelihood function should
-   be used in the \code{nlm} optimization. This option is only available
+   be used in the internal optimization. This option is only available
    when the correlation structure (\code{corStruct}) and the variance
    function structure (\code{varFunc}) have no "varying" parameters and
    the \code{pdMat} classes used in the random effects structure are
@@ -78,7 +76,7 @@ lmeControl(maxIter, msMaxIter, tolerance, niterEM, msMaxEval, msTol,
   a list with components for each of the possible arguments.
 }
 \author{José Pinheiro and Douglas Bates \email{bates@stat.wisc.edu}}
-\seealso{\code{\link{lme}}, \code{\link{nlm}}, \code{\link{optim}},
+\seealso{\code{\link{lme}}, \code{\link{nlminb}}, \code{\link{optim}},
   \code{\link{lmeScale}}}
 \examples{
 # decrease the maximum number iterations in the ms call and

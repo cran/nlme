@@ -85,6 +85,7 @@ getGroups.data.frame <-
   if (length(vlist) == 1) return(vlist[[1]]) # ignore level - only one choice
   ## make the list into a data frame with appropriate names
   value <- do.call("data.frame", vlist)
+  row.names(value) <- row.names(object) ## needed for fitted.lme
   if (missing(level)) return(value)
   if (is.character(level)) {
     nlevel <- match(level, names(vlist))
