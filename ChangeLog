@@ -1,10 +1,21 @@
+2014-03-09  Brian Ripley
+
+	* DESCRIPTION: version is 3.1-115
+
+	* R/{gls,gnls,lme,nmle}.R, man/{lmeScale,*Control}.Rd:
+	remove msScale and nlmStepMax arguments which were used for nlm(),
+	and where that is not longer used.
+
 2014-03-08  Brian Ripley
 
 	* DESCRIPTION: version is 3.1-114
 
-	* R/lme.R: labeling of fitted() was sometimes wrong (PR#15678)
+	* R/new-methods.R: labeling from fitted() was sometimes wrong as
+	the 'groups' component lost row names. (PR#15678)
 
 	* tests/fitted.R: add regression test.
+
+	* R/lme.R: clean up
 
 	* man/{lmeControl,lmeScale}.Rd: update..
 

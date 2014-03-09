@@ -7,8 +7,8 @@
 \title{Control Values for gnls Fit}
 \usage{
 gnlsControl(maxIter, nlsMaxIter, msMaxIter, minScale, tolerance,
-            nlsTol, msTol, msScale, returnObject, msVerbose,
-            apVar, .relStep, nlmStepMax,
+            nlsTol, msTol, returnObject, msVerbose,
+            apVar, .relStep,
             opt = c("nlminb", "optim"), optimMethod,
             minAbsParApVar)
 }
@@ -28,15 +28,11 @@ gnlsControl(maxIter, nlsMaxIter, msMaxIter, minScale, tolerance,
    \code{gnls} algorithm. Default is 1e-6.}
  \item{nlsTol}{tolerance for the convergence criterion in \code{nls}
    step. Default is 1e-3.} 
- \item{msTol}{tolerance for the convergence criterion in \code{ms},
-   passed as the \code{rel.tolerance} argument to the function (see
-   documentation on \code{ms}). Default is 1e-7.}
- \item{msScale}{scale function passed as the \code{scale} argument to
-   the \code{ms} function (see documentation on that function). Default
-   is \code{lmeScale}.}
+ \item{msTol}{tolerance for the convergence criterion of the first outer
+   iteration when \code{optim} is used.  Default is 1e-7.}
  \item{returnObject}{a logical value indicating whether the fitted
    object should be returned when the maximum number of iterations is
-   reached without convergence of the algorithm. Default is
+   reached without convergence of the algorithm.  Default is
    \code{FALSE}.} 
  \item{msVerbose}{a logical value passed as the \code{trace} argument to
    \code{ms} (see documentation on that function). Default is
@@ -46,14 +42,11 @@ gnlsControl(maxIter, nlsMaxIter, msMaxIter, minScale, tolerance,
    calculated. Default is \code{TRUE}.}
  \item{.relStep}{relative step for numerical derivatives
    calculations. Default is \code{.Machine$double.eps^(1/3)}.}
- \item{opt}{the optimizer to be used, either \code{\link{nlminb}} (the
-   default since (\R 2.2.0) or \code{\link{optim}} (the previous
-   default).}
+ \item{opt}{the optimizer to be used, either \code{"\link{nlminb}"} (the
+   current default) or \code{"\link{optim}"} (the previous default).}
  \item{optimMethod}{character - the optimization method to be used with
    the \code{\link{optim}} optimizer. The default is
    \code{"BFGS"}.  An alternative is \code{"L-BFGS-B"}.}
- \item{nlmStepMax}{stepmax value to be passed to nlm. See
-     \code{\link{nlm}} for details. Default is 100.0}
  \item{minAbsParApVar}{numeric value - minimum absolute parameter value
    in the approximate variance calculation.  The default is \code{0.05}.}
 }
@@ -68,7 +61,7 @@ gnlsControl(maxIter, nlsMaxIter, msMaxIter, minScale, tolerance,
 
 \author{José Pinheiro and Douglas Bates \email{bates@stat.wisc.edu}}
 
-\seealso{\code{\link{gnls}}, \code{\link{lmeScale}}}
+\seealso{\code{\link{gnls}}}
 
 \examples{
 # decrease the maximum number iterations in the ms call and

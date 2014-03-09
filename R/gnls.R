@@ -58,10 +58,6 @@ gnls <-
   ## control parameters
   controlvals <- gnlsControl()
   if (!missing(control)) {
-    if(!is.null(control$nlmStepMax) && control$nlmStepMax < 0) {
-      warning("negative control$nlmStepMax - using default value")
-      control$nlmStepMax <- NULL
-    }
     controlvals[names(control)] <- control
   }
   ##
@@ -878,17 +874,16 @@ gnlsControl <-
   ## Set control values for iterations within gnls
   function(maxIter = 50, nlsMaxIter = 7, msMaxIter = 50,
 	   minScale = 0.001, tolerance = 1e-6, nlsTol = 0.001,
-           msTol = 1e-7, msScale = lmeScale,
+           msTol = 1e-7,
            returnObject = FALSE, msVerbose = FALSE,
            apVar = TRUE, .relStep = (.Machine$double.eps)^(1/3),
-           nlmStepMax = 100.0,
 	   opt = c("nlminb", "optim"),  optimMethod = "BFGS",
            minAbsParApVar = 0.05)
 {
   list(maxIter = maxIter, nlsMaxIter = nlsMaxIter, msMaxIter = msMaxIter,
        minScale = minScale, tolerance = tolerance, nlsTol = nlsTol,
-       msTol = msTol, msScale = msScale, returnObject = returnObject,
+       msTol = msTol, returnObject = returnObject,
        msVerbose = msVerbose, apVar = apVar,
-       nlmStepMax = nlmStepMax, opt = match.arg(opt), optimMethod = optimMethod,
+       opt = match.arg(opt), optimMethod = optimMethod,
        .relStep = .relStep, minAbsParApVar = minAbsParApVar)
 }

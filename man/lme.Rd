@@ -6,6 +6,7 @@
 \usage{
 lme(fixed, data, random, correlation, weights, subset, method,
     na.action, control, contrasts = NULL, keep.data = TRUE)
+
 \method{update}{lme}(object, fixed., \dots, evaluate = TRUE)
 }
 \alias{lme}
@@ -22,9 +23,7 @@ lme(fixed, data, random, correlation, weights, subset, method,
 
     There is limited support for formulae such as \code{resp ~ 1} and
     \code{resp ~ 0}, and less prior to version \samp{3.1-112}.
-
-    The method functions \code{\link{lme.lmList}} and
-    \code{\link{lme.groupedData}} are documented separately.}
+}
  \item{fixed.}{Changes to the fixed-effects formula -- see
    \code{\link{update.formula}} for details.}
  \item{data}{an optional data frame containing the variables named in
@@ -92,10 +91,13 @@ lme(fixed, data, random, correlation, weights, subset, method,
   This generic function fits a linear mixed-effects model in the
   formulation described in Laird and Ware (1982) but allowing for nested
   random effects. The within-group errors are allowed to be correlated
-  and/or have unequal variances. 
+  and/or have unequal variances.
+
+  The methods \code{\link{lme.lmList}} and \code{\link{lme.groupedData}}
+  are documented separately.
 }
 \value{
-  an object of class \code{"lme"} representing the linear mixed-effects
+  An object of class \code{"lme"} representing the linear mixed-effects
   model fit. Generic functions such as \code{print}, \code{plot} and
   \code{summary} have methods to show the results of the fit. See
   \code{\link{lmeObject}} for the components of the fit. The functions

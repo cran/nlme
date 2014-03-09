@@ -173,10 +173,6 @@ nlme.formula <-
   ## control parameters
   controlvals <- nlmeControl()
   if (!missing(control)) {
-    if(!is.null(control$nlmStepMax) && control$nlmStepMax < 0) {
-      warning("negative control$nlmStepMax - using default value")
-      control$nlmStepMax <- NULL
-    }
     controlvals[names(control)] <- control
   }
   ##
@@ -1452,18 +1448,18 @@ nlmeControl <-
   ## Set control values for iterations within nlme
   function(maxIter = 50, pnlsMaxIter = 7, msMaxIter = 50,
 	   minScale = 0.001, tolerance = 1e-5, niterEM = 25,
-           pnlsTol = 0.001, msTol = 0.000001, msScale = lmeScale,
+           pnlsTol = 0.001, msTol = 0.000001,
            returnObject = FALSE, msVerbose = FALSE, gradHess = TRUE,
            apVar = TRUE, .relStep = (.Machine$double.eps)^(1/3),
-           nlmStepMax = 100.0, minAbsParApVar = 0.05,
+           minAbsParApVar = 0.05,
 	   opt = c("nlminb", "nlm"), natural = TRUE, ...)
 {
   list(maxIter = maxIter, pnlsMaxIter = pnlsMaxIter, msMaxIter = msMaxIter,
        minScale = minScale, tolerance = tolerance, niterEM = niterEM,
-       pnlsTol = pnlsTol, msTol = msTol, msScale = msScale,
+       pnlsTol = pnlsTol, msTol = msTol,
        returnObject = returnObject, msVerbose = msVerbose,
        gradHess = gradHess, apVar = apVar, .relStep = .relStep,
-       nlmStepMax = nlmStepMax, minAbsParApVar = minAbsParApVar,
+       minAbsParApVar = minAbsParApVar,
        opt = match.arg(opt), natural = natural, ...)
 }
 

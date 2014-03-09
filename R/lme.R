@@ -141,10 +141,6 @@ lme.formula <-
   ## control parameters
   controlvals <- lmeControl()
   if (!missing(control)) {
-    if(!is.null(control$nlmStepMax) && control$nlmStepMax < 0) {
-      warning("negative control$nlmStepMax - using default value")
-      control$nlmStepMax <- NULL
-    }
     controlvals[names(control)] <- control
   }
 
@@ -2933,41 +2929,22 @@ varWeights.lmeStruct <-
 
 ## Auxiliary control functions
 
-lmeScale <- function(start)
-#
-# function used to set the scale inside ms(), for lme() and nlme()
-# calls
-#
-{
-  scale <- abs(start)
-  nonzero <- scale > 0
-  if (any(nonzero)) {
-    scale[nonzero] <- 1/scale[nonzero]
-    scale[!nonzero] <- median(scale[nonzero])
-  }
-  else {
-    scale <- rep(1, length(scale))
-  }
-  scale
-}
-
 lmeControl <-
   ## Control parameters for lme
   function(maxIter = 50, msMaxIter = 50, tolerance = 1e-6, niterEM = 25,
            msMaxEval = 200,
-	   msTol = 1e-7, msScale = lmeScale, msVerbose = FALSE,
+	   msTol = 1e-7, msVerbose = FALSE,
            returnObject = FALSE, gradHess = TRUE, apVar = TRUE,
 	   .relStep = (.Machine$double.eps)^(1/3), minAbsParApVar = 0.05,
-           nlmStepMax = 100.0, opt = c("nlminb", "optim"),
+           opt = c("nlminb", "optim"),
 	   optimMethod = "BFGS", natural = TRUE,
            ...)
 {
   list(maxIter = maxIter, msMaxIter = msMaxIter, tolerance = tolerance,
-       niterEM = niterEM, msMaxEval = msMaxEval, msTol = msTol, msScale = msScale,
+       niterEM = niterEM, msMaxEval = msMaxEval, msTol = msTol,
        msVerbose = msVerbose, returnObject = returnObject,
        gradHess = gradHess , apVar = apVar, .relStep = .relStep,
-       nlmStepMax = nlmStepMax, opt = match.arg(opt),
-       optimMethod = optimMethod,
+       opt = match.arg(opt), optimMethod = optimMethod,
        minAbsParApVar = minAbsParApVar, natural = natural, ...)
 }
 

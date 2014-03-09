@@ -34,10 +34,6 @@ gls <-
     ## control parameters
     controlvals <- glsControl()
     if (!missing(control)) {
-        if(!is.null(control$nlmStepMax) && control$nlmStepMax < 0L) {
-            warning("negative control$nlmStepMax - using default value")
-            control$nlmStepMax <- NULL
-        }
         controlvals[names(control)] <- control
     }
 
@@ -1338,18 +1334,17 @@ varWeights.glsStruct <-
 glsControl <-
     ## Control parameters for gls
     function(maxIter = 50L, msMaxIter = 200L, tolerance = 1e-6, msTol = 1e-7,
-             msScale = lmeScale, msVerbose = FALSE, singular.ok = FALSE,
+             msVerbose = FALSE, singular.ok = FALSE,
              returnObject = FALSE,
              apVar = TRUE, .relStep = (.Machine$double.eps)^(1/3),
-             nlmStepMax = 100.0,
 	     opt = c("nlminb", "optim"),  optimMethod = "BFGS",
              minAbsParApVar = 0.05, natural = TRUE)
 {
     list(maxIter = maxIter, msMaxIter = msMaxIter, tolerance = tolerance,
-         msTol = msTol, msScale = msScale, msVerbose = msVerbose,
+         msTol = msTol, msVerbose = msVerbose,
          singular.ok = singular.ok,
          returnObject = returnObject, apVar = apVar,
          minAbsParApVar = minAbsParApVar, .relStep = .relStep,
-         nlmStepMax = nlmStepMax, opt = match.arg(opt),
+         opt = match.arg(opt),
 	 optimMethod = optimMethod, natural = natural)
 }

@@ -5,9 +5,9 @@
 \name{glsControl}
 \title{Control Values for gls Fit}
 \usage{
-glsControl(maxIter, msMaxIter, tolerance, msTol, msScale, msVerbose,
+glsControl(maxIter, msMaxIter, tolerance, msTol, msVerbose,
            singular.ok, returnObject, apVar, .relStep,
-           nlmStepMax, opt=c("nlminb", "optim"), optimMethod, 
+           opt=c("nlminb", "optim"), optimMethod, 
            minAbsParApVar, natural)
 }
 \alias{glsControl}
@@ -19,12 +19,8 @@ glsControl(maxIter, msMaxIter, tolerance, msTol, msScale, msVerbose,
    optimization. Default is 50.}
  \item{tolerance}{tolerance for the convergence criterion in the
    \code{gls} algorithm. Default is 1e-6.}
- \item{msTol}{tolerance for the convergence criterion in \code{ms},
-   passed as the \code{rel.tolerance} argument to the function (see
-   documentation on \code{ms}). Default is 1e-7.}
- \item{msScale}{scale function passed as the \code{scale} argument to
-   the \code{ms} function (see documentation on that function). Default
-   is \code{lmeScale}.}
+ \item{msTol}{tolerance for the convergence criterion of the first outer
+   iteration when \code{optim} is used.  Default is 1e-7.}
  \item{msVerbose}{a logical value passed as the \code{trace} argument to
    \code{ms} (see documentation on that function). Default is
    \code{FALSE}.}
@@ -40,11 +36,8 @@ glsControl(maxIter, msMaxIter, tolerance, msTol, msScale, msVerbose,
    calculated. Default is \code{TRUE}.}
  \item{.relStep}{relative step for numerical derivatives
    calculations. Default is \code{.Machine$double.eps^(1/3)}.}
- \item{nlmStepMax}{stepmax value to be passed to nlm. See
-   \code{\link{nlm}} for details. Default is 100.0}
- \item{opt}{the optimizer to be used, either \code{\link{nlminb}} (the
-   default since (\R 2.2.0) or \code{\link{optim}} (the previous
-   default).}
+ \item{opt}{the optimizer to be used, either \code{"\link{nlminb}"} (the
+   current default) or \code{"\link{optim}"} (the previous default).}
  \item{optimMethod}{character - the optimization method to be used with
    the \code{\link{optim}} optimizer. The default is
    \code{"BFGS"}.  An alternative is \code{"L-BFGS-B"}.}
@@ -64,7 +57,7 @@ glsControl(maxIter, msMaxIter, tolerance, msTol, msScale, msVerbose,
 
 \author{José Pinheiro and Douglas Bates \email{bates@stat.wisc.edu}}
 
-\seealso{\code{\link{gls}}, \code{\link{lmeScale}}}
+\seealso{\code{\link{gls}}}
 
 \examples{
 # decrease the maximum number iterations in the optimization call and
