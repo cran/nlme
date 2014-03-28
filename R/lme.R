@@ -336,9 +336,7 @@ lme.formula <-
     ## checking if any updating is needed
     if (!needUpdate(lmeSt)) {
 	if (optRes$convergence) {
-	    msg <- paste(controlvals$opt, " problem, convergence error code = ",
-			 optRes$convergence, "\n  message = ", optRes$message,
-			 sep='')
+	    msg <- gettextf("%s problem, convergence error code = %s\n  message = %s", controlvals$opt, optRes$convergence, paste(optRes$message, collapse = ""))
 	    if(!controlvals$returnObject)
 		stop(msg, domain = NA)
 	    else
@@ -364,8 +362,7 @@ lme.formula <-
 	break
     }
     if (numIter > controlvals$maxIter) {
-	msg <- paste("maximum number of iterations",
-		     "(lmeControl(maxIter)) reached without convergence")
+	msg <- gettext("maximum number of iterations (lmeControl(maxIter)) reached without convergence")
 	if (controlvals$returnObject) {
 	    warning(msg, domain = NA)
 	    break
@@ -1016,8 +1013,7 @@ anova.lme <-
                              val
                            }))
       if(length(unique(aux)) > 1) {
-        warning("fitted objects with different fixed effects.", " ",
-                "REML comparisons are not meaningful.")
+        warning("fitted objects with different fixed effects. REML comparisons are not meaningful.")
       }
     }
     termsCall <-

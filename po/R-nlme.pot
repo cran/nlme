@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: nlme 3.1-111\n"
-"POT-Creation-Date: 2013-08-17 08:12\n"
+"Project-Id-Version: nlme 3.1-115\n"
+"POT-Creation-Date: 2014-03-28 07:43\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -152,9 +152,6 @@ msgid "range must be > 0 in \"corSpher\" initial value"
 msgstr ""
 
 msgid "initial value for \"corSpher\" parameters of wrong dimension"
-msgstr ""
-
-msgid "negative control$nlmStepMax - using default value"
 msgstr ""
 
 msgid "model must be a formula of the form \"resp ~ pred\""
@@ -364,6 +361,12 @@ msgstr ""
 msgid "fewer observations than random effects in all level %s groups"
 msgstr ""
 
+msgid "%s problem, convergence error code = %s\n  message = %s"
+msgstr ""
+
+msgid "maximum number of iterations (lmeControl(maxIter)) reached without convergence"
+msgstr ""
+
 msgid "object must inherit from class \"lme\""
 msgstr ""
 
@@ -385,10 +388,7 @@ msgstr ""
 msgid "all fitted objects must have the same estimation method"
 msgstr ""
 
-msgid "fitted objects with different fixed effects."
-msgstr ""
-
-msgid "REML comparisons are not meaningful."
+msgid "fitted objects with different fixed effects. REML comparisons are not meaningful."
 msgstr ""
 
 msgid "objects must have a \"call\" component or attribute"
@@ -484,7 +484,7 @@ msgstr ""
 msgid "'form' can only be a formula, or a list of formulas"
 msgstr ""
 
-msgid "level of %s does not match formula"
+msgid "level of %s does not match formula %s"
 msgstr ""
 
 msgid "'form' argument must be a formula"
@@ -578,6 +578,9 @@ msgid "cannot use an anonymous function for the model"
 msgstr ""
 
 msgid "'data' must be a \"groupedData\" object if 'formula' does not include groups"
+msgstr ""
+
+msgid "old-style self-starting model functions\nare no longer supported.\nNew selfStart functions are available.\nUse\n  SSfpl instead of fpl,\n  SSfol instead of first.order.log,\n  SSbiexp instead of biexp,\n  SSlogis instead of logistic.\nIf writing your own selfStart model, see\n  \"help(selfStart)\"\nfor the new form of the \"initial\" attribute."
 msgstr ""
 
 msgid "missing call attribute in \"nlsList\" object"

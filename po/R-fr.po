@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nlme 3.1-65\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
-"POT-Creation-Date: 2013-08-17 08:12\n"
+"POT-Creation-Date: 2014-03-28 07:43\n"
 "PO-Revision-Date: 2012-10-03 16:45+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -215,9 +215,6 @@ msgid "initial value for \"corSpher\" parameters of wrong dimension"
 msgstr ""
 "la valeur initiale pour les paramètres \"corSpher\" sont de la mauvaise "
 "taille"
-
-msgid "negative control$nlmStepMax - using default value"
-msgstr "control$nlmStepMax négatif - utilisation de la valeur par défaut"
 
 msgid "model must be a formula of the form \"resp ~ pred\""
 msgstr "le modèle doit être une formule de la forme \"resp ~ pred\""
@@ -467,6 +464,17 @@ msgstr ""
 "moins d'observations qu'il n'y a d'effets aléatoires dans les niveaux des "
 "groupes %s"
 
+msgid ""
+"%s problem, convergence error code = %s\n"
+"  message = %s"
+msgstr ""
+
+#, fuzzy
+msgid ""
+"maximum number of iterations (lmeControl(maxIter)) reached without "
+"convergence"
+msgstr "le nombre maximum d'itérations est atteint, mais pas la convergence"
+
 msgid "object must inherit from class \"lme\""
 msgstr "l'objet doit hériter de la classe \"lme\""
 
@@ -501,11 +509,11 @@ msgstr ""
 "tous les objets ajustés doivent l'être à l'aide de la même méthode "
 "d'estimation"
 
-msgid "fitted objects with different fixed effects."
+#, fuzzy
+msgid ""
+"fitted objects with different fixed effects. REML comparisons are not "
+"meaningful."
 msgstr "les objets ont été ajustés avec différents effets fixes"
-
-msgid "REML comparisons are not meaningful."
-msgstr "Les comparaisons REML n'ont pas de sens."
 
 msgid "objects must have a \"call\" component or attribute"
 msgstr "les objets doivent avoir une composante ou un attribut \"call\""
@@ -609,8 +617,8 @@ msgstr "'form' doit avoir tous ses composantes sous forme de formules"
 msgid "'form' can only be a formula, or a list of formulas"
 msgstr "'form' ne peut être qu'une formule, ou une liste de formules"
 
-msgid "level of %s does not match formula"
-msgstr "le niveau de %s ne correspond pas à la formule"
+msgid "level of %s does not match formula %s"
+msgstr "le niveau de %s ne correspond pas à la formule %s"
 
 msgid "'form' argument must be a formula"
 msgstr "l'argument 'form' doit être une formule"
@@ -747,6 +755,20 @@ msgid ""
 msgstr ""
 "'data' doit être dans un objet \"groupedData\" si 'formula' n'inclus pas de "
 "groupes"
+
+msgid ""
+"old-style self-starting model functions\n"
+"are no longer supported.\n"
+"New selfStart functions are available.\n"
+"Use\n"
+"  SSfpl instead of fpl,\n"
+"  SSfol instead of first.order.log,\n"
+"  SSbiexp instead of biexp,\n"
+"  SSlogis instead of logistic.\n"
+"If writing your own selfStart model, see\n"
+"  \"help(selfStart)\"\n"
+"for the new form of the \"initial\" attribute."
+msgstr ""
 
 msgid "missing call attribute in \"nlsList\" object"
 msgstr "attribut d'appel manquant dans l'objet \"nlsList\""
@@ -1228,406 +1250,3 @@ msgstr[1] ""
 "les noms des groupes ne correspondent pas aux valeurs de départ pour les "
 "effets aléatoires : %s"
 
-#~ msgid "'Terms; must be between 1 and %d"
-#~ msgstr "'Terms;  doivent être compris entre 1 et %d"
-
-#~ msgid "at level"
-#~ msgstr "au niveau"
-
-#~ msgid "should be"
-#~ msgstr "devrait être"
-
-#~ msgid "number of columns in starting values for"
-#~ msgstr "le nombre de colonnes dans les valeurs de départ pour"
-
-#~ msgid "random component at level"
-#~ msgstr "la composante aléatoire au niveau"
-
-#, fuzzy
-#~ msgid "'idLabels' of incorrec ltength"
-#~ msgstr "\"IdLabels\" de longueur inconnue"
-
-#~ msgid "Id must be between 0 and 1"
-#~ msgstr "'Id' doit être compris entre 0 et 1"
-
-#, fuzzy
-#~ msgid "\"Id\" can only be a formula or numeric"
-#~ msgstr "\"Id\" doit être une formule ou une valeur numérique."
-
-#~ msgid "\"IdLabels\" of incorrect length"
-#~ msgstr "\"IdLabels\" de longueur inconnue"
-
-#~ msgid "\"IdLabels\" can only be a formula or a vector"
-#~ msgstr "\"IdLabels\" ne peut être qu'une formule ou un vecteur"
-
-#, fuzzy
-#~ msgid "incompatible lengths for \"random\" and grouping factors"
-#~ msgstr ""
-#~ "Tailles incompatibles entre \"random\" et les facteurs de regroupement"
-
-#, fuzzy
-#~ msgid "id must be between 0 and 1"
-#~ msgstr "'Id' doit être compris entre 0 et 1"
-
-#, fuzzy
-#~ msgid "cannot evaluate groups for desired levels on \"newdata\""
-#~ msgstr ""
-#~ "Impossible d'évaluer les groupes pour les niveaux désirés de \"newdata\""
-
-#~ msgid "a list of matrices"
-#~ msgstr "une liste de matrices"
-
-#~ msgid "groups levels mismatch in random and starting values"
-#~ msgstr ""
-#~ "les niveaux de groupes sont inconsistants entre les effets aléatoires et "
-#~ "les valeurs de départ"
-
-#~ msgid "for random at level"
-#~ msgstr "pour les effets aléatoires au niveau"
-
-#, fuzzy
-#~ msgid "nonexistent groups requested in \"subset\""
-#~ msgstr "Groupes inexistants demandés dans \"subset\""
-
-#, fuzzy
-#~ msgid ""
-#~ "cannot change the length of the 'varStruct' parameter after initialization"
-#~ msgstr ""
-#~ "Impossible de changer la longueur du paramètre après l'initialisation"
-
-#~ msgid "\"Id\" can only be a formula or numeric."
-#~ msgstr "\"Id\" doit être une formule ou une valeur numérique."
-
-#~ msgid "Fixed-effects model must be a formula of the form \"resp ~ pred\""
-#~ msgstr ""
-#~ "Un modèle à effet fixe doit être une formule de la forme \"resp ~ pred\""
-
-#~ msgid "Incompatible lengths for \"random\" and grouping factors"
-#~ msgstr ""
-#~ "Tailles incompatibles entre \"random\" et les facteurs de regroupement"
-
-#~ msgid "Cannot access the matrix of uninitialized objects"
-#~ msgstr "Impossible d'accéder à la matrice d'objets non initialisés"
-
-#, fuzzy
-#~ msgid "Cannot change the parameter when ength of parameters is undefined"
-#~ msgstr "Impossible de changer le paramètre lorsque"
-
-#~ msgid "Cannot change the length of the parameter after initialization"
-#~ msgstr ""
-#~ "Impossible de changer la longueur du paramètre après l'initialisation"
-
-#~ msgid "Right hand side of first argument must be a conditional expression"
-#~ msgstr ""
-#~ "Le membre de droite du premier argument doit être une expression "
-#~ "conditionnelle"
-
-#~ msgid "\"Form\" must be a formula"
-#~ msgstr "\"Form\" doit être une formule"
-
-#~ msgid "\"Form\" must be a one-sided formula"
-#~ msgstr "\"Form\" doit être une formule à un seul membre"
-
-#~ msgid "\"Form\" must be a two sided formula"
-#~ msgstr "\"Form\" doit être une formule à deux membres"
-
-#~ msgid "Covariate must be numeric"
-#~ msgstr "La covariable doit être numérique"
-
-#, fuzzy
-#~ msgid "Incompatible formulas for groups in \"random\" and \"correlation\""
-#~ msgstr "Formules incompatibles entre les groupes dans \"random\""
-
-#~ msgid "Cannot evaluate groups for desired levels on \"newdata\""
-#~ msgstr ""
-#~ "Impossible d'évaluer les groupes pour les niveaux désirés de \"newdata\""
-
-#~ msgid "Ignoring argument \"form\""
-#~ msgstr "L'argument \"form\" est ignoré"
-
-#~ msgid "Ignoring argument \"nam\""
-#~ msgstr "L'argument \"nam\" est ignoré"
-
-#~ msgid "Cannot have duplicated column names in a pdMat object"
-#~ msgstr ""
-#~ "Les noms de colonnes dupliqués ne sont pas permis dans un objet 'pdMat'"
-
-#, fuzzy
-#~ msgid "Level %s not allowed for %s"
-#~ msgid_plural "Levels %s not allowed for %s"
-#~ msgstr[0] "non autorisés pour"
-#~ msgstr[1] "non autorisés pour"
-
-#~ msgid "Multiple levels not allowed"
-#~ msgstr "Niveaux multiples non permis"
-
-#~ msgid "Subset can only be character or integer"
-#~ msgstr ""
-#~ "'Subset' ne peut qu'être une chaîne de caractères ou une valeur numérique"
-
-#~ msgid "Can only fit nlsList objects with single grouping variable"
-#~ msgstr ""
-#~ "Les objets 'nlsList' ne peuvent être ajustés qu'avec une seule variable "
-#~ "de regroupement"
-
-#~ msgid "random formula must be a formula or list of formulae"
-#~ msgstr "la formule 'random' doit être une formule ou une liste de formules"
-
-#~ msgid "Negative control$nlmStepMax - using default value"
-#~ msgstr "control$nlmStepMax négatif - utilisation de la valeur par défaut"
-
-#~ msgid "Maximum number of iterations reached without convergence"
-#~ msgstr "Le numbre maximum d'itérations est atteint, mais pas la convergence"
-
-#, fuzzy
-#~ msgid "Data in %s call must evaluate to a data frame"
-#~ msgstr "l'appel doit être évalué comme un tableau de données"
-
-#~ msgid "Covariate must be a data frame"
-#~ msgstr "La covariable doit être un tableau de données (data.frame)"
-
-#~ msgid "Cannot do pairs of just one variable"
-#~ msgstr "Impossible d'apparier avec seulement une variable"
-
-#~ msgid "Only residuals and random effects allowed"
-#~ msgstr "Seuls les résidus et les effets aléatoires sont permis"
-
-#, fuzzy
-#~ msgid "Fewer observations than random effects in all level %s grups"
-#~ msgstr ""
-#~ "Moins d'observations qu'il n'y a d'effets aléatoires dans tous les groupes"
-
-#~ msgid "does not include groups"
-#~ msgstr "qui n'inclut pas les groupes"
-
-#~ msgid "Maximum number of iterations reached without convergence."
-#~ msgstr "Le nombre maximum d'itérations est atteint mais pas la convergence"
-
-#, fuzzy
-#~ msgid "'Nint' is not consistent with 'breaks'"
-#~ msgstr "'nint' n'est pas consistant avec 'breaks'"
-
-#~ msgid "Only single level allowed."
-#~ msgstr "Un seul niveau est autorisé."
-
-#~ msgid "individual"
-#~ msgstr "l'individu"
-
-#~ msgid "object"
-#~ msgstr "objet"
-
-#~ msgid "within groups for corSymm objects"
-#~ msgstr "intragroupe pour les objets 'corSymm'"
-
-#~ msgid "Unique values of the covariate  for \"corSymm\""
-#~ msgstr "Valeurs uniques pour la covariable pour \"corSymm\""
-
-#~ msgid "Initial values for corSymm do not define"
-#~ msgstr "Les valeurs initiales pour 'corSymm' ne sont pas définies"
-
-#~ msgid "Unique values of the covariate  for corNatural"
-#~ msgstr "Valeurs uniques de la covariable pour 'corNatural'"
-
-#~ msgid "within groups for corAR1 objects"
-#~ msgstr "intragroupes pour des objets 'corAR1'"
-
-#~ msgid "within groups for corCAR1 objects"
-#~ msgstr "intragroupe pour des objets 'corCAR1'"
-
-#~ msgid "within groups for corARMA objects"
-#~ msgstr "intragroupes pour les objets 'corARMA'"
-
-#~ msgid "Parameter in \"corCompSymm\" structure"
-#~ msgstr "Le paramètre dans la structure \"corCompSymm\""
-
-#~ msgid "must be < 1 in absolute value"
-#~ msgstr "doit être < 1 en valeur absolue"
-
-#~ msgid "inf"
-#~ msgstr "inf"
-
-#~ msgid "Setting it to 1.1 * min(distance)"
-#~ msgstr "La valeur est fixée à 1.1 * min(distance)"
-
-#~ msgid "Term(s)"
-#~ msgstr "Terme(s)"
-
-#~ msgid ","
-#~ msgstr ","
-
-#~ msgid "columns"
-#~ msgstr "colonnes"
-
-#~ msgid "Effects"
-#~ msgstr "Effets"
-
-#~ msgid "Data in"
-#~ msgstr "Données dans"
-
-#~ msgid "and"
-#~ msgstr "et"
-
-#~ msgid "Levels"
-#~ msgstr "Niveaux"
-
-#~ msgid "Nint is not consistent with breaks."
-#~ msgstr "'Nint' n'est pas consistant avec 'breaks'"
-
-#~ msgid "to get initial estimates"
-#~ msgstr "pour obtenir les estimations initiales"
-
-#~ msgid "not of full rank"
-#~ msgstr "n'est pas de rang plein"
-
-#~ msgid "for"
-#~ msgstr "pour"
-
-#~ msgid "setting it to the display level"
-#~ msgstr "il est modifié au même niveau que l'affichage"
-
-#~ msgid "and \"correlation\""
-#~ msgstr "et \"correlation\""
-
-#~ msgid "Cannot use smaller level of grouping for"
-#~ msgstr "Impossible d'utiliser des niveaux plus petits de regroupement pour"
-
-#~ msgid "\"correlation\" than for \"random\". Replacing"
-#~ msgstr "\"correlation\" que pour \"random\". Remplacement"
-
-#~ msgid "the former with the latter."
-#~ msgstr "du premier par le second."
-
-#~ msgid "groups"
-#~ msgstr "de niveaux"
-
-#~ msgid "Objects must inherit from classes \"gls\", \"gnls\""
-#~ msgstr "Les objets doivent hériter des classes \"gls\", \"gnls\","
-
-#~ msgid "Some fitted objects deleted because"
-#~ msgstr "Quelques objets ajustés sont éliminés parce que"
-
-#~ msgid "Level of"
-#~ msgstr "Le niveau de"
-
-#~ msgid "\""
-#~ msgstr "\""
-
-#~ msgid "level of"
-#~ msgstr "niveau de"
-
-#~ msgid "\"data\", and \"start\""
-#~ msgstr "\"data\", et \"start\""
-
-#~ msgid "or be of length"
-#~ msgstr "ou être de longueur"
-
-#~ msgid "for random effects:"
-#~ msgstr "pour les effets aléatoires :"
-
-#~ msgid "old-style self-starting model functions"
-#~ msgstr "les fonctions auto-initialisées d'un ancien style"
-
-#~ msgid "are no longer supported."
-#~ msgstr "ne sont plus supportées."
-
-#~ msgid "New selfStart functions are available."
-#~ msgstr "De nouvelles fonctions 'selfStart' sont disponibles."
-
-#~ msgid "Use"
-#~ msgstr "Utilisez"
-
-#~ msgid "SSfpl instead of fpl,"
-#~ msgstr "'SSfpl' à la place de 'fpl'"
-
-#~ msgid "SSfol instead of first.order.log,"
-#~ msgstr "'SSfol' à la place de 'first.order.log'"
-
-#~ msgid "SSbiexp instead of biexp,"
-#~ msgstr "'SSbiexp' à la place de 'biexp'"
-
-#~ msgid "SSlogis instead of logistic."
-#~ msgstr "'SSlogis' à la place de 'logistic'."
-
-#~ msgid "If writing your own selfStart model, see"
-#~ msgstr "Si vous créez vos propres fonctions auto-initialisées,"
-
-#~ msgid "\"help(selfStart)\""
-#~ msgstr "voyez \"help(selfStart)\""
-
-#~ msgid "for the new form of the \"initial\" attribute."
-#~ msgstr "pour la nouvelle forme de l'attribut \"initial\"."
-
-#~ msgid "with \"nam\" argument"
-#~ msgstr "avec l'argument \"nam\""
-
-#~ msgid "of initial value"
-#~ msgstr "des valeurs initiales"
-
-#~ msgid "root of a pdMat object"
-#~ msgstr "racine carrée de l'objet 'pdMat'"
-
-#~ msgid "Cannot access the number of columns of"
-#~ msgstr "Impossible d'obtenir le nombre de colonnes des"
-
-#~ msgid "uninitialized objects without names."
-#~ msgstr "objets non initialisés et non nommés"
-
-#~ msgid "Cannot extract the log of the determinant"
-#~ msgstr "Impossible d'extraire le log du déterminant"
-
-#~ msgid "from an uninitialized object"
-#~ msgstr "pour un objet non initialisé"
-
-#~ msgid "of previous names"
-#~ msgstr "des noms antérieurs"
-
-#~ msgid "An object of length"
-#~ msgstr "Un objet de longueur"
-
-#~ msgid "without a formula"
-#~ msgstr "sans une formule"
-
-#~ msgid "uninitialized dimensions"
-#~ msgstr "des dimensions non initialisées"
-
-#~ msgid "not a matrix, and not numeric"
-#~ msgstr "ni une matrice, ni un nombre"
-
-#~ msgid "or two-sided formulae"
-#~ msgstr "ou des formules à double membre"
-
-#~ msgid "if random does not define groups"
-#~ msgstr "si l'effet aléatoire ne définit pas les groupes"
-
-#~ msgid "object, a formula, or a character string"
-#~ msgstr "'varFunc', d'une formule, ou d'une chaîne de caractères"
-
-#~ msgid "Cannot change the length of the varIdent"
-#~ msgstr "Impossible de changer la taille de 'varIdent'"
-
-#~ msgid "parameter after initialization"
-#~ msgstr "paramètre après initialisation"
-
-#~ msgid "Fixed parameters names in varIdent"
-#~ msgstr "Les noms de paramètres fixes dans 'varIdent'"
-
-#~ msgid "must be a subset of groups names"
-#~ msgstr "doivent être un sous-ensemble des noms de groupes"
-
-#~ msgid "Names of starting value for \"varIdent\" object"
-#~ msgstr "Les noms de la valeur initiale pour l'objet \"varIdent\""
-
-#~ msgid "Cannot change the length of the varStruct"
-#~ msgstr "Impossible de modifier la taille de 'varStruct'"
-
-#~ msgid "when all parameters are fixed"
-#~ msgstr "lorsque tous les paramètres sont fixés"
-
-#~ msgid "Cannot change the length of the"
-#~ msgstr "Impossible de modifier la taille de"
-
-#~ msgid "Contrasts not defined for"
-#~ msgstr "Les contrastes ne sont pas définis pour"
-
-#~ msgid "degrees of freedom"
-#~ msgstr "degrés de liberté"

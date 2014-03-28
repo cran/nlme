@@ -84,18 +84,7 @@ nlsList.formula <-
     FUN <- eval(model[[3]][[1]])
     if (is.function(FUN) && class(FUN) != "selfStart" &&
         !is.null(attr(FUN, "initial"))) {
-      stop(paste("old-style self-starting model functions\n",
-                 "are no longer supported.\n",
-                 "New selfStart functions are available.\n",
-                 "Use\n",
-                 "  SSfpl instead of fpl,\n",
-                 "  SSfol instead of first.order.log,\n",
-                 "  SSbiexp instead of biexp,\n",
-                 "  SSlogis instead of logistic.\n",
-                 "If writing your own selfStart model, see\n",
-                 "  \"help(selfStart)\"\n",
-                 "for the new form of the \"initial\" attribute.", sep="" ),
-           domain = NA)
+      stop("old-style self-starting model functions\nare no longer supported.\nNew selfStart functions are available.\nUse\n  SSfpl instead of fpl,\n  SSfol instead of first.order.log,\n  SSbiexp instead of biexp,\n  SSlogis instead of logistic.\nIf writing your own selfStart model, see\n  \"help(selfStart)\"\nfor the new form of the \"initial\" attribute.")
     }
   }
 

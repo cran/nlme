@@ -1,3 +1,15 @@
+2014-03-27  Brian Ripley
+
+	* R/{lme,newMethods,nlsList}.R: modify messsages.
+	* po/{R-pl,pl}.po: update.
+
+2014-03-19  Brian Ripley
+
+	* tests/missing.{R,Rout.save}: reduce 'digits' for cleaner results
+	on platforms without extended-precision hardware.
+
+	* po/R-de.po: Update from Detlef Steuer.
+
 2014-03-09  Brian Ripley
 
 	* DESCRIPTION: version is 3.1-115

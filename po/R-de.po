@@ -1,14 +1,15 @@
 # Translation of R-nlme.pot to German
-# Copyright (C) 2007-2009 The R Foundation
+# Copyright (C) 2007-2014 The R Foundation
 # This file is distributed under the same license as the nlme package.
 # Chris Leick <c.leick@vollbio.de>, 2009-2012.
+# Detlef Steuer <steuer@hsu-hh.de> 2014.
 msgid ""
 msgstr ""
-"Project-Id-Version: R 2.15.2 / nlme-3.1-105\n"
+"Project-Id-Version: R 3.1.0/ nlme-3.1-115\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
-"POT-Creation-Date: 2013-08-17 08:12\n"
-"PO-Revision-Date: 2012-10-11 13:10+0200\n"
-"Last-Translator: Chris Leick <c.leick@vollbio.de>\n"
+"POT-Creation-Date: 2014-03-28 07:43\n"
+"PO-Revision-Date: 2014-03-16 17:20+0100\n"
+"Last-Translator: Detlef Steuer <steuer@hsu-hh.de>\n"
 "Language-Team: German <debian-l10n-german@lists.debian.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -214,9 +215,6 @@ msgstr "Spannweite im \"corSpher\"-Anfangswert muss > 0 sein."
 msgid "initial value for \"corSpher\" parameters of wrong dimension"
 msgstr "Anfangswert für Parameter \"corSpher\" hat falsche Dimension"
 
-msgid "negative control$nlmStepMax - using default value"
-msgstr "Negativer control$nlmStepMax – Standardwert wird benutzt."
-
 msgid "model must be a formula of the form \"resp ~ pred\""
 msgstr "Modell muss eine Formel der Form \"resp ~ pred\" sein."
 
@@ -365,6 +363,8 @@ msgstr ""
 
 msgid "An lm fit failed, probably because a factor only had one level"
 msgstr ""
+"Eine lm Anpassung ist fehlgeschlage, vermtlich, weil ein Faktor nur\n"
+"eine Stufe hatte"
 
 msgid "'data' in %s call must evaluate to a data frame"
 msgstr "'data' in %s muss sich zu einem Dataframe berechnen"
@@ -444,6 +444,17 @@ msgid "fewer observations than random effects in all level %s groups"
 msgstr ""
 "weniger Beobachtungen als zufällige Effekte in allen Gruppen der Stufe %s"
 
+msgid ""
+"%s problem, convergence error code = %s\n"
+"  message = %s"
+msgstr ""
+
+#, fuzzy
+msgid ""
+"maximum number of iterations (lmeControl(maxIter)) reached without "
+"convergence"
+msgstr "maximale Anzahl der Iterationen ohne Konvergenz erreicht"
+
 msgid "object must inherit from class \"lme\""
 msgstr "Objekt muss von der Klasse \"lme\" erben"
 
@@ -471,11 +482,11 @@ msgstr "erstes Modell hat eine vom Rest abweichende Antwort"
 msgid "all fitted objects must have the same estimation method"
 msgstr "Alle gefitteten Objekte müssen die gleiche Schätzungsmethode haben."
 
-msgid "fitted objects with different fixed effects."
+#, fuzzy
+msgid ""
+"fitted objects with different fixed effects. REML comparisons are not "
+"meaningful."
 msgstr "gefittete Objekte mit unterschiedlichen festen Effekten"
-
-msgid "REML comparisons are not meaningful."
-msgstr "REML-Vergleiche sind nicht sinnvoll."
 
 msgid "objects must have a \"call\" component or attribute"
 msgstr "Objekte müssen eine \"call\"-Komponente oder -Attribut haben."
@@ -578,8 +589,8 @@ msgid "'form' can only be a formula, or a list of formulas"
 msgstr "'form' kann nur eine Formel oder eine Liste von Formeln sein."
 
 # R/newMethods.R
-msgid "level of %s does not match formula"
-msgstr "Stufe von %s passt nicht zu Formel"
+msgid "level of %s does not match formula %s"
+msgstr "Stufe von %s passt nicht zu Formel %s"
 
 msgid "'form' argument must be a formula"
 msgstr "'form'-Argument muss eine Formel sein"
@@ -703,6 +714,20 @@ msgid ""
 msgstr ""
 "'data' muss ein \"groupedData\"-Objekt sein, wenn 'formula' keine Gruppen "
 "enthält."
+
+msgid ""
+"old-style self-starting model functions\n"
+"are no longer supported.\n"
+"New selfStart functions are available.\n"
+"Use\n"
+"  SSfpl instead of fpl,\n"
+"  SSfol instead of first.order.log,\n"
+"  SSbiexp instead of biexp,\n"
+"  SSlogis instead of logistic.\n"
+"If writing your own selfStart model, see\n"
+"  \"help(selfStart)\"\n"
+"for the new form of the \"initial\" attribute."
+msgstr ""
 
 msgid "missing call attribute in \"nlsList\" object"
 msgstr "fehlendes Aufrufattribut in \"nlsList\"-Objekt"
@@ -1181,6 +1206,12 @@ msgid_plural ""
 "group names not matched in starting values for random effects: %s"
 msgstr[0] "Gruppenname nicht zu Startwerten für Zufallseffekte passend: %s"
 msgstr[1] "Gruppennamen nicht zu Startwerten für Zufallseffekte passend: %s"
+
+#~ msgid "REML comparisons are not meaningful."
+#~ msgstr "REML-Vergleiche sind nicht sinnvoll."
+
+#~ msgid "negative control$nlmStepMax - using default value"
+#~ msgstr "Negativer control$nlmStepMax – Standardwert wird benutzt."
 
 # FIXME 'Terms;
 #~ msgid "'Terms; must be between 1 and %d"

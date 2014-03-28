@@ -90,14 +90,16 @@ getGroups.data.frame <-
   if (is.character(level)) {
     nlevel <- match(level, names(vlist))
     if (any(aux <- is.na(nlevel))) {
-        stop(gettextf("level of %s does not match formula ",
-                      level[aux], sQuote(deparse(form))), domain = NA)
+        stop(gettextf("level of %s does not match formula %s",
+                      level[aux], sQuote(deparse(form))),
+             domain = "NA")
     }
   } else {
     nlevel <- as.numeric(level)
     if (any(aux <- is.na(match(nlevel, 1:ncol(value))))) {
-        stop(gettextf("level of %s does not match formula ",
-                      level[aux], sQuote(deparse(form))), domain = NA)
+        stop(gettextf("level of %s does not match formula %s",
+                      level[aux], sQuote(deparse(form))),
+             domain = "NA")
     }
   }
   if (length(nlevel) > 1)  return(value[, nlevel]) # multicolumn selection

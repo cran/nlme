@@ -1,105 +1,93 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: nlme 3.1-104\n"
+"Project-Id-Version: nlme 3.1-115\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
-"POT-Creation-Date: 2013-08-17 08:12\n"
-"PO-Revision-Date: 2012-10-06 16:10+0100\n"
+"POT-Creation-Date: 2014-03-28 07:43\n"
+"PO-Revision-Date: 2014-03-25 17:00+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language: pl_PL\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-Generator: Poedit 1.5.3\n"
+"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-Bookmarks: -1,-1,-1,72,-1,-1,-1,-1,-1,-1\n"
 
-# nlme/R/VarCov.R: 26
-# stop("not implemented for \"nlme\" objects")
 msgid "not implemented for \"nlme\" objects"
-msgstr "niezaimplementowane dla obiektów \"nlme\""
+msgstr ""
+"funkcja 'getVarCov.lme()'  nie jest zaimplementowana dla obiektów klasy "
+"\"nlme\""
 
 # nlme/R/VarCov.R: 28
-# stop("not implemented for multiple levels of nesting")
+# stop("'getVarCov.lme()' is not implemented for multiple levels of nesting")
 msgid "not implemented for multiple levels of nesting"
-msgstr "niezaimplementowane dla wielu poziomów zagnieżdżenia"
+msgstr ""
+"funkcja 'getVarCov.lme()' nie jest zaimplementowana dla wielu poziomów "
+"zagnieżdżenia"
 
 # nlme/R/VarCov.R: 47
-# stop(gettextf("individual %s was not used in the fit",
-#                               sQuote(individ)), domain = NA)
-# nlme/R/VarCov.R: 50
-# stop(gettextf("individual %s was not used in the fit",
-#                               sQuote(individ)), domain = NA)
+# stop(gettextf("individual %s was not used in the fit", sQuote(individ)), domain = "R-nlme")
+# nlme/R/VarCov.R: 49
+# stop(gettextf("individual %s was not used in the fit", sQuote(individ)), domain = "R-nlme")
 msgid "individual %s was not used in the fit"
 msgstr "jednostka %s nie została użyta w dopasowaniu"
 
 # nlme/R/corStruct.R: 60
-# stop(gettextf("do not know how to calculate correlation matrix of %s object",
-#                     dQuote(class(object)[1])), domain = NA)
+# stop(gettextf("do not know how to calculate correlation matrix of %s object", dQuote(class(object)[1])), domain = "R-nlme")
 msgid "do not know how to calculate correlation matrix of %s object"
 msgstr "nie wiadomo jak policzyć macierz korelacji obiektu %s"
 
-# nlme/R/corStruct.R: 108
+# nlme/R/corStruct.R: 107
 # stop("\"corStruct\" object must have a \"fixed\" attribute")
 msgid "\"corStruct\" object must have a \"fixed\" attribute"
 msgstr "obiekt \"corStruct\" musi posiadać atrybut \"fixed\"."
 
-# nlme/R/corStruct.R: 116
-# stop(gettextf("do not know how to obtain parameters of %s object",
-#                     dQuote(class(object)[1])), domain = NA)
+# nlme/R/corStruct.R: 115
+# stop(gettextf("do not know how to obtain parameters of %s object", dQuote(class(object)[1])), domain = "R-nlme")
 msgid "do not know how to obtain parameters of %s object"
 msgstr "nie wiadomo jak uzyskać parametry obiektu %s"
 
-# nlme/R/corStruct.R: 127
-# stop("cannot change the length of the parameter of a \"corStruct\" object")
 msgid "cannot change the length of the parameter of a \"corStruct\" object"
-msgstr "nie można zmienić długości parametru obiektu \"corStruct\""
+msgstr "nie można zmienić długości parametru obiektu klasy \"corStruct\""
 
-# nlme/R/corStruct.R: 162
-# warning("cannot change 'form'")
+# nlme/R/corStruct.R: 160
+# warning("cannot change 'form' argument")
 msgid "cannot change 'form'"
-msgstr "Nie można zmienić 'form'."
+msgstr "nie można zmienić argumentu 'form'"
 
-# nlme/R/corStruct.R: 166
-# stop("need data to calculate covariate of \"corStruct\" object")
 msgid "need data to calculate covariate of \"corStruct\" object"
 msgstr ""
-"potrzeba danych do obliczenia zmiennej wyjaśniającej obiektu \"corStruct\""
+"argument 'data' jest wymagany aby wyliczyć zmienną wyjaśniającą obiektu "
+"klasy \"corStruct\""
 
-# nlme/R/corStruct.R: 420
-# stop("cannot change the length of the parameter of a \"corSymm\" object")
 msgid "cannot change the length of the parameter of a \"corSymm\" object"
-msgstr "nie można zmienić długości parametru obiektu \"corStruct\""
+msgstr "nie można zmienić długości parametru obiektu klasy \"corSymm\""
 
-# nlme/R/corStruct.R: 450
-# stop("covariate must have unique values within groups for \"corSymm\" objects")
 msgid "covariate must have unique values within groups for \"corSymm\" objects"
 msgstr ""
 "zmienna wyjaśniająca musi mieć unikalne wartości w obrębie grup dla obiektów "
-"\"corSymm\""
+"klasy \"corSymm\""
 
-# nlme/R/corStruct.R: 455
-# stop("unique values of the covariate  for \"corSymm\" objects must be a sequence of consecutive integers")
 msgid ""
 "unique values of the covariate  for \"corSymm\" objects must be a sequence "
 "of consecutive integers"
 msgstr ""
-"unikalne wartości zmiennej wyjaśniającej dla obiektów \"corSymm\" muszą być "
-"ciągiem kolejnych liczb całkowitych"
+"unikalne wartości zmiennej wyjaśniającej dla obiektów klasy \"corSymm\" "
+"muszą być ciągiem kolejnych liczb całkowitych"
 
-# nlme/R/corStruct.R: 467
-# stop("initial value for \"corSymm\" parameters of wrong dimension")
+# nlme/R/corStruct.R: 465
+# stop("initial value for \"corSymm\" parameters are of wrong dimension")
 msgid "initial value for \"corSymm\" parameters of wrong dimension"
 msgstr ""
 "początkowe wartości dla parametrów \"corSymm\" posiadają niepoprawne wymiary"
 
-# nlme/R/corStruct.R: 470
-# stop("initial values for \"corSymm\" must be between -1 and 1")
 msgid "initial values for \"corSymm\" must be between -1 and 1"
-msgstr "początkowe wartości dla \"corSymm\" muszą być pomiędzy -1 a 1"
+msgstr "początkowe wartości dla \"corNatural\" muszą być pomiędzy -1 a 1"
 
-# nlme/R/corStruct.R: 477
+# nlme/R/corStruct.R: 475
 # stop("initial values for \"corSymm\" do not define a positive-definite correlation structure")
 msgid ""
 "initial values for \"corSymm\" do not define a positive-definite correlation "
@@ -108,41 +96,33 @@ msgstr ""
 "początkowe wartości dla \"corSymm\" nie definiują dodatnio określonej "
 "struktury korelacji"
 
-# nlme/R/corStruct.R: 660
-# stop("cannot change the length of the parameter of a \"corNatural\" object")
 msgid "cannot change the length of the parameter of a \"corNatural\" object"
-msgstr "nie można zmienić długości parametru obiektu \"corStruct\""
+msgstr "nie można zmienić długości parametru obiektu klasy \"corNatural\""
 
-# nlme/R/corStruct.R: 690
-# stop("covariate must have unique values within groups for \"corNatural\" objects")
 msgid ""
 "covariate must have unique values within groups for \"corNatural\" objects"
 msgstr ""
 "zmienna wyjaśniająca musi mieć unikalne wartości w obrębie grup dla obiektów "
-"\"corNatural\""
+"klasy \"corNatural\""
 
-# nlme/R/corStruct.R: 695
-# stop("unique values of the covariate for \"corNatural\" objects must be a sequence of consecutive integers")
 msgid ""
 "unique values of the covariate for \"corNatural\" objects must be a sequence "
 "of consecutive integers"
 msgstr ""
-"unikalne wartości zmiennej wyjaśniającej dla obiektów \"corNatural\" muszą "
-"być ciągiem kolejnych liczb całkowitych"
+"unikalne wartości zmiennej wyjaśniającej dla obiektów klasy \"corNatural\" "
+"muszą być ciągiem kolejnych liczb całkowitych"
 
-# nlme/R/corStruct.R: 707
+# nlme/R/corStruct.R: 705
 # stop("initial value for \"corNatural\" parameters of wrong dimension")
 msgid "initial value for \"corNatural\" parameters of wrong dimension"
 msgstr ""
 "początkowe wartości dla parametrów \"corNatural\" posiadają niepoprawne "
 "wymiary"
 
-# nlme/R/corStruct.R: 710
-# stop("initial values for \"corNatural\" must be between -1 and 1")
 msgid "initial values for \"corNatural\" must be between -1 and 1"
 msgstr "początkowe wartości dla \"corNatural\" muszą być pomiędzy -1 a 1"
 
-# nlme/R/corStruct.R: 717
+# nlme/R/corStruct.R: 715
 # stop("initial values for \"corNatural\" do not define a positive-definite correlation structure")
 msgid ""
 "initial values for \"corNatural\" do not define a positive-definite "
@@ -151,147 +131,124 @@ msgstr ""
 "początkowe wartości dla \"corNatural\" nie definiują dodatnio określonej "
 "strukture korelacji"
 
-# nlme/R/corStruct.R: 858
-# stop("parameter in AR(1) structure must be between -1 and 1")
 msgid "parameter in AR(1) structure must be between -1 and 1"
 msgstr "parametr w strukturze AR(1) musi być pomiędzy -1 a 1"
 
-# nlme/R/corStruct.R: 948
-# stop("cannot change the length of the parameter of a \"corAR1\" object")
 msgid "cannot change the length of the parameter of a \"corAR1\" object"
-msgstr "nie można zmienić długości parametru obiektu \"corStruct\""
+msgstr "nie można zmienić długości parametru obiektu klasy \"corCAR1\""
 
-# nlme/R/corStruct.R: 973
-# stop("covariate must have unique values within groups for \"corAR1\" objects")
 msgid "covariate must have unique values within groups for \"corAR1\" objects"
 msgstr ""
 "zmienna wyjaśniająca musi mieć unikalne wartości w obrębie grup dla obiektów "
-"\"corAR1\""
+"klasy \"corCAR1\""
 
-# nlme/R/corStruct.R: 1020
-# stop("parameter in CAR(1) structure must be between 0 and 1")
 msgid "parameter in CAR(1) structure must be between 0 and 1"
 msgstr "parametr w strukturze AR(1) musi być pomiędzy 0 a 1"
 
-# nlme/R/corStruct.R: 1114
-# stop("cannot change the length of the parameter of a \"corCAR1\" object")
 msgid "cannot change the length of the parameter of a \"corCAR1\" object"
-msgstr "nie można zmienić długości parametru obiektu \"corStruct\""
+msgstr "nie można zmienić długości parametru obiektu klasy \"corCAR1\""
 
-# nlme/R/corStruct.R: 1141
-# stop("covariate must have unique values within groups for \"corCAR1\" objects")
 msgid "covariate must have unique values within groups for \"corCAR1\" objects"
 msgstr ""
 "zmienna wyjaśniająca musi mieć unikalne wartości w obrębie grup dla obiektów "
-"\"corCAR1\""
+"klasy \"corCAR1\""
 
-# nlme/R/corStruct.R: 1179
+# nlme/R/corStruct.R: 1177
 # stop("autoregressive order must be a non-negative integer")
 msgid "autoregressive order must be a non-negative integer"
 msgstr "rząd autoregresji musi być nieujemną liczbą całkowitą"
 
-# nlme/R/corStruct.R: 1182
+# nlme/R/corStruct.R: 1180
 # stop("moving average order must be a non-negative integer")
 msgid "moving average order must be a non-negative integer"
 msgstr "rząd średniej ruchomej musi być nieujemną liczbą całkowitą"
 
-# nlme/R/corStruct.R: 1188
+# nlme/R/corStruct.R: 1186
 # stop("initial value for parameter of wrong length")
 msgid "initial value for parameter of wrong length"
 msgstr "początkowa wartość parametru posiada niepoprawną długość"
 
-# nlme/R/corStruct.R: 1191
-# stop("parameters in ARMA structure must be < 1 in absolute value")
 msgid "parameters in ARMA structure must be < 1 in absolute value"
-msgstr "parametry w strukturze ARMA muszą mieć wartość na moduł < 1"
+msgstr "parametry w strukturze ARMA muszą być pomiędzy -1 a 1"
 
-# nlme/R/corStruct.R: 1210
-# stop("'object' has not been Initialize()d")
-# nlme/R/corStruct.R: 1243
-# stop("'object' has not been Initialize()d")
-# nlme/R/corStruct.R: 1313
-# stop("'object' has not been Initialize()d")
-# nlme/R/corStruct.R: 1366
-# stop("'object' has not been Initialize()d")
+# nlme/R/corStruct.R: 1208
+# stop("'object' argument has not been initialized with 'Initialize()' function")
+# nlme/R/corStruct.R: 1241
+# stop("'object' argument has not been initialized with 'Initialize()' function")
+# nlme/R/corStruct.R: 1311
+# stop("'object' argument has not been initialized with 'Initialize()' function")
+# nlme/R/corStruct.R: 1364
+# stop("'object' argument has not been initialized with 'Initialize()' function")
 msgid "'object' has not been Initialize()d"
-msgstr "'object' nie został zainicjalizowany metodą 'Initialize()'"
+msgstr "argument 'object' nie został zainicjalizowany metodą 'Initialize()'"
 
-# nlme/R/corStruct.R: 1315
-# stop("cannot change the length of the parameter of a \"corARMA\" object")
 msgid "cannot change the length of the parameter of a \"corARMA\" object"
-msgstr "nie można zmienić długości parametru obiektu \"corStruct\""
+msgstr "nie można zmienić długości parametru obiektu klasy \"corARMA\""
 
-# nlme/R/corStruct.R: 1346
-# stop("covariate must have unique values within groups for \"corARMA\" objects")
 msgid "covariate must have unique values within groups for \"corARMA\" objects"
 msgstr ""
 "zmienna wyjaśniająca musi mieć unikalne wartości w obrębie grup dla obiektów "
-"\"corARMA\""
+"klasy \"corARMA\""
 
-# nlme/R/corStruct.R: 1399
-# stop("parameter in \"corCompSymm\" structure must be < 1 in absolute value")
 msgid "parameter in \"corCompSymm\" structure must be < 1 in absolute value"
-msgstr "parametr w strukturze \"corCompSymm\" musi mieć wartość na moduł < 1"
+msgstr "parametr w strukturze \"corCompSymm\" musi być pomiędzy -1 a 1"
 
-# nlme/R/corStruct.R: 1491
-# stop("cannot change the length of the parameter of a \"corCompSymm\" object")
 msgid "cannot change the length of the parameter of a \"corCompSymm\" object"
-msgstr "nie można zmienić długości parametru obiektu \"corStruct\""
+msgstr "nie można zmienić długości parametru obiektu klasy \"corCompSymm\""
 
-# nlme/R/corStruct.R: 1518
-# stop(gettextf("initial value in \"corCompSymm\" must be greater than %s",
-#                     attr(object, "inf")), domain = NA)
+# nlme/R/corStruct.R: 1516
+# stop(sprintf(gettext("initial value in \"corCompSymm\" must be greater than %s", domain = "R-nlme"), attr(object, "inf")), domain = NA)
 msgid "initial value in \"corCompSymm\" must be greater than %s"
 msgstr "początkowa wartość w \"corCompSymm\" musi być większa niż %s"
 
-# nlme/R/corStruct.R: 1854
+# nlme/R/corStruct.R: 1851
 # stop("cannot change the length of the parameter after initialization")
-# nlme/R/pdMat.R: 257
+# nlme/R/varFunc.R: 998
 # stop("cannot change the length of the parameter after initialization")
-# nlme/R/varFunc.R: 1007
+# nlme/R/pdMat.R: 256
 # stop("cannot change the length of the parameter after initialization")
 msgid "cannot change the length of the parameter after initialization"
 msgstr "nie można zmienić długości parametru po jego zainicjowaniu"
 
-# nlme/R/corStruct.R: 1892
-# stop("need data to calculate covariate")
 msgid "need data to calculate covariate"
-msgstr "potrzeba danych aby wyliczyć zmienną wyjaśniającą"
+msgstr ""
+"argument 'data' jest wymagany aby wyliczyć zmienną wyjaśniającą obiektu "
+"klasy \"corSpatial\""
 
-# nlme/R/corStruct.R: 1934
+# nlme/R/corStruct.R: 1930
 # stop("cannot have zero distances in \"corSpatial\"")
 msgid "cannot have zero distances in \"corSpatial\""
 msgstr "nie można mieć zerowych odległości w \"corSpatial\""
 
-# nlme/R/corStruct.R: 1952
+# nlme/R/corStruct.R: 1948
 # stop("'range' must be > 0 in \"corSpatial\" initial value")
 msgid "'range' must be > 0 in \"corSpatial\" initial value"
-msgstr "'range' musi być > 0 w początkowej wartości \"corSpatial\""
+msgstr "argument 'range' musi być > 0 w początkowej wartości \"corSpatial\""
 
-# nlme/R/corStruct.R: 1959
+# nlme/R/corStruct.R: 1955
 # stop("initial value for \"corSpatial\" parameters of wrong dimension")
-# nlme/R/corStruct.R: 1967
+# nlme/R/corStruct.R: 1963
 # stop("initial value for \"corSpatial\" parameters of wrong dimension")
 msgid "initial value for \"corSpatial\" parameters of wrong dimension"
 msgstr "początkowa wartość parametrów \"corSpatial\" ma niepoprawny wymiar"
 
-# nlme/R/corStruct.R: 1963
+# nlme/R/corStruct.R: 1959
 # stop("initial value of nugget ratio must be between 0 and 1")
-# nlme/R/corStruct.R: 2137
+# nlme/R/corStruct.R: 2133
 # stop("initial value of nugget ratio must be between 0 and 1")
-# nlme/R/corStruct.R: 2258
+# nlme/R/corStruct.R: 2254
 # stop("initial value of nugget ratio must be between 0 and 1")
 msgid "initial value of nugget ratio must be between 0 and 1"
 msgstr "początkowa wartość proporcji samorodka musi być pomiędzy 0 a 1"
 
-# nlme/R/corStruct.R: 2122
-# stop("'range' must be > 0 in \"corLin\" initial value")
+# nlme/R/corStruct.R: 1948
+# stop("'range' must be > 0 in \"corSpatial\" initial value")
 msgid "'range' must be > 0 in \"corLin\" initial value"
-msgstr "'range' musi być > 0 w początkowej wartości \"corLin\""
+msgstr "argument 'range' musi być > 0 w początkowej wartości \"corLin\""
 
-# nlme/R/corStruct.R: 2125
+# nlme/R/corStruct.R: 2121
 # warning("initial value for 'range' less than minimum distance. Setting it to 1.1 * min(distance)")
-# nlme/R/corStruct.R: 2246
+# nlme/R/corStruct.R: 2242
 # warning("initial value for 'range' less than minimum distance. Setting it to 1.1 * min(distance)")
 msgid ""
 "initial value for 'range' less than minimum distance. Setting it to 1.1 * min"
@@ -300,39 +257,31 @@ msgstr ""
 "początkowa wartość 'range' mniejsza niż minimalna odległość. Ustawianie jej "
 "na '1.1 * min(distance)'"
 
-# nlme/R/corStruct.R: 2133
+# nlme/R/corStruct.R: 2129
 # stop("initial value for \"corLin\" parameters of wrong dimension")
-# nlme/R/corStruct.R: 2141
+# nlme/R/corStruct.R: 2137
 # stop("initial value for \"corLin\" parameters of wrong dimension")
 msgid "initial value for \"corLin\" parameters of wrong dimension"
 msgstr "początkowa wartość parametrów \"corLin\" ma niepoprawny wymiar"
 
-# nlme/R/corStruct.R: 2243
+# nlme/R/corStruct.R: 2239
 # stop("range must be > 0 in \"corSpher\" initial value")
 msgid "range must be > 0 in \"corSpher\" initial value"
 msgstr "zakres musi być > 0 w początkowej wartości \"corShere\""
 
-# nlme/R/corStruct.R: 2254
+# nlme/R/corStruct.R: 2250
 # stop("initial value for \"corSpher\" parameters of wrong dimension")
-# nlme/R/corStruct.R: 2262
+# nlme/R/corStruct.R: 2258
 # stop("initial value for \"corSpher\" parameters of wrong dimension")
 msgid "initial value for \"corSpher\" parameters of wrong dimension"
 msgstr "początkowa wartość parametrów \"corSpher\" ma niepoprawny wymiar"
 
-# nlme/R/gls.R: 38
-# warning("negative control$nlmStepMax - using default value")
-# nlme/R/gnls.R: 62
-# warning("negative control$nlmStepMax - using default value")
-# nlme/R/lme.R: 145
-# warning("negative control$nlmStepMax - using default value")
-# nlme/R/nlme.R: 177
-# warning("negative control$nlmStepMax - using default value")
-msgid "negative control$nlmStepMax - using default value"
-msgstr "ujemna wartość 'control$nlmStepMax' - używanie wartości domyślnej"
-
+# nlme/R/gls.R: 48
+# stop("'model' argument must be a formula of the form \"resp ~ pred\"")
 msgid "model must be a formula of the form \"resp ~ pred\""
 msgstr ""
-"model musi być formułą o formie \"zmienna zależna ~ zmienna niezależna\""
+"argument 'model' musi być formułą o formie \"zmienna zależna ~ zmienna "
+"niezależna\""
 
 # nlme/R/gls.R: 93
 # stop("no coefficients to fit")
@@ -345,125 +294,99 @@ msgstr "brak współczynników do dopasowania"
 # warning("maximum number of iterations reached without convergence")
 # nlme/R/gnls.R: 469
 # stop("maximum number of iterations reached without convergence")
-# nlme/R/nlme.R: 951
+# nlme/R/nlme.R: 948
 # warning("maximum number of iterations reached without convergence")
-# nlme/R/nlme.R: 954
+# nlme/R/nlme.R: 951
 # stop("maximum number of iterations reached without convergence")
 msgid "maximum number of iterations reached without convergence"
 msgstr "maksymalna liczba iteracji została osiągnięta bez uzyskania zbieżności"
 
-# nlme/R/gls.R: 323
-# stop(gettextf("computed \"gls\" fit is singular, rank %s", rnk),
-#              domain = NA)
+# nlme/R/gls.R: 322
+# stop(gettextf("computed \"gls\" fit is singular, rank %s", rnk), domain = "R-nlme")
 msgid "computed \"gls\" fit is singular, rank %s"
 msgstr "obliczone dopasowanie \"gls\" jest osobliwe, ranga %s"
 
-# nlme/R/gls.R: 412
-# stop("object must inherit from class \"gls\"")
 msgid "object must inherit from class \"gls\""
-msgstr "obiekt musi dziedziczyć z klasy \"gls\""
+msgstr "argument 'object' nie jest obiektem klasy \"gls\""
 
-# nlme/R/gls.R: 456
-# stop(gettextf("'Terms' must be between 1 and %d",
-#                                       nTerms), domain = NA)
 msgid "'Terms' must be between 1 and %d"
-msgstr "'Terms' muszą być pomiędzy 1 a %d"
+msgstr "argument 'Terms' musi być pomiędzy 1 a %d"
 
-# nlme/R/gls.R: 469
+# nlme/R/gls.R: 466
 # stop("terms can only be integers or characters")
-# nlme/R/lme.R: 893
+# nlme/R/lme.R: 902
 # stop("terms can only be integers or characters")
 msgid "terms can only be integers or characters"
 msgstr "człony mogą być tylko liczbami całkowitymi lub tekstami"
 
-# nlme/R/gls.R: 546
-# stop(gettextf("data in %s call must evaluate to a data frame",
-#                       sQuote(substitute(object))), domain = NA)
-# nlme/R/lme.R: 1075
-# stop(gettextf("data in %s call must evaluate to a data frame",
-#                       sQuote(substitute(object))), domain = NA)
+# nlme/R/gls.R: 541
+# stop(gettextf("data in %s call must evaluate to a data frame", sQuote(substitute(object))), domain = "R-nlme")
+# nlme/R/lme.R: 1084
+# stop(gettextf("data in %s call must evaluate to a data frame", sQuote(substitute(object))), domain = "R-nlme")
 msgid "data in %s call must evaluate to a data frame"
 msgstr "dane w wywołaniu %s muszą wyliczać się do ramki danych"
 
-# nlme/R/gls.R: 551
-# stop(gettextf("%s without \"primary\" can only be used with fits of \"groupedData\" objects",
-#                           sys.call()[[1]]), domain = NA)
-# nlme/R/lme.R: 1080
-# stop(gettextf("%s without \"primary\" can only be used with fits of \"groupedData\" objects",
-#                       sys.call()[[1]]), domain = NA)
-# nlme/R/lmList.R: 113
-# stop(gettextf("%s without \"primary\" can only be used with fits of \"groupedData\" objects",
-#                       sys.call()[[1]]), domain = NA)
+# nlme/R/gls.R: 545
+# stop(gettextf("%s without \"primary\" can only be used with fits of \"groupedData\" objects", sys.call()[[1L]]), domain = "R-nlme")
+# nlme/R/lme.R: 1088
+# stop(gettextf("%s without \"primary\" can only be used with fits of \"groupedData\" objects", sys.call()[[1L]]), domain = "R-nlme")
+# nlme/R/lmList.R: 117
+# stop(gettextf("%s without \"primary\" can only be used with fits of \"groupedData\" objects", sys.call()[[1]]), domain = "R-nlme")
 msgid ""
 "%s without \"primary\" can only be used with fits of \"groupedData\" objects"
 msgstr ""
 "%s bez \"primary\" może być użyte jedynie z dopasowaniami obiektów "
 "\"groupedData\""
 
-# nlme/R/gls.R: 635
+# nlme/R/gls.R: 628
 # stop("only one level allowed for predictions")
 msgid "only one level allowed for predictions"
 msgstr "tylko jeden poziom jest dozwolony dla przewidywań"
 
-# nlme/R/gls.R: 664
-# stop(gettextf("%s and %s must have the same group levels", c1, c2),
-#                  domain = NA)
+# nlme/R/gls.R: 657
+# stop(gettextf("%s and %s must have the same group levels", sQuote(c1), sQuote(c2)), domain = "R-nlme")
 msgid "%s and %s must have the same group levels"
 msgstr "%s oraz %s muszą mieć te same poziomy grup"
 
-# nlme/R/gls.R: 678
+# nlme/R/gls.R: 670
 # stop("wrong group levels")
-# nlme/R/gls.R: 692
+# nlme/R/gls.R: 684
 # stop("wrong group levels")
 msgid "wrong group levels"
 msgstr "błędne poziomy grupy"
 
-# nlme/R/gls.R: 779
-# stop(gettextf("cannot get confidence intervals on var-cov components: %s",
-#                               aV), domain = NA)
-# nlme/R/lme.R: 1295
-# stop(gettextf("cannot get confidence intervals on var-cov components: %s",
-#                       aV), domain = NA)
+# nlme/R/gls.R: 772
+# stop(gettextf("cannot get confidence intervals on var-cov components: %s", aV), domain = "R-nlme")
+# nlme/R/lme.R: 1302
+# stop(gettextf("cannot get confidence intervals on var-cov components: %s", aV), domain = "R-nlme")
 msgid "cannot get confidence intervals on var-cov components: %s"
 msgstr "nie można uzyskać przedziałów ufności na komponentach var-cov: %s"
 
-# nlme/R/gls.R: 1097
-# stop("need an object with call component")
-# nlme/R/gnls.R: 770
-# stop("need an object with call component")
-# nlme/R/lme.R: 2613
-# stop("need an object with call component")
-# nlme/R/lmList.R: 1418
-# stop("need an object with call component")
-# nlme/R/nlme.R: 1336
+# nlme/R/lmList.R: 1443
 # stop("need an object with call component")
 msgid "need an object with call component"
-msgstr "potrzeba obiektu z komponentem wywołania"
+msgstr "wymagany jest obiekt z komponentem 'call'"
 
-# nlme/R/gls.R: 1221
+# nlme/R/gls.R: 1217
 # stop("'nint' is not consistent with 'breaks'")
-# nlme/R/lme.R: 2749
+# nlme/R/lme.R: 2761
 # stop("'nint' is not consistent with 'breaks'")
 msgid "'nint' is not consistent with 'breaks'"
 msgstr "'nint' jest niespójne z 'breaks'"
 
-# nlme/R/gnls.R: 71
-# stop("'object' must be a formula")
 msgid "'object' must be a formula"
-msgstr "'object' musi być formułą"
+msgstr "argument 'model' nie jest obiektem klasy \"formula\""
 
-# nlme/R/gnls.R: 73
-# stop("object formula must be of the form \"resp ~ pred\"")
 msgid "object formula must be of the form \"resp ~ pred\""
 msgstr ""
-"formuła obiektu musi mieć formę \"zmienna zależna ~ zmienna niezależna\""
+"formuła modelu musi mieć formę \"zmienna zależna ~ zmienna niezależna\""
 
 # nlme/R/gnls.R: 85
 # stop("'data' must be given explicitly to use 'nls' to get initial estimates")
 msgid "'data' must be given explicitly to use 'nls' to get initial estimates"
 msgstr ""
-"'data' musi być podane bezpośrednio aby użyć 'nls' w celu uzyskania "
-"początkowych oszacowań"
+"argument 'data' musi być podany bezpośrednio aby użyć 'nls()' w celu "
+"uzyskania początkowych oszacowań"
 
 # nlme/R/gnls.R: 89
 # stop("no initial values for model parameters")
@@ -475,17 +398,11 @@ msgstr "brak początkowych wartości dla parametrów modelu"
 msgid "starting estimates must have names when 'params' is missing"
 msgstr "początkowe oszacowania muszą mieć nazwy gdy brakuje 'params'"
 
-# nlme/R/gnls.R: 126
-# stop ("'params' must be a formula or list of formulae")
 msgid "'params' must be a formula or list of formulae"
-msgstr "'params' muszą być formułą lub listą formuł"
+msgstr "argument 'params' musi być formułą lub listą formuł"
 
-# nlme/R/gnls.R: 128
-# stop ("formulae in 'params' must be of the form \"parameter ~ expr\"")
-# nlme/R/gnls.R: 130
-# stop ("formulae in 'params' must be of the form \"parameter ~ expr\"")
 msgid "formulae in 'params' must be of the form \"parameter ~ expr\""
-msgstr "formuły w 'params' muszą mieć formę \"parametr ~ wyrażenie\"."
+msgstr "formuły w argumencie 'param' muszą mieć formę \"parametr ~ wyrażenie\""
 
 # nlme/R/gnls.R: 273
 # stop ("starting values for parameters are not of the correct length")
@@ -506,86 +423,80 @@ msgstr ""
 "przybliżona macierz kowariancji dla szacunkowych parametrów nie jest pełnej "
 "rangi"
 
-# nlme/R/gnls.R: 655
+# nlme/R/gnls.R: 654
 # stop("cannot calculate REML log-likelihood for \"gnls\" objects")
 msgid "cannot calculate REML log-likelihood for \"gnls\" objects"
 msgstr ""
-"nie można obliczyć REML logarytmu funkcji wiarygodności dla obiektów \"gnls\""
+"nie można obliczyć REML logarytmu funkcji wiarygodności dla obiektów klasy "
+"\"gnls\""
 
-# nlme/R/groupedData.R: 31
-# stop("first argument to 'groupedData' must be a two-sided formula")
 msgid "first argument to 'groupedData' must be a two-sided formula"
 msgstr ""
-"pierwszy argument przekazywany do 'groupedData' musi być dwustronną formułą"
+"pierwszy argument przekazywany do funkcji 'groupedData()' musi być "
+"dwustronną formułą"
 
 # nlme/R/groupedData.R: 34
 # stop("right-hand side of first argument must be a conditional expression")
-# nlme/R/groupedData.R: 55
+# nlme/R/groupedData.R: 54
 # stop("right-hand side of first argument must be a conditional expression")
-# nlme/R/groupedData.R: 155
+# nlme/R/groupedData.R: 154
 # stop("right-hand side of first argument must be a conditional expression")
 msgid "right-hand side of first argument must be a conditional expression"
 msgstr "prawa strona pierwszego argumentu musi być wyrażeniem warunkowym"
 
-# nlme/R/groupedData.R: 51
-# stop("first argument to 'nfGroupedData' must be a two-sided formula")
 msgid "first argument to 'nfGroupedData' must be a two-sided formula"
 msgstr ""
-"pierwszy argument przekazywany do 'nfGroupedData' musi być dwustronną formułą"
+"pierwszy argument przekazywany do funkcji 'nmGroupedData()' musi być "
+"dwustronną formułą"
 
-# nlme/R/groupedData.R: 58
+# nlme/R/groupedData.R: 57
 # stop("only one level of grouping allowed")
 msgid "only one level of grouping allowed"
 msgstr "tylko jeden poziom grupowania jest dozwolony"
 
-# nlme/R/groupedData.R: 68
-# stop("second argument to 'groupedData' must inherit from data.frame")
-# nlme/R/groupedData.R: 177
-# stop("second argument to 'groupedData' must inherit from data.frame")
+# nlme/R/groupedData.R: 67
+# stop("second argument passed to 'groupedData()' function must inherit from \"data.frame\"")
+# nlme/R/groupedData.R: 176
+# stop("second argument passed to 'groupedData()' function must inherit from \"data.frame\"")
 msgid "second argument to 'groupedData' must inherit from data.frame"
 msgstr ""
-"drugi argument przekazywany do 'groupedData' musi dziedziczyć z klasy \"data."
-"frame\""
+"drugi argument przekazywany do funkcji 'groupedData()' musi dziedziczyć z "
+"klasy \"data.frame\""
 
-# nlme/R/groupedData.R: 151
-# stop("first argument to 'nmGroupedData' must be a two-sided formula")
 msgid "first argument to 'nmGroupedData' must be a two-sided formula"
 msgstr ""
-"pierwszy argument przekazywany do 'nmGroupedData' musi być dwustronną formułą"
+"pierwszy argument przekazywany do funkcji 'nmGroupedData()' musi być "
+"dwustronną formułą"
 
-# nlme/R/groupedData.R: 220
+# nlme/R/groupedData.R: 219
 # warning("'subset' ignored with single grouping factor")
 msgid "'subset' ignored with single grouping factor"
-msgstr "'subset' zostało zignorowane z jednym czynnikem grupującym"
+msgstr "argument 'subset' został zignorowany z jednym czynnikem grupującym"
 
-# nlme/R/groupedData.R: 228
-# stop("'subset' must be a list")
 msgid "'subset' must be a list"
-msgstr "'subset' musi być listą"
+msgstr "argument 'subset' musi być listą"
 
-# nlme/R/groupedData.R: 235
+# nlme/R/groupedData.R: 234
 # stop("undefined group declared in 'subset'")
 msgid "undefined group declared in 'subset'"
-msgstr "niezdefiniowana grupa zadeklarowana w 'subset'"
+msgstr "niezdefiniowana grupa zadeklarowana w argumencie 'subset'"
 
-# nlme/R/groupedData.R: 246
+# nlme/R/groupedData.R: 245
 # stop("only one display level allowed")
 msgid "only one display level allowed"
 msgstr "tylko jeden poziom wyświetlenia jest dozwolony"
 
-# nlme/R/groupedData.R: 249
-# stop(gettextf("undefined display level %s for %s",
-#                     displayLevel, sQuote(substitute(object))), domain = NA)
+# nlme/R/groupedData.R: 248
+# stop(gettextf("undefined display level %s for %s", displayLevel, sQuote(substitute(object))), domain = "R-nlme")
 msgid "undefined display level %s for %s"
 msgstr "niezdefiniowany poziom %s wyświetlenia dla %s"
 
-# nlme/R/groupedData.R: 275
-# stop(gettextf("undefined collapsing level %s for %s",
-#                       collapseLevel, sQuote(substitute(object))), domain = NA)
+# nlme/R/groupedData.R: 273
+# stop(gettextf("undefined collapsing level %s for %s", collapseLevel, sQuote(substitute(object))), domain = "R-nlme")
 msgid "undefined collapsing level %s for %s"
 msgstr "niezdefiniowany poziom %s zapadania dla %s"
 
-# nlme/R/groupedData.R: 285
+# nlme/R/groupedData.R: 282
 # warning("collapsing level cannot be smaller than display level; setting it to the display level")
 msgid ""
 "collapsing level cannot be smaller than display level; setting it to the "
@@ -594,21 +505,21 @@ msgstr ""
 "poziom zapadania nie może być mniejszy niż poziom wyświetlania; ustawianie "
 "go do poziomu wyświetlania"
 
-# nlme/R/groupedData.R: 296
-# stop("'preserve' must be a two-sided formula")
 msgid "'preserve' must be a two-sided formula"
-msgstr "'preserve' musi być dwustronną formułą"
+msgstr "argument 'preserve' musi być dwustronną formułą"
 
-# nlme/R/groupedData.R: 629
-# stop("'asTable' cannot be used with multilevel grouped data")
+# nlme/R/groupedData.R: 626
+# stop("'asTable()' cannot be used with multilevel grouped data")
 msgid "'asTable' cannot be used with multilevel grouped data"
-msgstr "'asTable' nie może być użyte z wielopoziomowymi zgrupowanymi danymi"
+msgstr ""
+"funkcja 'asTable()' nie może być użyta z wielopoziomowymi zgrupowanymi danymi"
 
-# nlme/R/groupedData.R: 633
-# stop("'asTable' can only be used with balanced 'groupedData' objects")
+# nlme/R/groupedData.R: 630
+# stop("'asTable()' can only be used with balanced 'groupedData' objects")
 msgid "'asTable' can only be used with balanced 'groupedData' objects"
 msgstr ""
-"'asTable' może być użyte jedynie ze zbalansowanymi obiektami 'groupedData'"
+"funkcja 'asTable()' może być użyta jedynie ze zbalansowanymi obiektami klasy "
+"\"groupedData\""
 
 # nlme/R/lmList.R: 56
 # stop("multiple levels not allowed")
@@ -625,226 +536,137 @@ msgstr "wielokrotne poziomy nie są dozwolone"
 # stop ("'data' must be a \"groupedData\" object if 'groups' argument is missing")
 msgid "'data' must be a \"groupedData\" object if 'groups' argument is missing"
 msgstr ""
-"'data' musi być obiektem \"groupedData\" jeśli brakuje argumentu 'groups' "
+"argument 'data' musi być obiektem klasy \"groupedData\" jeśli brakuje "
+"argumentu 'groups' "
 
+# nlme/R/lmList.R: 87
+# warning("An lm fit failed, probably because a factor only had one level")
 msgid "An lm fit failed, probably because a factor only had one level"
 msgstr ""
+"Dopasowanie 'lm()' nie powiodło się prawdopodobnie dlatego, że czynnik miał "
+"tylko jeden poziom"
 
-# nlme/R/lmList.R: 108
-# stop(gettextf("'data' in %s call must evaluate to a data frame",
-#                      sQuote(substitute(object))), domain = NA)
+# nlme/R/lmList.R: 113
+# stop(gettextf("'data' in %s call must evaluate to a data frame", sQuote(substitute(object))), domain = "R-nlme")
 msgid "'data' in %s call must evaluate to a data frame"
-msgstr "'data' w wywołaniu %s musi wyliczać się do ramki danych"
+msgstr "argument 'data' w wywołaniu %s musi wyliczać się do ramki danych"
 
-# nlme/R/lmList.R: 221
+# nlme/R/lmList.R: 232
 # stop("nonexistent groups requested in 'subset'")
-# nlme/R/lmList.R: 226
+# nlme/R/lmList.R: 237
 # stop("nonexistent groups requested in 'subset'")
-# nlme/R/lmList.R: 1257
+# nlme/R/lmList.R: 1264
 # stop("nonexistent groups requested in 'subset'")
-# nlme/R/lmList.R: 1262
+# nlme/R/lmList.R: 1269
 # stop("nonexistent groups requested in 'subset'")
 msgid "nonexistent groups requested in 'subset'"
-msgstr "zażądano nieistniejących grup w 'subset'"
+msgstr "zażądano nieistniejących grup w argumencie 'subset'"
 
-# nlme/R/lmList.R: 229
+# nlme/R/lmList.R: 240
 # stop("'subset' can only be character or integer")
-# nlme/R/lmList.R: 1265
+# nlme/R/lmList.R: 1272
 # stop("'subset' can only be character or integer")
 msgid "'subset' can only be character or integer"
-msgstr "'subset' może być jedynie znakiem lub liczbą całkowitą"
+msgstr "argument 'subset' może być jedynie znakiem lub liczbą całkowitą"
 
-# nlme/R/lmList.R: 334
+# nlme/R/lmList.R: 345
 # stop("log-likelihood not available with NULL fits")
 msgid "log-likelihood not available with NULL fits"
 msgstr "logarytm funkcji wiarygodności nie jest dostępny z dopasowaniami NULL"
 
-# nlme/R/lme.R: 1421
-# stop("'form' must be a formula")
-# nlme/R/lme.R: 2223
-# stop("'form' must be a formula")
-# nlme/R/lmList.R: 376
-# stop("'form' must be a formula")
-# nlme/R/lmList.R: 638
-# stop("'form' must be a formula")
-# nlme/R/lmList.R: 1025
-# stop("'form' must be a formula")
-# nlme/R/newFunc.R: 139
-# stop("'form' must be a formula")
-# nlme/R/newFunc.R: 220
-# stop("'form' must be a formula")
-# nlme/R/newMethods.R: 15
-# stop("'form' must be a formula")
-# nlme/R/newMethods.R: 275
-# stop("'form' must be a formula")
-# nlme/R/newMethods.R: 695
-# stop("'form' must be a formula")
 msgid "'form' must be a formula"
-msgstr "'form' musi być formułą"
+msgstr "argument 'form' nie jest obiektem klasy \"formula\""
 
-# nlme/R/lme.R: 1424
-# stop("'form' must be a one-sided formula")
-# nlme/R/lmList.R: 379
-# stop("'form' must be a one-sided formula")
 msgid "'form' must be a one-sided formula"
-msgstr "'form' musi być jednostronną formułą"
+msgstr "argument 'form' musi być jednostronną formułą"
 
-# nlme/R/lme.R: 1456
+# nlme/R/lme.R: 1462
 # stop("covariate must be a data frame")
-# nlme/R/lmList.R: 411
+# nlme/R/lmList.R: 422
 # stop("covariate must be a data frame")
 msgid "covariate must be a data frame"
 msgstr "zmienna niezależna musi być ramką danych"
 
-# nlme/R/lme.R: 1467
+# nlme/R/lme.R: 1473
 # stop("cannot do pairs of just one variable")
-# nlme/R/lmList.R: 421
+# nlme/R/lmList.R: 432
 # stop("cannot do pairs of just one variable")
 msgid "cannot do pairs of just one variable"
 msgstr "nie można zrobić par tylko jednej zmiennej"
 
-# nlme/R/lme.R: 1510
-# stop("'id' must be between 0 and 1")
-# nlme/R/lme.R: 2340
-# stop("'id' must be between 0 and 1")
-# nlme/R/lmList.R: 462
-# stop("'id' must be between 0 and 1")
-# nlme/R/lmList.R: 734
-# stop("'id' must be between 0 and 1")
-# nlme/R/lmList.R: 1083
-# stop("'id' must be between 0 and 1")
-# nlme/R/lmList.R: 1136
-# stop("'id' must be between 0 and 1")
-# nlme/R/newMethods.R: 372
-# stop("'id' must be between 0 and 1")
-# nlme/R/newMethods.R: 747
-# stop("'id' must be between 0 and 1")
 msgid "'id' must be between 0 and 1"
-msgstr "'id' musi być pomiędzy 0 a 1"
+msgstr "argument 'id' musi być pomiędzy 0 a 1"
 
-# nlme/R/lme.R: 1522
-# stop("'id' can only be a formula or numeric")
-# nlme/R/lme.R: 2293
-# stop("'id' can only be a formula or numeric")
-# nlme/R/lme.R: 2346
-# stop("'id' can only be a formula or numeric")
-# nlme/R/lmList.R: 471
-# stop("'id' can only be a formula or numeric")
-# nlme/R/lmList.R: 739
-# stop("'id' can only be a formula or numeric")
-# nlme/R/lmList.R: 1089
-# stop("'id' can only be a formula or numeric")
-# nlme/R/lmList.R: 1142
-# stop("'id' can only be a formula or numeric")
-# nlme/R/newMethods.R: 378
-# stop("'id' can only be a formula or numeric")
-# nlme/R/newMethods.R: 758
-# stop("'id' can only be a formula or numeric")
 msgid "'id' can only be a formula or numeric"
-msgstr "'id' może być jedynie formułą lub liczbą"
+msgstr "argument 'id' może być jedynie formułą lub liczbą"
 
-# nlme/R/lme.R: 1540
-# stop("'idLabels' of incorrect length")
-# nlme/R/lme.R: 2305
-# stop("'idLabels' of incorrect length")
-# nlme/R/lme.R: 2361
-# stop("'idLabels' of incorrect length")
-# nlme/R/lmList.R: 486
-# stop("'idLabels' of incorrect length")
-# nlme/R/lmList.R: 751
-# stop("'idLabels' of incorrect length")
-# nlme/R/lmList.R: 1101
-# stop("'idLabels' of incorrect length")
-# nlme/R/lmList.R: 1157
-# stop("'idLabels' of incorrect length")
-# nlme/R/newMethods.R: 390
-# stop("'idLabels' of incorrect length")
-# nlme/R/newMethods.R: 770
-# stop("'idLabels' of incorrect length")
 msgid "'idLabels' of incorrect length"
-msgstr "'IdLabels' ma niepoprawną długość"
+msgstr "argument 'IdLabels' ma niepoprawną długość"
 
-# nlme/R/lme.R: 1544
-# stop("'idLabels' can only be a formula or a vector")
-# nlme/R/lme.R: 2309
-# stop("'idLabels' can only be a formula or a vector")
-# nlme/R/lme.R: 2365
-# stop("'idLabels' can only be a formula or a vector")
-# nlme/R/lmList.R: 490
-# stop("'idLabels' can only be a formula or a vector")
-# nlme/R/lmList.R: 755
-# stop("'idLabels' can only be a formula or a vector")
-# nlme/R/lmList.R: 1105
-# stop("'idLabels' can only be a formula or a vector")
-# nlme/R/lmList.R: 1161
-# stop("'idLabels' can only be a formula or a vector")
-# nlme/R/newMethods.R: 394
-# stop("'idLabels' can only be a formula or a vector")
-# nlme/R/newMethods.R: 774
-# stop("'idLabels' can only be a formula or a vector")
 msgid "'idLabels' can only be a formula or a vector"
-msgstr "'IdLabels' może być jedynie formułą lub wektorem"
+msgstr "argument 'IdLabels' może być jedynie formułą lub wektorem"
 
-# nlme/R/lmList.R: 685
+# nlme/R/newMethods.R: 317
 # stop("covariate must be numeric")
-# nlme/R/newMethods.R: 319
+# nlme/R/lmList.R: 696
 # stop("covariate must be numeric")
 msgid "covariate must be numeric"
 msgstr "zmienna niezależna musi być liczbą"
 
-# nlme/R/lmList.R: 850
+# nlme/R/lmList.R: 861
 # stop("nonexistent group in 'newdata'")
 msgid "nonexistent group in 'newdata'"
 msgstr "nieistniejąca grupa w 'newdata'"
 
-# nlme/R/lmList.R: 859
+# nlme/R/lmList.R: 870
 # stop("nonexistent group requested in 'subset'")
 msgid "nonexistent group requested in 'subset'"
 msgstr "zażądano nieistniejącej grupy w 'subset'."
 
-# nlme/R/lme.R: 2264
+# nlme/R/lme.R: 2279
 # stop("only residuals and random effects allowed")
-# nlme/R/lmList.R: 1065
+# nlme/R/lmList.R: 1072
 # stop("only residuals and random effects allowed")
 msgid "only residuals and random effects allowed"
 msgstr "tylko reszty oraz efekty losowe są dozwolone"
 
-# nlme/R/lme.R: 67
-# stop("can only fit \"lmList\" objects with single grouping variable")
-# nlme/R/lme.R: 107
-# stop("can only fit \"lmList\" objects with single grouping variable")
+# nlme/R/nlme.R: 90
+# stop("can only fit \"nlsList\" objects with single grouping variable")
 msgid "can only fit \"lmList\" objects with single grouping variable"
 msgstr ""
-"można dopasować jedynie obiekty \"lmList\" z pojedynczą zmienną grupującą"
+"można dopasować jedynie obiekty klasy \"lmList\" z pojedynczą zmienną "
+"grupującą"
 
 # nlme/R/lme.R: 72
-# warning("'lme.lmList' will redefine 'data'")
+# warning("'lme.lmList()' will redefine 'data' argument")
 msgid "'lme.lmList' will redefine 'data'"
-msgstr "'lme.lmList' przedefiniuje 'data'"
+msgstr "funkcja 'lme.lmList()' przedefiniuje argument 'data'"
 
 # nlme/R/lme.R: 112
-# warning("initial value for \"reStruct\" overwritten in 'lme.lmList'")
+# warning("initial value for \"reStruct\" overwritten in 'lme.lmList()'")
 msgid "initial value for \"reStruct\" overwritten in 'lme.lmList'"
-msgstr "początkowa wartość dla \"reStruct\" została nadpisana w 'lme.lmList'"
+msgstr ""
+"początkowa wartość dla \"reStruct\" została nadpisana w funkcji 'lme.lmList"
+"()'"
 
+# nlme/R/simulate.R: 26
+# stop("fixed-effects model must be a formula of the form \"resp ~ pred\"")
+# nlme/R/lme.R: 155
+# stop("fixed-effects model must be a formula of the form \"resp ~ pred\"")
 msgid "fixed-effects model must be a formula of the form \"resp ~ pred\""
 msgstr ""
 "model stałych efektów musi być formułą o formie \"zmienna zależna ~ zmienna "
 "niezależna\""
 
-# nlme/R/lme.R: 168
+# nlme/R/simulate.R: 39
 # stop("incompatible lengths for 'random' and grouping factors")
 # nlme/R/nlme.R: 206
 # stop("incompatible lengths for 'random' and grouping factors")
-# nlme/R/simulate.R: 39
+# nlme/R/lme.R: 168
 # stop("incompatible lengths for 'random' and grouping factors")
 msgid "incompatible lengths for 'random' and grouping factors"
 msgstr "niespójne długości dla 'random' oraz czynników grupujących"
 
-# nlme/R/lme.R: 196
-# stop("incompatible formulas for groups in 'random' and 'correlation'")
-# nlme/R/lme.R: 207
-# stop("incompatible formulas for groups in 'random' and 'correlation'")
 msgid "incompatible formulas for groups in 'random' and 'correlation'"
 msgstr "niespójne formuły dla grup w 'random' oraz 'correlation'"
 
@@ -857,41 +679,55 @@ msgstr ""
 "nie można użyć mniejszego poziomu grupowania dla 'correlation' niż dla "
 "'random'. Zastępowanie pierwszego drugim."
 
-# nlme/R/lme.R: 292
-# warning(gettextf("fewer observations than random effects in all level %s grups",
-#                        Q), domain = NA)
 # nlme/R/nlme.R: 559
-# warning(gettextf("fewer observations than random effects in all level %s grups",
-#                      Q), domain = NA)
+# warning(gettextf("fewer observations than random effects in all level %s groups", Q), domain = "R-nlme")
+# nlme/R/lme.R: 292
+# warning(gettextf("fewer observations than random effects in all level %s groups", Q), domain = "R-nlme")
 msgid "fewer observations than random effects in all level %s groups"
 msgstr ""
 "mniej obserwacji niż losowych efektów we wszystkich grupach w poziomie %s"
 
-# nlme/R/lme.R: 843
-# stop("object must inherit from class \"lme\" ")
-msgid "object must inherit from class \"lme\""
-msgstr "obiekt musi dziedziczyć z klasy \"lme\""
+# nlme/R/lme.R: 342
+# gettextf("%s problem, convergence error code = %s\n  message = %s", controlvals$opt, optRes$convergence, paste(optRes$message, collapse = ""))
+msgid ""
+"%s problem, convergence error code = %s\n"
+"  message = %s"
+msgstr ""
+"problem %s, kod błędu zbieżności = %s\n"
+"  komunikat = %s"
 
-# nlme/R/lme.R: 898
+# nlme/R/lme.R: 368
+# gettext("maximum number of iterations (lmeControl(maxIter)) reached without convergence")
+msgid ""
+"maximum number of iterations (lmeControl(maxIter)) reached without "
+"convergence"
+msgstr ""
+"maksymalna liczba iteracji ('lmeControl(maxIter)') została osiągnięta bez "
+"uzyskania zbieżności"
+
+msgid "object must inherit from class \"lme\""
+msgstr "argument 'object' nie jest obiektem klasy \"lme\""
+
+# nlme/R/lme.R: 907
 # stop("terms must all have the same denominator DF")
 msgid "terms must all have the same denominator DF"
 msgstr "wszystkie człony muszą mieć ten sam mianownik DF"
 
-# nlme/R/lme.R: 941
+# nlme/R/lme.R: 950
 # stop("L may only involve fixed effects with the same denominator DF")
 msgid "L may only involve fixed effects with the same denominator DF"
-msgstr "'L' może zawierać jedynie stałe efekty z tym samym mianownikem DF"
+msgstr ""
+"'L' może zawierać jedynie stałe efekty z tą samą liczbą stopni swobody "
+"mianownika"
 
-# nlme/R/lme.R: 971
-# stop("objects must inherit from classes \"gls\", \"gnls\" \"lm\",\"lmList\", \"lme\",\"nlme\",\"nlsList\", or \"nls\"")
 msgid ""
 "objects must inherit from classes \"gls\", \"gnls\",\"lm\",\"lmList\", \"lme"
 "\",\"nlme\",\"nlsList\", or \"nls\""
 msgstr ""
-"obiekty muszą dziedziczyć z klas \"lm\",\"lmList\", \"lme\",\"nlme\","
-"\"nlsList\", lub \"nls\""
+"obiekty muszą dziedziczyć z co najmniej jednej z następujących klas: \"lm\","
+"\"lmList\", \"lme\",\"nlme\",\"nlsList\", \"nls\""
 
-# nlme/R/lme.R: 978
+# nlme/R/lme.R: 988
 # warning("some fitted objects deleted because response differs from the first model")
 msgid ""
 "some fitted objects deleted because response differs from the first model"
@@ -899,182 +735,151 @@ msgstr ""
 "niektóre dopasowane obiekty zostały usunięte ponieważ zmienne zależne różnią "
 "się od pierwszego modelu"
 
-# nlme/R/lme.R: 980
+# nlme/R/lme.R: 990
 # stop("first model has a different response from the rest")
 msgid "first model has a different response from the rest"
 msgstr "pierwszy model ma inną zmienną zależną od reszty"
 
-# nlme/R/lme.R: 992
+# nlme/R/lme.R: 1002
 # stop("all fitted objects must have the same estimation method")
 msgid "all fitted objects must have the same estimation method"
 msgstr "wszystkie dopasowane obiekty muszą mieć tę samą metodę oszacowania"
 
-# nlme/R/lme.R: 1009
-# warning("fitted objects with different fixed effects.", " ",
-#                 "REML comparisons are not meaningful.")
-msgid "fitted objects with different fixed effects."
+# nlme/R/lme.R: 1019
+# warning("fitted objects with different fixed effects. REML comparisons are not meaningful.")
+#, fuzzy
+msgid ""
+"fitted objects with different fixed effects. REML comparisons are not "
+"meaningful."
 msgstr "dopasowane obiekty z różnymi stałymi efektami."
 
-# nlme/R/lme.R: 1009
-# warning("fitted objects with different fixed effects.", " ",
-#                 "REML comparisons are not meaningful.")
-msgid "REML comparisons are not meaningful."
-msgstr "Porównania REML nie mają sensu."
-
-# nlme/R/lme.R: 1017
+# nlme/R/lme.R: 1026
 # stop("objects must have a \"call\" component or attribute")
 msgid "objects must have a \"call\" component or attribute"
-msgstr "obiekty muszą mieć komponent \"call\" lub atrybut"
+msgstr "obiekty muszą mieć komponent 'call' lub atrybut"
 
-# nlme/R/lme.R: 1027
+# nlme/R/lme.R: 1036
 # stop("all fitted objects must use the same number of observations")
 msgid "all fitted objects must use the same number of observations"
 msgstr "wszystkie dopasowane obiekty muszą używać tej samej liczby obserwacji"
 
-# nlme/R/lme.R: 1152
+# nlme/R/lme.R: 1159
 # stop("only single level allowed")
-# nlme/R/lme.R: 1649
+# nlme/R/lme.R: 1655
 # stop("only single level allowed")
 msgid "only single level allowed"
 msgstr "jedynie pojedynczy poziom jest dozwolony"
 
-# nlme/R/lme.R: 1513
+# nlme/R/lme.R: 1519
 # stop("covariate must have a level attribute when groups are present")
 msgid "covariate must have a level attribute when groups are present"
 msgstr "zmienna niezależna musi mieć atrybut poziomu, gdy grupy są obecne"
 
-# nlme/R/lme.R: 1527
-# stop("covariate must have a level attribute when 'id' is a formula")
 msgid "covariate must have a level attribute when 'id' is a formula"
-msgstr "zmienna niezależna musi mieć atrybut poziomu, gdy 'id' jest formułą"
+msgstr ""
+"zmienna niezależna musi mieć atrybut poziomu, gdy argument 'id' jest formułą"
 
-# nlme/R/lme.R: 1550
-# stop("covariate must have a level attribute when 'idLabels' is a formula")
 msgid "covariate must have a level attribute when 'idLabels' is a formula"
 msgstr ""
 "zmienna niezależna musi mieć atrybut poziomu, gdy 'idLabels' jest formułą"
 
-# nlme/R/lme.R: 1722
-# stop("'form' must be a formula when not NULL")
-msgid "'form' must be a formula when not NULL"
-msgstr "'form' musi być formułą, gdy nie jest wartością NULL"
-
 # nlme/R/lme.R: 1728
+# stop(gettextf("'%s' argument must be a formula when not NULL", "form"))
+msgid "'form' must be a formula when not NULL"
+msgstr "argument 'form' musi być formułą, gdy nie jest wartością NULL"
+
+# nlme/R/lme.R: 1734
 # stop("only single effects allowed in left side of 'form'")
 msgid "only single effects allowed in left side of 'form'"
 msgstr "tylko pojedynczy efekt jest dozwolony po lewej stronie 'form'"
 
-# nlme/R/lme.R: 1732
-# stop(gettextf("%s is not a valid effect name", sQuote(reName)),
-#            domain = NA)
+# nlme/R/lme.R: 1738
+# stop(gettextf("%s is not a valid effect name", sQuote(reName)), domain = "R-nlme")
 msgid "%s is not a valid effect name"
 msgstr "%s nie jest poprawną nazwą efektu"
 
-# nlme/R/lme.R: 1737
+# nlme/R/lme.R: 1742
 # stop("no effects allowed in right side of formula")
 msgid "no effects allowed in right side of formula"
 msgstr "nie są dozwolone żadne efekty po prawej stronie fomuły"
 
-# nlme/R/lme.R: 1867
+# nlme/R/nlme.R: 1109
 # stop("cannot evaluate groups for desired levels on 'newdata'")
-# nlme/R/nlme.R: 1112
+# nlme/R/lme.R: 1872
 # stop("cannot evaluate groups for desired levels on 'newdata'")
 msgid "cannot evaluate groups for desired levels on 'newdata'"
 msgstr "nie można wyznaczyć grup dla pożądanych poziomów w 'newdata'"
 
-# nlme/R/lme.R: 2282
-# stop("'Id' must be between 0 and 1")
 msgid "'Id' must be between 0 and 1"
-msgstr "'Id' musi być pomiędzy 0 a 1"
+msgstr "argument 'id' musi być pomiędzy 0 a 1"
 
-# nlme/R/lme.R: 2456
+# nlme/R/lme.R: 2469
 # stop("augmentation of random effects only available for single level")
 msgid "augmentation of random effects only available for single level"
 msgstr ""
 "rozszerzenie efektów losowych dostępne jedynie dla pojedynczego poziomu"
 
-# nlme/R/lme.R: 2819
+# nlme/R/lme.R: 2831
 # stop("no condensed linear model")
 msgid "no condensed linear model"
 msgstr "brak skondensowanego modelu liniowego"
 
-# nlme/R/lme.R: 2822
+# nlme/R/lme.R: 2834
 # stop("no fitted \"lme\" object")
 msgid "no fitted \"lme\" object"
 msgstr "brak dopasowanego obiektu \"lme\""
 
-# nlme/R/newFunc.R: 82
+# nlme/R/newFunc.R: 83
 # stop("objects must have coefficients with same row names")
 msgid "objects must have coefficients with same row names"
 msgstr "obiekty muszą mieć współczynniki z tymi samymi nazwami wierszy"
 
-# nlme/R/newFunc.R: 134
-# stop("object must inherit from \"data.frame\"")
-# nlme/R/newFunc.R: 216
-# stop("object must inherit from \"data.frame\"")
 msgid "object must inherit from \"data.frame\""
-msgstr "obiekt musi dziedziczyć z \"data.frame\""
+msgstr "obiekt musi dziedziczyć z klasy \"data.frame\""
 
-# nlme/R/newFunc.R: 147
-# stop("only one level allowed in 'gapply'")
 msgid "only one level allowed in 'gapply'"
-msgstr "tylko jeden poziom jest dozwolony w 'gapply'"
+msgstr "tylko jeden poziom jest dozwolony w funkcji 'gapply()'"
 
-# nlme/R/newFunc.R: 165
-# stop(gettextf("'which' must be between 1 and %d",
-#                                ncol(object)), domain = NA)
 msgid "'which' must be between 1 and %d"
-msgstr "'which' musi być pomiędzy 1 a %d"
+msgstr "argument 'which' musi być pomiędzy 1 a %d"
 
-# nlme/R/newFunc.R: 169
-# stop("'which' can only be character or integer")
 msgid "'which' can only be character or integer"
-msgstr "'which' może być jedynie tekstem lub liczbą całkowitą"
+msgstr "argument 'which' może być jedynie tekstem lub liczbą całkowitą"
 
-# nlme/R/newFunc.R: 186
-# stop("formula(object) must return a formula")
 msgid "formula(object) must return a formula"
 msgstr "'formuła(obiekt)' musi zwracać formułę"
 
-# nlme/R/newFunc.R: 201
-# stop("'form' must be a two-sided formula")
-# nlme/R/newMethods.R: 123
-# stop("'form' must be a two-sided formula")
 msgid "'form' must be a two-sided formula"
-msgstr "'form' musi być dwustronną formułą"
+msgstr "argument 'form' musi być dwustronną formułą"
 
-# nlme/R/newFunc.R: 228
-# stop("only one level allowed in 'gsummary'")
 msgid "only one level allowed in 'gsummary'"
-msgstr "tylko jeden poziom jest dostępny w 'gsummary'"
+msgstr "tylko jeden poziom jest dostępny w funkcji 'gsummary()'"
 
 # nlme/R/newFunc.R: 253
 # stop("'FUN' can only be a function or a list of functions")
 msgid "'FUN' can only be a function or a list of functions"
-msgstr "'FUN' może być jedynie funkcją lub listą funkcji"
+msgstr "argument 'FUN' może być jedynie funkcją lub listą funkcji"
 
 # nlme/R/newFunc.R: 282
 # stop("cannot omit grouping factor without 'form'")
 msgid "cannot omit grouping factor without 'form'"
 msgstr "nie można pominąć czynnika grupującego bez 'form'"
 
-# nlme/R/newFunc.R: 301
-# stop("object must inherit from class \"lmList\"")
 msgid "object must inherit from class \"lmList\""
-msgstr "obiekt musi dziedziczyć z klasy \"lmList\""
+msgstr "argument nie jest obiektem klasy \"lmList\""
 
 # nlme/R/newFunc.R: 313
-# stop("no degrees of freedom for estimating std. dev.")
+# stop("no degrees of freedom for estimating standard deviation")
 msgid "no degrees of freedom for estimating std. dev."
 msgstr "brak stopni swobody na potrzeby oszacowania odchylenia standardowego"
 
 # nlme/R/newMethods.R: 52
-# stop( "data argument to \"data.frame\" method for 'getGroups' does not make sense" )
+# stop("'data' argument passed to \"data.frame\" method for 'getGroups()' does not make sense")
 msgid ""
 "data argument to \"data.frame\" method for 'getGroups' does not make sense"
 msgstr ""
-"argument danych przekazywany do metody \"data.frame\" dla 'getGroups' nie ma "
-"sensu"
+"argument danych przekazywany do metody 'data.frame()' dla 'getGroups()' nie "
+"ma sensu"
 
 # nlme/R/newMethods.R: 66
 # stop("invalid formula for groups")
@@ -1084,68 +889,68 @@ msgstr "niepoprawna formuła dla grup"
 # nlme/R/newMethods.R: 71
 # stop("'form' must have all components as formulas")
 msgid "'form' must have all components as formulas"
-msgstr "'form' musi mieć wszystkie komponenty przedstawione jako formuły"
+msgstr ""
+"argument 'form' musi mieć wszystkie komponenty przedstawione jako formuły"
 
-# nlme/R/newMethods.R: 74
-# stop("'form' can only be a formula, or a list of formulas")
 msgid "'form' can only be a formula, or a list of formulas"
-msgstr "'form' może być jedynie formułą lub listą formuł"
+msgstr "argument 'form' może być jedynie formułą lub listą formuł"
 
 # nlme/R/newMethods.R: 92
-# stop(gettextf("level of %s does not match formula ",
-#                       level[aux], sQuote(deparse(form))), domain = NA)
-# nlme/R/newMethods.R: 98
-# stop(gettextf("level of %s does not match formula ",
-#                       level[aux], sQuote(deparse(form))), domain = NA)
-msgid "level of %s does not match formula"
-msgstr "poziom %s nie zgadza się z formułą"
+# stop(gettextf("level of %s does not match formula %s", level[aux], sQuote(deparse(form))), domain = "R-nlme")
+# nlme/R/newMethods.R: 97
+# stop(gettextf("level of %s does not match formula %s", level[aux], sQuote(deparse(form))), domain = "R-nlme")
+msgid "level of %s does not match formula %s"
+msgstr "poziom %s nie zgadza się z formułą %s"
 
-# nlme/R/newMethods.R: 136
-# stop("'form' argument must be a formula")
+# nlme/R/reStruct.R: 66
+# stop(gettextf("'%s' argument must have a formula", "object"))
+# nlme/R/reStruct.R: 84
+# stop(gettextf("'%s' argument must have a formula", "object"))
 msgid "'form' argument must be a formula"
 msgstr "argument 'form' musi być formułą"
 
-# nlme/R/newMethods.R: 211
+# nlme/R/newMethods.R: 209
 # stop("at least two coefficients are needed")
 msgid "at least two coefficients are needed"
 msgstr "przynajmniej dwa współczynniki są potrzebne"
 
-# nlme/R/newMethods.R: 621
+# nlme/R/newMethods.R: 619
 # stop("no model variogram available with 'showModel = TRUE'")
 msgid "no model variogram available with 'showModel = TRUE'"
 msgstr "brak dostępnego modelu wariogramu w 'showModel = TRUE'"
 
-# nlme/R/newMethods.R: 731
+# nlme/R/newMethods.R: 730
 # stop("only residuals allowed")
 msgid "only residuals allowed"
 msgstr "jedynie reszty są dozwolone"
 
-# nlme/R/newMethods.R: 816
-# stop("'distance' and 'object' have incompatible lengths")
 msgid "'distance' and 'object' have incompatible lengths"
-msgstr "'distance' oraz 'object' mają niespójne długości"
+msgstr "argumenty 'distance' oraz 'object' mają niespójne długości"
 
 # nlme/R/nlme.R: 63
 # warning("'nlme.nlsList' will redefine 'fixed', 'data', and 'start'")
 msgid "'nlme.nlsList' will redefine 'fixed', 'data', and 'start'"
-msgstr "'nlme.nlsList' ponownie przedefiniuje 'fixed', 'data' oraz 'start'"
+msgstr ""
+"funkcja 'nlme.nlsList()' ponownie przedefiniuje argumenty 'fixed', 'data' "
+"oraz 'start'"
 
 # nlme/R/nlme.R: 90
 # stop("can only fit \"nlsList\" objects with single grouping variable")
 msgid "can only fit \"nlsList\" objects with single grouping variable"
 msgstr ""
-"można dopasować jedynie obiekty \"nlsList\" z pojedynczą zmienną grupującą"
+"można dopasować jedynie obiekty klasy \"nlsList\" z pojedynczą zmienną "
+"grupującą"
 
 # nlme/R/nlme.R: 122
 # warning("initial value for 'reStruct' overwritten in 'nlme.nlsList'")
 msgid "initial value for 'reStruct' overwritten in 'nlme.nlsList'"
-msgstr "początkowa wartość dla 'reStruct' nadpisana w 'nlme.nlsList'"
+msgstr "początkowa wartość dla 'reStruct' nadpisana w funkcji 'nlme.nlsList()'"
 
-# nlme/R/nlme.R: 186
-# stop("'model' must be a formula")
 msgid "'model' must be a formula"
-msgstr "'model' musi być formułą"
+msgstr "argument 'model' musi być formułą"
 
+# nlme/R/gnls.R: 73
+# stop("model formula must be of the form \"resp ~ pred\"")
 # nlme/R/nlme.R: 188
 # stop("model formula must be of the form \"resp ~ pred\"")
 msgid "model formula must be of the form \"resp ~ pred\""
@@ -1155,35 +960,30 @@ msgstr ""
 # nlme/R/nlme.R: 239
 # stop("'data' must be given explicitly to use 'nlsList'")
 msgid "'data' must be given explicitly to use 'nlsList'"
-msgstr "'data' musi być podane bezpośrednio aby użyć 'nlsList'"
+msgstr ""
+"argument 'data' musi być podane bezpośrednio aby użyć funkcji 'nlsList()'"
 
-# nlme/R/nlme.R: 275
-# stop ("'fixed' must be a formula or list of formulae")
 msgid "'fixed' must be a formula or list of formulae"
-msgstr "'fixed' musi być formułą lub listą formuł"
+msgstr "argument 'fixed' musi być formułą lub listą formuł"
 
-# nlme/R/nlme.R: 277
-# stop ("formulae in 'fixed' must be of the form \"parameter ~ expr\"")
-# nlme/R/nlme.R: 279
-# stop ("formulae in 'fixed' must be of the form \"parameter ~ expr\"")
 msgid "formulae in 'fixed' must be of the form \"parameter ~ expr\""
-msgstr "formuły w 'fixed' muszą mieć formę \"parametr ~ wyrażenie\"."
+msgstr ""
+"formuły w argumencie 'fixed' muszą mieć formę \"parametr ~ wyrażenie\"."
 
-# nlme/R/nlme.R: 294
-# stop ("'random' must be a formula or list of formulae")
 msgid "'random' must be a formula or list of formulae"
-msgstr "'random' musi być formułą lub listą formuł"
+msgstr "argument 'random' musi być formułą lub listą formuł"
 
-# nlme/R/nlme.R: 296
-# stop ("formulae in 'random' must be of the form \"parameter ~ expr\"")
-# nlme/R/nlme.R: 298
-# stop ("formulae in 'random' must be of the form \"parameter ~ expr\"")
 msgid "formulae in 'random' must be of the form \"parameter ~ expr\""
-msgstr "formuły w 'random' muszą mieć formę \"parametr ~ wyrażenie\""
+msgstr ""
+"formuły w argumencie 'random' muszą mieć formę \"parametr ~ wyrażenie\""
 
 # nlme/R/nlme.R: 329
 # stop("incompatible formulas for groups in \"random\" and \"correlation\"")
 # nlme/R/nlme.R: 340
+# stop("incompatible formulas for groups in \"random\" and \"correlation\"")
+# nlme/R/lme.R: 196
+# stop("incompatible formulas for groups in \"random\" and \"correlation\"")
+# nlme/R/lme.R: 207
 # stop("incompatible formulas for groups in \"random\" and \"correlation\"")
 msgid "incompatible formulas for groups in \"random\" and \"correlation\""
 msgstr "niespójne formuły dla grup w \"random\" oraz \"correlation\""
@@ -1200,22 +1000,21 @@ msgstr ""
 # nlme/R/nlme.R: 481
 # stop ("'start' must have a component called 'fixed'")
 msgid "'start' must have a component called 'fixed'"
-msgstr "'start' musi mieć komponent o nazwie 'fixed'"
+msgstr "argument 'start' musi mieć komponent o nazwie 'fixed'"
 
 # nlme/R/nlme.R: 521
 # stop ("starting values for the 'fixed' component are not the correct length")
 msgid "starting values for the 'fixed' component are not the correct length"
 msgstr "początkowe wartości dla komponentu 'fixed' nie mają poprawnej długości"
 
-# nlme/R/nlme.R: 570
+# nlme/R/nlme.R: 569
 # stop("starting values for random effects should be a list, or a matrix")
 msgid "starting values for random effects should be a list, or a matrix"
 msgstr ""
 "początkowe wartości dla efektów losowych powinny być listą lub macierzą"
 
-# nlme/R/nlme.R: 577
-# stop(gettextf("list with starting values for random effects must have names or be of length %d",
-#                         Q), domain = NA)
+# nlme/R/nlme.R: 576
+# stop(gettextf("list with starting values for random effects must have names or be of length %d", Q), domain = "R-nlme")
 msgid ""
 "list with starting values for random effects must have names or be of length "
 "%d"
@@ -1223,15 +1022,14 @@ msgstr ""
 "lista z początkowymi wartościami dla efektów losowych musi zawierać nazwy "
 "lub być długości %d"
 
-# nlme/R/nlme.R: 596
+# nlme/R/nlme.R: 594
 # stop("starting values for the random components should be a list of matrices")
 msgid "starting values for the random components should be a list of matrices"
 msgstr ""
 "wartości początkowe dla losowych komponentów powinny być listą macierzy"
 
-# nlme/R/nlme.R: 599
-# stop(gettextf("number of rows in starting values for random component at level %s should be %d",
-#                         namGrp[i], Dims$ngrps[i]), domain = NA)
+# nlme/R/nlme.R: 597
+# stop(gettextf("number of rows in starting values for random component at level %s should be %d", namGrp[i], Dims$ngrps[i]), domain = "R-nlme")
 msgid ""
 "number of rows in starting values for random component at level %s should be "
 "%d"
@@ -1239,9 +1037,8 @@ msgstr ""
 "liczba wierszy w wartościach początkowych dla losowego komponentu na "
 "poziomie %s powinna wynosić %d"
 
-# nlme/R/nlme.R: 603
-# stop(gettextf("number of columns in starting values for random component at level %s should be %d",
-#                         namGrp[i], rlength[i]), domain = NA)
+# nlme/R/nlme.R: 600
+# stop(gettextf("number of columns in starting values for random component at level %s should be %d", namGrp[i], rlength[i]), domain = "R-nlme")
 msgid ""
 "number of columns in starting values for random component at level %s should "
 "be %d"
@@ -1249,15 +1046,14 @@ msgstr ""
 "liczba kolumn w wartościach początkowych dla losowego komponentu na poziomie "
 "%s powinna wynosić %d"
 
-# nlme/R/nlme.R: 608
+# nlme/R/nlme.R: 604
 # stop("starting values for random effects must include group levels")
 msgid "starting values for random effects must include group levels"
 msgstr ""
 "wartości początkowe dla losowych efektów muszą zawierać w sobie poziomy grup"
 
-# nlme/R/nlme.R: 612
-# stop(gettextf("groups levels mismatch in 'random' and starting values for 'random' at level %s",
-#                         namGrp[i]), domain = NA)
+# nlme/R/nlme.R: 608
+# stop(gettextf("groups levels mismatch in 'random' and starting values for 'random' at level %s", namGrp[i]), domain = "R-nlme")
 msgid ""
 "groups levels mismatch in 'random' and starting values for 'random' at level "
 "%s"
@@ -1265,18 +1061,17 @@ msgstr ""
 "poziomy grup nie zgadzają się w 'random' oraz początkowych wartościach "
 "'random' na poziomie %s"
 
-# nlme/R/nlme.R: 631
-# stop (gettextf("names mismatch in 'random' and starting values  for 'random' at level %s",
-#                                  namGrp[i]), domain = NA)
+# nlme/R/nlme.R: 626
+# stop (gettextf("names mismatch in 'random' and starting values  for 'random' at level %s", namGrp[i]), domain = "R-nlme")
 msgid ""
 "names mismatch in 'random' and starting values  for 'random' at level %s"
 msgstr ""
 "nazwy nie zgadzają się w 'random' oraz początkowych wartościach dla 'random' "
 "na poziomie %s"
 
-# nlme/R/nlme.R: 881
+# nlme/R/nlme.R: 878
 # warning("step halving factor reduced below minimum in PNLS step")
-# nlme/R/nlme.R: 883
+# nlme/R/nlme.R: 880
 # stop("step halving factor reduced below minimum in PNLS step")
 msgid "step halving factor reduced below minimum in PNLS step"
 msgstr ""
@@ -1297,361 +1092,367 @@ msgstr "nie można użyć anonimowej funkcji dla modelu"
 msgid ""
 "'data' must be a \"groupedData\" object if 'formula' does not include groups"
 msgstr ""
-"'data' musi być obiektem \"groupedData\" jeśli 'fomula' nie zawiera grup"
+"argument 'data' musi być obiektem klasy \"groupedData\" jeśli argument "
+"'fomula' nie zawiera grup"
 
-# nlme/R/nlsList.R: 159
+# nlme/R/nlsList.R: 87
+# stop("old-style self-starting model functions\nare no longer supported.\nNew selfStart functions are available.\nUse\n  SSfpl instead of fpl,\n  SSfol instead of first.order.log,\n  SSbiexp instead of biexp,\n  SSlogis instead of logistic.\nIf writing your own selfStart model, see\n  \"help(selfStart)\"\nfor the new form of the \"initial\" attribute.", domain = "R-nlme")
+msgid ""
+"old-style self-starting model functions\n"
+"are no longer supported.\n"
+"New selfStart functions are available.\n"
+"Use\n"
+"  SSfpl instead of fpl,\n"
+"  SSfol instead of first.order.log,\n"
+"  SSbiexp instead of biexp,\n"
+"  SSlogis instead of logistic.\n"
+"If writing your own selfStart model, see\n"
+"  \"help(selfStart)\"\n"
+"for the new form of the \"initial\" attribute."
+msgstr ""
+"samoinicjujące się funkcje modelu starego stylu nie są już dłużej wspierane\n"
+"Brak dostępnych funkcji 'selfStart'.\n"
+"Użyj\n"
+"  'SSfpl' zamiast 'fpl',\n"
+"  'SSfol' zamiast 'first.order.log',\n"
+"  'SSbiexp' zamiast 'biexp',\n"
+"  'SSlogis' zamiast 'logistic'.\n"
+"Jeśli piszesz swój własny model 'selfStart', zobacz\n"
+"  'help(selfStart)'\n"
+"aby uzyskać informację o nowej formie atrybutu 'initial'."
+
+# nlme/R/nlsList.R: 148
 # stop("missing call attribute in \"nlsList\" object")
 msgid "missing call attribute in \"nlsList\" object"
-msgstr "brakuje wywoływanego atrybutu w obiekcie \"nlsList\""
+msgstr "brakuje wywoływanego atrybutu w obiekcie klasy \"nlsList\""
 
+# nlme/R/reStruct.R: 153
+# stop("cannot access the matrix of uninitialized objects")
+# nlme/R/reStruct.R: 168
+# stop("cannot access the matrix of uninitialized objects")
 # nlme/R/pdMat.R: 53
 # stop("cannot access the matrix of uninitialized objects")
-# nlme/R/pdMat.R: 227
+# nlme/R/pdMat.R: 226
 # stop("cannot access the matrix of uninitialized objects")
-# nlme/R/pdMat.R: 1707
+# nlme/R/pdMat.R: 1699
 # stop("cannot access the matrix of uninitialized objects")
-# nlme/R/pdMat.R: 1946
-# stop("cannot access the matrix of uninitialized objects")
-# nlme/R/reStruct.R: 154
-# stop("cannot access the matrix of uninitialized objects")
-# nlme/R/reStruct.R: 169
+# nlme/R/pdMat.R: 1938
 # stop("cannot access the matrix of uninitialized objects")
 msgid "cannot access the matrix of uninitialized objects"
 msgstr "nie można uzyskać dostępu do macierzy niezainicjalizowanych obiektów"
 
-# nlme/R/pdMat.R: 90
-# warning("ignoring argument 'form'")
-# nlme/R/pdMat.R: 133
-# warning("ignoring argument 'form'")
 msgid "ignoring argument 'form'"
 msgstr "ignorowanie argumentu 'form'"
 
-# nlme/R/pdMat.R: 98
-# warning("ignoring argument 'nam'")
 msgid "ignoring argument 'nam'"
 msgstr "ignorowanie argumentu 'nam'"
 
 # nlme/R/pdMat.R: 104
 # stop("'value' must be a square matrix")
 msgid "'value' must be a square matrix"
-msgstr "'value' musi być kwadratową macierzą"
+msgstr "argument 'value' musi być kwadratową macierzą"
 
 # nlme/R/pdMat.R: 109
 # stop("dimnames of 'value' must match or be NULL")
 msgid "dimnames of 'value' must match or be NULL"
-msgstr "nazwy wymiarów 'value' muszą się zgadzać lub być wartością NULL"
+msgstr ""
+"nazwy wymiarów argumentu 'value' muszą się zgadzać lub być wartością NULL"
 
 # nlme/R/pdMat.R: 114
 # stop("names of 'value' are not consistent with 'nam' argument")
 msgid "names of 'value' are not consistent with 'nam' argument"
-msgstr "nazwy 'value' nie są spójne z argumentem 'nam'"
+msgstr "nazwy argumentu 'value' nie są spójne z argumentem 'nam'"
 
 # nlme/R/pdMat.R: 137
-# stop(gettextf("%s is not a valid object for \"pdMat\"",
-#                       sQuote(deparse(object))), domain = NA)
+# stop(gettextf("%s is not a valid object for \"pdMat\"", sQuote(deparse(object))), domain = "R-nlme")
 msgid "%s is not a valid object for \"pdMat\""
-msgstr "%s nie jest poprawnym obiektem dla \"pdMat\""
+msgstr "%s nie jest poprawnym obiektem dla klasy \"pdMat\""
 
-# nlme/R/pdMat.R: 151
+# nlme/R/pdMat.R: 150
 # stop("all elements of 'form' list must be two-sided formulas")
 msgid "all elements of 'form' list must be two-sided formulas"
 msgstr "wszystkie elementy listy 'form' muszą być dwustronnymi formułami"
 
-# nlme/R/pdMat.R: 171
-# stop("'form' can only be a formula or a list of formulae")
 msgid "'form' can only be a formula or a list of formulae"
-msgstr "'form' może być jedynie formułą lub listą formuł"
+msgstr "argument 'form' może być jedynie formułą lub listą formuł"
 
-# nlme/R/pdMat.R: 201
+# nlme/R/pdMat.R: 200
 # stop("'form' not consistent with 'nam'")
 msgid "'form' not consistent with 'nam'"
-msgstr "'form' nie jest spójne z 'nam'"
+msgstr "argument 'form' nie jest spójny z argumentem 'nam'"
 
-# nlme/R/pdMat.R: 209
+# nlme/R/pdMat.R: 208
 # stop("length of 'nam' not consistent with dimensions of initial value")
 msgid "length of 'nam' not consistent with dimensions of initial value"
-msgstr "długość 'nam' nie jest spójna z wymiarami początkowej wartości"
+msgstr ""
+"długość argumentu 'nam' nie jest spójna z wymiarami początkowej wartości"
 
-# nlme/R/pdMat.R: 230
+# nlme/R/pdMat.R: 229
 # stop("no default method for extracting the square root of a \"pdMat\" object")
 msgid "no default method for extracting the square root of a \"pdMat\" object"
-msgstr "brak domyślnej metody dla uzyskania pierwiastka z obiektu \"pdMat\""
+msgstr ""
+"brak domyślnej metody dla uzyskania pierwiastka z obiektu klasy \"pdMat\""
 
-# nlme/R/pdMat.R: 247
+# nlme/R/pdMat.R: 246
 # stop("do not know how to obtain constrained coefficients")
 msgid "do not know how to obtain constrained coefficients"
 msgstr "nie wiadomo jak uzyskać ograniczone współczynniki"
 
-# nlme/R/pdMat.R: 275
+# nlme/R/pdMat.R: 274
 # stop("cannot access the number of columns of uninitialized objects without names")
 msgid ""
 "cannot access the number of columns of uninitialized objects without names"
 msgstr ""
 "nie można uzyskać liczby kolumn niezainicjalizowanych obiektów bez nazw"
 
-# nlme/R/pdMat.R: 291
+# nlme/R/pdMat.R: 290
 # stop("cannot extract the log of the determinant from an uninitialized object")
-# nlme/R/pdMat.R: 681
+# nlme/R/pdMat.R: 678
 # stop("cannot extract the log of the determinant from an uninitialized object")
-# nlme/R/pdMat.R: 1215
+# nlme/R/pdMat.R: 1210
 # stop("cannot extract the log of the determinant from an uninitialized object")
-# nlme/R/pdMat.R: 1366
+# nlme/R/pdMat.R: 1360
 # stop("cannot extract the log of the determinant from an uninitialized object")
 msgid "cannot extract the log of the determinant from an uninitialized object"
 msgstr ""
 "nie można wyodrębnić logarytmu macierzy z niezainicjalizowanego obiektu"
 
-# nlme/R/pdMat.R: 302
+# nlme/R/pdMat.R: 301
 # stop("cannot change dimensions on an initialized \"pdMat\" object")
 msgid "cannot change dimensions on an initialized \"pdMat\" object"
-msgstr "nie można zmienić wymiarów zainicjalizowanego obiektu \"pdMat\""
+msgstr "nie można zmienić wymiarów zainicjalizowanego obiektu klasy \"pdMat\""
 
-# nlme/R/pdMat.R: 324
-# stop(gettextf("Length of names should be %d", aux), domain = NA)
-# nlme/R/pdMat.R: 331
-# stop(gettextf("Length of names should be %d", length(dn)), domain = NA)
+# nlme/R/pdMat.R: 323
+# stop(gettextf("Length of names should be %d", aux), domain = "R-nlme")
+# nlme/R/pdMat.R: 330
+# stop(gettextf("Length of names should be %d", length(dn)), domain = "R-nlme")
 msgid "Length of names should be %d"
 msgstr "Długość nazw powinna wynosić %d"
 
-# nlme/R/pdMat.R: 369
+# nlme/R/pdMat.R: 368
 # stop("names being assigned do not correspond to a permutation of previous names")
 msgid ""
 "names being assigned do not correspond to a permutation of previous names"
 msgstr "przypisane nazwy nie odpowiadają permutacji poprzednich nazw"
 
-# nlme/R/pdMat.R: 420
-# stop("x-y data to splom got botched somehow")
+# nlme/R/pdMat.R: 419
+# stop("x-y data passed to 'splom()' function got botched somehow")
 msgid "x-y data to splom got botched somehow"
-msgstr "dane x-y przekazywane do 'splom' zostały jakoś uszkodzone"
+msgstr "dane x-y przekazywane do funkcji 'splom()' zostały jakoś uszkodzone"
 
-# nlme/R/pdMat.R: 528
+# nlme/R/pdMat.R: 526
 # stop("cannot get the inverse of an uninitialized object")
-# nlme/R/pdMat.R: 763
+# nlme/R/pdMat.R: 759
 # stop("cannot get the inverse of an uninitialized object")
-# nlme/R/pdMat.R: 847
+# nlme/R/pdMat.R: 843
 # stop("cannot get the inverse of an uninitialized object")
-# nlme/R/pdMat.R: 1225
+# nlme/R/pdMat.R: 1220
 # stop("cannot get the inverse of an uninitialized object")
-# nlme/R/pdMat.R: 2092
+# nlme/R/pdMat.R: 2084
 # stop("cannot get the inverse of an uninitialized object")
 msgid "cannot get the inverse of an uninitialized object"
 msgstr "nie można uzyskać odwrotności niezainicjalizowanego obiektu"
 
-# nlme/R/pdMat.R: 614
-# stop(gettextf("an object of length %d does not match the required parameter size",
-#                     length(val)), domain = NA)
-# nlme/R/pdMat.R: 1146
-# stop(gettextf("an object of length %d does not match the required parameter size",
-#                     length(val)), domain = NA)
-# nlme/R/pdMat.R: 1308
-# stop(gettextf("an object of length %d does not match the required parameter size",
-#                       length(val)), domain = NA)
-# nlme/R/pdMat.R: 1449
-# stop(gettextf("an object of length %d does not match the required parameter size",
-#                     length(val)), domain = NA)
-# nlme/R/pdMat.R: 1600
-# stop(gettextf("an object of length %d does not match the required parameter size",
-#                     length(val)), domain = NA)
+# nlme/R/pdMat.R: 612
+# stop(gettextf("an object of length %d does not match the required parameter size", length(val)), domain = "R-nlme")
+# nlme/R/pdMat.R: 1142
+# stop(gettextf("an object of length %d does not match the required parameter size", length(val)), domain = "R-nlme")
+# nlme/R/pdMat.R: 1303
+# stop(gettextf("an object of length %d does not match the required parameter size", length(val)), domain = "R-nlme")
+# nlme/R/pdMat.R: 1443
+# stop(gettextf("an object of length %d does not match the required parameter size", length(val)), domain = "R-nlme")
+# nlme/R/pdMat.R: 1593
+# stop(gettextf("an object of length %d does not match the required parameter size", length(val)), domain = "R-nlme")
 msgid "an object of length %d does not match the required parameter size"
 msgstr "obiekt o długości %d nie zgadza się z wymaganym rozmiarem parametru"
 
-# nlme/R/pdMat.R: 635
+# nlme/R/pdMat.R: 632
 # stop("cannot extract matrix from an uninitialized object")
-# nlme/R/pdMat.R: 1167
+# nlme/R/pdMat.R: 1162
 # stop("cannot extract matrix from an uninitialized object")
 msgid "cannot extract matrix from an uninitialized object"
 msgstr "nie można wyodrębnić macierzy z niezainicjalizowanego obiektu"
 
-# nlme/R/pdMat.R: 690
+# nlme/R/pdMat.R: 687
 # stop("cannot extract the inverse from an uninitialized object")
-# nlme/R/pdMat.R: 995
+# nlme/R/pdMat.R: 991
 # stop("cannot extract the inverse from an uninitialized object")
-# nlme/R/pdMat.R: 1375
+# nlme/R/pdMat.R: 1369
 # stop("cannot extract the inverse from an uninitialized object")
-# nlme/R/pdMat.R: 1517
+# nlme/R/pdMat.R: 1510
 # stop("cannot extract the inverse from an uninitialized object")
 msgid "cannot extract the inverse from an uninitialized object"
 msgstr "nie można wyodrębnić odwrotności z niezainicjalizowanego obiektu"
 
-# nlme/R/pdMat.R: 740
-# stop(gettextf("an object of length %d does not match a Cholesky factor",
-#                     length(val)), domain = NA)
+# nlme/R/pdMat.R: 737
+# stop(gettextf("an object of length %d does not match a Cholesky factor", length(val)), domain = "R-nlme")
 msgid "an object of length %d does not match a Cholesky factor"
 msgstr "obiekt o długości %d nie zgadza się z czynnikiem Cholesky'ego"
 
-# nlme/R/pdMat.R: 1325
+# nlme/R/pdMat.R: 1319
 # stop("cannot extract the matrix from an uninitialized object")
 msgid "cannot extract the matrix from an uninitialized object"
 msgstr "nie można wyodrębnić macierzy z niezainicjalizowanego obiektu"
 
-# nlme/R/pdMat.R: 1409
+# nlme/R/pdMat.R: 1403
 # stop("cannot extract the matrix from an uninitialized \"pdIdent\" object")
-# nlme/R/pdMat.R: 1471
+# nlme/R/pdMat.R: 1464
 # stop("cannot extract the matrix from an uninitialized \"pdIdent\" object")
 msgid "cannot extract the matrix from an uninitialized \"pdIdent\" object"
 msgstr ""
-"nie można wyodrębnić macierzy z niezainicjalizowanego obiektu \"pdIdent\""
+"nie można wyodrębnić macierzy z niezainicjalizowanego obiektu klasy \"pdIdent"
+"\""
 
-# nlme/R/pdMat.R: 1412
+# nlme/R/pdMat.R: 1406
 # stop("cannot extract the matrix with uninitialized dimensions")
-# nlme/R/pdMat.R: 1474
+# nlme/R/pdMat.R: 1467
 # stop("cannot extract the matrix with uninitialized dimensions")
-# nlme/R/pdMat.R: 1551
+# nlme/R/pdMat.R: 1544
 # stop("cannot extract the matrix with uninitialized dimensions")
-# nlme/R/pdMat.R: 1628
+# nlme/R/pdMat.R: 1620
 # stop("cannot extract the matrix with uninitialized dimensions")
 msgid "cannot extract the matrix with uninitialized dimensions"
 msgstr "nie można wyodrębnić macierzy z niezainicjalizowanymi wymiarami"
 
-# nlme/R/pdMat.R: 1453
-# stop("must give names when initializing \"pdIdent\" from parameter without a formula")
+# nlme/R/pdMat.R: 1446
+# stop(gettextf("must give names when initializing %s from parameter without a formula", dQuote("pdIdent")))
+# nlme/R/pdMat.R: 1596
+# stop(gettextf("must give names when initializing %s from parameter without a formula", dQuote("pdCompSymm")))
 msgid ""
 "must give names when initializing \"pdIdent\" from parameter without a "
 "formula"
 msgstr ""
-"potrzeba podać nazwy gdy występuje inicjalizowanie \"pdIdent\" z parametru "
-"bez formuły"
+"nazwy są wymagane gdy występuje inicjalizowanie obiektu klasy \"pdIdent\" z "
+"parametru bez formuły"
 
-# nlme/R/pdMat.R: 1503
+# nlme/R/pdMat.R: 1496
 # stop("cannot extract the dimensions")
-# nlme/R/pdMat.R: 1671
+# nlme/R/pdMat.R: 1663
 # stop("cannot extract the dimensions")
 msgid "cannot extract the dimensions"
 msgstr "nie można wyodrębnić wymiarów"
 
-# nlme/R/pdMat.R: 1548
+# nlme/R/pdMat.R: 1541
 # stop("cannot extract the matrix from an uninitialized \"pdCompSymm\" object")
-# nlme/R/pdMat.R: 1625
+# nlme/R/pdMat.R: 1617
 # stop("cannot extract the matrix from an uninitialized \"pdCompSymm\" object")
 msgid "cannot extract the matrix from an uninitialized \"pdCompSymm\" object"
 msgstr ""
-"nie można wyodrębnić macierzy z niezainicjalizowanego obiektu \"pdCompSymm\""
+"nie można wyodrębnić macierzy z niezainicjalizowanego obiektu klasy "
+"\"pdCompSymm\""
 
-# nlme/R/pdMat.R: 1591
+# nlme/R/pdMat.R: 1584
 # warning("initializing \"pdCompSymm\" object is not positive definite")
 msgid "initializing \"pdCompSymm\" object is not positive definite"
-msgstr "inicjalizowany obiektu \"pdCompSymm\" nie jest dodatnio określony"
+msgstr "inicjalizowany obiekt klasy \"pdCompSymm\" nie jest dodatnio określony"
 
-# nlme/R/pdMat.R: 1604
-# stop("must give names when initializing \"pdCompSymm\" from parameter without a formula")
 msgid ""
 "must give names when initializing \"pdCompSymm\" from parameter without a "
 "formula"
 msgstr ""
-"potrzeba dostarczyć nazw podczas inicjalizowania \"pdCompSymm\" z parametru "
-"bez formuły"
+"nazwy są wymagane podczas inicjalizowania obiektu klasy \"pdCompSymm\" z "
+"parametru bez formuły"
 
-# nlme/R/pdMat.R: 1655
+# nlme/R/pdMat.R: 1647
 # stop("cannot obtain constrained coefficients with uninitialized dimensions")
 msgid "cannot obtain constrained coefficients with uninitialized dimensions"
 msgstr ""
 "nie można uzyskać ograniczonych współczynników z niezainicjalizowanych "
 "wymiarów"
 
-# nlme/R/pdMat.R: 1710
+# nlme/R/pdMat.R: 1702
 # stop("cannot access the matrix of object without names")
-# nlme/R/pdMat.R: 1949
+# nlme/R/pdMat.R: 1941
 # stop("cannot access the matrix of object without names")
 msgid "cannot access the matrix of object without names"
 msgstr "nie można uzyskać dostępu do macierzy obiektu bez nazw"
 
-# nlme/R/pdMat.R: 1748
-# stop("'form' must be a list")
 msgid "'form' must be a list"
-msgstr "'form' musi być listą"
+msgstr "argument 'form' musi być listą"
 
-# nlme/R/pdMat.R: 1757
-# stop("'nam' must be a list")
 msgid "'nam' must be a list"
-msgstr "'nam' musi być listą"
+msgstr "argument 'nam' musi być listą"
+
+msgid "'form' and 'nam' have incompatible lengths"
+msgstr "argumenty 'form' oraz 'nam' mają niezgodne długości"
 
 # nlme/R/pdMat.R: 1761
-# stop("'form' and 'nam' have incompatible lengths")
-msgid "'form' and 'nam' have incompatible lengths"
-msgstr "'form' oraz 'nam' mają niezgodne długości"
-
-# nlme/R/pdMat.R: 1769
-# stop("'pdClass' must be a character vector")
+# stop(gettextf("'%s' argument must be a character vector", "pdClass"))
 msgid "'pdClass' must be a character vector"
-msgstr "'pdClass' musi być wektorem tekstowym"
+msgstr "argument 'pdClass' musi być wektorem tekstowym"
 
-# nlme/R/pdMat.R: 1774
-# stop("'form' and 'pdClass' have incompatible lengths")
 msgid "'form' and 'pdClass' have incompatible lengths"
-msgstr "'form' oraz 'pdClass' mają niezgodne długości"
+msgstr "argumenty 'form' oraz 'pdClass' mają niezgodne długości"
 
-# nlme/R/pdMat.R: 1777
-# stop("'nam' and 'pdClass' have incompatible lengths")
 msgid "'nam' and 'pdClass' have incompatible lengths"
-msgstr "'nam' oraz 'pdClass' mają niezgodne długości"
+msgstr "argumenty 'nam' oraz 'pdClass' mają niezgodne długości"
 
-# nlme/R/pdMat.R: 1789
+# nlme/R/pdMat.R: 1781
 # stop("LNone of the arguments specify more than one block")
 msgid "LNone of the arguments specify more than one block"
 msgstr "żaden z argumentów nie określa więcej niż jednego bloku"
 
-# nlme/R/pdMat.R: 1795
+# nlme/R/pdMat.R: 1787
 # stop("'object' must be a list when not missing, not a matrix, and not numeric")
 msgid "'object' must be a list when not missing, not a matrix, and not numeric"
 msgstr ""
-"'object' musi być listą, gdy nie jest brakujący, nie jest macierzą, ani też "
-"liczbą"
+"argument 'object' musi być listą, gdy nie jest brakujący, nie jest macierzą, "
+"ani też liczbą"
 
-# nlme/R/pdMat.R: 1799
+# nlme/R/pdMat.R: 1791
 # stop("arguments imply different number of blocks")
 msgid "arguments imply different number of blocks"
 msgstr "argumenty sugerują różną liczbę bloków"
 
-# nlme/R/pdMat.R: 1871
+# nlme/R/pdMat.R: 1863
 # stop("all elements in the argument must generate \"pdMat\" objects")
 msgid "all elements in the argument must generate \"pdMat\" objects"
 msgstr "wszystkie elementy w argumencie muszą tworzyć obiekty klasy \"pdMat\""
 
-# nlme/R/pdMat.R: 1894
+# nlme/R/pdMat.R: 1886
 # stop("cannot have duplicated column names in a \"pdMat\" object")
-# nlme/R/pdMat.R: 1913
+# nlme/R/pdMat.R: 1905
 # stop("cannot have duplicated column names in a \"pdMat\" object")
 msgid "cannot have duplicated column names in a \"pdMat\" object"
 msgstr "nie można mieć powtórzonych nazw kolumn w obiekcie klasy \"pdMat\""
 
-# nlme/R/pdMat.R: 1900
+# nlme/R/pdMat.R: 1892
 # stop("must have formula when no names are given")
 msgid "must have formula when no names are given"
-msgstr "potrzeba mieć formułę, gdy nie podano nazw"
+msgstr "formuła jest wymagana, gdy nie podano nazw"
 
-# nlme/R/pdMat.R: 1903
+# nlme/R/pdMat.R: 1895
 # stop("must give names when initializing from matrix or parameter")
 msgid "must give names when initializing from matrix or parameter"
-msgstr ""
-"potrzeba podać nazwy gdy następuje inicjowanie z macierzy lub parametru"
+msgstr "nazwy są wymagane, gdy następuje inicjowanie z macierzy lub parametru"
 
-# nlme/R/pdMat.R: 1908
+# nlme/R/pdMat.R: 1900
 # stop("all elements must have names when any has names")
 msgid "all elements must have names when any has names"
 msgstr "wszystkie elementy muszą mieć nazwy, gdy którykolwiek posiada"
 
-# nlme/R/pdMat.R: 1925
+# nlme/R/pdMat.R: 1917
 # stop("all elements must have a non-zero size")
 msgid "all elements must have a non-zero size"
 msgstr "wszystkie elementy muszą mieć niezerowy rozmiar"
 
-# nlme/R/pdMat.R: 1978
+# nlme/R/reStruct.R: 188
+# stop("cannot change the parameter when length of parameters is undefined")
+# nlme/R/pdMat.R: 1970
 # stop("cannot change the parameter when length of parameters is undefined")
 msgid "cannot change the parameter when length of parameters is undefined"
 msgstr "nie można zmienić parametru gdy długość parametru jest nieokreślona"
 
-# nlme/R/pdMat.R: 1981
-# stop("cannot change parameter length of initialized \"pdMat\" object")
 msgid "cannot change parameter length of initialized \"pdMat\" object"
 msgstr ""
 "nie można zmienić długości parametru zainicjowanego obiektu klasy \"pdMat\""
 
-# nlme/R/pdMat.R: 1998
+# nlme/R/pdMat.R: 1990
 # stop("all elements must have formulas when any has a formula")
 msgid "all elements must have formulas when any has a formula"
 msgstr "wszystkie elementy muszą mieć formułę, gdy którykolwiek posiada"
 
-# nlme/R/pdMat.R: 2016
+# nlme/R/pdMat.R: 2008
 # stop("all elements of formula must be list of two-sided formulae or two-sided formulae")
 msgid ""
 "all elements of formula must be list of two-sided formulae or two-sided "
@@ -1660,67 +1461,60 @@ msgstr ""
 "wszystkie elementy formuły muszą być listą dwustronnych formuł lub "
 "dwustronnymi formułami"
 
-# nlme/R/pdMat.R: 2048
+# nlme/R/pdMat.R: 2040
 # stop("cannot change the number of columns on an initialized object")
 msgid "cannot change the number of columns on an initialized object"
 msgstr "nie można zmienić liczby kolumn zainicjowanego obiektu"
 
-# nlme/R/pdMat.R: 2055
+# nlme/R/pdMat.R: 2047
 # stop("names of object and value must match")
 msgid "names of object and value must match"
 msgstr "nazwy obiektu oraz wartości muszą się zgadzać"
 
-# nlme/R/reStruct.R: 66
-# stop("\"pdMat\" element must have a formula")
 msgid "\"pdMat\" element must have a formula"
 msgstr "element \"pdMat\" musi posiadać formułę"
 
-# nlme/R/reStruct.R: 71
-# stop("'object' must be a list or a formula")
 msgid "'object' must be a list or a formula"
-msgstr "'object' musi być listą lub formułą"
+msgstr "argument 'object' musi być listą lub formułą"
 
-# nlme/R/reStruct.R: 84
-# stop("\"pdMat\" elements must have a formula")
 msgid "\"pdMat\" elements must have a formula"
 msgstr "elementy \"pdMat\" muszą posiadać formułę"
 
 # nlme/R/reStruct.R: 101
-# stop("elements in 'object' must be formulas or \"pdMat\" objects")
+# stop("elements in 'object' argument must be formulae or objects of class \"pdMat\"")
 msgid "elements in 'object' must be formulas or \"pdMat\" objects"
-msgstr "elementy w 'object' muszą być formułami lub obiektami klasy \"pdMat\""
+msgstr ""
+"elementy w argumencie 'object' muszą być formułami lub obiektami klasy "
+"\"pdMat\""
 
-# nlme/R/reStruct.R: 189
-# stop("cannot change the parameter when ength of parameters is undefined")
 msgid "cannot change the parameter when ength of parameters is undefined"
 msgstr "nie można zmienić parametru gdy długość parametru jest nieokreślona"
 
-# nlme/R/reStruct.R: 192
-# stop("cannot change parameter length of initialized objects")
 msgid "cannot change parameter length of initialized objects"
 msgstr "nie można zmienić długości parametru zainicjowanych obiektów"
 
-# nlme/R/reStruct.R: 212
+# nlme/R/reStruct.R: 211
 # stop("cannot extract groups formula without a formula")
 msgid "cannot extract groups formula without a formula"
 msgstr "nie można wyodrębnić formuł grup bez formuły"
 
-# nlme/R/reStruct.R: 253
-# stop("all elements of a \"reStruct\" object must have a non-zero size")
+# nlme/R/reStruct.R: 252
+# stop("all elements of an object of class \"reStruct\" must have a non-zero size")
 msgid "all elements of a \"reStruct\" object must have a non-zero size"
-msgstr "wszystkie elementy obiektu \"reStruct\" muszą mieć niezerowy rozmiar"
+msgstr ""
+"wszystkie elementy obiektu klasy \"reStruct\" muszą mieć niezerowy rozmiar"
 
-# nlme/R/reStruct.R: 303
-# stop("cannot change the length of 'object'")
+# nlme/R/reStruct.R: 302
+# stop("cannot change the length of 'object' argument")
 msgid "cannot change the length of 'object'"
-msgstr "nie można zmienić długości 'object'"
+msgstr "nie można zmienić długości argumentu 'object'"
 
-# nlme/R/reStruct.R: 316
+# nlme/R/reStruct.R: 315
 # stop("cannot extract model matrix without formula")
 msgid "cannot extract model matrix without formula"
 msgstr "nie można wyodrębnić macierzy modelu bez formuły"
 
-# nlme/R/reStruct.R: 374
+# nlme/R/reStruct.R: 373
 # stop("incompatible lengths for object names")
 msgid "incompatible lengths for object names"
 msgstr "niezgodne długości dla nazw obiektu"
@@ -1731,41 +1525,42 @@ msgid ""
 "'data' must inherit from \"groupedData\" class if 'random' does not define "
 "groups"
 msgstr ""
-"'data' musi dziedziczyć z klasy \"groupedData\" jeśli 'random' nie określa "
-"grup"
+"argument 'data' musi być obiektem klasy \"groupedData\" jeśli argument "
+"'random' nie określa grup"
 
 # nlme/R/simulate.R: 162
 # stop("models with \"corStruct\" and/or \"varFunc\" objects not allowed")
-# nlme/R/simulate.R: 228
+# nlme/R/simulate.R: 227
 # stop("models with \"corStruct\" and/or \"varFunc\" objects not allowed")
 msgid "models with \"corStruct\" and/or \"varFunc\" objects not allowed"
-msgstr "modele z obiektami \"corStruct\" oraz/lub \"varFunc\" nie są dozwolone"
+msgstr ""
+"modele z obiektami klasy \"corStruct\" oraz/lub \"varFunc\" nie są dozwolone"
 
-# nlme/R/simulate.R: 358
+# nlme/R/simulate.R: 356
 # stop("plot method only implemented for comparing models")
-# nlme/R/simulate.R: 364
+# nlme/R/simulate.R: 362
 # stop("plot method only implemented for comparing models")
 msgid "plot method only implemented for comparing models"
 msgstr ""
 "metoda rysująca wykres została zaimplementowana jedynie do porównywania "
 "modeli"
 
-# nlme/R/simulate.R: 369
+# nlme/R/simulate.R: 367
 # stop("no degrees of freedom specified")
 msgid "no degrees of freedom specified"
 msgstr "nie określono stopni swobody"
 
-# nlme/R/simulate.R: 377
+# nlme/R/simulate.R: 375
 # stop("degrees of freedom and weights must have the same length")
 msgid "degrees of freedom and weights must have the same length"
 msgstr "stopnie swobody oraz wagi muszą mieć tę samą długość"
 
-# nlme/R/simulate.R: 385
+# nlme/R/simulate.R: 383
 # stop("negative degrees of freedom not allowed")
 msgid "negative degrees of freedom not allowed"
 msgstr "ujemne stopnie swobody nie są dozwolone"
 
-# nlme/R/simulate.R: 388
+# nlme/R/simulate.R: 386
 # stop("more than one degree of freedom is needed when one them is zero.")
 msgid "more than one degree of freedom is needed when one them is zero."
 msgstr ""
@@ -1778,8 +1573,8 @@ msgid ""
 "can only construct \"varFunc\" object from another \"varFunc\" object, a "
 "formula, or a character string"
 msgstr ""
-"można stworzyć jedynie obiekt \"varFunc\" z innego obiektu \"varFunc\", "
-"formuły lub łańcucha tekstowego"
+"można stworzyć jedynie obiekt klasy \"varFunc\" z innego obiektu klasy "
+"\"varFunc\", formuły lub łańcucha tekstowego"
 
 # nlme/R/varFunc.R: 64
 # stop("cannot extract parameters of uninitialized object")
@@ -1787,116 +1582,101 @@ msgid "cannot extract parameters of uninitialized object"
 msgstr "nie można wyodrębnić parametrów niezainicjowanego obiektu"
 
 # nlme/R/varFunc.R: 80
-# stop(gettextf("do not know how to get coefficients for %s object",
-#                     dQuote(class(object)[1])), domain = NA)
+# stop(gettextf("do not know how to get coefficients for %s object", dQuote(class(object)[1])), domain = "R-nlme")
 msgid "do not know how to get coefficients for %s object"
 msgstr "nie wiadomo jak uzyskać współczynniki dla obiektu %s"
 
-# nlme/R/varFunc.R: 91
+# nlme/R/varFunc.R: 90
 # stop("cannot change the length of covariate in \"varFunc\" object")
 msgid "cannot change the length of covariate in \"varFunc\" object"
-msgstr "nie można zmienić długości zmiennej niezależnej w obiekcie \"varFunc\""
+msgstr ""
+"nie można zmienić długości zmiennej niezależnej w obiekcie klasy \"varFunc\""
 
-# nlme/R/varFunc.R: 202
-# stop("'value' must be a one sided formula")
 msgid "'value' must be a one sided formula"
-msgstr "'value' musi być jednostronną formułą"
+msgstr "argument 'value' musi być jednostronną formułą"
 
-# nlme/R/varFunc.R: 206
+# nlme/R/varFunc.R: 463
 # stop("'form' must have a covariate")
-# nlme/R/varFunc.R: 468
+# nlme/R/varFunc.R: 676
 # stop("'form' must have a covariate")
-# nlme/R/varFunc.R: 682
-# stop("'form' must have a covariate")
-# nlme/R/varFunc.R: 938
+# nlme/R/varFunc.R: 929
 # stop("'form' must have a covariate")
 msgid "'form' must have a covariate"
-msgstr "'form' musi posiadać zmienną niezależną"
+msgstr "argument 'form' musi posiadać zmienną niezależną"
 
-# nlme/R/varFunc.R: 210
+# nlme/R/varFunc.R: 206
 # warning("ignoring 'group' in \"varFixed\" formula")
 msgid "ignoring 'group' in \"varFixed\" formula"
-msgstr "Ignorowanie 'group' w formule \"varFixed\""
+msgstr "Ignorowanie 'group' w formule klasy \"varFixed\""
 
-# nlme/R/varFunc.R: 232
+# nlme/R/varFunc.R: 228
 # stop("all variables used in 'formula' must be in 'data'")
 msgid "all variables used in 'formula' must be in 'data'"
 msgstr "wszystkie zmienne użyte w 'formula' muszą być w 'data'"
 
-# nlme/R/varFunc.R: 270
+# nlme/R/varFunc.R: 266
 # stop("initial values must have group names in 'varIdent'")
 msgid "initial values must have group names in 'varIdent'"
 msgstr "początkowe wartości muszą posiadać nazwy grupy w 'varIdent'"
 
-# nlme/R/varFunc.R: 274
+# nlme/R/varFunc.R: 270
 # stop("initial values for 'varIdent' must be > 0")
 msgid "initial values for 'varIdent' must be > 0"
 msgstr "początkowe wartości dla 'varIdent' muszą być > 0"
 
-# nlme/R/varFunc.R: 282
+# nlme/R/varFunc.R: 278
 # stop("fixed parameters must have names in 'varIdent'")
 msgid "fixed parameters must have names in 'varIdent'"
 msgstr "ustalone parametry muszą posiadać nazwy w 'varIdent'"
 
-# nlme/R/varFunc.R: 339
-# stop("cannot change the length of the \"varIdent\" parameter after initialization")
 msgid ""
 "cannot change the length of the \"varIdent\" parameter after initialization"
 msgstr ""
 "nie można zmienić długości parametru \"varIdent\" po jego zainicjowaniu"
 
-# nlme/R/varFunc.R: 368
+# nlme/R/varFunc.R: 364
 # stop("fixed parameter names in 'varIdent' must be a subset of group names")
 msgid "fixed parameter names in 'varIdent' must be a subset of group names"
 msgstr "ustalone nazwy parametrów w 'varIdent' muszą być podzbiorem nazw grup"
 
-# nlme/R/varFunc.R: 376
+# nlme/R/varFunc.R: 372
 # stop("cannot fix variances in all groups")
 msgid "cannot fix variances in all groups"
 msgstr "nie można ustalić wariancji we wszystkich grupach"
 
-# nlme/R/varFunc.R: 391
-# stop(gettextf("initial value for \"varIdent\" should be of length %d",
-#                           len), domain = NA)
 msgid "initial value for \"varIdent\" should be of length %d"
 msgstr "początkowa wartość dla \"varIdent\" powinna być długości %d"
 
-# nlme/R/varFunc.R: 397
+# nlme/R/varFunc.R: 392
 # stop("names of starting value for \"varIdent\" object must contain all but one of the stratum levels")
 msgid ""
 "names of starting value for \"varIdent\" object must contain all but one of "
 "the stratum levels"
 msgstr ""
-"nazwy wartości początkowych dla obiektu \"varIdent\" muszą zawierać "
+"nazwy wartości początkowych dla obiektu klasy \"varIdent\" muszą zawierać "
 "wszystkie oprócz jednego z poziomów warstwy"
 
-# nlme/R/varFunc.R: 402
-# stop("nonexistent group names for initial values in 'varIdent'")
 msgid "nonexistent group names for initial values in 'varIdent'"
 msgstr "nieistniejące nazwy grup dla początkowych wartości w 'varIdent'"
 
-# nlme/R/varFunc.R: 472
+# nlme/R/varFunc.R: 467
 # stop("initial values must have group names in 'varPower'")
 msgid "initial values must have group names in 'varPower'"
 msgstr "początkowe wartości muszą posiadać nazwy grup w 'varPower'"
 
-# nlme/R/varFunc.R: 476
-# stop("fixed parameters must have group names in 'varPower'")
 msgid "fixed parameters must have group names in 'varPower'"
 msgstr "ustalone parametry muszą posiadać nazwy grup w 'varPower'"
 
-# nlme/R/varFunc.R: 523
-# stop("cannot change the length of the \"varStruct\" parameter after initialization")
 msgid ""
 "cannot change the length of the \"varStruct\" parameter after initialization"
 msgstr ""
 "nie można zmienić długości parametru \"varStruct\" po jego zainicjowaniu"
 
-# nlme/R/varFunc.R: 535
+# nlme/R/varFunc.R: 530
 # stop("cannot change coefficients before initialization or when all parameters are fixed")
-# nlme/R/varFunc.R: 746
+# nlme/R/varFunc.R: 740
 # stop("cannot change coefficients before initialization or when all parameters are fixed")
-# nlme/R/varFunc.R: 1024
+# nlme/R/varFunc.R: 1015
 # stop("cannot change coefficients before initialization or when all parameters are fixed")
 msgid ""
 "cannot change coefficients before initialization or when all parameters are "
@@ -1905,134 +1685,106 @@ msgstr ""
 "nie można zmienić współczynników przed zainicjowaniem lub gdy wszystkie "
 "parametry są ustalone"
 
-# nlme/R/varFunc.R: 561
-# stop("fixed parameters must have group names")
-# nlme/R/varFunc.R: 772
-# stop("fixed parameters must have group names")
-# nlme/R/varFunc.R: 1054
-# stop("fixed parameters must have group names")
 msgid "fixed parameters must have group names"
 msgstr "ustalone parametry muszą posiadać nazwy grup"
 
-# nlme/R/varFunc.R: 564
+# nlme/R/varFunc.R: 559
 # stop("mismatch between group names and fixed values names")
-# nlme/R/varFunc.R: 775
+# nlme/R/varFunc.R: 769
 # stop("mismatch between group names and fixed values names")
-# nlme/R/varFunc.R: 1057
+# nlme/R/varFunc.R: 1048
 # stop("mismatch between group names and fixed values names")
 msgid "mismatch between group names and fixed values names"
 msgstr "niezgodność pomiędzy nazwami grup oraz nazwami ustalonych wartości"
 
-# nlme/R/varFunc.R: 587
-# stop(gettextf("initial value for \"varPower\" should be of length %d",
-#                             nStratVar), domain = NA)
 msgid "initial value for \"varPower\" should be of length %d"
 msgstr "początkowa wartość dla \"varPower\" powinna być długości %d"
 
-# nlme/R/varFunc.R: 593
-# stop("nonexistent group names for initial values in \"varPower\"")
 msgid "nonexistent group names for initial values in \"varPower\""
 msgstr "nieistniejące nazwy grup dla początkowych wartości w \"varPower\""
 
-# nlme/R/varFunc.R: 630
-# stop("initial value for \"varPower\" should be of length 1")
 msgid "initial value for \"varPower\" should be of length 1"
 msgstr "początkowa wartość dla \"varPower\" powinna być długości 1"
 
-# nlme/R/varFunc.R: 686
+# nlme/R/varFunc.R: 680
 # stop("initial values must have group names in 'varExp'")
 msgid "initial values must have group names in 'varExp'"
 msgstr "początkowe wartości muszą posiadać nazwy grupy w 'varExp'"
 
-# nlme/R/varFunc.R: 690
-# stop("fixed parameters must have group names in 'varExp'")
 msgid "fixed parameters must have group names in 'varExp'"
 msgstr "ustalone parametry muszą posiadać nazwy grup w 'varExp'"
 
-# nlme/R/varFunc.R: 736
-# stop("cannot change the length of the \"varExp\" parameter after initialization")
 msgid ""
 "cannot change the length of the \"varExp\" parameter after initialization"
 msgstr "nie można zmienić długości parametru \"varExp\" po jego zainicjowaniu"
 
-# nlme/R/varFunc.R: 798
-# stop(gettextf("initial value for \"varExp\" should be of length %d",
-#                             nStratVar), domain = NA)
 msgid "initial value for \"varExp\" should be of length %d"
 msgstr "początkowa wartość dla \"varExp\" powinna być długości %d"
 
-# nlme/R/varFunc.R: 804
-# stop("nonexistent group names for initial values in \"varExp\"")
 msgid "nonexistent group names for initial values in \"varExp\""
 msgstr "nieistniejące nazwy grup dla początkowych wartości w \"varExp\""
 
-# nlme/R/varFunc.R: 841
-# stop("initial value for \"varExp\" should be of length 1")
 msgid "initial value for \"varExp\" should be of length 1"
 msgstr "początkowa wartość dla \"varExp\" powinna być długości 1"
 
-# nlme/R/varFunc.R: 896
-# stop(gettextf("%s can have at most two components", nam), domain = NA)
+# nlme/R/varFunc.R: 889
+# stop(gettextf("%s can have at most two components", nam), domain = "R-nlme")
 msgid "%s can have at most two components"
 msgstr "%s może posiadać najwyżej dwa komponenty"
 
-# nlme/R/varFunc.R: 902
-# stop(gettextf("%s can only have names \"const\" and \"power\"", nam),
-#              domain = NA)
+# nlme/R/varFunc.R: 895
+# stop(gettextf("%s can only have names \"const\" and \"power\"", nam), domain = "R-nlme")
 msgid "%s can only have names \"const\" and \"power\""
 msgstr "%s może posiadać jedynie nazwy \"const\" oraz \"power\""
 
-# nlme/R/varFunc.R: 912
-# stop(gettextf("%s can only be a list or numeric", nam), domain = NA)
+# nlme/R/varFunc.R: 904
+# stop(gettextf("%s can only be a list or numeric", nam), domain = "R-nlme")
 msgid "%s can only be a list or numeric"
 msgstr "%s może być jedynie listą lub liczbą"
 
-# nlme/R/varFunc.R: 922
-# stop(gettextf("%s must have group names in 'varConstPower'", nam),
-#              domain = NA)
+# nlme/R/varFunc.R: 914
+# stop(gettextf("%s must have group names in 'varConstPower'", nam), domain = "R-nlme")
 msgid "%s must have group names in 'varConstPower'"
 msgstr "%s musi posiadać nazwy grup w 'varConstPower'"
 
-# nlme/R/varFunc.R: 929
+# nlme/R/varFunc.R: 920
 # stop("constant in \"varConstPower\" structure must be > 0")
 msgid "constant in \"varConstPower\" structure must be > 0"
 msgstr "stała w strukturze \"varConstPower\" musi być > 0"
 
-# nlme/R/varFunc.R: 1079
-# stop(gettext("initial value should be of length %d",
-#                              nStratVar), domain = NA)
-# nlme/R/varFunc.R: 1128
-# stop(gettext("initial value should be of length %d", aux), domain = NA)
+# nlme/R/varFunc.R: 1070
+# stop(gettext("initial value should be of length %d", nStratVar), domain = "R-nlme")
+# nlme/R/varFunc.R: 1118
+# stop(gettext("initial value should be of length %d", aux), domain = "R-nlme")
 msgid "initial value should be of length %d"
 msgstr "początkowa wartość powinna być długości %d"
 
-# nlme/R/varFunc.R: 1085
+# nlme/R/varFunc.R: 1075
 # stop("nonexistent group names for initial values")
 msgid "nonexistent group names for initial values"
 msgstr "nieistniejące nazwy grup dla początkowych wartości"
 
-# nlme/R/varFunc.R: 1169
+# nlme/R/varFunc.R: 1159
 # stop("all arguments to 'varComb' must be of class \"varFunc\".")
 msgid "all arguments to 'varComb' must be of class \"varFunc\"."
 msgstr ""
-"wszystkie argumenty przekazywane do 'varComb' muszą być klasy \"varFunc\""
+"wszystkie argumenty przekazywane do funkcji 'varComb()' muszą być obiektami "
+"klasy \"varFunc\""
 
-# nlme/R/varFunc.R: 1201
-# stop("cannot change parameter length of initialized \"varComb\" object")
 msgid "cannot change parameter length of initialized \"varComb\" object"
 msgstr ""
 "nie można zmienić długości parametru zainicjalizowanego obiektu \"varComb\""
 
-# nlme/R/gls.R: 462
+# nlme/R/gls.R: 459
 # stop(sprintf(ngettext(sum(noMatch),
-#                                                   "term %s not matched",
-#                                                   "terms %s not matched"),
+#                                                   "term %s was not matched",
+#                                                   "terms %s were not matched", domain = "R-nlme"),
 #                                          paste(Terms[noMatch], collapse = ", ")),
 #                                  domain = NA)
-# nlme/R/lme.R: 886
+# nlme/R/lme.R: 895
 # stop(sprintf(ngettext(sum(noMatch),
-#                                       "term %s not matched",
-#                                       "terms %s not matched"),
+#                                       "term %s was not matched",
+#                                       "terms %s were not matched", domain = "R-nlme"),
 #                              paste(Terms[noMatch], collapse = ", ")),
 #                      domain = NA)
 msgid "term %s not matched"
@@ -2041,15 +1793,15 @@ msgstr[0] "człon %s nie został dopasowany"
 msgstr[1] "człony %s nie zostały dopasowane"
 msgstr[2] "człony %s nie zostały dopasowane"
 
-# nlme/R/gls.R: 482
+# nlme/R/gls.R: 478
 # stop(sprintf(ngettext(ncol(L),
 #                                           "'L' must have at most %d column",
-#                                           "'L' must have at most %d columns"),
+#                                           "'L' must have at most %d columns", domain = "R-nlme"),
 #                                  ncol(L)), domain = NA)
-# nlme/R/lme.R: 909
+# nlme/R/lme.R: 918
 # stop(sprintf(ngettext(nX,
 #                                 "'L' must have at most %d column",
-#                                 "'L' must have at most %d columns"),
+#                                 "'L' must have at most %d columns", domain = "R-nlme"),
 #                        nX), domain = NA)
 msgid "'L' must have at most %d column"
 msgid_plural "'L' must have at most %d columns"
@@ -2057,17 +1809,16 @@ msgstr[0] "'L' musi mieć co najwyzej %d kolumnę"
 msgstr[1] "'L' musi mieć co najwyzej %d kolumny"
 msgstr[2] "'L' musi mieć co najwyzej %d kolumn"
 
-# nlme/R/gls.R: 494
+# nlme/R/gls.R: 490
 # stop(sprintf(ngettext(sum(noMatch),
-#                                               "effect %s not matched",
-#                                               "effects %s not matched"),
-#                                      paste(dmsL2[noMatch],collapse=", ")),
-#                              domain = NA)
-# nlme/R/lme.R: 921
+#                                               "effect %s was not matched",
+#                                               "effects %s were not matched", domain = "R-nlme"),
+#                                      paste(dmsL2[noMatch], collapse = ", ")), domain = NA)
+# nlme/R/lme.R: 930
 # stop(sprintf(ngettext(sum(noMatch),
-#                                     "effect %s not matched",
-#                                     "effects %s not matched"),
-#                            paste(dmsL2[noMatch],collapse=", ")),
+#                                     "effect %s was not matched",
+#                                     "effects %s were not matched", domain = "R-nlme"),
+#                            paste(dmsL2[noMatch],collapse = ", ")),
 #                    domain = NA)
 msgid "effect %s not matched"
 msgid_plural "effects %s not matched"
@@ -2075,85 +1826,27 @@ msgstr[0] "efekt %s nie został dopasowany"
 msgstr[1] "efekty %s nie zostały dopasowane"
 msgstr[2] "efekty %s nie zostały dopasowane"
 
-# nlme/R/gls.R: 890
-# stop(sprintf(ngettext(sum(wch),
-#                                       "level %s not allowed for %s",
-#                                       "levels %s not allowed for %s"),
-#                              paste(levs[wch], collapse = ",")),
-#                      domain = NA)
-# nlme/R/gnls.R: 696
-# stop(sprintf(ngettext(sum(wch),
-#                                 "level %s not allowed for %s",
-#                                 "levels %s not allowed for %s"),
-#                        paste(levs[wch], collapse = ",")), domain = NA)
-# nlme/R/lme.R: 1929
-# stop(sprintf(ngettext(sum(wch),
-#                                 "level %s not allowed for %s",
-#                                 "levels %s not allowed for %s"),
-#                        paste(levs[wch], collapse = ",")),
-#                domain = NA)
-# nlme/R/nlme.R: 1181
-# stop(sprintf(ngettext(sum(wch),
-#                                 "level %s not allowed for %s",
-#                                 "levels %s not allowed for %s"),
-#                        paste(levs[wch], collapse = ",")),
-#                domain = NA)
 msgid "level %s not allowed for %s"
 msgid_plural "levels %s not allowed for %s"
 msgstr[0] "poziom %s nie jest dozwolony dla %s"
 msgstr[1] "poziomy %s nie są dozwolone dla %s"
 msgstr[2] "poziomy %s nie są dozwolone dla %s"
 
-# nlme/R/lme.R: 1439
-# stop(sprintf(ngettext(sum(naV),
-#                               "%s not found in data",
-#                               "%s not found in data"),
-#                      allV[naV]), domain = NA)
-# nlme/R/lme.R: 2238
-# stop(sprintf(ngettext(sum(naV),
-#                               "%s not found in data",
-#                               "%s not found in data"),
-#                      allV[naV]), domain = NA)
-# nlme/R/lmList.R: 394
-# stop(sprintf(ngettext(sum(naV),
-#                               "%s not found in data",
-#                               "%s not found in data"),
-#                      allV[naV]), domain = NA)
-# nlme/R/lmList.R: 654
-# stop(sprintf(ngettext(sum(naV),
-#                               "%s not found in data",
-#                               "%s not found in data"),
-#                       allV[naV]), domain = NA)
-# nlme/R/lmList.R: 1040
-# stop(sprintf(ngettext(sum(naV),
-#                               "%s not found in data",
-#                               "%s not found in data"),
-#                      allV[naV]), domain = NA)
-# nlme/R/newMethods.R: 290
-# stop(sprintf(ngettext(sum(naV),
-#                                 "%s not found in data",
-#                                 "%s not found in data"),
-#                        allV[naV]), domain = NA)
-# nlme/R/newMethods.R: 710
-# stop(sprintf(ngettext(sum(naV),
-#                               "%s not found in data",
-#                               "%s not found in data"),
-#                      allV[naV]), domain = NA)
 msgid "%s not found in data"
 msgid_plural "%s not found in data"
 msgstr[0] "%s nie został znaleziony w danych"
 msgstr[1] "%s nie zostały znalezione w danych"
 msgstr[2] "%s nie zostały znalezione w danych"
 
-# nlme/R/lme.R: 1215
+# nlme/R/lme.R: 1222
 # stop(sprintf(ngettext(sum(aux),
 #                               "nonexistent level %s",
-#                               "nonexistent levels %s"),
+#                               "nonexistent levels %s", domain = "R-nlme"),
 #                      level[aux]), domain = NA)
-# nlme/R/lme.R: 2519
+# nlme/R/lme.R: 2531
 # stop(sprintf(ngettext(sum(aux),
 #                               "nonexistent level %s",
-#                               "nonexistent levels %s"),
+#                               "nonexistent levels %s", domain = "R-nlme"),
 #                      level[aux]), domain = NA)
 msgid "nonexistent level %s"
 msgid_plural "nonexistent levels %s"
@@ -2161,15 +1854,15 @@ msgstr[0] "nieistniejący poziom %s"
 msgstr[1] "nieistniejące poziomy %s"
 msgstr[2] "nieistniejące poziomy %s"
 
-# nlme/R/lme.R: 1682
+# nlme/R/lme.R: 1688
 # stop(sprintf(ngettext(sum(whichNA),
-#                                 "%s not available for plotting",
-#                                 "%s not available for plotting"),
+#                                 "%s is not available for plotting",
+#                                 "%s are not available for plotting", domain = "R-nlme"),
 #                        onames[whichNA], collapse = ", "), domain = NA)
-# nlme/R/lme.R: 1740
+# nlme/R/lme.R: 1745
 # stop(sprintf(ngettext(sum(whichNA),
-#                               "%s not available for plotting",
-#                               "%s not available for plotting"),
+#                               "%s is not available for plotting",
+#                               "%s are not available for plotting", domain = "R-nlme"),
 #                      onames[whichNA], collapse = ", "), domain = NA)
 msgid "%s not available for plotting"
 msgid_plural "%s not available for plotting"
@@ -2177,23 +1870,29 @@ msgstr[0] "%s nie jest dostępne do rysowania"
 msgstr[1] "%s nie są dostępne do rysowania"
 msgstr[2] "%s nie są dostępne do rysowania"
 
-# nlme/R/newFunc.R: 156
-# stop(sprintf(ngettext(sum(wchNot),
-#                                        "%s not matched",
-#                                        "%s not matched"),
-#                               paste(which[wchNot], collapse = ",")),
-#                       domain = NA)
+# nlme/R/gls.R: 459
+# stop(sprintf(ngettext(sum(noMatch),
+#                                                   "term %s was not matched",
+#                                                   "terms %s were not matched", domain = "R-nlme"),
+#                                          paste(Terms[noMatch], collapse = ", ")),
+#                                  domain = NA)
+# nlme/R/lme.R: 895
+# stop(sprintf(ngettext(sum(noMatch),
+#                                       "term %s was not matched",
+#                                       "terms %s were not matched", domain = "R-nlme"),
+#                              paste(Terms[noMatch], collapse = ", ")),
+#                      domain = NA)
 msgid "%s not matched"
 msgid_plural "%s not matched"
-msgstr[0] "%s nie został dopasowany"
-msgstr[1] "%s nie zostały dopasowane"
-msgstr[2] "%s nie zostały dopasowane"
+msgstr[0] "człon %s nie został dopasowany"
+msgstr[1] "człony %s nie zostały dopasowane"
+msgstr[2] "człony %s nie zostały dopasowane"
 
-# nlme/R/nlme.R: 583
+# nlme/R/nlme.R: 581
 # stop(sprintf(ngettext(sum(noMatch),
 #                                 "group name not matched in starting values for random effects: %s",
-#                                 "group names not matched in starting values for random effects: %s"),
-#                        paste(namSran[noMatch], collapse=", ")), domain = NA)
+#                                 "group names not matched in starting values for random effects: %s", domain = "R-nlme"),
+#                        paste(namSran[noMatch], collapse = ", ")), domain = NA)
 msgid "group name not matched in starting values for random effects: %s"
 msgid_plural ""
 "group names not matched in starting values for random effects: %s"
@@ -2207,8 +1906,1280 @@ msgstr[2] ""
 "nazwy grup nie zgadzają się z początkowymi wartościami dla efektów losowych: "
 "%s"
 
-# nlme/R/lme.R: 880
-# stop(gettextf("'Terms; must be between 1 and %d", nTerms),
-#                    domain = NA)
-#~ msgid "'Terms; must be between 1 and %d"
-#~ msgstr "'Terms' muszą być pomiędzy 1 a %d"
+#~ msgid "negative control$nlmStepMax - using default value"
+#~ msgstr "ujemna wartość 'control$nlmStepMax' - używanie wartości domyślnej"
+
+#~ msgid "REML comparisons are not meaningful."
+#~ msgstr "Porównania REML nie mają sensu."
+
+# nlme/R/VarCov.R: 26
+# stop("'getVarCov.lme()' is not implemented for objects of class \"nlme\"")
+#~ msgid "'getVarCov.lme()' is not implemented for objects of class \"nlme\""
+#~ msgstr ""
+#~ "funkcja 'getVarCov.lme()' nie jest zaimplementowana dla obiektów klasy "
+#~ "\"nlme\""
+
+# nlme/R/VarCov.R: 105
+# gettext("correlation matrix", domain = "R-nlme")
+#~ msgid "correlation matrix"
+#~ msgstr "macierz korelacji"
+
+# nlme/R/VarCov.R: 111
+# gettext("variance covariance matrix", domain = "R-nlme")
+#~ msgid "variance covariance matrix"
+#~ msgstr "macierz wariancji-kowariancji"
+
+# nlme/R/VarCov.R: 116
+# gettext("  Standard Deviations: ", domain = "R-nlme")
+#~ msgid "Standard Deviations:"
+#~ msgstr "Standardowe odchylenia:"
+
+# nlme/R/corStruct.R: 125
+# stop(gettextf("cannot change the length of the parameter of an object of class %s", dQuote("corStruct")))
+# nlme/R/corStruct.R: 418
+# stop(gettextf("cannot change the length of the parameter of an object of class %s", dQuote("corSymm")))
+# nlme/R/corStruct.R: 658
+# stop(gettextf("cannot change the length of the parameter of an object of class %s", dQuote("corNatural")))
+# nlme/R/corStruct.R: 946
+# stop(gettextf("cannot change the length of the parameter of an object of class %s", dQuote("corAR1")))
+# nlme/R/corStruct.R: 1112
+# stop(gettextf("cannot change the length of the parameter of an object of class %s", dQuote("corCAR1")))
+# nlme/R/corStruct.R: 1313
+# stop(gettextf("cannot change the length of the parameter of an object of class %s", dQuote("corARMA")))
+# nlme/R/corStruct.R: 1489
+# stop(gettextf("cannot change the length of the parameter of an object of class %s", dQuote("corCompSymm")))
+#~ msgid "cannot change the length of the parameter of an object of class %s"
+#~ msgstr "nie można zmienić długości parametru obiektu klasy %s"
+
+# nlme/R/corStruct.R: 164
+# stop("'data' argument is required in order to calculate covariate of \"corStruct\" object")
+#~ msgid ""
+#~ "'%s' argument is required in order to calculate covariate of an object of "
+#~ "class %s"
+#~ msgstr ""
+#~ "wymagany jest argument '%s' w celu obliczenia zmiennej wyjaśniającej "
+#~ "obiektu klasy %s"
+
+# nlme/R/corStruct.R: 268
+# gettextf("Correlation structure of class %s representing", dQuote(class(x)[1]), domain = "R-nlme")
+# nlme/R/corStruct.R: 504
+# gettextf("Correlation structure of class %s representing", dQuote("corSymm"), domain = "R-nlme")
+# nlme/R/corStruct.R: 738
+# gettextf("Correlation structure of class %s representing", dQuote("corNatural"), domain = "R-nlme")
+#~ msgid "Correlation structure of class %s representing"
+#~ msgstr "Struktura korelacji klasy reprezentującej %s"
+
+# nlme/R/corStruct.R: 271
+# gettextf("Uninitialized correlation structure of class %s", dQuote(class(x)[1]), domain = "R-nlme")
+#~ msgid "Uninitialized correlation structure of class %s"
+#~ msgstr "Niezainicjalizowana struktura korelacji klasy %s"
+
+# nlme/R/corStruct.R: 280
+# gettext("Correlation Structure: ", domain = "R-nlme")
+#~ msgid "Correlation Structure:"
+#~ msgstr "Struktura korelacji:"
+
+# nlme/R/corStruct.R: 281
+# gettext(" Formula: ", domain = "R-nlme")
+# nlme/R/corStruct.R: 517
+# gettext(" Formula: ", domain = "R-nlme")
+# nlme/R/corStruct.R: 751
+# gettext(" Formula: ", domain = "R-nlme")
+# nlme/R/varFunc.R: 136
+# gettext(" Formula: ", domain = "R-nlme")
+# nlme/R/varFunc.R: 242
+# gettext(" Formula: ", domain = "R-nlme")
+# nlme/R/pdMat.R: 450
+# gettext(" Formula: ", domain = "R-nlme")
+#~ msgid "Formula:"
+#~ msgstr "Formuła:"
+
+# nlme/R/corStruct.R: 282
+# gettext(" Parameter estimates:", domain = "R-nlme")
+# nlme/R/corStruct.R: 518
+# gettext(" Parameter estimates:", domain = "R-nlme")
+# nlme/R/corStruct.R: 752
+# gettext(" Parameter estimates:", domain = "R-nlme")
+# nlme/R/varFunc.R: 137
+# gettext(" Parameter estimates:", domain = "R-nlme")
+#~ msgid "Parameter estimates:"
+#~ msgstr "Oszacowania parametrów:"
+
+# nlme/R/corStruct.R: 448
+# stop(gettextf("covariate must have unique values within groups for objects of class %s", dQuote("corSymm")))
+# nlme/R/corStruct.R: 688
+# stop(gettextf("covariate must have unique values within groups for objects of class %s", dQuote("corNatural")))
+# nlme/R/corStruct.R: 971
+# stop(gettextf("covariate must have unique values within groups for objects of class %s", dQuote("corAR1")))
+# nlme/R/corStruct.R: 1139
+# stop(gettextf("covariate must have unique values within groups for objects of class %s", dQuote("corCAR1")))
+# nlme/R/corStruct.R: 1344
+# stop(gettextf("covariate must have unique values within groups for objects of class %s", dQuote("corARMA")))
+#~ msgid ""
+#~ "covariate must have unique values within groups for objects of class %s"
+#~ msgstr ""
+#~ "zmienna wyjaśniająca musi mieć unikalne wartości w obrębie grup dla "
+#~ "obiektów klasy %s"
+
+# nlme/R/corStruct.R: 453
+# stop(gettextf("unique values of the covariate  for objects of class %s must be a sequence of consecutive integers", dQuote("corSymm")))
+# nlme/R/corStruct.R: 693
+# stop(gettextf("unique values of the covariate  for objects of class %s must be a sequence of consecutive integers", dQuote("corNatural")))
+#~ msgid ""
+#~ "unique values of the covariate  for objects of class %s must be a "
+#~ "sequence of consecutive integers"
+#~ msgstr ""
+#~ "unikalne wartości zmiennej wyjaśniającej dla obiektów klasy %s muszą być "
+#~ "ciągiem kolejnych liczb całkowitych"
+
+# nlme/R/corStruct.R: 468
+# stop(gettextf("initial values for %d must be between %d and %d", dQuote("corSymm"), -1, 1))
+# nlme/R/corStruct.R: 708
+# stop(gettextf("initial values for %d must be between %d and %d", dQuote("corNatural"), -1, 1))
+#~ msgid "initial values for %s must be between %d and %d"
+#~ msgstr "początkowe wartości dla %s muszą być pomiędzy %d a %d"
+
+# nlme/R/corStruct.R: 507
+# gettextf("Unitialized correlation structure of class %s", dQuote("corSymm"), domain = "R-nlme")
+# nlme/R/corStruct.R: 524
+# gettextf("Unitialized correlation structure of class %s", dQuote("corSymm"), domain = "R-nlme")
+# nlme/R/corStruct.R: 741
+# gettextf("Unitialized correlation structure of class %s", dQuote("corNatural"), domain = "R-nlme")
+# nlme/R/corStruct.R: 759
+# gettextf("Unitialized correlation structure of class %s", dQuote("corNatural"), domain = "R-nlme")
+#~ msgid "Unitialized correlation structure of class %s"
+#~ msgstr "Niezainicjalizowana struktura korelacji klasy %s"
+
+# nlme/R/corStruct.R: 516
+# gettext("Correlation Structure: General", domain = "R-nlme")
+# nlme/R/corStruct.R: 750
+# gettext("Correlation Structure: General", domain = "R-nlme")
+#~ msgid "Correlation Structure: General"
+#~ msgstr "Struktura korelacji: Ogólna"
+
+# nlme/R/corStruct.R: 546
+# gettext("General correlation", domain = "R-nlme")
+#~ msgid "General correlation"
+#~ msgstr "Ogólna korelacja"
+
+# nlme/R/corStruct.R: 782
+# gettext("General correlation, with natural parametrization", domain = "R-nlme")
+#~ msgid "General correlation, with natural parametrization"
+#~ msgstr "Ogólna korelacja z naturalną parametryzacją"
+
+# nlme/R/corStruct.R: 842
+# gettext("Independent", domain = "R-nlme")
+#~ msgid "Independent"
+#~ msgstr "Niezależna"
+
+# nlme/R/corStruct.R: 856
+# stop(gettextf("parameter in %s structure must be between %d and %d", "AR(1)", -1, 1))
+# nlme/R/corStruct.R: 1018
+# stop(gettextf("parameter in %s structure must be between %d and %d", "CAR(1)", 0, 1))
+# nlme/R/corStruct.R: 1397
+# stop(gettextf("parameter in %s structure must be between %d and %d", dQuote("corCompSymm"), -1, 1))
+#~ msgid "parameter in %s structure must be between %d and %d"
+#~ msgstr "parametr w strukturze %s musi być pomiędzy %d a %d"
+
+# nlme/R/corStruct.R: 1163
+# gettext("Continuous AR(1)", domain = "R-nlme")
+#~ msgid "Continuous AR(1)"
+#~ msgstr "Ciągła AR(1)"
+
+# nlme/R/corStruct.R: 1189
+# stop(gettextf("parameters in %s structure must be between %d and %d", "ARMA", -1, 1))
+#~ msgid "parameters in %s structure must be between %d and %d"
+#~ msgstr "parametry w strukturze %s muszą być pomiędzy %d a %d"
+
+# nlme/R/corStruct.R: 1541
+# gettext("Compound symmetry", domain = "R-nlme")
+#~ msgid "Compound symmetry"
+#~ msgstr "Złożona symetria"
+
+# nlme/R/corStruct.R: 2118
+# stop("'range' must be > 0 in \"corLin\" initial value")
+#~ msgid "'%s' argument must be > 0 in %s initial value"
+#~ msgstr "argument '%s' musi być > 0 w początkowej wartości %s"
+
+# nlme/R/corStruct.R: 2038
+# gettext("Exponential spatial correlation", domain = "R-nlme")
+#~ msgid "Exponential spatial correlation"
+#~ msgstr "Wykładnicza korelacja przestrzenna"
+
+# nlme/R/corStruct.R: 2068
+# gettext("Gaussian spatial correlation", domain = "R-nlme")
+#~ msgid "Gaussian spatial correlation"
+#~ msgstr "Gaussowska korelacja przestrzenna"
+
+# nlme/R/corStruct.R: 2156
+# gettext("Linear spatial correlation", domain = "R-nlme")
+#~ msgid "Linear spatial correlation"
+#~ msgstr "Liniowa korelacja przestrzenna"
+
+# nlme/R/corStruct.R: 2186
+# gettext("Rational quadratic spatial correlation", domain = "R-nlme")
+#~ msgid "Rational quadratic spatial correlation"
+#~ msgstr "Wymierna kwadratowa korelacja przestrzenna"
+
+# nlme/R/corStruct.R: 2277
+# gettext("Spherical spatial correlation", domain = "R-nlme")
+#~ msgid "Spherical spatial correlation"
+#~ msgstr "Sferyczna korelacja przestrzenna"
+
+# nlme/R/gls.R: 38
+# warning("negative 'control$nlmStepMax' - using default value")
+# nlme/R/gnls.R: 62
+# warning("negative 'control$nlmStepMax' - using default value")
+# nlme/R/nlme.R: 177
+# warning("negative 'control$nlmStepMax' - using default value")
+# nlme/R/lme.R: 145
+# warning("negative 'control$nlmStepMax' - using default value")
+#~ msgid "negative 'control$nlmStepMax' - using default value"
+#~ msgstr "ujemna wartość 'control$nlmStepMax' - używanie wartości domyślnej"
+
+# nlme/R/gls.R: 163
+# gettext("Iteration: ", domain = "R-nlme")
+#~ msgid "Iteration:"
+#~ msgstr "Iteracja:"
+
+# nlme/R/gls.R: 164
+# gettext("Objective: ", domain = "R-nlme")
+#~ msgid "Objective:"
+#~ msgstr "Funkcja celu:"
+
+# nlme/R/gls.R: 166
+# gettext("Convergence:", domain = "R-nlme")
+# nlme/R/gnls.R: 454
+# gettext("Convergence:", domain = "R-nlme")
+# nlme/R/nlme.R: 936
+# gettext("Convergence:", domain = "R-nlme")
+#~ msgid "Convergence:"
+#~ msgstr "Zbieżność:"
+
+# nlme/R/gls.R: 206
+# gettext("Approximate variance-covariance matrix not available", domain = "R-nlme")
+# nlme/R/gnls.R: 512
+# gettext("Approximate variance-covariance matrix not available", domain = "R-nlme")
+# nlme/R/lme.R: 411
+# gettext("Approximate variance-covariance matrix not available", domain = "R-nlme")
+#~ msgid "Approximate variance-covariance matrix not available"
+#~ msgstr "Przybliżona macierz wariancji-kowiariancji nie jest dostępna"
+
+# nlme/R/gls.R: 294
+# gettext("Non-positive definite approximate variance-covariance", domain = "R-nlme")
+# nlme/R/gnls.R: 593
+# gettext("Non-positive definite approximate variance-covariance", domain = "R-nlme")
+# nlme/R/lme.R: 617
+# gettext("Non-positive definite approximate variance-covariance", domain = "R-nlme")
+#~ msgid "Non-positive definite approximate variance-covariance"
+#~ msgstr "Niedodatnio określona przybliżona macierz wariancji-kowariancji"
+
+# nlme/R/newMethods.R: 15
+# stop(gettextf("'%s' argument is not an object of class %s", "form", dQuote("formula")))
+# nlme/R/newMethods.R: 134
+# stop(gettextf("'%s' argument is not an object of class %s", "object", dQuote("formula")))
+# nlme/R/newMethods.R: 273
+# stop(gettextf("'%s' argument is not an object of class %s", "form", dQuote("formula")))
+# nlme/R/newMethods.R: 693
+# stop(gettextf("'%s' argument is not an object of class %s", "form", dQuote("formula")))
+# nlme/R/gls.R: 410
+# stop(gettextf("'%s' argument is not an object of class %s", "object", dQuote("gls")))
+# nlme/R/gnls.R: 71
+# stop(gettextf("'%s' argument is not an object of class %s", "form", dQuote("formula")))
+# nlme/R/varFunc.R: 198
+# stop(gettextf("'%s' argument is not an object of class %s", "value", dQuote("formula")))
+# nlme/R/nlme.R: 186
+# stop(gettextf("'%s' argument is not an object of class %s", "model", dQuote("formula")))
+# nlme/R/lme.R: 853
+# stop(gettextf("'%s' argument is not an object of class %s", "object", dQuote("lme")))
+# nlme/R/lme.R: 1427
+# stop(gettextf("'%s' argument is not an object of class %s", "form", dQuote("formula")))
+# nlme/R/lme.R: 2237
+# stop(gettextf("'%s' argument is not an object of class %s", "form", dQuote("formula")))
+# nlme/R/lmList.R: 387
+# stop(gettextf("'%s' argument is not an object of class %s", "form", dQuote("formula")))
+# nlme/R/lmList.R: 649
+# stop(gettextf("'%s' argument is not an object of class %s", "form", dQuote("formula")))
+# nlme/R/lmList.R: 1031
+# stop(gettextf("'%s' argument is not an object of class %s", "form", dQuote("formula")))
+# nlme/R/newFunc.R: 135
+# stop(gettextf("'%s' argument is not an object of class %s", "object", dQuote("data.frame")))
+# nlme/R/newFunc.R: 140
+# stop(gettextf("'%s' argument is not an object of class %s", "form", dQuote("formula")))
+# nlme/R/newFunc.R: 186
+# stop(gettextf("'%s' argument is not an object of class %s", "object", dQuote("formula")))
+# nlme/R/newFunc.R: 216
+# stop(gettextf("'%s' argument is not an object of class %s", "object", dQuote("data.frame")))
+# nlme/R/newFunc.R: 220
+# stop(gettextf("'%s' argument is not an object of class %s", "form", dQuote("fomrula")))
+# nlme/R/newFunc.R: 301
+# stop(gettextf("'%s' argument is not an object of class %s", "object", dQuote("lmList")))
+#~ msgid "'%s' argument is not an object of class %s"
+#~ msgstr "argument '%s'  nie jest obiektem klasy %s"
+
+# nlme/R/gls.R: 428
+# gettext("Denom. DF: ", domain = "R-nlme")
+#~ msgid "Denom. DF:"
+#~ msgstr "Stopnie swobody mianownika:"
+
+# nlme/R/newMethods.R: 370
+# stop(gettextf("'%s' argument must be between %d and %d", "id", 0, 1))
+# nlme/R/newMethods.R: 746
+# stop(gettextf("'%s' argument must be between %d and %d", "id", 0, 1))
+# nlme/R/gls.R: 454
+# stop(gettextf("'%s' argument must be between %d and %d", "Terms", 1, nTerms), domain = "R-nlme")
+# nlme/R/lme.R: 890
+# stop(gettextf("'%s' argument must be between %d and %d", "Terms", 1, nTerms), domain = "R-nlme")
+# nlme/R/lme.R: 1516
+# stop(gettextf("'%s' argument must be between %d and %d", "id", 0, 1))
+# nlme/R/lme.R: 2297
+# stop(gettextf("'%s' argument must be between %d and %d", "id", 0, 1))
+# nlme/R/lme.R: 2353
+# stop(gettextf("'%s' argument must be between %d and %d", "id", 0, 1))
+# nlme/R/lmList.R: 473
+# stop(gettextf("'%s' argument must be between %d and %d", "id", 0, 1))
+# nlme/R/lmList.R: 745
+# stop(gettextf("'%s' argument must be between %d and %d", "id", 0, 1))
+# nlme/R/lmList.R: 1090
+# stop(gettextf("'%s' argument must be between %d and %d", "id", 0, 1))
+# nlme/R/lmList.R: 1143
+# stop(gettextf("'%s' argument must be between %d and %d", "id", 0, 1))
+# nlme/R/newFunc.R: 166
+# stop(gettextf("'%s' argument must be between %d and %d", "which", 1, ncol(object)), domain = "R-nlme")
+#~ msgid "'%s' argument must be between %d and %d"
+#~ msgstr "argument '%s' musi być pomiędzy %d a %d"
+
+# nlme/R/gls.R: 470
+# gettext(" F-test for: ", domain = "R-nlme")
+# nlme/R/lme.R: 910
+# gettext("F-test for: ", domain = "R-nlme")
+#~ msgid "F-test for:"
+#~ msgstr "Test F dla:"
+
+# nlme/R/gls.R: 506
+# gettext(" F-test for linear combinations", domain = "R-nlme")
+# nlme/R/lme.R: 952
+# gettext("F-test for linear combinations", domain = "R-nlme")
+#~ msgid "F-test for linear combinations"
+#~ msgstr "Test F dla kombinacji liniowej"
+
+# nlme/R/gls.R: 705
+# gettext("Fitted values", domain = "R-nlme")
+# nlme/R/lme.R: 1242
+# gettext("Fitted values", domain = "R-nlme")
+# nlme/R/lmList.R: 262
+# gettext("Fitted values", domain = "R-nlme")
+#~ msgid "Fitted values"
+#~ msgstr "Dopasowanie wartości"
+
+# nlme/R/gls.R: 754
+# gettext("Coefficients:", domain = "R-nlme")
+# nlme/R/gls.R: 955
+# gettext("Coefficients:", domain = "R-nlme")
+# nlme/R/gls.R: 992
+# gettext("Coefficients:", domain = "R-nlme")
+# nlme/R/lmList.R: 986
+# gettext("Coefficients:", domain = "R-nlme")
+# nlme/R/lmList.R: 1011
+# gettext("Coefficients:", domain = "R-nlme")
+#~ msgid "Coefficients:"
+#~ msgstr "Współczynniki:"
+
+# nlme/R/gls.R: 769
+# gettext("Residual standard error:", domain = "R-nlme")
+# nlme/R/gls.R: 800
+# gettext("Residual standard error:", domain = "R-nlme")
+# nlme/R/gls.R: 962
+# gettext("Residual standard error: ", domain = "R-nlme")
+# nlme/R/gls.R: 1013
+# gettext("Residual standard error: ", domain = "R-nlme")
+# nlme/R/lmList.R: 994
+# gettext("Residual standard error: ", domain = "R-nlme")
+#~ msgid "Residual standard error:"
+#~ msgstr "Standardowy błąd reszt:"
+
+# nlme/R/gls.R: 814
+# gettext("Correlation structure:", domain = "R-nlme")
+# nlme/R/lme.R: 1383
+# gettext("Correlation structure:", domain = "R-nlme")
+#~ msgid "Correlation structure:"
+#~ msgstr "Struktura korelacji:"
+
+# nlme/R/gls.R: 815
+# gettext("Variance function:", domain = "R-nlme")
+# nlme/R/varFunc.R: 134
+# gettext("Variance function:", domain = "R-nlme")
+# nlme/R/varFunc.R: 240
+# gettext("Variance function:", domain = "R-nlme")
+# nlme/R/lme.R: 1384
+# gettext("Variance function:", domain = "R-nlme")
+#~ msgid "Variance function:"
+#~ msgstr "Funkcja wariancji:"
+
+# nlme/R/gls.R: 906
+# gettext("Predicted values", domain = "R-nlme")
+# nlme/R/gnls.R: 754
+# gettext("Predicted values", domain = "R-nlme")
+# nlme/R/nlme.R: 1315
+# gettext("Predicted values", domain = "R-nlme")
+# nlme/R/lme.R: 1967
+# gettext("Predicted values", domain = "R-nlme")
+# nlme/R/lme.R: 2009
+# gettext("Predicted values", domain = "R-nlme")
+# nlme/R/lmList.R: 956
+# gettext("Predicted values", domain = "R-nlme")
+#~ msgid "Predicted values"
+#~ msgstr "Wyznaczone wartości"
+
+# nlme/R/gls.R: 916
+# gettextf("Approximate %s %% confidence intervals", attr(x, "level") * 100, domain = "R-nlme")
+# nlme/R/lme.R: 2072
+# gettextf("Approximate %s %% confidence intervals", attr(x, "level") * 100,  domain = "R-nlme")
+#~ msgid "Approximate %s %% confidence intervals"
+#~ msgstr "Przybliżone %s %% przedziały ufności"
+
+# nlme/R/gls.R: 933
+# gettext("Generalized nonlinear least squares fit", domain = "R-nlme")
+# nlme/R/gls.R: 973
+# gettext("Generalized nonlinear least squares fit", domain = "R-nlme")
+#~ msgid "Generalized nonlinear least squares fit"
+#~ msgstr "Uogólnione nieliniowe dopasowanie metodą najmniejszych kwadratów"
+
+# nlme/R/gls.R: 936
+# gettext("Generalized least squares fit by REML", domain = "R-nlme")
+# nlme/R/gls.R: 976
+# gettext("Generalized least squares fit by REML", domain = "R-nlme")
+#~ msgid "Generalized least squares fit by REML"
+#~ msgstr ""
+#~ "Uogólnione dopasowanie metodą najmniejszych kwadratów ze względu na REML"
+
+# nlme/R/gls.R: 938
+# gettext("Generalized least squares fit by maximum likelihood", domain = "R-nlme")
+# nlme/R/gls.R: 978
+# gettext("Generalized least squares fit by maximum likelihood", domain = "R-nlme")
+#~ msgid "Generalized least squares fit by maximum likelihood"
+#~ msgstr ""
+#~ "Uogólnione dopasowanie metodą najmniejszych kwadratów ze względu na "
+#~ "maksimum funkcji wiarygodności"
+
+# nlme/R/gls.R: 941
+# gettext("  Model: ", domain = "R-nlme")
+# nlme/R/gls.R: 981
+# gettext("  Model: ", domain = "R-nlme")
+# nlme/R/lme.R: 2099
+# gettext("  Model: ", domain = "R-nlme")
+# nlme/R/lme.R: 2168
+# gettext("  Model: ", domain = "R-nlme")
+# nlme/R/lmList.R: 981
+# gettext("  Model: ", domain = "R-nlme")
+# nlme/R/lmList.R: 1005
+# gettext("  Model: ", domain = "R-nlme")
+#~ msgid "Model:"
+#~ msgstr "Model:"
+
+# nlme/R/gls.R: 942
+# gettext("  Data: ", domain = "R-nlme")
+# nlme/R/gls.R: 982
+# gettext("  Data: ", domain = "R-nlme")
+# nlme/R/lme.R: 2107
+# gettext("  Data: ", domain = "R-nlme")
+# nlme/R/lme.R: 2177
+# gettext(" Data: ", domain = "R-nlme")
+# nlme/R/lmList.R: 985
+# gettext("   Data: ", domain = "R-nlme")
+# nlme/R/lmList.R: 1010
+# gettext("   Data: ", domain = "R-nlme")
+#~ msgid "Data:"
+#~ msgstr "Dane:"
+
+# nlme/R/gls.R: 944
+# gettext("  Subset: ", domain = "R-nlme")
+# nlme/R/gls.R: 984
+# gettext("  Subset: ", domain = "R-nlme")
+# nlme/R/lme.R: 2109
+# gettext("  Subset: ", domain = "R-nlme")
+# nlme/R/lme.R: 2179
+# gettext("  Subset: ", domain = "R-nlme")
+#~ msgid "Subset:"
+#~ msgstr "Podzbiór:"
+
+# nlme/R/gls.R: 947
+# gettext("  Log-likelihood: ", domain = "R-nlme")
+# nlme/R/gls.R: 952
+# gettext("  Log-likelihood: ", domain = "R-nlme")
+# nlme/R/lme.R: 2114
+# gettext("  Log-likelihood: ", domain = "R-nlme")
+#~ msgid "Log-likelihood:"
+#~ msgstr "logarytm funkcji wiarygodności:"
+
+# nlme/R/gls.R: 950
+# gettext("  Log-restricted-likelihood: ", domain = "R-nlme")
+# nlme/R/lme.R: 2112
+# gettext("  Log-restricted-likelihood: ", domain = "R-nlme")
+#~ msgid "Log-restricted-likelihood:"
+#~ msgstr "Logarytm ograniczonej funkcji wiarygodności:"
+
+# nlme/R/gls.R: 961
+# gettextf("Degrees of freedom: %s total; %s residual", dd[["N"]], dd[["N"]] - dd[["p"]], domain = "R-nlme")
+# nlme/R/gls.R: 1014
+# gettextf("Degrees of freedom: %s total; %s residual", dd[["N"]], dd[["N"]] - dd[["p"]], domain = "R-nlme")
+# nlme/R/lmList.R: 993
+# gettextf("Degrees of freedom: %s total; %s residual", length(unlist(lapply(x, fitted))), dfRes, domain = "R-nlme")
+#~ msgid "Degrees of freedom: %s total; %s residual"
+#~ msgstr "Stopnie swobody: całość %s, %s reszt"
+
+# nlme/R/gls.R: 987
+# gettext("Convergence at iteration: ", domain = "R-nlme")
+# nlme/R/lme.R: 2182
+# gettext("Convergence at iteration: ", domain = "R-nlme")
+#~ msgid "Convergence at iteration:"
+#~ msgstr "Zbieżność w iteracji:"
+
+# nlme/R/newMethods.R: 668
+# gettext(" Correlation:", domain = "R-nlme")
+# nlme/R/gls.R: 1008
+# gettext("Correlation:", domain = "R-nlme")
+# nlme/R/lme.R: 2209
+# gettext(" Correlation:", domain = "R-nlme")
+#~ msgid "Correlation:"
+#~ msgstr "Korelacja:"
+
+# nlme/R/gls.R: 1010
+# gettext("Standardized residuals:", domain = "R-nlme")
+#~ msgid "Standardized residuals:"
+#~ msgstr "Standaryzowane reszty:"
+
+# nlme/R/newMethods.R: 726
+# gettext("Standardized residuals", domain = "R-nlme")
+# nlme/R/gls.R: 1025
+# gettext("Standardized residuals", domain = "R-nlme")
+# nlme/R/lme.R: 2273
+# gettext("Standardized residuals", domain = "R-nlme")
+# nlme/R/lme.R: 2572
+# gettext("Standardized residuals", domain = "R-nlme")
+# nlme/R/lmList.R: 1067
+# gettext("Standardized residuals", domain = "R-nlme")
+# nlme/R/lmList.R: 1319
+# gettext("Standardized residuals", domain = "R-nlme")
+#~ msgid "Standardized residuals"
+#~ msgstr "Standaryzowane reszty"
+
+# nlme/R/newMethods.R: 727
+# gettext("Normalized residuals", domain = "R-nlme")
+# nlme/R/newMethods.R: 748
+# gettext("Normalized residuals", domain = "R-nlme")
+# nlme/R/gls.R: 1030
+# gettext("Normalized residuals", domain = "R-nlme")
+# nlme/R/lme.R: 2274
+# gettext("Normalized residuals", domain = "R-nlme")
+# nlme/R/lme.R: 2299
+# gettext("Normalized residuals", domain = "R-nlme")
+# nlme/R/lme.R: 2573
+# gettext("Normalized residuals", domain = "R-nlme")
+#~ msgid "Normalized residuals"
+#~ msgstr "Znormalizowane reszty"
+
+# nlme/R/newMethods.R: 729
+# gettext("Residuals", domain = "R-nlme")
+# nlme/R/gls.R: 1034
+# gettext("Residuals", domain = "R-nlme")
+# nlme/R/lme.R: 2276
+# gettext("Residuals", domain = "R-nlme")
+# nlme/R/lme.R: 2566
+# gettext("Residuals", domain = "R-nlme")
+# nlme/R/lmList.R: 1069
+# gettext("Residuals", domain = "R-nlme")
+# nlme/R/lmList.R: 1315
+# gettext("Residuals", domain = "R-nlme")
+#~ msgid "Residuals"
+#~ msgstr "Reszty"
+
+# nlme/R/gls.R: 1093
+# stop("an object with 'call' component is required")
+# nlme/R/gnls.R: 768
+# stop("an object with 'call' component is required")
+# nlme/R/nlme.R: 1332
+# stop("an object with 'call' component is required")
+# nlme/R/lme.R: 2625
+# stop("an object with 'call' component is required")
+#~ msgid "an object with 'call' component is required"
+#~ msgstr "wymagany jest obiekt z komponentem 'call'"
+
+# nlme/R/gnls.R: 126
+# stop(gettextf("'%s' must be a formula or list of formulae", "params"))
+# nlme/R/nlme.R: 275
+# stop(gettextf("'%s' must be a formula or list of formulae", "fixed"))
+# nlme/R/nlme.R: 294
+# stop(gettextf("'%s' must be a formula or list of formulae", "random"))
+#~ msgid "'%s' argument must be a formula or list of formulae"
+#~ msgstr "argument '%s' musi być formułą lub listą formuł"
+
+# nlme/R/gnls.R: 128
+# stop(gettextf("formulae in '%s' must be of the form \"parameter ~ expr\"", "params"))
+# nlme/R/gnls.R: 130
+# stop(gettextf("formulae in '%s' must be of the form \"parameter ~ expr\"", "params"))
+# nlme/R/nlme.R: 277
+# stop(gettextf("formulae in '%s' must be of the form \"parameter ~ expr\"", "fixed"))
+# nlme/R/nlme.R: 279
+# stop(gettextf("formulae in '%s' must be of the form \"parameter ~ expr\"", "fixed"))
+# nlme/R/nlme.R: 296
+# stop(gettextf("formulae in '%s' must be of the form \"parameter ~ expr\"", "random"))
+# nlme/R/nlme.R: 298
+# stop(gettextf("formulae in '%s' must be of the form \"parameter ~ expr\"", "random"))
+#~ msgid "formulae in '%s' must be of the form \"parameter ~ expr\""
+#~ msgstr "formuły w '%s' muszą mieć formę \"parametr ~ wyrażenie\""
+
+# nlme/R/gnls.R: 382
+# gettextf("Iteration %d", numIter, domain = "R-nlme")
+# nlme/R/nlme.R: 841
+# gettextf("Iteration %d", numIter, domain = "R-nlme")
+#~ msgid "Iteration %d"
+#~ msgstr "Iteracja %d"
+
+# nlme/R/gnls.R: 384
+# gettext("GLS step: Objective: ", domain = "R-nlme")
+#~ msgid "GLS step: Objective:"
+#~ msgstr "krok GLS: Funkcja celu:"
+
+#~ msgid "NLS step: RSS = %s"
+#~ msgstr "krok NLS: RSS = %s"
+
+# nlme/R/gnls.R: 433
+# gettext("model parameters:", domain = "R-nlme")
+#~ msgid "model parameters:"
+#~ msgstr "parametry modelu:"
+
+# nlme/R/gnls.R: 435
+# gettext("iterations: ", domain = "R-nlme")
+# nlme/R/nlme.R: 901
+# gettext("iterations: ", domain = "R-nlme")
+#~ msgid "iterations:"
+#~ msgstr "iteracje:"
+
+# nlme/R/groupedData.R: 31
+# stop(gettextf("first argument passed to %s function must be a two-sided formula", sQuote("GroupedData()")))
+# nlme/R/groupedData.R: 50
+# stop(gettextf("first argument passed to %s function must be a two-sided formula", sQuote("nfGroupedData()")))
+# nlme/R/groupedData.R: 150
+# stop(gettextf("first argument passed to %s function must be a two-sided formula", sQuote("nmGroupedData()")))
+#~ msgid "first argument passed to %s function must be a two-sided formula"
+#~ msgstr ""
+#~ "pierwszy argument przekazywany do funkcji %s musi być dwustronną formułą"
+
+# nlme/R/pdMat.R: 1740
+# stop(gettextf("'%s' argument must be a list", "form"))
+# nlme/R/pdMat.R: 1749
+# stop(gettextf("'%s' argument must be a list", "nam"))
+# nlme/R/groupedData.R: 227
+# stop(gettextf("'%s' argument must be a list", "subset"))
+#~ msgid "'%s' argument must be a list"
+#~ msgstr "argument '%s' musi być listą"
+
+# nlme/R/newMethods.R: 121
+# stop(gettextf("'%s' argument must be a two-sided formula", "form"))
+# nlme/R/newFunc.R: 201
+# stop(gettextf("'%s' argument must be a two-sided formula", "form"))
+# nlme/R/groupedData.R: 293
+# stop(gettextf("'%s' argument must be a two-sided formula", "preserve"))
+#~ msgid "'%s' argument must be a two-sided formula"
+#~ msgstr "argument '%s' musi być dwustronną formułą"
+
+# nlme/R/groupedData.R: 560
+# gettext("Grouped Data: ", domain = "R-nlme")
+#~ msgid "Grouped Data:"
+#~ msgstr "Zgrupowane dane:"
+
+# nlme/R/lme.R: 1206
+# gettext("Coefficients", domain = "R-nlme")
+# nlme/R/lmList.R: 216
+# gettext("Coefficients", domain = "R-nlme")
+#~ msgid "Coefficients"
+#~ msgstr "Współczynniki"
+
+# nlme/R/lme.R: 1430
+# stop(gettextf("'%s' argument must be a one-sided formula", "form"))
+# nlme/R/lmList.R: 390
+# stop(gettextf("'%s' argument must be a one-sided formula", "form"))
+#~ msgid "'%s' argument must be a one-sided formula"
+#~ msgstr "argument '%s' musi być jednostronną formułą"
+
+# nlme/R/newMethods.R: 376
+# stop(gettextf("'%s' argument can only be a formula or numeric", "id"))
+# nlme/R/newMethods.R: 757
+# stop(gettextf("'%s' argument can only be a formula or numeric", "id"))
+# nlme/R/lme.R: 1528
+# stop(gettextf("'%s' argument can only be a formula or numeric", "id"))
+# nlme/R/lme.R: 2306
+# stop(gettextf("'%s' argument can only be a formula or numeric", "id"))
+# nlme/R/lme.R: 2359
+# stop(gettextf("'%s' argument can only be a formula or numeric", "id"))
+# nlme/R/lmList.R: 482
+# stop(gettextf("'%s' argument can only be a formula or numeric", "id"))
+# nlme/R/lmList.R: 750
+# stop(gettextf("'%s' argument can only be a formula or numeric", "id"))
+# nlme/R/lmList.R: 1096
+# stop(gettextf("'%s' argument can only be a formula or numeric", "id"))
+# nlme/R/lmList.R: 1149
+# stop(gettextf("'%s' argument can only be a formula or numeric", "id"))
+#~ msgid "'%s' argument can only be a formula or numeric"
+#~ msgstr "argument '%s' może być jedynie formułą lub liczbą"
+
+# nlme/R/newMethods.R: 388
+# stop(gettextf("'%s' argument is of incorrect length", "idLabels"))
+# nlme/R/newMethods.R: 769
+# stop(gettextf("'%s' argument is of incorrect length", "idLabels"))
+# nlme/R/lme.R: 1546
+# stop(gettextf("'%s' argument is of incorrect length", "idLabels"))
+# nlme/R/lme.R: 2318
+# stop(gettextf("'%s' argument is of incorrect length", "idLabels"))
+# nlme/R/lme.R: 2374
+# stop(gettextf("'%s' argument is of incorrect length", "idLabels"))
+# nlme/R/lmList.R: 497
+# stop(gettextf("'%s' argument is of incorrect length", "idLabels"))
+# nlme/R/lmList.R: 762
+# stop(gettextf("'%s' argument is of incorrect length", "idLabels"))
+# nlme/R/lmList.R: 1108
+# stop(gettextf("'%s' argument is of incorrect length", "idLabels"))
+# nlme/R/lmList.R: 1164
+# stop(gettextf("'%s' argument is of incorrect length", "idLabels"))
+#~ msgid "'%s' argument is of incorrect length"
+#~ msgstr "argument '%s' ma niepoprawną długość"
+
+# nlme/R/newMethods.R: 392
+# stop(gettextf("'%s' argument can only be a formula or a vector", "idLabels"))
+# nlme/R/newMethods.R: 773
+# stop(gettextf("'%s' argument can only be a formula or a vector", "idLabels"))
+# nlme/R/lme.R: 1550
+# stop(gettextf("'%s' argument can only be a formula or a vector", "idLabels"))
+# nlme/R/lme.R: 2322
+# stop(gettextf("'%s' argument can only be a formula or a vector", "idLabels"))
+# nlme/R/lme.R: 2378
+# stop(gettextf("'%s' argument can only be a formula or a vector", "idLabels"))
+# nlme/R/lmList.R: 501
+# stop(gettextf("'%s' argument can only be a formula or a vector", "idLabels"))
+# nlme/R/lmList.R: 766
+# stop(gettextf("'%s' argument can only be a formula or a vector", "idLabels"))
+# nlme/R/lmList.R: 1112
+# stop(gettextf("'%s' argument can only be a formula or a vector", "idLabels"))
+# nlme/R/lmList.R: 1168
+# stop(gettextf("'%s' argument can only be a formula or a vector", "idLabels"))
+#~ msgid "'%s' argument can only be a formula or a vector"
+#~ msgstr "argument '%s' może być jedynie formułą lub wektorem"
+
+# nlme/R/lme.R: 2036
+# gettext("Call:", domain = "R-nlme")
+# nlme/R/lmList.R: 979
+# gettext("Call:", domain = "R-nlme")
+# nlme/R/lmList.R: 1003
+# gettext("Call:", domain = "R-nlme")
+#~ msgid "Call:"
+#~ msgstr "Wywołanie:"
+
+# nlme/R/lme.R: 2078
+# gettext("  Level: ",  domain = "R-nlme")
+# nlme/R/lme.R: 2149
+# gettext("Level: ", domain = "R-nlme")
+# nlme/R/pdMat.R: 461
+# gettext("Level: ", domain = "R-nlme")
+# nlme/R/lmList.R: 983
+# gettext(" Level: ", domain = "R-nlme")
+# nlme/R/lmList.R: 1008
+# gettext(" Level: ", domain = "R-nlme")
+#~ msgid "Level:"
+#~ msgstr "Poziom:"
+
+# nlme/R/lmList.R: 1018
+# gettextf("Residual standard error: %s on %s degrees of freedom", format(x$RSE), x$df.residual, domain = "R-nlme")
+#~ msgid "Residual standard error: %s on %s degrees of freedom"
+#~ msgstr "Standardowy błąd reszt: %s dla %s stopni swobody"
+
+# nlme/R/newMethods.R: 733
+# gettext("Quantiles of standard normal", domain = "R-nlme")
+# nlme/R/lme.R: 2283
+# gettext("Quantiles of standard normal", domain = "R-nlme")
+# nlme/R/lmList.R: 1076
+# gettext("Quantiles of standard normal", domain = "R-nlme")
+#~ msgid "Quantiles of standard normal"
+#~ msgstr "Kwantyle rozkładu normalnego"
+
+# nlme/R/lme.R: 2509
+# gettext("Standardized random effects", domain = "R-nlme")
+# nlme/R/lmList.R: 1243
+# gettext("Standardized random effects", domain = "R-nlme")
+#~ msgid "Standardized random effects"
+#~ msgstr "Ustandaryzowane efekty losowe"
+
+# nlme/R/lme.R: 2511
+# gettext("Random effects", domain = "R-nlme")
+# nlme/R/lmList.R: 1245
+# gettext("Random effects", domain = "R-nlme")
+#~ msgid "Random effects"
+#~ msgstr "Efekty losowe"
+
+# nlme/R/lme.R: 67
+# stop("can only fit \"lmList\" objects with single grouping variable")
+# nlme/R/lme.R: 107
+# stop("can only fit \"lmList\" objects with single grouping variable")
+#~ msgid "can only fit objects of class %s with single grouping variable"
+#~ msgstr ""
+#~ "można dopasować jedynie obiekty klasy %s z pojedynczą zmienną grupującą"
+
+# nlme/R/lme.R: 981
+# stop(gettextf("objects must inherit from at least one of the following classes: %s", paste(dQuote(valid.classes), collapse = ", ")))
+#~ msgid "objects must inherit from at least one of the following classes: %s"
+#~ msgstr ""
+#~ "obiekty muszą dziedziczyć z co najmniej jednej z następujących klas: %s"
+
+# nlme/R/nlme.R: 899
+# gettext("Fixed effects:", domain = "R-nlme")
+# nlme/R/lme.R: 1297
+# gettext("Fixed effects:", domain = "R-nlme")
+# nlme/R/lme.R: 2186
+# gettext("Fixed effects: ", domain = "R-nlme")
+#~ msgid "Fixed effects:"
+#~ msgstr "Ustalone efekty:"
+
+# nlme/R/lme.R: 1333
+# gettext("Within-group standard error:", domain = "R-nlme")
+#~ msgid "Within-group standard error:"
+#~ msgstr "Standardowy błąd w obrębie grup:"
+
+# nlme/R/reStruct.R: 396
+# gettext("Random effects:", domain = "R-nlme")
+# nlme/R/lme.R: 1382
+# gettext("Random effects:", domain = "R-nlme")
+#~ msgid "Random effects:"
+#~ msgstr "Efekty losowe:"
+
+# nlme/R/lme.R: 1533
+# stop(gettextf("covariate must have a level attribute when '%s' argument is a formula", "id"))
+# nlme/R/lme.R: 1556
+# stop(gettextf("covariate must have a level attribute when '%s' argument is a formula", "idLabels"))
+#~ msgid ""
+#~ "covariate must have a level attribute when '%s' argument is a formula"
+#~ msgstr ""
+#~ "zmienna niezależna musi mieć atrybut poziomu, gdy argument '%s' jest "
+#~ "formułą"
+
+# nlme/R/lme.R: 2095
+# gettext("Nonlinear mixed-effects model fit by REML", domain = "R-nlme")
+# nlme/R/lme.R: 2164
+# gettext("Nonlinear mixed-effects model fit by REML", domain = "R-nlme")
+#~ msgid "Nonlinear mixed-effects model fit by REML"
+#~ msgstr "Nieliniowe dopasowanie modelu mieszanych efektów ze względu na REML"
+
+# nlme/R/lme.R: 2097
+# gettext("Nonlinear mixed-effects model fit by maximum likelihood", domain = "R-nlme")
+# nlme/R/lme.R: 2166
+# gettext("Nonlinear mixed-effects model fit by maximum likelihood", domain = "R-nlme")
+#~ msgid "Nonlinear mixed-effects model fit by maximum likelihood"
+#~ msgstr ""
+#~ "Nieliniowe dopasowanie modelu mieszanych efektów ze względu na maksimum "
+#~ "funkcji wiarygodności"
+
+# nlme/R/lme.R: 2102
+# gettext("Linear mixed-effects model fit by REML", domain = "R-nlme")
+# nlme/R/lme.R: 2171
+# gettext("Linear mixed-effects model fit by REML", domain = "R-nlme")
+#~ msgid "Linear mixed-effects model fit by REML"
+#~ msgstr "Liniowe dopasowanie modelu mieszanych efektów ze względnu na REML"
+
+# nlme/R/lme.R: 2104
+# gettext("Linear mixed-effects model fit by maximum likelihood", domain = "R-nlme")
+# nlme/R/lme.R: 2173
+# gettext("Linear mixed-effects model fit by maximum likelihood", domain = "R-nlme")
+#~ msgid "Linear mixed-effects model fit by maximum likelihood"
+#~ msgstr ""
+#~ "Liniowe dopasowanie model mieszanych efektów ze względu na maksimum "
+#~ "funkcji wiarygodności"
+
+# nlme/R/lme.R: 2118
+# gettext("  Fixed: ", domain = "R-nlme")
+#~ msgid "Fixed:"
+#~ msgstr "Ustalone:"
+
+# nlme/R/lme.R: 2125
+# gettext("Number of Observations: ", domain = "R-nlme")
+# nlme/R/lme.R: 2213
+# gettext("Number of Observations: ", domain = "R-nlme")
+#~ msgid "Number of Observations:"
+#~ msgstr "Liczba obserwacji:"
+
+# nlme/R/lme.R: 2126
+# gettext("Number of Groups: ", domain = "R-nlme")
+# nlme/R/lme.R: 2214
+# gettext("Number of Groups: ", domain = "R-nlme")
+#~ msgid "Number of Groups:"
+#~ msgstr "Liczba brup:"
+
+# nlme/R/lme.R: 2211
+# gettext("Standardized Within-Group Residuals:", domain = "R-nlme")
+#~ msgid "Standardized Within-Group Residuals:"
+#~ msgstr "Ustandaryzowane reszty wewnątrz grupy:"
+
+# nlme/R/modelStruct.R: 62
+# gettextf("%s parameters:", i, domain = "R-nlme")
+#~ msgid "%s parameters:"
+#~ msgstr "parametry %s:"
+
+# nlme/R/newFunc.R: 148
+# stop(gettextf("only one level allowed in %s function", sQuote("gapply")))
+# nlme/R/newFunc.R: 228
+# stop(gettextf("only one level allowed in %s function", sQuote("gsummary")))
+#~ msgid "only one level allowed in %s function"
+#~ msgstr "tylko jeden poziom jest dozwolony w funkcji %s"
+
+# nlme/R/newFunc.R: 169
+# stop(gettextf("'%s' argument can only be character or integer", "which"))
+#~ msgid "'%s' argument can only be character or integer"
+#~ msgstr "argument '%s' może być jedynie znakiem lub liczbą całkowitą"
+
+# nlme/R/newMethods.R: 74
+# stop(gettextf("'%s' argument can only be a formula or a list of formulae", "form"))
+# nlme/R/pdMat.R: 170
+# stop(gettextf("'%s' argument can only be a formula or a list of formulae", "form"))
+#~ msgid "'%s' argument can only be a formula or a list of formulae"
+#~ msgstr "argument '%s' może być jedynie formułą lub listą formuł"
+
+# nlme/R/newMethods.R: 475
+# gettext("Lag", domain = "R-nlme")
+#~ msgid "Lag"
+#~ msgstr "Opóźnienie"
+
+#~ msgid "Autocorrelation"
+#~ msgstr "Autokorelacja"
+
+# nlme/R/newMethods.R: 603
+# gettext("Distance", domain = "R-nlme")
+#~ msgid "Distance"
+#~ msgstr "Odległość"
+
+#~ msgid "Semivariogram"
+#~ msgstr "Semiwariogram"
+
+# nlme/R/newMethods.R: 815
+# stop(gettextf("'%s' and '%s' arguments have incompatible lengths", "distance", "object"))
+# nlme/R/pdMat.R: 1753
+# stop(gettextf("'%s' and '%s' arguments have incompatible lengths", "form", "nam"))
+# nlme/R/pdMat.R: 1766
+# stop(gettextf("'%s' and '%s' arguments have incompatible lengths", "form", "pdClass"))
+# nlme/R/pdMat.R: 1769
+# stop(gettextf("'%s' and '%s' arguments have incompatible lengths", "nam", "pdClass"))
+#~ msgid "'%s' and '%s' arguments have incompatible lengths"
+#~ msgstr "argumenty '%s' oraz '%s' mają niezgodne długości"
+
+# nlme/R/nlme.R: 843
+# gettextf("LME step: Loglik: %s, nlm iterations: %d", format(nlmeFit$logLik), convIter, domain = "R-nlme")
+#~ msgid "LME step: Loglik: %s, nlm iterations: %d"
+#~ msgstr "krok LME: Logarytm funkcji wiarygodności: %s, iteracje nlm: %d"
+
+#~ msgid "PNLS step: RSS = %s"
+#~ msgstr "krok PNLS: RSS = %s"
+
+# nlme/R/pdMat.R: 90
+# warning(gettextf("ignoring argument '%s'", "form"))
+# nlme/R/pdMat.R: 98
+# warning(gettextf("ignoring argument '%s'", "nam"))
+# nlme/R/pdMat.R: 133
+# warning(gettextf("ignoring argument '%s'", "form"))
+#~ msgid "ignoring argument '%s'"
+#~ msgstr "ignorowanie argumentu '%s'"
+
+# nlme/R/pdMat.R: 436
+# gettextf("Positive definite matrix structure of class %s representing", dQuote(class(x)[1]), domain = "R-nlme")
+#~ msgid "Positive definite matrix structure of class %s representing"
+#~ msgstr "Struktura dodatnio określonej macierzy klasy reprezentującej %s"
+
+# nlme/R/pdMat.R: 439
+# gettextf("Uninitialized positive definite matrix structure of class %s.", dQuote(class(x)[1]), domain = "R-nlme")
+#~ msgid "Uninitialized positive definite matrix structure of class %s."
+#~ msgstr ""
+#~ "Niezainicjalizowana struktura dodatnio określonej macierzy klasy  %s"
+
+# nlme/R/varFunc.R: 135
+# gettext(" Structure: ", domain = "R-nlme")
+# nlme/R/pdMat.R: 476
+# gettext(" Structure: ", domain = "R-nlme")
+#~ msgid "Structure:"
+#~ msgstr "Struktura:"
+
+# nlme/R/pdMat.R: 510
+# gettext(" Composite Structure: ", domain = "R-nlme")
+#~ msgid "Composite Structure:"
+#~ msgstr "Struktura złożona:"
+
+# nlme/R/pdMat.R: 1319
+# stop("cannot extract the matrix from an uninitialized object")
+#~ msgid "cannot extract the matrix from an uninitialized object of class %s"
+#~ msgstr ""
+#~ "nie można wyodrębnić macierzy z niezainicjalizowanego obiektu klasy %s"
+
+# nlme/R/reStruct.R: 191
+# stop(gettextf("cannot change parameter length of initialized object of class %s", dQuote("reStruct")))
+# nlme/R/varFunc.R: 1191
+# stop(gettextf("cannot change parameter length of initialized object of class %s", dQuote("varComb")))
+# nlme/R/pdMat.R: 1973
+# stop(gettextf("cannot change parameter length of initialized object of class %s", dQuote("pdMat")))
+#~ msgid "cannot change parameter length of initialized object of class %s"
+#~ msgstr ""
+#~ "nie można zmienić długości parametru zainicjowanych obiektów klasy %s"
+
+# nlme/R/reStruct.R: 71
+# stop(gettextf("'%s' argument must be a list or a formula", "object"))
+#~ msgid "'%s' argument must be a list or a formula"
+#~ msgstr "argument '%s' musi być listą lub formułą"
+
+# nlme/R/reStruct.R: 401
+# gettext("Random effects estimates:", domain = "R-nlme")
+#~ msgid "Random effects estimates:"
+#~ msgstr "Oszacowania efektów losowych:"
+
+# nlme/R/reStruct.R: 407
+# gettext("Uninitialized random effects structure", domain = "R-nlme")
+#~ msgid "Uninitialized random effects structure"
+#~ msgstr "Niezainicjalizowana struktura efektów losowych"
+
+# nlme/R/simulate.R: 115
+# stop("order of arguments in 'simulate.lme' has changed to conform with generic in R-2.2.0", domain = "R-nlme")
+#~ msgid ""
+#~ "order of arguments in 'simulate.lme' has changed to conform with generic "
+#~ "in R-2.2.0"
+#~ msgstr ""
+#~ "kolejność argumentów w 'simulate.lme()' zmieniła się aby pasowała z "
+#~ "funkcjami ogólnymi w R-2.2.0"
+
+# nlme/R/varFunc.R: 144
+# gettextf("Variance function structure of class %s with no parameters, or uninitialized", dQuote(class(x)[1]), domain = "R-nlme")
+# nlme/R/varFunc.R: 156
+# gettextf("Variance function structure of class %s with no parameters, or uninitialized", dQuote(class(x)[1]), domain = "R-nlme")
+#~ msgid ""
+#~ "Variance function structure of class %s with no parameters, or "
+#~ "uninitialized"
+#~ msgstr ""
+#~ "Struktura funkcji wariancji klasy %s bez parametrów lub "
+#~ "niezainicjalizowana"
+
+# nlme/R/varFunc.R: 153
+# gettextf("Variance function structure of class %s representing", dQuote(class(x)[1]), domain = "R-nlme")
+#~ msgid "Variance function structure of class %s representing"
+#~ msgstr "Struktura funkcji wariancji klasy reprezentującej %s"
+
+# nlme/R/varFunc.R: 202
+# stop("'form' argument must have a covariate")
+#~ msgid "'%s' argument must have a covariate"
+#~ msgstr "argument '%s' musi posiadać zmienną niezależną"
+
+# nlme/R/varFunc.R: 241
+# gettext(" Structure: fixed weights", domain = "R-nlme")
+#~ msgid "Structure: fixed weights"
+#~ msgstr "Struktura: ustalone wagi"
+
+# nlme/R/varFunc.R: 335
+# stop(gettextf("cannot change the length of the %s parameter after initialization", dQuote("varIdent")))
+# nlme/R/varFunc.R: 518
+# stop(gettextf("cannot change the length of the %s parameter after initialization", dQuote("varStruct")))
+# nlme/R/varFunc.R: 730
+# stop(gettextf("cannot change the length of the %s parameter after initialization", dQuote("varExp")))
+#~ msgid "cannot change the length of the %s parameter after initialization"
+#~ msgstr "nie można zmienić długości parametru %s po jego zainicjowaniu"
+
+# nlme/R/varFunc.R: 387
+# stop(gettextf("initial value for %s should be of length %d", dQuote("varIdent"), len), domain = "R-nlme")
+# nlme/R/varFunc.R: 582
+# stop(gettextf("initial value for %s should be of length %d", dQuote("varPower"), nStratVar), domain = "R-nlme")
+# nlme/R/varFunc.R: 624
+# stop(gettextf("initial value for %s should be of length %d", dQuote("varPower"), 1), domain = "R-nlme")
+# nlme/R/varFunc.R: 792
+# stop(gettextf("initial value for %s should be of length %d", dQuote("varExp"), nStratVar), domain = "R-nlme")
+# nlme/R/varFunc.R: 834
+# stop(gettextf("initial value for %s should be of length %d", dQuote("varExp"), 1), domain = "R-nlme")
+#~ msgid "initial value for %s should be of length %d"
+#~ msgstr "początkowa wartość dla %s powinna być długości %d"
+
+# nlme/R/varFunc.R: 397
+# stop(gettextf("nonexistent group names for initial values in %s", dQuote("varIdent")))
+# nlme/R/varFunc.R: 587
+# stop(gettextf("nonexistent group names for initial values in %s", dQuote("varPower")))
+# nlme/R/varFunc.R: 797
+# stop(gettextf("nonexistent group names for initial values in %s", dQuote("varExp")))
+#~ msgid "nonexistent group names for initial values in %s"
+#~ msgstr "nieistniejące nazwy grup dla początkowych wartości w %s"
+
+# nlme/R/varFunc.R: 471
+# stop(gettextf("fixed parameters must have group names in %s function", sQuote("varPower()")))
+# nlme/R/varFunc.R: 556
+# stop(gettextf("fixed parameters must have group names in %s function", sQuote("Initialize.varPower()")))
+# nlme/R/varFunc.R: 684
+# stop(gettextf("fixed parameters must have group names in %s function", sQuote("varExp()")))
+# nlme/R/varFunc.R: 766
+# stop(gettextf("fixed parameters must have group names in %s function", sQuote("Initialize.varExp()")))
+# nlme/R/varFunc.R: 1045
+# stop(gettextf("fixed parameters must have group names in %s function", sQuote("Initialize.varConstPower()")))
+#~ msgid "fixed parameters must have group names in %s function"
+#~ msgstr "ustalone parametry muszą posiadać nazwy grup w funkcji %s"
+
+# nlme/R/varFunc.R: 1124
+# gettext("Constant plus power of variance covariate")
+#~ msgid "Constant plus power of variance covariate"
+#~ msgstr "Stała plus potęga zmiennej niezależnej wariancji"
+
+# nlme/R/varFunc.R: 1232
+# gettext("Combination of:", domain = "R-nlme")
+#~ msgid "Combination of:"
+#~ msgstr "Kombinacje:"
+
+# nlme/R/varFunc.R: 1246
+# gettext("Combination of variance functions:", domain = "R-nlme")
+#~ msgid "Combination of variance functions:"
+#~ msgstr "Kombinacja funkcji wariancji:"
+
+# nlme/R/gls.R: 882
+# stop(sprintf(ngettext(sum(wch),
+#                                       "level %s is not allowed for %s",
+#                                       "levels %s are not allowed for %s", domain = "R-nlme"),
+#                              paste(levs[wch], collapse = ", ")), domain = NA)
+# nlme/R/gnls.R: 694
+# stop(sprintf(ngettext(sum(wch),
+#                                 "level %s is not allowed for %s",
+#                                 "levels %s are not allowed for %s", domain = "R-nlme"),
+#                        paste(levs[wch], collapse = ", ")), domain = NA)
+# nlme/R/nlme.R: 1178
+# stop(sprintf(ngettext(sum(wch),
+#                                 "level %s is not allowed for %s",
+#                                 "levels %s ares not allowed for %s", domain = "R-nlme"),
+#                        paste(levs[wch], collapse = ", ")), domain = NA)
+# nlme/R/lme.R: 1934
+# stop(sprintf(ngettext(sum(wch),
+#                                 "level %s is not allowed for %s",
+#                                 "levels %s are not allowed for %s", domain = "R-nlme"),
+#                        paste(levs[wch], collapse = ", ")),
+#                domain = NA)
+#~ msgid "level %s is not allowed for %s"
+#~ msgid_plural "levels %s are not allowed for %s"
+#~ msgstr[0] "poziom %s nie jest dozwolony dla %s"
+#~ msgstr[1] "poziomy %s nie są dozwolone dla %s"
+#~ msgstr[2] "poziomy %s nie są dozwolone dla %s"
+
+# nlme/R/newMethods.R: 288
+# stop(sprintf(ngettext(sum(naV),
+#                                 "%s was not found in data",
+#                                 "%s were not found in data", domain = "R-nlme"),
+#                        allV[naV]), domain = NA)
+# nlme/R/newMethods.R: 708
+# stop(sprintf(ngettext(sum(naV),
+#                               "%s was not found in data",
+#                               "%s were not found in data", domain = "R-nlme"),
+#                      allV[naV]), domain = NA)
+# nlme/R/lme.R: 1445
+# stop(sprintf(ngettext(sum(naV),
+#                               "%s was not found in data",
+#                               "%s were not found in data", domain = "R-nlme"),
+#                      allV[naV]), domain = NA)
+# nlme/R/lme.R: 2252
+# stop(sprintf(ngettext(sum(naV),
+#                               "%s was not found in data",
+#                               "%s were not found in data", domain = "R-nlme"),
+#                      allV[naV]), domain = NA)
+# nlme/R/lmList.R: 405
+# stop(sprintf(ngettext(sum(naV),
+#                               "%s was not found in data",
+#                               "%s were not found in data", domain = "R-nlme"),
+#                      allV[naV]), domain = NA)
+# nlme/R/lmList.R: 665
+# stop(sprintf(ngettext(sum(naV),
+#                               "%s was not found in data",
+#                               "%s were not found in data", domain = "R-nlme"),
+#                       allV[naV]), domain = NA)
+# nlme/R/lmList.R: 1046
+# stop(sprintf(ngettext(sum(naV),
+#                               "%s was not found in data",
+#                               "%s were not found in data", domain = "R-nlme"),
+#                      allV[naV]), domain = NA)
+#~ msgid "%s was not found in data"
+#~ msgid_plural "%s were not found in data"
+#~ msgstr[0] "%s nie został znaleziony w danych"
+#~ msgstr[1] "%s nie zostały znalezione w danych"
+#~ msgstr[2] "%s nie zostały znalezione w danych"
+
+# nlme/R/newFunc.R: 157
+# stop(sprintf(ngettext(sum(wchNot),
+#                                        "%s value was not matched",
+#                                        "%s values were not matched", domain = "R-nlme"),
+#                               paste(which[wchNot], collapse = ", ")),
+#                       domain = NA)
+#~ msgid "%s value was not matched"
+#~ msgid_plural "%s values were not matched"
+#~ msgstr[0] "wartość %s nie została dopasowana"
+#~ msgstr[1] "wartości %s nie zostały dopasowane"
+#~ msgstr[2] "wartości %s nie zostały dopasowane"
+
+# nlme/R/corStruct.R: 1888
+# stop("'data' argument is required in order to calculate covariate")
+#~ msgid "'data' argument is required in order to calculate covariate"
+#~ msgstr ""
+#~ "wymagany jest argument 'data' w celu obliczenia zmiennej wyjaśniającej "
+#~ "obiektu klasy \"corStruct\""
+
+#~ msgid "'%d' argument must be between %d and %d"
+#~ msgstr "argument '%s' musi być pomiędzy %d a %d"
+
+#~ msgid "Random Effects:"
+#~ msgstr "Efekty losowe:"
+
+#, fuzzy
+#~ msgid "'%s' is of incorrect length"
+#~ msgstr "argument '%s' ma niepoprawną długość"
+
+#~ msgid "'%s' argument must be between 1 and %d"
+#~ msgstr "argument '%s' musi być pomiędzy 1 a %d"
+
+#, fuzzy
+#~ msgid "'%s' argument must be between 0 and 1"
+#~ msgstr "argument 'id' musi być pomiędzy 0 a 1"
+
+#~ msgid "Parameter estimate(s):"
+#~ msgstr "Oszacowania parametrów:"
+
+#, fuzzy
+#~ msgid "'which' argument must be between 1 and %d"
+#~ msgstr "argument 'Terms' musi być pomiędzy 1 a %d"
+
+#, fuzzy
+#~ msgid "Correlation structure of class \"corSymm\" representing"
+#~ msgstr "Struktura korelacji klasy %s reprezentującej"
+
+#, fuzzy
+#~ msgid "Unitialized correlation structure of class \"corSymm\""
+#~ msgstr "Niezainicjalizowana struktura korelacji klasy %s"
+
+#, fuzzy
+#~ msgid "Correlation structure of class \"corNatural\" representing"
+#~ msgstr "Struktura korelacji klasy %s reprezentującej"
+
+#, fuzzy
+#~ msgid "Unitialized correlation structure of class \"corNatural\""
+#~ msgstr "Niezainicjalizowana struktura korelacji klasy %s"
+
+#~ msgid "'object' argument is not an object of class \"gls\""
+#~ msgstr "argument 'object'  nie jest obiektem klasy \"gls\""
+
+#~ msgid "'form' argument is not an object of class \"formula\""
+#~ msgstr "argument 'form' nie jest obiektem klasy \"fomula\""
+
+#~ msgid "'object' argument is not an object of class \"data.frame\""
+#~ msgstr "argument 'object'  nie jest obiektem klasy \"data.frame\""
+
+#~ msgid "'value' argument is not an object of class \"formula\""
+#~ msgstr "argument 'value' nie jest obiektem klasy \"formula\""
+
+#, fuzzy
+#~ msgid "'object' argument is not an object of class \"formula\""
+#~ msgstr "argument 'form' nie jest obiektem klasy \"fomula\""
+
+#, fuzzy
+#~ msgid "Unitialized correlation structure of class corSymm"
+#~ msgstr "Niezainicjalizowana struktura korelacji klasy %s"
+
+#, fuzzy
+#~ msgid "Unitialized correlation structure of class corNatural"
+#~ msgstr "Niezainicjalizowana struktura korelacji klasy %s"

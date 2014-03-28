@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: nlme 3.1-105\n"
-"POT-Creation-Date: 2013-08-17 08:12\n"
+"POT-Creation-Date: 2014-03-28 07:43\n"
 "PO-Revision-Date: 2013-08-16 18:52-0600\n"
 "Last-Translator: Chel Hee Lee <gnustats@gmail.com>\n"
 "Language-Team: R Development Translation Teams (Korean) <gnustats@korea.gnu."
@@ -177,9 +177,6 @@ msgid "range must be > 0 in \"corSpher\" initial value"
 msgstr ""
 
 msgid "initial value for \"corSpher\" parameters of wrong dimension"
-msgstr ""
-
-msgid "negative control$nlmStepMax - using default value"
 msgstr ""
 
 msgid "model must be a formula of the form \"resp ~ pred\""
@@ -394,6 +391,17 @@ msgstr ""
 msgid "fewer observations than random effects in all level %s groups"
 msgstr ""
 
+msgid ""
+"%s problem, convergence error code = %s\n"
+"  message = %s"
+msgstr ""
+
+#, fuzzy
+msgid ""
+"maximum number of iterations (lmeControl(maxIter)) reached without "
+"convergence"
+msgstr "수렴하지 않고 지정된 최대 반복수에 도달하였습니다"
+
 msgid "object must inherit from class \"lme\""
 msgstr ""
 
@@ -418,10 +426,9 @@ msgstr ""
 msgid "all fitted objects must have the same estimation method"
 msgstr "모든 객체들이 같은 추정방법을 이용하여 적합되어야 합니다"
 
-msgid "fitted objects with different fixed effects."
-msgstr ""
-
-msgid "REML comparisons are not meaningful."
+msgid ""
+"fitted objects with different fixed effects. REML comparisons are not "
+"meaningful."
 msgstr ""
 
 msgid "objects must have a \"call\" component or attribute"
@@ -518,7 +525,7 @@ msgstr ""
 msgid "'form' can only be a formula, or a list of formulas"
 msgstr ""
 
-msgid "level of %s does not match formula"
+msgid "level of %s does not match formula %s"
 msgstr ""
 
 msgid "'form' argument must be a formula"
@@ -624,6 +631,20 @@ msgstr ""
 
 msgid ""
 "'data' must be a \"groupedData\" object if 'formula' does not include groups"
+msgstr ""
+
+msgid ""
+"old-style self-starting model functions\n"
+"are no longer supported.\n"
+"New selfStart functions are available.\n"
+"Use\n"
+"  SSfpl instead of fpl,\n"
+"  SSfol instead of first.order.log,\n"
+"  SSbiexp instead of biexp,\n"
+"  SSlogis instead of logistic.\n"
+"If writing your own selfStart model, see\n"
+"  \"help(selfStart)\"\n"
+"for the new form of the \"initial\" attribute."
 msgstr ""
 
 msgid "missing call attribute in \"nlsList\" object"

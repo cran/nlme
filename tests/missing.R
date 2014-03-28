@@ -1,6 +1,6 @@
 library(nlme)
 
-options(digits=4) # avoid rounding differences
+options(digits = 3) # reduce rounding differences
 
 Ovary[c(1,272), 2] <- NA
 fm1 <- gls(follicles ~ sin(2*pi*Time) + cos(2*pi*Time), Ovary,
