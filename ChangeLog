@@ -1,4 +1,12 @@
-2014-03-27  Brian Ripley
+2014-03-31  Brian Ripley
+
+	* DESCRIPTION: version is 3.1-117
+
+	* po/R-fr.po: update.
+
+2014-03-28  Brian Ripley
+
+	* DESCRIPTION: version is 3.1-116
 
 	* R/{lme,newMethods,nlsList}.R: modify messsages.
 	* po/{R-pl,pl}.po: update.
@@ -16,7 +24,7 @@
 
 	* R/{gls,gnls,lme,nmle}.R, man/{lmeScale,*Control}.Rd:
 	remove msScale and nlmStepMax arguments which were used for nlm(),
-	and where that is not longer used.
+	where that is not longer used.
 
 2014-03-08  Brian Ripley
 
