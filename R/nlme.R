@@ -2,6 +2,7 @@
 ###
 ### Copyright 1997-2003  Jose C. Pinheiro,
 ###                      Douglas M. Bates <bates@stat.wisc.edu>
+# Copyright 2006-2014 The R Core team
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -226,9 +227,9 @@ nlme.formula <-
     nlsLCall <- nlmeCall[c("","model","data","groups")]
     nlsLCall[[1]] <- quote(nlme::nlsList)
     names(nlsLCall)[2] <- "model"
-    for(i in c("data", "groups", "start")) {
-      nlmeCall[[i]] <- NULL
-    }
+    nm <- names(nlmeCall)
+    for(i in c("fixed", "data", "groups", "start"))
+      if(i %in% nm) nlmeCall[[i]] <- NULL
     nlmeCall[[1]] <- quote(nlme::nlme.nlsList)
     ## checking if "data" is not equal to sys.frame(sys.parent())
     if (is.null(dim(data))) {

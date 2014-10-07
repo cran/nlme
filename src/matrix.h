@@ -2,6 +2,7 @@
    header file for the nlme package
 
    Copyright 1999-2001  Saikat DebRoy
+   Copyright 2007-2013  The R Core Team
 
    This file is part of the nlme package for S and related languages
    and is made available under the terms of the GNU General Public

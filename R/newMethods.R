@@ -2,6 +2,7 @@
 ###
 ### Copyright 1997-2003  Jose C. Pinheiro,
 ###                      Douglas M. Bates <bates@stat.wisc.edu>
+# Copyright 2006-2014 The R Core team
 
 ##*## Methods for some of the generics in newGenerics.q for standard classes
 

@@ -1,3 +1,16 @@
+2014-10-07  Brian Ripley
+
+	* DESCRIPTION: version is 3.1-118
+
+2014-09-30 Brian Ripley
+
+	* R/nlme.R: nlme with self-starting model required 'start'.
+
+	* tests/nlme2.R: regression test for above.
+
+	* R/*, src/* correct copyright information.
+	
+
 2014-03-31  Brian Ripley
 
 	* DESCRIPTION: version is 3.1-117

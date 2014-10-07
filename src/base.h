@@ -3,6 +3,7 @@
 
    Copyright 1999-2001  Saikat DebRoy,
 			Douglas Bates <bates@stat.wisc.edu>
+   Copyright 2007-2013  The R Core Team
 
    This file is part of the nlme package for S and related languages
    and is made available under the terms of the GNU General Public

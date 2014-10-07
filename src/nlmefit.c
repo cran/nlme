@@ -5,6 +5,7 @@
    Copyright 1997-2005  Douglas M. Bates <bates@stat.wisc.edu>,
    Jose C. Pinheiro,
    Saikat DebRoy
+   Copyright 2007-2013  The R Core Team
 
    This file is part of the nlme package for R and related languages
    and is made available under the terms of the GNU General Public
