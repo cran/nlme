@@ -2159,7 +2159,7 @@ print.summary.lme <-
     cat( "Linear mixed-effects model fit by " )
     cat( ifelse( x$method == "REML", "REML\n", "maximum likelihood\n") )
   }
-  method <- x$method
+##  method <- x$method
   cat(" Data:", deparse( x$call$data ), "\n")
   if (!is.null(x$call$subset)) {
     cat("  Subset:", deparse(asOneSidedFormula(x$call$subset)[[2L]]),"\n")

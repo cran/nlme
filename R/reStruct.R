@@ -389,7 +389,7 @@ print.reStruct <-
   ox <- x
   if (isInitialized(x)) {
     nobj <- length(x)
-    if (is.null(namx <- names(x))) names(x) <- nobj:1
+    if (is.null(names(x))) names(x) <- nobj:1
     aux <- t(array(rep(names(x), nobj), c(nobj, nobj)))
     aux[lower.tri(aux)] <- ""
     x[] <- rev(x)

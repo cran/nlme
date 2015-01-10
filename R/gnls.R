@@ -739,7 +739,7 @@ predict.gnls <-
   params <- val
   names(params) <- pnames
   prs <- coef(object)
-  pn <- names(prs)
+##  pn <- names(prs)
   for(nm in pnames) {
     if (!is.logical(plist[[nm]])) {
       plist[[nm]] <- model.matrix(asOneSidedFormula(params[[nm]][[3]]),

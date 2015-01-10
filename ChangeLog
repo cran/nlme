@@ -1,10 +1,20 @@
+2015-01-09  Brian Ripley
+
+	* DESCRIPTION: version is 3.1-119
+
+	* man/bdf.Rd: update URL.
+
+2014-10-20  Brian Ripleyx
+
+	* R/*.R: remove unused assignments.
+
 2014-10-07  Brian Ripley
 
 	* DESCRIPTION: version is 3.1-118
 
 2014-09-30 Brian Ripley
 
-	* R/nlme.R: nlme with self-starting model required 'start'.
+	* R/nlme.R: nlme with self-starting model incorrectly required 'start'.
 
 	* tests/nlme2.R: regression test for above.
 

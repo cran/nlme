@@ -1106,7 +1106,7 @@ predict.nlme <-
   if (maxQ > 0) {			# predictions with random effects
     whichQ <- Q - (maxQ-1):0
     reSt <- object$modelStruct$reStruct[whichQ]
-    nlmeSt <- nlmeStruct(reStruct = reSt)
+##    nlmeSt <- nlmeStruct(reStruct = reSt)
     groups <- getGroupsFormula(reSt)
     if (any(is.na(match(all.vars(groups), names(newdata))))) {
       ## groups cannot be evaluated in newdata
@@ -1227,7 +1227,7 @@ predict.nlme <-
   fnames <- unlist(lapply(fixed, function(el) deparse(el[[2]])))
   names(fixed) <- fnames
   fix <- fixef(object)
-  fn <- names(fix)
+##  fn <- names(fix)
   for(nm in fnames) {
     if (!is.logical(plist[[nm]]$fixed)) {
       plist[[nm]]$fixed <- model.matrix(asOneSidedFormula(fixed[[nm]][[3]]),
@@ -1250,7 +1250,7 @@ predict.nlme <-
     } else {
       ran <- rev(ran)
     }
-    rn <- lapply(ran[whichQ], names)
+##    rn <- lapply(ran[whichQ], names)
     ran <- lapply(ran, t)
     ranVec <- unlist(ran)
     for(nm in names(plist)) {

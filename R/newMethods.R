@@ -611,7 +611,7 @@ plot.Variogram <-
 {
   object <- x
   trlLin <- trellis.par.get("superpose.line")
-  coll <- attr(object, "collapse")
+##  coll <- attr(object, "collapse")
   modVrg <- attr(object, "modelVariog")
   lineT <- 1
   if (!is.na(match(type, c("l","o","b")))) {

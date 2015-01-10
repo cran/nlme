@@ -763,7 +763,7 @@ solve.pdLogChol <-
   if (!isInitialized(a)) {
     stop("cannot get the inverse of an uninitialized object")
   }
-  Ncol <- (-1 + sqrt(1 + 8 * length(a))) / 2
+#  Ncol <- (-1 + sqrt(1 + 8 * length(a))) / 2
 #  val <- array(.Fortran("dbksl",
 # 			as.double(pdFactor(a)),
 # 			as.integer(Ncol),
