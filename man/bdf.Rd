@@ -44,7 +44,7 @@ scores from grade 8 pupils in elementary schools in The Netherlands.
   }
 }
 \source{
-  \url{http://stat.gamma.rug.nl/snijders/multilevel.htm}, the first
+  \samp{http://stat.gamma.rug.nl/snijders/multilevel.htm}, the first
   edition of \url{http://www.stats.ox.ac.uk/~snijders/mlbook.htm}.
 }
 \references{

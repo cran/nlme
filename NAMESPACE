@@ -10,7 +10,7 @@ importFrom(lattice,
 
 importFrom(stats,
            anova, coef, fitted, formula, logLik, nobs, predict, qqnorm,
-           residuals, update, vcov)
+           residuals, simulate, update, vcov)
 
 export(ACF, allCoef, asOneFormula, asTable, augPred, balancedGrouped,
        "coef<-", "coefficients<-", collapse, compareFits,
@@ -388,6 +388,7 @@ S3method(residuals, lme)
 S3method(residuals, lmeStruct)
 S3method(residuals, lmList)
 S3method(residuals, nlmeStruct)
+S3method(simulate, lme)
 S3method(solve, pdBlocked)
 S3method(solve, pdDiag)
 S3method(solve, pdIdent)

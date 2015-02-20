@@ -96,4 +96,4 @@ options(contrasts = c("contr.treatment", "contr.poly"))
 # cleanup
 
 proc.time()
-q("no")
+

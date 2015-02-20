@@ -828,7 +828,3 @@ Variogram.default <-
 
 ## local function for complete deparsing
 c_deparse <- function(...) paste(deparse(..., width.cutoff=500), collapse="")
-
-## Local Variables:
-## mode:S
-## End:

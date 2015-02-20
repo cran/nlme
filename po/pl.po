@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nlme 3.1-115\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-17 08:12+0100\n"
+"POT-Creation-Date: 2015-01-29 16:47+0000\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -18,13 +18,13 @@ msgstr ""
 
 # nlme/src/corStruct.c: 445
 # error(_("All parameters must be less than 1 in absolute value"))
-#: corStruct.c:445
+#: corStruct.c:446
 msgid "All parameters must be less than 1 in absolute value"
 msgstr "Wszystkie parametry muszą być na moduł mniejsze niż 1"
 
 # nlme/src/corStruct.c: 556
 # error(_("Coefficient matrix not invertible"))
-#: corStruct.c:556
+#: corStruct.c:557
 msgid "Coefficient matrix not invertible"
 msgstr "Macierz współczynników nie jest odwracalna"
 
@@ -36,50 +36,50 @@ msgstr "Macierz współczynników nie jest odwracalna"
 # error(_("Unknown spatial correlation class"))
 # nlme/src/corStruct.c: 1072
 # error(_("Unknown spatial correlation class"))
-#: corStruct.c:908 corStruct.c:963 corStruct.c:1030 corStruct.c:1072
+#: corStruct.c:909 corStruct.c:964 corStruct.c:1031 corStruct.c:1073
 msgid "Unknown spatial correlation class"
 msgstr "Nieznana klasa przestrzennej korelacji"
 
 # nlme/src/nlme.c: 499
 # error(_("First observation on an individual must have a dose"))
-#: nlme.c:498
+#: nlme.c:499
 msgid "First observation on an individual must have a dose"
 msgstr "Pierwsza obserwacja jednostki musi mieć zamknięcie"
 
 # nlme/src/nlmefit.c: 401
 # error(_("Singularity in backsolve at level %ld, block %ld"),
 # 		      (long int) (i - (dd->Q)), j + 1L)
-#: nlmefit.c:400
+#: nlmefit.c:401
 #, c-format
 msgid "Singularity in backsolve at level %ld, block %ld"
 msgstr "Osobliwość w 'backsolve' na poziomie %ld, blok %ld"
 
 # nlme/src/nlmefit.c: 558
 # error(_("analytic gradient is not available with matrix logarithm"))
-#: nlmefit.c:557
+#: nlmefit.c:558
 msgid "analytic gradient is not available with matrix logarithm"
 msgstr "gradient analityczny nie jest dostępny z algorytmem macierzowym"
 
 # nlme/src/nlmefit.c: 581
 # error(_("analytic gradient is not available with compound symmetry"))
-#: nlmefit.c:580
+#: nlmefit.c:581
 msgid "analytic gradient is not available with compound symmetry"
 msgstr "gradient analityczny nie jest dostępny dla złożonej symetrii"
 
 # nlme/src/nlmefit.c: 861
 # error(_("Unable to form eigenvalue-eigenvector decomposition"))
-#: nlmefit.c:860
+#: nlmefit.c:861
 msgid "Unable to form eigenvalue-eigenvector decomposition"
 msgstr "Nie można uformować dekompozycji wartość własna-wektor własny"
 
 # nlme/src/nlmefit.c: 893
 # error(_("Unable to form Cholesky decomposition"))
-#: nlmefit.c:892
+#: nlmefit.c:893
 msgid "Unable to form Cholesky decomposition"
 msgstr "Nie można uformować dekompozycji Cholesky'ego"
 
 # nlme/src/nlmefit.c: 924
 # error(_("Haven't written the compound symmetry case for this yet"))
-#: nlmefit.c:923
+#: nlmefit.c:924
 msgid "Haven't written the compound symmetry case for this yet"
 msgstr "Jak na razie nie została napisany przypadek dla tej złożonej symetrii"

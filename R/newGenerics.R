@@ -149,8 +149,3 @@ Variogram <-
   ## calculates variogram of a vector according to a distance matrix
   function(object, distance, ...)
   UseMethod("Variogram")
-
-### Local variables:
-### mode: S
-### End:
-

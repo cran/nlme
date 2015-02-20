@@ -175,7 +175,3 @@ update.nlsList <-
 #  nextCall[names(thisCall)] <- thisCall
 #  do.call("nlsList", nextCall)
 #}
-
-### Local variables:
-### mode: S
-### End:

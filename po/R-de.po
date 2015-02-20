@@ -2,13 +2,13 @@
 # Copyright (C) 2007-2014 The R Foundation
 # This file is distributed under the same license as the nlme package.
 # Chris Leick <c.leick@vollbio.de>, 2009-2012.
-# Detlef Steuer <steuer@hsu-hh.de> 2014.
+# Detlef Steuer <steuer@hsu-hh.de>, 2014-2015.
 msgid ""
 msgstr ""
-"Project-Id-Version: R 3.1.0/ nlme-3.1-115\n"
+"Project-Id-Version: R 3.1.2/ nlme-3.1-119\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
 "POT-Creation-Date: 2014-03-28 07:43\n"
-"PO-Revision-Date: 2014-03-16 17:20+0100\n"
+"PO-Revision-Date: 2015-01-29 15:05+0100\n"
 "Last-Translator: Detlef Steuer <steuer@hsu-hh.de>\n"
 "Language-Team: German <debian-l10n-german@lists.debian.org>\n"
 "Language: de\n"
@@ -448,12 +448,13 @@ msgid ""
 "%s problem, convergence error code = %s\n"
 "  message = %s"
 msgstr ""
+"%s Problem, Konvergenzfehlerkode = %s\n"
+"  Nachricht = %s"
 
-#, fuzzy
 msgid ""
 "maximum number of iterations (lmeControl(maxIter)) reached without "
 "convergence"
-msgstr "maximale Anzahl der Iterationen ohne Konvergenz erreicht"
+msgstr "maximale Anzahl der Iterationen (lmeControl(maxIter)) ohne Konvergenz erreicht"
 
 msgid "object must inherit from class \"lme\""
 msgstr "Objekt muss von der Klasse \"lme\" erben"
@@ -482,11 +483,12 @@ msgstr "erstes Modell hat eine vom Rest abweichende Antwort"
 msgid "all fitted objects must have the same estimation method"
 msgstr "Alle gefitteten Objekte müssen die gleiche Schätzungsmethode haben."
 
-#, fuzzy
 msgid ""
 "fitted objects with different fixed effects. REML comparisons are not "
 "meaningful."
-msgstr "gefittete Objekte mit unterschiedlichen festen Effekten"
+msgstr ""
+"Gefittete Objekte mit unterschiedlichen festen Effekten. REML\n"
+"Vergleiche haben keine Bedeutung."
 
 msgid "objects must have a \"call\" component or attribute"
 msgstr "Objekte müssen eine \"call\"-Komponente oder -Attribut haben."
@@ -728,6 +730,17 @@ msgid ""
 "  \"help(selfStart)\"\n"
 "for the new form of the \"initial\" attribute."
 msgstr ""
+"Selbst-startende Model Funktionen im alten Stil\n"
+"werden nicht mehr unterstützt.\n"
+"Neue selbst-startende Funktionen sind verfügbar.\n"
+"Nutzen Sie\n"
+"  SSfpl statt fpl,\n"
+"  SSfol statt first.order.lag,\n"
+"  SSbiexp statt biexp,\n"
+"  SSlogis statt logistic.\n"
+"Um eigene selbst-startende Modelle zu implementieren,\n"
+"sehen Sie unter \"help(selfStart)\" die neue Form\n"
+"der \"initial\" Attribute nach."
 
 msgid "missing call attribute in \"nlsList\" object"
 msgstr "fehlendes Aufrufattribut in \"nlsList\"-Objekt"

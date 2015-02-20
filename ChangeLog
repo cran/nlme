@@ -1,10 +1,30 @@
+2015-02-20  Brian Ripley
+
+	* DESCRIPTION: version is 3.1-120
+
+2015-02-07  Brian Ripley
+
+	* man/bdf.Rd: change markup for a dead URL
+
+2015-01-29  Brian Ripley
+
+	* po/*.de.po: updates.
+
+2015-01-23  Brian Ripley
+
+	* NAMESPACE: register lme method for simulate()
+
+2015-01-10  Martin Maechler
+
+	* remove non-useful legacy "code":  q(); emacs "Mode: S" etc
+
 2015-01-09  Brian Ripley
 
 	* DESCRIPTION: version is 3.1-119
 
 	* man/bdf.Rd: update URL.
 
-2014-10-20  Brian Ripleyx
+2014-10-20  Brian Ripley
 
 	* R/*.R: remove unused assignments.
 

@@ -101,8 +101,3 @@ update.modelStruct <-
   }
   object
 }
-
-### Local Variables:
-### mode:S
-### End:
-

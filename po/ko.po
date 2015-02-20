@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nlme 3.1-105\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-17 08:12+0100\n"
+"POT-Creation-Date: 2015-01-29 16:47+0000\n"
 "PO-Revision-Date: 2013-08-16 18:27-0600\n"
 "Last-Translator: Chel Hee Lee <gnustats@gmail.com>\n"
 "Language-Team: R Development Translation Teams (Korean) <gnustats@korea.gnu."
@@ -25,43 +25,43 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Generator: Poedit 1.5.4\n"
 
-#: corStruct.c:445
+#: corStruct.c:446
 msgid "All parameters must be less than 1 in absolute value"
 msgstr "모든 파라미터들의 절대값이 반드시 1 보다 작아야 합니다"
 
-#: corStruct.c:556
+#: corStruct.c:557
 msgid "Coefficient matrix not invertible"
 msgstr "가역적이지 않은 계수행렬입니다"
 
-#: corStruct.c:908 corStruct.c:963 corStruct.c:1030 corStruct.c:1072
+#: corStruct.c:909 corStruct.c:964 corStruct.c:1031 corStruct.c:1073
 msgid "Unknown spatial correlation class"
 msgstr "알 수 없는 spatial correlation 클래스입니다"
 
-#: nlme.c:498
+#: nlme.c:499
 msgid "First observation on an individual must have a dose"
 msgstr "개인의 첫번째 관측값은 반드시 dose 이어야 합니다"
 
-#: nlmefit.c:400
+#: nlmefit.c:401
 #, c-format
 msgid "Singularity in backsolve at level %ld, block %ld"
 msgstr ""
 
-#: nlmefit.c:557
+#: nlmefit.c:558
 msgid "analytic gradient is not available with matrix logarithm"
 msgstr "analytic gradient는 matrix logarithm과 함께 사용할 수 없습니다"
 
-#: nlmefit.c:580
+#: nlmefit.c:581
 msgid "analytic gradient is not available with compound symmetry"
 msgstr "analytic gradient는 compound symmetry와 함께 사용할 수 없습니다"
 
-#: nlmefit.c:860
+#: nlmefit.c:861
 msgid "Unable to form eigenvalue-eigenvector decomposition"
 msgstr "고유값-고유벡터 분해를 할 수 없습니다"
 
-#: nlmefit.c:892
+#: nlmefit.c:893
 msgid "Unable to form Cholesky decomposition"
 msgstr "콜레스키 분해를 할 수 없습니다"
 
-#: nlmefit.c:923
+#: nlmefit.c:924
 msgid "Haven't written the compound symmetry case for this yet"
 msgstr "이것에 대하여 compound symmetry의 경우는 아직 작성되지 않았습니다"

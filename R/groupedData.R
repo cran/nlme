@@ -651,9 +651,3 @@ balancedGrouped <-
   frm[[ as.character(getResponseFormula(form)[[2]]) ]] <- as.vector( data )
   do.call("groupedData", list(form, data = frm, labels = labels, units = units ))
 }
-
-### Local variables:
-### mode: S
-### End:
-
-

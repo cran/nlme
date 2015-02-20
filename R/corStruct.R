@@ -2328,7 +2328,6 @@ Variogram.corSpher <-
 ###              Random code beginning with a ####* comment
 
 ### Local variables:
-### mode: S
 ### mode: outline-minor
 ### outline-regexp: "\^L\\|\\`#\\|##\\*\\|###\\*\\|[a-zA-Z]\\|\\\"[a-zA-Z]\\|####\\*"
 ### End:

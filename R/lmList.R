@@ -1479,7 +1479,3 @@ update.lmList <-
 #  nextCall[[1]] <- as.name("lmList")
 #  eval(nextCall, envir = parent.frame(1))
 #}
-
-### Local variables:
-### mode: S
-### End:

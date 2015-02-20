@@ -372,8 +372,3 @@ LDEsysMat <-
     val[incidence[tt > 0, c("To", "From"), drop = FALSE]] <- pp[tt > 0]
     val
 }
-
-## Local Variables:
-## mode:S
-## End:
-

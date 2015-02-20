@@ -427,22 +427,11 @@ solve.reStruct <-
 
 summary.reStruct <- function(object, ...) object
 
-update.reStruct <-
-  function(object, data, ...)
-{
-  object
-}
+update.reStruct <- function(object, data, ...) object
 
-"[.reStruct" <-
-  function(x, ...)
+"[.reStruct" <- function(x, ...)
 {
   val <- NextMethod()
   if (length(val)) class(val) <- "reStruct"
   val
 }
-
-### Local variables:
-### mode: S
-### End:
-
-

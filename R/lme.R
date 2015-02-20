@@ -2944,8 +2944,3 @@ lmeControl <-
        opt = match.arg(opt), optimMethod = optimMethod,
        minAbsParApVar = minAbsParApVar, natural = natural, ...)
 }
-
-## Local Variables:
-## mode:S
-## End:
-

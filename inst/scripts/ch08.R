@@ -290,4 +290,4 @@ anova( fm2Dial.lmeML, fm3Dial.glsML, fm3Dial.gnls, test = FALSE)
 # cleanup
 
 proc.time()
-q("no")
+

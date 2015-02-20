@@ -133,7 +133,3 @@ VarCorr.pdBlocked <- function( x, sigma = 1., rdig = 3)
     paste( sapply( m, attr, which = "formStr" ), collapse = ", ")
   bd
 }
-
-### Local variables:
-### mode: S
-### End:
