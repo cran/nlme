@@ -17,7 +17,7 @@ Type 'q()' to quit R.
 
 > library(nlme)
 > 
-> options(digits=3) # reduce rounding differences
+> options(digits = 3) # reduce rounding differences
 > 
 > Ovary[c(1,272), 2] <- NA
 > fm1 <- gls(follicles ~ sin(2*pi*Time) + cos(2*pi*Time), Ovary,

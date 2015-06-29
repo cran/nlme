@@ -1,16 +1,13 @@
 useDynLib(nlme, .registration=TRUE)
 
-importFrom(graphics, pairs, plot)
+importFrom(graphics, pairs, par, plot)
+import(stats)
 
 importFrom(lattice,
            Rows, bwplot, dotplot, llines, lpoints, lsegments, ltext,
            panel.abline, panel.bwplot, panel.dotplot,  panel.grid,
            panel.histogram, panel.linejoin, panel.loess, panel.superpose,
            panel.xyplot, splom, strip.default, trellis.par.get, xyplot)
-
-importFrom(stats,
-           anova, coef, fitted, formula, logLik, nobs, predict, qqnorm,
-           residuals, simulate, update, vcov)
 
 export(ACF, allCoef, asOneFormula, asTable, augPred, balancedGrouped,
        "coef<-", "coefficients<-", collapse, compareFits,

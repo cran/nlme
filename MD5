@@ -1,9 +1,9 @@
 9aa6c82a971643ee4d74c74698ce84e8 *ChangeLog
-db4649f4187dbc7e29a39021c51b650b *DESCRIPTION
+088b45903f99fba9263ec2c294bac132 *DESCRIPTION
 eb723b61539feef013de476e68b5c50a *GPL-2
 c843826752e9f806f255d79801354abb *INDEX
 63161a0a16a64cefc52314184570dcb4 *LICENCE.note
-d29ca1425bece69f8fa69c2f00082d50 *NAMESPACE
+abd1e1f58b3964230cc5c2dec9557ab9 *NAMESPACE
 df6c3cf7246ac55d479f2295b48ce318 *R/VarCorr.R
 993d44ea848ef2b135f05e81cb6a2d20 *R/VarCov.R
 95c16b65b266fc3f50f168df5752cd2b *R/corStruct.R
@@ -412,7 +412,7 @@ dea84bf6c5e3f953ea2c523ef749bfae *tests/fitted.R
 522de7c58b1d4d04b93da9d3ef7f946c *tests/lme.R
 7e4cd57564c62031123371161603f745 *tests/lme.Rout.save
 1310db49cf519727dd9827eed613191c *tests/missing.R
-01c7368b8933a19d186a80f448895a9f *tests/missing.Rout.save
+218a542ec2433ec6e7dbeee2270743f8 *tests/missing.Rout.save
 b1d27fcbbbeb438d352fdff4b6e74c74 *tests/nlme.R
 c65f705ed0f86a109c1bd2efbbdf6143 *tests/nlme.Rout.save
 556d767831f9e9abea9078eb8c2e3ac8 *tests/nlme2.R
