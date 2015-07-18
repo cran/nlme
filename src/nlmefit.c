@@ -107,30 +107,35 @@ dimS(SEXP d)			/* from an SEXP */
     value->ncol = INTEGER(coerceVector(getListElement(d, "ncol"), INTSXP));
     value->nrot = INTEGER(coerceVector(getListElement(d, "nrot"), INTSXP));
     value->ZXoff = Calloc(Qp2, int *);
-    tmp = coerceVector(getListElement(d, "ZXoff"), VECSXP);
+    PROTECT(tmp = coerceVector(getListElement(d, "ZXoff"), VECSXP));
     for (i = 0; i < Qp2; i++) {
 	(value->ZXoff)[i] = INTEGER(coerceVector(VECTOR_ELT(tmp, i), INTSXP));
     }
+    UNPROTECT(1);
     value->ZXlen = Calloc(Qp2, int *);
-    tmp = coerceVector(getListElement(d, "ZXlen"), VECSXP);
+    PROTECT(tmp = coerceVector(getListElement(d, "ZXlen"), VECSXP));
     for (i = 0; i < Qp2; i++) {
 	(value->ZXlen)[i] = INTEGER(coerceVector(VECTOR_ELT(tmp, i), INTSXP));
     }
+    UNPROTECT(1);
     value->SToff = Calloc(Qp2, int *);
-    tmp = coerceVector(getListElement(d, "SToff"), VECSXP);
+    PROTECT(tmp = coerceVector(getListElement(d, "SToff"), VECSXP));
     for (i = 0; i < Qp2; i++) {
 	(value->SToff)[i] = INTEGER(coerceVector(VECTOR_ELT(tmp, i), INTSXP));
     }
+    UNPROTECT(1);
     value->DecOff = Calloc(Qp2, int *);
-    tmp = coerceVector(getListElement(d, "DecOff"), VECSXP);
+    PROTECT(tmp = coerceVector(getListElement(d, "DecOff"), VECSXP));
     for (i = 0; i < Qp2; i++) {
 	(value->DecOff)[i] = INTEGER(coerceVector(VECTOR_ELT(tmp, i), INTSXP));
     }
+    UNPROTECT(1);
     value->DecLen = Calloc(Qp2, int *);
-    tmp = coerceVector(getListElement(d, "DecLen"), VECSXP);
+    PROTECT(tmp = coerceVector(getListElement(d, "DecLen"), VECSXP));
     for (i = 0; i < Qp2; i++) {
 	(value->DecLen)[i] = INTEGER(coerceVector(VECTOR_ELT(tmp, i), INTSXP));
     }
+    UNPROTECT(1);
     return value;
 }
 void

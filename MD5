@@ -1,5 +1,5 @@
-9aa6c82a971643ee4d74c74698ce84e8 *ChangeLog
-088b45903f99fba9263ec2c294bac132 *DESCRIPTION
+f8b17e9634037c952b4f62449295531e *ChangeLog
+cf6fba8dd71f0f152021b6ddc76ab02e *DESCRIPTION
 eb723b61539feef013de476e68b5c50a *GPL-2
 c843826752e9f806f255d79801354abb *INDEX
 63161a0a16a64cefc52314184570dcb4 *LICENCE.note
@@ -392,7 +392,7 @@ f3e7a9ca15c42d772bdd449550c32af1 *src/init.c
 e3295bbc585af66e0c2aa29e5c127d4f *src/nlOptimizer.c
 570d6bd736c8e9c2e1df06b78d9029a1 *src/nlOptimizer.h
 84da2ff9c009c9a18d58685370f7eff3 *src/nlme.c
-8501f44b07efb364f86ea041460de23f *src/nlmefit.c
+06b94da25b1a1ec9ef9f9859dd5188ee *src/nlmefit.c
 bcf3a66ae9707f95d8de00963bc7527f *src/nlmefit.h
 bf1decb5c881ff2fda2036fd9124bf79 *src/nls.c
 f9dfa4780752ba79b41ae9c45f39ed8f *src/pdMat.c
