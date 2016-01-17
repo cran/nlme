@@ -1,6 +1,6 @@
 library(nlme)
 
-options(digits = 3) # reduce rounding differences
+op <- options(digits = 3) # reduce rounding differences
 
 Ovary[c(1,272), 2] <- NA
 fm1 <- gls(follicles ~ sin(2*pi*Time) + cos(2*pi*Time), Ovary,
@@ -24,3 +24,5 @@ fm3 <- gnls(weight ~ SSlogis(Time, Asym, xmid, scal), Soybean,
 fitted(fm3)
 residuals(fm3)
 summary(fm3)
+
+options(op)# revert when this file is source()d

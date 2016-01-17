@@ -126,7 +126,7 @@ nlme.nlsList <-
   }
   thisCall[["start"]] <- start
   thisCall[["random"]] <- reSt
-  val <- do.call("nlme.formula", thisCall)
+  val <- do.call(nlme.formula, thisCall)
   val$origCall <- match.call()
   val
 }
@@ -361,7 +361,7 @@ nlme.formula <-
     mfArgs[["subset"]] <- asOneSidedFormula(Call[["subset"]])[[2]]
   }
   mfArgs$drop.unused.levels <- TRUE
-  dataMix <- do.call("model.frame", mfArgs)
+  dataMix <- do.call(model.frame, mfArgs)
 
   origOrder <- row.names(dataMix)	# preserve the original order
   ##
@@ -384,7 +384,7 @@ nlme.formula <-
     row.names(grps) <- origOrder
     names(grps) <- as.character(deparse((groups[[2]])))
   } else {
-    ord <- do.call("order", grps)
+    ord <- do.call(order, grps)
     ## making group levels unique
     for(i in 2:ncol(grps)) {
       grps[, i] <-
@@ -395,7 +395,7 @@ nlme.formula <-
   }
   if (corQ > lmeQ) {
     ## may have to reorder by the correlation groups
-    ord <- do.call("order", getGroups(dataMix,
+    ord <- do.call(order, getGroups(dataMix,
                                  getGroupsFormula(correlation)))
   }
   grps <- grps[ord, , drop = FALSE]
@@ -781,10 +781,12 @@ nlme.formula <-
   }
   ## creating the condensed linear model
   attr(nlmeSt, "conLin") <-
-    list(Xy = array(c(ZX, w), c(NReal, sum(ncols)),
-	     list(row.names(dataMixShrunk), c(colnames(ZX),
-					deparse(model[[2]])))),
-	 dims = Dims, logLik = 0)
+    list(Xy = array(c(ZX, w), dim = c(NReal, sum(ncols)),
+                    dimnames = list(row.names(dataMixShrunk),
+                                    c(colnames(ZX), deparse(model[[2]])))),
+	 dims = Dims, logLik = 0,
+	 ## 17-11-2015; Fixed sigma patch; SH Heisterkamp; Quantitative Solutions
+	 sigma = controlvals$sigma, auxSigma = 0)
 
   ## additional attributes of nlmeSt
   attr(nlmeSt, "resp") <- yShrunk
@@ -828,7 +830,7 @@ nlme.formula <-
                          control = control)
         aConv <- coef(nlmeSt) <- optRes$par
         convIter <- optRes$iterations
-    } else {
+    } else { ## nlm(.)
         aNlm <- nlm(f = function(nlmePars) -logLik(nlmeSt, nlmePars),
                     p = c(coef(nlmeSt)), hessian = TRUE,
                     print.level = controlvals$msVerbose,
@@ -842,9 +844,8 @@ nlme.formula <-
     nlmeFit <- attr(nlmeSt, "lmeFit") <- MEestimate(nlmeSt, grpShrunk)
     if (verbose) {
       cat("\n**Iteration", numIter)
-      cat("\n")
-      cat("LME step: Loglik:", format(nlmeFit$logLik),
-          ", nlm iterations:", convIter, "\n")
+      cat(sprintf("\nLME step: Loglik: %s, %s iterations: %d\n",
+                  format(nlmeFit$logLik), controlvals$opt, convIter))
       print(nlmeSt)
     }
 
@@ -856,11 +857,8 @@ nlme.formula <-
       cF <- corFactor(nlmeSt$corStruct)
       cD <- Dim(nlmeSt$corStruct)
     }
-    if (is.null(weights)) {
-      vW <- 1.0
-    } else {
-      vW <- varWeights(nlmeSt$varStruct)
-    }
+    vW <- if(is.null(weights)) 1.0 else varWeights(nlmeSt$varStruct)
+
     work <- .C(fit_nlme,
 	       thetaPNLS = as.double(c(as.vector(unlist(sran)), sfix)),
                pdFactor = as.double(pdFactor(nlmeSt$reStruct)),
@@ -874,38 +872,38 @@ nlme.formula <-
 	       additional = double(NReal * (pLen + 1)),
 	       as.integer(!is.null(correlation)),
 	       as.integer(!is.null(weights)),
+           ## 17-11-2015; Fixed sigma patch; SH Heisterkamp; Quantitative Solutions
+	       as.double(controlvals$sigma),
                nlModel,
 	       NAOK = TRUE)
     if (work$settings[4] == 1) {
 ##      convResult <- 2
-      if (controlvals$returnObject) {
-        warning("step halving factor reduced below minimum in PNLS step")
-      } else {
-        stop("step halving factor reduced below minimum in PNLS step")
-      }
+      msg <- "step halving factor reduced below minimum in PNLS step"
+      if (controlvals$returnObject)
+        warning(msg)
+      else
+        stop(msg)
     }
     # dim(work$pdFactor) <- dim(pdMatrix(nlmeSt$reStruct[[1]]))
     # matrix(nlmeSt$reStruct[[1]]) <- crossprod(work$pdFactor)
     # fix from Setzer.Woodrow@epamail.epa.gov for nested grouping factors
-    pdFacStart <- 1
+    i.pdF <- 1
     for (i in seq_along(nlmeSt$reStruct)) {
-      tmppdFactor <- work$pdFactor[pdFacStart:
-                                   (pdFacStart -1 +
-                                    prod(dim(pdMatrix(nlmeSt$reStruct[[i]]))))]
-      dim(tmppdFactor) <- dim(pdMatrix(nlmeSt$reStruct[[i]]))
-      matrix(nlmeSt$reStruct[[i]]) <- crossprod(tmppdFactor)
-      pdFacStart <- pdFacStart + prod(dim(pdMatrix(nlmeSt$reStruct[[i]])))
+      d.i <- dim(pdMatrix(nlmeSt$reStruct[[i]]))
+      ni.pdF <- i.pdF + prod(d.i)
+      pdF <- array(work$pdFactor[i.pdF:(ni.pdF -1)], dim = d.i)
+      matrix(nlmeSt$reStruct[[i]]) <- crossprod(pdF)
+      i.pdF <- ni.pdF
     }
     oldPars <- c(sfix, oldPars)
     for(i in 1:Q) sran[[i]][] <- work$thetaPNLS[(bmap[i]+1):bmap[i+1]]
     sfix[] <- work$thetaPNLS[nPars + 1 - (fLen:1)]
     if (verbose) {
-      cat("\nPNLS step: RSS = ", format(work$set[6]), "\n fixed effects:")
-      for (i in 1:fLen) cat(format(signif(sfix[i]))," ")
-      cat("\n iterations:",work$set[5],"\n")
+      cat("PNLS step: RSS = ", format(work$settings[6]), "\n fixed effects: ")
+      for (i in 1:fLen) cat(format(sfix[i])," ")
+      cat("\n iterations:", work$settings[5],"\n")
     }
-    aConv <- coef(nlmeSt) # added by SDR 04/19/2002
-    aConv <- c(sfix, aConv)
+    aConv <- c(sfix, coef(nlmeSt)) # 2nd part added by SDR 04/19/2002
     w[] <- work$additional[(NReal * pLen) + 1:NReal]
     ZX[] <- work$additional[1:(NReal * pLen)]
     w <- w + as.vector(ZX[, rLen + (1:fLen), drop = FALSE] %*% sfix)
@@ -926,8 +924,7 @@ nlme.formula <-
 
     conv <- abs((oldPars - aConv)/
                 ifelse(abs(aConv) < controlvals$tolerance, 1, aConv))
-    aConv <- c(max(conv[1:fLen]))
-    names(aConv) <- "fixed"
+    aConv <- c(fixed = max(conv[1:fLen]))
     conv <- conv[-(1:fLen)]
     for(i in names(nlmeSt)) {
       if (any(parMap[,i])) {
@@ -937,7 +934,8 @@ nlme.formula <-
     }
 
     if (verbose) {
-      cat("\nConvergence:\n")
+      cat(sprintf("Convergence crit. (must all become <= tolerance = %g):\n",
+                  controlvals$tolerance))
       print(aConv)
     }
 
@@ -948,36 +946,41 @@ nlme.formula <-
     }
     if (numIter >= controlvals$maxIter) {
 ##      convResult <- 1
+      msg <- gettextf(
+	"maximum number of iterations (maxIter = %d) reached without convergence",
+	controlvals$maxIter)
       if (controlvals$returnObject) {
-	warning("maximum number of iterations reached without convergence")
+	warning(msg, domain=NA)
 	break
       } else {
-	stop("maximum number of iterations reached without convergence")
+	stop(msg, domain=NA)
       }
     }
   }
 
   ## wrapping up
-  if (decomp) {
-    nlmeFit <- MEestimate(nlmeSt, grpShrunk, oldConLin)
-  } else {
-    nlmeFit <- MEestimate(nlmeSt, grpShrunk)
-  }
+  nlmeFit <-
+    if (decomp)
+      MEestimate(nlmeSt, grpShrunk, oldConLin)
+    else
+      MEestimate(nlmeSt, grpShrunk)
   ## degrees of freedom for fixed effects tests
   fixDF <- getFixDF(ZX[, rLen + (1:fLen), drop = FALSE],
                     grpShrunk, attr(nlmeSt, "conLin")$dims$ngrps, fixAssign)
 
-  attr(fixDF, "varFixFact") <- nlmeFit$sigma * nlmeFit$varFix
-  varFix <- crossprod(nlmeFit$sigma * nlmeFit$varFix)
+  ## 17-11-2015; Fixed sigma patch; SH Heisterkamp; Quantitative Solutions
+  attr(fixDF, "varFixFact") <- varFix <- nlmeFit$sigma * nlmeFit$varFix
+  varFix <- crossprod(varFix)
+
   dimnames(varFix) <- list(fn, fn)
   ##
   ## fitted.values and residuals (in original order)
   ##
-  if (decomp) {
-    Resid <- resid(nlmeSt, level = 0:Q, oldConLin)[revOrderShrunk, ]
-  } else {
-    Resid <- resid(nlmeSt, level = 0:Q)[revOrderShrunk, ]
-  }
+  Resid <-
+    if (decomp)
+      resid(nlmeSt, level = 0:Q, oldConLin)[revOrderShrunk, ]
+    else
+      resid(nlmeSt, level = 0:Q)[revOrderShrunk, ]
   Fitted <- yShrunk[revOrderShrunk] - Resid
   rownames(Resid) <- rownames(Fitted) <- origOrderShrunk
   grpShrunk <- grpShrunk[revOrderShrunk, , drop = FALSE]
@@ -988,6 +991,8 @@ nlme.formula <-
   dims <- attr(nlmeSt, "conLin")$dims[c("N", "Q", "qvec", "ngrps", "ncol")]
   ## getting the approximate var-cov of the parameters
   if (controlvals$apVar) {
+    ## 17-11-2015; Fixed sigma patch; SH Heisterkamp; Quantitative Solutions
+    attr(nlmeSt, "fixedSigma") <- (controlvals$sigma > 0)
     apVar <- lmeApVar(nlmeSt, nlmeFit$sigma,
 		      .relStep = controlvals[[".relStep"]],
                       minAbsPar = controlvals[["minAbsParApVar"]],
@@ -1001,10 +1006,14 @@ nlme.formula <-
   oClass <- class(nlmeSt)
   attributes(nlmeSt) <- attributes(nlmeSt)[c("names", "class", "pmap")]
   class(nlmeSt) <- oClass
+  ## 17-11-2015; Fixed sigma patch; SH Heisterkamp; Quantitative Solutions
+  attr(nlmeSt, "fixedSigma") <- (controlvals$sigma > 0)
   ##
   ## creating the  nlme object
   ##
-  estOut <- list(modelStruct = nlmeSt,
+  isGrpd <- inherits(data, "groupedData")
+  structure(class = c("nlme","lme"),
+            list(modelStruct = nlmeSt,
 		 dims = dims,
                  contrasts = contr,
 		 coefficients = list(fixed = sfix, random = rev(sran)),
@@ -1020,14 +1029,10 @@ nlme.formula <-
 		 residuals = Resid,
 		 plist = plist,
                  map = list(fmap=fmap,rmap=rmap,rmapRel=rmapRel,bmap=bmap),
-                 fixDF = fixDF)
-  if (inherits(data, "groupedData")) {
-    ## saving labels and units for plots
-    attr(estOut, "units") <- attr(data, "units")
-    attr(estOut, "labels") <- attr(data, "labels")
-  }
-  class(estOut) <- c("nlme","lme")
-  estOut
+                 fixDF = fixDF),
+            ## saving labels and units for plots
+            units = if(isGrpd) attr(data, "units"),
+            labels = if(isGrpd) attr(data, "labels"))
 }
 
 ###
@@ -1099,10 +1104,10 @@ predict.nlme <-
     return(data.frame(object[["groups"]][,level[level != 0], drop = FALSE],
 		      predict = val))
   }
-  maxQ <- max(level)
+  maxQ <- max(level)			# maximum level for predictions
   nlev <- length(level)
-  newdata <- as.data.frame(newdata)
   mCall <- object$call
+  newdata <- as.data.frame(newdata)
   if (maxQ > 0) {			# predictions with random effects
     whichQ <- Q - (maxQ-1):0
     reSt <- object$modelStruct$reStruct[whichQ]
@@ -1116,13 +1121,14 @@ predict.nlme <-
     reSt <- NULL
   }
 
-  mfArgs <- list(formula = asOneFormula(formula(object),
+  mfArgs <- list(formula = asOneFormula(
+                   formula(object),
                    mCall$fixed, formula(reSt), naPattern,
                    omit = c(names(object$plist), "pi",
-                     deparse(getResponseFormula(object)[[2]]))),
-                 data = newdata, na.action = na.action)
-  mfArgs$drop.unused.levels <- TRUE
-  dataMix <- do.call("model.frame", mfArgs)
+                            deparse(getResponseFormula(object)[[2]]))),
+                 data = newdata, na.action = na.action,
+                 drop.unused.levels = TRUE)
+  dataMix <- do.call(model.frame, mfArgs)
   origOrder <- row.names(dataMix)	# preserve the original order
   whichRows <- match(origOrder, row.names(newdata))
 
@@ -1130,44 +1136,46 @@ predict.nlme <-
     ## sort the model.frame by groups and get the matrices and parameters
     ## used in the estimation procedures
     grps <- getGroups(newdata,
-	      eval(parse(text = paste("~1", deparse(groups[[2]]), sep = "|"))))
+                      as.formula(substitute(~ 1 | GRPS,
+                                            list(GRPS = groups[[2]]))))
     ## ordering data by groups
     if (inherits(grps, "factor")) {	# single level
       grps <- grps[whichRows, drop = TRUE]
       oGrps <- data.frame(grps)
       ## checking if there are missing groups
       if (any(naGrps <- is.na(grps))) {
-	grps[naGrps] <- levels(grps)[1]	# input with existing level
+	grps[naGrps] <- levels(grps)[1L]	# input with existing level
       }
       ord <- order(grps)     #"order" treats a single named argument peculiarly
       grps <- data.frame(grps)
       row.names(grps) <- origOrder
-      names(grps) <- names(oGrps) <- as.character(deparse((groups[[2]])))
+      names(grps) <- names(oGrps) <- as.character(deparse((groups[[2L]])))
     } else {
       grps <- oGrps <-
-	do.call("data.frame", lapply(grps[whichRows, ], function(x) x[drop = TRUE]))
+	do.call(data.frame, ## FIXME?  better  lapply(*, drop)   ??
+                lapply(grps[whichRows, ], function(x) x[drop = TRUE]))
       ## checking for missing groups
       if (any(naGrps <- is.na(grps))) {
 	## need to input missing groups
 	for(i in names(grps)) {
-	  grps[naGrps[, i], i] <- levels(grps[,i])[1]
+	  grps[naGrps[, i], i] <- levels(grps[,i])[1L]
 	}
 	naGrps <- t(apply(naGrps, 1, cumsum)) # propagating NAs
       }
-      ord <- do.call("order", grps)
+      ord <- do.call(order, grps)
       ## making group levels unique
       grps[, 1] <- grps[, 1][drop = TRUE]
       for(i in 2:ncol(grps)) {
 	grps[, i] <-
-          as.factor(paste(as.character(grps[, i-1]), as.character(grps[,i]),
-                          sep = "/"))
-	NULL
+          as.factor(paste(as.character(grps[, i-1]),
+                          as.character(grps[, i  ]), sep = "/"))
       }
     }
-    if (match(0, level, nomatch = 0)) {
-      naGrps <- cbind(FALSE, naGrps)
-    }
-    naGrps <- as.matrix(naGrps)[ord, , drop = FALSE]
+    ## if (match(0, level, nomatch = 0)) {
+    ##   naGrps <- cbind(FALSE, naGrps)
+    ## }
+    ## naGrps <- as.matrix(naGrps)[ord, , drop = FALSE]
+    naGrps <- cbind(FALSE, naGrps)[ord, , drop = FALSE]
     grps <- grps[ord, , drop = FALSE]
     dataMix <- dataMix[ord, ,drop = FALSE]
     revOrder <- match(origOrder, row.names(dataMix)) # putting in orig. order
@@ -1177,7 +1185,7 @@ predict.nlme <-
   for(i in names(dataMix)) {
     if (inherits(dataMix[,i], "factor") && !is.null(contr[[i]])) {
       levs <- levels(dataMix[,i])
-      levsC <- dimnames(contr[[i]])[[1]]
+      levsC <- dimnames(contr[[i]])[[1L]]
       if (any(wch <- is.na(match(levs, levsC)))) {
           stop(sprintf(ngettext(sum(wch),
                                 "level %s not allowed for %s",
@@ -1185,7 +1193,6 @@ predict.nlme <-
                        paste(levs[wch], collapse = ",")),
                domain = NA)
       }
-      attr(dataMix[,i], "contrasts") <- contr[[i]][levs, , drop = FALSE]
 #      if (length(levs) < length(levsC)) {
 #        if (inherits(dataMix[,i], "ordered")) {
 #          dataMix[,i] <- ordered(as.character(dataMix[,i]), levels = levsC)
@@ -1193,6 +1200,7 @@ predict.nlme <-
 #          dataMix[,i] <- factor(as.character(dataMix[,i]), levels = levsC)
 #        }
 #      }
+      attr(dataMix[,i], "contrasts") <- contr[[i]][levs, , drop = FALSE]
     }
   }
 
@@ -1245,11 +1253,7 @@ predict.nlme <-
       names(ranForm[[i]]) <- rnames[[i]]
     }
     ran <- ranef(object)
-    if(is.data.frame(ran)) {
-      ran <- list(ran)
-    } else {
-      ran <- rev(ran)
-    }
+    ran <- if(is.data.frame(ran)) list(ran) else rev(ran)
 ##    rn <- lapply(ran[whichQ], names)
     ran <- lapply(ran, t)
     ranVec <- unlist(ran)
@@ -1257,25 +1261,21 @@ predict.nlme <-
       for(i in namGrp) {
         if (!is.logical(plist[[nm]]$random[[i]])) {
           wch <- (1:length(rnames[[i]]))[!is.na(match(rnames[[i]], nm))]
-          if (length(wch) == 1) {         # only one formula for nm
-            plist[[nm]]$random[[i]] <-
-              model.matrix(asOneSidedFormula(ranForm[[i]][[nm]][[3]]),
-                 model.frame(asOneSidedFormula(ranForm[[i]][[nm]][[3]]),
-                             dataMix))
-          } else {                        # multiple formulae
-            plist[[nm]]$random[[i]] <- lapply(ranForm[[i]][wch],
-                           function(el, data) {
-                             if (el[[3]] == "1") {
-                               TRUE
-                             } else {
-                               val <- model.matrix(asOneSidedFormula(el[[3]]),
-                                       model.frame(asOneSidedFormula(el[[3]]),
-                                                   data))
-                               val
-
-                             }
-                           }, data = dataMix)
-          }
+          plist[[nm]]$random[[i]] <-
+            if (length(wch) == 1) {         # only one formula for nm
+              oSform <- asOneSidedFormula(ranForm[[i]][[nm]][[3]])
+              model.matrix(oSform,
+                           model.frame(oSform, dataMix))
+            } else {                        # multiple formulae
+              lapply(ranForm[[i]][wch], function(el) {
+                if (el[[3]] == "1") {
+                  TRUE
+                } else {
+                  oSform <- asOneSidedFormula(el[[3]])
+                  model.matrix(oSform,
+                               model.frame(oSform, dataMix))
+                } })
+            }
         }
       }
     }
@@ -1284,14 +1284,18 @@ predict.nlme <-
     grpsRev <- ranVec <- ran <- NULL
   }
   val <- vector("list", nlev)
-  names(val) <- c("fixed", rev(namGrp))[level + 1]
   modForm <- getCovariateFormula(object)[[2]]
+  omap <- object$map
   for(i in 1:nlev) {
-    val[[i]] <- eval(modForm, data.frame(dataMix,
-                  getParsNlme(plist, object$map$fmap, object$map$rmapRel,
-                          object$map$bmap, grpsRev, fix, ranVec, ran,
-                          level[i], N)))[naPat]
+    val[[i]] <- eval(modForm,
+                     data.frame(dataMix,
+                                ## FIXME: getParsNlme(...) fails when we have levels
+                                ## in newdata which do not exist in orig.data
+                                getParsNlme(plist, omap$fmap, omap$rmapRel,
+                                            omap$bmap, grpsRev, fix, ranVec, ran,
+                                            level[i], N)))[naPat]
   }
+  names(val) <- c("fixed", rev(namGrp))[level + 1]
   val <- as.data.frame(val)
 
   if (maxQ > 0) {
@@ -1301,39 +1305,39 @@ predict.nlme <-
     }
   }
   ## putting back in original order
+
   if (maxQ > 1) {                      # making groups unique
-    for(i in 2:maxQ) {
-      oGrps[, i] <- paste(as.character(oGrps[,i-1]), as.character(oGrps[,i]),
-                          sep = "/")
-    }
+    for(i in 2:maxQ)
+      oGrps[, i] <-
+        as.factor(paste(as.character(oGrps[,i-1]),
+                        as.character(oGrps[,i  ]), sep = "/"))
   }
   if (length(level) == 1) {
-    val <- val[,1]
-    if (level > 0) {
+    val <- val[,1] ## ?? not in predict.lme()
+    ## if (level > 0) {
       grps <- as.character(oGrps[, level])
       if (asList) {
         val <- split(val, ordered(grps, levels = unique(grps)))
       } else {
         names(val) <- grps
       }
-    }
+    ## }
     lab <- "Predicted values"
     if (!is.null(aux <- attr(object, "units")$y)) {
       lab <- paste(lab, aux)
     }
     attr(val, "label") <- lab
+    val
   } else {
-    val <- data.frame(oGrps, predict = val)
+    data.frame(oGrps, predict = val)
   }
-  val
 }
 
 # based on R's update.default
 update.nlme <-
     function (object, model., ..., evaluate = TRUE)
 {
-    call <- object$call
-    if (is.null(call))
+    if (is.null(call <- object$call))
 	stop("need an object with call component")
     extras <- match.call(expand.dots = FALSE)$...
     if (!missing(model.))
@@ -1394,7 +1398,7 @@ update.nlme <-
 #    thisCall$weights <- thWgt
 #  }
 #  nextCall[names(thisCall)] <- thisCall
-#  do.call("nlme", nextCall)
+#  do.call(nlme, nextCall)
 #}
 
 ###*### nlmeStruct - a model structure for nlme fits
@@ -1407,15 +1411,14 @@ nlmeStruct <-
 
   val <- list(reStruct = reStruct, corStruct = corStruct,
               varStruct = varStruct)
-  val <- val[!sapply(val, is.null)]	# removing NULL components
-  attr(val, "settings") <- attr(val$reStruct, "settings")
+  structure(val[!vapply(val, is.null, NA)], # removing NULL components
+            settings = attr(val$reStruct, "settings"),
 #  attr(val, "resp") <- resp
 #  attr(val, "model") <- model
 #  attr(val, "local") <- local
 #  attr(val, "N") <- N
 #  attr(val, "naPat") <- naPat
-  class(val) <- c("nlmeStruct", "lmeStruct", "modelStruct")
-  val
+            class = c("nlmeStruct", "lmeStruct", "modelStruct"))
 }
 
 ##*## nlmeStruct methods for standard generics
@@ -1432,6 +1435,7 @@ residuals.nlmeStruct <-
   function(object, level = Q, conLin = attr(object, "conLin"), ...)
 {
   Q <- conLin$dims[["Q"]]
+  stopifnot(length(level) >= 1)
   loc <- attr(object, "local")
   oLev <- get("level", envir = loc)
   on.exit(assign("level", oLev, envir = loc))
@@ -1453,18 +1457,26 @@ nlmeControl <-
            returnObject = FALSE, msVerbose = FALSE, gradHess = TRUE,
            apVar = TRUE, .relStep = (.Machine$double.eps)^(1/3),
            minAbsParApVar = 0.05,
-	   opt = c("nlminb", "nlm"), natural = TRUE, ...)
+	   opt = c("nlminb", "nlm"), natural = TRUE, sigma = NULL, ...)
 {
+  ## 17-11-2015; Fixed sigma patch; SH Heisterkamp; Quantitative Solutions
+  if (!is.null(sigma)) {
+    if (!is.numeric(sigma) || (length(sigma) != 1) || (sigma <= 0)) {
+      stop("Within-group std. dev. must be a positive numeric value")
+    }
+  }
+  else
+    sigma <- 0
   list(maxIter = maxIter, pnlsMaxIter = pnlsMaxIter, msMaxIter = msMaxIter,
        minScale = minScale, tolerance = tolerance, niterEM = niterEM,
        pnlsTol = pnlsTol, msTol = msTol,
        returnObject = returnObject, msVerbose = msVerbose,
        gradHess = gradHess, apVar = apVar, .relStep = .relStep,
        minAbsParApVar = minAbsParApVar,
-       opt = match.arg(opt), natural = natural, ...)
+       opt = match.arg(opt), natural = natural, sigma=sigma, ...)
 }
 
-nonlinModel <- function( modelExpression, env,
+nonlinModel <- function(modelExpression, env,
                         paramNames = get(".parameters", envir = env)) {
   modelExpression <- modelExpression[[2]]
   thisEnv <- environment()
@@ -1472,11 +1484,12 @@ nonlinModel <- function( modelExpression, env,
   ind <- vector("list", length(paramNames))
   names(ind) <- paramNames
   for( i in paramNames ) {
-    ind[[ i ]] <- offset + seq_along(get(i, envir = env))
-    offset <- offset + length( get(i, envir = env) )
+    v.i <- get(i, envir = env)
+    ind[[ i ]] <- offset + seq_along(v.i)
+    offset <- offset + length(v.i)
   }
   modelValue <- eval(modelExpression, env)
-  on.exit(remove(i, offset, paramNames))
+  rm(i, offset, paramNames)
   function (newPars) {
     if(!missing(newPars)) {
       for(i in names(ind))

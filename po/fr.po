@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nlme 3.1-65\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-29 16:47+0000\n"
+"POT-Creation-Date: 2015-12-15 23:42+0100\n"
 "PO-Revision-Date: 2005-12-08 01:00+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -29,33 +29,37 @@ msgstr "Matrice de coefficient non inversible"
 msgid "Unknown spatial correlation class"
 msgstr "Classes de corrélation spatiale inconnues"
 
-#: nlme.c:499
+#: nlme.c:508
 msgid "First observation on an individual must have a dose"
 msgstr "La première observation sur un individu doit avoir une dose"
 
-#: nlmefit.c:401
+#: nlmefit.c:422
 #, c-format
 msgid "Singularity in backsolve at level %ld, block %ld"
 msgstr "Singularité rencontrée en résolution inverse au niveau %ld, bloc %ld"
 
-#: nlmefit.c:558
+#: nlmefit.c:564 nlmefit.c:745
+msgid "Overfitted model!"
+msgstr ""
+
+#: nlmefit.c:590
 msgid "analytic gradient is not available with matrix logarithm"
 msgstr ""
 "un gradient analytique n'est pas disponible avec une matrice logarithmique"
 
-#: nlmefit.c:581
+#: nlmefit.c:613
 msgid "analytic gradient is not available with compound symmetry"
 msgstr "un gradient analytique n'est pas disponible avec une symétrie composée"
 
-#: nlmefit.c:861
+#: nlmefit.c:913
 msgid "Unable to form eigenvalue-eigenvector decomposition"
 msgstr ""
 "Incapable de former la décomposition valeurs propres - vecteurs propres"
 
-#: nlmefit.c:893
+#: nlmefit.c:945
 msgid "Unable to form Cholesky decomposition"
 msgstr "Incapable de former la décomposition de Cholesky"
 
-#: nlmefit.c:924
+#: nlmefit.c:976
 msgid "Haven't written the compound symmetry case for this yet"
 msgstr "Les cas de symétrie composée n'ont pas encore été écrits"

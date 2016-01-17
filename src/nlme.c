@@ -4,7 +4,7 @@
    Copyright 1997-2001  Douglas M. Bates <bates@stat.wisc.edu>,
 			Jose C. Pinheiro,
 			Saikat DebRoy
-   Copyright 2007-2012  The R Core Team
+   Copyright 2007-2015  The R Core Team
 
    This file is part of the nlme package for R and related languages
    and is made available under the terms of the GNU General Public
@@ -37,7 +37,8 @@ extern void corStruct_recalc(double *, longint *, longint *, double *);
 
 typedef struct nlme_struct {	/* Nonlinear mixed-effects structure */
     double *residuals, *gradient, *DmHalf, *corFactor, *varWeights,
-	*newtheta, *theta, *incr, *add_ons, new_objective, objective, RSS;
+	*newtheta, *theta, *incr, *add_ons, new_objective, objective, RSS,
+	*sigma; // <- 17-11-2015; Fixed sigma patch; E van Willigen; Quant.Sol.
     longint corOpt, varOpt, nparTot, ngrpTot, nrdof, *sgroups, *corDims,
 	*npar, *pdClass, *pdims, *ZXoff, *ZXlen;
     double *result[1];
@@ -71,7 +72,9 @@ static nlmePtr
 nlme_init(double *ptheta, double *pDmHalf, longint *pgroups,
 	  longint *pdims, longint *pdClass, double *pcorFactor,
 	  double *pvarWeights, longint *pcorDims, double *additional,
-	  longint *pcorOpt, longint *pvarOpt aMOD)
+	  longint *pcorOpt, longint *pvarOpt
+	  // 17-11-2015; Fixed sigma patch; E van Willigen; Quantitative Solutions
+	  , double *sigma aMOD)
 {
     longint i, *src, nResult;
     nlmePtr nlme = Calloc(1, struct nlme_struct);
@@ -83,6 +86,7 @@ nlme_init(double *ptheta, double *pDmHalf, longint *pgroups,
     nlme->corDims = pcorDims;
     nlme->dd = dims(pdims);
     nlme->npar = Calloc(nlme->dd->Q + 1, longint);
+    nlme->sigma = sigma; // 17-11-2015; Fixed sigma patch; E van Willigen; Quantitative Solutions
     for(i = 0, nlme->nparTot = 0; i <= nlme->dd->Q; i++) {
 	nlme->npar[i] = (nlme->dd->ncol)[i] * (nlme->dd->ngrp)[i];
 	nlme->nparTot += nlme->npar[i];
@@ -252,7 +256,8 @@ nlme_increment(nlmePtr nlme)
     internal_decomp(nlme->dd, nlme->gradient);
     nlme_workingRes(nlme);
     internal_EM(nlme->dd, nlme->gradient, nlme->DmHalf, 20,
-		nlme->pdClass, &RML, &logLik, Ra, &lRSS);
+		// 17-11-2015; Fixed sigma patch; E van Willigen; Quantitative Solutions
+		nlme->pdClass, &RML, &logLik, Ra, &lRSS, nlme->sigma);
     {
 	statePTR st = Calloc(1, struct state_struct);
 	int ntheta = count_DmHalf_pars( nlme->dd, nlme->pdClass ),
@@ -269,6 +274,7 @@ nlme_increment(nlmePtr nlme)
 	st->ZXy = nlme->gradient;
 	st->pdClass = nlme->pdClass;
 	st->RML = &RML;
+	st->sigma = nlme->sigma; // 17-11-2015; Fixed sigma patch; E van Willigen; Quantitative Solutions
 
 	generate_theta(theta, nlme->dd, nlme->pdClass, nlme->DmHalf);
 
@@ -303,7 +309,8 @@ nlme_increment(nlmePtr nlme)
 	Free(st);
     }
     nlme->objective = nlme_objective(nlme);
-    internal_loglik(nlme->dd, nlme->result[0], nlme->DmHalf, &RML, dc, DNULLP);
+    // 17-11-2015; Fixed sigma patch; E van Willigen; Quantitative Solutions
+    internal_loglik(nlme->dd, nlme->result[0], nlme->DmHalf, &RML, dc, DNULLP, nlme->sigma);
     internal_estimate(nlme->dd, dc);
     src = dc +  (nlme->dd->ZXcols - 1) * nlme->dd->Srows;
     dest = incr;
@@ -395,7 +402,8 @@ void
 fit_nlme(double *ptheta, double *pDmHalf, longint *pgroups,
 	 longint *pdims, longint *pdClass, double *pcorFactor,
 	 double *pvarWeights, longint *pcorDims, double *settings,
-	 double *additional, longint *pcorOpt, longint *pvarOpt aMOD)
+	 // 17-11-2015; Fixed sigma patch; E van Willigen; Quantitative Solutions
+	 double *additional, longint *pcorOpt, longint *pvarOpt, double *sigma aMOD)
 {
     nlmePtr nlme;
     S_EVALUATOR
@@ -405,7 +413,8 @@ fit_nlme(double *ptheta, double *pDmHalf, longint *pgroups,
 #endif /* R_S_H */
     nlme = nlme_init(ptheta, pDmHalf, pgroups, pdims, pdClass,
 		     pcorFactor, pvarWeights, pcorDims,
-		     additional, pcorOpt, pvarOpt MOD);
+		     // 17-11-2015; Fixed sigma patch; E van Willigen; Quantitative Solutions
+		     additional, pcorOpt, pvarOpt, sigma MOD);
     if(!sqrt_eps) sqrt_eps = sqrt(DOUBLE_EPS);
     settings[4] = (double) nlme_iterate(nlme, settings SEV);
     nlme_wrapup(nlme SEV);

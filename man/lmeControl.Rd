@@ -1,20 +1,29 @@
 % File nlme/man/lmeControl.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE.note
+% Distributed under GPL 2 or later: see ../LICENCE.note
 
 \name{lmeControl}
-\title{Control Values for lme Fit}
-\usage{
-lmeControl(maxIter, msMaxIter, tolerance, niterEM, msMaxEval, msTol,
-           msVerbose, returnObject, gradHess, apVar,
-           .relStep, minAbsParApVar,
-           opt = c("nlminb", "optim"), optimMethod,
-           natural, \dots)
-}
+\title{Specifying Control Values for lme Fit}
 \alias{lmeControl}
+\description{
+  The values supplied in the \code{lmeControl()} call replace the
+  defaults, and a \code{\link{list}} with all settings (i.e., values for
+  all possible arguments) is returned.  The returned list is
+  used as the \code{control} argument to the \code{lme} function.
+}
+\usage{
+lmeControl(maxIter = 50, msMaxIter = 50, tolerance = 1e-6, niterEM = 25,
+           msMaxEval = 200,
+	   msTol = 1e-7, msVerbose = FALSE,
+           returnObject = FALSE, gradHess = TRUE, apVar = TRUE,
+	   .relStep = .Machine$double.eps^(1/3), minAbsParApVar = 0.05,
+           opt = c("nlminb", "optim"),
+	   optimMethod = "BFGS", natural = TRUE,
+	   sigma = NULL, \dots)
+}
 \arguments{
  \item{maxIter}{maximum number of iterations for the \code{lme}
-   optimization algorithm.  Default is \code{50}.} 
+   optimization algorithm.  Default is \code{50}.}
  \item{msMaxIter}{maximum number of iterations
    for the optimization step inside the \code{lme} optimization.
    Default is \code{50}.}
@@ -28,12 +37,11 @@ lmeControl(maxIter, msMaxIter, tolerance, niterEM, msMaxEval, msTol,
  \item{msTol}{tolerance for the convergence criterion on the first
    iteration when \code{optim} is used.  Default is \code{1e-7}.}
  \item{msVerbose}{a logical value passed as the \code{trace} argument to
-   \code{\link{nlminb}} or \code{\link{optim}}.
-   Default is \code{FALSE}.} 
+   \code{\link{nlminb}} or \code{\link{optim}}.  Default is \code{FALSE}.}
  \item{returnObject}{a logical value indicating whether the fitted
    object should be returned when the maximum number of iterations is
    reached without convergence of the algorithm.  Default is
-   \code{FALSE}.} 
+   \code{FALSE}.}
  \item{gradHess}{a logical value indicating whether numerical gradient
    vectors and Hessian matrices of the log-likelihood function should
    be used in the internal optimization.  This option is only available
@@ -59,20 +67,18 @@ lmeControl(maxIter, msMaxIter, tolerance, niterEM, msMaxEval, msTol,
    parametrization should be used for general positive-definite matrices
    (\code{pdSymm}) in \code{reStruct}, when the approximate covariance
    matrix of the estimators is calculated.  Default is \code{TRUE}.}
- \item{\dots}{Further named control arguments to be passed to
-   \code{\link{nlminb}} (those from \code{abs.tol} down)
+ \item{sigma}{optionally a positive number to fix the residual error at.
+   If \code{NULL}, as by default, sigma is estimated.}
+ \item{\dots}{further named control arguments to be passed, depending on
+   \code{opt}, to \code{\link{nlminb}} (those from \code{abs.tol} down)
    or \code{\link{optim}} (those except \code{trace} and \code{maxit};
    \code{reltol} is used only from the second iteration).}
-}
-\description{
-  The values supplied in the function call replace the defaults and a
-  list with all possible arguments is returned.  The returned list is
-  used as the \code{control} argument to the \code{lme} function.
 }
 \value{
   a list with components for each of the possible arguments.
 }
-\author{José Pinheiro and Douglas Bates \email{bates@stat.wisc.edu}}
+\author{José Pinheiro and Douglas Bates \email{bates@stat.wisc.edu}; the
+  \code{sigma} option: Siem Heisterkamp and Bert van Willigen.}
 \seealso{\code{\link{lme}}, \code{\link{nlminb}}, \code{\link{optim}}}
 \examples{
 # decrease the maximum number iterations in the ms call and

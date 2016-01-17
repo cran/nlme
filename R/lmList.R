@@ -975,8 +975,7 @@ print.intervals.lmList <-
   invisible(ox)
 }
 
-print.lmList <-
-  function(x, pool = attr(x, "pool"), ...)
+print.lmList <- function(x, pool = attr(x, "pool"), ...)
 {
   mCall <- attr(x, "call")
   cat("Call:\n")
@@ -989,7 +988,7 @@ print.lmList <-
   }
   cat("   Data:", deparse(mCall$data),"\n\n")
   cat("Coefficients:\n")
-  invisible(print(coef(x)))
+  print(coef(x), ...)
   if(pool) {
     cat("\n")
     poolSD <- pooledSD(x)
@@ -1003,8 +1002,7 @@ print.lmList <-
   invisible(x)
 }
 
-print.summary.lmList <-
-  function(x, ...)
+print.summary.lmList <- function(x, ...)
 {
   cat("Call:\n")
   form <- formula(x)
@@ -1018,7 +1016,7 @@ print.summary.lmList <-
   cat("Coefficients:\n")
   for(i in dimnames(coef(x))[[3]]) {
     cat("  ",i,"\n")
-    print(coef(x)[,,i])
+    print(coef(x)[,,i], ...)
   }
   if(x$pool) {
     cat("\n")
@@ -1049,19 +1047,16 @@ qqnorm.lmList <-
       alist <- c(as.list(as.name("data.frame")), alist)
       mode(alist) <- "call"
       data <- eval(alist, sys.parent(1))
-    } else {
-      if (any(naV <- is.na(match(allV, names(data))))) {
+    } else if (any(naV <- is.na(match(allV, names(data))))) {
         stop(sprintf(ngettext(sum(naV),
                               "%s not found in data",
                               "%s not found in data"),
                      allV[naV]), domain = NA)
-      }
     }
   } else data <- NULL
   ## argument list
   dots <- list(...)
-  if (length(dots) > 0) args <- dots
-  else args <- list()
+  args <- if (length(dots) > 0) dots else list()
   ## appending object to data
   data <- as.list(c(as.list(data), . = list(object)))
 
@@ -1069,16 +1064,14 @@ qqnorm.lmList <-
   covF <- getCovariateFormula(form)
   .x <- eval(covF[[2]], data)
   labs <- attr(.x, "label")
-  if (inherits(.x, "ranef.lmList")) {      # random effects
-    type <- "reff"
-  } else {
-    if (!is.null(labs) && ((labs == "Standardized residuals") ||
-                           (substring(labs, 1, 9) == "Residuals"))) {
-      type <- "res"                     # residuals
-    } else {
+  type <-
+    if (inherits(.x, "ranef.lmList"))
+      "reff" # random effects
+    else if (!is.null(labs) && ((labs == "Standardized residuals") ||
+                                (substr(labs, 1, 9) == "Residuals")))
+      "res" # residuals
+    else
       stop("only residuals and random effects allowed")
-    }
-  }
   if (is.null(args$xlab)) args$xlab <- labs
   if (is.null(args$ylab)) args$ylab <- "Quantiles of standard normal"
   if(type == "res") {			# residuals

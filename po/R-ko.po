@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: nlme 3.1-105\n"
-"POT-Creation-Date: 2014-03-28 07:43\n"
+"POT-Creation-Date: 2015-12-15 23:42\n"
 "PO-Revision-Date: 2013-08-16 18:52-0600\n"
 "Last-Translator: Chel Hee Lee <gnustats@gmail.com>\n"
 "Language-Team: R Development Translation Teams (Korean) <gnustats@korea.gnu."
@@ -166,8 +166,8 @@ msgid "'range' must be > 0 in \"corLin\" initial value"
 msgstr ""
 
 msgid ""
-"initial value for 'range' less than minimum distance. Setting it to 1.1 * min"
-"(distance)"
+"initial value for 'range' less than minimum distance. Setting it to 1.1 * "
+"min(distance)"
 msgstr ""
 
 msgid "initial value for \"corLin\" parameters of wrong dimension"
@@ -225,6 +225,9 @@ msgstr ""
 msgid "'nint' is not consistent with 'breaks'"
 msgstr ""
 
+msgid "Within-group std. dev. must be a positive numeric value"
+msgstr ""
+
 msgid "'object' must be a formula"
 msgstr "'object'는 반드시 formula이어야 합니다"
 
@@ -250,9 +253,6 @@ msgid "starting values for parameters are not of the correct length"
 msgstr "파라미터들에 대한 시작값들에 대한 길이가 올바르지 않습니다"
 
 msgid "step halving factor reduced below minimum in NLS step"
-msgstr ""
-
-msgid "approximate covariance matrix for parameter estimates not of full rank"
 msgstr ""
 
 msgid "cannot calculate REML log-likelihood for \"gnls\" objects"
@@ -620,8 +620,9 @@ msgid ""
 "names mismatch in 'random' and starting values  for 'random' at level %s"
 msgstr ""
 
-msgid "step halving factor reduced below minimum in PNLS step"
-msgstr ""
+#, fuzzy
+msgid "maximum number of iterations (maxIter = %d) reached without convergence"
+msgstr "수렴하지 않고 지정된 최대 반복수에 도달하였습니다"
 
 msgid "second argument must be a groupedData object"
 msgstr ""
@@ -864,10 +865,10 @@ msgstr ""
 msgid "models with \"corStruct\" and/or \"varFunc\" objects not allowed"
 msgstr ""
 
-msgid "plot method only implemented for comparing models"
+msgid "no degrees of freedom specified"
 msgstr ""
 
-msgid "no degrees of freedom specified"
+msgid "plot method only implemented for comparing models"
 msgstr ""
 
 msgid "degrees of freedom and weights must have the same length"

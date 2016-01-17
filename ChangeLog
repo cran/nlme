@@ -1,3 +1,15 @@
+2016-01-11  Martin Maechler
+
+	* R/VarCorr.R, man/VarCorr.Rd: add optional '...' (for other methods).
+
+2015-11-25 Bert van Willigen --- with modifications by MM
+	* DESCRIPTION: version 3.1-123
+	* man/*Control.Rd: Fixed "sigma" (residual error) added.
+	* R/gls.R, R/gnls.R, R/lme.R, R/nlme.R, R/reStruct.R: Fixed sigma added.
+	* src/init.c, src/nlme.c, src/nlmefit.?:
+	* tests/example_[1-9]_wequantify.R: 9 files added.
+	* README: Credentials added.
+
 2015-08-18 Luke Tierney
 	* Description: version 3.1-122
 	* src/nlmefit.c: Added PROTECT/UNPROTECT calls.
@@ -49,7 +61,7 @@
 	* tests/nlme2.R: regression test for above.
 
 	* R/*, src/* correct copyright information.
-	
+
 
 2014-03-31  Brian Ripley
 
@@ -121,12 +133,12 @@
 
 	* man/*.Rd: classes in quotes, more links, remove CVS lines.
 
-	* R/lme.R, R/newFunc.R, tests/predict.lme.R: 
+	* R/lme.R, R/newFunc.R, tests/predict.lme.R:
 	fix asOneFormula and predict.lme for y ~ 0.
 	(see https://stat.ethz.ch/pipermail/r-devel/2013-September/067600.html)
 
 	* R/lme.R: Several of the return components were incorrect for a
-	model of the form fixed = resp ~ 0. 
+	model of the form fixed = resp ~ 0.
 
 2013-08-17  Brian Ripley
 

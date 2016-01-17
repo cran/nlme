@@ -2,7 +2,7 @@
 ###
 ### Copyright 1997-2003  Jose C. Pinheiro,
 ###                      Douglas M. Bates <bates@stat.wisc.edu>
-# Copyright 2005-2012 The R Core team
+### Copyright 2005-2015  The R Core team
 
 #
 #  This program is free software; you can redistribute it and/or modify
@@ -473,9 +473,9 @@ Initialize.corSymm <-
     }
     natMat <- diag(maxCov)/2
     natMat[lower.tri(natMat)] <- natPar
-    natMat <- (t(natMat) + natMat)
+    natMat <- t(natMat) + natMat
     ## checking if positive-definite
-    if (any(eigen(natMat)$values <= 0)) {
+    if (any(eigen(natMat, symmetric=TRUE, only.values=TRUE)$values <= 0)) {
       stop("initial values for \"corSymm\" do not define a positive-definite correlation structure")
     }
     natMat <- chol(natMat)
@@ -713,9 +713,9 @@ Initialize.corNatural <-
     }
     natMat <- diag(maxCov)/2
     natMat[lower.tri(natMat)] <- natPar
-    natMat <- (t(natMat) + natMat)
+    natMat <- t(natMat) + natMat
     ## checking if positive-definite
-    if (any(eigen(natMat)$values <= 0)) {
+    if (any(eigen(natMat, symmetric=TRUE, only.values=TRUE)$values <= 0)) {
       stop("initial values for \"corNatural\" do not define a positive-definite correlation structure")
     }
     coef(object) <- log((natPar + 1)/(1 - natPar))

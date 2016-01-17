@@ -1,8 +1,7 @@
 
-R Under development (unstable) (2011-07-19 r56420)
-Copyright (C) 2011 The R Foundation for Statistical Computing
-ISBN 3-900051-07-0
-Platform: x86_64-apple-darwin9.8.0/x86_64 (64-bit)
+R version 3.2.3 Patched (2016-01-12 r69945) -- "Wooden Christmas-Tree"
+Copyright (C) 2016 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -17,6 +16,11 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 Type 'q()' to quit R.
 
 > library(nlme)
+> is64bit <- .Machine$sizeof.pointer == 8
+> 
+> options(digits = 6)# <==> less platform dependency in print() output
+> if(!dev.interactive(orNone=TRUE)) pdf("test_lme.pdf")
+> 
 > fm1 <- lmList(Oxboys)
 > fm1
 Call:
@@ -24,44 +28,44 @@ Call:
    Data: Oxboys 
 
 Coefficients:
-   (Intercept)      age
-10    130.2616 3.722915
-26    137.9927 5.588783
-25    139.2105 4.024081
-9     138.1369 6.009057
-2     142.8584 5.440176
-6     146.7908 3.963171
-7     146.1279 4.990050
-17    142.9777 8.611780
-16    147.5447 4.545196
-15    144.2759 7.124260
-8     148.2929 6.464712
-20    151.4707 4.374466
-1     148.1203 7.178151
-18    151.1804 5.957793
-5     151.4293 6.246128
-23    151.0645 7.185123
-11    150.0467 8.506082
-21    150.5210 7.497794
-3     155.6508 4.774669
-24    153.1404 6.764705
-22    154.5670 8.087514
-12    156.8106 7.015468
-13    156.0714 8.493806
-14    159.4738 8.670886
-19    164.5761 9.065620
-4     165.0724 9.360561
+   (Intercept)     age
+10     130.262 3.72291
+26     137.993 5.58878
+25     139.210 4.02408
+9      138.137 6.00906
+2      142.858 5.44018
+6      146.791 3.96317
+7      146.128 4.99005
+17     142.978 8.61178
+16     147.545 4.54520
+15     144.276 7.12426
+8      148.293 6.46471
+20     151.471 4.37447
+1      148.120 7.17815
+18     151.180 5.95779
+5      151.429 6.24613
+23     151.065 7.18512
+11     150.047 8.50608
+21     150.521 7.49779
+3      155.651 4.77467
+24     153.140 6.76470
+22     154.567 8.08751
+12     156.811 7.01547
+13     156.071 8.49381
+14     159.474 8.67089
+19     164.576 9.06562
+4      165.072 9.36056
 
 Degrees of freedom: 234 total; 182 residual
-Residual standard error: 0.6598878
+Residual standard error: 0.659888
 > fm2 <- lme(fm1)
 > fm2
 Linear mixed-effects model fit by REML
   Data: Oxboys 
-  Log-restricted-likelihood: -362.0455
+  Log-restricted-likelihood: -362.045
   Fixed: height ~ age 
 (Intercept)         age 
- 149.371753    6.525469 
+  149.37175     6.52547 
 
 Random effects:
  Formula: ~age | Subject
@@ -73,58 +77,108 @@ Residual    0.659889
 
 Number of Observations: 234
 Number of Groups: 26 
+> vc2 <- VarCorr(fm2)
+> stopifnot(
++     all.equal(fixef(fm2), c("(Intercept)" = 149.371753,
++                             age = 6.52546866), tol=1e-8),
++     all.equal(as.numeric(vc2[,"StdDev"]),
++               c(8.081077, 1.680717, 0.659889), tol=4e-7))
 > 
 > # bug report from Arne.Mueller@sanofi-aventis.com
 > mod <- distance ~ age + Sex
 > fm3 <- lme(mod, Orthodont, random = ~ 1)
-> predict(fm3, Orthodont)
-     M01      M01      M01      M01      M02      M02      M02      M02 
-25.39237 26.71274 28.03311 29.35348 21.61052 22.93089 24.25126 25.57163 
-     M03      M03      M03      M03      M04      M04      M04      M04 
-22.36689 23.68726 25.00763 26.32800 24.41990 25.74027 27.06064 28.38101 
-     M05      M05      M05      M05      M06      M06      M06      M06 
-21.28636 22.60673 23.92710 25.24747 24.20379 25.52416 26.84453 28.16490 
-     M07      M07      M07      M07      M08      M08      M08      M08 
-21.93468 23.25505 24.57542 25.89579 22.04273 23.36310 24.68347 26.00384 
-     M09      M09      M09      M09      M10      M10      M10      M10 
-23.12326 24.44363 25.76400 27.08437 26.90511 28.22548 29.54585 30.86622 
-     M11      M11      M11      M11      M12      M12      M12      M12 
-21.82663 23.14700 24.46737 25.78774 22.36689 23.68726 25.00763 26.32800 
-     M13      M13      M13      M13      M14      M14      M14      M14 
-22.36689 23.68726 25.00763 26.32800 22.90715 24.22753 25.54790 26.86827 
-     M15      M15      M15      M15      M16      M16      M16      M16 
-23.77158 25.09195 26.41232 27.73269 21.28636 22.60673 23.92710 25.24747 
-     F01      F01      F01      F01      F02      F02      F02      F02 
-19.56700 20.88737 22.20774 23.52811 20.97168 22.29205 23.61243 24.93280 
-     F03      F03      F03      F03      F04      F04      F04      F04 
-21.62000 22.94037 24.26074 25.58111 22.59248 23.91285 25.23322 26.55359 
-     F05      F05      F05      F05      F06      F06      F06      F06 
-20.64753 21.96790 23.28827 24.60864 19.35089 20.67126 21.99163 23.31200 
-     F07      F07      F07      F07      F08      F08      F08      F08 
-20.97168 22.29205 23.61243 24.93280 21.29584 22.61621 23.93658 25.25695 
-     F09      F09      F09      F09      F10      F10      F10      F10 
-19.35089 20.67126 21.99163 23.31200 17.08178 18.40215 19.72252 21.04289 
-     F11      F11      F11      F11 
-23.88911 25.20948 26.52985 27.85022 
-attr(,"label")
-[1] "Predicted values (mm)"
+> pm3 <- predict(fm3, Orthodont)
+> stopifnot(all.equal(mean(pm3), 24.023148148),
++ 	  all.equal(  sd(pm3), 2.4802195115),
++ 	  all.equal(quantile(pm3), c("0%"  = 17.0817792, "25%" = 22.3481813,
++ 				     "50%" = 23.9271016, "75%" = 25.5740014,
++ 				     "100%"= 30.8662241)))
+> 
 > 
 > ## bug report and fix from Dimitris Rizopoulos and Spencer Graves:
 > ## when 'returnObject = TRUE', do not stop() but give warning() on non-convergence:
-> fm1 <- lme(distance ~ age, data = Orthodont,
+> tools::assertWarning(
++ fm1 <- lme(distance ~ age, data = Orthodont,
 + 	   control = lmeControl(msMaxIter = 1, returnObject = TRUE))
-Warning message:
-In lme.formula(distance ~ age, data = Orthodont, control = lmeControl(msMaxIter = 1,  :
-  nlminb problem, convergence error code = 1
-  message = iteration limit reached without convergence (10)
++ )
 > 
 > ## based on bug report on R-help
-> predict(fm3, Orthodont[1,])
-     M01 
-25.39237 
+> (p3.1 <- predict(fm3, Orthodont[1,]))
+    M01 
+25.3924 
 attr(,"label")
 [1] "Predicted values (mm)"
 > # failed in 3.1-88
+> stopifnot(all.equal(pm3[1], p3.1,
++ 		    check.attributes=FALSE, tolerance = 1e-14))
+> 
+> ## Intervals failed in a patch proposal (Nov.2015):
+> (fm4 <- lme(distance ~ age, Orthodont, random = ~ age | Subject))
+Linear mixed-effects model fit by REML
+  Data: Orthodont 
+  Log-restricted-likelihood: -221.318
+  Fixed: distance ~ age 
+(Intercept)         age 
+  16.761111    0.660185 
+
+Random effects:
+ Formula: ~age | Subject
+ Structure: General positive-definite, Log-Cholesky parametrization
+            StdDev   Corr  
+(Intercept) 2.327034 (Intr)
+age         0.226428 -0.609
+Residual    1.310040       
+
+Number of Observations: 108
+Number of Groups: 27 
+> (i4 <- intervals(fm4))
+Approximate 95% confidence intervals
+
+ Fixed effects:
+                lower      est.     upper
+(Intercept) 15.218322 16.761111 18.303900
+age          0.518387  0.660185  0.801984
+attr(,"label")
+[1] "Fixed effects:"
+
+ Random Effects:
+  Level: Subject 
+                         lower      est.    upper
+sd((Intercept))       0.948561  2.327034 5.708742
+sd(age)               0.102509  0.226428 0.500147
+cor((Intercept),age) -0.938250 -0.609333 0.298169
+
+ Within-group standard error:
+  lower    est.   upper 
+1.08498 1.31004 1.58179 
+> ## from  dput(signif(i4$reStruct$Subject, 8))
+> ## R-devel 2016-01-11; 64-bit :
+> reSS <- data.frame(lower = c(0.9485605, 0.10250901, -0.93825047),
++                    est.  = c(2.3270341, 0.22642779, -0.60933286),
++                    upper = c(5.7087424, 0.50014674,  0.29816857))
+> ## R-devel 2016-01-11; 32-bit :
+> ## reSS <- data.frame(lower = c(0.94962127,0.10262181, -0.93804767),
+> ##                    est.  = c(2.3270339, 0.22642779, -0.60933284),
+> ##                    upper = c(5.7023648, 0.49959695,  0.29662651))
+> rownames(reSS) <- rownames(i4$reStruct$Subject)
+> sm4 <- summary(fm4)
+> stopifnot(
++     all.equal(fixef(fm4),
++               c("(Intercept)" = 16.761111, age = 0.66018519)),
++     identical(fixef(fm4), sm4$tTable[,"Value"]),
++     all.equal(sm4$tTable[,"Std.Error"],
++               c("(Intercept)" = 0.77524603, age = 0.071253264), tol=6e-8),
++     all.equal(i4$reStruct$Subject[,"est."], reSS[,"est."], tol= 8e-8)
++     ## (lower, upper) cannot be very accurate for these : ==> tol = *e-4
++    ,## "interestingly" 32-bit values changed from 3.2.3 to R-devel(3.3.0):
++     all.equal(i4$reStruct$Subject[,c(1,3)], reSS[,c(1,3)],
++ 	      tol = if(is64bit) 4e-4 else .005)
++    ,
++     all.equal(as.vector(i4$sigma),
++               ##  lower     est.        upper
++               c(1.0849772, 1.3100397, 1.5817881), tol=8e-4)
++ )
+> 
 > 
 > ## wrong results from getData:
 > load("ss2.rda")
@@ -144,3 +198,6 @@ attr(,"label")
 +           na.action = na.omit)
 > plot(m2, resid(.) ~ WEALTH)
 > 
+> proc.time()
+   user  system elapsed 
+  1.720   0.095   1.807 

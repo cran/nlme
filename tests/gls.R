@@ -20,5 +20,13 @@ stopifnot(all.equal(as.vector(p1), as.vector(p2)), # 'label' differs
 
 ## PR#13418
 fm1 <- gls(weight ~ Time * Diet, BodyWeight)
-Variogram(fm1, form = ~ Time | Rat)[1:10,]
+(V10 <- Variogram(fm1, form = ~ Time | Rat)[1:10,])
 ## failed in 3.1-89
+stopifnot(all.equal(V10$variog,
+                    c(0.0072395216, 0.014584634, 0.014207936, 0.018442267,
+                      0.011128505, 0.019910082, 0.027072311, 0.034140379,
+                      0.028320657, 0.037525507)),
+          V10$dist == c(1, 6, 7, 8, 13, 14, 15, 20, 21, 22),
+          V10$n.pairs == 16*c(1, 1, 9, 1, 1, 8, 1, 1, 7, 1))
+
+intervals(fm1)

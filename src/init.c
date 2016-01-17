@@ -1,5 +1,5 @@
 /*
-   Copyright 2005-2012  The R Core Team
+   Copyright 2005-2015  The R Core Team
 
    This file is part of the nlme package for R and related languages
    and is made available under the terms of the GNU General Public
@@ -70,11 +70,11 @@ extern void spatial_recalc(double *, longint *, longint *, double *,
 extern void fit_nlme(double *, double *, longint *,
 	 longint *, longint *, double *,
 	 double *, longint *, double *,
-	 double *, longint *, longint * aMOD);
+	 double *, longint *, longint *,
+        // 17-11-2015; Fixed sigma patch; E van Willigen; Quantitative Solutions
+	 double * aMOD);
 extern void nlme_one_comp_first (longint *, double *, double *);
 extern void nlme_one_comp_open (longint *, double *, double *);
-extern void mixed_estimate(double *, longint *, double *, longint *,
-	       double *, double *, longint *);
 
 extern void inner_perc_table(double *, longint *, longint *, longint *,
 		 longint *, double *);
@@ -109,22 +109,23 @@ R_CMethodDef CEntries[] = {
     {"spatial_factList", (DL_FUNC) &spatial_factList, 7},
     {"spatial_matList", (DL_FUNC) &spatial_matList, 6},
     {"spatial_recalc", (DL_FUNC) &spatial_recalc, 8},
-    {"gls_loglik", (DL_FUNC) &gls_loglik, 4},
+    {"gls_loglik", (DL_FUNC) &gls_loglik, 5}, // 17-11-2015; Fixed sigma ...
+
     {"gls_estimate", (DL_FUNC) &gls_estimate, 8},
     {"fit_gnls", (DL_FUNC) &fit_gnls, 10},
     {"inner_perc_table", (DL_FUNC) &inner_perc_table, 6},
-    {"mixed_loglik", (DL_FUNC) &mixed_loglik, 6},
+    {"mixed_loglik", (DL_FUNC) &mixed_loglik, 7}, // 17-11-2015; Fixed sigma ...
     {"mixed_decomp", (DL_FUNC) &mixed_decomp, 2},
-    {"mixed_EM", (DL_FUNC) &mixed_EM, 9},
+    {"mixed_EM", (DL_FUNC) &mixed_EM, 10},        // 17-11-2015; Fixed sigma ...
     {"nlme_one_comp_first", (DL_FUNC) &nlme_one_comp_first, 3},
     {"nlme_one_comp_open", (DL_FUNC) &nlme_one_comp_open, 3},
-    {"fit_nlme", (DL_FUNC) &fit_nlme, 13},
+    {"fit_nlme", (DL_FUNC) &fit_nlme, 14},        // 17-11-2015; Fixed sigma ...
     {"matrixLog_pd", (DL_FUNC) &matrixLog_pd, 3},
     {"logChol_pd", (DL_FUNC) &logChol_pd, 3},
     {"natural_pd", (DL_FUNC) &natural_pd, 3},
     {"compSymm_pd", (DL_FUNC) &compSymm_pd, 3},
-    {"mixed_estimate", (DL_FUNC) &mixed_estimate, 7},
-    {"mixed_combined", (DL_FUNC) &mixed_combined, 10},
+    {"mixed_estimate", (DL_FUNC) &mixed_estimate, 8}, // 17-11-2015; Fixed sigma ...
+    {"mixed_combined", (DL_FUNC) &mixed_combined, 11},
     {NULL, NULL, 0}
 };
 

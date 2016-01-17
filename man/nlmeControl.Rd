@@ -9,12 +9,12 @@ nlmeControl(maxIter, pnlsMaxIter, msMaxIter, minScale,
             tolerance, niterEM, pnlsTol, msTol,
             returnObject, msVerbose, gradHess, apVar, .relStep,
             minAbsParApVar = 0.05,
-            opt = c("nlminb", "nlm"), natural = TRUE, \dots)
+            opt = c("nlminb", "nlm"), natural = TRUE, sigma = NULL, \dots)
 }
 \alias{nlmeControl}
 \arguments{
  \item{maxIter}{maximum number of iterations for the \code{nlme}
-   optimization algorithm.  Default is 50.} 
+   optimization algorithm.  Default is 50.}
  \item{pnlsMaxIter}{maximum number of iterations
    for the \code{PNLS} optimization step inside the \code{nlme}
    optimization.  Default is 7.}
@@ -30,17 +30,17 @@ nlmeControl(maxIter, pnlsMaxIter, msMaxIter, minScale,
    the initial estimates of the random effects variance-covariance
    coefficients.  Default is 25.}
  \item{pnlsTol}{tolerance for the convergence criterion in \code{PNLS}
-   step.  Default is \code{1e-3}.} 
+   step.  Default is \code{1e-3}.}
  \item{msTol}{tolerance for the convergence criterion in \code{nlm},
    passed as the \code{gradtol} argument to the function (see
    documentation on \code{nlm}).  Default is \code{1e-7}. }
  \item{returnObject}{a logical value indicating whether the fitted
    object should be returned when the maximum number of iterations is
    reached without convergence of the algorithm.  Default is
-   \code{FALSE}.} 
+   \code{FALSE}.}
  \item{msVerbose}{a logical value passed as the \code{trace} argument to
    \code{nlm} (see documentation on that function).  Default is
-   \code{FALSE}.} 
+   \code{FALSE}.}
  \item{gradHess}{a logical value indicating whether numerical gradient
    vectors and Hessian matrices of the log-likelihood function should
    be used in the \code{nlm} optimization. This option is only available
@@ -63,9 +63,11 @@ nlmeControl(maxIter, pnlsMaxIter, msMaxIter, minScale,
    parametrization should be used for general positive-definite matrices
    (\code{pdSymm}) in \code{reStruct}, when the approximate covariance
    matrix of the estimators is calculated.  Default is \code{TRUE}.}
+ \item{sigma}{optionally a positive number to fix the residual error at.
+   If \code{NULL}, as by default, sigma is estimated.}
  \item{\dots}{Further named control arguments to be passed to
    \code{\link{nlminb}}, where used (\code{eval.max} and those from
-   \code{abs.tol} down).} 
+   \code{abs.tol} down).}
 }
 \description{
   The values supplied in the function call replace the defaults and a
@@ -75,7 +77,8 @@ nlmeControl(maxIter, pnlsMaxIter, msMaxIter, minScale,
 \value{
   a list with components for each of the possible arguments.
 }
-\author{José Pinheiro and Douglas Bates \email{bates@stat.wisc.edu}}
+\author{José Pinheiro and Douglas Bates \email{bates@stat.wisc.edu}; the
+  \code{sigma} option: Siem Heisterkamp and Bert van Willigen.}
 \seealso{\code{\link{nlme}}, \code{\link{nlm}}, \code{\link{optim}},
   \code{\link{nlmeStruct}}}
 \examples{

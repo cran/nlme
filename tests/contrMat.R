@@ -1,9 +1,9 @@
 ## problem reported by Christian Ritz on R-help, Tue, 20 Mar 2007 14:55:38
 
-## Dataset PestSci from package drc
+## Dataset PestSci from package drc [w/ 'CURVE' as factor]
 PestSci <-
-data.frame(CURVE = rep(1:5, each=21),
-           HERBICIDE = rep(c("bentazon", "diuron"), times=c(63, 42)),
+data.frame(CURVE = gl(5, 21),
+           HERBICIDE = rep(c("bentazon", "diuron"), times = c(63, 42)),
            DOSE = rep(c(0, 0.62, 1.85, 5.56, 16.67, 50, 150, 0, 0.62,
            1.85, 5.56, 16.67, 50, 150, 0, 0.15, 0.59, 2.34, 9.38, 37.5,
            150, 0, 0.01, 0.03, 0.1, 0.3, 1, 3, 0, 0.01, 0.03, 0.1, 0.3, 1, 3),
@@ -29,12 +29,33 @@ data.frame(CURVE = rep(1:5, each=21),
 library(nlme)
 sv <- c(0.43355869, 2.49963220, 0.05861799, 1.73290589, 0.38153146, 0.24316978)
 
-nlme(SLOPE ~ c + (d-c)/(1+exp(b*(log(DOSE)-log(e)))),
-     fixed = list(b ~ factor(HERBICIDE)-1,
-                  c ~ 1,
-                  d ~ 1,
-                  e ~ factor(HERBICIDE)-1),
-     random = d ~ 1 | CURVE,
-     start = sv, data = PestSci)
+## bug only triggered from the  " factor(.) " below:
+fm <- nlme(SLOPE ~ c + (d-c)/(1+exp(b*(log(DOSE)-log(e)))),
+           fixed = list(b ~ factor(HERBICIDE)-1,
+                        c ~ 1,
+                        d ~ 1,
+                        e ~ factor(HERBICIDE)-1),
+           random = d ~ 1 | CURVE,
+           start = sv, data = PestSci)
+fm
+## failed in contrMat / contr.treatment in 3.1-78
 
-## failed in contrMat in 3.1-78
+stopifnot(
+    all.equal(as.numeric(VarCorr(fm)[,"StdDev"]),
+	      c(0.46996772, 0.07139796), tol = 5e-5)
+    ,
+    all.equal(as.numeric(fixef(fm)),
+	      c(0.563538644, 1.7912626,
+		0.0519817224, 1.57545308,
+		1.5714210, 0.201112468), tol = 1e-7)
+)
+(sfm <- summary(fm))
+cfT <- sfm$tTable
+stopifnot(is.matrix(cfT), identical(cfT[,"Value"], fixef(fm)),
+	  all.equal(as.vector(cfT[,"Std.Error"]),
+		    c(0.0363115, 0.106345, 0.022107,
+		      0.217066, 0.191389, 0.00771419), tol = 5e-5)
+	  ,
+	  all.equal(as.numeric(sfm[c("AIC", "BIC", "logLik")]),
+		    c(-211.36462, -190.13294, 113.68231), tol = 1e-7)
+	  )

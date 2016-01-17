@@ -9,11 +9,11 @@ C     THIS PROGRAM SHOULD FUNCTION PROPERLY ON ALL SYSTEMS
 C     SATISFYING THE FOLLOWING TWO ASSUMPTIONS,
 C        1.  THE BASE USED IN REPRESENTING FLOATING POINT
 C            NUMBERS IS NOT A POWER OF THREE.
-C        2.  THE QUANTITY  A  IN STATEMENT 10 IS REPRESENTED TO 
+C        2.  THE QUANTITY  A  IN STATEMENT 10 IS REPRESENTED TO
 C            THE ACCURACY USED IN FLOATING POINT VARIABLES
 C            THAT ARE STORED IN MEMORY.
 C     THE STATEMENT NUMBER 10 AND THE GO TO 10 ARE INTENDED TO
-C     FORCE OPTIMIZING COMPILERS TO GENERATE CODE SATISFYING 
+C     FORCE OPTIMIZING COMPILERS TO GENERATE CODE SATISFYING
 C     ASSUMPTION 2.
 C     UNDER THESE ASSUMPTIONS, IT SHOULD BE TRUE THAT,
 C            A  IS NOT EXACTLY EQUAL TO FOUR-THIRDS,
@@ -181,8 +181,9 @@ C
       IERR = 0
       IF (N .EQ. 1) GO TO 1001
 C
-      DO 100 I = 2, N
-  100 E(I-1) = E(I)
+      DO I = 2, N
+         E(I-1) = E(I)
+      end do
 C
       F = 0.0D0
       TST1 = 0.0D0
@@ -193,12 +194,12 @@ C
          H = DABS(D(L)) + DABS(E(L))
          IF (TST1 .LT. H) TST1 = H
 C     .......... LOOK FOR SMALL SUB-DIAGONAL ELEMENT ..........
-         DO 110 M = L, N
+         DO M = L, N
             TST2 = TST1 + DABS(E(M))
             IF (TST2 .EQ. TST1) GO TO 120
 C     .......... E(N) IS ALWAYS ZERO, SO THERE IS NO EXIT
 C                THROUGH THE BOTTOM OF THE LOOP ..........
-  110    CONTINUE
+         end do
 C
   120    IF (M .EQ. L) GO TO 220
   130    IF (J .EQ. 30) GO TO 1000
@@ -215,8 +216,9 @@ C     .......... FORM SHIFT ..........
          H = G - D(L)
          IF (L2 .GT. N) GO TO 145
 C
-         DO 140 I = L2, N
-  140    D(I) = D(I) - H
+         DO I = L2, N
+            D(I) = D(I) - H
+         end do
 C
   145    F = F + H
 C     .......... QL TRANSFORMATION ..........
@@ -338,8 +340,9 @@ C
       IERR = 0
       IF (N .EQ. 1) GO TO 1001
 C
-      DO 100 I = 2, N
-  100 E2(I-1) = E2(I)
+      DO I = 2, N
+         E2(I-1) = E2(I)
+      end do
 C
       F = 0.0D0
       T = 0.0D0
@@ -371,8 +374,9 @@ C     .......... FORM SHIFT ..........
          D(L) = S / (P + DSIGN(R,P))
          H = G - D(L)
 C
-         DO 140 I = L1, N
-  140    D(I) = D(I) - H
+         DO I = L1, N
+            D(I) = D(I) - H
+         end do
 C
          F = F + H
 C     .......... RATIONAL QL TRANSFORMATION ..........
@@ -479,25 +483,26 @@ C     .......... FOR I=N STEP -1 UNTIL 1 DO -- ..........
          SCALE = 0.0D0
          IF (L .LT. 1) GO TO 130
 C     .......... SCALE ROW (ALGOL TOL THEN NOT NEEDED) ..........
-         DO 120 K = 1, L
-  120    SCALE = SCALE + DABS(D(K))
+         DO K = 1, L
+            SCALE = SCALE + DABS(D(K))
+         end do
 C
          IF (SCALE .NE. 0.0D0) GO TO 140
 C
-         DO 125 J = 1, L
+         DO J = 1, L
             D(J) = A(L,J)
             A(L,J) = A(I,J)
             A(I,J) = 0.0D0
-  125    CONTINUE
+         end do
 C
   130    E(I) = 0.0D0
          E2(I) = 0.0D0
          GO TO 300
 C
-  140    DO 150 K = 1, L
+  140    DO K = 1, L
             D(K) = D(K) / SCALE
             H = H + D(K) * D(K)
-  150    CONTINUE
+         end do
 C
          E2(I) = SCALE * SCALE * H
          F = D(L)
@@ -507,8 +512,9 @@ C
          D(L) = F - G
          IF (L .EQ. 1) GO TO 285
 C     .......... FORM A*U ..........
-         DO 170 J = 1, L
-  170    E(J) = 0.0D0
+         DO J = 1, L
+            E(J) = 0.0D0
+         end do
 C
          DO 240 J = 1, L
             F = D(J)
@@ -516,41 +522,43 @@ C
             JP1 = J + 1
             IF (L .LT. JP1) GO TO 220
 C
-            DO 200 K = JP1, L
+            DO K = JP1, L
                G = G + A(K,J) * D(K)
                E(K) = E(K) + A(K,J) * F
-  200       CONTINUE
+            end do
 C
   220       E(J) = G
   240    CONTINUE
 C     .......... FORM P ..........
          F = 0.0D0
 C
-         DO 245 J = 1, L
+         DO J = 1, L
             E(J) = E(J) / H
             F = F + E(J) * D(J)
-  245    CONTINUE
+         end do
 C
          H = F / (H + H)
 C     .......... FORM Q ..........
-         DO 250 J = 1, L
-  250    E(J) = E(J) - H * D(J)
+         DO J = 1, L
+            E(J) = E(J) - H * D(J)
+         end do
 C     .......... FORM REDUCED A ..........
-         DO 280 J = 1, L
+         DO J = 1, L
             F = D(J)
             G = E(J)
 C
-            DO 260 K = J, L
-  260       A(K,J) = A(K,J) - F * E(K) - G * D(K)
+            DO K = J, L
+               A(K,J) = A(K,J) - F * E(K) - G * D(K)
+            end do
 C
-  280    CONTINUE
+         end do
 C
-  285    DO 290 J = 1, L
+  285    DO J = 1, L
             F = D(J)
             D(J) = A(L,J)
             A(L,J) = A(I,J)
             A(I,J) = F * SCALE
-  290    CONTINUE
+         end do
 C
   300 CONTINUE
 C
@@ -600,13 +608,12 @@ C     THIS VERSION DATED AUGUST 1983.
 C
 C     ------------------------------------------------------------------
 C
-      DO 100 I = 1, N
-C
-         DO 80 J = I, N
-   80    Z(J,I) = A(J,I)
-C
+      DO I = 1, N
+         DO J = I, N
+            Z(J,I) = A(J,I)
+         end do
          D(I) = A(N,I)
-  100 CONTINUE
+      end do
 C
       IF (N .EQ. 1) GO TO 510
 C     .......... FOR I=N STEP -1 UNTIL 2 DO -- ..........
@@ -617,24 +624,25 @@ C     .......... FOR I=N STEP -1 UNTIL 2 DO -- ..........
          SCALE = 0.0D0
          IF (L .LT. 2) GO TO 130
 C     .......... SCALE ROW (ALGOL TOL THEN NOT NEEDED) ..........
-         DO 120 K = 1, L
-  120    SCALE = SCALE + DABS(D(K))
+         DO K = 1, L
+            SCALE = SCALE + DABS(D(K))
+         end do
 C
          IF (SCALE .NE. 0.0D0) GO TO 140
   130    E(I) = D(L)
 C
-         DO 135 J = 1, L
+         DO J = 1, L
             D(J) = Z(L,J)
             Z(I,J) = 0.0D0
             Z(J,I) = 0.0D0
-  135    CONTINUE
+         end do
 C
          GO TO 290
 C
-  140    DO 150 K = 1, L
+  140    DO K = 1, L
             D(K) = D(K) / SCALE
             H = H + D(K) * D(K)
-  150    CONTINUE
+         end do
 C
          F = D(L)
          G = -DSIGN(DSQRT(H),F)
@@ -642,8 +650,9 @@ C
          H = H - F * G
          D(L) = F - G
 C     .......... FORM A*U ..........
-         DO 170 J = 1, L
-  170    E(J) = 0.0D0
+         DO J = 1, L
+            E(J) = 0.0D0
+         end do
 C
          DO 240 J = 1, L
             F = D(J)
@@ -652,32 +661,34 @@ C
             JP1 = J + 1
             IF (L .LT. JP1) GO TO 220
 C
-            DO 200 K = JP1, L
+            DO K = JP1, L
                G = G + Z(K,J) * D(K)
                E(K) = E(K) + Z(K,J) * F
-  200       CONTINUE
+            end do
 C
   220       E(J) = G
   240    CONTINUE
 C     .......... FORM P ..........
          F = 0.0D0
 C
-         DO 245 J = 1, L
+         DO J = 1, L
             E(J) = E(J) / H
             F = F + E(J) * D(J)
-  245    CONTINUE
+         end do
 C
          HH = F / (H + H)
 C     .......... FORM Q ..........
-         DO 250 J = 1, L
-  250    E(J) = E(J) - HH * D(J)
+         DO J = 1, L
+            E(J) = E(J) - HH * D(J)
+         end do
 C     .......... FORM REDUCED A ..........
          DO 280 J = 1, L
             F = D(J)
             G = E(J)
 C
-            DO 260 K = J, L
-  260       Z(K,J) = Z(K,J) - F * E(K) - G * D(K)
+            DO K = J, L
+               Z(K,J) = Z(K,J) - F * E(K) - G * D(K)
+            end do
 C
             D(J) = Z(L,J)
             Z(I,J) = 0.0D0
@@ -691,30 +702,33 @@ C     .......... ACCUMULATION OF TRANSFORMATION MATRICES ..........
          Z(N,L) = Z(L,L)
          Z(L,L) = 1.0D0
          H = D(I)
-         IF (H .EQ. 0.0D0) GO TO 380
+         IF (H .ne. 0.0D0) then
+            DO K = 1, L
+               D(K) = Z(K,I) / H
+            end do
 C
-         DO 330 K = 1, L
-  330    D(K) = Z(K,I) / H
+            DO J = 1, L
+               G = 0.0D0
+               DO K = 1, L
+                  G = G + Z(K,I) * Z(K,J)
+               end do
 C
-         DO 360 J = 1, L
-            G = 0.0D0
-C
-            DO 340 K = 1, L
-  340       G = G + Z(K,I) * Z(K,J)
-C
-            DO 360 K = 1, L
-               Z(K,J) = Z(K,J) - G * D(K)
-  360    CONTINUE
-C
-  380    DO 400 K = 1, L
-  400    Z(K,I) = 0.0D0
+               DO K = 1, L
+                  Z(K,J) = Z(K,J) - G * D(K)
+               end do
+            end do
+         end if
+C 380
+         DO K = 1, L
+            Z(K,I) = 0.0D0
+         end do
 C
   500 CONTINUE
 C
-  510 DO 520 I = 1, N
+  510 DO I = 1, N
          D(I) = Z(N,I)
          Z(N,I) = 0.0D0
-  520 CONTINUE
+      end do
 C
       Z(N,N) = 1.0D0
       E(1) = 0.0D0

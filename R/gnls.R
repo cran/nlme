@@ -3,7 +3,7 @@
 ###
 ### Copyright 1997-2003  Jose C. Pinheiro,
 ###                      Douglas M. Bates <bates@stat.wisc.edu>
-# Copyright 2007-2014 The R Core team
+### Copyright 2007-2015  The R Core team
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -331,11 +331,14 @@ gnls <-
       getParsGnls(plist, pmap, beta, N)))[naPat]
   w <- eval(modelResid[[2]], envir = nlEnv)
   ## creating the condensed linear model
+  ## 17-11-2015; Fixed sigma patch; SH Heisterkamp; Quantitative Solutions
+  fixedSigma<-controlvals$sigma > 0
   Dims <- list(p = pLen, N = NReal, REML = FALSE)
   attr(gnlsSt, "conLin") <-
     list(Xy = array(w, c(NReal, 1),
            list(row.names(dataModShrunk), deparse(form[[2]]))), dims = Dims,
-         logLik = 0)
+         ## 17-11-2015; Fixed sigma patch; SH Heisterkamp; Quantitative Solutions
+         logLik = 0, sigma=controlvals$sigma, auxSigma=0, fixedSigma=fixedSigma)
 
   ## additional attributes of gnlsSt
   attr(gnlsSt, "resp") <- yShrunk
@@ -473,19 +476,27 @@ gnls <-
   auxRes <- ww[NReal * pLen + (1:NReal)]
   attr(gnlsSt, "conLin")$Xy <- array(ww, c(NReal, pLen + 1))
   attr(gnlsSt, "conLin") <- recalc(gnlsSt)
-  sigma <-
-    sqrt(sum((attr(gnlsSt,"conLin")$Xy[,pLen+1])^2)/(NReal - pLen))
+    ## 17-11-2015; Fixed sigma patch; SH Heisterkamp; Quantitative Solutions
+	if((sigma <- controlvals$sigma) == 0) {
+		sigma <- sqrt(sum((attr(gnlsSt, "conLin")$Xy[, pLen + 1])^2)/(NReal - pLen))
+		lsig <- logb(sigma) + 0.5 * logb(1 - pLen/NReal)
+		loglik <- ( - NReal * (1 + logb(2 * pi) + 2 * lsig))/2 + attr(gnlsSt, "conLin")$logLik
+	} else {
+		loglik <-  - (NReal * (logb(2 * pi)/2 + logb(sigma)) + sum((attr(gnlsSt, "conLin")$Xy[
+			, pLen + 1])^2)/(2 * sigma^2)) + attr(gnlsSt, "conLin")$logLik
+		lsig <- log(sigma)
+	}
+    ######
   varBeta <- qr(attr(gnlsSt, "conLin")$Xy[ , 1:pLen, drop = FALSE])
   if (varBeta$rank < pLen) {
-    stop("approximate covariance matrix for parameter estimates not of full rank")
+    ## 17-11-2015; Fixed sigma patch; SH Heisterkamp; Quantitative Solutions
+    print("approximate covariance matrix for parameter estimates not of full rank")
+	return()
   }
-  lsig <- log(sigma) + 0.5 * log(1 - pLen/NReal)
   attr(parAssign, "varBetaFact") <- varBeta <-
     sigma * t(backsolve(qr.R(varBeta), diag(pLen)))
   varBeta <- crossprod(varBeta)
   dimnames(varBeta) <- list(pn, pn)
-  loglik <- - NReal * (1 + log(2 * pi) + 2 * lsig) / 2 +
-    attr(gnlsSt, "conLin")$logLik
   ##
   ## fitted.values and residuals (in original order)
   ##
@@ -502,6 +513,8 @@ gnls <-
   ## getting the approximate var-cov of the parameters
   ## first making Xy into single column array again
   attr(gnlsSt, "conLin")$Xy <- array(auxRes, c(NReal, 1))
+  ## 17-11-2015; Fixed sigma patch; SH Heisterkamp; Quantitative Solutions
+  attr(gnlsSt, "fixedSigma") <- (controlvals$sigma > 0)
   if (controlvals$apVar) {
     apVar <- gnlsApVar(gnlsSt, lsig, .relStep = controlvals[[".relStep"]],
                        minAbsPar = controlvals[["minAbsParApVar"]])
@@ -512,7 +525,8 @@ gnls <-
   oClass <- class(gnlsSt)
   attributes(gnlsSt) <-
     attributes(gnlsSt)[!is.na(match(names(attributes(gnlsSt)),
-                                    c("names","pmap")))]
+    ## 17-11-2015; Fixed sigma patch; SH Heisterkamp; Quantitative Solutions
+                                    c("names","pmap","fixedSigma")))]
   class(gnlsSt) <- oClass
   ##
   ## creating the  gnls object
@@ -522,7 +536,8 @@ gnls <-
                  contrasts = contr,
 		 coefficients = spar,
 		 varBeta = varBeta,
-		 sigma = sigma,
+         ## 17-11-2015; Fixed sigma patch; SH Heisterkamp; Quantitative Solutions
+		 sigma = ifelse(controlvals$sigma>0, controlvals$sigma,sigma),
 		 apVar = apVar,
 		 logLik = loglik,
 		 numIter = numIter,
@@ -556,13 +571,21 @@ gnlsApVar <-
   fullGnlsLogLik <-
     function(Pars, object, conLin, N) {
       ## logLik as a function of sigma and coef(glsSt)
+      ## 17-11-2015; Fixed sigma patch; SH Heisterkamp; Quantitative Solutions
+      fixedSigma<-attr(object,"fixedSigma")
       npar <- length(Pars)
-      lsigma <- Pars[npar]              # within-group std. dev.
-      Pars <- Pars[-npar]
+      if (!fixedSigma) {
+         lsigma <- Pars[npar]
+         Pars <- Pars[-npar]
+      } else {
+         lsigma<-log(conLin$sigma)
+      }
+      #######
       coef(object) <- Pars
       conLin <- recalc(object, conLin)
       conLin[["logLik"]] - N * lsigma - sum(conLin$Xy^2)/(2*exp(2*lsigma))
     }
+  fixedSigma<-attr(gnlsSt,"fixedSigma")
   if (length(gnlsCoef <- coef(gnlsSt)) > 0) {
     cSt <- gnlsSt[["corStruct"]]
     if (!is.null(cSt) && inherits(cSt, "corSymm") && natural) {
@@ -575,19 +598,32 @@ gnlsApVar <-
     dims <- conLin$dims
     N <- dims$N
     conLin[["logLik"]] <- 0               # making sure
-    Pars <- c(gnlsCoef, lSigma = lsigma)
+    ## 17-11-2015; Fixed sigma patch; SH Heisterkamp; Quantitative Solutions
+    if(fixedSigma){
+        Pars <- c(gnlsCoef)
+    } else {
+        Pars <- c(gnlsCoef, lSigma = lsigma)  #   log(sigma) is used as input in contrast to gls
+    }
     val <- fdHess(Pars, fullGnlsLogLik, gnlsSt, conLin, N,
 		  .relStep = .relStep, minAbsPar = minAbsPar)[["Hessian"]]
-    if (all(eigen(val)$values < 0)) {
+    if (all(eigen(val, only.values=TRUE)$values < 0)) {
       ## negative definite - OK
       val <- solve(-val)
+      ## 17-11-2015; Fixed sigma patch; SH Heisterkamp; Quantitative Solutions
+      if(fixedSigma && !is.null(dim(val))){
+          Pars <- c(gnlsCoef, lSigma = lsigma)
+          npars<-length(Pars)
+          val<-cbind(val,rep(0,npars-1))
+          val<-rbind(val,rep(0,npars))
+      }
+      #######
       nP <- names(Pars)
       dimnames(val) <- list(nP, nP)
       attr(val, "Pars") <- Pars
       attr(val, "natural") <- natural
       val
     } else {
-      ## problem - solution is not a maximum
+    	## problem - solution is not maximum
       "Non-positive definite approximate variance-covariance"
     }
   } else {
@@ -646,20 +682,26 @@ getData.gnls <-
 
 
 logLik.gnls <-
+    ## 17-11-2015; Fixed sigma patch; SH Heisterkamp; Quantitative Solutions
   function(object, REML = FALSE, ...)
 {
   if (REML) {
     stop("cannot calculate REML log-likelihood for \"gnls\" objects")
   }
+  ## 17-11-2015; Fixed sigma patch; SH Heisterkamp; Quantitative Solutions
+  fixSig <- attr(object[["modelStruct"]], "fixedSigma")
+  fixSig <- !is.null(fixSig) && fixSig
+
   p <- object$dims$p
   N <- object$dims$N
   val <- object[["logLik"]]
   attr(val, "nobs") <- attr(val, "nall") <- N
-  attr(val, "df") <- p + length(coef(object[["modelStruct"]])) + 1
+
+  ## 17-11-2015; Fixed sigma patch; SH Heisterkamp; Quantitative Solutions
+  attr(val, "df") <- p + length(coef(object[["modelStruct"]])) + as.integer(!fixSig)
   class(val) <- "logLik"
   val
 }
-
 nobs.gnls <- function(object, ...) object$dims$N
 
 predict.gnls <-
@@ -859,10 +901,17 @@ Initialize.gnlsStruct <-
 logLik.gnlsStruct <-
   function(object, Pars, conLin = attr(object, "conLin"), ...)
 {
-  coef(object) <- Pars			# updating parameter values
-  conLin <- recalc(object, conLin)	# updating conLin
-  conLin[["logLik"]] - conLin$dims$N * log(sum(conLin$Xy^2)) / 2
+	coef(object) <- Pars
+	# updating parameter values
+	conLin <- recalc(object, conLin)
+	## 17-11-2015; Fixed sigma patch; SH Heisterkamp; Quantitative Solutions
+	if(conLin$sigma == 0) {
+		conLin[["logLik"]] - (conLin$dims$N * logb(sum(conLin$Xy^2)))/2
+	} else {
+		conLin[["logLik"]] - conLin$dims$N * logb(conLin$sigma) - sum(conLin$Xy^2)/(2 * conLin$sigma^2)
+	}
 }
+
 
 
 residuals.gnlsStruct <-
@@ -879,12 +928,22 @@ gnlsControl <-
            returnObject = FALSE, msVerbose = FALSE,
            apVar = TRUE, .relStep = (.Machine$double.eps)^(1/3),
 	   opt = c("nlminb", "optim"),  optimMethod = "BFGS",
-           minAbsParApVar = 0.05)
+           ## 17-11-2015; Fixed sigma patch; SH Heisterkamp; Quantitative Solutions
+           minAbsParApVar = 0.05,sigma=NULL)
 {
+    ## 17-11-2015; Fixed sigma patch; SH Heisterkamp; Quantitative Solutions
+	if(!is.null(sigma)) {
+		if(!is.numeric(sigma) || (length(sigma) != 1) || (sigma <= 0)) {
+			stop("Within-group std. dev. must be a positive numeric value")
+		}
+	} else {
+		sigma <- 0
+	}
   list(maxIter = maxIter, nlsMaxIter = nlsMaxIter, msMaxIter = msMaxIter,
        minScale = minScale, tolerance = tolerance, nlsTol = nlsTol,
        msTol = msTol, returnObject = returnObject,
        msVerbose = msVerbose, apVar = apVar,
        opt = match.arg(opt), optimMethod = optimMethod,
-       .relStep = .relStep, minAbsParApVar = minAbsParApVar)
+       ## 17-11-2015; Fixed sigma patch; SH Heisterkamp; Quantitative Solutions
+       .relStep = .relStep, minAbsParApVar = minAbsParApVar,sigma=sigma)
 }

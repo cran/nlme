@@ -1,21 +1,21 @@
 Copyright (C) 1999-2001 Jose C. Pinheiro and Douglas M. Bates
-Copyright (C) 2006-2014 The R Core team
-	
+Copyright (C) 2006-2015 The R Core team
+
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation; either version 2, or (at your option)
 any later version.
- 
+
 This program is distributed in the hope that it will be useful, but
 WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-General Public License for more details. 
-  
+General Public License for more details.
+
 You should have received a copy of the GNU General Public License
 along with this file.  A copy of the GNU General Public License is
 available at http://www.r-project.org/Licenses/
 
--------------------
+----------------------------------------------------------------------------
 
 This package contains the nlme (nonlinear mixed effects) package
 version 3.1 for R.
@@ -23,3 +23,13 @@ version 3.1 for R.
 Authors: Jose Pinheiro
          Douglas Bates <bates@stat.wisc.edu>
          Saikat DebRoy
+
+---------
+
+Copyright (C) 2015 Quantitative Solutions, a Certara company
+
+Authors of 'fixed sigma option' of Nov. 2015:
+
+         Siem Heisterkamp <sh.heisterkamp@icloud.com>
+         Bert van Willigen <info@vanwilligen-ict.com>
+         Paul Matthias Diderichsen <pmdiderichsen@wequantify.com>  (sponsor)

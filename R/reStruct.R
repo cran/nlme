@@ -287,13 +287,28 @@ logLik.reStruct <-
   function(object, conLin, ...)
 {
   if(any(!is.finite(conLin$Xy))) return(-Inf)
-  .C(mixed_loglik,
+  ## 17-11-2015; Fixed sigma patch; SH Heisterkamp; Quantitative Solutions
+  dims <- conLin$dims
+  REML <- as.integer(attr(object, "settings"))[1]
+  val <- .C(mixed_loglik,
      as.double(conLin$Xy),
      as.integer(unlist(conLin$dims)),
      as.double(pdFactor(object)),
      as.integer(attr(object, "settings")),
      loglik = double(1),
-     double(1))$loglik
+     lRSS = double(1),
+     as.double(conLin$sigma))
+
+  if (conLin$sigma > 0 && REML == 1) {
+     nc <- dims$ncol
+     p <- nc[dims$Q + 1]
+     N <- dims$N
+     aux <- N * log(conLin$sigma) - exp(val[["lRSS"]]) /  (2*conLin$sigma)
+     val[["loglik"]] + aux
+  } else {
+     val[["loglik"]]
+  }
+  ########
 }
 
 "matrix<-.reStruct" <-

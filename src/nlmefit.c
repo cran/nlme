@@ -2,10 +2,9 @@
    Routines for calculation of the log-likelihood or restricted
    log-likelihood with mixed-effects models.
 
-   Copyright 1997-2005  Douglas M. Bates <bates@stat.wisc.edu>,
-   Jose C. Pinheiro,
-   Saikat DebRoy
-   Copyright 2007-2013  The R Core Team
+   Copyright (C) 1997-2005  Douglas M. Bates <bates@stat.wisc.edu>,
+		            Jose C. Pinheiro, Saikat DebRoy
+   Copyright (C) 2007-2015  The R Core Team
 
    This file is part of the nlme package for R and related languages
    and is made available under the terms of the GNU General Public
@@ -34,6 +33,8 @@
 #endif /* S_VERSION */
 #endif /* SPLUS_VERSION */
 
+// 17-11-2015; Fixed sigma patch; E van Willigen; Quantitative Solutions
+static double *_sigma_; /* This to provide msmnh out-of-band the sigma. */
 extern void F77_NAME(msmnh)();
 
 static longint **
@@ -356,7 +357,9 @@ internal_decomp(dimPTR dd, double *ZXy)
 
 double			/* evaluate the log-likelihood pieces */
 internal_loglik(dimPTR dd, double *ZXy, double *DmHalf, longint *RML,
-		double *dc, double *lRSS)
+		double *dc, double *lRSS,
+		// 17-11-2015; Fixed sigma patch; E van Willigen; Quantitative Sol.
+		double *sigma)
 {				/* if dc is NULL, don't attempt storage */
     longint i, j, Q = dd->Q,  Qp2 = Q + 2, qi,
 	ldstr = (dc != DNULLP) ? (dd->Srows) : 0L;
@@ -386,9 +389,22 @@ internal_loglik(dimPTR dd, double *ZXy, double *DmHalf, longint *RML,
 	accum += (dd->ngrp)[i] * QRlogAbsDet( dmQR ) - lglk[i];
 	QRfree( dmQR ); Free( dmHlf );
     }
-    accum -= *RML * lglk[ Q ] + (dd->N - *RML * dd->ncol[ Q ]) * lglk[Q + 1];
-    if (lRSS != DNULLP) *lRSS = lglk[Q + 1]; /* return log(RSS)/2 */
-    Free( lglk );
+    // 17-11-2015; Fixed sigma patch; E van Willigen; Quantitative Solutions
+    if (*sigma > 0) { // Fixed sigma
+	double h = 0;
+	if (*RML == 1) {
+	    h += (lglk[Q] - dd->ncol[Q]*lglk[Q+1]) - 1;
+	}
+	accum -= pow(exp(lglk[Q+1]),2)/(2*pow(*sigma,2));
+	accum -= (dd->N - dd->ncol[Q]) * log(*sigma);
+	accum -= h;
+    } else {	// Free sigma
+	accum -= *RML * lglk[Q] + (dd->N - *RML * dd->ncol[Q]) * lglk[Q + 1];
+    }
+    if (lRSS != DNULLP) {
+	*lRSS = lglk[Q+1];
+    }
+    Free(lglk);
     return accum;
 }
 
@@ -436,8 +452,10 @@ pt_prod( double *prod, double *a, double *b, longint len )
 }
 
 static void
-finite_diff_Hess( double (*func)(double*), double *pars, int npar,
-		  double *vals )
+finite_diff_Hess(double (*func)(double*,double*), double *pars, int npar,
+		 double *vals,
+		 // 17-11-2015; Fixed sigma patch; E van Willigen; Quantitative Sol.
+		 double *sigma)
 {				/* use Koshal design for finite-differences */
     int i, j, nTot = 1 + npar + ( npar * ( npar + 1 ) ) / 2;
     double *incr = Calloc( npar, double), *ppt, *xpt, *dpt,
@@ -475,7 +493,7 @@ finite_diff_Hess( double (*func)(double*), double *pars, int npar,
 #ifdef Debug
     print_mat( "parray", parray, npar, npar, nTot );
 #endif /* Debug */
-    vals[ 0 ] = (*func)( pars );
+    vals[ 0 ] = (*func)( pars, sigma ); // 17-11-2015; Fixed sigma patch ...
     Xmat[ 0 ] = 1.0;
     for (i = 1; i < nTot; i++) {
 	Xmat[i] = 1.0;		/* column of 1's for constant */
@@ -483,7 +501,7 @@ finite_diff_Hess( double (*func)(double*), double *pars, int npar,
 	for (j = 0; j < npar; j++) {
 	    parray[ j ] += parray[ j + i * npar ] * incr[ j ];
 	}
-	vals[i] = (*func)( parray );
+	vals[i] = (*func)( parray, sigma ); // 17-11-2015; Fixed sigma patch ...
     }
 #ifdef Debug
     print_mat( "Xmat", Xmat, nTot, nTot, nTot );
@@ -515,7 +533,7 @@ mixed_fcn(longint n, double *pars, double *g, void *state)
     Memcpy(zxcopy, st->ZXy, st->dd->ZXrows * st->dd->ZXcols);
     *g = -internal_loglik(st->dd, zxcopy,
 			  generate_DmHalf(Delta, st->dd, st->pdClass, pars),
-			  st->RML, DNULLP, DNULLP);
+			  st->RML, DNULLP, DNULLP, st->sigma);// 17-11-2015; Fixed sigma ..
     Free(Delta); Free(zxcopy);
 }
 
@@ -534,11 +552,20 @@ mixed_grad(longint n, double *pars, double *g, void *state)
     DmHalf = generate_DmHalf(Delta, st->dd, st->pdClass, pars),
 	Memcpy(zxcopy, st->ZXy, st->dd->ZXrows * st->dd->ZXcols);
     /* needed ? */
-    internal_loglik(st->dd, zxcopy, DmHalf, st->RML, dc, DNULLP);
+    internal_loglik(st->dd, zxcopy, DmHalf, st->RML, dc, DNULLP, st->sigma);// Fixed sigma
     internal_estimate(st->dd, dc);
     internal_R_invert(st->dd, dc);
-    sigmainv = *(dc + (size_t)((st->dd->Srows) * (st->dd->ZXcols)) - 1)/sqrtDF;
-    sigmainv = 1.0/((sigmainv < 0.0) ? - sigmainv : sigmainv);
+    // 17-11-2015; Fixed sigma patch; E van Willigen; Quantitative Solutions
+    if (*st->sigma > 0) {
+	sigmainv = 1.0/(*st->sigma);
+    } else {
+	sigmainv = *(dc + (size_t)((st->dd->Srows) * (st->dd->ZXcols)) - 1)/sqrtDF;
+	if (sigmainv == 0) {
+	    error(_("Overfitted model!"));
+	} else {
+	    sigmainv = 1.0/((sigmainv < 0.0) ? - sigmainv : sigmainv);
+	}
+    }
     offset = ((st->dd->ZXcols) - 1L) * (st->dd->Srows);
     for (i = 0L; i < (st->dd->Q); i++) {
 	longint ncol = (st->dd->q)[i],
@@ -630,29 +657,29 @@ static longint *setngs, *pdC;
 size_t zxdim;
 
 static double
-logLik_fun( double *pars )
+logLik_fun( double *pars, double *sigma) // 17-11-2015; Fixed sigma patch; E van Willigen; Quantitative Solutions
 {				/* defined for finite differences */
     Memcpy( zxcopy2, zxcopy, zxdim );
     return internal_loglik(dd, zxcopy2, generate_DmHalf( Delta, dd, pdC, pars ),
-			   setngs, DNULLP, DNULLP );
+			   setngs, DNULLP, DNULLP, sigma ); // 17-11-2015; Fixed sigma patch; E van Willigen; Quantitative Solutions
 }
 
 static double
-negLogLik_fun( double *pars )
+negLogLik_fun( double *pars, double *sigma) // 17-11-2015; Fixed sigma patch; E van Willigen; Quantitative Solutions
 {				/* defined for finite differences */
     Memcpy( zxcopy2, zxcopy, zxdim );
     return - internal_loglik(dd, zxcopy2, generate_DmHalf( Delta, dd, pdC, pars ),
-			     setngs, DNULLP, DNULLP );
+			     setngs, DNULLP, DNULLP, sigma ); // 17-11-2015; Fixed sigma patch; E van Willigen; Quantitative Solutions
 }
 
 void
 mixed_loglik(double *ZXy, longint *pdims, double *pars, longint *settings,
-	     double *logLik, double *lRSS)
+	     double *logLik, double *lRSS, double *sigma) // 17-11-2015; Fixed sigma patch; E van Willigen; Quantitative Solutions
 {				/* evaluate the log-likelihood */
     dd = dims(pdims);
     /* settings gives RML, asDelta, gradHess, and pdClass in that order */
     if (settings[ 1 ]) {		/* gradHess not used and pdClass ignored */
-	*logLik = internal_loglik( dd, ZXy, pars, settings, DNULLP, lRSS);
+	*logLik = internal_loglik( dd, ZXy, pars, settings, DNULLP, lRSS, sigma); // 17-11-2015; Fixed sigma patch; E van Willigen; Quantitative Solutions
     } else {			/* generate the Delta arrays from pars */
 	setngs = settings;
 	pdC = setngs + 3;
@@ -661,7 +688,7 @@ mixed_loglik(double *ZXy, longint *pdims, double *pars, longint *settings,
 	if (settings[ 2 ] == 0) {	/* no gradient or Hessian */
 	    *logLik =
 		internal_loglik( dd, ZXy, generate_DmHalf( Delta, dd, pdC, pars ),
-				 settings, DNULLP, lRSS );
+				 settings, DNULLP, lRSS, sigma ); // 17-11-2015; Fixed sigma patch; E van Willigen; Quantitative Solutions
 	} else {
 	    int npar = count_DmHalf_pars( dd, pdC );
 	    zxdim = (dd->ZXrows) * (dd->ZXcols);
@@ -669,7 +696,7 @@ mixed_loglik(double *ZXy, longint *pdims, double *pars, longint *settings,
 	    zxcopy2 = ZXy;
 
 	    Memcpy( zxcopy, ZXy, zxdim );
-	    finite_diff_Hess( logLik_fun, pars, npar, logLik);
+	    finite_diff_Hess( logLik_fun, pars, npar, logLik, sigma); // 17-11-2015; Fixed sigma patch; E van Willigen; Quantitative Solutions
 	    Free( zxcopy );
 	}
 	Free( Delta );
@@ -679,11 +706,13 @@ mixed_loglik(double *ZXy, longint *pdims, double *pars, longint *settings,
 
 void				/* loglikelihood and parameter estimates */
 mixed_estimate(double *ZXy, longint *pdims, double *DmHalf, longint *RML,
-	       double *logLik, double *dc, longint *invert)
+	       double *logLik, double *dc, longint *invert,
+	       // 17-11-2015; Fixed sigma patch; E van Willigen; Quantitative Sol.:
+	       double *sigma)
 {				/* dc receives the decomposed ZXy array */
     dimPTR dd = dims(pdims);
 
-    *logLik = internal_loglik(dd, ZXy, DmHalf, RML, dc, DNULLP);
+    *logLik = internal_loglik(dd, ZXy, DmHalf, RML, dc, DNULLP, sigma);
     internal_estimate(dd, dc);
     if (*invert != 0) { internal_R_invert( dd, dc ); }
     dimFree(dd);
@@ -692,7 +721,9 @@ mixed_estimate(double *ZXy, longint *pdims, double *DmHalf, longint *RML,
 void				/* EM iterations for mixed-effects models */
 internal_EM(dimPTR dd, double *ZXy, double *DmHalf, int nn,
 	    longint *pdClass, longint *RML, double *logLik, double *Ra,
-	    double *lRSS)
+	    double *lRSS,
+	    // 17-11-2015; Fixed sigma patch; E van Willigen; Quantitative Solutions:
+	    double *sigma)
 {
     double sigmainv, *res, *pt,
 	*dc = Calloc((size_t) ((dd->Srows) * (dd->ZXcols)), double),
@@ -702,11 +733,20 @@ internal_EM(dimPTR dd, double *ZXy, double *DmHalf, int nn,
 
     while (nn-- > 0) {
 	copy_mat(zxcopy, dd->ZXrows, ZXy, dd->ZXrows, dd->ZXrows, dd->ZXcols);
-	*logLik = internal_loglik(dd, zxcopy, DmHalf, RML, dc, DNULLP);
+	*logLik = internal_loglik(dd, zxcopy, DmHalf, RML, dc, DNULLP, sigma);
 	internal_estimate( dd, dc );
 	internal_R_invert( dd, dc );
-	sigmainv = *(dc + (size_t)((dd->Srows) * (dd->ZXcols)) - 1)/sqrtDF;
-	sigmainv = 1.0/((sigmainv < 0.0) ? - sigmainv : sigmainv);
+	// 17-11-2015; Fixed sigma patch; E van Willigen; Quantitative Solutions
+	if (*sigma > 0) {
+	    sigmainv = 1.0/(*sigma);
+	} else {
+	    sigmainv = *(dc + (size_t)((dd->Srows) * (dd->ZXcols)) - 1)/sqrtDF;
+	    if (sigmainv == 0.) {
+		error(_("Overfitted model!"));
+	    } else {
+		sigmainv = 1.0/((sigmainv < 0.0) ? - sigmainv : sigmainv);
+	    }
+	}
 	offset = ((dd->ZXcols) - 1L) * (dd->Srows);
 	for (i = 0L; i < (dd->Q); i++) {
 	    longint ncol = (dd->q)[i],
@@ -786,18 +826,21 @@ internal_EM(dimPTR dd, double *ZXy, double *DmHalf, int nn,
 	}
     }
     copy_mat(zxcopy, dd->ZXrows, ZXy, dd->ZXrows, dd->ZXrows, dd->ZXcols);
-    *logLik = internal_loglik(dd, zxcopy, DmHalf, RML, dc, lRSS);
+    *logLik = internal_loglik(dd, zxcopy, DmHalf, RML, dc, lRSS,
+			      // 17-11-2015; Fixed sigma patch :
+			      sigma);
     Free(dc); Free(zxcopy);
 }
 
 void
 mixed_EM(double *ZXy, longint *pdims, double *DmHalf, longint *nIter,
 	 longint *pdClass, longint *RML, double *logLik, double *Ra,
-	 double *lRSS)
+	 double *lRSS,
+	 // 17-11-2015; Fixed sigma patch; E van Willigen; Quantitative Solutions
+	 double *sigma)
 {
     dimPTR dd = dims(pdims);
-
-    internal_EM(dd, ZXy, DmHalf, *nIter, pdClass, RML, logLik, Ra, lRSS);
+    internal_EM(dd, ZXy, DmHalf, *nIter, pdClass, RML, logLik, Ra, lRSS, sigma);
     dimFree(dd);
 }
 
@@ -808,7 +851,9 @@ mixed_calcf(longint *n, double *theta, longint *nf,
 {
     Memcpy( zxcopy2, zxcopy, zxdim );
     *f = - internal_loglik(dd, zxcopy2, generate_DmHalf( Delta, dd, pdC, theta ),
-			   setngs, DNULLP, DNULLP );
+			   setngs, DNULLP, DNULLP,
+			   // 17-11-2015; Fixed sigma patch; E van Willigen; Quant.Sol.
+			   _sigma_ );
 }
 
 void				/* to be called by Fortran msmnh */
@@ -819,7 +864,9 @@ mixed_calcgh(longint *n, double *theta, longint *nf,
     longint i, nn = *n;
     double *hpt = values + nn + 1;
 
-    finite_diff_Hess( negLogLik_fun, theta, (int) nn, values );
+    finite_diff_Hess(negLogLik_fun, theta, (int) nn, values,
+		     // 17-11-2015; Fixed sigma patch; E van Willigen; Quant.Sol.
+		     _sigma_ );
     Memcpy( g, values + 1, nn );
     for( i = 1; i <= nn; i++ ) {	/* copy upper triangle of Hessian */
 	Memcpy( h, hpt, i );
@@ -940,7 +987,9 @@ generate_theta( double *theta, dimPTR dd, longint *pdClass, double *DmHalf )
 void				/* both EM and Newton-Raphson iterations */
 mixed_combined(double *ZXy, longint *pdims, double *DmHalf, longint *nIter,
 	       longint *pdClass, longint *RML, double *logLik, double *R0,
-	       double *lRSS, longint *info)
+	       double *lRSS, longint *info,
+	       // 17-11-2015; Fixed sigma patch; E van Willigen; Quantitative Solutions
+	       double *sigma)
 {
     longint i, j;
     double *Ra, *dc, *work;
@@ -967,7 +1016,8 @@ mixed_combined(double *ZXy, longint *pdims, double *DmHalf, longint *nIter,
 	    Delta -= (dd->q)[i];	/* have moved too far - step back */
 	}
     }
-    internal_EM(dd, ZXy, DmHalf, *nIter, pdClass, RML, logLik, Ra, lRSS);
+    internal_EM(dd, ZXy, DmHalf, *nIter, pdClass, RML, logLik, Ra, lRSS,
+		sigma); // 17-11-2015; Fixed sigma patch ...
 #ifdef USING_R
     {
 	statePTR st = Calloc(1, struct state_struct);
@@ -985,6 +1035,7 @@ mixed_combined(double *ZXy, longint *pdims, double *DmHalf, longint *nIter,
 	st->ZXy = ZXy;
 	st->pdClass = pdClass;
 	st->RML = RML;
+	st->sigma = sigma; // 17-11-2015; Fixed sigma patch; ...
 
 	generate_theta(theta, dd, pdClass, DmHalf);
 
@@ -1008,18 +1059,20 @@ mixed_combined(double *ZXy, longint *pdims, double *DmHalf, longint *nIter,
 	if (*info == 0) {
 	    *logLik = internal_loglik( dd, ZXy,
 				       generate_DmHalf( DmHalf, dd, pdC, theta ),
-				       setngs, dc, lRSS );
+				       setngs, dc, lRSS,
+				       // 17-11-2015; Fixed sigma patch ... :
+				       sigma );
 	    copy_mat(R0, p, dc + (dd->SToff)[(dd->Q)][0], (dd->Srows), p, p + 1);
 	}
 	Free(work); Free(a); Free(newtheta); Free(grad); Free(typsiz); Free(theta);
 	Free(st);
     }
-#else  /* USING_R */
+#else  /* not USING_R */
     {
 	int ntheta = count_DmHalf_pars( dd, pdC );
 	longint p, *iv, liv, lv, uiparm[1]; /* for msmnh */
-	double *theta, *scale, ufparm[1];
-
+	double *theta, *scale, ufparm[1],
+	    *sigma; // 17-11-2015; Fixed sigma patch; E van Willigen; Quantitative Sol.
 	Delta = DmHalf;
 	p = (dd->ncol)[(dd->Q)];
 	zxdim = (dd->ZXrows) * (dd->ZXcols); /* global zxdim, zxcopy, and zxcopy2 */
@@ -1035,13 +1088,17 @@ mixed_combined(double *ZXy, longint *pdims, double *DmHalf, longint *nIter,
 	work = Calloc( (size_t) lv, double );
 	scale = Calloc( (size_t) ntheta, double );
 	for( i = 0; i < ntheta; i++ ) { scale[i] = 1.; }
+	// 17-11-2015; Fixed sigma patch; E van Willigen; Quantitative Solutions
+	_sigma_ = sigma; // To provide sigma out-of-band to mixed_calcf and mixed_calcgh.
 	F77_CALL(msmnh) (&ntheta, scale, theta, mixed_calcf, mixed_calcgh,
 			 iv, &liv, &lv, work, uiparm, ufparm, abort);
 	*info = iv[0];
 	Memcpy( zxcopy2, ZXy, zxdim );
 	*logLik = internal_loglik( dd, zxcopy2,
 				   generate_DmHalf( Delta, dd, pdC, theta ),
-				   setngs, dc, lRSS );
+				   setngs, dc, lRSS,
+				   // 17-11-2015; Fixed sigma patch ... :
+				   sigma);
 	copy_mat(R0, p, dc + (dd->SToff)[(dd->Q)][0], (dd->Srows), p, p + 1);
 	Free(scale); Free(work); Free(iv); Free(values); Free(theta); Free(zxcopy);
     }
@@ -1097,7 +1154,9 @@ inner_perc_table(double *X, longint *grps, longint *p, longint *Q,
 
 /* gls functions */
 void
-gls_loglik(double *Xy, longint *pdims, double *logLik, double *lRSS)
+gls_loglik(double *Xy, longint *pdims, double *logLik, double *lRSS,
+	   // 17-11-2015; Fixed sigma patch; E van Willigen; Quantitative Solutions
+	   double *sigma)
 {
     longint i, N = pdims[0], p = pdims[1], RML = pdims[2],
 	Np1 = N + 1, Nr = N - RML * p, rnkm1;
@@ -1108,13 +1167,27 @@ gls_loglik(double *Xy, longint *pdims, double *logLik, double *lRSS)
     if(rnkm1 != p) {
 	*logLik = -DBL_MAX;
     } else {
-	*lRSS = log(fabs (dmQR->mat[p * Np1]));
-	*logLik -= Nr * (*lRSS);
-	if (RML == 1) {
-	    for(i = 0; i < p; i++) {
-		*logLik -= log(fabs(dmQR->mat[i * Np1]));
+	// 17-11-2015; Fixed sigma patch; E van Willigen; Quantitative Solutions
+	double f;
+	*lRSS = log(f=fabs (dmQR->mat[p * Np1]));
+	if (*sigma > 0) { // fixed sigma
+	    double h = 0;
+	    if (RML == 1) {
+		for(i = 0; i < p; i++) {
+		    h += log(fabs(dmQR->mat[i * Np1]));
+		}
 	    }
-	}
+	    *logLik -= pow(f,2)/(2*pow(*sigma,2));
+	    *logLik -= Nr * log(*sigma);
+	    *logLik -= h;
+	} else { // estimated sigma (default)
+	    *logLik -= (((double)Nr) * (*lRSS));
+	    if (RML == 1) {
+		for (i = 0; i < p; i++) {
+		    *logLik -= log(fabs(dmQR->mat[i * Np1]));
+		}
+	    }
+    	}
     }
     QRfree(dmQR);
 }
@@ -1157,12 +1230,26 @@ gls_estimate(double *Xy, longint *pdims, double *beta, double *sigma,
     for(i = 0; i < rk; i++) {
 	Memcpy(R + i * rk, dmQR->mat + i * N, i + 1);
     }
-    *sigma = fabs(R[rk * rk - 1]);
-    *logLik -= Nr * log(*sigma);
-    *sigma /= sqrt(((double) Nr));
-    if (RML == 1) {
-	for(i = 0; i < rkm1; i++) {
-	    *logLik -= log(fabs(R[i * (rkp1)]));
+    // 17-11-2015; Fixed sigma patch; E van Willigen; Quantitative Solutions
+    if (*sigma > 0) { // fixed sigma
+	double h = 0;
+	*logLik = fabs(R[rk * rk - 1]);
+	if (RML == 1) { // RML
+	    for(i=0; i<rkm1; i++) {
+		h += log(fabs(R[i * (rkp1)]));
+	    }
+	}
+	*logLik = -pow(*logLik, 2)/(2*(pow(*sigma,2)));
+	*logLik -= Nr * log(*sigma);
+	*logLik -= h;
+    } else {	// estimated sigma (default)
+    	*sigma = fabs(R[rk * rk - 1]);
+    	*logLik -= Nr * log(*sigma);
+    	*sigma /= sqrt(((double) Nr));
+	if (RML == 1) {
+	    for(i = 0; i < rkm1; i++) {
+		*logLik -= log(fabs(R[i * (rkp1)]));
+	    }
 	}
     }
     copy_mat(varBeta, rkm1, R, rk, rkm1, rkm1);

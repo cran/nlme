@@ -2,7 +2,7 @@
 ###
 ### Copyright 1997-2003  Jose C. Pinheiro,
 ###                      Douglas M. Bates <bates@stat.wisc.edu>
-# Copyright 2006-2012 The R Core team
+### Copyright 2006-2015  The R Core team
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -22,10 +22,8 @@ createConLin <-
     function(fixed, data = sys.frame(sys.parent()),
              random = pdSymm(eval(as.call(fixed[-2]))), ...)
 {
-##    Call <- match.call()
-    if(!inherits(fixed, "formula") || length(fixed) != 3) {
+    if(!inherits(fixed, "formula") || length(fixed) != 3)
         stop("\nfixed-effects model must be a formula of the form \"resp ~ pred\"")
-    }
     REML <- FALSE
     reSt <- reStruct(random, REML = REML, data = NULL)
     groups <- getGroupsFormula(reSt)
@@ -73,13 +71,12 @@ createConLin <-
         names(grps) <- as.character(deparse((groups[[2]])))
     }
     else {
-        ord <- do.call("order", grps)
+        ord <- do.call(order, grps)
         ## making group levels unique
         for(i in 2:ncol(grps)) {
-            grps[, i] <-
-                as.factor(paste(as.character(grps[, i - 1]), as.character(grps[, i]),
-                                sep = "/"))
-            NULL
+	    grps[, i] <-
+		as.factor(paste(as.character(grps[, i - 1]),
+				as.character(grps[, i    ]), sep = "/"))
         }
     }
     grps <- grps[ord,  , drop = FALSE]
@@ -96,60 +93,63 @@ createConLin <-
     auxContr <- lapply(X, function(el)
                        if(inherits(el, "factor")) contrasts(el))
     contr <- c(contr, auxContr[is.na(match(names(auxContr), names(contr)))])
-    contr <- contr[!unlist(lapply(contr, is.null))]
+    contr <- contr[!vapply(contr, is.null, NA)]
     X <- model.matrix(fixed, X)
     y <- eval(fixed[[2]], dataMix)
     ncols <- c(ncols, dim(X)[2], 1)
-    Q <- ncol(grps)	## creating the condensed linear model
+    ## Q <- ncol(grps)
+    ## creating the condensed linear model :
     list(Xy = array(c(Z, X, y), c(N, sum(ncols)),
-	 list(row.names(dataMix),
-	      c(colnames(Z), colnames(X), deparse(fixed[[2]])))),
-         dims = MEdims(grps, ncols), logLik = 0)
+                    list(row.names(dataMix),
+                         c(colnames(Z), colnames(X), deparse(fixed[[2]])))),
+         dims = MEdims(grps, ncols), logLik = 0,
+         sigma = 0) # <- no "fixed Sigma" yet
 }
 
 simulate.lme <-
     function(object, nsim = 1, seed = as.integer(runif(1, 0, .Machine$integer.max)),
-             m2, method = c("REML", "ML"), niterEM = c(40, 200),
-             useGen = FALSE, ...)
+             m2, method = c("REML", "ML"), niterEM = c(40, 200), useGen, ...)
 {
-    if (inherits(nsim, "lm") || inherits(nsim, "lme"))
-        stop("order of arguments in 'simulate.lme' has changed to conform with generic in R-2.2.0", domain = NA)
     ## object is a list of arguments to lme, or an lme object from which the
     ##    call is extracted, to define the null model
     ## m2 is an option list of arguments to lme to define the feared model
+    if (inherits(nsim, "lm") || inherits(nsim, "lme"))
+        stop("order of arguments in 'simulate.lme' has changed to conform with generic in R-2.2.0",
+             domain = NA)
+### FIXME?  if(!ALT)  behave like a regular  simulate() method --> return 'base2' (see below)
     getResults1 <-
-        function(conLin, nIter, pdClass, REML, ssq, p, pp1)
-        {
-            unlist(.C(mixed_combined,
-                      as.double(conLin$Xy),
-                      as.integer(unlist(conLin$dims)),
-                      double(ssq),
-                      as.integer(nIter),
-                      as.integer(pdClass),
-                      as.integer(REML),
-                      logLik = double(1),
-                      R0 = double(pp1),
-                      lRSS = double(1),
-                      info = integer(1))[c("info", "logLik")])
-        }
+	function(conLin, nIter, pdClass, REML, ssq, p, pp1) {
+	    unlist(.C(mixed_combined,
+		      as.double(conLin$Xy),
+		      as.integer(unlist(conLin$dims)),
+		      double(ssq),
+		      as.integer(nIter),
+		      as.integer(pdClass),
+		      as.integer(REML),
+		      logLik = double(1),
+		      R0 = double(pp1),
+		      lRSS = double(1),
+		      info = integer(1),
+		      sigma = as.double(conLin$sigma))[c("info", "logLik")])
+	}
     getResults2 <-
-        function(conLin, reSt, REML, control)
-        {
-            lmeSt <- lmeStruct(reStruct = reStruct(reSt, REML = REML))
-            attr(lmeSt, "conLin") <- conLin
-            lmeSt <- Initialize(lmeSt, data = NULL, groups = NULL, control = control)
-            attr(lmeSt, "conLin") <- MEdecomp(attr(lmeSt, "conLin"))
-            aMs <- nlminb(c(coef(lmeSt)),
-               function(lmePars) -logLik(lmeSt, lmePars),
-               control = list(iter.max = control$msMaxIter,
-               eval.max = control$msMaxEval,
-               trace = control$msVerbose))
-            c(info = aMs$flags[1], logLik = -aMs$value)
-        }
+	function(conLin, reSt, REML, control) {
+	    lmeSt <- lmeStruct(reStruct = reStruct(reSt, REML = REML))
+	    attr(lmeSt, "conLin") <- conLin
+	    lmeSt <- Initialize(lmeSt, data = NULL, groups = NULL, control = control)
+	    attr(lmeSt, "conLin") <- MEdecomp(attr(lmeSt, "conLin"))
+	    aMs <- nlminb(c(coef(lmeSt)),
+			  function(lmePars) -logLik(lmeSt, lmePars),
+			  control = list(iter.max = control$msMaxIter,
+					 eval.max = control$msMaxEval,
+					 trace = control$msVerbose))
+	    c(info = aMs$flags[1], logLik = -aMs$value)
+	}
 
     if(!exists(".Random.seed", envir = .GlobalEnv))
         runif(1)		     # initialize the RNG if necessary
     RNGstate <- get(".Random.seed", envir = .GlobalEnv)
+    on.exit(assign(".Random.seed", RNGstate, envir = .GlobalEnv))
     set.seed(seed)
 
     if (inherits(object, "lme")) {      # given as an lme object
@@ -157,14 +157,13 @@ simulate.lme <-
         object <- as.list(object$call[-1])
     } else {
         object <- as.list(match.call(lme, substitute(object))[ -1 ])
-        fit1 <- do.call("lme", object)
+        fit1 <- do.call(lme, object)
     }
-    if (length(fit1$modelStruct) > 1) {
+    if (length(fit1$modelStruct) > 1)
         stop("models with \"corStruct\" and/or \"varFunc\" objects not allowed")
-    }
     reSt1 <- fit1$modelStruct$reStruct
-    condL1 <- do.call("createConLin", object)
-    pdClass1 <- unlist(lapply(reSt1, data.class))
+    condL1 <- do.call(createConLin, object)
+    pdClass1 <- vapply(reSt1, data.class, "")
     pdClass1 <- match(pdClass1, c("pdSymm", "pdDiag", "pdIdent",
                                   "pdCompSymm", "pdLogChol"), 0) - 1
     control1 <- lmeControl()
@@ -191,27 +190,15 @@ simulate.lme <-
     csq1 <- cumsum(c(1, qvec[ - Q]))
     csq2 <- cumsum(qvec)
     ngrp <- nullD$ngrps
-    ind <- vector("list", Q)
     ## base for creating response
     base <-
         condL1$Xy[, ycol1 - (nullD$ncol[Q + 1]:1), drop = FALSE] %*% fixef(fit1)
-    for(i in 1:Q) {
-        ind[[i]] <- rep(1:ngrp[i], nullD$ZXlen[[i]])
-    }
-    value <- list(null = list())
-    if (ML <- !is.na(match("ML", method))) {
-        value$null$ML <-
-            array(0, c(nsim, 2), list(1:nsim, c("info", "logLik")))
-    }
-    if (REML <- !is.na(match("REML", method))) {
-        value$null$REML <-
-            array(0, c(nsim, 2), list(1:nsim, c("info", "logLik")))
-    }
-    attr(value, "call") <- match.call()
-    attr(value, "seed") <- seed
-    ALT <- FALSE
-    if (!missing(m2)) {
-        ALT <- TRUE
+    ind <- lapply(1:Q, function(i) rep(1:ngrp[i], nullD$ZXlen[[i]]))
+    if (ML <- !is.na(match("ML", method)))
+        nML   <- array(0, c(nsim, 2), list(1:nsim, c("info", "logLik")))
+    if (REML <- !is.na(match("REML", method)))
+        nREML <- array(0, c(nsim, 2), list(1:nsim, c("info", "logLik")))
+    if ((ALT <- !missing(m2))) {
         if (inherits(m2, "lme")) {            # given as an lme object
             fit2 <- m2
             m2 <- as.list(m2$call[-1])
@@ -223,19 +210,19 @@ simulate.lme <-
             aux <- object
             aux[names(m2)] <- m2
             m2 <- aux
-            fit2 <- do.call("lme", m2)
+            fit2 <- do.call(lme, m2)
         }
         if (length(fit2$modelStruct) > 1) {
             stop("models with \"corStruct\" and/or \"varFunc\" objects not allowed")
         }
-        condL2 <- do.call("createConLin", m2)
+        condL2 <- do.call(createConLin, m2)
         reSt2 <- fit2$modelStruct$reStruct
         control2 <- lmeControl()
         if (!is.null(m2$control)) {
             control2[names(m2$control)] <- m2$control
         }
         control2$niterEM <- niterEM[2]
-        pdClass2 <- unlist(lapply(fit2$modelStruct$reStruct, data.class))
+        pdClass2 <- vapply(fit2$modelStruct$reStruct, data.class, "")
         pdClass2 <- match(pdClass2, c("pdSymm", "pdDiag", "pdIdent",
                                       "pdCompSymm", "pdLogChol"), 0) - 1
         useGen <- useGen || any(pdClass2 == -1)
@@ -244,88 +231,84 @@ simulate.lme <-
         p2 <- altD$ncol[altD$Q + 1]
         pp12 <- p2 * (p2 + 1)
         ycol2 <- sum(altD$ncol)
-        if (ML) {
-            value$alt$ML <- value$null$ML
-        }
-        if (REML) {
-            value$alt$REML <- value$null$REML
-        }
+        if (ML)
+            aML <- nML
+        if (REML)
+            aREML <- nREML
     }
     for(i in 1:nsim) {
-        base2 <- base + rnorm(N, sd = sig)
+        base2 <- base + rnorm(N, sd = sig) ## = X beta + eps
+        ## now add  'Z b' as Q different terms  \sum_{j=1}^Q  Z_j b_j :
         for(j in 1:Q) {
             base2 <- base2 +
                 ((array(rnorm(ngrp[j] * qvec[j]), c(ngrp[j], qvec[j]),
-                        list(1:ngrp[j], NULL)) %*%
-                  DeltaInv[[j]])[ind[[j]], , drop = FALSE] * condL1$Xy[,csq1[j]:csq2[j],
-                                             drop = FALSE]) %*% rep(1, qvec[j])
+                        list(1:ngrp[j], NULL)) %*% DeltaInv[[j]])[ind[[j]], , drop = FALSE] *
+                 condL1$Xy[,csq1[j]:csq2[j], drop = FALSE]) %*% rep(1, qvec[j])
         }
         condL1$Xy[, ycol1] <- base2
         if (REML) {
-            if (useGen) {
-                value$null$REML[i,] <-
+            nREML[i,] <-
+                if (useGen)
                     getResults2(condL1, reSt1, TRUE, control1)
-            } else {
-                value$null$REML[i,] <-
+                else
                     getResults1(condL1, niterEM[1], pdClass1, TRUE, ssq1, p1, pp11)
-            }
         }
         if (ML) {
-            if (useGen) {
-                value$null$ML[i,] <-
+            nML[i,] <-
+                if (useGen)
                     getResults2(condL1, reSt1, FALSE, control1)
-            } else {
-                value$null$ML[i,] <-
+                else
                     getResults1(condL1, niterEM[1], pdClass1, FALSE, ssq1, p1, pp11)
-            }
         }
         if (ALT) {
             condL2$Xy[, ycol2] <- base2
             if (REML) {
-                if (useGen) {
-                    value$alt$REML[i,] <-
+                aREML[i,] <-
+                    if (useGen)
                         getResults2(condL2, reSt2, TRUE, control2)
-                } else {
-                    value$alt$REML[i,] <-
+                    else
                         getResults1(condL2, niterEM[2], pdClass2, TRUE, ssq2, p2, pp12)
-                }
             }
             if (ML) {
-                if (useGen) {
-                    value$alt$ML[i,] <-
+                aML[i,] <-
+                    if (useGen)
                         getResults2(condL2, reSt2, FALSE, control2)
-                } else {
-                    value$alt$ML[i,] <-
+                    else
                         getResults1(condL2, niterEM[2], pdClass2, FALSE, ssq2, p2, pp12)
-                }
             }
         }
-    }
+    } ## for i = 1,..,nsim
+    v.null <- v.alt <- list()
     if (ML) {
-        value$null$ML[, "logLik"] <-
-            N * (log(N) - (1 + log(2*pi)))/2 + value$null$ML[, "logLik"]
+        nML[, "logLik"] <- nML[, "logLik"] + N * (log(N) - (1 + log(2*pi)))/2
+        v.null$ML <- nML
         if (ALT) {
-            value$alt$ML[, "logLik"] <-
-                N * (log(N) - (1 + log(2*pi)))/2 + value$alt$ML[, "logLik"]
+            aML[, "logLik"] <- aML[, "logLik"] + N * (log(N) - (1 + log(2*pi)))/2
+            v.alt$ML <- aML
         }
     }
     if (REML) {
-        value$null$REML[, "logLik"] <-
-            (N - p1) * (log(N - p1) - (1 + log(2*pi)))/2 + value$null$REML[, "logLik"]
+        nREML[, "logLik"] <- nREML[, "logLik"] +
+            (N - p1) * (log(N - p1) - (1 + log(2*pi)))/2
+        v.null$REML <- nREML
         if (ALT) {
-            value$alt$REML[, "logLik"] <-
-                (N - p2) * (log(N - p2) - (1 + log(2*pi)))/2 + value$alt$REML[, "logLik"]
+            aREML[, "logLik"] <- aREML[, "logLik"] +
+                (N - p2) * (log(N - p2) - (1 + log(2*pi)))/2
+            v.alt$REML <- aREML
         }
     }
-    attr(value, "df") <- p1 + length(coef(reSt1)) + 1
-    if (ALT) {
-        attr(value, "df") <-
-            abs(attr(value, "df") - (p2 + length(coef(reSt2)) + 1))
-    }
-    attr(value, "useGen") <- useGen
-    class(value) <- "simulate.lme"
-    assign(".Random.seed", RNGstate, envir = .GlobalEnv)
-    value
+    df <- p1 + length(coef(reSt1)) + 1
+    if (ALT)
+        df <- abs(df - (p2 + length(coef(reSt2)) + 1))
+    ## return :
+    structure(if(ALT && (ML || REML))
+		  list(null = v.null, alt = v.alt)
+	      else list(null = v.null),
+	      class = "simulate.lme",
+	      call = match.call(),
+	      seed = seed,
+	      df = df,
+	      useGen = useGen)
 }
 
 print.simulate.lme <-
@@ -353,6 +336,8 @@ plot.simulate.lme <-
              ylim = c(0.037, 0.963), aspect = 1,
              strip = function(...) strip.default(..., style = 1), ...)
 {
+    if (is.null(df))
+        stop("no degrees of freedom specified")
     ML <- !is.null(x$null$ML)
     if(ML) {
         if (is.null(x$alt$ML))
@@ -366,9 +351,6 @@ plot.simulate.lme <-
         okREML <- x$null$REML[, "info"] < 8 & x$alt$REML[, "info"] < 8
     }
 
-    if (is.null(df)) {
-        stop("no degrees of freedom specified")
-    }
     if ((ldf <- length(df)) > 1) {
         df <- sort(unique(df))
         if (missing(weights)) {
@@ -394,7 +376,7 @@ plot.simulate.lme <-
             rev(sort(2 * pmax(0, x$alt$ML[okML, "logLik"] - x$null$ML[okML,"logLik"])))
         MLy <- lapply(df,
                       function(df, x) {
-			  if (df > 0) 1 - pchisq(x, df) else 1*(x == 0)
+			  if (df > 0) pchisq(x, df, lower.tail=FALSE) else 1*(x == 0)
                       }, x = MLstat)
         dfC <- paste("df",df,sep="=")
         if (useWgts) {                      # has weights
@@ -432,18 +414,17 @@ plot.simulate.lme <-
         REMLy <- lapply(df,
                         function(df, x) {
                             if (df > 0) {
-                                1 - pchisq(x, df)
+                                pchisq(x, df, lower.tail = FALSE)
                             } else {
-                                val <- rep(0, length(x))
-                                val[x == 0] <- 1
-                                val
+                                1*(x == 0)
                             }
                         }, x = REMLstat)
         dfC <- paste("df",df,sep="=")
         if (useWgts) {                      # has weights
             if (ldf == 2) {                   # will interpolate
                 REMLy <-
-                    c(REMLy[[1]], weights[1] * REMLy[[1]] + weights[2] * REMLy[[2]], REMLy[[2]])
+                    c(REMLy[[1]], weights[1] * REMLy[[1]] + weights[2] * REMLy[[2]],
+                      REMLy[[2]])
                 REMLdf <- rep(c(dfC[1], paste("Mix(",df[1],",",df[2],")",sep=""),
                                 dfC[2]), rep(length(REMLstat), ldf + 1))
             } else {

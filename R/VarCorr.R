@@ -1,8 +1,8 @@
 ###          Extract variance components of lme models.
 ###
+### Copyright 2007-2016 The R Core team
 ### Copyright 1997-2003  Jose C. Pinheiro,
 ###                      Douglas M. Bates <bates@stat.wisc.edu>
-# Copyright 2007-2011 The R Core team
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -18,13 +18,19 @@
 #  http://www.r-project.org/Licenses/
 #
 
-VarCorr <- function( x, sigma = 1, rdig = 3) UseMethod("VarCorr")
+if(getRversion() < "3.2.0") {
+    lengths <- function (x, use.names = TRUE)
+        vapply(x, length, 1L, USE.NAMES = use.names)
+}
 
-VarCorr.lme <- function( x, sigma = 1., rdig = 3)
+
+VarCorr <- function( x, sigma = 1, rdig = 3, ...) UseMethod("VarCorr")
+
+VarCorr.lme <- function( x, sigma = 1, rdig = 3, ...)
 {
   sigma <- x$sigma
-  m <- lapply( rev( x$modelStruct$reStruct ), VarCorr,
-              sigma = sigma, rdig = rdig)
+  m <- lapply(X=rev( x$modelStruct$reStruct ), FUN=VarCorr,
+              sigma = sigma, rdig = rdig, ...)
   Q <- length( m )
   if (Q <= 1) {
     nm <- names(m)
@@ -33,19 +39,16 @@ VarCorr.lme <- function( x, sigma = 1., rdig = 3)
     v <- array( "", dim(mm), dimnames(mm) )
     v[, 1] <- format( mm[, 1] )
     v[, 2] <- format( mm[, 2] )
-    if (!is.null( attr(m, "corr") ) ) {
-      v <- cbind( v, rbind(attr(m, "corr"),
-                           Residual = rep("", ncol(attr(m, "corr")))))
+    if (!is.null(corr <- attr(m, "corr"))) {
+      v <- cbind(v, rbind(corr, Residual = rep("", ncol(corr))))
     }
-    attr( v, "title" ) <-
-      paste( nm, "=", attr( m, "formStr" ) )
-    class( v ) <- "VarCorr.lme"
-    return( v )
+    return(structure(v, title = paste(nm, "=", attr( m, "formStr" )),
+                     class = "VarCorr.lme"))
   }
   ## multiple nested levels case
   nrows <- sapply( m, nrow )
   trows <- 1 + c(0, cumsum(1 + nrows))[1:Q]
-  bd <- rbind( do.call("rbind", m),
+  bd <- rbind(do.call(rbind, m),
               c(Variance = sigma^2, StdDev = sigma) )
   corr <- lapply( m, attr, which = "corr")
   colnames <- colnames(bd)
@@ -84,7 +87,7 @@ print.VarCorr.lme <- function(x, ...)
 }
 
 
-VarCorr.pdMat <- function( x, sigma = 1., rdig = 3)
+VarCorr.pdMat <- function( x, sigma = 1., rdig = 3, ...)
 {
   sx <- summary( x )
   sd <- sigma * attr( sx, "stdDev" )
@@ -104,9 +107,9 @@ VarCorr.pdMat <- function( x, sigma = 1., rdig = 3)
       paste(class(x)[[1]], "(",
             substring(deparse(attr(x, "formula")), 2), ")", sep = "")
     }
-      if ( attr(sx, "noCorrelation") | (p <= 1) ) {
+  if (attr(sx, "noCorrelation") || p <= 1)
     return(v)
-  }
+
   ll <- lower.tri(sx)
   sx[ll] <- format(round(sx[ll], digits = rdig))
   sx[!ll] <- ""
@@ -118,10 +121,10 @@ VarCorr.pdMat <- function( x, sigma = 1., rdig = 3)
   v
 }
 
-VarCorr.pdBlocked <- function( x, sigma = 1., rdig = 3)
+VarCorr.pdBlocked <- function( x, sigma = 1., rdig = 3, ...)
 {
-  m <- lapply( x, VarCorr, sigma = sigma, rdig = rdig)
-  bd <- do.call("rbind", m)
+  m <- lapply(X=x, FUN=VarCorr, sigma = sigma, rdig = rdig, ...)
+  bd <- do.call(rbind, m)
 ## the following code does not appear to be used at all
 ##   corr <- lapply( m, attr, which = "corr")
 ##   maxCorr <- 0

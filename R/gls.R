@@ -2,7 +2,7 @@
 ###
 ### Copyright 1997-2003  Jose C. Pinheiro,
 ###                      Douglas M. Bates <bates@stat.wisc.edu>
-# Copyright 2005-2014 The R Core team
+### Copyright 2005-2015  The R Core team
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -47,9 +47,7 @@ gls <-
     method <- match.arg(method)
     REML <- method == "REML"
     ## check if correlation is present and has groups
-    if (!is.null(correlation)) {
-        groups <- getGroupsFormula(correlation)
-    } else groups <- NULL
+    groups <- if (!is.null(correlation)) getGroupsFormula(correlation) ## else NULL
     ## create a gls structure containing the plug-ins
     glsSt <-
         glsStruct(corStruct = correlation, varStruct = varFunc(weights))
@@ -64,7 +62,7 @@ gls <-
         mfArgs[["subset"]] <- asOneSidedFormula(Call[["subset"]])[[2L]]
     }
     mfArgs$drop.unused.levels <- TRUE
-    dataMod <- do.call("model.frame", mfArgs)
+    dataMod <- do.call(model.frame, mfArgs)
     origOrder <- row.names(dataMod)	# preserve the original order
     if (!is.null(groups)) {
         ## sort the model.frame by groups and get the matrices and parameters
@@ -99,11 +97,14 @@ gls <-
     }
     namTerms <- factor(parAssign, labels = namTerms)
     parAssign <- split(order(parAssign), namTerms)
+    fixedSigma <- (controlvals$sigma > 0) ## 17-11-2015; Fixed sigma patch
     ## creating the condensed linear model
     attr(glsSt, "conLin") <-
         list(Xy = array(c(X, y), c(N, ncol(X) + 1L), list(row.names(dataMod),
 	     c(colnames(X), deparse(model[[2]])))),
-             dims = list(N = N, p = p, REML = as.integer(REML)), logLik = 0)
+             dims = list(N = N, p = p, REML = as.integer(REML)), logLik = 0,
+             ## 17-11-2015; Fixed sigma patch; SH Heisterkamp; Quantitative Solutions
+             sigma = controlvals$sigma, fixedSigma = fixedSigma)
 
     ## initialization
     glsEstControl <- controlvals["singular.ok"]
@@ -173,6 +174,8 @@ gls <-
     ## wrapping up
     glsFit <- attr(glsSt, "glsFit")
     namBeta <- names(glsFit$beta)
+    ## 17-11-2015; Fixed sigma patch; SH Heisterkamp; Quantitative Solutions
+    attr(glsSt, "fixedSigma") <- fixedSigma
     attr(parAssign, "varBetaFact") <- varBeta <-
         glsFit$sigma * glsFit$varBeta * sqrt((N - REML * p)/(N - p))
     varBeta <- crossprod(varBeta)
@@ -186,27 +189,28 @@ gls <-
         grps <- grps[revOrder]
         Fitted <- Fitted[revOrder]
         Resid <- y[revOrder] - Fitted
-        attr(Resid, "std") <- glsFit$sigma/(varWeights(glsSt)[revOrder])
+        attr(Resid, "std") <- glsFit$sigma/varWeights(glsSt)[revOrder]
     } else {
         Resid <- y - Fitted
-        attr(Resid, "std") <- glsFit$sigma/(varWeights(glsSt))
+        attr(Resid, "std") <- glsFit$sigma/varWeights(glsSt)
     }
     names(Resid) <- names(Fitted) <- origOrder
 
     ## getting the approximate var-cov of the parameters
-    if (controlvals$apVar) {
-        apVar <- glsApVar(glsSt, glsFit$sigma,
-                          .relStep = controlvals[[".relStep"]],
-                          minAbsPar = controlvals[["minAbsParApVar"]],
-                          natural = controlvals[["natural"]])
-    } else {
-        apVar <- "Approximate variance-covariance matrix not available"
-    }
+    apVar <-
+        if (controlvals$apVar)
+            glsApVar(glsSt, glsFit$sigma,
+                     .relStep = controlvals[[".relStep"]],
+                     minAbsPar = controlvals[["minAbsParApVar"]],
+                     natural = controlvals[["natural"]])
+        else
+            "Approximate variance-covariance matrix not available"
     ## getting rid of condensed linear model and fit
     dims <- attr(glsSt, "conLin")[["dims"]]
     dims[["p"]] <- p
     attr(glsSt, "conLin") <- NULL
     attr(glsSt, "glsFit") <- NULL
+    attr(glsSt, "fixedSigma") <- fixedSigma ## 17-11-2015; Fixed sigma patch; ..
     ##
     ## creating the  gls object
     ##
@@ -215,11 +219,11 @@ gls <-
                    contrasts = contr,
                    coefficients = glsFit[["beta"]],
                    varBeta = varBeta,
-                   sigma = glsFit$sigma,
+	## 17-11-2015; Fixed sigma patch; SH Heisterkamp; Quantitative Solutions
+                   sigma = if(fixedSigma) controlvals$sigma else glsFit$sigma,
                    apVar = apVar,
                    logLik = glsFit$logLik,
-                   numIter = if (needUpdate(glsSt)) numIter
-		   else numIter0,
+                   numIter = if (needUpdate(glsSt)) numIter else numIter0,
                    groups = grps,
                    call = Call,
                    method = method,
@@ -239,30 +243,41 @@ gls <-
 
 ### Auxiliary functions used internally in gls and its methods
 
+glsApVar.fullGlsLogLik <- function(Pars, object, conLin, dims, N)
+{
+    fixedSigma<-attr(object, "fixedSigma")
+    ## logLik as a function of sigma and coef(glsSt)
+    npar <- length(Pars)
+    if (!fixedSigma) {
+        lsigma <- Pars[npar]              # within-group std. dev.
+        Pars <- Pars[-npar]
+        sigma <- 0
+    } else {
+        sigma <- conLin$sigma
+    }
+    coef(object) <- Pars
+    conLin <- recalc(object, conLin)
+    val <- .C(gls_loglik,
+              as.double(conLin$Xy),
+              as.integer(unlist(dims)),
+              logLik = double(1L),
+              lRSS = double(1L), sigma = as.double(sigma), NAOK = TRUE)[c("logLik", "lRSS")]
+    if (!fixedSigma) {
+        aux <- 2 * (val[["lRSS"]] - lsigma)
+        conLin[["logLik"]] + val[["logLik"]] + (N * aux - exp(aux))/2
+    } else {
+        val[["logLik"]]
+    }
+}
+
 glsApVar <-
     function(glsSt, sigma, conLin = attr(glsSt, "conLin"),
              .relStep = .Machine$double.eps^(1/3), minAbsPar = 0,
              natural = TRUE)
 {
+    fixedSigma <- attr(glsSt, "fixedSigma")
     ## calculate approximate variance-covariance matrix of all parameters
     ## except the coefficients
-    fullGlsLogLik <-
-        function(Pars, object, conLin, dims, N)
-        {
-            ## logLik as a function of sigma and coef(glsSt)
-            npar <- length(Pars)
-            lsigma <- Pars[npar]              # within-group std. dev.
-            Pars <- Pars[-npar]
-            coef(object) <- Pars
-            conLin <- recalc(object, conLin)
-            val <- .C(gls_loglik,
-                      as.double(conLin$Xy),
-                      as.integer(unlist(dims)),
-                      logLik = double(1L),
-                      lRSS = double(1), NAOK = TRUE)[c("logLik", "lRSS")]
-            aux <- 2 * (val[["lRSS"]] - lsigma)
-            conLin[["logLik"]] + val[["logLik"]] + (N * aux - exp(aux))/2
-        }
     if (length(glsCoef <- coef(glsSt)) > 0L) {
         cSt <- glsSt[["corStruct"]]
         if (natural && !is.null(cSt) && inherits(cSt, "corSymm")) {
@@ -275,12 +290,20 @@ glsApVar <-
         dims <- conLin$dims
         N <- dims$N - dims$REML * dims$p
         conLin[["logLik"]] <- 0               # making sure
-        Pars <- c(glsCoef, lSigma = log(sigma))
-        val <- fdHess(Pars, fullGlsLogLik, glsSt, conLin, dims, N,
+        Pars <- c(glsCoef, lSigma=log(sigma))
+        val <- fdHess(Pars, glsApVar.fullGlsLogLik, glsSt, conLin, dims, N,
                       .relStep = .relStep, minAbsPar = minAbsPar)[["Hessian"]]
-        if (all(eigen(val)$values < 0)) {
+        if (all(eigen(val, only.values=TRUE)$values < 0)) {
             ## negative definite - OK
             val <- solve(-val)
+            ## return val with original dimensions to prevent crashing in intervals
+            ## 17-11-2015; Fixed sigma patch; SH Heisterkamp; Quantitative Solutions
+            if (fixedSigma && !is.null(dim(val))) {
+            	Pars <- c(glsCoef, lSigma=log(sigma))
+            	npars <- length(Pars)
+            	val <- rbind(cbind(val, rep(0,npars-1)),
+                             rep(0,npars))
+            }
             nP <- names(Pars)
             dimnames(val) <- list(nP, nP)
             attr(val, "Pars") <- Pars
@@ -300,12 +323,14 @@ glsEstimate <-
     dd <- conLin$dims
     p <- dd$p
     oXy <- conLin$Xy
+    fixSig <- conLin$fixedSigma ## 17-11-2015; Fixed sigma patch; ..
+    sigma <- conLin$sigma
     conLin <- recalc(object, conLin)	# updating for corStruct and varFunc
     val <- .C(gls_estimate,
               as.double(conLin$Xy),
               as.integer(unlist(dd)),
               beta = double(p),
-              sigma = double(1L),
+              sigma = as.double(sigma), ## 17-11-2015; Fixed sigma patch; ..
               logLik = double(1L),
               varBeta = double(p * p),
               rank = integer(1),
@@ -319,15 +344,23 @@ glsEstimate <-
     }
     N <- dd$N - dd$REML * p
     namCoef <- colnames(oXy)[val[["pivot"]][1:rnkm1] + 1L]	# coef names
-    ll <- conLin$logLik + val[["logLik"]]
     varBeta <- t(array(val[["varBeta"]], c(rnkm1, rnkm1),
                        list(namCoef, namCoef)))
     beta <- val[["beta"]][1:rnkm1]
     names(beta) <- namCoef
-    fitVal <- oXy[, namCoef, drop = FALSE] %*% beta
-    list(logLik = N * (log(N) - (1 + log(2 * pi)))/2 + ll, beta = beta,
-         sigma = val[["sigma"]], varBeta = varBeta,
-         fitted = c(fitVal), resid = c(oXy[, p + 1L] - fitVal))
+    fitted <- c(oXy[, namCoef, drop = FALSE] %*% beta)
+    resid <- oXy[, p + 1] - fitted
+    ll <- conLin$logLik + val[["logLik"]]
+    logLik <-
+        if (!fixSig) {
+            (N * (logb(N) - (1 + logb(2 * pi))))/2 + ll
+            ## formula 2.21 on page 70  if sigma is estimated ML formula or 2.23 page 76 with REML
+        } else {
+            (-N/2) * logb(2*pi)  + ll
+        }
+    list(logLik = logLik, beta = beta,
+         sigma = val[["sigma"]], varBeta = varBeta, fitted = fitted,
+         resid = resid, auxSigma = sqrt(sum((resid)^2))/sqrt(N))
 }
 
 ### Methods for standard generics
@@ -388,16 +421,18 @@ ACF.gls <-
     val0 <- apply(sapply(val, function(x) x[,2L]), 1, sum)
     val1 <- apply(sapply(val, function(x) x[,1L]), 1, sum)/val0
     val2 <- val1/val1[1L]
-    z <- data.frame(lag = 0:maxLag, ACF = val2)
-    attr(z, "n.used") <- val0
-    class(z) <- c("ACF", "data.frame")
-    z
+    structure(data.frame(lag = 0:maxLag, ACF = val2),
+	      n.used = val0,
+	      class = c("ACF", "data.frame"))
 }
 
 anova.gls <-
     function(object, ..., test = TRUE, type = c("sequential", "marginal"),
              adjustSigma = TRUE, Terms, L, verbose = FALSE)
 {
+	## 17-11-2015; Fixed sigma patch; SH Heisterkamp; Quantitative Solutions
+    fixSig <- attr(object$modelStruct, "fixedSigma")
+	fixSig <- !is.null(fixSig) && fixSig
     Lmiss <- missing(L)
     ## returns the likelihood ratio statistics, the AIC, and the BIC
     dots <- list(...)
@@ -496,12 +531,7 @@ anova.gls <-
                 L <- L0[noZeroRowL <- as.logical((L0 != 0) %*% rep(1, p)), , drop = FALSE]
                 nrowL <- nrow(L)
                 noZeroColL <- as.logical(c(rep(1,nrowL) %*% (L != 0)))
-                if (is.null(dmsL1)) {
-                    dmsL1 <- 1:nrowL
-                } else {
-                    dmsL1 <- dmsL1[noZeroRowL]
-                }
-                rownames(L) <- dmsL1
+                rownames(L) <- if(is.null(dmsL1)) 1:nrowL else dmsL1[noZeroRowL]
                 lab <- paste(lab, "F-test for linear combination(s)\n")
             }
             nDF <- sum(svd(L)$d > 0)
@@ -587,21 +617,17 @@ augPred.gls <-
     labs <- list(x = prName, y = respName)
     unts <- list(x = "", y = "")
     if(inherits(data, "groupedData")) {
-        labs[names(attr(data, "labels"))] <- attr(data, "labels")
-        unts[names(attr(data, "units"))] <- attr(data, "units")
-        attr(value, "units") <- attr(data, "units")
+	labs[names(attr(data, "labels"))] <- attr(data, "labels")
+	unts[names(attr(data, "units"))] <- attr(data, "units")
     }
-    attr(value, "labels") <- labs
-    attr(value, "units") <- unts
-    if (noGrp) {
-        attr(value, "formula") <-
-            eval(parse(text = paste(respName, prName, sep = "~")))
-    } else {
-        attr(value, "formula") <-
-            eval(parse(text = paste(respName, "~", prName, "|", grName)))
-    }
-    class(value) <- c("augPred", class(value))
-    value
+    structure(value, class = c("augPred", class(value)),
+	      labels = labs,
+	      units = unts,
+	      formula =
+		  eval(parse(text =
+				 if (noGrp)
+				      paste(respName, prName, sep = "~")
+				 else paste(respName, "~", prName, "|", grName))))
 }
 
 coef.gls <-
@@ -639,12 +665,12 @@ comparePred.gls <-
         args[["minimum"]] <- minimum
         args[["maximum"]] <- maximum
     }
-    val1 <- do.call("augPred", args)
+    val1 <- do.call(augPred, args)
     dm1 <- dim(val1)
     c1 <- deparse(substitute(object1))
     levels(val1[,4])[1] <- c1
     args[["object"]] <- object2
-    val2 <- do.call("augPred", args)
+    val2 <- do.call(augPred, args)
     dm2 <- dim(val2)
     c2 <- deparse(substitute(object2))
     levels(val2[, 4L])[1] <- c2
@@ -717,14 +743,11 @@ formula.gls <- function(x, ...) eval(x$call$model)
 
 getGroups.gls <- function(object, form, level, data, sep) object$groups
 
-getGroupsFormula.gls <-
-    function(object, asList = FALSE, sep)
+getGroupsFormula.gls <- function(object, asList = FALSE, sep)
 {
-    if (!is.null(cSt <- object$modelStruct$corStruct)) {
+    if (!is.null(cSt <- object$modelStruct$corStruct))
         getGroupsFormula(cSt, asList)
-    } else {
-        NULL
-    }
+    ## else NULL
 }
 
 getResponse.gls <-
@@ -747,6 +770,10 @@ intervals.gls <-
     which <- match.arg(which)
     val <- list()
     dims <- object$dims
+    ## 17-11-2015; Fixed sigma patch; SH Heisterkamp; Quantitative Solutions
+    fixSig <- attr(object$modelStruct, "fixedSigma")
+    fixSig <- !is.null(fixSig) && fixSig
+
     if (which != "var-cov") {		# coefficients included
         len <- -qt((1-level)/2, dims$N - dims$p) * sqrt(diag(object$varBeta))
         est <- coef(object)
@@ -758,17 +785,24 @@ intervals.gls <-
 
     if (which != "coef") {		# variance-covariance included
         if (is.null(aV <- object$apVar)) {	# only sigma
-            if (inherits(object, "gnls")) {   #always REML-like sigma
-                Nr <- dims$N - dims$p
+            Nr <- if (inherits(object, "gnls")) {   #always REML-like sigma
+                      dims$N - dims$p
+                  } else {
+                      dims$N - dims$REML * dims$p
+                  }
+            ## 17-11-2015; Fixed sigma patch; SH Heisterkamp; Quantitative Solutions
+            if(!fixSig){
+                est <- object$sigma * sqrt(Nr)
+                val[["sigma"]] <-
+                    structure(c(est/sqrt(qchisq((1+level)/2, Nr)), object$sigma,
+                                est/sqrt(qchisq((1-level)/2, Nr))),
+                              names = c("lower", "est.", "upper"))
+                attr(val[["sigma"]], "label") <- "Residual standard error:"
             } else {
-                Nr <- dims$N - dims$REML * dims$p
+                est <- 1
+                val[["sigma"]] <- structure(c(object$sigma,object$sigma,object$sigma), names = c("lower", "est.", "upper"))
+                attr(val[["sigma"]], "label") <- "Fixed Residual standard error:"
             }
-            est <- object$sigma * sqrt(Nr)
-            val[["sigma"]] <-
-                structure(c(est/sqrt(qchisq((1+level)/2, Nr)), object$sigma,
-                            est/sqrt(qchisq((1-level)/2, Nr))),
-                          names = c("lower", "est.", "upper"))
-            attr(val[["sigma"]], "label") <- "Residual standard error:"
         } else {
             if (is.character(aV)) {
                 stop(gettextf("cannot get confidence intervals on var-cov components: %s",
@@ -799,8 +833,12 @@ intervals.gls <-
             aux <-
                 array(c(est - len, est, est + len),
                       c(nP, 3), list(NULL, c("lower", "est.", "upper")))
-            auxVal[["sigma"]] <- exp(aux[nP, ])
-            attr(auxVal[["sigma"]], "label") <- "Residual standard error:"
+            auxVal[["sigma"]] <-
+                structure(if(!fixSig)
+                              exp(aux[nP, ])
+                          else
+                              c(object$sigma, object$sigma, object$sigma),
+                          label = "Residual standard error:")
             aux <- aux[-nP,, drop = FALSE]
             rownames(aux) <- ## namP <-
                 names(coef(glsSt, FALSE))
@@ -809,45 +847,47 @@ intervals.gls <-
                 aux[,i] <- coef(glsSt, unconstrained = FALSE)
             }
             for(i in namG) {
-                auxVal[[i]] <- aux[pmap[,i], , drop = FALSE]
-                dimnames(auxVal[[i]])[[1]] <-
-                    substring(dimnames(auxVal[[i]])[[1]], nchar(i, "c") + 2)
-                attr(auxVal[[i]], "label") <-
+                au.i <- aux[pmap[,i], , drop = FALSE]
+                dimnames(au.i)[[1]] <- substring(dimnames(au.i)[[1]], nchar(i, "c") + 2)
+                attr(au.i, "label") <-
                     switch(i,
                            corStruct = "Correlation structure:",
                            varStruct = "Variance function:",
-                           paste(i,":",sep=""))
+                           paste0(i, ":"))
+                auxVal[[i]] <- au.i
             }
             val <- c(val, auxVal)
         }
     }
-    attr(val, "level") <- level
-    class(val) <- "intervals.gls"
-    val
+    structure(val, level = level, class = "intervals.gls")
 }
 
 logLik.gls <-
     function(object, REML, ...)
 {
+    ## 17-11-2015; Fixed sigma patch; SH Heisterkamp; Quantitative Solutions
+    fixSig <- attr(object[["modelStruct"]], "fixedSigma")
+    fixSig <- !is.null(fixSig) && fixSig
     p <- object$dims$p
     N <- object$dims$N
     Np <- N - p
     estM <- object$method
     if (missing(REML)) REML <- estM == "REML"
     val <- object[["logLik"]]
-    if (REML && (estM == "ML")) {			# have to correct logLik
+    if (REML && estM == "ML") { # have to correct logLik
         val <- val + (p * (log(2 * pi) + 1) + Np * log(1 - p/N) +
                       sum(log(abs(svd(object$varBeta)$d)))) / 2
     }
-    if (!REML && (estM == "REML")) {	# have to correct logLik
+    else if (!REML && (estM == "REML")) { # have to correct logLik
         val <- val - (p * (log(2*pi) + 1) + N * log(1 - p/N) +
                       sum(log(abs(svd(object$varBeta)$d)))) / 2
     }
-    attr(val, "nall") <- N
-    attr(val, "nobs") <- N - REML * p
-    attr(val, "df") <- p + length(coef(object[["modelStruct"]])) + 1L
-    class(val) <- "logLik"
-    val
+    structure(val,
+              nall = N,
+              nobs = N - REML * p,
+              ## 17-11-2015; Fixed sigma patch; SH Heisterkamp; Quantitative Solutions
+              df = p + length(coef(object[["modelStruct"]])) + as.integer(!fixSig),
+              class = "logLik")
 }
 
 nobs.gls <- function(object, ...) object$dims$N
@@ -859,7 +899,7 @@ plot.gls <-
              grid, ...)
     ## Diagnostic plots based on residuals and/or fitted values
 {
-    do.call("plot.lme", as.list(match.call()[-1]))
+    do.call(plot.lme, as.list(match.call()[-1]))
 }
 
 predict.gls <-
@@ -874,7 +914,7 @@ predict.gls <-
     form <- getCovariateFormula(object)
     mfArgs <- list(formula = form, data = newdata, na.action = na.action)
     mfArgs$drop.unused.levels <- TRUE
-    dataMod <- do.call("model.frame", mfArgs)
+    dataMod <- do.call(model.frame, mfArgs)
     ## making sure factor levels are the same as in contrasts
     contr <- object$contrasts
     for(i in names(dataMod)) {
@@ -889,41 +929,40 @@ predict.gls <-
                      domain = NA)
             }
             attr(dataMod[,i], "contrasts") <- contr[[i]][levs, , drop = FALSE]
-                                        #      if (length(levs) < length(levsC)) {
-                                        #        if (inherits(dataMod[,i], "ordered")) {
-                                        #          dataMod[,i] <- ordered(as.character(dataMod[,i]), levels = levsC)
-                                        #        } else {
-                                        #          dataMod[,i] <- factor(as.character(dataMod[,i]), levels = levsC)
-                                        #        }
-                                        #      }
+            ##      if (length(levs) < length(levsC)) {
+            ##        if (inherits(dataMod[,i], "ordered")) {
+            ##          dataMod[,i] <- ordered(as.character(dataMod[,i]), levels = levsC)
+            ##        } else {
+            ##          dataMod[,i] <- factor(as.character(dataMod[,i]), levels = levsC)
+            ##        }
+            ##      }
         }
     }
     N <- nrow(dataMod)
     if (length(all.vars(form)) > 0) {
-                                        #    X <- model.matrix(form, dataMod, contr)
+        ##    X <- model.matrix(form, dataMod, contr)
         X <- model.matrix(form, dataMod)
     } else {
         X <- array(1, c(N, 1), list(row.names(dataMod), "(Intercept)"))
     }
     cf <- coef(object)
     val <- c(X[, names(cf), drop = FALSE] %*% cf)
-    attr(val, "label") <- "Predicted values"
+    lab <- "Predicted values"
     if (!is.null(aux <- attr(object, "units")$y)) {
-        attr(val, "label") <- paste(attr(val, "label"), aux)
+        lab <- paste(lab, aux)
     }
-    val
+    structure(val, label = lab)
 }
 
 print.intervals.gls <-
     function(x, ...)
 {
-    cat(paste("Approximate ", attr(x, "level") * 100,
-              "% confidence intervals\n", sep = ""))
+    cat(paste0("Approximate ", attr(x, "level") * 100,
+               "% confidence intervals\n"))
     for(i in names(x)) {
         aux <- x[[i]]
         cat("\n ",attr(aux, "label"), "\n", sep = "")
-        if (i == "sigma") print(c(aux), ...)
-        else print(as.matrix(aux), ...)
+        print(if(i == "sigma") c(aux) else as.matrix(aux), ...)
     }
     invisible(x)
 }
@@ -932,13 +971,16 @@ print.gls <-
     ## method for print() used for gls objects
     function(x, ...)
 {
+    ## 17-11-2015; Fixed sigma patch; SH Heisterkamp; Quantitative Solutions
+    fixSig <- attr(x[["modelStruct"]], "fixedSigma")
+    fixSig <- !is.null(fixSig) && fixSig
     dd <- x$dims
     mCall <- x$call
     if (inherits(x, "gnls")) {
         cat("Generalized nonlinear least squares fit\n")
     } else {
         cat("Generalized least squares fit by ")
-        cat(ifelse(x$method == "REML", "REML\n", "maximum likelihood\n"))
+        cat(if(x$method == "REML") "REML\n" else "maximum likelihood\n")
     }
     cat("  Model:", deparse(mCall$model), "\n")
     cat("  Data:", deparse( mCall$data ), "\n")
@@ -948,7 +990,7 @@ print.gls <-
     if (inherits(x, "gnls")) {
         cat("  Log-likelihood: ", format(x$logLik), "\n", sep = "")
     } else {
-        cat("  Log-", ifelse(x$method == "REML", "restricted-", ""),
+        cat("  Log-", if(x$method == "REML") "restricted-" else "",
             "likelihood: ", format(x$logLik), "\n", sep = "")
     }
     cat("\nCoefficients:\n")
@@ -967,13 +1009,17 @@ print.summary.gls <-
     function(x, verbose = FALSE, digits = .Options$digits, ...)
 {
     dd <- x$dims
+    ## 17-11-2015; Fixed sigma patch; SH Heisterkamp; Quantitative Solutions
+	fixSig <- attr(x[["modelStruct"]], "fixedSigma")
+	fixSig <- !is.null(fixSig) && fixSig
+
     verbose <- verbose || attr(x, "verbose")
     mCall <- x$call
     if (inherits(x, "gnls")) {
         cat("Generalized nonlinear least squares fit\n")
     } else {
         cat("Generalized least squares fit by ")
-        cat(ifelse(x$method == "REML", "REML\n", "maximum likelihood\n"))
+        cat(if(x$method == "REML") "REML\n" else "maximum likelihood\n")
     }
     cat("  Model:", deparse(mCall$model), "\n")
     cat("  Data:", deparse( mCall$data ), "\n")
@@ -1021,21 +1067,20 @@ residuals.gls <-
     val <- object$residuals
     if (type != "response") {
         val <- val/attr(val, "std")
-        attr(val, "label") <- "Standardized residuals"
+        lab <- "Standardized residuals"
         if (type == "normalized") {
             if (!is.null(cSt <- object$modelStruct$corStruct)) {
                 ## normalize according to inv-trans factor
                 val <- recalc(cSt, list(Xy = as.matrix(val)))$Xy[, 1]
-                attr(val, "label") <- "Normalized residuals"
+                lab <- "Normalized residuals"
             }
         }
     } else {
         lab <- "Residuals"
-        if (!is.null(aux <- attr(object, "units")$y)) {
+        if (!is.null(aux <- attr(object, "units")$y))
             lab <- paste(lab, aux)
-        }
-        attr(val, "label") <- lab
     }
+    attr(val, "label") <- lab
     if (!is.null(object$na.action)) {
         res <- naresid(object$na.action, val)
         attr(res, "std") <- naresid(object$na.action, attr(val, "std"))
@@ -1045,6 +1090,9 @@ residuals.gls <-
 }
 
 summary.gls <- function(object, verbose = FALSE, ...) {
+    ## 17-11-2015; Fixed sigma patch; SH Heisterkamp; Quantitative Solutions
+    fixSig <- attr(object[["modelStruct"]], "fixedSigma")
+    fixSig <- !is.null(fixSig) && fixSig
     ##
     ## generates an object used in the print.summary method for lme
     ##
@@ -1077,11 +1125,9 @@ summary.gls <- function(object, verbose = FALSE, ...) {
     ## generating the final object
     ##
     aux <- logLik(object)
-    object$BIC <- BIC(aux)
-    object$AIC <- AIC(aux)
-    attr(object, "verbose") <- verbose
-    class(object) <- c("summary.gls", class(object))
-    object
+    structure(c(object, list(BIC = BIC(aux), AIC = AIC(aux))),
+	      verbose = verbose,
+	      class = c("summary.gls", class(object)))
 }
 
 update.gls <-
@@ -1195,7 +1241,7 @@ Variogram.gls <-
         for(i in levGrps) {
             val[[i]] <- Variogram(res[[i]], distance[[i]])
         }
-        val <- do.call("rbind", val)
+        val <- do.call(rbind, val)
     }
     if (!missing(maxDist)) {
         val <- val[val$dist <= maxDist, ]
@@ -1241,23 +1287,18 @@ Variogram.gls <-
                           dst <- median(el$dist)
                           data.frame(variog = vrg, dist = dst)
                       }, robust = robust)
-        val <- do.call("rbind", as.list(val))
+        val <- do.call(rbind, as.list(val))
         val$n.pairs <- unclass(table(na.omit(cutDist)))
     }
     row.names(val) <- 1:nrow(val)
     if (inherits(csT, "corSpatial") && resType != "normalized") {
         ## will keep model variogram
-        if (resType == "pearson") {
-            sig2 <- 1
-        } else {
-            sig2 <- object$sigma^2
-        }
+        sig2 <- if (resType == "pearson") 1 else object$sigma^2
         attr(val, "modelVariog") <-
             Variogram(csT, sig2 = sig2, length.out = length.out)
     }
-    attr(val, "collapse") <- collapse != "none"
-    class(val) <- c("Variogram", "data.frame")
-    val
+    structure(val, collapse = collapse != "none",
+	      class = c("Variogram", "data.frame"))
 }
 
 ###*### glsStruct - a model structure for gls fits
@@ -1313,7 +1354,8 @@ logLik.glsStruct <-
               as.double(conLin[["Xy"]]),
               as.integer(unlist(conLin[["dims"]])),
               logLik = as.double(conLin[["logLik"]]),
-              double(1L), NAOK = TRUE)
+              ## 17-11-2015; Fixed sigma patch; SH Heisterkamp; Quantitative Solutions
+              double(1L), as.double(conLin$sigma), NAOK = TRUE)
     val[["logLik"]]
 }
 
@@ -1339,13 +1381,19 @@ glsControl <-
              returnObject = FALSE,
              apVar = TRUE, .relStep = (.Machine$double.eps)^(1/3),
 	     opt = c("nlminb", "optim"),  optimMethod = "BFGS",
-             minAbsParApVar = 0.05, natural = TRUE)
+             minAbsParApVar = 0.05, natural = TRUE, sigma = NULL)
 {
+    ## 17-11-2015; Fixed sigma patch; SH Heisterkamp; Quantitative Solutions
+    if(is.null(sigma))
+	sigma <- 0
+    else if(!is.finite(sigma) || length(sigma) != 1 || sigma <= 0)
+	stop("Within-group std. dev. must be a positive numeric value")
+
     list(maxIter = maxIter, msMaxIter = msMaxIter, tolerance = tolerance,
          msTol = msTol, msVerbose = msVerbose,
          singular.ok = singular.ok,
          returnObject = returnObject, apVar = apVar,
          minAbsParApVar = minAbsParApVar, .relStep = .relStep,
          opt = match.arg(opt),
-	 optimMethod = optimMethod, natural = natural)
+	 optimMethod = optimMethod, natural = natural, sigma = sigma)
 }

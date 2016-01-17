@@ -1,7 +1,19 @@
 useDynLib(nlme, .registration=TRUE)
 
 importFrom(graphics, pairs, par, plot)
-import(stats)
+
+importFrom("stats",
+           AIC, BIC, anova, as.formula, asOneSidedFormula, coef, coefficients,
+           contr.SAS, contr.helmert, contr.poly, contr.sum, contr.treatment,
+           contrasts, "contrasts<-",
+           delete.response, dist, fitted, formula, lm, logLik,
+           mad, median, model.frame, model.matrix,
+           na.fail, na.omit, napredict, naresid,
+           nlm, nlminb, nls, nls.control, nobs, optim,
+           pchisq, pf, predict, pt,
+           qchisq, qf, qnorm, qqnorm, qt, quantile,
+           resid, residuals, rnorm, runif, simulate, terms,
+           update, update.formula, var, vcov)
 
 importFrom(lattice,
            Rows, bwplot, dotplot, llines, lpoints, lsegments, ltext,

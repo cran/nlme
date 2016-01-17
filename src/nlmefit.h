@@ -51,6 +51,7 @@ typedef struct state_struct {
   double *ZXy;
   longint *pdClass,
     *RML;
+  double	*sigma; // 17-11-2015; Fixed sigma patch; E van Willigen; Quantitative Solutions
 } *statePTR;
 
 extern dimPTR dims(longint *);
@@ -64,24 +65,24 @@ extern void mixed_fcn(longint, double *, double *, void *);
 extern void mixed_grad(longint, double *, double *, void *);
 extern void internal_decomp(dimPTR, double *);
 extern void mixed_loglik(double *, longint *, double *, longint *,
-			 double *, double *);
+			 double *, double *, double *); // 17-11-2015; Fixed sigma patch; E van Willigen; Quantitative Solutions
 extern double internal_loglik(dimPTR, double *, double *, longint *,
-			      double *, double *);
+			      double *, double *, double *); // 17-11-2015; Fixed sigma patch; E van Willigen; Quantitative Solutions
 extern void mixed_estimate(double *, longint *, double *, longint *,
-			   double *, double *, longint *);
+			   double *, double *, longint *, double *); // 17-11-2015; Fixed sigma patch; E van Willigen; Quantitative Solutions
 extern void internal_estimate(dimPTR, double *);
 extern void mixed_EM(double *, longint *, double *, longint *,
-		     longint *, longint *, double *, double *, double *);
+		     longint *, longint *, double *, double *, double *, double *); // 17-11-2015; Fixed sigma patch; E van Willigen; Quantitative Solutions
 extern void internal_EM(dimPTR, double *, double *, int, longint *,
-			longint *, double *, double *, double *);
+			longint *, double *, double *, double *, double *); // 17-11-2015; Fixed sigma patch; E van Willigen; Quantitative Solutions
 extern void mixed_combined(double *, longint *, double *, longint *,
 			   longint *, longint *, double *, double *,
-			   double *, longint *);
+			   double *, longint *, double *); // 17-11-2015; Fixed sigma patch; E van Willigen; Quantitative Solutions
 extern void mixed_calcf(longint *, double *, longint *, double *,
 			longint *, double *, void (*)(void));
 extern void mixed_calcgh(longint *, double *, longint *, double *,
 			 double *, longint *, double *, void (*)(void));
-extern void gls_loglik(double *, longint *, double *, double *);
+extern void gls_loglik(double *, longint *, double *, double *, double *); // 17-11-2015; Fixed sigma patch; E van Willigen; Quantitative Solutions
 extern void gls_estimate(double *, longint *, double *, double *,
 			 double *, double *, longint *, longint *);
 

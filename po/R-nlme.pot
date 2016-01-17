@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: nlme 3.1-119\n"
-"POT-Creation-Date: 2015-01-29 16:47\n"
+"Project-Id-Version: nlme 3.1-123\n"
+"POT-Creation-Date: 2015-12-15 23:42\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -199,6 +199,9 @@ msgstr ""
 msgid "'nint' is not consistent with 'breaks'"
 msgstr ""
 
+msgid "Within-group std. dev. must be a positive numeric value"
+msgstr ""
+
 msgid "'object' must be a formula"
 msgstr ""
 
@@ -224,9 +227,6 @@ msgid "starting values for parameters are not of the correct length"
 msgstr ""
 
 msgid "step halving factor reduced below minimum in NLS step"
-msgstr ""
-
-msgid "approximate covariance matrix for parameter estimates not of full rank"
 msgstr ""
 
 msgid "cannot calculate REML log-likelihood for \"gnls\" objects"
@@ -568,7 +568,7 @@ msgstr ""
 msgid "names mismatch in 'random' and starting values  for 'random' at level %s"
 msgstr ""
 
-msgid "step halving factor reduced below minimum in PNLS step"
+msgid "maximum number of iterations (maxIter = %d) reached without convergence"
 msgstr ""
 
 msgid "second argument must be a groupedData object"
@@ -790,10 +790,10 @@ msgstr ""
 msgid "models with \"corStruct\" and/or \"varFunc\" objects not allowed"
 msgstr ""
 
-msgid "plot method only implemented for comparing models"
+msgid "no degrees of freedom specified"
 msgstr ""
 
-msgid "no degrees of freedom specified"
+msgid "plot method only implemented for comparing models"
 msgstr ""
 
 msgid "degrees of freedom and weights must have the same length"

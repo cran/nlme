@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nlme 3.1-115\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
-"POT-Creation-Date: 2014-03-28 07:43\n"
+"POT-Creation-Date: 2015-12-15 23:42\n"
 "PO-Revision-Date: 2014-03-25 17:00+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -251,8 +251,8 @@ msgstr "argument 'range' musi być > 0 w początkowej wartości \"corLin\""
 # nlme/R/corStruct.R: 2242
 # warning("initial value for 'range' less than minimum distance. Setting it to 1.1 * min(distance)")
 msgid ""
-"initial value for 'range' less than minimum distance. Setting it to 1.1 * min"
-"(distance)"
+"initial value for 'range' less than minimum distance. Setting it to 1.1 * "
+"min(distance)"
 msgstr ""
 "początkowa wartość 'range' mniejsza niż minimalna odległość. Ustawianie jej "
 "na '1.1 * min(distance)'"
@@ -374,6 +374,9 @@ msgstr "wymagany jest obiekt z komponentem 'call'"
 msgid "'nint' is not consistent with 'breaks'"
 msgstr "'nint' jest niespójne z 'breaks'"
 
+msgid "Within-group std. dev. must be a positive numeric value"
+msgstr ""
+
 msgid "'object' must be a formula"
 msgstr "argument 'model' nie jest obiektem klasy \"formula\""
 
@@ -415,13 +418,6 @@ msgstr "wartości początkowe parametrów nie mają poprawnej długości"
 # stop("step halving factor reduced below minimum in NLS step")
 msgid "step halving factor reduced below minimum in NLS step"
 msgstr "czynnik skracający krok został zredukowany poniżej minimum w kroku NLS"
-
-# nlme/R/gnls.R: 483
-# stop("approximate covariance matrix for parameter estimates not of full rank")
-msgid "approximate covariance matrix for parameter estimates not of full rank"
-msgstr ""
-"przybliżona macierz kowariancji dla szacunkowych parametrów nie jest pełnej "
-"rangi"
 
 # nlme/R/gnls.R: 654
 # stop("cannot calculate REML log-likelihood for \"gnls\" objects")
@@ -646,8 +642,8 @@ msgstr "funkcja 'lme.lmList()' przedefiniuje argument 'data'"
 # warning("initial value for \"reStruct\" overwritten in 'lme.lmList()'")
 msgid "initial value for \"reStruct\" overwritten in 'lme.lmList'"
 msgstr ""
-"początkowa wartość dla \"reStruct\" została nadpisana w funkcji 'lme.lmList"
-"()'"
+"początkowa wartość dla \"reStruct\" została nadpisana w funkcji 'lme."
+"lmList()'"
 
 # nlme/R/simulate.R: 26
 # stop("fixed-effects model must be a formula of the form \"resp ~ pred\"")
@@ -1069,13 +1065,13 @@ msgstr ""
 "nazwy nie zgadzają się w 'random' oraz początkowych wartościach dla 'random' "
 "na poziomie %s"
 
-# nlme/R/nlme.R: 878
-# warning("step halving factor reduced below minimum in PNLS step")
-# nlme/R/nlme.R: 880
-# stop("step halving factor reduced below minimum in PNLS step")
-msgid "step halving factor reduced below minimum in PNLS step"
+# nlme/R/lme.R: 368
+# gettext("maximum number of iterations (lmeControl(maxIter)) reached without convergence")
+#, fuzzy
+msgid "maximum number of iterations (maxIter = %d) reached without convergence"
 msgstr ""
-"czynnik skracający krok został zredukowany poniżej minimum w kroku PNLS"
+"maksymalna liczba iteracji ('lmeControl(maxIter)') została osiągnięta bez "
+"uzyskania zbieżności"
 
 # nlme/R/nlsList.R: 31
 # stop("second argument must be a groupedData object")
@@ -1536,6 +1532,11 @@ msgid "models with \"corStruct\" and/or \"varFunc\" objects not allowed"
 msgstr ""
 "modele z obiektami klasy \"corStruct\" oraz/lub \"varFunc\" nie są dozwolone"
 
+# nlme/R/simulate.R: 367
+# stop("no degrees of freedom specified")
+msgid "no degrees of freedom specified"
+msgstr "nie określono stopni swobody"
+
 # nlme/R/simulate.R: 356
 # stop("plot method only implemented for comparing models")
 # nlme/R/simulate.R: 362
@@ -1544,11 +1545,6 @@ msgid "plot method only implemented for comparing models"
 msgstr ""
 "metoda rysująca wykres została zaimplementowana jedynie do porównywania "
 "modeli"
-
-# nlme/R/simulate.R: 367
-# stop("no degrees of freedom specified")
-msgid "no degrees of freedom specified"
-msgstr "nie określono stopni swobody"
 
 # nlme/R/simulate.R: 375
 # stop("degrees of freedom and weights must have the same length")
@@ -1905,6 +1901,22 @@ msgstr[1] ""
 msgstr[2] ""
 "nazwy grup nie zgadzają się z początkowymi wartościami dla efektów losowych: "
 "%s"
+
+# nlme/R/gnls.R: 483
+# stop("approximate covariance matrix for parameter estimates not of full rank")
+#~ msgid ""
+#~ "approximate covariance matrix for parameter estimates not of full rank"
+#~ msgstr ""
+#~ "przybliżona macierz kowariancji dla szacunkowych parametrów nie jest "
+#~ "pełnej rangi"
+
+# nlme/R/nlme.R: 878
+# warning("step halving factor reduced below minimum in PNLS step")
+# nlme/R/nlme.R: 880
+# stop("step halving factor reduced below minimum in PNLS step")
+#~ msgid "step halving factor reduced below minimum in PNLS step"
+#~ msgstr ""
+#~ "czynnik skracający krok został zredukowany poniżej minimum w kroku PNLS"
 
 #~ msgid "negative control$nlmStepMax - using default value"
 #~ msgstr "ujemna wartość 'control$nlmStepMax' - używanie wartości domyślnej"

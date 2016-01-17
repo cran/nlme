@@ -1,7 +1,7 @@
 
-R Under development (unstable) (2014-03-09 r65151) -- "Unsuffered Consequences"
-Copyright (C) 2014 The R Foundation for Statistical Computing
-Platform: x86_64-apple-darwin13.1.0 (64-bit)
+R version 3.2.3 beta (2015-11-29 r69717) -- "Wooden Christmas-Tree"
+Copyright (C) 2015 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -17,7 +17,7 @@ Type 'q()' to quit R.
 
 > library(nlme)
 > 
-> options(digits = 3) # reduce rounding differences
+> op <- options(digits = 3) # reduce rounding differences
 > 
 > Ovary[c(1,272), 2] <- NA
 > fm1 <- gls(follicles ~ sin(2*pi*Time) + cos(2*pi*Time), Ovary,
@@ -760,6 +760,8 @@ Standardized residuals:
 Residual standard error: 0.369 
 Degrees of freedom: 407 total; 404 residual
 > 
+> options(op)# revert when this file is source()d
+> 
 > proc.time()
    user  system elapsed 
-  0.561   0.047   0.592 
+  0.302   0.033   0.399 
