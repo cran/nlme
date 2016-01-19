@@ -520,7 +520,7 @@ ARMA_corr(longint *p, longint *q, longint *maxlag, double *pars, double *psi,
     double *coef = Calloc(P * P, double), *src, *qraux = Calloc(P, double),
 	*work = Calloc(P * P, double), *work1;
 
-    if (!sqrt_eps) sqrt_eps = sqrt(DOUBLE_EPS);
+    if (sqrt_eps == 0.0) sqrt_eps = sqrt(DOUBLE_EPS);
     if ((maxPQ = ((*p > *q) ? *p : *q))) {
 	for(i = 0, src = coef; i < P; i++, src += Pp1) {
 	    crr[i] = 0;

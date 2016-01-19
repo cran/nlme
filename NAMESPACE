@@ -1,6 +1,6 @@
 useDynLib(nlme, .registration=TRUE)
 
-importFrom(graphics, pairs, par, plot)
+importFrom("graphics", pairs, par, plot)
 
 importFrom("stats",
            AIC, BIC, anova, as.formula, asOneSidedFormula, coef, coefficients,
@@ -15,7 +15,9 @@ importFrom("stats",
            resid, residuals, rnorm, runif, simulate, terms,
            update, update.formula, var, vcov)
 
-importFrom(lattice,
+importFrom("utils", head, tail)
+
+importFrom("lattice",
            Rows, bwplot, dotplot, llines, lpoints, lsegments, ltext,
            panel.abline, panel.bwplot, panel.dotplot,  panel.grid,
            panel.histogram, panel.linejoin, panel.loess, panel.superpose,

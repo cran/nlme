@@ -123,7 +123,7 @@ gnls_increment(gnlsPtr gnls)
   double regSS = 0, *auxRes;
   QRptr aQR;
   longint i;
-  if (!sqrt_eps) sqrt_eps = sqrt(DOUBLE_EPS);
+  if (sqrt_eps == 0.0) sqrt_eps = sqrt(DOUBLE_EPS);
   auxRes = Calloc(gnls->N, double);
   Memcpy(auxRes, gnls->residuals, gnls->N);
   aQR = QR(gnls->gradient, gnls->N, gnls->N, gnls->npar);
@@ -204,7 +204,7 @@ fit_gnls(double *ptheta, longint *pdims, double *pcorFactor, double
 #ifdef R_S_H
   PROTECT(model);
 #endif /* R_S_H */
-  if(!sqrt_eps) sqrt_eps = sqrt(DOUBLE_EPS);
+  if(sqrt_eps == 0.0) sqrt_eps = sqrt(DOUBLE_EPS);
   gnls = gnls_init(ptheta, pdims, pcorFactor, pvarWeights, pcorDims,
     settings, additional, *pcorOpt, *pvarOpt MOD);
   settings[4] = (double) gnls_iterate(gnls SEV);

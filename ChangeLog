@@ -1,9 +1,22 @@
+2016-01-19 Brian Ripley
+
+	* src/{corStruct,gnls,nlme,nlmefit,nls}.c: Avoid clang warnings on
+	implicit conversions.
+
+2016-01-18 Martin Maechler
+
+	* DESCRIPTION: version 3.1-124
+	* nlme/man/lmeControl.Rd, R/lme.R, etc: in lmeControl() etc,
+	currently 'apVar' to FALSE when sigma is fixed, and document that
+	somewhat.
+
 2016-01-11  Martin Maechler
 
-	* R/VarCorr.R, man/VarCorr.Rd: add optional '...' (for other methods).
+	* R/VarCorr.R, man/VarCorr.Rd: add optional '...' and remove 'rdig'
+	from the argument list of the generic (for other methods).
 
 2015-11-25 Bert van Willigen --- with modifications by MM
-	* DESCRIPTION: version 3.1-123
+	* DESCRIPTION: version 3.1-123 (released 2016-01-17)
 	* man/*Control.Rd: Fixed "sigma" (residual error) added.
 	* R/gls.R, R/gnls.R, R/lme.R, R/nlme.R, R/reStruct.R: Fixed sigma added.
 	* src/init.c, src/nlme.c, src/nlmefit.?:
@@ -11,7 +24,7 @@
 	* README: Credentials added.
 
 2015-08-18 Luke Tierney
-	* Description: version 3.1-122
+	* DESCRIPTION: version 3.1-122
 	* src/nlmefit.c: Added PROTECT/UNPROTECT calls.
 
 2015-06-29  Brian Ripley

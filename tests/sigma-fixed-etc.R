@@ -31,7 +31,7 @@ cat("\nFixed sigma= ",sigma,"  estimation method 'REML'\n")
 t1.fix.REML.gls <- gls(distance ~ Sex*I(age-11), data = Orthodont,
                        correlation = corSymm(form = ~1 | Subject),
                        weights = varIdent(form = ~1 |age),
-                       control = glsControl(sigma = sigma, apVar = FALSE,
+                       control = glsControl(sigma = sigma, # now by default: apVar = FALSE,
                                             maxIter = 1000, msMaxIter = 200),
                        method = "REML")
 summary(t1.fix.REML.gls)
@@ -47,7 +47,8 @@ method <- "ML"
 sigma <- 1
 cat("\nFixed sigma= ",sigma,"  estimation method ", method,"\n")
 t1.fix.ML.lme <- lme(distance ~ I(age-11), data = Orthodont,
-                     control = lmeControl(sigma = sigma, apVar = FALSE), method = method)
+                     control = lmeControl(sigma = sigma), ## apVar = FALSE now by default
+                     method = method)
 summary(t1.fix.ML.lme)
   anova(t1.fix.ML.lme)
 
@@ -70,7 +71,8 @@ cat("\nFixed sigma= ",sigma,"  estimation method ", method,"\n")
 t1.fix.gnls <- gnls( rate ~SSasympOff(pressure, Asym, lrc, c0), data = Dialyzer,
                     params = list(Asym + lrc ~ QB, c0 ~ 1),
                     start = c(53.6,8.6,0.51,-0.26, 0.225),
-                    control = gnlsControl(sigma = 1,apVar = FALSE))
+                    control = gnlsControl(sigma = 1)) # apVar = FALSE
+t1.fix.gnls$apVar ## NULL --- why ? [example(gnls) -> fm1 *has* apVar !]
 summary(t1.fix.gnls)
   anova(t1.fix.gnls)
 cat("Time elapsed: ", (proc.time() - .pt)[1:3], "\n")
@@ -341,7 +343,7 @@ t9.fix.ML.nlme <- nlme(conc ~ SSfol(Dose, Time, lKe, lKa, lCl), data = Theoph,
                        fixed = lKe + lKa + lCl ~ 1,
                        random = pdDiag( lKa + lCl ~ 1),
                        method = method, start = c(-2.4,0.5,-3.3),
-                       control = nlmeControl(apVar = FALSE, sigma = 1))
+                       control = nlmeControl(sigma = 1))# apVar = FALSE now by defaul
 (sM9 <- summary(t9.fix.ML.nlme))
 (aM9 <- anova  (t9.fix.ML.nlme))
 stopifnot(

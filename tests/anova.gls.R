@@ -11,16 +11,15 @@ fm1 <- gls(follicles ~ sin(2*pi*Time) + cos(2*pi*Time), Ovary,
 stopifnot(
     all.equal(int1$corStruct["Phi",],
 	      c(lower=0.66842829, est.=0.753207889, upper=0.81866619),
-	      tol = 2e-6)
+	      tol = 6e-6)# 3.44e-6 needed on solaris-x86
    ,
     all.equal(as.vector(int1$sigma),
-	      c(3.9747061, 4.61617157, 5.361161), tol = 4e-6)
+	      c(3.9747061, 4.61617157, 5.361161), tol = 6e-6)
 )
 
 # variance changes with a power of the absolute fitted values?
 fm2 <- update(fm1, weights = varPower())
 (a12 <- anova(fm1, fm2))
-
 
 ## now define a little function
 dummy <- function(obj) anova(obj[[1]], obj[[2]])
@@ -28,7 +27,7 @@ dummy <- function(obj) anova(obj[[1]], obj[[2]])
 ## last failed < 3.1-66
 rownames(d12) <- rownames(a12)
 stopifnot(all.equal(a12, d12, tol = 1e-15),
-          all.equal(a12[2,"p-value"], 0.111752516, tol = 4e-7)
+          all.equal(a12[2,"p-value"], 0.111752516, tol = 1e-5)
 )
 
 ## PR#13567

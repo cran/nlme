@@ -251,7 +251,7 @@ nlme_increment(nlmePtr nlme)
     double *theta = nlme->theta;
     longint i, j, start, RML = 0;
 
-    if (!sqrt_eps) sqrt_eps = sqrt(DOUBLE_EPS);
+    if (sqrt_eps == 0.0) sqrt_eps = sqrt(DOUBLE_EPS);
 /*    Memcpy(auxGrad, nlme->gradient, (nlme->dd->ZXcols - 1) * nlme->dd->N); */
     internal_decomp(nlme->dd, nlme->gradient);
     nlme_workingRes(nlme);
@@ -415,7 +415,7 @@ fit_nlme(double *ptheta, double *pDmHalf, longint *pgroups,
 		     pcorFactor, pvarWeights, pcorDims,
 		     // 17-11-2015; Fixed sigma patch; E van Willigen; Quantitative Solutions
 		     additional, pcorOpt, pvarOpt, sigma MOD);
-    if(!sqrt_eps) sqrt_eps = sqrt(DOUBLE_EPS);
+    if(sqrt_eps == 0.0) sqrt_eps = sqrt(DOUBLE_EPS);
     settings[4] = (double) nlme_iterate(nlme, settings SEV);
     nlme_wrapup(nlme SEV);
     settings[5] = nlme->objective;

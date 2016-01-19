@@ -31,3 +31,8 @@ stopifnot(
               structure(-114.743, class = "logLik", nall = 84, nobs = 84, df = 5),
               tol = 4e-6)
     )
+
+pm2.0 <- predict(fm2, Loblolly, level=0)## failed in nlme 3.1-123
+stopifnot(all.equal(head(pm2.0),
+		    c(3.64694, 11.0597, 27.2258, 40.5006, 51.4012, 60.3522),
+		    tol = 1e-5)) # 4e-7 {64b nb-mm4}

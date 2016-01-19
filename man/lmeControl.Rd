@@ -53,7 +53,9 @@ lmeControl(maxIter = 50, msMaxIter = 50, tolerance = 1e-6, niterEM = 25,
    \code{pdCompSymm} (compound symmetry).  Default is \code{TRUE}.}
  \item{apVar}{a logical value indicating whether the approximate
    covariance matrix of the variance-covariance parameters should be
-   calculated.  Default is \code{TRUE}.}
+   calculated.  Default is \code{TRUE} unless \code{sigma} is fixed (to
+   a positive number) in which case the covariance computation is not
+   available.}
  \item{.relStep}{relative step for numerical derivatives
    calculations.  Default is \code{.Machine$double.eps^(1/3)}.}
  \item{opt}{the optimizer to be used, either \code{"\link{nlminb}"} (the

@@ -464,7 +464,7 @@ finite_diff_Hess(double (*func)(double*,double*), double *pars, int npar,
 	*Xmat = Calloc( nTot * nTot, double ); /* regressor matrix */
     QRptr xQR;
 
-    if (!cube_root_eps) cube_root_eps = exp( log( DOUBLE_EPS ) / 3.);
+    if (cube_root_eps == 0.0) cube_root_eps = exp( log( DOUBLE_EPS ) / 3.);
     div[ 0 ] = 1.0;
     ppt = parray + npar * ( 2 * npar + 1 ); /* location of first cross term */
     xpt = Xmat + nTot * ( 2 * npar + 1 );	/* location of first cross column */

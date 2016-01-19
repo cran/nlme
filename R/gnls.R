@@ -3,7 +3,7 @@
 ###
 ### Copyright 1997-2003  Jose C. Pinheiro,
 ###                      Douglas M. Bates <bates@stat.wisc.edu>
-### Copyright 2007-2015  The R Core team
+### Copyright 2007-2016  The R Core team
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -287,25 +287,21 @@ gnls <-
   }
 
   ##
-  ## defining the nlFrame
+  ## defining the nlFrame, i.e., nlEnv, an environment in R :
   ##
-  nlEnv <- new.env()
-  nlList <-
-                            list(model = gnlsModel,
-			    data = dataMod,
-			    plist = plist,
-			    beta = as.vector(spar),
-			    X = array(0, c(NReal, pLen), list(NULL, pn)),
-			    pmap = pmap,
-                            N = NReal,
-                            naPat = naPat,
-			    .parameters = c("beta"),
-                            finiteDiffGrad = finiteDiffGrad)
+  nlEnv <- list2env(
+      list(model = gnlsModel,
+           data = dataMod,
+           plist = plist,
+           beta = as.vector(spar),
+           X = array(0, c(NReal, pLen), list(NULL, pn)),
+           pmap = pmap,
+           N = NReal,
+           naPat = naPat,
+           .parameters = c("beta"),
+           finiteDiffGrad = finiteDiffGrad))
 
-  lapply(names(nlList), function(x, y, env) assign(x, y[[x]], envir = env),
-         nlList, env = nlEnv)
-
-  modelExpression <- ~{
+  modelExpression <- ~ {
     pars <- getParsGnls(plist, pmap, beta, N)
     res <- eval(model, data.frame(data, pars))
     if (!length(grad <- attr(res, "gradient"))) {
@@ -528,16 +524,18 @@ gnls <-
     ## 17-11-2015; Fixed sigma patch; SH Heisterkamp; Quantitative Solutions
                                     c("names","pmap","fixedSigma")))]
   class(gnlsSt) <- oClass
+  grpDta <- inherits(data, "groupedData")
   ##
   ## creating the  gnls object
   ##
-  estOut <- list(modelStruct = gnlsSt,
+  structure(class = c("gnls", "gls"),
+            list(modelStruct = gnlsSt,
 		 dims = Dims,
                  contrasts = contr,
 		 coefficients = spar,
 		 varBeta = varBeta,
          ## 17-11-2015; Fixed sigma patch; SH Heisterkamp; Quantitative Solutions
-		 sigma = ifelse(controlvals$sigma>0, controlvals$sigma,sigma),
+		 sigma = ifelse(controlvals$sigma>0, controlvals$sigma, sigma),
 		 apVar = apVar,
 		 logLik = loglik,
 		 numIter = numIter,
@@ -549,14 +547,10 @@ gnls <-
 		 plist = plist,
                  pmap = pmap,
                  parAssign = parAssign,
-                 na.action = attr(dataMod, "na.action"))
-  if (inherits(data, "groupedData")) {
-    ## saving labels and units for plots
-    attr(estOut, "units") <- attr(data, "units")
-    attr(estOut, "labels") <- attr(data, "labels")
-  }
-  class(estOut) <- c("gnls", "gls")
-  estOut
+                 na.action = attr(dataMod, "na.action")),
+	    ## saving labels and units for plots
+	    units = if(grpDta) attr(data, "units"),
+	    labels= if(grpDta) attr(data, "labels"))
 }
 
 ### Auxiliary functions used internally in gls and its methods
@@ -585,7 +579,8 @@ gnlsApVar <-
       conLin <- recalc(object, conLin)
       conLin[["logLik"]] - N * lsigma - sum(conLin$Xy^2)/(2*exp(2*lsigma))
     }
-  fixedSigma<-attr(gnlsSt,"fixedSigma")
+
+  fixedSigma <- attr(gnlsSt,"fixedSigma")
   if (length(gnlsCoef <- coef(gnlsSt)) > 0) {
     cSt <- gnlsSt[["corStruct"]]
     if (!is.null(cSt) && inherits(cSt, "corSymm") && natural) {
@@ -931,14 +926,14 @@ gnlsControl <-
            ## 17-11-2015; Fixed sigma patch; SH Heisterkamp; Quantitative Solutions
            minAbsParApVar = 0.05,sigma=NULL)
 {
-    ## 17-11-2015; Fixed sigma patch; SH Heisterkamp; Quantitative Solutions
-	if(!is.null(sigma)) {
-		if(!is.numeric(sigma) || (length(sigma) != 1) || (sigma <= 0)) {
-			stop("Within-group std. dev. must be a positive numeric value")
-		}
-	} else {
-		sigma <- 0
-	}
+  ## 17-11-2015; Fixed sigma patch; SH Heisterkamp; Quantitative Solutions
+  if(is.null(sigma))
+    sigma <- 0
+  else {
+    if(!is.finite(sigma) || length(sigma) != 1 || sigma <= 0)
+      stop("Within-group std. dev. must be a positive numeric value")
+      if(missing(apVar)) apVar <- FALSE # not yet implemented
+  }
   list(maxIter = maxIter, nlsMaxIter = nlsMaxIter, msMaxIter = msMaxIter,
        minScale = minScale, tolerance = tolerance, nlsTol = nlsTol,
        msTol = msTol, returnObject = returnObject,

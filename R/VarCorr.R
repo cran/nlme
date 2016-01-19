@@ -3,20 +3,19 @@
 ### Copyright 2007-2016 The R Core team
 ### Copyright 1997-2003  Jose C. Pinheiro,
 ###                      Douglas M. Bates <bates@stat.wisc.edu>
-#
-#  This program is free software; you can redistribute it and/or modify
-#  it under the terms of the GNU General Public License as published by
-#  the Free Software Foundation; either version 2 of the License, or
-#  (at your option) any later version.
-#
-#  This program is distributed in the hope that it will be useful,
-#  but WITHOUT ANY WARRANTY; without even the implied warranty of
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#  GNU General Public License for more details.
-#
-#  A copy of the GNU General Public License is available at
-#  http://www.r-project.org/Licenses/
-#
+###
+### This program is free software; you can redistribute it and/or modify
+### it under the terms of the GNU General Public License as published by
+### the Free Software Foundation; either version 2 of the License, or
+### (at your option) any later version.
+###
+### This program is distributed in the hope that it will be useful,
+### but WITHOUT ANY WARRANTY; without even the implied warranty of
+### MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+### GNU General Public License for more details.
+###
+### A copy of the GNU General Public License is available at
+### http://www.r-project.org/Licenses/
 
 if(getRversion() < "3.2.0") {
     lengths <- function (x, use.names = TRUE)
@@ -24,7 +23,7 @@ if(getRversion() < "3.2.0") {
 }
 
 
-VarCorr <- function( x, sigma = 1, rdig = 3, ...) UseMethod("VarCorr")
+VarCorr <- function(x, sigma = 1, ...) UseMethod("VarCorr")
 
 VarCorr.lme <- function( x, sigma = 1, rdig = 3, ...)
 {

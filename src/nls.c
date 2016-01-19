@@ -30,7 +30,7 @@ static double
 est_delta(double *x, longint i)
 {
   double xx;
-  if(!sqrt_eps) sqrt_eps = sqrt(DOUBLE_EPS);
+  if(sqrt_eps == 0.0) sqrt_eps = sqrt(DOUBLE_EPS);
   if(!xlower) xlower = 100.*DOUBLE_XMIN;
 				/* should sometime use the strategy of */
 				/* the grd routine in dmnf */

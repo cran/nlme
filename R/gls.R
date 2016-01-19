@@ -2,7 +2,7 @@
 ###
 ### Copyright 1997-2003  Jose C. Pinheiro,
 ###                      Douglas M. Bates <bates@stat.wisc.edu>
-### Copyright 2005-2015  The R Core team
+### Copyright 2005-2016  The R Core team
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -211,10 +211,12 @@ gls <-
     attr(glsSt, "conLin") <- NULL
     attr(glsSt, "glsFit") <- NULL
     attr(glsSt, "fixedSigma") <- fixedSigma ## 17-11-2015; Fixed sigma patch; ..
+    grpDta <- inherits(data, "groupedData")
     ##
     ## creating the  gls object
     ##
-    estOut <- list(modelStruct = glsSt,
+    structure(class = "gls",
+              list(modelStruct = glsSt,
                    dims = dims,
                    contrasts = contr,
                    coefficients = glsFit[["beta"]],
@@ -230,22 +232,18 @@ gls <-
                    fitted = Fitted,
                    residuals = Resid,
                    parAssign = parAssign,
-                   na.action = attr(dataMod, "na.action"))
-    if (inherits(data, "groupedData")) {
-        ## saving labels and units for plots
-        attr(estOut, "units") <- attr(data, "units")
-        attr(estOut, "labels") <- attr(data, "labels")
-    }
-    attr(estOut, "namBetaFull") <- colnames(X)
-    class(estOut) <- "gls"
-    estOut
+		   na.action = attr(dataMod, "na.action")),
+	      namBetaFull = colnames(X),
+	      ## saving labels and units for plots
+	      units = if(grpDta) attr(data, "units"),
+	      labels= if(grpDta) attr(data, "labels"))
 }
 
 ### Auxiliary functions used internally in gls and its methods
 
 glsApVar.fullGlsLogLik <- function(Pars, object, conLin, dims, N)
 {
-    fixedSigma<-attr(object, "fixedSigma")
+    fixedSigma <- attr(object, "fixedSigma")
     ## logLik as a function of sigma and coef(glsSt)
     npar <- length(Pars)
     if (!fixedSigma) {
@@ -1386,9 +1384,11 @@ glsControl <-
     ## 17-11-2015; Fixed sigma patch; SH Heisterkamp; Quantitative Solutions
     if(is.null(sigma))
 	sigma <- 0
-    else if(!is.finite(sigma) || length(sigma) != 1 || sigma <= 0)
-	stop("Within-group std. dev. must be a positive numeric value")
-
+    else {
+	if(!is.finite(sigma) || length(sigma) != 1 || sigma <= 0)
+	    stop("Within-group std. dev. must be a positive numeric value")
+	if(missing(apVar)) apVar <- FALSE # not yet implemented
+    }
     list(maxIter = maxIter, msMaxIter = msMaxIter, tolerance = tolerance,
          msTol = msTol, msVerbose = msVerbose,
          singular.ok = singular.ok,

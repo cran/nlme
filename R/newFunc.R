@@ -1,23 +1,22 @@
 ###       Functions that are used in several parts of the nlme library
 ###                 but do not belong to any specific part
 ###
+### Copyright 2006-2016  The R Core team
 ### Copyright 1997-2003  Jose C. Pinheiro,
 ###                      Douglas M. Bates <bates@stat.wisc.edu>
-# Copyright 2006-2013 The R Core team
-#
-#  This program is free software; you can redistribute it and/or modify
-#  it under the terms of the GNU General Public License as published by
-#  the Free Software Foundation; either version 2 of the License, or
-#  (at your option) any later version.
-#
-#  This program is distributed in the hope that it will be useful,
-#  but WITHOUT ANY WARRANTY; without even the implied warranty of
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#  GNU General Public License for more details.
-#
-#  A copy of the GNU General Public License is available at
-#  http://www.r-project.org/Licenses/
-#
+###
+###  This program is free software; you can redistribute it and/or modify
+###  it under the terms of the GNU General Public License as published by
+###  the Free Software Foundation; either version 2 of the License, or
+###  (at your option) any later version.
+###
+###  This program is distributed in the hope that it will be useful,
+###  but WITHOUT ANY WARRANTY; without even the implied warranty of
+###  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+###  GNU General Public License for more details.
+###
+###  A copy of the GNU General Public License is available at
+###  http://www.r-project.org/Licenses/
 
 allCoef <-
   ## Combines different coefficient vectors into one vector, keeping track
@@ -103,8 +102,7 @@ fdHess <- function(pars, fun, ..., .relStep = (.Machine$double.eps)^(1/3),
 {
   pars <- as.numeric(pars)
   npar <- length(pars)
-  incr <- ifelse( abs(pars) <= minAbsPar, minAbsPar * .relStep,
-                 abs(pars) * .relStep )
+  incr <- pmax(abs(pars), minAbsPar) * .relStep
   baseInd <- diag(npar)
   frac <- c(1, incr, incr^2)
   cols <- list(0, baseInd, -baseInd)
@@ -119,11 +117,13 @@ fdHess <- function(pars, fun, ..., .relStep = (.Machine$double.eps)^(1/3),
   for ( i in seq_along(pars)[ - npar ] ) {
     Xcols <- c( Xcols, list( indMat[ , i ] * indMat[ , -(1:i) ] ) )
   }
-  coefs <- solve( do.call( "cbind", Xcols ) , apply(shifted, 2, fun, ...) )/frac
+  coefs <- solve(do.call("cbind", Xcols),
+                 apply(shifted, 2, fun, ...)) / frac
   Hess <- diag( coefs[ 1 + npar + seq_along(pars) ], ncol = npar )
-  Hess[ row( Hess ) > col ( Hess ) ] <- coefs[ -(1:(1 + 2 * npar)) ]
-  list( mean = coefs[ 1 ], gradient = coefs[ 1 + seq_along(pars) ],
-       Hessian = ( Hess + t(Hess) ) )
+  Hess[ row(Hess) > col (Hess) ] <- coefs[ -(1:(1 + 2 * npar)) ]
+  list(mean     = coefs[ 1 ],
+       gradient = coefs[ 1 + seq_along(pars) ],
+       Hessian   = (Hess + t(Hess)) )
 }
 
 gapply <-

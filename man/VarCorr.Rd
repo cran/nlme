@@ -4,15 +4,16 @@
 
 \name{VarCorr}
 \title{Extract variance and correlation components}
-\usage{
-VarCorr(x, sigma = 1, rdig = 3, \dots)
-}
 \alias{VarCorr}
 \alias{VarCorr.lme}
 \alias{VarCorr.pdMat}
 \alias{VarCorr.pdBlocked}
-\alias{summary.VarCorr.lme}
 \alias{print.VarCorr.lme}
+\usage{
+VarCorr(x, sigma = 1, \dots)
+\method{VarCorr}{lme}(x, sigma = 1, rdig = 3, \dots)
+## and identical signature for classes 'pdMat' and 'pdBlocked'
+}
 \arguments{
   \item{x}{a fitted model object, usually an object inheriting from
     class \code{"\link{lme}"}.}
