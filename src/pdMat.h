@@ -2,7 +2,7 @@
    header file for the nlme package
 
    Copyright 1999 Saikat DebRoy
-   Copyright 2007-2011  The R Core Team
+   Copyright 2007-2016  The R Core Team
 
    This file is part of the nlme package for R and related languages
    and is made available under the terms of the GNU General Public
@@ -25,8 +25,8 @@
 #define NLME_PDMAT_H
 #include "base.h"
 
-extern void compSymm_pd(double *, longint *, double *);
-extern void matrixLog_pd(double *, longint *, double *);
-extern void logChol_pd(double *, longint *, double *);
+extern void compSymm_pd(double *, int *, double *);
+extern void matrixLog_pd(double *, int *, double *);
+extern void logChol_pd(double *, int *, double *);
 
 #endif /* NLME_BASE_H */

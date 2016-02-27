@@ -2,7 +2,7 @@
    header file for the nlme package
 
    Copyright 1999 Saikat DebRoy
-   Copyright 2007-2013  The R Core Team
+   Copyright 2007-2016  The R Core Team
 
    This file is part of the nlme package for R and related languages
    and is made available under the terms of the GNU General Public
@@ -25,12 +25,9 @@
 #define NLME_NLOPTIMIZER_H
 
 #include "base.h"
-
-#ifdef R_S_H
 #include "Rinternals.h"
-#endif
 
-extern int evaluate(double *, longint aMOD, double ** aSEV);
-extern void fit_gnls(double *, longint *, double *, double *, longint
-		     *, double *, double *, longint *, longint * aMOD);
+extern int evaluate(double *, int, SEXP model, double **);
+extern void fit_gnls(double *, int *, double *, double *, int *,
+		     double *, double *, int *, int *, SEXP model);
 #endif /* NLME_NLOPTIMIZER_H */

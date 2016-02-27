@@ -25,56 +25,19 @@
 #ifndef NLME_BASE_H
 #define NLME_BASE_H
 
-#include "S.h"
 #include <stdlib.h>
-
-#ifdef R_S_H
+#include <string.h> // for memcpy
 #include <R.h>
 #include <Rinternals.h>
 #include <Rmath.h>
-//#include <R_ext/Applic.h>
 #ifdef ENABLE_NLS
-#include <libintl.h>
-#define _(String) dgettext ("nlme", String)
+# include <libintl.h>
+# define _(String) dgettext ("nlme", String)
 #else
-#define _(String) (String)
-#endif
-
-#else
-#include "nonlin.h"
+# define _(String) (String)
 #endif
 
 #define DNULLP (double *) 0
-
-#ifndef SPLUS_VERSION		/* F77_CALL and F77_NAME used as in S-PLUS */
-#ifdef S_VERSION		/* S VERSION 4 */
-#define F77_CALL F77_SUB
-#define F77_NAME F77_SUB
-#endif /* S_VERSION */
-#endif /* SPLUS_VERSION */
-
-#ifndef R_S_H
-extern void F77_NAME(dtrsl)();
-extern void F77_NAME(dqrsl)();
-#define longint long int
-#endif /* R_S_H */
-
-#ifdef R_S_H
-#define MOD , model
-#define aMOD , SEXP model
-#else
-#define MOD
-#define aMOD
-#endif /* R_S_H */
-
-#if( defined(SPLUS_VERSION) && SPLUS_VERSION >= 5000 )
-#define  SEV , S_evaluator
-#define aSEV , s_evaluator *S_evaluator
-#else
-#define  SEV
-#define aSEV
-#define S_EVALUATOR
-#endif /* SPLUS_VERSION */
 
 extern double sqrt_eps;
 extern double xlower;

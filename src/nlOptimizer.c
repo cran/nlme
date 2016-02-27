@@ -2,7 +2,7 @@
    Implementation of eval_model() and spread() for R.
 
    Copyright 1999 Saikat DebRoy
-   Copyright 2007-2012  The R Core Team
+   Copyright 2007-2016  The R Core Team
 
    This file is part of the nlme package for S and related languages
    and is made available under the terms of the GNU General Public
@@ -23,14 +23,9 @@
 
 #include "nlOptimizer.h"
 
-#ifndef R_S_H
-#include "nonlin.h"
-#endif /* R_S_H */
-
 int
-evaluate(double *param, longint nParam aMOD, double **value aSEV)
+evaluate(double *param, int nParam, SEXP model, double **value)
 {
-#ifdef R_S_H
   SEXP newPars, call, result;
   int i, nResult;
 
@@ -49,10 +44,6 @@ evaluate(double *param, longint nParam aMOD, double **value aSEV)
   for(i = 0; i < nResult; i++)
     value[0][i] = res[i];
   UNPROTECT(4);
-#else
-  spread(param, nParam SEV);
-  eval_model(TRUE SEV);
-  value[0] = nl_results[0];
-#endif
+
   return(-1);
 }

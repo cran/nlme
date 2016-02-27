@@ -4,7 +4,7 @@
    Copyright 1997-2005  Douglas M. Bates <bates@stat.wisc.edu>,
 			Jose C. Pinheiro,
 			Saikat DebRoy
-   Copyright 2007-2013  The R Core Team
+   Copyright 2007-2016  The R Core Team
 
    This file is part of the nlme package for R and related languages
    and is made available under the terms of the GNU General Public
@@ -34,13 +34,13 @@ void F77_NAME(dqrls)(double *x, int *n, int *p, double *y, int *ny,
 		     int *jpvt, double *qraux, double *work);
 
 void
-d_axpy(double *y, double a, double *x, longint n)
+d_axpy(double *y, double a, double *x, int n)
 {				/* y <- a * x + y  */
   while (n-- > 0) { *y++ += a * *x++; }
 }
 
 double
-d_sum_sqr( double *x, longint n )
+d_sum_sqr( double *x, int n )
 {				/* sum(x * x) */
   double accum = 0.0;
   while (n-- > 0) { accum += *x * *x; x++; }
@@ -48,7 +48,7 @@ d_sum_sqr( double *x, longint n )
 }
 
 double
-d_dot_prod( double *x, longint incx, double *y, longint incy, longint n )
+d_dot_prod( double *x, int incx, double *y, int incy, int n )
 {				/* sum(x * y) */
   double accum = 0.0;
   while (n-- > 0) { accum += *x * *y; x +=incx; y += incy; }
@@ -56,8 +56,7 @@ d_dot_prod( double *x, longint incx, double *y, longint incy, longint n )
 }
 
 double *
-copy_mat(double *y, longint ldy, double *x, longint ldx,
-	 longint nrow, longint ncol)
+copy_mat(double *y, int ldy, double *x, int ldx, int nrow, int ncol)
 {				/* y <- x */
   double * ret = y;
   while (ncol-- > 0) { Memcpy(y, x, nrow); y += ldy; x += ldx; }
@@ -65,11 +64,11 @@ copy_mat(double *y, longint ldy, double *x, longint ldx,
 }
 
 double *
-copy_trans(double *y, longint ldy, double *x, longint ldx,
-	   longint nrow, longint ncol) /* y <- t(x) */
+copy_trans(double *y, int ldy, double *x, int ldx, int nrow, int ncol)
+ /* y <- t(x) */
 {
   double * ret = y;
-  longint i, j;
+  int i, j;
   for (i = 0L; i < nrow; i++) {
     for (j = 0L; j < ncol; j++) { y[j] = x[i + j * ldx]; }
     y += ldy;
@@ -78,9 +77,9 @@ copy_trans(double *y, longint ldy, double *x, longint ldx,
 }
 
 double *
-mult_mat(double *z, longint ldz,
-	 double *x, longint ldx, longint xrows, longint xcols,
-	 double *y, longint ldy, longint ycols)
+mult_mat(double *z, int ldz,
+	 double *x, int ldx, int xrows, int xcols,
+	 double *y, int ldy, int ycols)
 {				/* z <- x %*% y */
   double *t, *tmp = Calloc((size_t)(xrows * ycols), double);
   int i, j;			/* use tmp so z can be either x or y */
@@ -99,7 +98,7 @@ mult_mat(double *z, longint ldz,
 }
 
 static void
-zero_mat(double *y, longint ldy, longint nrow, longint ncol)
+zero_mat(double *y, int ldy, int nrow, int ncol)
 {				/* y[,] <- 0 */
   while (ncol-- > 0) {
     int i;
@@ -109,10 +108,10 @@ zero_mat(double *y, longint ldy, longint nrow, longint ncol)
 }
 
 QRptr
-QR(double *mat, longint ldmat, longint nrow, longint ncol)
+QR(double *mat, int ldmat, int nrow, int ncol)
 {				/* Constructor for a QR object */
   QRptr value = Calloc((size_t) 1, struct QR_struct);
-  longint j;  double *work;
+  int j;  double *work;
 
   if (sqrt_eps == 0.) { sqrt_eps = sqrt(DOUBLE_EPS); }
   value->mat = mat;
@@ -120,7 +119,7 @@ QR(double *mat, longint ldmat, longint nrow, longint ncol)
   value->nrow = nrow;
   value->ncol = ncol;
   value->qraux = Calloc((size_t) ncol, double);
-  value->pivot = Calloc((size_t) ncol, longint);
+  value->pivot = Calloc((size_t) ncol, int);
   for (j = 0; j < ncol; j++) { (value->pivot)[j] = j; }
   work = Calloc( 2 * ncol, double );
   F77_CALL(dqrdc2) (mat, &ldmat, &nrow, &ncol, &sqrt_eps, &(value->rank),
@@ -137,10 +136,10 @@ QRfree(QRptr this)
   Free(this);
 }
 
-longint
-QRqty(QRptr this, double *ymat, longint ldy, longint ycol)
+int
+QRqty(QRptr this, double *ymat, int ldy, int ycol)
 {				/* ymat <- qr.qty(this, ymat) */
-  longint j, info, task = 1000L;
+  int j, info, task = 1000L;
   for (j = 0; j < ycol; j++) {
     double *col = ymat + j * ldy;
     F77_CALL(dqrsl) (this->mat, &(this->ldmat), &(this->nrow), &(this->ncol),
@@ -150,11 +149,10 @@ QRqty(QRptr this, double *ymat, longint ldy, longint ycol)
   return info;
 }
 
-longint
-QRsolve( QRptr this, double *ymat, longint ldy, longint ycol,
-	 double *beta, longint ldbeta )
+int
+QRsolve( QRptr this, double *ymat, int ldy, int ycol, double *beta, int ldbeta )
 {				/* beta <- qr.beta(this, ymat) */
-  longint j, info, task = 1100L;
+  int j, info, task = 1100L;
   double *qty = Calloc( this->nrow, double ),
     *bb = Calloc( this->ncol, double );
 
@@ -174,7 +172,7 @@ QRsolve( QRptr this, double *ymat, longint ldy, longint ycol,
 double
 QRlogAbsDet(QRptr this)
 {				/* log(abs(det(upper triangle))) */
-  longint j;
+  int j;
   double accum = 0.0;
   for (j = 0; j < this->rank; j++)
     accum += log(fabs(this->mat[j * (this->ldmat + 1L)]));
@@ -182,7 +180,7 @@ QRlogAbsDet(QRptr this)
 }
 
 void
-QRstoreR(QRptr this, double *dest, longint ldDest)
+QRstoreR(QRptr this, double *dest, int ldDest)
 {				/* store the R part into dest */
   int i;
   for (i = 0; i < this->ncol; i++) {
@@ -191,15 +189,15 @@ QRstoreR(QRptr this, double *dest, longint ldDest)
   }
 }
 
-longint
-QR_and_rotate(double *mat, longint ldmat, longint nrow, longint ncol,
-	      double *DmHalf, longint qi, longint ndecomp,
-	      double *logdet, double *store, longint ldstr)
+int
+QR_and_rotate(double *mat, int ldmat, int nrow, int ncol,
+	      double *DmHalf, int qi, int ndecomp,
+	      double *logdet, double *store, int ldstr)
      /* Append DmHalf to the bottom of mat and take a QR decomposition
 	of the first ndecomp columns.  Apply the rotations to the other
 	columns.  Return the rank and increment log(abs(det(R11))). */
 {
-  longint rank, arow = nrow + qi,  /* number of rows in augmented matrix */
+  int rank, arow = nrow + qi,  /* number of rows in augmented matrix */
     ndrow = ((arow > ndecomp) ? ndecomp : arow);
   double *aug = Calloc((size_t) arow * ncol, double);
   QRptr aQR;

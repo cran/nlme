@@ -4,7 +4,7 @@
    Copyright 1997-2005 Douglas M. Bates <bates@stat.wisc.edu>,
 		       Jose C. Pinheiro,
 		       Saikat DebRoy
-   Copyright 2007-2011  The R Core Team
+   Copyright 2007-2016  The R Core Team
 
    This file is part of the nlme package for R and related languages
    and is made available under the terms of the GNU General Public
@@ -29,9 +29,9 @@
 /* Positive definite matrices */
 
 static void
-Chol_pd(double *L, longint *q, double *l)
+Chol_pd(double *L, int *q, double *l)
 {
-  longint i, qq = *q;
+  int i, qq = *q;
   for(i = 0; i < qq; i++) {
     Memcpy(L + i * qq, l, i + 1);
     l += i + 1;
@@ -39,9 +39,9 @@ Chol_pd(double *L, longint *q, double *l)
 }
 
 void				/* general pd, logChol parametrization */
-logChol_pd(double *L, longint *q, double *l)
+logChol_pd(double *L, int *q, double *l)
 {
-  longint i, qq = *q;
+  int i, qq = *q;
   double *ll = l + qq;
   L[0] = exp(*l);
   for(i = 1; i < qq; i++) {
@@ -52,9 +52,9 @@ logChol_pd(double *L, longint *q, double *l)
 }
 
 void
-matrixLog_pd(double *L, longint *q, double *l)
+matrixLog_pd(double *L, int *q, double *l)
 {
-  longint i, j, qq = *q, one = 1L, info = 0L;
+  int i, j, qq = *q, one = 1L, info = 0L;
   if ( qq == 1 ) {
     *L = exp( *l );
   } else {
@@ -80,9 +80,9 @@ matrixLog_pd(double *L, longint *q, double *l)
 
 
 void
-natural_pd(double *L, longint *q, double *l) /* natural parametrization  */
+natural_pd(double *L, int *q, double *l) /* natural parametrization  */
 {
-  longint i, j, qp1 = *q + 1, info;
+  int i, j, qp1 = *q + 1, info;
   double *std = l, *corr = l + *q, *work = Calloc(*q, double);
 
   for(i = 0; i < *q; i++) std[i] = exp(std[i]);
@@ -96,19 +96,14 @@ natural_pd(double *L, longint *q, double *l) /* natural parametrization  */
       corr++;
     }
   }
-#ifdef R_S_H
   F77_CALL(chol) (L, q, q, L, &info);
-#else
-  zero = 0L;
-  F77_CALL(chol) (L, q, work, &zero, &zero, &info);
-#endif /* R_S_H */
   Free(work);
 }
 
 void
-compSymm_pd(double *L, longint *q, double *l) /* compound symmetry */
+compSymm_pd(double *L, int *q, double *l) /* compound symmetry */
 {
-  longint i, j, qp1 = *q + 1;
+  int i, j, qp1 = *q + 1;
   double aux = exp(l[0]), aux1 = exp(l[1]), aux2;
 
   aux1 = (aux1 - 1.0/((double) *q - 1.0))/(aux1 + 1.0);

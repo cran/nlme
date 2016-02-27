@@ -3,7 +3,7 @@
 
    Copyright 1999-2001 Saikat DebRoy,
 		       Douglas Bates <bates@stat.wisc.edu>
-   Copyright 2007-2013  The R Core Team
+   Copyright 2007-2016  The R Core Team
 
    This file is part of the nlme package for R and related languages
    and is made available under the terms of the GNU General Public
@@ -28,7 +28,7 @@
 #include <R_ext/Applic.h> // for nlm internals
 
 typedef struct dim_struct {
-  longint
+  int
     N,				/* number of observations in original data */
     ZXrows,			/* number of rows in ZXy  */
     ZXcols,			/* number of columns in ZXy */
@@ -49,41 +49,41 @@ typedef struct dim_struct {
 typedef struct state_struct {
   dimPTR dd;
   double *ZXy;
-  longint *pdClass,
+  int *pdClass,
     *RML;
   double	*sigma; // 17-11-2015; Fixed sigma patch; E van Willigen; Quantitative Solutions
 } *statePTR;
 
-extern dimPTR dims(longint *);
+extern dimPTR dims(int *);
 extern dimPTR dimS(SEXP);
-extern int count_DmHalf_pars(dimPTR, longint *);
-extern double * generate_theta(double *, dimPTR, longint *, double *);
-extern double * generate_DmHalf(double *, dimPTR, longint *, double *);
+extern int count_DmHalf_pars(dimPTR, int *);
+extern double * generate_theta(double *, dimPTR, int *, double *);
+extern double * generate_DmHalf(double *, dimPTR, int *, double *);
 extern void dimFree(dimPTR);
-extern void mixed_decomp(double *, longint *);
-extern void mixed_fcn(longint, double *, double *, void *);
-extern void mixed_grad(longint, double *, double *, void *);
+extern void mixed_decomp(double *, int *);
+extern void mixed_fcn(int, double *, double *, void *);
+extern void mixed_grad(int, double *, double *, void *);
 extern void internal_decomp(dimPTR, double *);
-extern void mixed_loglik(double *, longint *, double *, longint *,
+extern void mixed_loglik(double *, int *, double *, int *,
 			 double *, double *, double *); // 17-11-2015; Fixed sigma patch; E van Willigen; Quantitative Solutions
-extern double internal_loglik(dimPTR, double *, double *, longint *,
+extern double internal_loglik(dimPTR, double *, double *, int *,
 			      double *, double *, double *); // 17-11-2015; Fixed sigma patch; E van Willigen; Quantitative Solutions
-extern void mixed_estimate(double *, longint *, double *, longint *,
-			   double *, double *, longint *, double *); // 17-11-2015; Fixed sigma patch; E van Willigen; Quantitative Solutions
+extern void mixed_estimate(double *, int *, double *, int *,
+			   double *, double *, int *, double *); // 17-11-2015; Fixed sigma patch; E van Willigen; Quantitative Solutions
 extern void internal_estimate(dimPTR, double *);
-extern void mixed_EM(double *, longint *, double *, longint *,
-		     longint *, longint *, double *, double *, double *, double *); // 17-11-2015; Fixed sigma patch; E van Willigen; Quantitative Solutions
-extern void internal_EM(dimPTR, double *, double *, int, longint *,
-			longint *, double *, double *, double *, double *); // 17-11-2015; Fixed sigma patch; E van Willigen; Quantitative Solutions
-extern void mixed_combined(double *, longint *, double *, longint *,
-			   longint *, longint *, double *, double *,
-			   double *, longint *, double *); // 17-11-2015; Fixed sigma patch; E van Willigen; Quantitative Solutions
-extern void mixed_calcf(longint *, double *, longint *, double *,
-			longint *, double *, void (*)(void));
-extern void mixed_calcgh(longint *, double *, longint *, double *,
-			 double *, longint *, double *, void (*)(void));
-extern void gls_loglik(double *, longint *, double *, double *, double *); // 17-11-2015; Fixed sigma patch; E van Willigen; Quantitative Solutions
-extern void gls_estimate(double *, longint *, double *, double *,
-			 double *, double *, longint *, longint *);
+extern void mixed_EM(double *, int *, double *, int *,
+		     int *, int *, double *, double *, double *, double *); // 17-11-2015; Fixed sigma patch; E van Willigen; Quantitative Solutions
+extern void internal_EM(dimPTR, double *, double *, int, int *,
+			int *, double *, double *, double *, double *); // 17-11-2015; Fixed sigma patch; E van Willigen; Quantitative Solutions
+extern void mixed_combined(double *, int *, double *, int *,
+			   int *, int *, double *, double *,
+			   double *, int *, double *); // 17-11-2015; Fixed sigma patch; E van Willigen; Quantitative Solutions
+extern void mixed_calcf(int *, double *, int *, double *,
+			int *, double *, void (*)(void));
+extern void mixed_calcgh(int *, double *, int *, double *,
+			 double *, int *, double *, void (*)(void));
+extern void gls_loglik(double *, int *, double *, double *, double *); // 17-11-2015; Fixed sigma patch; E van Willigen; Quantitative Solutions
+extern void gls_estimate(double *, int *, double *, double *,
+			 double *, double *, int *, int *);
 
 #endif /* NLME_NLMEFIT_H */

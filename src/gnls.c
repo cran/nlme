@@ -4,7 +4,7 @@
    Copyright 1997-2005 Douglas M. Bates <bates@stat.wisc.edu>,
 		       Jose C. Pinheiro,
 		       Saikat DebRoy
-   Copyright 2007-2012  The R Core Team
+   Copyright 2007-2016  The R Core Team
 
    This file is part of the nlme package for R and related languages
    and is made available under the terms of the GNU General Public
@@ -27,7 +27,7 @@
 #include "matrix.h"
 #include "nlmefit.h"
 
-extern void corStruct_recalc(double *, longint *, longint *, double *);
+extern void corStruct_recalc(double *, int *, int *, double *);
 
 /* gnls functions and variables     */
 
@@ -36,19 +36,17 @@ typedef struct gnls_struct {	/* Generalized nonlinear least squares structure */
     tolerance, *newtheta, *theta, *incr, *add_ons,
     new_objective, objective;
   double *result[1];
-  longint corOpt, varOpt, npar, ncol, N, nrdof, maxIter, *corDims;
-#ifdef R_S_H
+  int corOpt, varOpt, npar, ncol, N, nrdof, maxIter, *corDims;
   SEXP model;
-#endif
   int conv_failure;
 } *gnlsPtr;
 
 static gnlsPtr
-gnls_init(double *ptheta, longint *dims, double *corFactor, double *varWeights,
-	  longint *corDims, double *settings, double *additional,
-	  longint corOpt, longint varOpt aMOD)
+gnls_init(double *ptheta, int *dims, double *corFactor, double *varWeights,
+	  int *corDims, double *settings, double *additional,
+	  int corOpt, int varOpt, SEXP model)
 {
-  longint nResult;
+  int nResult;
   gnlsPtr gnls = Calloc(1, struct gnls_struct);
   gnls->theta = ptheta;
   gnls->corFactor = corFactor;
@@ -66,12 +64,10 @@ gnls_init(double *ptheta, longint *dims, double *corFactor, double *varWeights,
   gnls->varOpt = varOpt;
   gnls->corOpt = corOpt;
   gnls->add_ons = additional;
-#ifdef R_S_H
   gnls->model = model;
   gnls->result[0] = DNULLP;
-  nResult = evaluate(ptheta, gnls->npar MOD, gnls->result SEV);
+  nResult = evaluate(ptheta, gnls->npar , model, gnls->result);
   gnls->result[0] = Calloc(nResult, double);
-#endif
   return gnls;
 }
 
@@ -80,16 +76,14 @@ gnlsFree( gnlsPtr gnls )
 {
   Free(gnls->newtheta);
   Free(gnls->incr);
-#ifdef R_S_H
   Free(gnls->result[0]);
-#endif
   Free(gnls);
 }
 
 static double
 gnls_objective(gnlsPtr gnls)
 {
-  longint i, j;
+  int i, j;
   if(gnls->varOpt) {			/* variance function correction */
     for(i = 0; i < gnls->N; i++) {
       for(j = 0; j < gnls->ncol; j++) {
@@ -105,24 +99,12 @@ gnls_objective(gnlsPtr gnls)
   return(d_sum_sqr(gnls->residuals, gnls->N));
 }
 
-/*  static double */
-/*  gnls_RegSS(gnlsPtr gnls) */
-/*  { */
-/*    longint i; */
-/*    double regSS = 0, aux; */
-/*    for(i = 0; i < gnls->N; i++) { */
-/*      aux = d_dot_prod(gnls->gradient + i, gnls->N, gnls->incr, 1L, gnls->npar); */
-/*      regSS += aux * aux; */
-/*    } */
-/*    return(regSS); */
-/*  } */
-
 static double
 gnls_increment(gnlsPtr gnls)
 {
   double regSS = 0, *auxRes;
   QRptr aQR;
-  longint i;
+  int i;
   if (sqrt_eps == 0.0) sqrt_eps = sqrt(DOUBLE_EPS);
   auxRes = Calloc(gnls->N, double);
   Memcpy(auxRes, gnls->residuals, gnls->N);
@@ -138,18 +120,15 @@ gnls_increment(gnlsPtr gnls)
 	      ((double) gnls->npar) * (gnls->new_objective - regSS)));
 }
 
-static longint
-gnls_iterate(gnlsPtr gnls aSEV)
+static int
+gnls_iterate(gnlsPtr gnls)
 {
   double factor, criterion;
-  longint iteration;
-#ifdef R_S_H
+  int iteration;
   SEXP model = gnls->model;
-#endif
-  S_EVALUATOR
 
   Memcpy(gnls->newtheta, gnls->theta, gnls->npar);
-  evaluate(gnls->theta, gnls->npar MOD, gnls->result SEV);
+  evaluate(gnls->theta, gnls->npar , model, gnls->result);
   gnls->new_objective = gnls->objective = gnls_objective(gnls);
   gnls->conv_failure = 0;
   for (factor = 1.0, iteration = 1; iteration <= gnls->maxIter;
@@ -165,7 +144,7 @@ gnls_iterate(gnlsPtr gnls aSEV)
       }
       Memcpy(gnls->newtheta, gnls->theta, gnls->npar);
       d_axpy(gnls->newtheta, factor, gnls->incr, gnls->npar);
-      evaluate(gnls->newtheta, gnls->npar MOD, gnls->result SEV);
+      evaluate(gnls->newtheta, gnls->npar , model, gnls->result);
       gnls->new_objective = gnls_objective(gnls);
       if (gnls->conv_failure) return(iteration); /* unable to evaluate objective */
       factor /= 2.0;
@@ -181,38 +160,29 @@ gnls_iterate(gnlsPtr gnls aSEV)
 }
 
 static void
-gnls_wrapup(gnlsPtr gnls aSEV)
+gnls_wrapup(gnlsPtr gnls)
 {
-#ifdef R_S_H
   SEXP model = gnls->model;
-#endif
-  S_EVALUATOR
-
-  evaluate(gnls->theta, gnls->npar MOD, gnls->result SEV);
+  evaluate(gnls->theta, gnls->npar , model, gnls->result);
   Memcpy(gnls->add_ons, gnls->result[0] + gnls->npar * gnls->N, gnls->N);
   gnls->objective = gnls_objective(gnls);
 }
 
 void
-fit_gnls(double *ptheta, longint *pdims, double *pcorFactor, double
-	 *pvarWeights, longint *pcorDims, double *settings,
-	 double *additional, longint *pcorOpt, longint *pvarOpt aMOD)
+fit_gnls(double *ptheta, int *pdims, double *pcorFactor, double
+	 *pvarWeights, int *pcorDims, double *settings,
+	 double *additional, int *pcorOpt, int *pvarOpt, SEXP model)
 {
   gnlsPtr gnls;
-  S_EVALUATOR
 
-#ifdef R_S_H
   PROTECT(model);
-#endif /* R_S_H */
   if(sqrt_eps == 0.0) sqrt_eps = sqrt(DOUBLE_EPS);
   gnls = gnls_init(ptheta, pdims, pcorFactor, pvarWeights, pcorDims,
-    settings, additional, *pcorOpt, *pvarOpt MOD);
-  settings[4] = (double) gnls_iterate(gnls SEV);
-  gnls_wrapup(gnls SEV);
+		   settings, additional, *pcorOpt, *pvarOpt, model);
+  settings[4] = (double) gnls_iterate(gnls);
+  gnls_wrapup(gnls);
   settings[3] = gnls->conv_failure;
   settings[5] = gnls->objective;
   gnlsFree(gnls);
-#ifdef R_S_H
   UNPROTECT(1);
-#endif /* R_S_H */
 }

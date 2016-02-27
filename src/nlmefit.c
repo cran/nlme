@@ -4,7 +4,7 @@
 
    Copyright (C) 1997-2005  Douglas M. Bates <bates@stat.wisc.edu>,
 		            Jose C. Pinheiro, Saikat DebRoy
-   Copyright (C) 2007-2015  The R Core Team
+   Copyright (C) 2007-2016  The R Core Team
 
    This file is part of the nlme package for R and related languages
    and is made available under the terms of the GNU General Public
@@ -27,20 +27,14 @@
 #include "matrix.h"
 #include "pdMat.h"
 
-#ifndef SPLUS_VERSION
-#ifdef S_VERSION
-#define msmnh    dmnh
-#endif /* S_VERSION */
-#endif /* SPLUS_VERSION */
-
 // 17-11-2015; Fixed sigma patch; E van Willigen; Quantitative Solutions
 static double *_sigma_; /* This to provide msmnh out-of-band the sigma. */
 extern void F77_NAME(msmnh)();
 
-static longint **
-setOffsets(longint ** base, longint * ngrp, longint Qp2)
+static int **
+setOffsets(int ** base, int * ngrp, int Qp2)
 {
-    longint i, **ptrVec = Calloc((size_t) Qp2, longint *);
+    int i, **ptrVec = Calloc((size_t) Qp2, int *);
     for (i = 0; i < Qp2; i++) {
 	ptrVec[i] = *base;
 	*base += ngrp[i];
@@ -49,10 +43,10 @@ setOffsets(longint ** base, longint * ngrp, longint Qp2)
 }
 
 dimPTR
-dims(longint *pdims)
+dims(int *pdims)
 {				/* constructor for a dims object */
     dimPTR value = Calloc((size_t) 1, struct dim_struct);
-    longint *base, Qp2, *ngrp;
+    int *base, Qp2, *ngrp;
 
     value->N = (int) pdims[0];
     value->ZXrows = pdims[1];
@@ -151,7 +145,7 @@ dimFree(dimPTR this)
 }
 
 int
-count_DmHalf_pars( dimPTR dd, longint *pdClass )
+count_DmHalf_pars( dimPTR dd, int *pdClass )
 {
     int i, result;
     for ( i = 0, result = 0; i < dd->Q; i++ ) {
@@ -169,7 +163,7 @@ count_DmHalf_pars( dimPTR dd, longint *pdClass )
 }
 
 double *
-generate_DmHalf( double *DmHalf, dimPTR dd, longint *pdClass, double *pars )
+generate_DmHalf( double *DmHalf, dimPTR dd, int *pdClass, double *pars )
 {				/* Expand parameters to DmHalf arrays */
     int i, j, q, Q = dd->Q; double diag;
     for (i = 0; i < Q; i++) {
@@ -207,8 +201,7 @@ generate_DmHalf( double *DmHalf, dimPTR dd, longint *pdClass, double *pars )
 
 #ifdef Debug
 static void
-print_mat( char *msg, double *x, longint ldx, longint nrow,
-	   longint ncol )
+print_mat( char *msg, double *x, int ldx, int nrow, int ncol )
 {				/* print matrix and message */
     int i, j;
     printf( "%s\n", msg );
@@ -223,8 +216,8 @@ print_mat( char *msg, double *x, longint ldx, longint nrow,
 #endif /* Debug */
 
 static double *
-scale_mat(double *y, longint ldy, double a,
-	  double *x, longint ldx, longint nrow, longint ncol)
+scale_mat(double *y, int ldy, double a,
+	  double *x, int ldx, int nrow, int ncol)
 {				/* y <- a * x */
     int i, j;
     double * ret = y;
@@ -237,8 +230,7 @@ scale_mat(double *y, longint ldy, double a,
 }
 
 static double *
-plus_equals_mat(double *y, longint ldy, double *x, longint ldx,
-		longint nrow, longint ncol)
+plus_equals_mat(double *y, int ldy, double *x, int ldx, int nrow, int ncol)
 {				/* y <- y + x */
     double * ret = y;
     int i, j;
@@ -250,11 +242,10 @@ plus_equals_mat(double *y, longint ldy, double *x, longint ldx,
     return ret;
 }
 
-static longint			/* backsolve and update */
-backsolve(double *mat, longint ldmat, longint nupdate, longint ncol,
-	  longint nrot, longint ny)
+static int			/* backsolve and update */
+backsolve(double *mat, int ldmat, int nupdate, int ncol, int nrot, int ny)
 {
-    longint i, j, ONE = 1L, info;
+    int i, j, ONE = 1L, info;
     double *y = mat + (int) ((ncol + nrot - ny) * ldmat);
 
     mat = mat - (int) nupdate;
@@ -271,10 +262,10 @@ backsolve(double *mat, longint ldmat, longint nupdate, longint ncol,
     return info;
 }
 
-static longint			/* invert an upper-triangular matrix in place*/
-invert_upper(double *mat, longint ldmat, longint ncol)
+static int			/* invert an upper-triangular matrix in place*/
+invert_upper(double *mat, int ldmat, int ncol)
 {
-    longint i, j, ONE = 1L, info = 0L;
+    int i, j, ONE = 1L, info = 0L;
     double *b = Calloc((size_t) ncol, double);
 
     for (i = ncol; i > 1L; i--) {
@@ -289,12 +280,11 @@ invert_upper(double *mat, longint ldmat, longint ncol)
     Free(b); return 0L;
 }
 
-static longint			/* invert a block in the virtual R array */
-invert_block(double *mat, longint ldmat, longint nabove,
-	     longint ncol, longint nright)
+static int			/* invert a block in the virtual R array */
+invert_block(double *mat, int ldmat, int nabove, int ncol, int nright)
 {
     double * tpblk = mat - (int) nabove;
-    longint info = invert_upper(mat, ldmat, ncol);
+    int info = invert_upper(mat, ldmat, ncol);
 
     if (info != 0L) return info;
     if (nright > 0) {
@@ -320,7 +310,7 @@ invert_block(double *mat, longint ldmat, longint nabove,
 
 
 void				/* return the decomposition for ZXy */
-mixed_decomp(double *ZXy, longint *pdims)
+mixed_decomp(double *ZXy, int *pdims)
 {
     dimPTR dd = dims(pdims);	/* Create a dimensions structure */
     internal_decomp(dd, ZXy);
@@ -330,7 +320,7 @@ mixed_decomp(double *ZXy, longint *pdims)
 void
 internal_decomp(dimPTR dd, double *ZXy)
 {				/* decompose ZXy and re-write the dims */
-    longint i, j, Qp2 = (dd->Q) + 2;
+    int i, j, Qp2 = (dd->Q) + 2;
     double *dc;
 
     if ((dd->Srows) >= (dd->ZXrows)) /* decomposition is not worthwhile */
@@ -356,12 +346,12 @@ internal_decomp(dimPTR dd, double *ZXy)
 }
 
 double			/* evaluate the log-likelihood pieces */
-internal_loglik(dimPTR dd, double *ZXy, double *DmHalf, longint *RML,
+internal_loglik(dimPTR dd, double *ZXy, double *DmHalf, int *RML,
 		double *dc, double *lRSS,
 		// 17-11-2015; Fixed sigma patch; E van Willigen; Quantitative Sol.
 		double *sigma)
 {				/* if dc is NULL, don't attempt storage */
-    longint i, j, Q = dd->Q,  Qp2 = Q + 2, qi,
+    int i, j, Q = dd->Q,  Qp2 = Q + 2, qi,
 	ldstr = (dc != DNULLP) ? (dd->Srows) : 0L;
     double accum, *dmHlf, *lglk = Calloc( Qp2, double );
     QRptr dmQR;
@@ -411,7 +401,7 @@ internal_loglik(dimPTR dd, double *ZXy, double *DmHalf, longint *RML,
 void
 internal_estimate(dimPTR dd, double *dc)
 {				/* solve for Beta and b_i estimates */
-    longint i, j, Qp1 = (dd->Q) + 1L;
+    int i, j, Qp1 = (dd->Q) + 1L;
 
     for (i = (dd->Q); i >= 0; i--) {
 	for (j = 0; j < (dd->ngrp)[i]; j++) {
@@ -442,9 +432,9 @@ internal_R_invert(dimPTR dd, double *dc)
 static double cube_root_eps = 0.;
 
 static double *
-pt_prod( double *prod, double *a, double *b, longint len )
+pt_prod( double *prod, double *a, double *b, int len )
 {				/* prod <- a * b */
-    longint i; double *ret = prod;
+    int i; double *ret = prod;
     for (i = 0; i < len; i++) {
 	*prod++ = *a++ * *b++;
     }
@@ -506,8 +496,8 @@ finite_diff_Hess(double (*func)(double*,double*), double *pars, int npar,
 #ifdef Debug
     print_mat( "Xmat", Xmat, nTot, nTot, nTot );
 #endif /* Debug */
-    xQR = QR( Xmat, (longint) nTot, (longint) nTot, (longint) nTot );
-    QRsolve( xQR, vals, (longint) nTot, 1L, vals, (longint) nTot );
+    xQR = QR( Xmat, (int) nTot, (int) nTot, (int) nTot );
+    QRsolve( xQR, vals, (int) nTot, 1L, vals, (int) nTot );
     pt_prod( vals, vals, div, nTot );
     /* re-arrange the Hessian terms */
     xpt = vals + npar + 1;
@@ -524,7 +514,7 @@ finite_diff_Hess(double (*func)(double*,double*), double *pars, int npar,
 }
 
 void				/* For optif9 */
-mixed_fcn(longint n, double *pars, double *g, void *state)
+mixed_fcn(int n, double *pars, double *g, void *state)
 {
     statePTR st = (statePTR) state;
     double *zxcopy = Calloc(st->dd->ZXrows * st->dd->ZXcols, double),
@@ -538,7 +528,7 @@ mixed_fcn(longint n, double *pars, double *g, void *state)
 }
 
 void				/* For optif9 */
-mixed_grad(longint n, double *pars, double *g, void *state)
+mixed_grad(int n, double *pars, double *g, void *state)
 {
     statePTR st = (statePTR) state;
     double *zxcopy = Calloc(st->dd->ZXrows * st->dd->ZXcols, double),
@@ -547,7 +537,7 @@ mixed_grad(longint n, double *pars, double *g, void *state)
 	*DmHalf, sigmainv, *pt, *res;
     double  sqrtDF = sqrt((double) (st->dd->N -
 				    *(st->RML)*(st->dd->ncol[st->dd->Q])));
-    longint i, j, offset;
+    int i, j, offset;
 
     DmHalf = generate_DmHalf(Delta, st->dd, st->pdClass, pars),
 	Memcpy(zxcopy, st->ZXy, st->dd->ZXrows * st->dd->ZXcols);
@@ -568,9 +558,9 @@ mixed_grad(longint n, double *pars, double *g, void *state)
     }
     offset = ((st->dd->ZXcols) - 1L) * (st->dd->Srows);
     for (i = 0L; i < (st->dd->Q); i++) {
-	longint ncol = (st->dd->q)[i],
+	int ncol = (st->dd->q)[i],
 	    nright = (st->dd->nrot)[i] - (st->dd->nrot)[(st->dd->Q) - ( (*(st->RML)) ? 0 : 1 )];
-	longint nrow = (ncol + nright + 1L) * (st->dd->ngrp)[i];
+	int nrow = (ncol + nright + 1L) * (st->dd->ngrp)[i];
 	QRptr qq;
 	pt = res = Calloc((size_t) (ncol * nrow), double);
 	for (j = 0L; j < (st->dd->ngrp)[i]; j++) {
@@ -653,7 +643,7 @@ mixed_grad(longint n, double *pars, double *g, void *state)
    definitions but not for other compilers */
 static double *zxcopy, *zxcopy2, *Delta, *values;
 static dimPTR dd;
-static longint *setngs, *pdC;
+static int *setngs, *pdC;
 size_t zxdim;
 
 static double
@@ -673,7 +663,7 @@ negLogLik_fun( double *pars, double *sigma) // 17-11-2015; Fixed sigma patch; E 
 }
 
 void
-mixed_loglik(double *ZXy, longint *pdims, double *pars, longint *settings,
+mixed_loglik(double *ZXy, int *pdims, double *pars, int *settings,
 	     double *logLik, double *lRSS, double *sigma) // 17-11-2015; Fixed sigma patch; E van Willigen; Quantitative Solutions
 {				/* evaluate the log-likelihood */
     dd = dims(pdims);
@@ -705,8 +695,8 @@ mixed_loglik(double *ZXy, longint *pdims, double *pars, longint *settings,
 }
 
 void				/* loglikelihood and parameter estimates */
-mixed_estimate(double *ZXy, longint *pdims, double *DmHalf, longint *RML,
-	       double *logLik, double *dc, longint *invert,
+mixed_estimate(double *ZXy, int *pdims, double *DmHalf, int *RML,
+	       double *logLik, double *dc, int *invert,
 	       // 17-11-2015; Fixed sigma patch; E van Willigen; Quantitative Sol.:
 	       double *sigma)
 {				/* dc receives the decomposed ZXy array */
@@ -719,9 +709,8 @@ mixed_estimate(double *ZXy, longint *pdims, double *DmHalf, longint *RML,
 }
 
 void				/* EM iterations for mixed-effects models */
-internal_EM(dimPTR dd, double *ZXy, double *DmHalf, int nn,
-	    longint *pdClass, longint *RML, double *logLik, double *Ra,
-	    double *lRSS,
+internal_EM(dimPTR dd, double *ZXy, double *DmHalf, int nn, int *pdClass,
+	    int *RML, double *logLik, double *Ra, double *lRSS,
 	    // 17-11-2015; Fixed sigma patch; E van Willigen; Quantitative Solutions:
 	    double *sigma)
 {
@@ -729,7 +718,7 @@ internal_EM(dimPTR dd, double *ZXy, double *DmHalf, int nn,
 	*dc = Calloc((size_t) ((dd->Srows) * (dd->ZXcols)), double),
 	*zxcopy = Calloc((size_t) ((dd->ZXrows) * (dd->ZXcols)), double);
     double  sqrtDF = sqrt((double) (dd->N - *RML * (dd->ncol[dd->Q])));
-    longint i, j, k, offset;
+    int i, j, k, offset;
 
     while (nn-- > 0) {
 	copy_mat(zxcopy, dd->ZXrows, ZXy, dd->ZXrows, dd->ZXrows, dd->ZXcols);
@@ -749,9 +738,9 @@ internal_EM(dimPTR dd, double *ZXy, double *DmHalf, int nn,
 	}
 	offset = ((dd->ZXcols) - 1L) * (dd->Srows);
 	for (i = 0L; i < (dd->Q); i++) {
-	    longint ncol = (dd->q)[i],
+	    int ncol = (dd->q)[i],
 		nright = (dd->nrot)[i] - (dd->nrot)[(dd->Q) - ( (*RML) ? 0 : 1 )];
-	    longint nrow = (ncol + nright + 1L) * (dd->ngrp)[i];
+	    int nrow = (ncol + nright + 1L) * (dd->ngrp)[i];
 	    QRptr qq;
 	    pt = res = Calloc((size_t) (ncol * nrow), double);
 	    for (j = 0L; j < (dd->ngrp)[i]; j++) {
@@ -793,7 +782,7 @@ internal_EM(dimPTR dd, double *ZXy, double *DmHalf, int nn,
 	    case 3:			/* compound symmetry */
 	    {
 		double trA = 0.0, trAJ = 0.0, *auxRes;
-		longint l;
+		int l;
 		for(j = 0; j < ncol; j++) {
 		    for(k = 0; k <= j; k++) {
 			trA += res[k + j * nrow] * res[k + j * nrow];
@@ -813,12 +802,7 @@ internal_EM(dimPTR dd, double *ZXy, double *DmHalf, int nn,
 			auxRes[j * ncol + k] = auxRes[j + k * ncol] = trAJ;
 		    }
 		}
-#ifdef USING_R
 		F77_CALL(chol)(auxRes, &ncol, &ncol, auxRes, &l);
-#else
-		zero = 0L;
-		F77_CALL(chol)(auxRes, &ncol, res, &zero, &zero, &l);
-#endif /* USING_R */
 	    }
 	    break;
 	    }
@@ -833,9 +817,8 @@ internal_EM(dimPTR dd, double *ZXy, double *DmHalf, int nn,
 }
 
 void
-mixed_EM(double *ZXy, longint *pdims, double *DmHalf, longint *nIter,
-	 longint *pdClass, longint *RML, double *logLik, double *Ra,
-	 double *lRSS,
+mixed_EM(double *ZXy, int *pdims, double *DmHalf, int *nIter, int *pdClass,
+	 int *RML, double *logLik, double *Ra, double *lRSS,
 	 // 17-11-2015; Fixed sigma patch; E van Willigen; Quantitative Solutions
 	 double *sigma)
 {
@@ -845,9 +828,8 @@ mixed_EM(double *ZXy, longint *pdims, double *DmHalf, longint *nIter,
 }
 
 void				/* to be called by Fortran msmnh */
-mixed_calcf(longint *n, double *theta, longint *nf,
-	    double *f, longint *uiparm, double *urparm,
-	    void (*ufparm)(void))
+mixed_calcf(int *n, double *theta, int *nf, double *f, int *uiparm, 
+	    double *urparm, void (*ufparm)(void))
 {
     Memcpy( zxcopy2, zxcopy, zxdim );
     *f = - internal_loglik(dd, zxcopy2, generate_DmHalf( Delta, dd, pdC, theta ),
@@ -857,11 +839,11 @@ mixed_calcf(longint *n, double *theta, longint *nf,
 }
 
 void				/* to be called by Fortran msmnh */
-mixed_calcgh(longint *n, double *theta, longint *nf,
-	     double *g, double *h, longint *uiparm,
+mixed_calcgh(int *n, double *theta, int *nf,
+	     double *g, double *h, int *uiparm,
 	     double *urparm, void (*ufparm)(void))
 {
-    longint i, nn = *n;
+    int i, nn = *n;
     double *hpt = values + nn + 1;
 
     finite_diff_Hess(negLogLik_fun, theta, (int) nn, values,
@@ -876,10 +858,10 @@ mixed_calcgh(longint *n, double *theta, longint *nf,
 }
 
 static double *
-crossprod_mat(double *y, longint ldy, double *x, longint ldx,
-	      longint nrow, longint ncol) /* y <- t(x) %*% x */
+crossprod_mat(double *y, int ldy, double *x, int ldx,
+	      int nrow, int ncol) /* y <- t(x) %*% x */
 {
-    longint i, j;
+    int i, j;
 
     for( i = 0; i < ncol; i++ ) {
 	y[ i * ldy + i ] = d_dot_prod( x + i * ldx, 1L, x + i * ldx, 1L, nrow );
@@ -896,9 +878,9 @@ crossprod_mat(double *y, longint ldy, double *x, longint ldx,
 /*  Will leave open the possibility. */
 
 static void
-Delta2MatrixLog( double *theta, longint *q, double *Delta )
+Delta2MatrixLog( double *theta, int *q, double *Delta )
 {
-    longint i, j, qq = *q, one = 1L, info = 0L;
+    int i, j, qq = *q, one = 1L, info = 0L;
     if ( qq == 1 ) {
 	*theta = log(*Delta * *Delta)/2.;
     } else {
@@ -931,9 +913,9 @@ Delta2MatrixLog( double *theta, longint *q, double *Delta )
 }
 
 static void
-Delta2LogCholesky(double *theta, longint *q, double *Delta )
+Delta2LogCholesky(double *theta, int *q, double *Delta )
 {
-    longint i, qq = *q, info = 0L;
+    int i, qq = *q, info = 0L;
     if ( qq == 1 ) {
 	*theta = log(*Delta * *Delta)/2.;
     } else {
@@ -954,7 +936,7 @@ Delta2LogCholesky(double *theta, longint *q, double *Delta )
 }
 
 double *
-generate_theta( double *theta, dimPTR dd, longint *pdClass, double *DmHalf )
+generate_theta( double *theta, dimPTR dd, int *pdClass, double *DmHalf )
 {				/* Expand parameters to DmHalf arrays */
     int i, j, q, Q = dd->Q;
     for (i = 0; i < Q; i++) {
@@ -985,13 +967,13 @@ generate_theta( double *theta, dimPTR dd, longint *pdClass, double *DmHalf )
 }
 
 void				/* both EM and Newton-Raphson iterations */
-mixed_combined(double *ZXy, longint *pdims, double *DmHalf, longint *nIter,
-	       longint *pdClass, longint *RML, double *logLik, double *R0,
-	       double *lRSS, longint *info,
+mixed_combined(double *ZXy, int *pdims, double *DmHalf, int *nIter,
+	       int *pdClass, int *RML, double *logLik, double *R0,
+	       double *lRSS, int *info,
 	       // 17-11-2015; Fixed sigma patch; E van Willigen; Quantitative Solutions
 	       double *sigma)
 {
-    longint i, j;
+    int i, j;
     double *Ra, *dc, *work;
 
     dd = dims(pdims);		/* Using global dd, pdC, setngs, and Delta */
@@ -1018,7 +1000,6 @@ mixed_combined(double *ZXy, longint *pdims, double *DmHalf, longint *nIter,
     }
     internal_EM(dd, ZXy, DmHalf, *nIter, pdClass, RML, logLik, Ra, lRSS,
 		sigma); // 17-11-2015; Fixed sigma patch ...
-#ifdef USING_R
     {
 	statePTR st = Calloc(1, struct state_struct);
 	int ntheta = count_DmHalf_pars( dd, pdC ), itrmcd, itncnt,
@@ -1067,49 +1048,13 @@ mixed_combined(double *ZXy, longint *pdims, double *DmHalf, longint *nIter,
 	Free(work); Free(a); Free(newtheta); Free(grad); Free(typsiz); Free(theta);
 	Free(st);
     }
-#else  /* not USING_R */
-    {
-	int ntheta = count_DmHalf_pars( dd, pdC );
-	longint p, *iv, liv, lv, uiparm[1]; /* for msmnh */
-	double *theta, *scale, ufparm[1],
-	    *sigma; // 17-11-2015; Fixed sigma patch; E van Willigen; Quantitative Sol.
-	Delta = DmHalf;
-	p = (dd->ncol)[(dd->Q)];
-	zxdim = (dd->ZXrows) * (dd->ZXcols); /* global zxdim, zxcopy, and zxcopy2 */
-	zxcopy = Calloc( zxdim, double );
-	zxcopy2 = ZXy;
-	Memcpy( zxcopy, ZXy, zxdim );	/* keep a copy before we mess it up */
-	theta = Calloc((size_t) ntheta, double);
-	generate_theta( theta, dd, pdClass, DmHalf );
-	values = Calloc( (size_t) ntheta * (ntheta + 1) + 1, double ); /* global */
-	liv = 60;
-	iv = Calloc( (size_t) liv, longint );
-	lv = 78 + ntheta * (ntheta + 12);
-	work = Calloc( (size_t) lv, double );
-	scale = Calloc( (size_t) ntheta, double );
-	for( i = 0; i < ntheta; i++ ) { scale[i] = 1.; }
-	// 17-11-2015; Fixed sigma patch; E van Willigen; Quantitative Solutions
-	_sigma_ = sigma; // To provide sigma out-of-band to mixed_calcf and mixed_calcgh.
-	F77_CALL(msmnh) (&ntheta, scale, theta, mixed_calcf, mixed_calcgh,
-			 iv, &liv, &lv, work, uiparm, ufparm, abort);
-	*info = iv[0];
-	Memcpy( zxcopy2, ZXy, zxdim );
-	*logLik = internal_loglik( dd, zxcopy2,
-				   generate_DmHalf( Delta, dd, pdC, theta ),
-				   setngs, dc, lRSS,
-				   // 17-11-2015; Fixed sigma patch ... :
-				   sigma);
-	copy_mat(R0, p, dc + (dd->SToff)[(dd->Q)][0], (dd->Srows), p, p + 1);
-	Free(scale); Free(work); Free(iv); Free(values); Free(theta); Free(zxcopy);
-    }
-#endif  /* USING_R */
     dimFree( dd ); Free( dc ); Free( Ra );
 }
 
 /* functions for calculating df's for fixed effects tests */
 
 static double
-inner_perc(double *x, longint *grp, longint n)
+inner_perc(double *x, int *grp, int n)
     /* percentage of groups for which x is inner */
 {
     /* x - column of X matrix to be assessed
@@ -1117,7 +1062,7 @@ inner_perc(double *x, longint *grp, longint n)
        n - length of x and grp
        data are assumed to be ordered by grp */
 
-    longint currGrp, nn = 0, isInner;
+    int currGrp, nn = 0, isInner;
     double nInner = 0., nGrp = 0., currVal;
 
     while (nn < n) {
@@ -1137,12 +1082,11 @@ inner_perc(double *x, longint *grp, longint n)
 }
 
 void
-inner_perc_table(double *X, longint *grps, longint *p, longint *Q,
-		 longint *n, double *pTable)
+inner_perc_table(double *X, int *grps, int *p, int *Q, int *n, double *pTable)
     /* constructs an p x Q "inner-percentage" table for a fixed effects
        matrix X and a set of grouping vectors grps */
 {
-    longint i, j, pp = *p, nn = *n, ipp = 0, inn = 0;
+    int i, j, pp = *p, nn = *n, ipp = 0, inn = 0;
     for(i = 0; i < *Q; i++) {
 	for(j = 0; j < pp; j++) {
 	    pTable[j + ipp] = inner_perc(X + j * nn, grps + inn, nn);
@@ -1154,11 +1098,11 @@ inner_perc_table(double *X, longint *grps, longint *p, longint *Q,
 
 /* gls functions */
 void
-gls_loglik(double *Xy, longint *pdims, double *logLik, double *lRSS,
+gls_loglik(double *Xy, int *pdims, double *logLik, double *lRSS,
 	   // 17-11-2015; Fixed sigma patch; E van Willigen; Quantitative Solutions
 	   double *sigma)
 {
-    longint i, N = pdims[0], p = pdims[1], RML = pdims[2],
+    int i, N = pdims[0], p = pdims[1], RML = pdims[2],
 	Np1 = N + 1, Nr = N - RML * p, rnkm1;
     QRptr dmQR;
 
@@ -1195,9 +1139,9 @@ gls_loglik(double *Xy, longint *pdims, double *logLik, double *lRSS,
 #if 0
 /* gls functions */
 void
-gls_loglik(double *Xy, longint *pdims, double *logLik, double *lRSS)
+gls_loglik(double *Xy, int *pdims, double *logLik, double *lRSS)
 {
-    longint i, N = pdims[0], p = pdims[1], RML = pdims[2],
+    int i, N = pdims[0], p = pdims[1], RML = pdims[2],
 	Np1 = N + 1, Nr = N - RML * p;
     QRptr dmQR;
 
@@ -1214,10 +1158,10 @@ gls_loglik(double *Xy, longint *pdims, double *logLik, double *lRSS)
 #endif
 
 void
-gls_estimate(double *Xy, longint *pdims, double *beta, double *sigma,
-	     double *logLik, double *varBeta, longint *rank, longint *pivot)
+gls_estimate(double *Xy, int *pdims, double *beta, double *sigma,
+	     double *logLik, double *varBeta, int *rank, int *pivot)
 {
-    longint i, N = pdims[0], p = pdims[1], RML = pdims[2], pp1 = p + 1,
+    int i, N = pdims[0], p = pdims[1], RML = pdims[2], pp1 = p + 1,
 	Nr = N - RML * p, rk, rkm1, rkp1;
     QRptr dmQR;
     double *R = Calloc((size_t) (pp1 * pp1), double);

@@ -1,3 +1,21 @@
+2016-02-27 Brian Ripley
+
+	* DESCRIPTION: version 3.1-125; released
+	* tests/coef.Rout.save: update for R 3.3.x
+
+2016-02-13 Brian Ripley
+
+	* src/*.[ch]: remove use of S.h, clean up.
+	* src/nls.c: Unused in R, so remove.
+
+2016-01-25 Brian Ripley
+
+	* src/*.c: include directly headers included via R.h.
+
+2016-01-19 Martin Maechler
+
+	* DESCRIPTION: version 3.1-124, and released
+
 2016-01-19 Brian Ripley
 
 	* src/{corStruct,gnls,nlme,nlmefit,nls}.c: Avoid clang warnings on
@@ -5,7 +23,6 @@
 
 2016-01-18 Martin Maechler
 
-	* DESCRIPTION: version 3.1-124
 	* nlme/man/lmeControl.Rd, R/lme.R, etc: in lmeControl() etc,
 	currently 'apVar' to FALSE when sigma is fixed, and document that
 	somewhat.

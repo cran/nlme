@@ -4,7 +4,7 @@
    Copyright 1997-2005  Douglas M. Bates <bates@stat.wisc.edu>,
 			Jose C. Pinheiro,
 			Saikat DebRoy
-   Copyright 2007-2013  The R Core Team
+   Copyright 2007-2016  The R Core Team
 
    This file is part of the nlme package for R and related languages
    and is made available under the terms of the GNU General Public
@@ -30,23 +30,16 @@
 /* Factor list and Recalc for general corStruct object */
 
 void
-corStruct_factList(double *mat, longint *pdims, double *FactorL, double *logdet)
+corStruct_factList(double *mat, int *pdims, double *FactorL, double *logdet)
 {
-    longint i, j, M = pdims[1], *len = pdims + 4, job = 11L, info;
-#ifndef USING_R
-    longint zero = 0L;
-#endif
+    int i, j, M = pdims[1], *len = pdims + 4, job = 11L, info;
     double *work, *work1;
 
     for(i = 0; i < M; i++) {
-	longint li = len[i], lisq = li * li, lip1 = li + 1;
+	int li = len[i], lisq = li * li, lip1 = li + 1;
 	work = Calloc(li, double);
 	work1 = Calloc(lisq, double);
-#ifdef USING_R
 	F77_CALL(chol) (mat, &li, &li, mat, &info);
-#else
-	F77_CALL(chol) (mat, &li, work, &zero, &zero, &info);
-#endif
 	for(j = 0; j < li; j++) {
 	    work1[j * lip1] = 1;
 	    F77_CALL(dtrsl) (mat, &li, &li, work1 + j * li, &job, &info);
@@ -60,9 +53,9 @@ corStruct_factList(double *mat, longint *pdims, double *FactorL, double *logdet)
 }
 
 void
-corStruct_recalc(double *Xy, longint *pdims, longint *ZXcol, double *Factor)
+corStruct_recalc(double *Xy, int *pdims, int *ZXcol, double *Factor)
 {
-    longint N = pdims[0], M = pdims[1], *len = pdims + 4, *start = len + M, i;
+    int N = pdims[0], M = pdims[1], *len = pdims + 4, *start = len + M, i;
     for(i = 0; i < M;  i++) {
 	mult_mat(Xy + start[i], N, Factor, len[i], len[i], len[i],
 		 Xy + start[i], N, *ZXcol);
@@ -74,11 +67,11 @@ corStruct_recalc(double *Xy, longint *pdims, longint *ZXcol, double *Factor)
    parametrization */
 
 void
-symm_fullCorr(double *par, longint *maxC, double *crr)
+symm_fullCorr(double *par, int *maxC, double *crr)
     /* calculates full correlation structure  */
 {
     double *work, aux, aux1, *src = par, *src1, *dest;
-    longint i, j, n = *maxC;
+    int i, j, n = *maxC;
 
     /* first get upper-triangular factor */
     dest = work = Calloc(n * (n + 1) / 2, double);
@@ -97,7 +90,7 @@ symm_fullCorr(double *par, longint *maxC, double *crr)
 
     /* getting the correlations */
     for(i = 0, dest = crr, src = work; i < n - 1; i++) {
-	longint ip1 = i + 1;
+	int ip1 = i + 1;
 	src += i;
 	for(j = ip1, src1 = src; j < n; j++) {
 	    src1 += j;
@@ -109,9 +102,9 @@ symm_fullCorr(double *par, longint *maxC, double *crr)
 }
 
 static void
-symm_mat(double *crr, longint *time, longint *n, longint *maxC, double *mat)
+symm_mat(double *crr, int *time, int *n, int *maxC, double *mat)
 {
-    longint i, j, k, np1 = *n + 1, n1, n2;
+    int i, j, k, np1 = *n + 1, n1, n2;
     for(i = 0; i < *n; i++) {
 	mat[i * np1] = 1.0;
 	for(j = i + 1; j < *n; j++) {
@@ -124,11 +117,10 @@ symm_mat(double *crr, longint *time, longint *n, longint *maxC, double *mat)
 }
 
 void
-symm_matList(double *pars, longint *time, longint *maxC,
-	     longint *pdims, double *mat)
+symm_matList(double *pars, int *time, int *maxC, int *pdims, double *mat)
 {
     double *crr = Calloc(*maxC * (*maxC - 1) / 2, double);
-    longint i, M = pdims[1], *len = pdims + 4;
+    int i, M = pdims[1], *len = pdims + 4;
     /* parameters assumed in unconstrained form */
     symm_fullCorr(pars, maxC, crr);
     for(i = 0; i < M;  i++) {
@@ -140,21 +132,14 @@ symm_matList(double *pars, longint *time, longint *maxC,
 }
 
 static void
-symm_fact(double *crr, longint *time, longint *n, longint *maxC, double *mat,
+symm_fact(double *crr, int *time, int *n, int *maxC, double *mat,
 	  double *logdet)
 {
-    longint job = 11L, info, i, nsq = *n * (*n), np1 = *n + 1;
-#ifndef USING_R
-    longint zero = 0L;
-#endif
+    int job = 11L, info, i, nsq = *n * (*n), np1 = *n + 1;
     double *work = Calloc(*n, double), *work1 = Calloc(nsq, double);
 
     symm_mat(crr, time, n, maxC, mat);
-#ifdef USING_R
     F77_CALL(chol) (mat, n, n, mat, &info);
-#else
-    F77_CALL(chol) (mat, n, work, &zero, &zero, &info);
-#endif
     for(i = 0; i < *n; i++) {
 	work1[i * np1] = 1;
 	F77_CALL(dtrsl) (mat, n, n, work1 + i * (*n), &job, &info);
@@ -165,11 +150,11 @@ symm_fact(double *crr, longint *time, longint *n, longint *maxC, double *mat,
 }
 
 void
-symm_factList(double *pars, longint *time, longint *maxC, longint *pdims,
+symm_factList(double *pars, int *time, int *maxC, int *pdims,
 	      double *FactorL, double *logdet)
 {
     double *crr = Calloc(*maxC * (*maxC - 1L) / 2L, double);
-    longint i, M = pdims[1], *len = pdims + 4;
+    int i, M = pdims[1], *len = pdims + 4;
     /* parameters assumed in unconstrained form */
     symm_fullCorr(pars, maxC, crr);
     for(i = 0; i < M;  i++) {
@@ -181,10 +166,10 @@ symm_factList(double *pars, longint *time, longint *maxC, longint *pdims,
 }
 
 void
-symm_recalc(double *Xy, longint *pdims, longint *ZXcol, double *pars,
-	    longint *time, longint *maxC, double *logdet)
+symm_recalc(double *Xy, int *pdims, int *ZXcol, double *pars,
+	    int *time, int *maxC, double *logdet)
 {
-    longint N = pdims[0], M = pdims[1], *len = pdims + 4, *start = len + M, i;
+    int N = pdims[0], M = pdims[1], *len = pdims + 4, *start = len + M, i;
     double *crr = Calloc(*maxC * (*maxC - 1) / 2, double);
     /* parameters assumed in unconstrained form */
     symm_fullCorr(pars, maxC, crr);
@@ -201,11 +186,11 @@ symm_recalc(double *Xy, longint *pdims, longint *ZXcol, double *pars,
 /* nat class - unstructured correlation - natural parametrization */
 
 void
-nat_fullCorr(double *par, longint *maxC, double *crr)
+nat_fullCorr(double *par, int *maxC, double *crr)
     /* calculates full correlation structure  */
 {
     double aux;
-    longint i, npar = *maxC * (*maxC - 1) / 2;
+    int i, npar = *maxC * (*maxC - 1) / 2;
 
     for(i = 0; i < npar; i++) {
 	aux = exp(par[i]);
@@ -214,11 +199,10 @@ nat_fullCorr(double *par, longint *maxC, double *crr)
 }
 
 void
-nat_matList(double *pars, longint *time, longint *maxC,
-	    longint *pdims, double *mat)
+nat_matList(double *pars, int *time, int *maxC, int *pdims, double *mat)
 {
     double *crr = Calloc(*maxC * (*maxC - 1) / 2, double);
-    longint i, M = pdims[1], *len = pdims + 4;
+    int i, M = pdims[1], *len = pdims + 4;
     /* parameters assumed in unconstrained form */
     nat_fullCorr(pars, maxC, crr);
     for(i = 0; i < M;  i++) {
@@ -230,11 +214,11 @@ nat_matList(double *pars, longint *time, longint *maxC,
 }
 
 void
-nat_factList(double *pars, longint *time, longint *maxC, longint *pdims,
+nat_factList(double *pars, int *time, int *maxC, int *pdims,
 	     double *FactorL, double *logdet)
 {
     double *crr = Calloc(*maxC * (*maxC - 1L) / 2L, double);
-    longint i, M = pdims[1], *len = pdims + 4;
+    int i, M = pdims[1], *len = pdims + 4;
     /* parameters assumed in unconstrained form */
     nat_fullCorr(pars, maxC, crr);
     for(i = 0; i < M;  i++) {
@@ -246,10 +230,10 @@ nat_factList(double *pars, longint *time, longint *maxC, longint *pdims,
 }
 
 void
-nat_recalc(double *Xy, longint *pdims, longint *ZXcol, double *pars,
-	   longint *time, longint *maxC, double *logdet)
+nat_recalc(double *Xy, int *pdims, int *ZXcol, double *pars,
+	   int *time, int *maxC, double *logdet)
 {
-    longint N = pdims[0], M = pdims[1], *len = pdims + 4, *start = len + M, i;
+    int N = pdims[0], M = pdims[1], *len = pdims + 4, *start = len + M, i;
     double *crr = Calloc(*maxC * (*maxC - 1) / 2, double);
     /* parameters assumed in unconstrained form */
     nat_fullCorr(pars, maxC, crr);
@@ -266,9 +250,9 @@ nat_recalc(double *Xy, longint *pdims, longint *ZXcol, double *pars,
 /* AR1 class */
 
 static void
-AR1_mat(double *par, longint *n, double *mat)
+AR1_mat(double *par, int *n, double *mat)
 {
-    longint i, j;
+    int i, j;
     double aux;
     for(i = 0; i < *n; i++) {
 	*(mat + i * (*n + 1)) = 1.0;
@@ -292,9 +276,9 @@ safe_phi(double x)		/* returns (exp(x) - 1)/(exp(x) + 1), x < 0 */
 }
 
 void
-AR1_matList(double *par, longint *pdims, double *mat)
+AR1_matList(double *par, int *pdims, double *mat)
 {
-    longint i, M = pdims[1], *len = pdims + 4;
+    int i, M = pdims[1], *len = pdims + 4;
     /* par assumed in unconstrained form */
 
     *par = safe_phi( *par );
@@ -305,9 +289,9 @@ AR1_matList(double *par, longint *pdims, double *mat)
 }
 
 static void
-AR1_fact(double *par, longint *n, double *mat, double *logdet)
+AR1_fact(double *par, int *n, double *mat, double *logdet)
 {
-    longint i, np1 = *n + 1;
+    int i, np1 = *n + 1;
     double aux = sqrt(1 - *par * (*par)), aux1 = - (*par)/aux;
 
     *logdet -= (*n - 1) * log(aux);
@@ -320,10 +304,9 @@ AR1_fact(double *par, longint *n, double *mat, double *logdet)
 }
 
 void
-AR1_factList(double *par, longint *pdims, double *FactorL,
-	     double *logdet)
+AR1_factList(double *par, int *pdims, double *FactorL, double *logdet)
 {
-    longint i, M = pdims[1], *len = pdims + 4;
+    int i, M = pdims[1], *len = pdims + 4;
     /* par assumed in unconstrained form */
 
     *par = safe_phi( *par );
@@ -334,10 +317,9 @@ AR1_factList(double *par, longint *pdims, double *FactorL,
 }
 
 void
-AR1_recalc(double *Xy, longint *pdims, longint *ZXcol, double *par,
-	   double *logdet)
+AR1_recalc(double *Xy, int *pdims, int *ZXcol, double *par, double *logdet)
 {
-    longint N = pdims[0], M = pdims[1], *len = pdims + 4,  *start = len + M, i;
+    int N = pdims[0], M = pdims[1], *len = pdims + 4,  *start = len + M, i;
     double *Factor;
     /* par assumed in unconstrained form */
     *par = safe_phi( *par );
@@ -354,9 +336,9 @@ AR1_recalc(double *Xy, longint *pdims, longint *ZXcol, double *par,
 /* Continuous AR1 class */
 
 static void
-CAR1_mat(double *par, double *time, longint *n, double *mat)
+CAR1_mat(double *par, double *time, int *n, double *mat)
 {
-    longint i, j;
+    int i, j;
     double aux;
     for(i = 0; i < *n; i++) {
 	*(mat + i * (*n + 1)) = 1.0;
@@ -368,9 +350,9 @@ CAR1_mat(double *par, double *time, longint *n, double *mat)
 }
 
 void
-CAR1_matList(double *par, double *time, longint *pdims, double *mat)
+CAR1_matList(double *par, double *time, int *pdims, double *mat)
 {
-    longint i, M = pdims[1], *len = pdims + 4;
+    int i, M = pdims[1], *len = pdims + 4;
     double aux = exp(*par);
     /* parameter assumed in unconstrained form */
     *par = aux / (1.0 + aux);
@@ -382,17 +364,12 @@ CAR1_matList(double *par, double *time, longint *pdims, double *mat)
 }
 
 static void
-CAR1_fact(double *par, double *time, longint *n, double *mat, double *logdet)
+CAR1_fact(double *par, double *time, int *n, double *mat, double *logdet)
 {
-    longint job = 11L, info, i, nsq = *n * (*n), np1 = *n + 1;
+    int job = 11L, info, i, nsq = *n * (*n), np1 = *n + 1;
     double *work = Calloc(*n, double), *work1 = Calloc(nsq, double);
     CAR1_mat(par, time, n, mat);
-#ifdef USING_R
     F77_CALL(chol) (mat, n, n, mat, &info);
-#else
-    longint zero = 0L;
-    F77_CALL(chol) (mat, n, work, &zero, &zero, &info);
-#endif
     for(i = 0; i < *n; i++) {
 	work1[i * np1] = 1;
 	F77_CALL(dtrsl) (mat, n, n, work1 + i * (*n), &job, &info);
@@ -403,10 +380,10 @@ CAR1_fact(double *par, double *time, longint *n, double *mat, double *logdet)
 }
 
 void
-CAR1_factList(double *par, double *time, longint *pdims,
+CAR1_factList(double *par, double *time, int *pdims,
 	      double *FactorL, double *logdet)
 {
-    longint i, M = pdims[1], *len = pdims + 4;
+    int i, M = pdims[1], *len = pdims + 4;
     double aux = exp(*par);
     /* parameter assumed in unconstrained form */
     *par = aux / (1.0 + aux);
@@ -418,10 +395,10 @@ CAR1_factList(double *par, double *time, longint *pdims,
 }
 
 void
-CAR1_recalc(double *Xy, longint *pdims, longint *ZXcol,
+CAR1_recalc(double *Xy, int *pdims, int *ZXcol,
 	    double *par, double *time, double *logdet)
 {
-    longint N = pdims[0], M = pdims[1], *len = pdims + 4, *start = len + M, i;
+    int N = pdims[0], M = pdims[1], *len = pdims + 4, *start = len + M, i;
     double aux = exp(*par);
     /* parameter assumed in unconstrained form */
     *par = aux / (1.0 + aux);
@@ -437,9 +414,9 @@ CAR1_recalc(double *Xy, longint *pdims, longint *ZXcol,
 /* ARMA class */
 
 static void
-ARMA_transPar(longint N, double *pars, double sgn)
+ARMA_transPar(int N, double *pars, double sgn)
 {
-    longint i, j, n, n2;
+    int i, j, n, n2;
     double ps, D, aux;
     for(n = N - 1; n > -1; n--) {
 	if ((ps = pars[n] * pars[n]) >= 1.0)
@@ -462,16 +439,16 @@ ARMA_transPar(longint N, double *pars, double sgn)
 }
 
 void
-ARMA_unconstCoef(longint *p, longint *q, double *pars)
+ARMA_unconstCoef(int *p, int *q, double *pars)
 {
     ARMA_transPar(*p, pars, 1.0);
     ARMA_transPar(*q, pars + *p, -1.0);
 }
 
 static void
-ARMA_untransPar(longint N, double *pars, double sgn)
+ARMA_untransPar(int N, double *pars, double sgn)
 {
-    longint i, j;
+    int i, j;
     double *aux;
     if (N) {
 	aux = Calloc(N, double);
@@ -490,16 +467,16 @@ ARMA_untransPar(longint N, double *pars, double sgn)
 }
 
 void
-ARMA_constCoef(longint *p, longint *q, double *pars)
+ARMA_constCoef(int *p, int *q, double *pars)
 {
     ARMA_untransPar(*p, pars, -1.0);
     ARMA_untransPar(*q, pars + *p, 1.0);
 }
 
 static void
-ARMA_cross(longint *p, longint *q, double *pars, double *psi)
+ARMA_cross(int *p, int *q, double *pars, double *psi)
 {
-    longint i, j, M = *q + 1, PM;
+    int i, j, M = *q + 1, PM;
     M = (*p > M ? *p : M);
     psi[0] = 1;
     for(i = 1; i < M; i++) {
@@ -512,11 +489,10 @@ ARMA_cross(longint *p, longint *q, double *pars, double *psi)
 }
 
 static void
-ARMA_corr(longint *p, longint *q, longint *maxlag, double *pars, double *psi,
-	  double *crr)
+ARMA_corr(int *p, int *q, int *maxlag, double *pars, double *psi, double *crr)
 {
-    longint P = *p + 1, Pp1 = P + 1, i, j, k, minPQ, Mlag, maxPQ,
-	*pivot = Calloc(P, longint);
+    int P = *p + 1, Pp1 = P + 1, i, j, k, minPQ, Mlag, maxPQ,
+	*pivot = Calloc(P, int);
     double *coef = Calloc(P * P, double), *src, *qraux = Calloc(P, double),
 	*work = Calloc(P * P, double), *work1;
 
@@ -582,10 +558,9 @@ ARMA_corr(longint *p, longint *q, longint *maxlag, double *pars, double *psi,
 }
 
 static void
-ARMA_fullCorr(longint *p, longint *q, longint *maxlag, double *pars,
-	      double *crr)
+ARMA_fullCorr(int *p, int *q, int *maxlag, double *pars, double *crr)
 {
-    longint M = *q + 1;
+    int M = *q + 1;
     double *psi;
     M = ((M < *p) ? *p : M);
     psi = Calloc(M, double);
@@ -595,9 +570,9 @@ ARMA_fullCorr(longint *p, longint *q, longint *maxlag, double *pars,
 }
 
 static void
-ARMA_mat(double *crr, longint *time, longint *n, double *mat)
+ARMA_mat(double *crr, int *time, int *n, double *mat)
 {
-    longint i, j, k;
+    int i, j, k;
     for(i = 0; i < *n; i++) {
 	for(j = i; j < *n; j++) {
 	    k = time[j] - time[i];
@@ -608,11 +583,11 @@ ARMA_mat(double *crr, longint *time, longint *n, double *mat)
 }
 
 void
-ARMA_matList(double *pars, longint *p, longint *q, longint *time,
-	     longint *maxlag, longint *pdims, double *mat)
+ARMA_matList(double *pars, int *p, int *q, int *time, int *maxlag,
+	     int *pdims, double *mat)
 {
     double *crr = Calloc(*maxlag + 1L, double);
-    longint i, M = pdims[1], *len = pdims + 4;
+    int i, M = pdims[1], *len = pdims + 4;
     /* parameters assumed in unconstrained form */
     ARMA_constCoef(p, q, pars);
     ARMA_fullCorr(p, q, maxlag, pars, crr);
@@ -625,19 +600,12 @@ ARMA_matList(double *pars, longint *p, longint *q, longint *time,
 }
 
 static void
-ARMA_fact(double *crr, longint *time, longint *n, double *mat, double *logdet)
+ARMA_fact(double *crr, int *time, int *n, double *mat, double *logdet)
 {
-    longint job = 11L, info, i, nsq = *n * (*n), np1 = *n + 1;
+    int job = 11L, info, i, nsq = *n * (*n), np1 = *n + 1;
     double *work = Calloc(*n, double), *work1 = Calloc(nsq, double);
-#ifndef USING_R
-    longint zero = 0L;
-#endif
     ARMA_mat(crr, time, n, mat);
-#ifdef USING_R
     F77_CALL(chol) (mat, n, n, mat, &info);
-#else
-    F77_CALL(chol) (mat, n, work, &zero, &zero, &info);
-#endif
     for(i = 0; i < *n; i++) {
 	work1[i * np1] = 1;
 	F77_CALL(dtrsl) (mat, n, n, work1 + i * (*n), &job, &info);
@@ -648,12 +616,12 @@ ARMA_fact(double *crr, longint *time, longint *n, double *mat, double *logdet)
 }
 
 void
-ARMA_factList(double *pars, longint *p, longint *q, longint *time,
-	      longint *maxlag, longint *pdims, double *FactorL,
+ARMA_factList(double *pars, int *p, int *q, int *time,
+	      int *maxlag, int *pdims, double *FactorL,
 	      double *logdet)
 {
     double *crr = Calloc(*maxlag + 1L, double);
-    longint i, M = pdims[1], *len = pdims + 4;
+    int i, M = pdims[1], *len = pdims + 4;
     /* parameters assumed in unconstrained form */
     ARMA_constCoef(p, q, pars);
     ARMA_fullCorr(p, q, maxlag, pars, crr);
@@ -666,11 +634,11 @@ ARMA_factList(double *pars, longint *p, longint *q, longint *time,
 }
 
 void
-ARMA_recalc(double *Xy, longint *pdims, longint *ZXcol, double *pars,
-	    longint *p, longint *q, longint *time, longint *maxlag,
+ARMA_recalc(double *Xy, int *pdims, int *ZXcol, double *pars,
+	    int *p, int *q, int *time, int *maxlag,
 	    double *logdet)
 {
-    longint N = pdims[0], M = pdims[1], *len = pdims + 4, *start = len + M, i;
+    int N = pdims[0], M = pdims[1], *len = pdims + 4, *start = len + M, i;
     double *crr = Calloc(*maxlag + 1L, double);
     /* parameters assumed in unconstrained form */
     ARMA_constCoef(p, q, pars);
@@ -687,9 +655,9 @@ ARMA_recalc(double *Xy, longint *pdims, longint *ZXcol, double *pars,
 /* Compound symmetry */
 
 static void
-compSymm_mat(double *par, longint *n, double *mat)
+compSymm_mat(double *par, int *n, double *mat)
 {
-    longint i, j;
+    int i, j;
     for(i = 0; i < *n; i++) {
 	mat[(*n + 1) * i] = 1.0;
 	for(j = i + 1; j < *n; j++) {
@@ -699,9 +667,9 @@ compSymm_mat(double *par, longint *n, double *mat)
 }
 
 void
-compSymm_matList(double *par, double *inf, longint *pdims, double *mat)
+compSymm_matList(double *par, double *inf, int *pdims, double *mat)
 {
-    longint i, M = pdims[1], *len = pdims + 4;
+    int i, M = pdims[1], *len = pdims + 4;
     /* parameter assumed in unconstrained form */
     double aux = exp(*par);
     *par = (aux + *inf)/(aux + 1.0);
@@ -712,9 +680,9 @@ compSymm_matList(double *par, double *inf, longint *pdims, double *mat)
 }
 
 static void
-compSymm_fact(double *par, longint *n, double *mat, double *logdet)
+compSymm_fact(double *par, int *n, double *mat, double *logdet)
 {
-    longint i, j, np1 = *n + 1, nsq = *n * (*n);
+    int i, j, np1 = *n + 1, nsq = *n * (*n);
     double aux, aux1, *work = Calloc(nsq, double);
     aux = 1 + (*n - 1) * (*par);
     *logdet -= log(aux)/2;
@@ -736,10 +704,10 @@ compSymm_fact(double *par, longint *n, double *mat, double *logdet)
 }
 
 void
-compSymm_factList(double *par, double *inf, longint *pdims,
+compSymm_factList(double *par, double *inf, int *pdims,
 		  double *FactorL, double *logdet)
 {
-    longint i, M = pdims[1], *len = pdims + 4;
+    int i, M = pdims[1], *len = pdims + 4;
     /* parameter assumed in unconstrained form */
     double aux = exp(*par);
     *par = (aux + *inf)/(aux + 1.0);
@@ -750,10 +718,10 @@ compSymm_factList(double *par, double *inf, longint *pdims,
 }
 
 void
-compSymm_recalc(double *Xy, longint *pdims, longint *ZXcol, double *par,
+compSymm_recalc(double *Xy, int *pdims, int *ZXcol, double *par,
 		double *inf, double *logdet)
 {
-    longint N = pdims[0], M = pdims[1], *len = pdims + 4, *start = len + M, i;
+    int N = pdims[0], M = pdims[1], *len = pdims + 4, *start = len + M, i;
     double aux = exp(*par);
     /* parameter assumed in unconstrained form */
     *par = (aux + *inf)/(aux + 1.0);
@@ -769,9 +737,9 @@ compSymm_recalc(double *Xy, longint *pdims, longint *ZXcol, double *par,
 /* Huyn-Feldt class */
 
 static void
-HF_mat(double *par, longint *time, longint *n, double *mat)
+HF_mat(double *par, int *time, int *n, double *mat)
 {
-    longint i, j, np1 = *n + 1;
+    int i, j, np1 = *n + 1;
     for(i = 0; i < *n; i++) {
 	mat[i * np1] = par[time[i]];
 	for(j = i + 1; j < *n; j++) {
@@ -782,10 +750,10 @@ HF_mat(double *par, longint *time, longint *n, double *mat)
 }
 
 void
-HF_matList(double *par, longint *maxC, longint *time, longint *pdims,
+HF_matList(double *par, int *maxC, int *time, int *pdims,
 	   double *mat)
 {
-    longint i, M = pdims[1], *len = pdims + 4;
+    int i, M = pdims[1], *len = pdims + 4;
     /* parameter assumed in unconstrained form */
     double inf = -1.0/(2.0 * ((double) *maxC));
     for(i = 0; i < *maxC; i++) {
@@ -799,19 +767,12 @@ HF_matList(double *par, longint *maxC, longint *time, longint *pdims,
 }
 
 static void
-HF_fact(double *par, longint *time, longint *n, double *mat, double *logdet)
+HF_fact(double *par, int *time, int *n, double *mat, double *logdet)
 {
-    longint job = 11L, info, i, nsq = *n * (*n), np1 = *n + 1;
+    int job = 11L, info, i, nsq = *n * (*n), np1 = *n + 1;
     double *work = Calloc(*n, double), *work1 = Calloc(nsq, double);
-#ifndef USING_R
-    longint zero = 0L;
-#endif
     HF_mat(par, time, n, mat);
-#ifdef USING_R
     F77_CALL(chol) (mat, n, n, mat, &info);
-#else
-    F77_CALL(chol) (mat, n, work, &zero, &zero, &info);
-#endif
     for(i = 0; i < *n; i++) {
 	work1[i * np1] = 1;
 	F77_CALL(dtrsl) (mat, n, n, work1 + i * (*n), &job, &info);
@@ -822,10 +783,10 @@ HF_fact(double *par, longint *time, longint *n, double *mat, double *logdet)
 }
 
 void
-HF_factList(double *par, longint *maxC, longint *time, longint *pdims,
+HF_factList(double *par, int *maxC, int *time, int *pdims,
 	    double *FactorL, double *logdet)
 {
-    longint i, M = pdims[1], *len = pdims + 4;
+    int i, M = pdims[1], *len = pdims + 4;
     /* parameter assumed in unconstrained form */
     double inf = -1.0/(2.0 * ((double) *maxC));
     for(i = 0; i < *maxC; i++) {
@@ -839,10 +800,10 @@ HF_factList(double *par, longint *maxC, longint *time, longint *pdims,
 }
 
 void
-HF_recalc(double *Xy, longint *pdims, longint *ZXcol, double *par,
-	  longint *time, longint *maxC, double *logdet)
+HF_recalc(double *Xy, int *pdims, int *ZXcol, double *par,
+	  int *time, int *maxC, double *logdet)
 {
-    longint N = pdims[0], M = pdims[1], *len = pdims + 4,  *start = len + M, i;
+    int N = pdims[0], M = pdims[1], *len = pdims + 4,  *start = len + M, i;
     double inf = -1.0/(2.0 * ((double) *maxC));
     /* parameter assumed in unconstrained form */
     for(i = 0; i < *maxC; i++) {
@@ -913,10 +874,10 @@ dummy_corr(double val)
 /* methods for the virtual class */
 
 static void
-spatial_mat(double *par, double *dist, longint *n, longint *nug,
+spatial_mat(double *par, double *dist, int *n, int *nug,
 	    double (*corr)(double ), double *mat)
 {
-    longint i, j, np1 = *n + 1;
+    int i, j, np1 = *n + 1;
     double aux, *sdist, ratio = 1.0;
     sdist = dist;
     if (*nug) ratio = par[1];
@@ -930,10 +891,10 @@ spatial_mat(double *par, double *dist, longint *n, longint *nug,
 }
 
 void
-spatial_matList(double *par, longint *nug, double *dist, longint *pdims,
+spatial_matList(double *par, int *nug, double *dist, int *pdims,
 		double *minD, double *mat)
 {
-    longint i, M = pdims[1], spClass = pdims[2], *len = pdims + 4,
+    int i, M = pdims[1], spClass = pdims[2], *len = pdims + 4,
 	*start = len + M;
     double aux, (*corr)(double ) = dummy_corr;
     /* parameter assumed in unconstrained form */
@@ -971,21 +932,14 @@ spatial_matList(double *par, longint *nug, double *dist, longint *pdims,
 }
 
 static void
-spatial_fact(double *par, double *dist, longint *n, longint *nug,
+spatial_fact(double *par, double *dist, int *n, int *nug,
 	     double (*corr) (double ), double *mat,
 	     double *logdet)
 {
-    longint job = 11L, info, i, nsq = *n * (*n), np1 = *n + 1;
+    int job = 11L, info, i, nsq = *n * (*n), np1 = *n + 1;
     double *work = Calloc(*n, double), *work1 = Calloc(nsq, double);
-#ifndef USING_R
-    longint zero = 0L;
-#endif
     spatial_mat(par, dist, n, nug, corr, mat);
-#ifdef USING_R
     F77_CALL(chol) (mat, n, n, mat, &info);
-#else
-    F77_CALL(chol) (mat, n, work, &zero, &zero, &info);
-#endif
     for(i = 0; i < *n; i++) {
 	work1[i * np1] = 1;
 	F77_CALL(dtrsl) (mat, n, n, work1 + i * (*n), &job, &info);
@@ -996,10 +950,10 @@ spatial_fact(double *par, double *dist, longint *n, longint *nug,
 }
 
 void
-spatial_factList(double *par, longint *nug, double *dist, longint *pdims,
+spatial_factList(double *par, int *nug, double *dist, int *pdims,
 		 double *minD, double *FactorL, double *logdet)
 {
-    longint i, M = pdims[1], spClass = pdims[2], *len = pdims + 4,
+    int i, M = pdims[1], spClass = pdims[2], *len = pdims + 4,
 	*start = len + M;
     double aux, (*corr)(double ) = dummy_corr;
     /* parameter assumed in unconstrained form */
@@ -1038,10 +992,10 @@ spatial_factList(double *par, longint *nug, double *dist, longint *pdims,
 }
 
 void
-spatial_recalc(double *Xy, longint *pdims, longint *ZXcol, double *par,
-	       double *dist, double *minD, longint *nug, double *logdet)
+spatial_recalc(double *Xy, int *pdims, int *ZXcol, double *par,
+	       double *dist, double *minD, int *nug, double *logdet)
 {
-    longint N = pdims[0], M = pdims[1], spClass = pdims[2],
+    int N = pdims[0], M = pdims[1], spClass = pdims[2],
 	*len = pdims + 4, *start = len + M, i;
     double aux, (*corr)(double ) = dummy_corr, *sXy;
     /* parameter assumed in unconstrained form */
