@@ -61,3 +61,40 @@ if(!all((res10 <- round(10 * as.vector(resiv))) == res.T)) {
     print(cbind(resiv, res10, res.T)[iD,])
 }
 ## -> indices  14 [64-bit]  or  27 [32-bit], respectively
+
+
+## [Bug 16715] New: nlme: unable to use predict and augPredict ..
+## Date: 17 Feb 2016 -- part 2 -- predict():
+##
+## Comment 4 daveauty@gmail.com 2016-03-08 -- modified by MM --
+
+## simulate density data then fit Michaelis-Menten equation of density as
+## function of ring age. TreeIDs grouped by SP (spacing)
+set.seed(1)
+df <- data.frame(SP = rep(LETTERS[1:5], 60),
+                  expand.grid(TreeID = factor(1:12), age = seq(2, 50, 2)))
+df[,"dens"] <- with(df, (runif(1,10,20)*age)/(runif(1,9,10)+age)) + rnorm(25, 0, 1)
+str(df)
+## 'data.frame':	1000 obs. of  4 variables:
+## $ SP    : Factor w/ 5 levels "A","B","C","D",..: 1 2 3 4 5 1 2 3 4 5 ...
+## $ TreeID: Factor w/ 20 levels "1","2","3","4",..: 1 2 3 4 5 6 7 8 9 10 ...
+## $ age   : num  1 1 1 1 1 1 1 1 1 1 ...
+## $ dens  : num  1.042 1.42 2.884 0.207 -0.439 ...
+
+## mixed-effects model
+fit1 <- nlme(dens ~ a*age/(b+age),
+	     fixed = a+b ~ 1, random= a ~ 1|TreeID,
+	     start = c(a=15, b=5), data=df)
+summary(fit1)
+## allow fixed effects parameters to vary by 'SP':
+fit2 <- update(fit1, fixed = list(a ~ SP, b ~ SP),
+               start = c(a = rep(14, 5), b = rep(4, 5)))
+summary(fit2)
+
+## make new data for predictions
+newdat <- expand.grid(SP = LETTERS[1:5], age = seq(1, 50, 1))
+n.pred1 <- predict(fit1, newdat, level=0) # works fine
+n.pred2 <- predict(fit2, newdat, level=0)
+## in nlme 3.1-124, throws the error:
+## Error in eval(expr, envir, enclos) : object 'SP' not found
+

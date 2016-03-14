@@ -1030,9 +1030,8 @@ getParsNlme <-
   pars <- array(0, c(N, length(plist)), list(NULL, names(plist)))
   for (nm in names(plist)) {
     if (is.logical(f <- plist[[nm]]$fixed)) {
-      if (f) {
+      if (f)
         pars[, nm] <- beta[fmap[[nm]]]
-      }
     } else {
       pars[, nm] <- f %*% beta[fmap[[nm]]]
     }
@@ -1040,29 +1039,26 @@ getParsNlme <-
       Q <- length(groups)
       for(i in (Q - level + 1):Q) {
         b[[i]][] <- bvec[(bmap[i] + 1):bmap[i+1]]
+        rm.i. <- rmapRel[[i]][[nm]]
         if (is.logical(r <- plist[[nm]]$random[[i]])) {
           if (r) {
-            pars[, nm] <- pars[, nm] + b[[i]][rmapRel[[i]][[nm]], groups[[i]]]
+            pars[, nm] <- pars[, nm] + b[[i]][rm.i., groups[[i]]]
           }
-        } else {
-          if (data.class(r) != "list") {
+        } else if (data.class(r) != "list") {
             pars[,nm] <- pars[,nm] +
-              (r * t(b[[i]])[groups[[i]], rmapRel[[i]][[nm]], drop = FALSE]) %*%
+              (r * t(b[[i]])[groups[[i]], rm.i., drop = FALSE]) %*%
               rep(1, ncol(r))
-          } else {
-            for(j in seq_along(rmapRel[[i]][[nm]])) {
-              if (is.logical(rr <- r[[j]])) {
-                pars[, nm] <- pars[, nm] +
-                  b[[i]][rmapRel[[i]][[nm]][[j]], groups[[i]]]
-              } else {
-                pars[,nm] <- pars[,nm] +
-                  (rr * t(b[[i]])[groups[[i]], rmapRel[[i]][[nm]][[j]],
-                                  drop = FALSE]) %*% rep(1, ncol(rr))
-              }
-            }
+	} else {
+	  b.i.gi <- b[[i]][, groups[[i]], drop = FALSE]
+          for(j in seq_along(rm.i.)) {
+	    pars[, nm] <- pars[, nm] +
+	      if (is.logical(rr <- r[[j]]))
+		b.i.gi[rm.i.[[j]], ]
+	      else
+		(rr * t(b.i.gi[rm.i.[[j]], , drop = FALSE])) %*% rep(1, ncol(rr))
           }
         }
-      }
+      } # for( i )
     }
   }
   pars
@@ -1221,7 +1217,7 @@ predict.nlme <-
   for(nm in fnames) {
     if (!is.logical(plist[[nm]]$fixed)) {
       oSform <- asOneSidedFormula(fixed[[nm]][[3]])
-      plist[[nm]]$fixed <- model.matrix(oSform, model.frame(oSform), dataMix)
+      plist[[nm]]$fixed <- model.matrix(oSform, model.frame(oSform, dataMix))
     }
   }
 
@@ -1246,16 +1242,14 @@ predict.nlme <-
           plist[[nm]]$random[[i]] <-
             if (length(wch) == 1) {         # only one formula for nm
               oSform <- asOneSidedFormula(ranForm[[i]][[nm]][[3]])
-              model.matrix(oSform,
-                           model.frame(oSform, dataMix))
+              model.matrix(oSform, model.frame(oSform, dataMix))
             } else {                        # multiple formulae
               lapply(ranForm[[i]][wch], function(el) {
                 if (el[[3]] == "1") {
                   TRUE
                 } else {
                   oSform <- asOneSidedFormula(el[[3]])
-                  model.matrix(oSform,
-                               model.frame(oSform, dataMix))
+                  model.matrix(oSform, model.frame(oSform, dataMix))
                 } })
             }
         }

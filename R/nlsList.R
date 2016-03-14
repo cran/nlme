@@ -2,7 +2,7 @@
 ###
 ### Copyright 1997-2003  Jose C. Pinheiro,
 ###                      Douglas M. Bates <bates@stat.wisc.edu>
-# Copyright 2006-2014 The R Core team
+### Copyright 2006-2016 The R Core team
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -50,33 +50,30 @@ nlsList.formula <-
   function(model, data, start = NULL, control, level, subset,
            na.action = na.fail, pool = TRUE)
 {
+  if (!missing(level) && length(level) > 1)
+    stop("multiple levels not allowed")
   Call <- match.call()
   if (!missing(subset)) {
     data <-
       data[eval(asOneSidedFormula(Call[["subset"]])[[2]], data),, drop = FALSE]
   }
-  if (!inherits(data, "data.frame")) data <- as.data.frame(data)
+  if (!is.data.frame(data)) data <- as.data.frame(data)
   data <- na.action(data)
   if (is.null(grpForm <- getGroupsFormula(model))) {
     if (inherits(data, "groupedData")) {
-      if (missing(level)) level <- length(getGroupsFormula(data, asList = TRUE))
-      else if (length(level) > 1) {
-	stop("multiple levels not allowed")
-      }
+      if (missing(level))
+        level <- length(getGroupsFormula(data, asList = TRUE))
       groups <- getGroups(data, level = level)[drop = TRUE]
       grpForm <- getGroupsFormula(data)
     } else {
       stop("'data' must be a \"groupedData\" object if 'formula' does not include groups")
     }
   } else {
-    if (missing(level)) {
+    if (missing(level))
       level <- length(getGroupsFormula(model, asList = TRUE))
-    } else if (length(level) > 1) {
-      stop("multiple levels not allowed")
-    }
     model <- eval(parse(text = paste(paste(deparse(model[[2]]), collapse=" "),
-                        paste(deparse(getCovariateFormula(model)[[2]]), collapse=" "),
-			sep = "~")))
+				     paste(deparse(getCovariateFormula(model)[[2]]), collapse=" "),
+				     sep = "~")))
     groups <- getGroups(data, form = grpForm, level = level)[drop = TRUE]
   }
   if (is.null(start) && is.null(attr(data, "parameters"))) {
@@ -90,25 +87,23 @@ nlsList.formula <-
   }
 
   controlvals <- nls.control()
-  if(!missing(control)) {
-    controlvals[names(control)] <- control
-  }
+  if(!missing(control)) controlvals[names(control)] <- control
   val <- lapply(split(data, groups),
-		function(dat, formula, start, control, first = TRUE)
-		{
-                  ans <- try({
+		function(dat) {
+                  ans <- tryCatch({
                     data <- as.data.frame(dat)
                     if (is.null(start)) {
-                      nls(formula = formula, data = data, control = control)
+                      nls(formula = model, data = data, control = controlvals)
                     } else {
-                      nls(formula = formula, data = data, start = start,
-                          control = control)
+                      nls(formula = model, data = data, control = controlvals, start = start)
                     }
-                  })
-                  if (inherits(ans, "try-error"))
-                    NULL
-                  else ans
-		}, formula = model, start = start, control = controlvals)
+                  }, error = function(e) e)
+                  if (inherits(ans, "error")) {
+		    warning("error caught in nls()' ", deparse(conditionCall(ans)), ": ",
+			    conditionMessage(ans), call. = FALSE)
+		    NULL
+                  } else ans
+		})
   if (inherits(data, "groupedData")) {
     ## saving labels and units for plots
     attr(val, "units") <- attr(data, "units")

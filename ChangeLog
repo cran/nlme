@@ -1,3 +1,9 @@
+2016-03-12  Martin Mächler  <maechler@stat.math.ethz.ch>
+
+	* DESCRIPTION: version 3.1-126
+	* R/nlme.R (predict.nlme): fix bug PR#16715; +cosmetic; also in
+	* R/lmList.R, R/nlsList.R: better error catching -> warning()
+
 2016-02-27 Brian Ripley
 
 	* DESCRIPTION: version 3.1-125; released

@@ -1,5 +1,5 @@
-0c2fc8476ee215fdd2990b57428c5b0f *ChangeLog
-9904fae7e8de0a4c16439689e56d475a *DESCRIPTION
+0b0d0a451fac7beb2290fa0e1595b264 *ChangeLog
+d252d20acf504226d0936ccdbf0df163 *DESCRIPTION
 eb723b61539feef013de476e68b5c50a *GPL-2
 c843826752e9f806f255d79801354abb *INDEX
 63161a0a16a64cefc52314184570dcb4 *LICENCE.note
@@ -10,14 +10,14 @@ b0e12ebc1b40ef54c56c9ca9fcb14c68 *R/corStruct.R
 426c6b61c3fb59c19aad04251c935cf5 *R/gls.R
 34adad1ec2dc300833370658e1889b28 *R/gnls.R
 1c38152ea5aba1c27f43045de7491ce9 *R/groupedData.R
-ef0948f7450678f6fa19a803447b8e95 *R/lmList.R
+14010a4b61dd09cc2ca9af4af47d2738 *R/lmList.R
 27409c8f86927c0e2f9f4993eed6b53d *R/lme.R
 10df1c8d2721de309e685d572de161a6 *R/modelStruct.R
 a2dce87d376acb876339499a139f3610 *R/newFunc.R
 1548e7a2392e75a6ee7e676ee1e2495d *R/newGenerics.R
 6b3189ef4fe67c8a0c4d96bcaaab3782 *R/newMethods.R
-c640b9665ff83f172ca27e496f892fdb *R/nlme.R
-5beb60e3c89050ae1ed77daf2f396640 *R/nlsList.R
+24e706072cbfd367825f36bb07716eaf *R/nlme.R
+b7d88b5601011c618abae606026700c0 *R/nlsList.R
 169b1bc29ce8f4d2bcfc53bd7fec6691 *R/pdMat.R
 f3a106e7fb34827c8261b09fc72ff340 *R/reStruct.R
 24e90b7745b3042d6d3bcb0a6af262d3 *R/simulate.R
@@ -398,7 +398,7 @@ aee83096167846e585d243c9e7e93da7 *src/nlOptimizer.h
 87f59f283d5378beccb42f205be507cf *src/pdMat.h
 ef88a46d414dd7348296893300ffcb63 *src/rs.f
 2be84e1c3d5a5e23b70bd76ae5c9a367 *tests/anova.gls.R
-71e0f19e94843d44f0c9e4f8067de9f7 *tests/augPred_lab.R
+395bfa0ee325c0e8b45d76b851e56b23 *tests/augPred_lab.R
 cdced2c0665ee6e3f80188b92267e8c8 *tests/augPredmissing.R
 ab25428328f64b827b7ff267fc84ab5e *tests/coef.R
 b9701ba1a2d534994af3ced1cfcf4f31 *tests/coef.Rout.save
@@ -414,7 +414,7 @@ db2b6e128769fe949671803e3dff6737 *tests/gls.R
 4191899f37fc372e70793b9c71d72304 *tests/missing.R
 c9ee39d5e6278ffd5bd9620ba6f529cf *tests/missing.Rout.save
 5b697919530896b09cc8e19c7bb6458d *tests/nlme.R
-d4823e4fe8773fa8e82dd1f3cccd0348 *tests/nlme2.R
+a2a080867a0982d4dcfc0a73e694f37c *tests/nlme2.R
 1dcb40c8ec95980cb02af27cd02a6c8b *tests/predict.lme.R
 ff23c357f09f1c7492a8256c15c0bdd2 *tests/sigma-fixed-etc.R
 a6257e1699574133d825e01022db7fd6 *tests/ss2.rda

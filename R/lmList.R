@@ -2,7 +2,7 @@
 ###
 ### Copyright 1997-2003  Jose C. Pinheiro,
 ###                      Douglas M. Bates <bates@stat.wisc.edu>
-# Copyright 2005-2013 The R Core team
+### Copyright 2005-2016 The R Core team
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -76,16 +76,13 @@ lmList.formula <-
                        c_deparse(getCovariateFormula(object)[[2]]), sep = "~")))
   }
   val <- lapply(split(data, groups),
-		function(dat, form, na.action)
-		{
-			try(lm(formula = form, data = dat, na.action = na.action),
-				silent=TRUE)
-		},
-		form = object, na.action = na.action)
-  use <- sapply(val, function(x)!inherits(x, "try-error"))
+		function(dat)
+                  tryCatch(lm(formula = object, data = dat, na.action = na.action),
+                           error = function(e) e))
+  use <- !vapply(val, inherits, NA, what = "error")
   val[!use] <- list(NULL)
-  if (sum(!use))
-	  warning("An lm fit failed, probably because a factor only had one level")
+  if (any(!use))
+    warning("At least one lm() fit failed, probably because a factor only had one level")
   if (inherits(data, "groupedData")) {
     ## saving labels and units for plots
     attr(val, "units") <- attr(data, "units")
@@ -415,8 +412,7 @@ pairs.lmList <-
 
   ## argument list
   dots <- list(...)
-  if (length(dots) > 0) args <- dots
-  else args <- list()
+  args <- if (length(dots) > 0) dots else list()
 
   ## covariate - must be present as a data.frame
   covF <- getCovariateFormula(form)
@@ -458,12 +454,11 @@ pairs.lmList <-
   grpsF <- getGroupsFormula(form)
   if (!is.null(grpsF)) {
     gr <- splitFormula(grpsF, sep = "*")
-    for(i in 1:length(gr)) {
+    for(i in seq_along(gr)) {
       auxData[[deparse(gr[[i]][[2]])]] <- eval(gr[[i]][[2]], data)
     }
-    if (length(argForm) == 2)
-      argForm <- eval(parse(text = paste("~ .x |", deparse(grpsF[[2]]))))
-    else argForm <- eval(parse(text = paste(".y ~ .x |", deparse(grpsF[[2]]))))
+    argForm <- eval(parse(text = paste(if (length(argForm) == 2) "~ .x |" else ".y ~ .x |",
+				       deparse(grpsF[[2]]))))
   }
 
   ## id and idLabels - need not be present
