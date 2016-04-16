@@ -2,7 +2,7 @@
 ###
 ### Copyright 1997-2003  Jose C. Pinheiro,
 ###                      Douglas M. Bates <bates@stat.wisc.edu>
-### Copyright 2005-2016 The R Core team
+### Copyright 2005-2016  The R Core team
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -20,17 +20,46 @@
 
 lmList <-
   ## a list of lm objects from a formula or a groupedData object
-  function(object, data, level, subset, na.action = na.fail, pool = TRUE)
+  function(object, data, level, subset, na.action = na.fail, pool = TRUE, warn.lm = TRUE)
   UseMethod("lmList")
 
+##' Utility for lmList() and nlsList(): Collect errors from a list \code{val},
+##' produce a "summary warning" and keep that message as "warningMsg" attribute
+warnErrList <- function(val, warn = TRUE) {
+  errs <- vapply(val, inherits, NA, what = "error")
+  if (any(errs)) {
+    v.err <- val[errs]
+    e.call <- deparse(conditionCall(v.err[[1]]))
+    tt <- table(vapply(v.err, conditionMessage, ""))
+    msg <-
+      if(length(tt) == 1)
+        sprintf(ngettext(tt[[1]],
+                         "%d error caught in %s: %s",
+                         "%d times caught the same error in %s: %s"),
+                tt[[1]], e.call, names(tt)[[1]])
+      else ## at least two different errors caught
+        paste(gettextf(
+          "%d errors caught in %s.  The error messages and their frequencies are",
+          sum(tt), e.call),
+          paste(capture.output(sort(tt)), collapse="\n"), sep="\n")
+
+    if(warn)
+	warning(msg, call. = FALSE, domain = NA)
+    val[errs] <- list(NULL)
+    attr(val, "warningMsg") <- msg
+  }
+  val
+}
+
 lmList.groupedData <-
-  function(object, data, level, subset, na.action = na.fail, pool = TRUE)
+  function(object, data, level, subset, na.action = na.fail, pool = TRUE, warn.lm = TRUE)
 {
   ### object will provide the formula, the data, and the groups
   form <- formula(object)
-  args <- as.list(match.call())[-1]
-  args[["object"]] <- as.vector(eval(parse(text = paste(deparse(form[[2]]),
-                                             "~", deparse(form[[3]][[2]])))))
+  args <- as.list(match.call())[-1L]
+  args[["object"]] <- eval(substitute(Y ~ RHS,
+                                      list(Y  = form[[2]],
+                                           RHS= form[[3]][[2]])))
   if (!missing(data)) {
     args[["data"]] <- substitute(object)
   } else {
@@ -39,8 +68,8 @@ lmList.groupedData <-
   do.call("lmList.formula", args)
 }
 
-lmList.formula <-
-  function(object, data, level, subset, na.action = na.fail, pool = TRUE)
+lmList.formula <- function(object, data, level, subset, na.action = na.fail,
+                           pool = TRUE, warn.lm = TRUE)
 {
   Call <- match.call()
   if (!missing(subset)) {
@@ -59,9 +88,8 @@ lmList.formula <-
       groups <- getGroups(data, level = level)[drop = TRUE]
       grpForm <- getGroupsFormula(data)
       Call$object <-
-        as.vector(eval(parse(text=paste(deparse(Call$object),
-                               deparse(grpForm[[2]]), sep = "|"))))
-
+        eval(parse(text=paste(deparse(Call$object),
+                              deparse(grpForm[[2]]), sep = "|")))
     } else {
       stop ("'data' must be a \"groupedData\" object if 'groups' argument is missing")
     }
@@ -72,32 +100,28 @@ lmList.formula <-
       stop("multiple levels not allowed")
     }
     groups <- getGroups(data, form = grpForm, level = level)[drop = TRUE]
-    object <- eval(parse(text=paste(deparse(getResponseFormula(object)[[2]]),
-                       c_deparse(getCovariateFormula(object)[[2]]), sep = "~")))
+    object <- eval(substitute(Y ~ X, list(Y = getResponseFormula (object)[[2]],
+                                          X = getCovariateFormula(object)[[2]])))
   }
   val <- lapply(split(data, groups),
 		function(dat)
-                  tryCatch(lm(formula = object, data = dat, na.action = na.action),
-                           error = function(e) e))
-  use <- !vapply(val, inherits, NA, what = "error")
-  val[!use] <- list(NULL)
-  if (any(!use))
-    warning("At least one lm() fit failed, probably because a factor only had one level")
+		    tryCatch(lm(object, data = dat, na.action = na.action),
+			     error = function(e) e))
+  val <- warnErrList(val, warn = warn.lm)
   if (inherits(data, "groupedData")) {
     ## saving labels and units for plots
     attr(val, "units") <- attr(data, "units")
     attr(val, "labels") <- attr(data, "labels")
   }
 
-  attr(val, "dims") <- list(N = nrow(data), M = length(val))
-  attr(val,"call") <- Call
-  attr(val, "groupsForm") <- grpForm
-  attr(val,"groups") <- ordered(groups, levels = names(val))
-  attr(val, "origOrder") <- match(unique(as.character(groups)), names(val))
-  attr(val, "level") <- level
-  attr(val, "pool") <- pool
-  class(val) <- "lmList"
-  val
+  structure(val, class = "lmList",
+            dims = list(N = nrow(data), M = length(val)),
+            call = Call,
+            groupsForm = grpForm,
+            groups = ordered(groups, levels = names(val)),
+            origOrder = match(unique(as.character(groups)), names(val)),
+            level = level,
+            pool = pool)
 }
 
 ###*# Methods for standard generics
@@ -117,15 +141,15 @@ augPred.lmList <-
                       sys.call()[[1]]), domain = NA)
     }
     primary <- getCovariate(data)
-    prName <- deparse(getCovariateFormula(data)[[2]])
-  } else{
-    primary <- asOneSidedFormula(primary)[[2]]
-    prName <- deparse(primary)
-    primary <- eval(primary, data)
+    pr.var <- getCovariateFormula(data)[[2L]]
+  } else {
+    pr.var <- asOneSidedFormula(primary)[[2L]]
+    primary <- eval(pr.var, data)
   }
+  prName <- c_deparse(pr.var)
   newprimary <- seq(from = minimum, to = maximum, length.out = length.out)
   groups <- getGroups(object)
-  grName <- deparse(getGroupsFormula(object)[[2]])
+  grName <- deparse(gr.v <- getGroupsFormula(object)[[2]])
   ugroups <- unique(groups)
   value <- data.frame(rep(newprimary, length(ugroups)),
 		      rep(ugroups, rep(length(newprimary), length(ugroups))))
@@ -140,7 +164,7 @@ augPred.lmList <-
   pred <- c(predict(object, value, asList = FALSE))
   newvals <- cbind(value[, 1:2], pred)
   names(newvals)[3] <- respName <-
-    deparse(getResponseFormula(object)[[2]])
+    deparse(resp.v <- getResponseFormula(object)[[2]])
   orig <- data.frame(primary, groups, getResponse(object))
   names(orig) <- names(newvals)
   value <- rbind(orig, newvals)
@@ -155,12 +179,11 @@ augPred.lmList <-
     unts[names(attr(data, "units"))] <- attr(data, "units")
     attr(value, "units") <- attr(data, "units")
   }
-  attr(value, "labels") <- labs
-  attr(value, "units") <- unts
-  attr(value, "formula") <-
-      eval(parse(text = paste(respName, "~", prName, "|", grName)))
-  class(value) <- c("augPred", class(value))
-  value
+  structure(value, class = c("augPred", class(value)),
+	    labels = labs,
+	    units = unts,
+	    formula = eval(substitute(Y ~ X | G,
+				      list(Y = resp.v, X = pr.var, G = gr.v))))
 }
 
 coef.lmList <-
@@ -169,56 +192,56 @@ coef.lmList <-
            which = NULL, FUN = mean, omitGroupingFactor = TRUE, ...)
 {
   coefs <- lapply(object, coef)
-  non.null <- !unlist(lapply(coefs, is.null))
+  non.null <- !vapply(coefs, is.null, NA)
   ## size the data frame to cope with combined levels for factors
   ## and name the columns so can fill by name
   if (sum(non.null) > 0) {
-	  coefNames <- unique(as.vector(sapply(coefs[non.null], names)))
-	  co <- matrix(NA,
-				   ncol=length(coefNames),
-				   nrow=length(coefs),
-				   byrow=TRUE, dimnames=list(names(object), coefNames))
+    coefNames <- unique(as.vector(sapply(coefs[non.null], names)))
+    co <- matrix(NA,
+                 ncol=length(coefNames),
+                 nrow=length(coefs),
+                 byrow=TRUE, dimnames=list(names(object), coefNames))
     ## template <- coefs[non.null][[1]]
     ## if (is.numeric(template)) {
     ##   co <- matrix(template,
-	## 	      ncol = length(template),
-	## 	      nrow = length(coefs),
-	## 	      byrow = TRUE,
-	## 	      dimnames = list(names(object), names(template)))
-      for (i in names(object)) {
-		  co[i, names(coefs[[i]])] <-
-			  if (is.null(coefs[[i]])) { NA } else coefs[[i]]
-      }
-      coefs <- as.data.frame(co)
-      effectNames <- names(coefs)
-      if(augFrame) {
-        if (is.null(data)) {
-          data <- getData(object)
-        }
-        data <- as.data.frame(data)
-        if (is.null(which)) {
-          which <- 1:ncol(data)
-        }
-	data <- data[, which, drop = FALSE]
-	## eliminating columns with same names as effects
-	data <- data[, is.na(match(names(data), effectNames)), drop = FALSE]
-        data <- gsummary(data, FUN = FUN, groups = getGroups(object))
-	if (omitGroupingFactor) {
-	  data <- data[, is.na(match(names(data),
-                   names(getGroupsFormula(object, asList = TRUE)))),
-                       drop = FALSE]
-	}
-	if (length(data) > 0) {
-	  coefs <- cbind(coefs, data[row.names(coefs),,drop = FALSE])
-	}
-      }
-      attr(coefs, "level") <- attr(object, "level")
-      attr(coefs, "label") <- "Coefficients"
-      attr(coefs, "effectNames") <- effectNames
-      attr(coefs, "standardized") <- FALSE
-      attr(coefs, "grpNames") <- deparse(getGroupsFormula(object)[[2]])
-      class(coefs) <- c("coef.lmList", "ranef.lmList", class(coefs))
+    ## 	      ncol = length(template),
+    ## 	      nrow = length(coefs),
+    ## 	      byrow = TRUE,
+    ## 	      dimnames = list(names(object), names(template)))
+    for (i in names(object)) {
+      co[i, names(coefs[[i]])] <-
+        if (is.null(coefs[[i]])) { NA } else coefs[[i]]
     }
+    coefs <- as.data.frame(co)
+    effectNames <- names(coefs)
+    if(augFrame) {
+      if (is.null(data)) {
+        data <- getData(object)
+      }
+      data <- as.data.frame(data)
+      if (is.null(which)) {
+        which <- 1:ncol(data)
+      }
+      data <- data[, which, drop = FALSE]
+      ## eliminating columns with same names as effects
+      data <- data[, is.na(match(names(data), effectNames)), drop = FALSE]
+      data <- gsummary(data, FUN = FUN, groups = getGroups(object))
+      if (omitGroupingFactor) {
+        data <- data[, is.na(match(names(data),
+                                   names(getGroupsFormula(object, asList = TRUE)))),
+                     drop = FALSE]
+      }
+      if (length(data) > 0) {
+        coefs <- cbind(coefs, data[row.names(coefs),,drop = FALSE])
+      }
+    }
+    attr(coefs, "level") <- attr(object, "level")
+    attr(coefs, "label") <- "Coefficients"
+    attr(coefs, "effectNames") <- effectNames
+    attr(coefs, "standardized") <- FALSE
+    attr(coefs, "grpNames") <- deparse(getGroupsFormula(object)[[2]])
+    class(coefs) <- c("coef.lmList", "ranef.lmList", class(coefs))
+  }
   ##}
   coefs
 }
@@ -233,7 +256,7 @@ fitted.lmList <-
       }
     } else {
       if (is.integer(subset)) {
-        if (any(is.na(match(subset, 1:length(object))))) {
+        if (any(is.na(match(subset, seq_along(object))))) {
           stop("nonexistent groups requested in 'subset'")
         }
       } else {
@@ -249,7 +272,7 @@ fitted.lmList <-
   val <- lapply(object, fitted)
   if(!asList) {				#convert to array
     ngrps <- table(getGroups(object))[names(object)]
-    if(any(aux <- sapply(object, is.null))) {
+    if(any(aux <- vapply(object, is.null, NA))) {
       for(i in names(ngrps[aux])) {
 	val[[i]] <- rep(NA, ngrps[i])
       }
@@ -267,14 +290,12 @@ fitted.lmList <-
   val
 }
 
-fixef.lmList <-
-  function(object, ...)
+fixef.lmList <- function(object, ...)
 {
   coeff <- coef(object)
   if(is.matrix(coeff) || is.data.frame(coeff)) {
-    return(apply(coeff, 2, mean, na.rm = TRUE))
-  }
-  NULL
+    colMeans(coeff, na.rm = TRUE)
+  } # else NULL
 }
 
 formula.lmList <-
@@ -301,19 +322,13 @@ getData.lmList <-
 getGroups.lmList <-  function(object, form, level, data, sep)
   attr(object, "groups")
 
-getGroupsFormula.lmList <-
-  function(object, asList = FALSE, sep)
-{
+getGroupsFormula.lmList <- function(object, asList = FALSE, sep) {
   val <- attr(object, "groupsForm")
-  getGroupsFormula(eval(parse(text=paste("~1",c_deparse(val[[2]]),sep="|"))),
+  getGroupsFormula(eval(substitute(~ 1 | GR, list(GR = val[[2]]))),
 		   asList = asList)
 }
 
-getResponse.lmList <-
-  function(object, form)
-{
-  fitted(object) + resid(object)
-}
+getResponse.lmList <- function(object, form) fitted(object) + resid(object)
 
 intervals.lmList <-
   function(object, level = 0.95, pool = attr(object, "pool"), ...)
@@ -341,26 +356,26 @@ intervals.lmList <-
 logLik.lmList <-
   function(object, REML = FALSE, pool = attr(object, "pool"), ...)
 {
-  if(any(unlist(lapply(object, is.null)))) {
+  if(any(vapply(object, is.null, NA))) {
     stop("log-likelihood not available with NULL fits")
   }
   if(pool) {
-    aux <- apply(sapply(object, function(el) {
-                   res <- resid(el)
-		   p <- el$rank
-		   n <- length(res)
-		   if (is.null(w <- el$weights)) w <- rep(1, n)
-		   else {
-		     excl <- w == 0
-		     if (any(excl)) {
-		       res <- res[!excl]
-		       n <- length(res)
-		       w <- w[!excl]
-		     }
-		   }
-		   c(n, sum(w * res^2), p, sum(log(w)),
-		     sum(log(abs(diag(el$qr$qr)[1:p]))))
-		 }), 1, sum)
+    aux <- rowSums(sapply(object, function(el) {
+      res <- resid(el)
+      p <- el$rank
+      n <- length(res)
+      if (is.null(w <- el$weights)) w <- rep(1, n)
+      else {
+        excl <- w == 0
+        if (any(excl)) {
+          res <- res[!excl]
+          n <- length(res)
+          w <- w[!excl]
+        }
+      }
+      c(n, sum(w * res^2), p, sum(log(w)),
+        sum(log(abs(diag(el$qr$qr)[1:p]))))
+    }))
     N <- aux[1] - REML * aux[3]
     val <- (aux[4] - N * (log(2 * pi) + 1 - log(N) + log(aux[2])))/2 -
       REML * aux[5]
@@ -397,7 +412,7 @@ pairs.lmList <-
     if (is.null(data)) {		# try to construct data
       alist <- lapply(as.list(allV), as.name)
       names(alist) <- allV
-      alist <- c(as.list(as.name("data.frame")), alist)
+      alist <- c(as.list(quote(data.frame)), alist)
       mode(alist) <- "call"
       data <- eval(alist, sys.parent(1))
     } else {
@@ -424,7 +439,7 @@ pairs.lmList <-
     .x <- .x[, effNams, drop = FALSE]
   }
   ## eliminating constant effects
-  isFixed <- unlist(lapply(.x, function(el) length(unique(el)) == 1))
+  isFixed <- vapply(.x, function(el) length(unique(el)) == 1, NA)
   .x <- .x[, !isFixed, drop = FALSE]
   nc <- ncol(.x)
   if (nc == 1) {
@@ -457,8 +472,8 @@ pairs.lmList <-
     for(i in seq_along(gr)) {
       auxData[[deparse(gr[[i]][[2]])]] <- eval(gr[[i]][[2]], data)
     }
-    argForm <- eval(parse(text = paste(if (length(argForm) == 2) "~ .x |" else ".y ~ .x |",
-				       deparse(grpsF[[2]]))))
+    argForm <- eval(substitute(if(length(argForm) == 2) ~ .x | R else .y ~ .x | R,
+			       list(R = grpsF[[2L]])))
   }
 
   ## id and idLabels - need not be present
@@ -472,9 +487,8 @@ pairs.lmList <-
 	       }
 	       aux <- as.matrix(na.omit(ranef(object)))
 	       auxV <- t(chol(var(aux)))
-	       aux <- as.logical(apply((solve(auxV, t(aux)))^2, 2, sum) >
-				 qchisq(1 - id, dim(aux)[2]))
-	       aux
+	       as.logical(colSums((solve(auxV, t(aux)))^2) >
+                          qchisq(1 - id, dim(aux)[2]))
 	     },
 	     call = eval(asOneSidedFormula(id)[[2]], data),
 	     stop("'id' can only be a formula or numeric")
@@ -655,7 +669,7 @@ plot.lmList <-
     if (is.null(data)) {		# try to construct data
       alist <- lapply(as.list(allV), as.name)
       names(alist) <- allV
-      alist <- c(as.list(as.name("data.frame")), alist)
+      alist <- c(as.list(quote(data.frame)), alist)
       mode(alist) <- "call"
       data <- eval(alist, sys.parent(1))
     } else {
@@ -720,12 +734,11 @@ plot.lmList <-
   grpsF <- getGroupsFormula(form)
   if (!is.null(grpsF)) {
     gr <- splitFormula(grpsF, sep = "*")
-    for(i in 1:length(gr)) {
+    for(i in seq_along(gr)) {
       argData[[deparse(gr[[i]][[2]])]] <- eval(gr[[i]][[2]], data)
     }
-    if (length(argForm) == 2)
-      argForm <- eval(parse(text = paste("~ .x |", deparse(grpsF[[2]]))))
-    else argForm <- eval(parse(text = paste(".y ~ .x |", deparse(grpsF[[2]]))))
+    argForm <- eval(substitute(if(length(argForm) == 2) ~ .x | R else .y ~ .x | R,
+			       list(R = grpsF[[2L]])))
   }
   ## adding to args list
   args <- c(list(argForm, data = argData), args)
@@ -876,7 +889,7 @@ predict.lmList <-
       myData <- myData[subset]
   }
   nmGrps <- names(object)
-  noNull <- !sapply(object, is.null)
+  noNull <- !vapply(object, is.null, NA)
   val <- vector("list", length(nmGrps))
   names(val) <- nmGrps
   if(!sameData) {
@@ -932,7 +945,7 @@ predict.lmList <-
       ngrps <- rep(dim(newdata)[1], length(object))
       names(ngrps) <- names(object)
     }
-    if(any(aux <- sapply(object, is.null))) {
+    if(any(aux <- vapply(object, is.null, NA))) {
       for(i in names(ngrps[aux])) {
 	aux1 <- rep(NA, ngrps[i])
 	if(se.fit) {
@@ -1039,7 +1052,7 @@ qqnorm.lmList <-
     if (is.null(data)) {		# try to construct data
       alist <- lapply(as.list(allV), as.name)
       names(alist) <- allV
-      alist <- c(as.list(as.name("data.frame")), alist)
+      alist <- c(as.list(quote(data.frame)), alist)
       mode(alist) <- "call"
       data <- eval(alist, sys.parent(1))
     } else if (any(naV <- is.na(match(allV, names(data))))) {
@@ -1255,18 +1268,14 @@ residuals.lmList <-
   }
   if(!is.null(subset)) {
     if(is.character(subset)) {
-      if (any(is.na(match(subset, names(object))))) {
+      if (any(is.na(match(subset, names(object)))))
         stop("nonexistent groups requested in 'subset'")
-      }
-    } else {
-      if (is.integer(subset)) {
-        if (any(is.na(match(subset, 1:length(object))))) {
-          stop("nonexistent groups requested in 'subset'")
-        }
-      } else {
+    } else if (is.integer(subset)) {
+      if (any(is.na(match(subset, seq_along(object)))))
+        stop("nonexistent groups requested in 'subset'")
+    } else
         stop("'subset' can only be character or integer")
-      }
-    }
+
     oclass <- class(object)
     oatt <- attr(object, "call")
     object <- object[subset]
@@ -1276,42 +1285,35 @@ residuals.lmList <-
   val <-
     switch(type,
 	   pooled.pearson = {
-	     lapply(object, function(el, pSD) {
-	       if(!is.null(el)) resid(el)/pSD
-	       else NULL
-	     }, pSD = poolSD)
+	     lapply(object, function(el, pSD)
+	       if(!is.null(el)) resid(el)/pSD # else NULL
+	     , pSD = poolSD)
 	   },
 	   pearson = lapply(object, function(el) {
 	     if(!is.null(el)) {
 	       aux <- resid(el)
 	       aux/sqrt(sum(aux^2)/(length(aux) - length(coef(el))))
-	     } else {
-	       NULL
-	     }
+	     } # else NULL
 	   }),
-	   response = lapply(object, function(el) {
-	     if(!is.null(el)) resid(el)
-	     else NULL
-	   })
+	   response = lapply(object, function(el)
+               if(!is.null(el)) resid(el)) # else NULL
 	   )
   if(!asList) {				#convert to array
     ngrps <- table(getGroups(object))[names(object)]
-    if(any(aux <- sapply(object, is.null))) {
+    if(any(aux <- vapply(object, is.null, NA))) {
       for(i in names(ngrps[aux])) {
 	val[[i]] <- rep(NA, ngrps[i])
       }
     }
     val <- val[attr(object, "origOrder")] # putting in original order
-    namVal <- names(val)
-    val <- unlist(val)
-    names(val) <- rep(namVal, ngrps)
+    val <- setNames(unlist(val), rep(names(val), ngrps))
   }
-  if (type == "response") {
-    lab <- "Residuals"
-    if (!is.null(aux <- attr(object, "units")$y)) {
-      lab <- paste(lab, aux)
+  lab <-
+    if (type == "response") {
+      lab <- "Residuals"
+      if(!is.null(aux <- attr(object, "units")$y)) paste(lab, aux) else lab
     }
-  } else lab <- "Standardized residuals"
+    else "Standardized residuals"
   attr(val, "label") <- lab
   val
 }
@@ -1321,44 +1323,40 @@ summary.lmList <-
 {
     to.3d.array <-
         ## Convert the list to a 3d array watching for null elements
-        function(lst, template)
-        {
-            if (!is.matrix(template)) {
-                return(lst)
-            }
-            ## make empty array:
-            dnames <- dimnames(template)
-            if (length(dnames[[1]]) == length(dnames[[2]]) &&
-		all(dnames[[1]] == dnames[[2]])) {
-		val <- array(NA, dim=c(length(coefNames), length(coefNames),
-                                 length(lst)),
-                             dimnames=c(list(coefNames), list(coefNames), list(names(lst))))
-		for (ii in 1:length(lst))
-                    if (length(lst[[ii]])) {
-                        use <- dimnames(lst[[ii]])[[1]]
-                        val[use, use, ii] <- lst[[ii]]
-                    }
-            } else {
-		val <- array(NA, dim=c(length(coefNames), dim(template)[2],
-                                 length(lst)),
-                             dimnames=c(list(coefNames), list(dimnames(template)[[2]]),
-                             list(names(lst))))
-		for (ii in 1:length(lst))
-                    if (length(lst[[ii]])) {
-                        use <- dimnames(lst[[ii]])[[1]]
-                        val[use, , ii] <- lst[[ii]]
-                    }
-            }
-            ## val <- aperm(array(unlist(lapply(lst, function(el, template)
-            ## 				 if(is.null(el)) { template }
-            ## 				 else { el }, template = template)),
-            ## 		   c(dim(template), length(lst)),
-            ## 		   c(dimnames(template), list(names(lst)))),
-            ## 	     c(3, 2, 1))
-            ## val[unlist(lapply(lst, is.null)), , ] <- NA
+        function(lst, template) {
+          if (!is.matrix(template))
+            return(lst)
 
-            val <- aperm(val, c(3, 2, 1))
-            val
+          ## Make empty array val[,,] and then fill it  -----
+          dnames <- dimnames(template)
+          use.i <- which(lengths(lst) > 0)
+          ## TODO? just   identical(dnames[[1]], dnames[[2]]) :
+          if (length(dnames[[1]]) == length(dnames[[2]]) &&
+              all(dnames[[1]] == dnames[[2]])) { ## symmetric
+            val <- array(NA, dim=c(length(cfNms), length(cfNms), length(lst)),
+                         dimnames=list(cfNms, cfNms, names(lst)))
+            for (ii in use.i) {
+              use <- dimnames(lst[[ii]])[[1]]
+              val[use, use, ii] <- lst[[ii]]
+              ##       ----
+            }
+          } else {
+            val <- array(NA, dim=c(length(cfNms), dim(template)[2], length(lst)),
+                         dimnames=list(cfNms, dnames[[2]], names(lst)))
+            for (ii in use.i) {
+              use <- dimnames(lst[[ii]])[[1]]
+              val[use, , ii] <- lst[[ii]]
+              ##     ---
+            }
+          }
+	  aperm(val, 3:1)
+          ## val <- aperm(array(unlist(lapply(lst, function(el, template)
+          ## 				 if(is.null(el)) { template }
+          ## 				 else { el }, template = template)),
+          ## 		   c(dim(template), length(lst)),
+          ## 		   c(dnames, list(names(lst)))),
+          ## 	     c(3, 2, 1))
+          ## val[unlist(lapply(lst, is.null)), , ] <- NA
         }
     to.2d.array <-
         ## Convert the list to a 2d array watching for null elements
@@ -1366,31 +1364,27 @@ summary.lmList <-
         {
             if(is.null(template)) return(lst)
             template <- as.vector(template)
-            val <- t(array(unlist(lapply(lst, function(el, template)
-                                         if(is.null(el)) { template }
-                                         else { el }, template = template)),
+            val <- t(array(unlist(lapply(lst, function(el) if(is.null(el))
+                                                             template else el)),
                            c(length(template), length(lst)),
                            list(names(template), names(lst))))
-            val[unlist(lapply(lst, is.null)), ] <- NA
+            val[vapply(lst, is.null, NA), ] <- NA
             val
         }
     ## Create a summary by applying summary to each component of the list
-    sum.lst <- lapply(object, function(el) if(is.null(el)) {NULL}
-                      else {summary(el)})
-    nonNull <- !unlist(lapply(sum.lst, is.null))
+    sum.lst <- lapply(object, function(el) if(!is.null(el)) summary(el))
+    nonNull <- !vapply(sum.lst, is.null, NA)
     if(!any(nonNull)) return(NULL)
-    template <- sum.lst[[match(TRUE, nonNull)]]
-    val <- list()
+    template <- sum.lst[[match(TRUE, nonNull)]] # the first one
+    val <- as.list(setNames(nm = names(template)))
     for (i in names(template)) {
-        val[[i]] <- lapply(sum.lst, "[[", i)
+        val[[i]] <- lapply(sum.lst, `[[`, i)
         class(val[[i]]) <- "listof"
     }
-    ## get complete set of coefs
-    coefNames <-
-        unique(as.vector(sapply(sum.lst[nonNull],
-                                function(x)dimnames(x[['coefficients']])[[1]])))
-
-
+    ## complete set of coefs [only used in to.3d.array()]
+    cfNms <-
+      unique(as.vector(sapply(sum.lst[nonNull],
+                              function(x) dimnames(x[['coefficients']])[[1]])))
     ## re-arrange the matrices into 3d arrays
     for(i in c("parameters", "cov.unscaled", "correlation", "coefficients"))
         if(length(val[[i]]))
@@ -1415,12 +1409,11 @@ summary.lmList <-
         dfRes <- attr(poolSD, "df")
         RSE <- c(poolSD)
         corRSE <- RSE/val$sigma
-        pname <- if(inherits(object, "nlsList")) "parameters"
-        else "coefficients"
+        pname <- if(inherits(object, "nlsList")) "parameters" else "coefficients"
         val[[pname]][,2,] <- val[[pname]][,2,] * corRSE
         val[[pname]][,3,] <- val[[pname]][,3,] / corRSE
         if(!inherits(object, "nlsList"))
-            val[[pname]][,4,] <- 2*(1-pt(abs(val[[pname]][,3,]), dfRes))
+            val[[pname]][,4,] <- 2*pt(abs(val[[pname]][,3,]), dfRes, lower.tail=FALSE)
         val[["df.residual"]] <- dfRes
         val[["RSE"]] <- RSE
     }
@@ -1464,6 +1457,6 @@ update.lmList <-
 #  if (!is.null(thisCall$object)) {
 #    nextCall$object <- update(as.formula(nextCall$object), nextCall$object)
 #  }
-#  nextCall[[1]] <- as.name("lmList")
+#  nextCall[[1]] <- quote(lmList)
 #  eval(nextCall, envir = parent.frame(1))
 #}

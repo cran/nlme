@@ -99,19 +99,17 @@ nlme.nlsList <-
     if (length(allV) > 0) {
       alist <- lapply(as.list(allV), as.name)
       names(alist) <- allV
-      alist <- c(as.list(as.name("data.frame")), alist)
+      alist <- c(as.list(quote(data.frame)), alist)
       mode(alist) <- "call"
       mData <- eval(alist, sys.parent(1))
     }
-  } else {
-    if (mode(mData) == "name" || mode(mData) == "call") {
-      mData <- eval(mData)
-    }
+  } else if (mode(mData) == "name" || mode(mData) == "call") {
+    mData <- eval(mData)
   }
   reSt <- reStruct(random, REML = REML, data = mData)
   names(reSt) <- deparse(groups[[2]])
   ## convert list of "name" objects to "character" vector
-  rnames <- sapply(lapply(ranForm, "[[", 2), deparse)
+  rnames <- sapply(lapply(ranForm, `[[`, 2L), deparse)
   ## if the random effects are a subset of the coefficients,
   ## construct initial estimates for their var-cov matrix
   if (all(match(rnames, pnames, 0))) {
@@ -231,7 +229,7 @@ nlme.formula <-
       stop("'data' must be given explicitly to use 'nlsList'")
     }
     nlsLObj <- eval(nlsLCall)
-    nlmeCall[["model"]] <- as.name("nlsLObj")
+    nlmeCall[["model"]] <- quote(nlsLObj)
     nlmeCall <- as.call(nlmeCall)
     val <- eval(nlmeCall)
     val$origCall <- NULL
@@ -424,7 +422,7 @@ nlme.formula <-
     }
     if (any(unlist(this[["random"]]))) {
       for(i in 1:Q) {
-        wch <- (1:length(rnames[[i]]))[!is.na(match(rnames[[i]], nm))]
+        wch <- which(!is.na(match(rnames[[i]], nm)))
         if (length(wch) == 1) {           # only one formula for nm at level i
           if ((rF.i <- ranForm[[i]][[nm]][[3]]) != "1") {
             this[["random"]][[i]] <-
@@ -535,7 +533,7 @@ nlme.formula <-
   }
   Names(nlmeSt$reStruct) <- rn
   rNam <- unlist(rn)                    # unlisted names of random effects
-  rlength<- unlist(lapply(rn, length))  # number of random effects per stratum
+  rlength <- lengths(rn)                # number of random effects per stratum
   rLen <- sum(rlength)                  # total number of random effects
   pLen <- rLen + fLen                   # total number of parameters
   ncols <- c(rlength, fLen, 1)
@@ -692,10 +690,8 @@ nlme.formula <-
          beta = as.vector(sfix),
          bvec = unlist(sran),
          b = sran,
-         X = array(0, c(N, fLen),
-                   list(NULL, fn)),
-         Z = array(0, c(N, rLen),
-                   list(NULL, rNam)),
+         X = array(0, c(N, fLen), list(NULL, fn)),
+         Z = array(0, c(N, rLen), list(NULL, rNam)),
          fmap = fmap,
          rmap = rmap,
          rmapRel = rmapRel,
@@ -716,17 +712,15 @@ nlme.formula <-
     for (nm in names(plist)) {
       gradnm <- grad[, nm]
       if (is.logical(f <- plist[[nm]]$fixed)) {
-        if (f) {
-          X[, fmap[[nm]]] <- gradnm
-        }
-      } else {
+        if(f)
+          X[, fmap[[nm]]] <- gradnm # else f == FALSE =^= 0
+      } else
         X[, fmap[[nm]]] <- gradnm * f
-      }
+
       for(i in 1:Q) {
         if (is.logical(r <- plist[[nm]]$random[[i]])) {
-          if (r) {
-            Z[, rmap[[i]][[nm]]] <- gradnm
-          }
+          if (r)
+            Z[, rmap[[i]][[nm]]] <- gradnm  # else r == FALSE =^= 0
         } else {
           rm.i <- rmap[[i]][[nm]]
           if (data.class(rm.i) != "list") {
@@ -746,10 +740,13 @@ nlme.formula <-
     result <- c(Z[naPat, ], X[naPat, ], res[naPat])
     result[is.na(result)] <- 0
     result
-  }
+  }## {modelExpression}
 
-  modelResid <- ~eval(model, data.frame(data,
-                                        getParsNlme(plist, fmap, rmapRel, bmap, groups, beta, bvec, b, level, N)))[naPat]
+  modelResid <-
+    ~ eval(model,
+           data.frame(data,
+                      getParsNlme(plist, fmap, rmapRel, bmap, groups,
+                                  beta, bvec, b, level, N)))[naPat]
   ww <- eval(modelExpression[[2]], envir = nlEnv)
   w <- ww[NReal * pLen + (1:NReal)]
   ZX <- array(ww[1:(NReal*pLen)], c(NReal, pLen),
@@ -971,27 +968,25 @@ nlme.formula <-
   attr(Resid, "std") <- nlmeFit$sigma/(varWeights(nlmeSt)[revOrderShrunk])
   ## inverting back reStruct
   nlmeSt$reStruct <- solve(nlmeSt$reStruct)
+  attr(nlmeSt, "fixedSigma") <- (controlvals$sigma > 0)
   ## saving part of dims
   dims <- attr(nlmeSt, "conLin")$dims[c("N", "Q", "qvec", "ngrps", "ncol")]
   ## getting the approximate var-cov of the parameters
-  if (controlvals$apVar) {
-    ## 17-11-2015; Fixed sigma patch; SH Heisterkamp; Quantitative Solutions
-    attr(nlmeSt, "fixedSigma") <- (controlvals$sigma > 0)
-    apVar <- lmeApVar(nlmeSt, nlmeFit$sigma,
-		      .relStep = controlvals[[".relStep"]],
-                      minAbsPar = controlvals[["minAbsParApVar"]],
-     		      natural = controlvals[["natural"]])
-  } else {
-    apVar <- "Approximate variance-covariance matrix not available"
-  }
+  apVar <-
+    if (controlvals$apVar)
+      lmeApVar(nlmeSt, nlmeFit$sigma,
+               .relStep = controlvals[[".relStep"]],
+               minAbsPar = controlvals[["minAbsParApVar"]],
+               natural = controlvals[["natural"]])
+    else
+      "Approximate variance-covariance matrix not available"
   ## putting sran in the right format
   sran <- lapply(sran, t)
   ## getting rid of condensed linear model, fit, and other attributes
-  oClass <- class(nlmeSt)
-  attributes(nlmeSt) <- attributes(nlmeSt)[c("names", "class", "pmap")]
-  class(nlmeSt) <- oClass
-  ## 17-11-2015; Fixed sigma patch; SH Heisterkamp; Quantitative Solutions
-  attr(nlmeSt, "fixedSigma") <- (controlvals$sigma > 0)
+###- oClass <- class(nlmeSt)
+  attributes(nlmeSt) <- attributes(nlmeSt)[
+    c("names", "class", "pmap", "fixedSigma")]
+##- class(nlmeSt) <- oClass
   ##
   ## creating the  nlme object
   ##
@@ -1020,46 +1015,54 @@ nlme.formula <-
 } ## {nlme.formula}
 
 ###
-### function used to calculate the parameters from
-### the fixed and random effects
-###
-
+##' Calculate the parameters from the fixed and random effects
 getParsNlme <-
   function(plist, fmap, rmapRel, bmap, groups, beta, bvec, b, level, N)
 {
   pars <- array(0, c(N, length(plist)), list(NULL, names(plist)))
+  ## for random effects below
+  iQ <- if (level > 0) {
+    Q <- length(groups)
+    (Q - level + 1L):Q
+  } else integer() # empty
+
   for (nm in names(plist)) {
+    ## 1) Fixed effects
     if (is.logical(f <- plist[[nm]]$fixed)) {
       if (f)
         pars[, nm] <- beta[fmap[[nm]]]
-    } else {
+      ## else pars[, nm] <- 0  (as f == FALSE)
+    } else
       pars[, nm] <- f %*% beta[fmap[[nm]]]
-    }
-    if (level > 0) {
-      Q <- length(groups)
-      for(i in (Q - level + 1):Q) {
-        b[[i]][] <- bvec[(bmap[i] + 1):bmap[i+1]]
-        rm.i. <- rmapRel[[i]][[nm]]
+
+    ## 2) Random effects
+    for(i in iQ)
+      if(!is.null(rm.i. <- rmapRel[[i]][[nm]])) {
+        b.i <- b[[i]]
+        b.i[] <- bvec[(bmap[i] + 1):bmap[i+1]]
+        ## NB: some groups[[i]] may be *new* levels, i.e. non-matching:
+        gr.i <- match(groups[[i]], colnames(b.i)) # column numbers + NA
         if (is.logical(r <- plist[[nm]]$random[[i]])) {
-          if (r) {
-            pars[, nm] <- pars[, nm] + b[[i]][rm.i., groups[[i]]]
-          }
+          if (r)
+            pars[, nm] <- pars[, nm] + b.i[rm.i., gr.i]
+          ## else r == FALSE =^= 0
         } else if (data.class(r) != "list") {
-            pars[,nm] <- pars[,nm] +
-              (r * t(b[[i]])[groups[[i]], rm.i., drop = FALSE]) %*%
-              rep(1, ncol(r))
-	} else {
-	  b.i.gi <- b[[i]][, groups[[i]], drop = FALSE]
+          pars[, nm] <- pars[, nm] +
+            (r * t(b.i)[gr.i, rm.i., drop=FALSE]) %*% rep(1, ncol(r))
+        } else {
+          b.i.gi <- b.i[, gr.i, drop=FALSE]
           for(j in seq_along(rm.i.)) {
-	    pars[, nm] <- pars[, nm] +
-	      if (is.logical(rr <- r[[j]]))
-		b.i.gi[rm.i.[[j]], ]
-	      else
-		(rr * t(b.i.gi[rm.i.[[j]], , drop = FALSE])) %*% rep(1, ncol(rr))
+            if (is.logical(rr <- r[[j]])) {
+              if(rr)
+                pars[, nm] <- pars[, nm] + b.i.gi[rm.i.[[j]], ]
+              ## else rr == FALSE =^= 0
+            }
+            else
+              pars[, nm] <- pars[, nm] +
+                (rr * t(b.i.gi[rm.i.[[j]], , drop=FALSE])) %*% rep(1, ncol(rr))
           }
         }
-      } # for( i )
-    }
+      } # for( i ) if(!is.null(rm.i. ..))
   }
   pars
 }
@@ -1086,7 +1089,6 @@ predict.nlme <-
   }
   maxQ <- max(level)			# maximum level for predictions
   nlev <- length(level)
-  mCall <- object$call
   newdata <- as.data.frame(newdata)
   if (maxQ > 0) {			# predictions with random effects
     whichQ <- Q - (maxQ-1):0
@@ -1103,7 +1105,7 @@ predict.nlme <-
 
   mfArgs <- list(formula = asOneFormula(
                    formula(object),
-                   mCall$fixed, formula(reSt), naPattern,
+                   object$call$fixed, formula(reSt), naPattern,
                    omit = c(names(object$plist), "pi",
                             deparse(getResponseFormula(object)[[2]]))),
                  data = newdata, na.action = na.action,
@@ -1116,8 +1118,8 @@ predict.nlme <-
     ## sort the model.frame by groups and get the matrices and parameters
     ## used in the estimation procedures
     grps <- getGroups(newdata,
-                      as.formula(substitute(~ 1 | GRPS,
-                                            list(GRPS = groups[[2]]))))
+                      eval(substitute(~ 1 | GRPS,
+                                      list(GRPS = groups[[2]]))))
     ## ordering data by groups
     if (inherits(grps, "factor")) {	# single level
       grps <- grps[whichRows, drop = TRUE]
@@ -1188,12 +1190,11 @@ predict.nlme <-
   ##
   ## evaluating the naPattern expression, if any
   ##
-  if (is.null(naPattern)) naPat <- rep(TRUE, N)
-  else naPat <- as.logical(eval(asOneSidedFormula(naPattern)[[2]], dataMix))
-
+  naPat <- if(is.null(naPattern)) rep(TRUE, N)
+           else
+             as.logical(eval(asOneSidedFormula(naPattern)[[2]], dataMix))
   ##
   ## Getting  the plist for the new data frame
-  ##
   ##
   plist <- object$plist
   fixed <- eval(object$call$fixed)
@@ -1227,7 +1228,7 @@ predict.nlme <-
     namGrp <- names(ranForm)
     rnames <- lapply(ranForm, function(el)
       unlist(lapply(el, function(el1) deparse(el1[[2]]))))
-    for(i in 1:length(ranForm)) {
+    for(i in seq_along(ranForm)) {
       names(ranForm[[i]]) <- rnames[[i]]
     }
     ran <- ranef(object)
@@ -1238,7 +1239,7 @@ predict.nlme <-
     for(nm in names(plist)) {
       for(i in namGrp) {
         if (!is.logical(plist[[nm]]$random[[i]])) {
-          wch <- (1:length(rnames[[i]]))[!is.na(match(rnames[[i]], nm))]
+          wch <- which(!is.na(match(rnames[[i]], nm)))
           plist[[nm]]$random[[i]] <-
             if (length(wch) == 1) {         # only one formula for nm
               oSform <- asOneSidedFormula(ranForm[[i]][[nm]][[3]])
@@ -1265,8 +1266,6 @@ predict.nlme <-
   for(i in 1:nlev) {
     val[[i]] <- eval(modForm,
                      data.frame(dataMix,
-                                ## FIXME: getParsNlme(...) fails when we have levels
-                                ## in newdata which do not exist in orig.data
                                 getParsNlme(plist, omap$fmap, omap$rmapRel,
                                             omap$bmap, grpsRev, fix, ranVec, ran,
                                             level[i], N)))[naPat]
@@ -1418,7 +1417,7 @@ residuals.nlmeStruct <-
   dn <- c("fixed", rev(names(object$reStruct)))[level + 1]
   val <- array(0, c(attr(object, "NReal"), length(level)),
                list(dimnames(conLin$Xy)[[1]], dn))
-  for(i in 1:length(level)) {
+  for(i in seq_along(level)) {
     assign("level", level[i], envir = loc, immediate = TRUE)
     val[, i] <- c(eval(attr(object, "model")[[2]], envir = loc))
   }

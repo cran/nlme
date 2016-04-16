@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nlme 3.1-65\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-15 23:42+0100\n"
+"POT-Creation-Date: 2016-04-14 19:28+0200\n"
 "PO-Revision-Date: 2005-12-08 01:00+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -17,49 +17,49 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: corStruct.c:446
+#: corStruct.c:423
 msgid "All parameters must be less than 1 in absolute value"
 msgstr "Tous les paramètres doivent être inférieurs à 1 en valeur absolue"
 
-#: corStruct.c:557
+#: corStruct.c:533
 msgid "Coefficient matrix not invertible"
 msgstr "Matrice de coefficient non inversible"
 
-#: corStruct.c:909 corStruct.c:964 corStruct.c:1031 corStruct.c:1073
+#: corStruct.c:870 corStruct.c:925 corStruct.c:985 corStruct.c:1027
 msgid "Unknown spatial correlation class"
 msgstr "Classes de corrélation spatiale inconnues"
 
-#: nlme.c:508
+#: nlme.c:459
 msgid "First observation on an individual must have a dose"
 msgstr "La première observation sur un individu doit avoir une dose"
 
-#: nlmefit.c:422
+#: nlmefit.c:412
 #, c-format
 msgid "Singularity in backsolve at level %ld, block %ld"
 msgstr "Singularité rencontrée en résolution inverse au niveau %ld, bloc %ld"
 
-#: nlmefit.c:564 nlmefit.c:745
+#: nlmefit.c:554 nlmefit.c:734
 msgid "Overfitted model!"
 msgstr ""
 
-#: nlmefit.c:590
+#: nlmefit.c:580
 msgid "analytic gradient is not available with matrix logarithm"
 msgstr ""
 "un gradient analytique n'est pas disponible avec une matrice logarithmique"
 
-#: nlmefit.c:613
+#: nlmefit.c:603
 msgid "analytic gradient is not available with compound symmetry"
 msgstr "un gradient analytique n'est pas disponible avec une symétrie composée"
 
-#: nlmefit.c:913
+#: nlmefit.c:895
 msgid "Unable to form eigenvalue-eigenvector decomposition"
 msgstr ""
 "Incapable de former la décomposition valeurs propres - vecteurs propres"
 
-#: nlmefit.c:945
+#: nlmefit.c:927
 msgid "Unable to form Cholesky decomposition"
 msgstr "Incapable de former la décomposition de Cholesky"
 
-#: nlmefit.c:976
+#: nlmefit.c:958
 msgid "Haven't written the compound symmetry case for this yet"
 msgstr "Les cas de symétrie composée n'ont pas encore été écrits"

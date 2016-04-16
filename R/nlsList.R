@@ -21,11 +21,12 @@
 nlsList <-
   ## A list of nls objects
   function(model, data, start, control, level, subset, na.action = na.fail,
-           pool = TRUE) UseMethod("nlsList")
+           pool = TRUE, warn.nls = NA) # Deprecation: will be 'TRUE'
+      UseMethod("nlsList")
 
 nlsList.selfStart <-
   function (model, data, start, control, level, subset, na.action = na.fail,
-            pool = TRUE)
+            pool = TRUE, warn.nls = NA) # Deprecation: will be 'TRUE'
 {
   mCall <- as.list(match.call())[-1]
   if (!inherits(data, "groupedData")) {
@@ -48,10 +49,14 @@ nlsList.selfStart <-
 
 nlsList.formula <-
   function(model, data, start = NULL, control, level, subset,
-           na.action = na.fail, pool = TRUE)
+           na.action = na.fail, pool = TRUE,
+           warn.nls = NA) # Deprecation: will be 'TRUE'
 {
   if (!missing(level) && length(level) > 1)
     stop("multiple levels not allowed")
+  ## Deprecation: options(show.error.messages = FALSE) should continue to work for now
+  if(is.na(warn.nls <- as.logical(warn.nls)))
+    warn.nls <- !identical(FALSE, getOption("show.error.messages"))
   Call <- match.call()
   if (!missing(subset)) {
     data <-
@@ -71,9 +76,9 @@ nlsList.formula <-
   } else {
     if (missing(level))
       level <- length(getGroupsFormula(model, asList = TRUE))
-    model <- eval(parse(text = paste(paste(deparse(model[[2]]), collapse=" "),
-				     paste(deparse(getCovariateFormula(model)[[2]]), collapse=" "),
-				     sep = "~")))
+    model <- eval(substitute(Y ~ RHS,
+			     list(Y  = model[[2]],
+				  RHS= getCovariateFormula(model)[[2]])))
     groups <- getGroups(data, form = grpForm, level = level)[drop = TRUE]
   }
   if (is.null(start) && is.null(attr(data, "parameters"))) {
@@ -89,35 +94,30 @@ nlsList.formula <-
   controlvals <- nls.control()
   if(!missing(control)) controlvals[names(control)] <- control
   val <- lapply(split(data, groups),
-		function(dat) {
-                  ans <- tryCatch({
+		function(dat)
+                  tryCatch({
                     data <- as.data.frame(dat)
                     if (is.null(start)) {
-                      nls(formula = model, data = data, control = controlvals)
+                      nls(model, data = data, control = controlvals)
                     } else {
-                      nls(formula = model, data = data, control = controlvals, start = start)
+                      nls(model, data = data, control = controlvals, start = start)
                     }
-                  }, error = function(e) e)
-                  if (inherits(ans, "error")) {
-		    warning("error caught in nls()' ", deparse(conditionCall(ans)), ": ",
-			    conditionMessage(ans), call. = FALSE)
-		    NULL
-                  } else ans
-		})
+                  }, error = function(e) e))
+  val <- warnErrList(val, warn = warn.nls)
   if (inherits(data, "groupedData")) {
     ## saving labels and units for plots
     attr(val, "units") <- attr(data, "units")
     attr(val, "labels") <- attr(data, "labels")
     attr(val, "outer") <- attr(data, "outer")
   }
-  attr(val, "dims") <- list(N = nrow(data), M = length(val))
-  attr(val, "call") <- Call
-  attr(val,"groups") <- ordered(groups, levels = names(val))
-  attr(val, "origOrder") <- match(unique(as.character(groups)), names(val))
-  attr(val, "pool") <- pool
-  attr(val, "groupsForm") <- grpForm
-  class(val) <- c("nlsList", "lmList")
-  val
+
+  structure(val, class = c("nlsList", "lmList"),
+            call = Call,
+            dims = list(N = nrow(data), M = length(val)),
+            groups = ordered(groups, levels = names(val)),
+            origOrder = match(unique(as.character(groups)), names(val)),
+            pool = pool,
+            groupsForm = grpForm)
 }
 
 ###*# Methods for standard generics
@@ -131,7 +131,7 @@ formula.nlsList <-
 summary.nlsList <-
   function(object, ...)
 {
-  val <- NextMethod("summary")
+  val <- NextMethod("summary") # -> summary.lmList()
   class(val) <- c("summary.nlsList", class(val))
   val
 }

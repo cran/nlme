@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: nlme 3.1-123\n"
+"Project-Id-Version: nlme 3.1-127\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-15 23:42+0100\n"
+"POT-Creation-Date: 2016-04-14 19:28+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,47 +17,47 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: corStruct.c:446
+#: corStruct.c:423
 msgid "All parameters must be less than 1 in absolute value"
 msgstr ""
 
-#: corStruct.c:557
+#: corStruct.c:533
 msgid "Coefficient matrix not invertible"
 msgstr ""
 
-#: corStruct.c:909 corStruct.c:964 corStruct.c:1031 corStruct.c:1073
+#: corStruct.c:870 corStruct.c:925 corStruct.c:985 corStruct.c:1027
 msgid "Unknown spatial correlation class"
 msgstr ""
 
-#: nlme.c:508
+#: nlme.c:459
 msgid "First observation on an individual must have a dose"
 msgstr ""
 
-#: nlmefit.c:422
+#: nlmefit.c:412
 #, c-format
 msgid "Singularity in backsolve at level %ld, block %ld"
 msgstr ""
 
-#: nlmefit.c:564 nlmefit.c:745
+#: nlmefit.c:554 nlmefit.c:734
 msgid "Overfitted model!"
 msgstr ""
 
-#: nlmefit.c:590
+#: nlmefit.c:580
 msgid "analytic gradient is not available with matrix logarithm"
 msgstr ""
 
-#: nlmefit.c:613
+#: nlmefit.c:603
 msgid "analytic gradient is not available with compound symmetry"
 msgstr ""
 
-#: nlmefit.c:913
+#: nlmefit.c:895
 msgid "Unable to form eigenvalue-eigenvector decomposition"
 msgstr ""
 
-#: nlmefit.c:945
+#: nlmefit.c:927
 msgid "Unable to form Cholesky decomposition"
 msgstr ""
 
-#: nlmefit.c:976
+#: nlmefit.c:958
 msgid "Haven't written the compound symmetry case for this yet"
 msgstr ""

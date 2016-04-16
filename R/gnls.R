@@ -877,13 +877,13 @@ Initialize.gnlsStruct <-
   if (length(object)) {
     object[] <- lapply(object, Initialize, data)
     theta <- lapply(object, coef)
-    len <- unlist(lapply(theta, length))
+    len <- lengths(theta)
     num <- seq_along(len)
-    if (sum(len) > 0) {
-      pmap <- outer(rep(num, len), num, "==")
-    } else {
-      pmap <- array(FALSE, c(1, length(len)))
-    }
+    pmap <-
+        if (sum(len) > 0)
+            outer(rep(num, len), num, "==")
+        else
+            array(FALSE, c(1, length(len)))
     dimnames(pmap) <- list(NULL, names(object))
     attr(object, "pmap") <- pmap
     if (needUpdate(object)) {

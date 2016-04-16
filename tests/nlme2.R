@@ -72,14 +72,14 @@ if(!all((res10 <- round(10 * as.vector(resiv))) == res.T)) {
 ## function of ring age. TreeIDs grouped by SP (spacing)
 set.seed(1)
 df <- data.frame(SP = rep(LETTERS[1:5], 60),
-                  expand.grid(TreeID = factor(1:12), age = seq(2, 50, 2)))
+		 expand.grid(TreeID = factor(1:12), age = seq(2, 50, 2)))
 df[,"dens"] <- with(df, (runif(1,10,20)*age)/(runif(1,9,10)+age)) + rnorm(25, 0, 1)
 str(df)
-## 'data.frame':	1000 obs. of  4 variables:
-## $ SP    : Factor w/ 5 levels "A","B","C","D",..: 1 2 3 4 5 1 2 3 4 5 ...
-## $ TreeID: Factor w/ 20 levels "1","2","3","4",..: 1 2 3 4 5 6 7 8 9 10 ...
-## $ age   : num  1 1 1 1 1 1 1 1 1 1 ...
-## $ dens  : num  1.042 1.42 2.884 0.207 -0.439 ...
+## 'data.frame':	300 obs. of  4 variables:
+##  $ SP    : Factor w/ 5 levels "A","B","C","D",..: 1 2 3 4 5 1 2 3 4 5 ...
+##  $ TreeID: Factor w/ 12 levels "1","2","3","4",..: 1 2 3 4 5 6 7 8 9 10 ...
+##  $ age   : num  2 2 2 2 2 2 2 2 2 2 ...
+##  $ dens  : num  2.41 1.39 3.82 2.56 1.41 ...
 
 ## mixed-effects model
 fit1 <- nlme(dens ~ a*age/(b+age),
@@ -98,3 +98,22 @@ n.pred2 <- predict(fit2, newdat, level=0)
 ## in nlme 3.1-124, throws the error:
 ## Error in eval(expr, envir, enclos) : object 'SP' not found
 
+## New data with  never-yet observed levels of a random effect -- PR#16614 :
+set.seed(47)
+newD <- expand.grid(SP = LETTERS[2:4], age = runif(16, 1,50),
+                    TreeID = sample(c(sample(1:12, 7), 100:102)))
+n1prD0 <- predict(fit1, newD, level=0)
+n2prD0 <- predict(fit2, newD, level=0)
+n1prD1 <- predict(fit1, newD, level=1)   # failed in nlme <= 3.1-126
+n2prD1 <- predict(fit2, newD, level=1)   # ditto
+(n1prD01 <- predict(fit1, newD, level=0:1))#  "
+(n2prD01 <- predict(fit2, newD, level=0:1))#  "
+## consistency :
+stopifnot(
+    identical(is.na(n1prD1), is.na(n2prD1)),
+    identical(sort(unique(newD[is.na(n2prD1), "TreeID"])), 100:102),
+    sort(unique( newD[is.na(n2prD1), "TreeID"] )) %in% 100:102 ,
+    all.equal(as.vector(n1prD0), n1prD01[,"predict.fixed"], tolerance= 1e-15),
+    all.equal(as.vector(n2prD0), n2prD01[,"predict.fixed"], tolerance= 1e-15),
+    all.equal(as.vector(n1prD1), n1prD01[,"predict.TreeID"],tolerance= 1e-15),
+    all.equal(as.vector(n2prD1), n2prD01[,"predict.TreeID"],tolerance= 1e-15))

@@ -5,7 +5,8 @@
 \name{nlsList.selfStart}
 \title{nlsList Fit from a selfStart Function}
 \usage{
-\method{nlsList}{selfStart}(model, data, start, control, level, subset, na.action, pool)
+\method{nlsList}{selfStart}(model, data, start, control, level, subset,
+        na.action = na.fail, pool = TRUE, warn.nls = NA)
 }
 \alias{nlsList.selfStart}
 \arguments{
@@ -14,7 +15,7 @@
   \item{data}{a data frame in which to interpret the variables in
     \code{model}. Because no grouping factor can be specified in
     \code{model}, \code{data} must inherit from class
-    \code{"\link{groupedData}"}. 
+    \code{"\link{groupedData}"}.
   }
   \item{start}{an optional named list with initial values for the
     parameters to be estimated in \code{model}. It is passed as the
@@ -37,11 +38,7 @@
     \code{nlsList} to print an error message and terminate if there are any
     incomplete observations.
   }
-  \item{pool}{
-    an optional logical value that is preserved as an attribute of the
-    returned value.  This will be used as the default for \code{pool} in
-    calculations of standard deviations or standard errors for summaries.
-  }
+  \item{pool, warn.nls}{optional \code{\link{logical}}s, see \code{\link{nlsList}}.}
 }
 \description{
   The response variable and primary covariate in \code{formula(data)}
@@ -58,7 +55,7 @@
   \code{fixed.effects}, \code{lme}, \code{pairs}, \code{plot},
   \code{predict}, \code{random.effects}, \code{summary}, and
   \code{update} have methods that can be applied to an \code{nlsList}
-  object.  
+  object.
 }
 
 \seealso{

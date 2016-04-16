@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: nlme 3.1-105\n"
-"POT-Creation-Date: 2015-12-15 23:42\n"
+"POT-Creation-Date: 2016-04-14 19:17\n"
 "PO-Revision-Date: 2013-08-16 18:52-0600\n"
 "Last-Translator: Chel Hee Lee <gnustats@gmail.com>\n"
 "Language-Team: R Development Translation Teams (Korean) <gnustats@korea.gnu."
@@ -308,13 +308,13 @@ msgstr ""
 msgid "'asTable' can only be used with balanced 'groupedData' objects"
 msgstr ""
 
+msgid "%d errors caught in %s.  The error messages and their frequencies are"
+msgstr ""
+
 msgid "multiple levels not allowed"
 msgstr ""
 
 msgid "'data' must be a \"groupedData\" object if 'groups' argument is missing"
-msgstr ""
-
-msgid "An lm fit failed, probably because a factor only had one level"
 msgstr ""
 
 msgid "'data' in %s call must evaluate to a data frame"
@@ -374,6 +374,11 @@ msgstr ""
 msgid "initial value for \"reStruct\" overwritten in 'lme.lmList'"
 msgstr ""
 
+msgid ""
+"for 'sigma' fixed, 'apVar' is set FALSE, as the cov approxmation is not yet "
+"available."
+msgstr ""
+
 msgid "fixed-effects model must be a formula of the form \"resp ~ pred\""
 msgstr ""
 
@@ -411,9 +416,7 @@ msgstr ""
 msgid "L may only involve fixed effects with the same denominator DF"
 msgstr ""
 
-msgid ""
-"objects must inherit from classes \"gls\", \"gnls\",\"lm\",\"lmList\", \"lme"
-"\",\"nlme\",\"nlsList\", or \"nls\""
+msgid "objects must inherit from classes %s, or %s"
 msgstr ""
 
 msgid ""
@@ -438,6 +441,11 @@ msgid "all fitted objects must use the same number of observations"
 msgstr ""
 
 msgid "only single level allowed"
+msgstr ""
+
+msgid ""
+"cannot get confidence intervals on var-cov components: %s\n"
+" Consider '%s'"
 msgstr ""
 
 msgid "covariate must have a level attribute when groups are present"
@@ -1031,6 +1039,10 @@ msgid "level %s not allowed for %s"
 msgid_plural "levels %s not allowed for %s"
 msgstr[0] ""
 msgstr[1] ""
+
+msgid "%d error caught in %s: %s"
+msgid_plural "%d times caught the same error in %s: %s"
+msgstr[0] ""
 
 msgid "%s not found in data"
 msgid_plural "%s not found in data"

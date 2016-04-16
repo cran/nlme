@@ -16,7 +16,6 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 Type 'q()' to quit R.
 
 > library(nlme)
-> is64bit <- .Machine$sizeof.pointer == 8
 > 
 > options(digits = 6)# <==> less platform dependency in print() output
 > if(!dev.interactive(orNone=TRUE)) pdf("test_lme.pdf")
@@ -168,11 +167,10 @@ cor((Intercept),age) -0.938250 -0.609333 0.298169
 +     identical(fixef(fm4), sm4$tTable[,"Value"]),
 +     all.equal(sm4$tTable[,"Std.Error"],
 +               c("(Intercept)" = 0.77524603, age = 0.071253264), tol=6e-8),
-+     all.equal(i4$reStruct$Subject[,"est."], reSS[,"est."], tol= 8e-8)
++     all.equal(i4$reStruct$Subject[,"est."], reSS[,"est."], tol= 1e-7)
 +     ## (lower, upper) cannot be very accurate for these : ==> tol = *e-4
 +    ,## "interestingly" 32-bit values changed from 3.2.3 to R-devel(3.3.0):
-+     all.equal(i4$reStruct$Subject[,c(1,3)], reSS[,c(1,3)],
-+ 	      tol = if(is64bit) 4e-4 else .005)
++     all.equal(i4$reStruct$Subject[,c(1,3)], reSS[,c(1,3)], tol = .005)
 +    ,
 +     all.equal(as.vector(i4$sigma),
 +               ##  lower     est.        upper

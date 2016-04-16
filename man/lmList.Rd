@@ -5,7 +5,8 @@
 \name{lmList}
 \title{List of lm Objects with a Common Model}
 \usage{
-lmList(object, data, level, subset, na.action, pool)
+lmList(object, data, level, subset, na.action = na.fail,
+       pool = TRUE, warn.lm = TRUE)
 \method{update}{lmList}(object, formula., \dots, evaluate = TRUE)
 \method{print}{lmList}(x, pool, \dots)
 }
@@ -22,8 +23,8 @@ lmList(object, data, level, subset, na.action, pool)
     according to which different \code{lm} fits should be performed. The
     grouping factor \code{g} may be omitted from the formula, in which
     case the grouping structure will be obtained from \code{data}, which
-    must inherit from class \code{groupedData}. The method function 
-    \code{lmList.groupedData} is documented separately.
+    must inherit from class \code{groupedData}.  The method function
+    \code{\link{lmList.groupedData}} is documented separately.
     For the method \code{update.lmList}, \code{object} is an object
     inheriting from class \code{lmList}.
   }
@@ -35,10 +36,10 @@ lmList(object, data, level, subset, na.action, pool)
    details.}
   \item{data}{
     a data frame in which to interpret the variables named in
-    \code{object}. 
+    \code{object}.
   }
   \item{level}{
-    an optional integer specifying the level of grouping to be used when 
+    an optional integer specifying the level of grouping to be used when
     multiple nested levels of grouping are present.
   }
  \item{subset}{an optional expression indicating which subset of the rows of
@@ -53,10 +54,14 @@ lmList(object, data, level, subset, na.action, pool)
  }
  \item{pool}{
    an optional logical value indicating whether a pooled
-   estimate of the residual standard error should be used 
+   estimate of the residual standard error should be used
    in calculations of standard deviations or standard errors for
    summaries.
  }
+ \item{warn.lm}{\code{\link{logical}} indicating if \code{\link{lm}()}
+   errors (all of which are caught by \code{\link{tryCatch}}) should be
+   signalled as a \dQuote{summarizing} \code{\link{warning}}.}
+
  \item{x}{an object inheriting from class \code{lmList} to be printed.}
  \item{\dots}{some methods for this generic require additional
    arguments.  None are used in this method.}
@@ -74,21 +79,21 @@ lmList(object, data, level, subset, na.action, pool)
   \code{coef}, \code{fixed.effects}, \code{lme}, \code{pairs},
   \code{plot}, \code{predict}, \code{random.effects}, \code{summary},
   and \code{update} have methods that can be applied to an \code{lmList}
-  object. 
+  object.
 }
 \references{
   Pinheiro, J.C., and Bates, D.M. (2000) "Mixed-Effects Models
-  in S and S-PLUS", Springer.  
+  in S and S-PLUS", Springer.
 }
 
 \seealso{
   \code{\link{lm}},
-  \code{\link{lme.lmList}}, 
-  \code{\link{plot.lmList}},  
-  \code{\link{pooledSD}}, 
-  \code{\link{predict.lmList}}, 
-  \code{\link{residuals.lmList}}, 
-  \code{\link{summary.lmList}}    
+  \code{\link{lme.lmList}},
+  \code{\link{plot.lmList}},
+  \code{\link{pooledSD}},
+  \code{\link{predict.lmList}},
+  \code{\link{residuals.lmList}},
+  \code{\link{summary.lmList}}
 }
 \examples{
 fm1 <- lmList(distance ~ age | Subject, Orthodont)

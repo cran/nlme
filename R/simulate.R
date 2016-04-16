@@ -396,11 +396,11 @@ plot.simulate.lme <-
                 MLy <- c(unlist(MLy), aux)
                 MLdf <- rep(c(dfC, auxNam), rep(length(MLstat), ldf + 1))
             }
-            MLx <- rep((1:length(MLstat) - 0.5)/length(MLstat), ldf + 1)
+            MLx <- rep((seq_along(MLstat) - 0.5)/length(MLstat), ldf + 1)
         } else {
             MLy <- unlist(MLy)
             MLdf <- rep(dfC, rep(length(MLstat), ldf))
-            MLx <- rep((1:length(MLstat) - 0.5)/length(MLstat), ldf)
+            MLx <- rep((seq_along(MLstat) - 0.5)/length(MLstat), ldf)
         }
         auxInd <- MLdf != "df=0"
         meth <- rep("ML", length(MLy))
@@ -438,11 +438,11 @@ plot.simulate.lme <-
                 REMLy <- c(unlist(REMLy), aux)
                 REMLdf <- rep(c(dfC, auxNam), rep(length(REMLstat), ldf + 1))
             }
-            REMLx <- rep((1:length(REMLstat) - 0.5)/length(REMLstat), ldf + 1)
+            REMLx <- rep((seq_along(REMLstat) - 0.5)/length(REMLstat), ldf + 1)
         } else {
             REMLy <- unlist(REMLy)
             REMLdf <- rep(dfC, rep(length(REMLstat), ldf))
-            REMLx <- rep((1:length(REMLstat) - 0.5)/length(REMLstat), ldf)
+            REMLx <- rep((seq_along(REMLstat) - 0.5)/length(REMLstat), ldf)
         }
         auxInd <- c(auxInd, REMLdf != "df=0")
         meth <- c(meth, rep("REML", length(REMLy)))

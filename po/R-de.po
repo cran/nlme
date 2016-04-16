@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.2/ nlme-3.1-119\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
-"POT-Creation-Date: 2015-12-15 23:42\n"
-"PO-Revision-Date: 2015-01-29 15:05+0100\n"
+"POT-Creation-Date: 2016-04-14 19:17\n"
+"PO-Revision-Date: 2016-04-14 13:01+0200\n"
 "Last-Translator: Detlef Steuer <steuer@hsu-hh.de>\n"
 "Language-Team: German <debian-l10n-german@lists.debian.org>\n"
 "Language: de\n"
@@ -265,7 +265,7 @@ msgid "'nint' is not consistent with 'breaks'"
 msgstr "'nint' ist nicht konsistent mit 'breaks'"
 
 msgid "Within-group std. dev. must be a positive numeric value"
-msgstr ""
+msgstr "SD innerhalb der Gruppe muss positiver numerischer Wert sein"
 
 msgid "'object' must be a formula"
 msgstr "'object' muss eine Formel sein"
@@ -352,17 +352,15 @@ msgid "'asTable' can only be used with balanced 'groupedData' objects"
 msgstr ""
 "'asTable' kann nur mit balancierten 'groupedData'-Objekten benutzt werden"
 
+msgid "%d errors caught in %s.  The error messages and their frequencies are"
+msgstr ""
+
 msgid "multiple levels not allowed"
 msgstr "mehrere Stufen nicht erlaubt"
 
 msgid "'data' must be a \"groupedData\" object if 'groups' argument is missing"
 msgstr ""
 "'data' muss ein \"groupedData\"-Objekt sein, falls 'groups'-Argument fehlt"
-
-msgid "An lm fit failed, probably because a factor only had one level"
-msgstr ""
-"Eine lm Anpassung ist fehlgeschlage, vermtlich, weil ein Faktor nur\n"
-"eine Stufe hatte"
 
 msgid "'data' in %s call must evaluate to a data frame"
 msgstr "'data' in %s muss sich zu einem Dataframe berechnen"
@@ -422,6 +420,11 @@ msgstr "'lme.lmList' wird 'data' redefinieren"
 msgid "initial value for \"reStruct\" overwritten in 'lme.lmList'"
 msgstr "Anfangswert für \"reStruct\" in 'lme.lmList' überschrieben"
 
+msgid ""
+"for 'sigma' fixed, 'apVar' is set FALSE, as the cov approxmation is not yet "
+"available."
+msgstr ""
+
 msgid "fixed-effects model must be a formula of the form \"resp ~ pred\""
 msgstr "Feste-Effekte-Modell muss eine Formel der Form \"resp ~ pred\" sein."
 
@@ -465,12 +468,9 @@ msgstr "Terme müssen alle den gleichen Freiheitsgrad im Nenner haben"
 msgid "L may only involve fixed effects with the same denominator DF"
 msgstr "L kann nur feste Effekte mit dem gleichen Nenner DF einschließen"
 
-msgid ""
-"objects must inherit from classes \"gls\", \"gnls\",\"lm\",\"lmList\", \"lme"
-"\",\"nlme\",\"nlsList\", or \"nls\""
-msgstr ""
-"Objekte müssen von den Klassen \"gls\", \"gnls\", \"lm\", \"lmList\", \"lme"
-"\", \"nlme\", \"nlsList\" oder \"nls\" erben"
+#, fuzzy
+msgid "objects must inherit from classes %s, or %s"
+msgstr "Objekt muss von der Klasse \"gls\" abgeleitet sein."
 
 msgid ""
 "some fitted objects deleted because response differs from the first model"
@@ -499,6 +499,13 @@ msgstr ""
 
 msgid "only single level allowed"
 msgstr "nur einzelne Stufe erlaubt"
+
+#, fuzzy
+msgid ""
+"cannot get confidence intervals on var-cov components: %s\n"
+" Consider '%s'"
+msgstr ""
+"Konfidenzintervalle für var-cov-Komponenten können nicht bestimmt werden: %s"
 
 msgid "covariate must have a level attribute when groups are present"
 msgstr "Kovariate muss ein Stufenattribut haben, wenn Gruppen vorhanden sind"
@@ -701,11 +708,9 @@ msgstr ""
 "Namen  in 'random' und in den Startwerten für 'random' auf Stufe %s passen "
 "nicht "
 
-#, fuzzy
 msgid "maximum number of iterations (maxIter = %d) reached without convergence"
 msgstr ""
-"maximale Anzahl der Iterationen (lmeControl(maxIter)) ohne Konvergenz "
-"erreicht"
+"maximale Anzahl der Iterationen (maxIter = %d) ohne Konvergenz erreicht"
 
 msgid "second argument must be a groupedData object"
 msgstr "zweites Argument muss ein groupedData-Objekt sein"
@@ -1196,6 +1201,11 @@ msgid_plural "levels %s not allowed for %s"
 msgstr[0] "Stufe %s nicht für %s erlaubt"
 msgstr[1] "Stufen %s nicht für %s erlaubt"
 
+msgid "%d error caught in %s: %s"
+msgid_plural "%d times caught the same error in %s: %s"
+msgstr[0] ""
+msgstr[1] ""
+
 msgid "%s not found in data"
 msgid_plural "%s not found in data"
 msgstr[0] "%s nicht in Daten gefunden"
@@ -1221,6 +1231,18 @@ msgid_plural ""
 "group names not matched in starting values for random effects: %s"
 msgstr[0] "Gruppenname nicht zu Startwerten für Zufallseffekte passend: %s"
 msgstr[1] "Gruppennamen nicht zu Startwerten für Zufallseffekte passend: %s"
+
+#~ msgid "An lm fit failed, probably because a factor only had one level"
+#~ msgstr ""
+#~ "Eine lm Anpassung ist fehlgeschlage, vermtlich, weil ein Faktor nur\n"
+#~ "eine Stufe hatte"
+
+#~ msgid ""
+#~ "objects must inherit from classes \"gls\", \"gnls\",\"lm\",\"lmList\", "
+#~ "\"lme\",\"nlme\",\"nlsList\", or \"nls\""
+#~ msgstr ""
+#~ "Objekte müssen von den Klassen \"gls\", \"gnls\", \"lm\", \"lmList\", "
+#~ "\"lme\", \"nlme\", \"nlsList\" oder \"nls\" erben"
 
 #~ msgid ""
 #~ "approximate covariance matrix for parameter estimates not of full rank"

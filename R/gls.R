@@ -68,7 +68,7 @@ gls <-
         ## sort the model.frame by groups and get the matrices and parameters
         ## used in the estimation procedures
         ## always use innermost level of grouping
-        groups <- eval(parse(text = paste("~1", deparse(groups[[2L]]), sep = "|")))
+        groups <- eval(substitute(~ 1 | GR, list(GR = groups[[2L]])))
         grps <- getGroups(dataMod, groups,
                           level = length(getGroupsFormula(groups, asList = TRUE)))
         ## ordering data by groups
@@ -379,7 +379,7 @@ ACF.gls <-
                 if (length(allV) > 0L) {
                     alist <- lapply(as.list(allV), as.name)
                     names(alist) <- allV
-                    alist <- c(as.list(as.name("data.frame")), alist)
+                    alist <- c(as.list(quote(data.frame)), alist)
                     mode(alist) <- "call"
                     data <- eval(alist, sys.parent(1))
                 }
@@ -398,7 +398,7 @@ ACF.gls <-
         res <- list(res)
     }
     if(missing(maxLag)) {
-        maxLag <- min(c(maxL <- max(sapply(res, length)) - 1L,
+        maxLag <- min(c(maxL <- max(lengths(res)) - 1L,
                         as.integer(10 * log10(maxL + 1))))
     }
     val <- lapply(res,
@@ -559,6 +559,7 @@ anova.gls <-
     }
 }
 
+## (This is "cut'n'paste" similar to augPred.lme() in ./lme.R -- keep in sync!)
 augPred.gls <-
     function(object, primary = NULL, minimum = min(primary),
              maximum = max(primary), length.out = 51L, ...)
@@ -574,25 +575,23 @@ augPred.gls <-
                           sys.call()[[1L]]), domain = NA)
         }
         primary <- getCovariate(data)
-        prName <- c_deparse(getCovariateFormula(data)[[2]])
-    } else{
-        primary <- asOneSidedFormula(primary)[[2]]
-        prName <- c_deparse(primary)
-        primary <- eval(primary, data)
-    }
-    newprimary <- seq(from = minimum, to = maximum, length.out = length.out)
-    groups <- getGroups(object)
-    grName <- ".groups"
-    if (is.null(groups)) {		# no groups used
-        noGrp <- TRUE
-        groups <- rep("1", length(primary))
-        value <- data.frame(newprimary, rep("1", length(newprimary)))
+        pr.var <- getCovariateFormula(data)[[2L]]
     } else {
-        noGrp <- FALSE
-        ugroups <- unique(groups)
-        value <- data.frame(rep(newprimary, length(ugroups)),
-                            rep(ugroups, rep(length(newprimary), length(ugroups))))
+        pr.var <- asOneSidedFormula(primary)[[2L]]
+        primary <- eval(pr.var, data)
     }
+    prName <- c_deparse(pr.var)
+    newprimary <- seq(from = minimum, to = maximum, length.out = length.out)
+    groups <- getGroups(object) # much simpler here than in augPred.lme
+    grName <- ".groups"
+    value <- if (noGrp <- is.null(groups)) {		# no groups used
+		 groups <- rep("1", length(primary))
+		 data.frame(newprimary, rep("1", length(newprimary)))
+	     } else {
+		 ugroups <- unique(groups)
+		 data.frame(rep(newprimary, length(ugroups)),
+			    rep(ugroups, rep(length(newprimary), length(ugroups))))
+	     }
     names(value) <- c(prName, grName)
     ## recovering other variables in data that may be needed for predictions
     ## varying variables will be replaced by their means
@@ -604,7 +603,7 @@ augPred.gls <-
     pred <- predict(object, value)
     newvals <- cbind(value[, 1:2], pred)
     names(newvals)[3] <- respName <-
-        deparse(getResponseFormula(object)[[2]])
+        deparse(resp.var <- getResponseFormula(object)[[2L]])
     orig <- data.frame(primary, groups, getResponse(object))
     names(orig) <- names(newvals)
     value <- rbind(orig, newvals)
@@ -618,14 +617,13 @@ augPred.gls <-
 	labs[names(attr(data, "labels"))] <- attr(data, "labels")
 	unts[names(attr(data, "units"))] <- attr(data, "units")
     }
+    subL <- list(Y = resp.var, X = pr.var, G = as.name(grName))
     structure(value, class = c("augPred", class(value)),
 	      labels = labs,
-	      units = unts,
-	      formula =
-		  eval(parse(text =
-				 if (noGrp)
-				      paste(respName, prName, sep = "~")
-				 else paste(respName, "~", prName, "|", grName))))
+	      units  = unts,
+	      formula= if(noGrp)
+			   eval (substitute(Y ~ X,     subL))
+		       else eval(substitute(Y ~ X | G, subL)))
 }
 
 coef.gls <-
@@ -992,10 +990,10 @@ print.gls <-
             "likelihood: ", format(x$logLik), "\n", sep = "")
     }
     cat("\nCoefficients:\n")
-    print(coef(x))
+    print(coef(x), ...)
     cat("\n")
     if (length(x$modelStruct) > 0L) {
-        print(summary(x$modelStruct))
+        print(summary(x$modelStruct), ...)
     }
     cat("Degrees of freedom:", dd[["N"]],"total;",dd[["N"]] - dd[["p"]],
         "residual\n")
@@ -1024,11 +1022,13 @@ print.summary.gls <-
     if (!is.null(mCall$subset)) {
         cat("  Subset:", deparse(asOneSidedFormula(mCall$subset)[[2]]),"\n")
     }
-    print( data.frame(AIC=x$AIC,BIC=x$BIC,logLik=as.vector(x$logLik),row.names = " "))
+    print(data.frame(AIC=x$AIC, BIC=x$BIC, logLik=as.vector(x$logLik),
+		     row.names = " "),
+	  ...)
     if (verbose) { cat("Convergence at iteration:",x$numIter,"\n") }
     if (length(x$modelStruct)) {
         cat("\n")
-        print(summary(x$modelStruct))
+        print(summary(x$modelStruct), ...)
     }
     cat("\nCoefficients:\n")
     xtTab <- as.data.frame(x$tTable)
@@ -1041,19 +1041,17 @@ print.summary.gls <-
         levels(xtTab[, wchPval])[wchLv] <- "<.0001"
     }
     row.names(xtTab) <- dimnames(x$tTable)[[1]]
-    print(xtTab)
+    print(xtTab, ...)
     if (nrow(x$tTable) > 1L) {
         corr <- x$corBeta
         class(corr) <- "correlation"
-        print(corr,
-              title = "\n Correlation:",
-              ...)
+        print(corr, title = "\n Correlation:", ...)
     }
     cat("\nStandardized residuals:\n")
-    print(x$residuals)
+    print(x$residuals, ...)
     cat("\n")
     cat("Residual standard error:", format(x$sigma),"\n")
-    cat("Degrees of freedom:", dd[["N"]],"total;",dd[["N"]] - dd[["p"]],
+    cat("Degrees of freedom:", dd[["N"]],"total;", dd[["N"]] - dd[["p"]],
         "residual\n")
     invisible(x)
 }
@@ -1181,7 +1179,7 @@ Variogram.gls <-
                 if (length(allV) > 0L) {
                     alist <- lapply(as.list(allV), as.name)
                     names(alist) <- allV
-                    alist <- c(as.list(as.name("data.frame")), alist)
+                    alist <- c(as.list(quote(data.frame)), alist)
                     mode(alist) <- "call"
                     data <- eval(alist, sys.parent(1))
                 }
@@ -1193,36 +1191,34 @@ Variogram.gls <-
                 grps <- getGroups(object)
             }
             covForm <- getCovariateFormula(form)
-            if (length(all.vars(covForm)) > 0L) {
-                if (attr(terms(covForm), "intercept") == 1L) {
-                    covForm <-
-                        eval(parse(text = paste("~", deparse(covForm[[2]]),"-1",sep="")))
+            covar <-
+                if (length(all.vars(covForm)) > 0L) {
+                    if (attr(terms(covForm), "intercept") == 1L) {
+                        covForm <- eval(substitute(~ CV - 1, list(CV = covForm[[2]])))
+                    }
+                    covar <- model.frame(covForm, data, na.action = na.action)
+                    ## making sure grps is consistent
+                    wchRows <- !is.na(match(row.names(data), row.names(covar)))
+                    if (!is.null(grps)) {
+                        grps <- grps[wchRows, drop = TRUE]
+                    }
+                    as.data.frame(unclass(model.matrix(covForm, covar)))
+                } else if (is.null(grps))
+                    1:nrow(data)
+                else
+                    data.frame(dist = unlist(tapply(rep(1, nrow(data)), grps, cumsum)))
+
+            distance <-
+                if (is.null(grps))
+                    dist(as.matrix(covar), method = metric)
+                else {
+                    covar <- split(covar, grps)
+                    ## getting rid of 1-observation groups
+                    covar <- covar[sapply(covar, function(el) nrow(as.matrix(el))) > 1]
+                    lapply(covar,
+                           function(el, metric) dist(as.matrix(el), method=metric),
+                           metric = metric)
                 }
-                covar <- model.frame(covForm, data, na.action = na.action)
-                ## making sure grps is consistent
-                wchRows <- !is.na(match(row.names(data), row.names(covar)))
-                if (!is.null(grps)) {
-                    grps <- grps[wchRows, drop = TRUE]
-                }
-                covar <- as.data.frame(unclass(model.matrix(covForm, covar)))
-            } else {
-                if (is.null(grps)) {
-                    covar <- 1:nrow(data)
-                } else {
-                    covar <-
-                        data.frame(dist = unlist(tapply(rep(1, nrow(data)), grps, cumsum)))
-                }
-            }
-            if (is.null(grps)) {
-                distance <- dist(as.matrix(covar), method = metric)
-            } else {
-                covar <- split(covar, grps)
-                ## getting rid of 1-observation groups
-                covar <- covar[sapply(covar, function(el) nrow(as.matrix(el))) > 1]
-                distance <- lapply(covar,
-                                   function(el, metric) dist(as.matrix(el), method=metric),
-                                   metric = metric)
-            }
         }
     }
     res <- resid(object, type = resType)
@@ -1233,7 +1229,7 @@ Variogram.gls <-
         val <- Variogram(res, distance)
     } else {
         res <- split(res, grps)
-        res <- res[sapply(res, length) > 1L] # no 1-observation groups
+        res <- res[lengths(res) > 1L] # no 1-observation groups
         levGrps <- levels(grps)
         val <- structure(vector("list", length(levGrps)), names = levGrps)
         for(i in levGrps) {
@@ -1325,13 +1321,13 @@ Initialize.glsStruct <-
     if (length(object)) {
         object[] <- lapply(object, Initialize, data)
         theta <- lapply(object, coef)
-        len <- unlist(lapply(theta, length))
+        len <- lengths(theta)
         num <- seq_along(len)
-        if (sum(len) > 0) {
-            pmap <- outer(rep(num, len), num, "==")
-        } else {
-            pmap <- array(FALSE, c(1, length(len)))
-        }
+        pmap <-
+            if (sum(len) > 0)
+                outer(rep(num, len), num, "==")
+            else
+                array(FALSE, c(1, length(len)))
         dimnames(pmap) <- list(NULL, names(object))
         attr(object, "pmap") <- pmap
         attr(object, "glsFit") <-

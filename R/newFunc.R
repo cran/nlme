@@ -25,13 +25,13 @@ allCoef <-
 {
   dots <- list(...)
   theta <- lapply(dots, extract)
-  len <- unlist(lapply(theta, length))
+  len <- lengths(theta)
   num <- seq_along(len)
-  if (sum(len) > 0) {
-    which <- outer(rep(num, len), num, "==")
-  } else {
-    which <- array(FALSE, c(1, length(len)))
-  }
+  which <-
+    if (sum(len) > 0)
+      outer(rep(num, len), num, "==")
+    else
+      array(FALSE, c(1, length(len)))
   cnames <- unlist(as.list(sys.call()[-1]))
   dimnames(which) <- list(NULL, cnames[cnames != substitute(extract)])
   theta <- unlist(theta)

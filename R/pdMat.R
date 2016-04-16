@@ -2,7 +2,7 @@
 ###
 ### Copyright 1997-2003  Jose C. Pinheiro,
 ###                      Douglas M. Bates <bates@stat.wisc.edu>
-# Copyright 2006-2012 The R Core team
+### Copyright 2006-2016  The R Core team
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -179,7 +179,7 @@ pdConstruct.pdMat <-
         if (any(noMatch <- is.na(match(nam, namesForm)))) {
           err <- TRUE
           namCopy <- nam
-          indNoMatch <- (1:length(nam))[noMatch]
+          indNoMatch <- seq_along(nam)[noMatch]
           if (any(wch1 <- (nchar(nam, "c") > 12))) {
             ## possibly names with .(Intercept) in value
             wch1 <- substring(nam, nchar(nam, "c")-10) == "(Intercept)"
@@ -336,7 +336,7 @@ Names.pdMat <-
       err <- TRUE
       ## checking nlme case
       valueCopy <- value
-      indNoMatch <- (1:length(value))[noMatch]
+      indNoMatch <- seq_along(value)[noMatch]
       nam1 <- value[noMatch]            # no matching names
       if (any(wch1 <- (nchar(nam1, "c") > 12))) {
         ## possibly names with .(Intercept) in value
@@ -425,8 +425,8 @@ plot.pdMat <-
 			    y = sumDif[1,2] + lagged * sumDif[2,2])
 		     }, lagged = laggedCos)
     gg <- rep(seq_along(xylist), rep(length(.angles), length(xylist)))
-    panel.superpose(unlist(lapply(xylist, "[[", "x")),
-		    unlist(lapply(xylist, "[[", "y")),
+    panel.superpose(unlist(lapply(xylist, `[[`, "x")),
+		    unlist(lapply(xylist, `[[`, "y")),
 		    subscripts = seq_along(gg), groups = gg, ..., type = "l")
   }, subscripts = TRUE, groups = groups)
 }
@@ -1872,7 +1872,7 @@ pdConstruct.pdBlocked <-
     stop("all elements in the argument must generate \"pdMat\" objects")
   }
   namesList <- lapply(object, Names)
-  lNam <- unlist(lapply(namesList, length))
+  lNam <- lengths(namesList)
 #  namInterc <- unlist(lapply(namesList,
 #                             function(el) {
 #                               (length(el) == 1) && (el == "(Intercept)")

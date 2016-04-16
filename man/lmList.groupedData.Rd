@@ -4,16 +4,17 @@
 
 \name{lmList.groupedData}
 \title{lmList Fit from a groupedData Object}
-\usage{
-\method{lmList}{groupedData}(object, data, level, subset, na.action, pool)
-}
 \alias{lmList.groupedData}
+\usage{
+\method{lmList}{groupedData}(object, data, level, subset, na.action = na.fail,
+       pool = TRUE, warn.lm = TRUE)
+}
 \arguments{
   \item{object}{a data frame inheriting from class \code{"\link{groupedData}"}.}
   \item{data}{this argument is included for consistency with the generic
     function. It is ignored in this method function.}
   \item{level}{
-    an optional integer specifying the level of grouping to be used when 
+    an optional integer specifying the level of grouping to be used when
     multiple nested levels of grouping are present.
   }
   \item{subset}{an optional expression indicating which subset of the rows of
@@ -26,11 +27,7 @@
     \code{lmList} to print an error message and terminate if there are any
     incomplete observations.
   }
-  \item{pool}{
-    an optional logical value that is preserved as an attribute of the
-    returned value.  This will be used as the default for \code{pool} in
-    calculations of standard deviations or standard errors for summaries.
-  }
+  \item{pool, warn.lm}{optional \code{\link{logical}}s, see \code{\link{lmList}}.}
 }
 \description{
   The response variable and primary covariate in \code{formula(object)}
@@ -46,7 +43,7 @@
   \code{coef}, \code{fixed.effects}, \code{lme}, \code{pairs},
   \code{plot}, \code{predict}, \code{random.effects}, \code{summary},
   and \code{update} have methods that can be applied to an \code{lmList}
-  object. 
+  object.
 }
 
 \seealso{

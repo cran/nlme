@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nlme 3.1-115\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
-"POT-Creation-Date: 2015-12-15 23:42\n"
+"POT-Creation-Date: 2016-04-14 19:17\n"
 "PO-Revision-Date: 2014-03-25 17:00+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -517,6 +517,9 @@ msgstr ""
 "funkcja 'asTable()' może być użyta jedynie ze zbalansowanymi obiektami klasy "
 "\"groupedData\""
 
+msgid "%d errors caught in %s.  The error messages and their frequencies are"
+msgstr ""
+
 # nlme/R/lmList.R: 56
 # stop("multiple levels not allowed")
 # nlme/R/lmList.R: 71
@@ -534,13 +537,6 @@ msgid "'data' must be a \"groupedData\" object if 'groups' argument is missing"
 msgstr ""
 "argument 'data' musi być obiektem klasy \"groupedData\" jeśli brakuje "
 "argumentu 'groups' "
-
-# nlme/R/lmList.R: 87
-# warning("An lm fit failed, probably because a factor only had one level")
-msgid "An lm fit failed, probably because a factor only had one level"
-msgstr ""
-"Dopasowanie 'lm()' nie powiodło się prawdopodobnie dlatego, że czynnik miał "
-"tylko jeden poziom"
 
 # nlme/R/lmList.R: 113
 # stop(gettextf("'data' in %s call must evaluate to a data frame", sQuote(substitute(object))), domain = "R-nlme")
@@ -645,6 +641,11 @@ msgstr ""
 "początkowa wartość dla \"reStruct\" została nadpisana w funkcji 'lme."
 "lmList()'"
 
+msgid ""
+"for 'sigma' fixed, 'apVar' is set FALSE, as the cov approxmation is not yet "
+"available."
+msgstr ""
+
 # nlme/R/simulate.R: 26
 # stop("fixed-effects model must be a formula of the form \"resp ~ pred\"")
 # nlme/R/lme.R: 155
@@ -716,12 +717,9 @@ msgstr ""
 "'L' może zawierać jedynie stałe efekty z tą samą liczbą stopni swobody "
 "mianownika"
 
-msgid ""
-"objects must inherit from classes \"gls\", \"gnls\",\"lm\",\"lmList\", \"lme"
-"\",\"nlme\",\"nlsList\", or \"nls\""
-msgstr ""
-"obiekty muszą dziedziczyć z co najmniej jednej z następujących klas: \"lm\","
-"\"lmList\", \"lme\",\"nlme\",\"nlsList\", \"nls\""
+#, fuzzy
+msgid "objects must inherit from classes %s, or %s"
+msgstr "argument 'object' nie jest obiektem klasy \"gls\""
 
 # nlme/R/lme.R: 988
 # warning("some fitted objects deleted because response differs from the first model")
@@ -765,6 +763,16 @@ msgstr "wszystkie dopasowane obiekty muszą używać tej samej liczby obserwacji
 # stop("only single level allowed")
 msgid "only single level allowed"
 msgstr "jedynie pojedynczy poziom jest dozwolony"
+
+# nlme/R/gls.R: 772
+# stop(gettextf("cannot get confidence intervals on var-cov components: %s", aV), domain = "R-nlme")
+# nlme/R/lme.R: 1302
+# stop(gettextf("cannot get confidence intervals on var-cov components: %s", aV), domain = "R-nlme")
+#, fuzzy
+msgid ""
+"cannot get confidence intervals on var-cov components: %s\n"
+" Consider '%s'"
+msgstr "nie można uzyskać przedziałów ufności na komponentach var-cov: %s"
 
 # nlme/R/lme.R: 1519
 # stop("covariate must have a level attribute when groups are present")
@@ -1828,6 +1836,12 @@ msgstr[0] "poziom %s nie jest dozwolony dla %s"
 msgstr[1] "poziomy %s nie są dozwolone dla %s"
 msgstr[2] "poziomy %s nie są dozwolone dla %s"
 
+msgid "%d error caught in %s: %s"
+msgid_plural "%d times caught the same error in %s: %s"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
 msgid "%s not found in data"
 msgid_plural "%s not found in data"
 msgstr[0] "%s nie został znaleziony w danych"
@@ -1901,6 +1915,20 @@ msgstr[1] ""
 msgstr[2] ""
 "nazwy grup nie zgadzają się z początkowymi wartościami dla efektów losowych: "
 "%s"
+
+# nlme/R/lmList.R: 87
+# warning("An lm fit failed, probably because a factor only had one level")
+#~ msgid "An lm fit failed, probably because a factor only had one level"
+#~ msgstr ""
+#~ "Dopasowanie 'lm()' nie powiodło się prawdopodobnie dlatego, że czynnik "
+#~ "miał tylko jeden poziom"
+
+#~ msgid ""
+#~ "objects must inherit from classes \"gls\", \"gnls\",\"lm\",\"lmList\", "
+#~ "\"lme\",\"nlme\",\"nlsList\", or \"nls\""
+#~ msgstr ""
+#~ "obiekty muszą dziedziczyć z co najmniej jednej z następujących klas: \"lm"
+#~ "\",\"lmList\", \"lme\",\"nlme\",\"nlsList\", \"nls\""
 
 # nlme/R/gnls.R: 483
 # stop("approximate covariance matrix for parameter estimates not of full rank")

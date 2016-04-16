@@ -1,6 +1,6 @@
 ## Contributed by Mary Lindstrom <lindstro@biostat.wisc.edu>
 
-# Copyright 2007-2011 The R Core team
+# Copyright 2007-2016 The R Core team
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -44,7 +44,7 @@ getVarCov.lme <-
             individuals  <-  ugroups[individuals]
         for (individ in individuals)
         {
-            indx <- (1:length(ugroups))[individ==ugroups]
+            indx <- which(individ == ugroups)
             if (!length(indx))
                 stop(gettextf("individual %s was not used in the fit",
                               sQuote(individ)), domain = NA)

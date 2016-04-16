@@ -2,7 +2,7 @@
 ###
 ### Copyright 1997-2003  Jose C. Pinheiro,
 ###                      Douglas M. Bates <bates@stat.wisc.edu>
-# Copyright 2006-2014 The R Core team
+### Copyright 2006-2016  The R Core team
 
 ##*## Methods for some of the generics in newGenerics.q for standard classes
 
@@ -23,8 +23,7 @@ getCovariate.data.frame <-
   }
 }
 
-getData.nls <-
-  function(object)
+getData.nls <- function(object)
 {
   mCall <- object$call
   ## avoid partial matches here.
@@ -34,8 +33,8 @@ getData.nls <-
   if (!is.null(naAct)) {
       ## guessing here: known values (omit, exclude) work.
       data <- if (inherits(naAct, "omit")) data[-naAct, ]
-      else if (inherits(naAct, "exclude")) data
-      else eval(mCall$na.action)(data)
+	      else if (inherits(naAct, "exclude")) data
+	      else eval(mCall$na.action)(data)
   }
   subset <- mCall$subset
   if (!is.null(subset)) {
@@ -61,28 +60,25 @@ getGroups.data.frame <-
       names(grpForm) <-
         unlist( lapply( grpForm, function(el) deparse( el[[ length(el) ]] ) ) )
     }
-    if (any(unlist(lapply(grpForm,
-#                          function(el) length(el[[length(el)]]))) != 1)) {
-                          function(el) length(all.vars(el)))) != 1)) {
+    if (any(vapply(grpForm, function(el) length(all.vars(el)) != 1, NA)))
       stop("invalid formula for groups")
-    }
+
     form <- grpForm
   } else if (data.class(form) == "list") {
-    if (!all(unlist(lapply(form, function(el) inherits(el, "formula"))))) {
+    if (!all(vapply(form, function(el) inherits(el, "formula"), NA))) {
       stop("'form' must have all components as formulas")
     }
   } else {
     stop("'form' can only be a formula, or a list of formulas")
   }
   vlist <- lapply(form,
-                  function(x, dat, N) {
-                    val <- eval(x[[length(x)]], dat)
-                    if (length(val) == 1) {             # repeat groups
-                      return(as.factor(rep(val, N)))
-                    } else {
-                      return(as.factor(val)[drop = TRUE])
-                    }
-                  }, dat = object, N = nrow(object))
+                  function(x, N) {
+                    val <- eval(x[[length(x)]], object)
+                    if (length(val) == 1L)              # repeat groups
+                      as.factor(rep(val, N))
+                    else
+                      as.factor(val)[drop = TRUE]
+                  }, N = nrow(object))
   if (length(vlist) == 1) return(vlist[[1]]) # ignore level - only one choice
   ## make the list into a data frame with appropriate names
   value <- do.call("data.frame", vlist)
@@ -112,9 +108,9 @@ getGroups.data.frame <-
     value <- value[do.call("order", value),]
     aux <- unique(do.call("paste", c(lapply(as.list(value),
 					    as.character), sep = sep)))
-    return(ordered(val, aux))
+    ordered(val, aux)
   } else {
-    return(ordered(val, unique(as.character(val))))
+    ordered(val, unique(as.character(val)))
   }
 }
 
@@ -140,10 +136,10 @@ getGroupsFormula.default <-
     stop("'form' argument must be a formula")
   }
   form <- form[[length(form)]]
-  if (!((length(form) == 3) && (form[[1]] == as.name("|")))) {
+  if (!(length(form) == 3L && form[[1L]] == as.name("|")))
     ## no conditioning expression
     return(NULL)
-  }
+
   ## val <- list( asOneSidedFormula( form[[ 3 ]] ) )
   val <- splitFormula(asOneSidedFormula(form[[3]]), sep = sep)
   names(val) <- unlist(lapply(val, function(el) deparse(el[[2]])))
@@ -167,39 +163,32 @@ Names.formula <-
   allV <- allV[is.na(match(allV, exclude))]
 
   if (length(allV) == 0) {
-    if (attr(terms(object), "intercept")) { return("(Intercept)") }
-    return(NULL)
-  }
-
-  if (any(is.na(match(allV, names(data))))) { return(NULL) }
-  dimnames(model.matrix(object, model.frame(object, data)))[[2]]
+      if (attr(terms(object), "intercept")) "(Intercept)" ## else NULL
+  } else if (!anyNA(match(allV, names(data))))
+      dimnames(model.matrix(object, model.frame(object, data)))[[2]]
+  ## else NULL
 }
 
 Names.listForm <-
   function(object, data = list(), exclude = c("pi", "."), ...)
 {
-  pnames <- as.character(unlist(lapply(object, "[[", 2)))
-  nams <- lapply(object, function(el, data, exclude) {
-    Names(getCovariateFormula(el), data, exclude)
-    }, data = data, exclude = exclude)
+  pnames <- as.character(unlist(lapply(object, `[[`, 2L)))
+  nams <- lapply(object, function(el) Names(getCovariateFormula(el), data, exclude))
   if (is.null(nams[[1]])) return(NULL)
   val <- c()
-  for(i in seq_along(object)) {
-    if ((length(nams[[i]]) == 1) && (nams[[i]] == "(Intercept)")) {
-      val <- c(val, pnames[i])
-    } else {
-      val <- c(val, paste(pnames[i], nams[[i]], sep = "."))
-    }
-  }
+  for(i in seq_along(object))
+    val <- c(val,
+             if ((length(nams[[i]]) == 1) && (nams[[i]] == "(Intercept)"))
+               pnames[i]
+             else
+               paste(pnames[i], nams[[i]], sep = "."))
   val
 }
 
-needUpdate.default <-
-  function(object)
+needUpdate.default <- function(object)
 {
   val <- attr(object, "needUpdate")
-  if (is.null(val) || !val) FALSE
-  else TRUE
+  !is.null(val) && val
 }
 
 ##--- needs Trellis/Lattice :
@@ -286,7 +275,7 @@ plot.nls <-
     if (is.null(data)) {		# try to construct data
       alist <- lapply(as.list(allV), as.name)
       names(alist) <- allV
-      alist <- c(list(as.name("data.frame")), alist)
+      alist <- c(list(quote(data.frame)), alist)
       mode(alist) <- "call"
       data <- eval(alist, sys.parent(1))
     } else {
@@ -349,7 +338,7 @@ plot.nls <-
   grpsF <- getGroupsFormula(form)
   if (!is.null(grpsF)) {
     gr <- splitFormula(grpsF, sep = "*")
-    for(i in 1:length(gr)) {
+    for(i in seq_along(gr)) {
       auxGr <- all.vars(gr[[i]])
       for(j in auxGr) {
         argData[[j]] <- eval(as.name(j), data)
@@ -511,7 +500,7 @@ plot.augPred <-
 		 ylab = paste(attr(x, "labels")$y, attr(x, "units")$y))
   labels <- labels[unlist(lapply(labels, function(el) length(el) > 0))]
   args <- c(list(attr(x, "formula"),
-		 groups = as.name(".type"),
+		 groups = quote(.type),
 		 data = x,
 		 strip = function(...) strip.default(..., style = 1),
 		 panel = if (length(levels(x[[".type"]])) == 2) {
@@ -706,7 +695,7 @@ qqnorm.nls <-
     if (is.null(data)) {		# try to construct data
       alist <- lapply(as.list(allV), as.name)
       names(alist) <- allV
-      alist <- c(as.list(as.name("data.frame")), alist)
+      alist <- c(as.list(quote(data.frame)), alist)
       mode(alist) <- "call"
       data <- eval(alist, sys.parent(1))
     } else {

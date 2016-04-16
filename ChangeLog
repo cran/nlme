@@ -1,4 +1,18 @@
-2016-03-12  Martin Mächler  <maechler@stat.math.ethz.ch>
+2016-03-21 Martin Maechler
+
+	* R/nlme.R (getParsNlme): wish of PR#16614 : now predict REs as NA
+	for non-existing levels instead of signalling error.
+	* R/*.R: cosmetics: More vapply(); quote(.) instead of as.name(),
+	passing '...' down in print() methods, etc.
+
+2016-03-16 Martin Maechler
+
+	* DESCRIPTION (Version): 3.1-127
+	* R/lmList.R, R/nlsList.R: same kind of error catching -> warning
+	* */*.R: speedup cosmetics:  seq_along; vapply(); lengths();
+	lapply(a, `[[`, i).  Less  eval(parse(text = ....))
+
+2016-03-12 Martin Maechler
 
 	* DESCRIPTION: version 3.1-126
 	* R/nlme.R (predict.nlme): fix bug PR#16715; +cosmetic; also in

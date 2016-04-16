@@ -12,10 +12,10 @@ importFrom("stats",
            nlm, nlminb, nls, nls.control, nobs, optim,
            pchisq, pf, predict, pt,
            qchisq, qf, qnorm, qqnorm, qt, quantile,
-           resid, residuals, rnorm, runif, simulate, terms,
+           resid, residuals, rnorm, runif, simulate, setNames, terms,
            update, update.formula, var, vcov)
 
-importFrom("utils", head, tail)
+importFrom("utils", head, tail, capture.output)
 
 importFrom("lattice",
            Rows, bwplot, dotplot, llines, lpoints, lsegments, ltext,

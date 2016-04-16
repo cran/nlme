@@ -12,12 +12,12 @@ matrix(object) <- value
  \item{object}{any object to which \code{as.matrix} can be applied.}
  \item{value}{a matrix, or list of matrices, with the same dimensions as
    \code{as.matrix(object)} with the new values to be assigned to the
-   matrix associated with \code{object}.} 
+   matrix associated with \code{object}.}
 }
 \description{
   This function is generic; method functions can be written to handle
-  specific classes of objects. Classes which already have methods for
-  this function include \code{pdMat}, \code{pdBlocked}, and 
+  specific classes of objects.  Classes which already have methods for
+  this function include \code{pdMat}, \code{pdBlocked}, and
   \code{reStruct}.
 }
 \value{
@@ -25,12 +25,8 @@ matrix(object) <- value
 }
 \author{José Pinheiro and Douglas Bates \email{bates@stat.wisc.edu}}
 
-\seealso{\code{\link{as.matrix}}
-%  ,\code{"\link[=Matrix.pdMat]{matrix.pdMat}"}
-%  ,\code{"\link[=Matrix.reStruct]{matrix.reStruct"}}
-}
-
-\examples{
-## see the method function documentation
+\seealso{\code{\link{as.matrix}}, also for examples,
+  \code{\link{matrix<-.pdMat}},%incl .pdBlocked
+  \code{\link{matrix<-.reStruct}}.
 }
 \keyword{models}
