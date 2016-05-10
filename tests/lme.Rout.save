@@ -1,5 +1,5 @@
 
-R version 3.2.3 Patched (2016-01-12 r69945) -- "Wooden Christmas-Tree"
+R Under development (unstable) (2016-05-02 r70575) -- "Unsuffered Consequences"
 Copyright (C) 2016 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -130,26 +130,7 @@ Residual    1.310040
 
 Number of Observations: 108
 Number of Groups: 27 
-> (i4 <- intervals(fm4))
-Approximate 95% confidence intervals
-
- Fixed effects:
-                lower      est.     upper
-(Intercept) 15.218322 16.761111 18.303900
-age          0.518387  0.660185  0.801984
-attr(,"label")
-[1] "Fixed effects:"
-
- Random Effects:
-  Level: Subject 
-                         lower      est.    upper
-sd((Intercept))       0.948561  2.327034 5.708742
-sd(age)               0.102509  0.226428 0.500147
-cor((Intercept),age) -0.938250 -0.609333 0.298169
-
- Within-group standard error:
-  lower    est.   upper 
-1.08498 1.31004 1.58179 
+> i4 <- intervals(fm4)
 > ## from  dput(signif(i4$reStruct$Subject, 8))
 > ## R-devel 2016-01-11; 64-bit :
 > reSS <- data.frame(lower = c(0.9485605, 0.10250901, -0.93825047),
@@ -175,6 +156,11 @@ cor((Intercept),age) -0.938250 -0.609333 0.298169
 +     all.equal(as.vector(i4$sigma),
 +               ##  lower     est.        upper
 +               c(1.0849772, 1.3100397, 1.5817881), tol=8e-4)
++    ,
++     all.equal(as.vector(i4$fixed),
++               as.vector(rbind(c(15.218322, 16.761111, 18.3039),
++                               c(0.51838667, 0.66018519, 0.8019837))),
++               tol = 1e-6)
 + )
 > 
 > 
@@ -198,4 +184,4 @@ cor((Intercept),age) -0.938250 -0.609333 0.298169
 > 
 > proc.time()
    user  system elapsed 
-  1.720   0.095   1.807 
+  1.900   0.087   2.040 

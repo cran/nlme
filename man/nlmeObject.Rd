@@ -13,16 +13,16 @@
   \code{fitted}, \code{fixed.effects}, \code{formula}, \code{getGroups},
   \code{getResponse}, \code{intervals}, \code{logLik}, \code{pairs},
   \code{plot}, \code{predict}, \code{print}, \code{random.effects},
-  \code{residuals}, \code{summary}, and \code{update}.   
+  \code{residuals}, \code{summary}, and \code{update}.
 
 }
 \value{
   The following components must be included in a legitimate \code{"nlme"}
-  object. 
+  object.
   \item{apVar}{an approximate covariance matrix for the
-    variance-covariance coefficients. If \code{apVar = FALSE} in the list
-    of control values used in the call to \code{nlme}, this
-    component is equal to \code{NULL}.}
+    variance-covariance coefficients. If \code{apVar = FALSE} in the
+    control values used in the call to \code{nlme}, this component is
+    \code{NULL}.}
   \item{call}{a list containing an image of the \code{nlme} call that
     produced the object.}
   \item{coefficients}{a list with two components, \code{fixed} and
@@ -67,13 +67,13 @@
     likelihood, or \code{"REML"} for restricted maximum likelihood.}
   \item{modelStruct}{an object inheriting from class \code{nlmeStruct},
     representing a list of mixed-effects model components, such
-    as \code{reStruct}, \code{corStruct}, and \code{varFunc} objects.} 
+    as \code{reStruct}, \code{corStruct}, and \code{varFunc} objects.}
   \item{numIter}{the number of iterations used in the iterative
-    algorithm.} 
+    algorithm.}
   \item{residuals}{a data frame with the residuals as columns. The
     leftmost column corresponds to the population residuals
     and successive columns from left to right correspond to increasing
-    levels of grouping.} 
+    levels of grouping.}
   \item{sigma}{the estimated within-group error standard deviation.}
   \item{varFix}{an approximate covariance matrix of the
     fixed effects estimates.}

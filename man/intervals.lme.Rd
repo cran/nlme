@@ -5,7 +5,8 @@
 \name{intervals.lme}
 \title{Confidence Intervals on lme Parameters}
 \usage{
-\method{intervals}{lme}(object, level, which, \dots)
+\method{intervals}{lme}(object, level = 0.95,
+          which = c("all", "var-cov", "fixed"), \dots)
 }
 \alias{intervals.lme}
 \alias{print.intervals.lme}
@@ -13,14 +14,14 @@
  \item{object}{an object inheriting from class \code{"\link{lme}"}, representing
    a fitted linear mixed-effects model.}
  \item{level}{an optional numeric value with the confidence level for
-   the intervals. Defaults to 0.95.} 
+   the intervals.  Defaults to 0.95.}
  \item{which}{an optional character string specifying the  subset
    of parameters for which to construct the confidence
    intervals. Possible values are \code{"all"} for all parameters,
    \code{"var-cov"} for the variance-covariance parameters only, and
-   \code{"fixed"} for the fixed effects only. Defaults to \code{"all"}.}
+   \code{"fixed"} for the fixed effects only.  Defaults to \code{"all"}.}
  \item{\dots}{some methods for this generic require additional
-    arguments.  None are used in this method.} 
+    arguments.  None are used in this method.}
 }
 \description{
   Approximate confidence intervals for the parameters in the linear
@@ -56,7 +57,7 @@
 
 \references{
   Pinheiro, J.C., and Bates, D.M. (2000) "Mixed-Effects Models
-  in S and S-PLUS", Springer.  
+  in S and S-PLUS", Springer.
 }
 \author{José Pinheiro and Douglas Bates \email{bates@stat.wisc.edu}}
 

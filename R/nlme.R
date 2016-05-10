@@ -205,7 +205,6 @@ nlme.formula <-
       ## will assume single group
       groups <- ~ 1
       names(reSt) <- namGrp <- "1"
-
     }
   } else {
     g.exp <- eval(parse(text = paste("~1", deparse(groups[[2]]),sep="|")))
@@ -256,17 +255,16 @@ nlme.formula <-
                                                       sep = "~"),
                                                 collapse = ","), ")")))
   }))
-  fnames <- character(length(fixed))
-  for (i in seq_along(fixed)) {
-    this <- eval(fixed[[i]])
+  fnames <- lapply(fixed, function(fix.i) {
+    this <- eval(fix.i)
     if (!inherits(this, "formula"))
       stop ("'fixed' must be a formula or list of formulae")
     if (length(this) != 3)
       stop ("formulae in 'fixed' must be of the form \"parameter ~ expr\"")
     if (!is.name(this[[2]]))
       stop ("formulae in 'fixed' must be of the form \"parameter ~ expr\"")
-    fnames[i] <- as.character(this[[2]])
-  }
+    as.character(this[[2]])
+  })
   names(fixed) <- fnames
 
   ranForm <- formula(reSt)              # random effects formula(s)
@@ -991,7 +989,7 @@ nlme.formula <-
   ## creating the  nlme object
   ##
   isGrpd <- inherits(data, "groupedData")
-  structure(class = c("nlme","lme"),
+  structure(class = c("nlme", "lme"),
             list(modelStruct = nlmeSt,
 		 dims = dims,
                  contrasts = contr,
@@ -1430,17 +1428,14 @@ nlmeControl <-
 	   minScale = 0.001, tolerance = 1e-5, niterEM = 25,
            pnlsTol = 0.001, msTol = 0.000001,
            returnObject = FALSE, msVerbose = FALSE, gradHess = TRUE,
-           apVar = TRUE, .relStep = (.Machine$double.eps)^(1/3),
+           apVar = TRUE, .relStep = .Machine$double.eps^(1/3),
            minAbsParApVar = 0.05,
 	   opt = c("nlminb", "nlm"), natural = TRUE, sigma = NULL, ...)
 {
   if(is.null(sigma))
     sigma <- 0
-  else {
-    if(!is.finite(sigma) || length(sigma) != 1 || sigma <= 0)
-      stop("Within-group std. dev. must be a positive numeric value")
-    if(missing(apVar)) apVar <- FALSE # not yet implemented
-  }
+  else if(!is.finite(sigma) || length(sigma) != 1 || sigma < 0)
+    stop("Within-group std. dev. must be a positive numeric value")
   list(maxIter = maxIter, pnlsMaxIter = pnlsMaxIter, msMaxIter = msMaxIter,
        minScale = minScale, tolerance = tolerance, niterEM = niterEM,
        pnlsTol = pnlsTol, msTol = msTol,

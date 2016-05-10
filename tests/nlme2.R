@@ -86,6 +86,7 @@ fit1 <- nlme(dens ~ a*age/(b+age),
 	     fixed = a+b ~ 1, random= a ~ 1|TreeID,
 	     start = c(a=15, b=5), data=df)
 summary(fit1)
+fit1R <- update(fit1, method = "REML")
 ## allow fixed effects parameters to vary by 'SP':
 fit2 <- update(fit1, fixed = list(a ~ SP, b ~ SP),
                start = c(a = rep(14, 5), b = rep(4, 5)))

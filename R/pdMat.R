@@ -265,37 +265,29 @@ coef.pdMat <-
   value
 }
 
-Dim.pdMat <-
-  function(object, ...)
+Dim.pdMat <- function(object, ...)
 {
-  if ((val <- length(Names(object))) > 0) {
-    return(c(val, val))
-  } else if (isInitialized(object)) {
-    return(dim(as.matrix(object)))
-  }
-  stop("cannot access the number of columns of uninitialized objects without names")
+  if ((val <- length(Names(object))) > 0)
+    c(val, val)
+  else if (isInitialized(object))
+    dim(as.matrix(object))
+  else
+    stop("cannot access the number of columns of uninitialized objects without names")
 }
 
 formula.pdMat <-
   function(x, asList, ...) eval(attr(x, "formula"))
 
-isInitialized.pdMat <-
-  function(object)
-{
-  length(object) > 0
-}
+isInitialized.pdMat <- function(object) length(object) > 0
 
-logDet.pdMat <-
-  function(object, ...)
+logDet.pdMat <- function(object, ...)
 {
-  if (!isInitialized(object)) {
+  if (!isInitialized(object))
     stop("cannot extract the log of the determinant from an uninitialized object")
-  }
-  sum(log(svd(pdMatrix(object, factor = TRUE))$d))
+  sum(log(svd.d(pdMatrix(object, factor = TRUE))))
 }
 
-"matrix<-.pdMat" <-
-  function(object, value)
+`matrix<-.pdMat` <- function(object, value)
 {
   value <- as.matrix(value)
   ## check for consistency of dimensions when object is initialized
@@ -311,8 +303,7 @@ Names.pdMat <-
   as.character(attr(object, "Dimnames")[[2]])
 }
 
-"Names<-.pdMat" <-
-  function(object, ..., value)
+`Names<-.pdMat` <- function(object, ..., value)
 {
   if (is.null(value)) {
     attr(object, "Dimnames") <- NULL
@@ -629,16 +620,14 @@ pdFactor.pdSymm <-
      as.double(object))$Factor
 }
 
-pdMatrix.pdSymm <-
-  function(object, factor = FALSE)
+pdMatrix.pdSymm <- function(object, factor = FALSE)
 {
-  if (!isInitialized(object)) {
+  if (!isInitialized(object))
     stop("cannot extract matrix from an uninitialized object")
-  }
   if (factor) {
     Ncol <- Dim(object)[2]
     value <- array(pdFactor(object), c(Ncol, Ncol), attr(object, "Dimnames"))
-    attr(value, "logDet") <- sum(log(abs(svd(value)$d)))
+    attr(value, "logDet") <- sum(log(abs(svd.d(value))))
     value
   } else {
     NextMethod()

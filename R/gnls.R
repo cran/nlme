@@ -142,9 +142,7 @@ gnls <-
 ##  }
 
   ## check if correlation is present and has groups
-  if (!is.null(correlation)) {
-    groups <- getGroupsFormula(correlation)
-  } else groups <- NULL
+  groups <- if (!is.null(correlation)) getGroupsFormula(correlation) # else NULL
 #  if (!is.null(correlation)) {
 #    groups <- getGroupsFormula(correlation, asList = TRUE)
 #    if (!is.null(groups)) {
@@ -204,8 +202,8 @@ gnls <-
   ##
   ## evaluating the naPattern expression, if any
   ##
-  if (missing(naPattern)) naPat <- rep(TRUE, N)
-  else naPat <- as.logical(eval(asOneSidedFormula(naPattern)[[2]], dataMod))
+  naPat <- if (missing(naPattern)) rep(TRUE, N)
+	   else as.logical(eval(asOneSidedFormula(naPattern)[[2]], dataMod))
   origOrderShrunk <- origOrder[naPat]
 
   dataModShrunk <- dataMod[naPat, , drop=FALSE]
@@ -312,11 +310,8 @@ gnls <-
     res <- res[naPat]
     for (nm in names(plist)) {
       gradnm <- grad[, nm]
-      if (is.logical(p <- plist[[nm]])) {
-        X[, pmap[[nm]]] <- gradnm
-      } else {
-        X[, pmap[[nm]]] <- gradnm * p
-      }
+      X[, pmap[[nm]]] <-
+        if(is.logical(p <- plist[[nm]])) gradnm else gradnm * p
     }
     result <- c(X, res)
     result[is.na(result)] <- 0
@@ -328,7 +323,7 @@ gnls <-
   w <- eval(modelResid[[2]], envir = nlEnv)
   ## creating the condensed linear model
   ## 17-11-2015; Fixed sigma patch; SH Heisterkamp; Quantitative Solutions
-  fixedSigma<-controlvals$sigma > 0
+  fixedSigma <- controlvals$sigma > 0
   Dims <- list(p = pLen, N = NReal, REML = FALSE)
   attr(gnlsSt, "conLin") <-
     list(Xy = array(w, c(NReal, 1),
@@ -347,7 +342,7 @@ gnls <-
 
   numIter <- 0				# number of iterations
   nlsSettings <- c(controlvals$nlsMaxIter, controlvals$minScale,
-                    controlvals$nlsTol, 0, 0, 0)
+                   controlvals$nlsTol, 0, 0, 0)
   nlModel <- nonlinModel(modelExpression, nlEnv)
   repeat {
   ## alternating algorithm
@@ -453,11 +448,11 @@ gnls <-
 
     if ((max(aConv) <= controlvals$tolerance) ||
         (aConv["params"] <= controlvals$tolerance && convIter == 1)) {
-##      convResult <- 0
+      ##      convResult <- 0
       break
     }
     if (numIter >= controlvals$maxIter) {
-##      convResult <- 1
+      ##      convResult <- 1
       if (controlvals$returnObject) {
 	warning("maximum number of iterations reached without convergence")
 	break
@@ -465,25 +460,25 @@ gnls <-
 	stop("maximum number of iterations reached without convergence")
       }
     }
-  }
+  } ## end{ repeat } --------------
 
   ## wraping up
   ww <- eval(modelExpression[[2]], envir = nlEnv)
   auxRes <- ww[NReal * pLen + (1:NReal)]
   attr(gnlsSt, "conLin")$Xy <- array(ww, c(NReal, pLen + 1))
-  attr(gnlsSt, "conLin") <- recalc(gnlsSt)
-    ## 17-11-2015; Fixed sigma patch; SH Heisterkamp; Quantitative Solutions
-	if((sigma <- controlvals$sigma) == 0) {
-		sigma <- sqrt(sum((attr(gnlsSt, "conLin")$Xy[, pLen + 1])^2)/(NReal - pLen))
-		lsig <- logb(sigma) + 0.5 * logb(1 - pLen/NReal)
-		loglik <- ( - NReal * (1 + logb(2 * pi) + 2 * lsig))/2 + attr(gnlsSt, "conLin")$logLik
-	} else {
-		loglik <-  - (NReal * (logb(2 * pi)/2 + logb(sigma)) + sum((attr(gnlsSt, "conLin")$Xy[
-			, pLen + 1])^2)/(2 * sigma^2)) + attr(gnlsSt, "conLin")$logLik
-		lsig <- log(sigma)
-	}
-    ######
-  varBeta <- qr(attr(gnlsSt, "conLin")$Xy[ , 1:pLen, drop = FALSE])
+  attr(gnlsSt, "conLin") <- c.L <- recalc(gnlsSt)
+  ## 17-11-2015; Fixed sigma patch; SH Heisterkamp; Quantitative Solutions
+  if((sigma <- controlvals$sigma) == 0) {
+    sigma <- sqrt(sum((c.L$Xy[, pLen + 1])^2)/(NReal - pLen))
+    lsig <- logb(sigma) + 0.5 * logb(1 - pLen/NReal)
+    loglik <- ( - NReal * (1 + logb(2 * pi) + 2 * lsig))/2 + c.L$logLik
+  } else {
+    loglik <- - (NReal * (logb(2 * pi)/2 + logb(sigma)) +
+                 sum((c.L$Xy[, pLen + 1])^2) / (2 * sigma^2)) + c.L$logLik
+    lsig <- log(sigma)
+  }
+  ## ####
+  varBeta <- qr(c.L$Xy[ , 1:pLen, drop = FALSE])
   if (varBeta$rank < pLen) {
     ## 17-11-2015; Fixed sigma patch; SH Heisterkamp; Quantitative Solutions
     print("approximate covariance matrix for parameter estimates not of full rank")
@@ -511,12 +506,11 @@ gnls <-
   attr(gnlsSt, "conLin")$Xy <- array(auxRes, c(NReal, 1))
   ## 17-11-2015; Fixed sigma patch; SH Heisterkamp; Quantitative Solutions
   attr(gnlsSt, "fixedSigma") <- (controlvals$sigma > 0)
-  if (controlvals$apVar) {
-    apVar <- gnlsApVar(gnlsSt, lsig, .relStep = controlvals[[".relStep"]],
-                       minAbsPar = controlvals[["minAbsParApVar"]])
-  } else {
-    apVar <- "Approximate variance-covariance matrix not available"
-  }
+  apVar <-
+    if (controlvals$apVar)
+      gnlsApVar(gnlsSt, lsig, .relStep = controlvals[[".relStep"]],
+		minAbsPar = controlvals[["minAbsParApVar"]])
+    else "Approximate variance-covariance matrix not available"
   ## getting rid of condensed linear model and fit
   oClass <- class(gnlsSt)
   attributes(gnlsSt) <-
@@ -535,7 +529,7 @@ gnls <-
 		 coefficients = spar,
 		 varBeta = varBeta,
          ## 17-11-2015; Fixed sigma patch; SH Heisterkamp; Quantitative Solutions
-		 sigma = ifelse(controlvals$sigma>0, controlvals$sigma, sigma),
+		 sigma = if(controlvals$sigma) controlvals$sigma else sigma,
 		 apVar = apVar,
 		 logLik = loglik,
 		 numIter = numIter,
@@ -566,13 +560,13 @@ gnlsApVar <-
     function(Pars, object, conLin, N) {
       ## logLik as a function of sigma and coef(glsSt)
       ## 17-11-2015; Fixed sigma patch; SH Heisterkamp; Quantitative Solutions
-      fixedSigma<-attr(object,"fixedSigma")
+      fixedSigma <- attr(object,"fixedSigma")
       npar <- length(Pars)
       if (!fixedSigma) {
          lsigma <- Pars[npar]
          Pars <- Pars[-npar]
       } else {
-         lsigma<-log(conLin$sigma)
+         lsigma <- log(conLin$sigma)
       }
       #######
       coef(object) <- Pars
@@ -594,24 +588,20 @@ gnlsApVar <-
     N <- dims$N
     conLin[["logLik"]] <- 0               # making sure
     ## 17-11-2015; Fixed sigma patch; SH Heisterkamp; Quantitative Solutions
-    if(fixedSigma){
-        Pars <- c(gnlsCoef)
-    } else {
-        Pars <- c(gnlsCoef, lSigma = lsigma)  #   log(sigma) is used as input in contrast to gls
-    }
+    Pars <- if(fixedSigma) gnlsCoef else c(gnlsCoef, lSigma = lsigma)
+                                        #   log(sigma) is used as input in contrast to gls
     val <- fdHess(Pars, fullGnlsLogLik, gnlsSt, conLin, N,
 		  .relStep = .relStep, minAbsPar = minAbsPar)[["Hessian"]]
     if (all(eigen(val, only.values=TRUE)$values < 0)) {
       ## negative definite - OK
       val <- solve(-val)
-      ## 17-11-2015; Fixed sigma patch; SH Heisterkamp; Quantitative Solutions
-      if(fixedSigma && !is.null(dim(val))){
-          Pars <- c(gnlsCoef, lSigma = lsigma)
-          npars<-length(Pars)
-          val<-cbind(val,rep(0,npars-1))
-          val<-rbind(val,rep(0,npars))
-      }
-      #######
+      ## ## 17-11-2015; Fixed sigma patch; SH Heisterkamp; Quantitative Solutions
+      ## if(fixedSigma && !is.null(dim(val))){
+      ##     Pars <- c(gnlsCoef, lSigma = lsigma)
+      ##     npars<-length(Pars)
+      ##     val<-cbind(val,rep(0,npars-1))
+      ##     val<-rbind(val,rep(0,npars))
+      ## }
       nP <- names(Pars)
       dimnames(val) <- list(nP, nP)
       attr(val, "Pars") <- Pars
@@ -631,16 +621,15 @@ gnlsApVar <-
 ### the params and random effects
 ###
 
-getParsGnls <-
-  function(plist, pmap, beta, N)
+getParsGnls <- function(plist, pmap, beta, N)
 {
   pars <- array(0, c(N, length(plist)), list(NULL, names(plist)))
   for (nm in names(plist)) {
-    if (is.logical(p <- plist[[nm]])) {
-      pars[, nm] <- beta[pmap[[nm]]]
-    } else {
-      pars[, nm] <- p %*% beta[pmap[[nm]]]
-    }
+    pars[, nm] <-
+      if (is.logical(p <- plist[[nm]]))
+        beta[pmap[[nm]]]
+      else
+        p %*% beta[pmap[[nm]]]
   }
   pars
 }
@@ -865,14 +854,9 @@ gnlsStruct <-
 
 ##*## gnlsStruct methods for standard generics
 
-fitted.gnlsStruct <-
-  function(object, ...)
-{
-  attr(object, "resp") - resid(object)
-}
+fitted.gnlsStruct <- function(object, ...) attr(object, "resp") - resid(object)
 
-Initialize.gnlsStruct <-
-  function(object, data, ...)
+Initialize.gnlsStruct <- function(object, data, ...)
 {
   if (length(object)) {
     object[] <- lapply(object, Initialize, data)
@@ -886,9 +870,8 @@ Initialize.gnlsStruct <-
             array(FALSE, c(1, length(len)))
     dimnames(pmap) <- list(NULL, names(object))
     attr(object, "pmap") <- pmap
-    if (needUpdate(object)) {
+    if (needUpdate(object))
       object <- update(object, data)
-    }
   }
   object
 }
@@ -901,17 +884,16 @@ logLik.gnlsStruct <-
 	conLin <- recalc(object, conLin)
 	## 17-11-2015; Fixed sigma patch; SH Heisterkamp; Quantitative Solutions
 	if(conLin$sigma == 0) {
-		conLin[["logLik"]] - (conLin$dims$N * logb(sum(conLin$Xy^2)))/2
+            conLin[["logLik"]] - (conLin$dims$N * logb(sum(conLin$Xy^2)))/2
 	} else {
-		conLin[["logLik"]] - conLin$dims$N * logb(conLin$sigma) - sum(conLin$Xy^2)/(2 * conLin$sigma^2)
+            conLin[["logLik"]] - conLin$dims$N * logb(conLin$sigma) -
+                sum(conLin$Xy^2) / (2 * conLin$sigma^2)
 	}
 }
 
 
 
-residuals.gnlsStruct <-
-  function(object, ...)
-{
+residuals.gnlsStruct <- function(object, ...) {
   c(eval(attr(object, "model")[[2]], envir = attr(object, "local")))
 }
 
@@ -921,24 +903,25 @@ gnlsControl <-
 	   minScale = 0.001, tolerance = 1e-6, nlsTol = 0.001,
            msTol = 1e-7,
            returnObject = FALSE, msVerbose = FALSE,
-           apVar = TRUE, .relStep = (.Machine$double.eps)^(1/3),
+           apVar = TRUE, .relStep = .Machine$double.eps^(1/3),
 	   opt = c("nlminb", "optim"),  optimMethod = "BFGS",
            ## 17-11-2015; Fixed sigma patch; SH Heisterkamp; Quantitative Solutions
-           minAbsParApVar = 0.05,sigma=NULL)
+           minAbsParApVar = 0.05, sigma=NULL)
 {
   ## 17-11-2015; Fixed sigma patch; SH Heisterkamp; Quantitative Solutions
   if(is.null(sigma))
     sigma <- 0
-  else {
-    if(!is.finite(sigma) || length(sigma) != 1 || sigma <= 0)
-      stop("Within-group std. dev. must be a positive numeric value")
-      if(missing(apVar)) apVar <- FALSE # not yet implemented
-  }
+  else  if(!is.finite(sigma) || length(sigma) != 1 || sigma < 0)
+    stop("Within-group std. dev. must be a positive numeric value")
   list(maxIter = maxIter, nlsMaxIter = nlsMaxIter, msMaxIter = msMaxIter,
        minScale = minScale, tolerance = tolerance, nlsTol = nlsTol,
        msTol = msTol, returnObject = returnObject,
        msVerbose = msVerbose, apVar = apVar,
        opt = match.arg(opt), optimMethod = optimMethod,
        ## 17-11-2015; Fixed sigma patch; SH Heisterkamp; Quantitative Solutions
-       .relStep = .relStep, minAbsParApVar = minAbsParApVar,sigma=sigma)
+       .relStep = .relStep, minAbsParApVar = minAbsParApVar, sigma=sigma)
 }
+
+## Local Variables:
+## ess-indent-offset: 2
+## End:

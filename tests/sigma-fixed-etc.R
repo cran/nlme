@@ -22,20 +22,31 @@ cat("\nFixed sigma= ",sigma,"  estimation method 'ML'\n")
 t1.fix.ML.gls <- gls(distance ~ Sex *I(age-11), data = Orthodont,
                      correlation = corSymm(form = ~1 | Subject),
                      weights = varIdent(form = ~1 |age),
-                     control = glsControl(sigma = sigma, apVar = FALSE),
+                     control = glsControl(sigma = sigma),
                      method = "ML")
-summary(t1.fix.ML.gls)
-  anova(t1.fix.ML.gls)
+(s1M <- summary(t1.fix.ML.gls))
+(a1M <-   anova(t1.fix.ML.gls)) # sequential
+(a1Mm<-   anova(t1.fix.ML.gls, type = "marginal"))
+## t_{n} ^2  ==  F_{1,n}:
+stopifnot(all.equal(as.vector(s1M$tTable[,"t-value"] ^ 2),
+                    a1Mm[,"F-value"], tolerance = 1e-14))
+
 ##
 cat("\nFixed sigma= ",sigma,"  estimation method 'REML'\n")
 t1.fix.REML.gls <- gls(distance ~ Sex*I(age-11), data = Orthodont,
                        correlation = corSymm(form = ~1 | Subject),
                        weights = varIdent(form = ~1 |age),
-                       control = glsControl(sigma = sigma, # now by default: apVar = FALSE,
+                       control = glsControl(sigma = sigma,
                                             maxIter = 1000, msMaxIter = 200),
                        method = "REML")
-summary(t1.fix.REML.gls)
-  anova(t1.fix.REML.gls)
+(s1R <- summary(t1.fix.REML.gls))
+(a1R  <-   anova(t1.fix.REML.gls))
+(a1Rm <-   anova(t1.fix.REML.gls, type="marginal"))
+intervals(t1.fix.REML.gls) # now work (via 'apVar')
+## t_{n} ^2  ==  F_{1,n}:
+stopifnot(all.equal(as.vector(s1R$tTable[,"t-value"] ^ 2),
+                    a1Rm[,"F-value"], tolerance = 1e-14))
+
 cat("Time elapsed: ", (proc.time() - .pt)[1:3], "\n")
 
 ##===   example 2  linear mixed model page 147  lme ML  and REML ================
@@ -47,17 +58,20 @@ method <- "ML"
 sigma <- 1
 cat("\nFixed sigma= ",sigma,"  estimation method ", method,"\n")
 t1.fix.ML.lme <- lme(distance ~ I(age-11), data = Orthodont,
-                     control = lmeControl(sigma = sigma), ## apVar = FALSE now by default
+                     control = lmeControl(sigma = sigma),
                      method = method)
-summary(t1.fix.ML.lme)
-  anova(t1.fix.ML.lme)
+ summary (t1.fix.ML.lme)
+   anova (t1.fix.ML.lme)
+intervals(t1.fix.ML.lme)
+
 
 method <- "REML"
 cat("\nFixed sigma= ",sigma,"  estimation method ", method,"\n")
 t1.fix.REML.lme <- lme(distance ~ I(age-11), data = Orthodont,
-                       control = lmeControl(sigma = sigma, apVar = FALSE), method = method)
-summary(t1.fix.REML.lme)
-  anova(t1.fix.REML.lme)
+                       control = lmeControl(sigma = sigma), method = method)
+ summary (t1.fix.REML.lme)
+   anova (t1.fix.REML.lme)
+intervals(t1.fix.REML.lme)
 cat("Time elapsed: ", (proc.time() - .pt)[1:3], "\n")
 
 ##===   example 3  general non-linear  model page 402/ page 512  gnls ls ========
@@ -71,10 +85,19 @@ cat("\nFixed sigma= ",sigma,"  estimation method ", method,"\n")
 t1.fix.gnls <- gnls( rate ~SSasympOff(pressure, Asym, lrc, c0), data = Dialyzer,
                     params = list(Asym + lrc ~ QB, c0 ~ 1),
                     start = c(53.6,8.6,0.51,-0.26, 0.225),
-                    control = gnlsControl(sigma = 1)) # apVar = FALSE
-t1.fix.gnls$apVar ## NULL --- why ? [example(gnls) -> fm1 *has* apVar !]
-summary(t1.fix.gnls)
-  anova(t1.fix.gnls)
+                    control = gnlsControl(sigma = 1))
+stopifnot(is.null(t1.fix.gnls$apVar)) ## as is has  *no*  varying ranef-parameters
+ summary (t1.fix.gnls)
+   anova (t1.fix.gnls)
+cat("Time elapsed: ", (proc.time() - .pt)[1:3], "\n"); .pt <- proc.time()
+t1.fix.w <- update(t1.fix.gnls, weights = varPower())
+ summary (t1.fix.w)
+   anova (t1.fix.w)
+(it1fw <- intervals(t1.fix.w))
+stopifnot(all.equal(it1fw$varStruct["power",],
+		    c(lower = 0.33147895,
+		      est.  = 0.36474755,
+		      upper = 0.39801614), tol = 1e-6))
 cat("Time elapsed: ", (proc.time() - .pt)[1:3], "\n")
 
 ##===   example 4  mixed non-linear  model  page 363 nlme =======================
@@ -97,13 +120,14 @@ system.time(# *not* fast :
 t1.fix.ML.nlme <- nlme(conc ~ SSfol(Dose, Time, lKe, lKa, lCl), data = Theoph,
                        fixed = lKe + lKa + lCl ~ 1,
                        method = method, start = c(-2.4,0.45,-3.2),
-                       control = nlmeControl(apVar=FALSE, sigma=sigma,
-                                             maxIter = 200),
+                       control = nlmeControl(sigma=sigma, maxIter = 200),
                        verbose = interactive())
 )
-t1.fix.ML.nlme$numIter # 58 or 61 ..
+t1.fix.ML.nlme$numIter # 58 or 61 (and now 22)..
 (sM4 <- summary(t1.fix.ML.nlme))
 (aM4 <- anova  (t1.fix.ML.nlme))
+t1.fix.ML.nlme$apVar ## "Non-positive definite approximate variance-covariance"
+##(iM4 <- intervals(t1.fix.ML.nlme))
 stopifnot(
     all.equal(fixef(t1.fix.ML.nlme),
               c(lKe = -2.432512, lKa = 0.450163, lCl = -3.2144713), tol= 8e-6)
@@ -125,13 +149,14 @@ cat("\nFixed sigma= ", sigma,"  estimation method ", method,"\n")
 ## only converges when tolerance is not small (and still takes long!) :
 t1.fix.REML.nlme <- update(t1.fix.ML.nlme, method = method,
                            control = nlmeControl(tolerance = 0.0005,
-                                                 apVar=FALSE, sigma=sigma,
+                                                 sigma=sigma,
                                                  pnlsMaxIter = 20, # not just 7
                                                  maxIter = 1000),
                            verbose = interactive())
 cat(" -> numIter: ", t1.fix.REML.nlme$numIter, "\n") # 380 or so
 print(summary(t1.fix.REML.nlme))
-print(anova  (t1.fix.REML.nlme))
+print( anova(t1.fix.REML.nlme))
+it1.fRn <- try( intervals(t1.fix.REML.nlme) ) ## cannot get .. Non-positive ...
 }# only if(doExtras())
 
 cat("Time elapsed: ", (proc.time() - .pt)[1:3], "\n")
@@ -148,9 +173,10 @@ cat("\nFixed sigma= ",sigma,"  estimation method ", method,"\n")
 t5.fix.ML.nlme <- nlme(circumference ~ SSlogis(age,Asym,xmid,scal), data = Orange,
                        fixed = Asym + xmid + scal ~ 1,
                        method = method, start = c(192,727,356),
-                       control = nlmeControl(apVar = FALSE, sigma = sigma))
+                       control = nlmeControl(sigma = sigma))
 (sM5 <- summary(t5.fix.ML.nlme))
 (aM5 <- anova  (t5.fix.ML.nlme))
+(t5.fix.ML.nlme$apVar) ## Non-positive definite  [FIXME?]
 stopifnot(
     all.equal(fixef(t5.fix.ML.nlme),
               c(Asym= 192.79023, xmid= 726.36351, scal= 355.62941), tol= 1e-7)
@@ -166,11 +192,12 @@ stopifnot(
 method <-"REML"
 cat("\nFixed sigma= ",sigma,"  estimation method ", method,"\n")
 t5.fix.REML.nlme <- update(t5.fix.ML.nlme, method = method,
-                           control = nlmeControl(apVar=FALSE, sigma=sigma),
+                           control = nlmeControl(sigma=sigma),
                            verbose = interactive())
 ## converges very quickly (when started from ML!)
 (sR5 <- summary(t5.fix.REML.nlme))
 (aR5 <- anova  (t5.fix.REML.nlme))
+(               t5.fix.REML.nlme$apVar) ## Non-positive definite  [FIXME?]
 stopifnot(
     ## ML and REML : fixed effects are very close
     all.equal(fixef(t5.fix.REML.nlme), fixef(t5.fix.ML.nlme), tol = 1e-6)
@@ -194,9 +221,10 @@ cat("\nFixed sigma= ",sigma,"  estimation method ", method,"\n")
 t6.fix.ML.lme <- lme(distance ~ I(age-11), data = Orthodont,
                      weights = varIdent(form = ~1 | Sex),
                      method = method,
-                     control = lmeControl(sigma = sigma, apVar = FALSE))
-(sM6 <- summary(t6.fix.ML.lme))
-(aM6 <- anova  (t6.fix.ML.lme))
+                     control = lmeControl(sigma = sigma))
+(sM6 <-  summary (t6.fix.ML.lme))
+(aM6 <-   anova  (t6.fix.ML.lme))
+(iM6 <- intervals(t6.fix.ML.lme))
 stopifnot(
     all.equal(fixef(t6.fix.ML.lme),
               c("(Intercept)"= 24.009565, "I(age - 11)"= 0.64760432), tol= 1e-7)
@@ -205,6 +233,11 @@ stopifnot(
               c("(Intercept)"= 0.426561, "I(age - 11)"= 0.066832), tol = 5e-5)
     ,
     all.equal(aM6[,"F-value"], c(3162.47, 93.8969), tol = 5e-5)
+    ,
+    all.equal(iM6$varStruct["Female",],
+	      c(lower = 0.51230063,
+		est.  = 0.65065925,
+		upper = 0.82638482), tol = 5e-5)
 )
 
 ##-------------
@@ -215,9 +248,10 @@ cat("\nFixed sigma= ",sigma,"  estimation method ", method,"\n")
 t6.fix.REML.lme <- lme(distance ~I(age-11), data = Orthodont,
                        weights = varIdent(form = ~1 | Sex),
                        method = method,
-                       control = lmeControl(sigma = sigma, apVar = FALSE))
-(sR6 <- summary(t6.fix.REML.lme))
-(aR6 <- anova  (t6.fix.REML.lme))
+                       control = lmeControl(sigma = sigma))
+(sR6 <-  summary (t6.fix.REML.lme))
+(aR6 <-   anova  (t6.fix.REML.lme))
+(iR6 <- intervals(t6.fix.REML.lme))
 stopifnot(
     all.equal(fixef(t6.fix.REML.lme),
               c("(Intercept)"= 24.010662, "I(age - 11)"= 0.64879966), tol= 1e-7)
@@ -226,6 +260,11 @@ stopifnot(
               c("(Intercept)"= 0.436365, "I(age - 11)"= 0.0687549), tol = 5e-5)
     ,
     all.equal(aR6[,"F-value"], c(3019.86, 89.046), tol = 5e-5)
+    ,
+    all.equal(iR6$varStruct["Female",],
+	      c(lower = 0.51774671,
+		est.  = 0.66087796,
+		upper = 0.8435779), tol = 5e-5)
 )
 cat("Time elapsed: ", (proc.time() - .pt)[1:3], "\n")
 
@@ -241,7 +280,7 @@ t7.fix.ML.lme <- lme( current ~ voltage + I(voltage^2), data = Wafer,
                      random = list(Wafer = pdDiag(~voltage + I(voltage^2)),
                                    Site  = pdDiag(~voltage + I(voltage^2)) ),
                      method = method,
-                     control = lmeControl(sigma = 1, apVar = FALSE,
+                     control = lmeControl(sigma = 1,
                                           ## nlminb: false convergence on 32-bit
                                           msVerbose = TRUE, opt = "optim"))
 (ss7 <- summary(t7.fix.ML.lme))
@@ -264,7 +303,7 @@ cat("\nFixed sigma= ",sigma,"  estimation method ", method,"\n")
 t7.fix.REML.lme <- lme( current ~voltage + I(voltage^2), data = Wafer,
                        random = list(Wafer = pdDiag(~voltage + I(voltage^2)),
                                      Site  = pdDiag(~voltage + I(voltage^2)) ),
-                       control = lmeControl(sigma = 1,apVar = FALSE),
+                       control = lmeControl(sigma = 1),
                        method = method)
 (sR7 <- summary(t7.fix.REML.lme))
 (aR7 <-   anova(t7.fix.REML.lme))
@@ -295,7 +334,7 @@ t8.fix.ML.nlme <- nlme(conc ~ SSfol(Dose, Time, lKe, lKa, lCl), data = Theoph,
                        fixed = lKe + lKa + lCl ~ 1,
                        random = pdDiag(lKe + lKa + lCl ~ 1),
                        method = method, start = c(-2.4,0.5,-3.3),
-                       control = nlmeControl(apVar = FALSE, sigma = 1))
+                       control = nlmeControl(sigma = 1))
 (sM8 <- summary(t8.fix.ML.nlme))
 (aM8 <- anova  (t8.fix.ML.nlme))
 stopifnot(
@@ -343,7 +382,7 @@ t9.fix.ML.nlme <- nlme(conc ~ SSfol(Dose, Time, lKe, lKa, lCl), data = Theoph,
                        fixed = lKe + lKa + lCl ~ 1,
                        random = pdDiag( lKa + lCl ~ 1),
                        method = method, start = c(-2.4,0.5,-3.3),
-                       control = nlmeControl(sigma = 1))# apVar = FALSE now by defaul
+                       control = nlmeControl(sigma = 1))
 (sM9 <- summary(t9.fix.ML.nlme))
 (aM9 <- anova  (t9.fix.ML.nlme))
 stopifnot(

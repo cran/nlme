@@ -1,0 +1,28 @@
+								-*- org -*-
+* Priority 1-2 (urgent - important)
+** TODO REML <-> ML 'Std.Error's for fixed effecs in summary(n?lme()) are the *same* but should not,
+ Both S+ nlme [note from Siem Heisterkamp] and e.g. lme4 do differ.
+** DONE svn ci -m'patch from Siem Heisterkamp ['apVar' for "fixed sigma"] + changes to make intervals(.) working'
+*** svn-diffB R/gls.R R/gnls.R R/lme.R R/newFunc.R R/nlme.R man/glsControl.Rd man/gnlsControl.Rd man/gnlsObject.Rd man/intervals.lmList.Rd man/intervals.lme.Rd man/lmeControl.Rd man/lmeObject.Rd man/nlmeControl.Rd man/nlmeObject.Rd tests/sigma-fixed-etc.R
+
+** DONE svn ci -m'fix qqnorm.lme() bug - undetected because of "wrong" \dontrun{}'
+*** svn-diffB R/lme.R man/qqnorm.lme.Rd
+
+* Priority 3-4 (project for ...)
+** TODO stats::summary.lm  ,  stats::print.summary.lm by default do *NOT*
+  compute and print the correlation matrix.
+*** stats:::summary.lm (object, correlation = FALSE, symbolic.cor = FALSE, ...)
+*** stats:::print.summary.lm (x, digits = max(3L, getOption("digits") - 3L),
+                              symbolic.cor = x$symbolic.cor,
+  			      signif.stars = getOption("show.signif.stars"), ...)
+
+*** 'nlme' should at least *allow* to not compute and print
+    so people would use  summary(.)  much more often probably !
+    MM thinks the default should even *change* not to print the correlation
+
+** TODO Bug 16703 -- corFactor/corMatrix use O(n^2) storage - sparseMatrix would help
+*** https://bugs.r-project.org/bugzilla/show_bug.cgi?id=16703
+** TODO Bug 16806 - nlme getVarCov() fails for corSpatial fits for individuals with a single observation only
+*** https://bugs.r-project.org/bugzilla/show_bug.cgi?id=16806
+
+* Priority 5 (nice to have)

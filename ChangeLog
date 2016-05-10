@@ -1,3 +1,19 @@
+2016-05-04 Martin Maechler
+
+	* R/lme.R, etc (lmeControl): 'sigma = 0' is now allowed (and
+	equivalent to 'sigma = NULL'); this fixes mgcv::gamm()'s use of
+	the equivalent of 'do.call(lmeControl, lmeControl())'.
+
+2016-04-26 Martin Maechler
+
+	* DESCRIPTION (Version): 3.1-128
+	* R/lme.R (qqnorm.lme): fixed bug introduced in v 3.1-127
+	* R/lme.R, R/nlme.R, etc: "fixed sigma" now computes 'apVar'
+	correctly; thanks to patches from Siem Heisterkamp
+	* R/lme.R, R/gls.R: coef(summary(.)) now also works for "gls", "lme".
+	* R/gls.R (anova.gls): fixed a very long standing bug in the F
+	statistics for the ML case, thanks to Siem H.
+
 2016-03-21 Martin Maechler
 
 	* R/nlme.R (getParsNlme): wish of PR#16614 : now predict REs as NA

@@ -33,9 +33,7 @@ glsControl(maxIter, msMaxIter, tolerance, msTol, msVerbose,
    \code{FALSE}.}
  \item{apVar}{a logical value indicating whether the approximate
    covariance matrix of the variance-covariance parameters should be
-   calculated. Default is \code{TRUE} unless \code{sigma} is fixed (to
-   a positive number) in which case the covariance computation is not
-   available.}
+   calculated.  Default is \code{TRUE}.}
  \item{.relStep}{relative step for numerical derivatives
    calculations. Default is \code{.Machine$double.eps^(1/3)}.}
  \item{opt}{the optimizer to be used, either \code{"\link{nlminb}"} (the
@@ -48,7 +46,7 @@ glsControl(maxIter, msMaxIter, tolerance, msTol, msVerbose,
  \item{natural}{logical.  Should the natural parameterization be used
    for the approximate variance calculations?  Default is \code{TRUE}.}
  \item{sigma}{optionally a positive number to fix the residual error at.
-   If \code{NULL}, as by default, sigma is estimated.}
+   If \code{NULL}, as by default, or \code{0}, sigma is estimated.}
 }
 \description{
   The values supplied in the function call replace the defaults and a

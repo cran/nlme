@@ -13,20 +13,20 @@
   \code{coef}, \code{fitted}, \code{formula}, \code{getGroups},
   \code{getResponse}, \code{intervals}, \code{logLik}, \code{plot},
   \code{predict}, \code{print}, \code{residuals}, \code{summary}, and
-  \code{update}.    
+  \code{update}.
 
 }
 \value{
   The following components must be included in a legitimate \code{gnls}
-  object. 
+  object.
   \item{apVar}{an approximate covariance matrix for the
-    variance-covariance coefficients. If \code{apVar = FALSE} in the list
-    of control values used in the call to \code{gnls}, this
+    variance-covariance coefficients.  If \code{apVar = FALSE} in the
+    control values used in the call to \code{gnls}, this
     component is equal to \code{NULL}.}
   \item{call}{a list containing an image of the \code{gnls} call that
     produced the object.}
   \item{coefficients}{a vector with the estimated nonlinear model
-    coefficients.} 
+    coefficients.}
   \item{contrasts}{a list with the contrasts used to represent factors
     in the model formula. This information is important for making
     predictions from a new data frame in which not all levels of the
@@ -39,7 +39,7 @@
   \item{fitted}{a vector with the fitted values.}
   \item{modelStruct}{an object inheriting from class \code{gnlsStruct},
     representing a list of model components, such as \code{corStruct} and
-    \code{varFunc} objects.} 
+    \code{varFunc} objects.}
   \item{groups}{a vector with the correlation structure grouping factor,
     if any is present.}
   \item{logLik}{the log-likelihood at convergence.}
@@ -47,7 +47,7 @@
     algorithm.}
   \item{plist}{}
   \item{pmap}{}
-  \item{residuals}{a vector with the residuals.} 
+  \item{residuals}{a vector with the residuals.}
   \item{sigma}{the estimated residual standard error.}
   \item{varBeta}{an approximate covariance matrix of the
     coefficients estimates.}

@@ -20,6 +20,7 @@ stopifnot(
 # variance changes with a power of the absolute fitted values?
 fm2 <- update(fm1, weights = varPower())
 (a12 <- anova(fm1, fm2))
+stopifnot(identical(a12, anova(fm1, fm2, type = "seq")))# latter had failed
 
 ## now define a little function
 dummy <- function(obj) anova(obj[[1]], obj[[2]])
@@ -37,3 +38,22 @@ fm1Orth.gls <- gls(distance ~ Sex * I(age - 11), Orthodont,
 (aOr <- anova(fm1Orth.gls, Terms = "Sex"))
 stopifnot(all.equal(aOr[,"F-value"], 9.4030752449,
 		    aOr[,"p-value"], 0.0027608643857))
+
+## anova.gls(.) -- REML & ML
+(a1  <- anova(fm1))
+(a1m <- anova(fm1, type="marginal"))
+##
+fm1M <- update(fm1, method = "ML")
+(a1M <- anova(fm1M))
+(a1Mm <- anova(fm1M, type = "marginal"))
+stopifnot(
+    all.equal(a1M[,"F-value"],
+              c(378.774471, 19.1105834, 1.71334909),
+              tolerance = 1e-7)
+   ,
+    all.equal(summary(fm1M)$tTable[,"t-value"] ^ 2,
+	      as.matrix(a1Mm)[,"F-value"], tolerance = 1e-14)
+   ,
+    all.equal(summary(fm1 )$tTable[,"t-value"] ^ 2,
+              as.matrix(a1m )[,"F-value"], tolerance = 1e-14)
+)

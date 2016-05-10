@@ -40,7 +40,7 @@ stopifnot(all.equal(pm3[1], p3.1,
 
 ## Intervals failed in a patch proposal (Nov.2015):
 (fm4 <- lme(distance ~ age, Orthodont, random = ~ age | Subject))
-(i4 <- intervals(fm4))
+i4 <- intervals(fm4)
 ## from  dput(signif(i4$reStruct$Subject, 8))
 ## R-devel 2016-01-11; 64-bit :
 reSS <- data.frame(lower = c(0.9485605, 0.10250901, -0.93825047),
@@ -66,6 +66,11 @@ stopifnot(
     all.equal(as.vector(i4$sigma),
               ##  lower     est.        upper
               c(1.0849772, 1.3100397, 1.5817881), tol=8e-4)
+   ,
+    all.equal(as.vector(i4$fixed),
+              as.vector(rbind(c(15.218322, 16.761111, 18.3039),
+                              c(0.51838667, 0.66018519, 0.8019837))),
+              tol = 1e-6)
 )
 
 

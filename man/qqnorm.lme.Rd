@@ -27,7 +27,7 @@
    the left of a \code{|} operator must evaluate to a residuals vector,
    or a random effects matrix. Default is \code{~ resid(., type = "p")},
    corresponding to a normal plot of the standardized residuals
-   evaluated at the innermost level of nesting.}  
+   evaluated at the innermost level of nesting.}
  \item{abline}{an optional numeric value, or numeric vector of length
    two. If given as a single value, a horizontal line will be added to the
    plot at that coordinate; else, if given as a vector, its values are
@@ -59,7 +59,7 @@
   plot specification. A conditioning expression (on the right side of a
   \code{|} operator) always implies that different panels are used for
   each level of the conditioning factor, according to a Trellis
-  display. 
+  display.
 }
 \value{
   a diagnostic Trellis plot for assessing normality of residuals or
@@ -68,12 +68,10 @@
 \author{José Pinheiro and Douglas Bates \email{bates@stat.wisc.edu}}
 \seealso{\code{\link{lme}}, \code{\link{plot.lme}}}
 \examples{
-\dontrun{
 fm1 <- lme(distance ~ age, Orthodont, random = ~ age | Subject)
-# normal plot of standardized residuals by gender
+## normal plot of standardized residuals by gender
 qqnorm(fm1, ~ resid(., type = "p") | Sex, abline = c(0, 1))
-# normal plots of random effects
+## normal plots of random effects
 qqnorm(fm1, ~ranef(.))
-}
 }
 \keyword{models}

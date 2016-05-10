@@ -18,6 +18,8 @@
 ###  A copy of the GNU General Public License is available at
 ###  http://www.r-project.org/Licenses/
 
+svd.d <- function(x) La.svd(x, nu=0L, nv=0L)$d
+
 allCoef <-
   ## Combines different coefficient vectors into one vector, keeping track
   ## of which coefficients came from which object
@@ -55,8 +57,7 @@ asOneFormula <-
   ## list of formulas, except for the names in omit
   function(..., omit = c(".", "pi"))
 {
-  dots <- list(...)
-  names <- unique(allVarsRec((dots)))
+  names <- unique(allVarsRec(list(...)))
   names <- names[is.na(match(names, omit))]
   if (length(names))
     eval(parse(text = paste("~", paste(names, collapse = "+")))[[1]])
@@ -96,7 +97,7 @@ compareFits <-
   out
 }
 
-fdHess <- function(pars, fun, ..., .relStep = (.Machine$double.eps)^(1/3),
+fdHess <- function(pars, fun, ..., .relStep = .Machine$double.eps^(1/3),
                    minAbsPar = 0)
   ## Use a Koschal design to establish a second order model for the response
 {
@@ -247,13 +248,11 @@ gsummary <-
       aux <- table(x)
       names(aux)[match(max(aux), aux)]
     }
-    if (data.class(FUN) == "function") {	# single function given
+    if (is.function(FUN)) {	# single function given
       FUN <- list(numeric = FUN, ordered = Mode, factor = Mode)
     } else {
-      if (!(is.list(FUN) &&
-	   all(sapply(FUN, data.class) == "function"))) {
+      if (!(is.list(FUN) && all(sapply(FUN, is.function))))
 	stop("'FUN' can only be a function or a list of functions")
-      }
       auxFUN <- list(numeric = mean, ordered = Mode, factor = Mode)
       aux <- names(auxFUN)[is.na(match(names(auxFUN), names(FUN)))]
       if (length(aux) > 0) FUN[aux] <- auxFUN[aux]

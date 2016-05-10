@@ -32,18 +32,14 @@ gnlsControl(maxIter, nlsMaxIter, msMaxIter, minScale, tolerance,
    iteration when \code{optim} is used.  Default is 1e-7.}
  \item{returnObject}{a logical value indicating whether the fitted
    object should be returned when the maximum number of iterations is
-   reached without convergence of the algorithm.  Default is
-   \code{FALSE}.}
+   reached without convergence of the algorithm.  Default is \code{FALSE}.}
  \item{msVerbose}{a logical value passed as the \code{trace} argument to
-   \code{ms} (see documentation on that function). Default is
-   \code{FALSE}.}
+   \code{ms} (see documentation on that function).  Default is \code{FALSE}.}
  \item{apVar}{a logical value indicating whether the approximate
    covariance matrix of the variance-covariance parameters should be
-   calculated. Default is \code{TRUE} unless \code{sigma} is fixed (to
-   a positive number) in which case the covariance computation is not
-   available.}
+   calculated.  Default is \code{TRUE}.}
  \item{.relStep}{relative step for numerical derivatives
-   calculations. Default is \code{.Machine$double.eps^(1/3)}.}
+   calculations.  Default is \code{.Machine$double.eps^(1/3)}.}
  \item{opt}{the optimizer to be used, either \code{"\link{nlminb}"} (the
    current default) or \code{"\link{optim}"} (the previous default).}
  \item{optimMethod}{character - the optimization method to be used with
@@ -52,7 +48,7 @@ gnlsControl(maxIter, nlsMaxIter, msMaxIter, minScale, tolerance,
  \item{minAbsParApVar}{numeric value - minimum absolute parameter value
    in the approximate variance calculation.  The default is \code{0.05}.}
  \item{sigma}{optionally a positive number to fix the residual error at.
-   If \code{NULL}, as by default, sigma is estimated.}
+   If \code{NULL}, as by default, or \code{0}, sigma is estimated.}
 }
 \description{
   The values supplied in the function call replace the defaults and a

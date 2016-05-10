@@ -52,9 +52,7 @@ nlmeControl(maxIter, pnlsMaxIter, msMaxIter, minScale,
    \code{pdCompSymm} (compound symmetry).  Default is \code{TRUE}.}
  \item{apVar}{a logical value indicating whether the approximate
    covariance matrix of the variance-covariance parameters should be
-   calculated.  Default is \code{TRUE} unless \code{sigma} is fixed (to
-   a positive number) in which case the covariance computation is not
-   available.}
+   calculated.  Default is \code{TRUE}.}
  \item{.relStep}{relative step for numerical derivatives
    calculations.  Default is \code{.Machine$double.eps^(1/3)}.}
  \item{minAbsParApVar}{numeric value - minimum absolute parameter value
@@ -66,7 +64,7 @@ nlmeControl(maxIter, pnlsMaxIter, msMaxIter, minScale,
    (\code{pdSymm}) in \code{reStruct}, when the approximate covariance
    matrix of the estimators is calculated.  Default is \code{TRUE}.}
  \item{sigma}{optionally a positive number to fix the residual error at.
-   If \code{NULL}, as by default, sigma is estimated.}
+   If \code{NULL}, as by default, or \code{0}, sigma is estimated.}
  \item{\dots}{Further named control arguments to be passed to
    \code{\link{nlminb}}, where used (\code{eval.max} and those from
    \code{abs.tol} down).}

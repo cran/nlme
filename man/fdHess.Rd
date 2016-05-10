@@ -10,7 +10,8 @@
   using finite differences.
 }
 \usage{
-fdHess(pars, fun, \dots, .relStep=(.Machine$double.eps)^(1/3), minAbsPar=0)
+fdHess(pars, fun, \dots,
+       .relStep = .Machine$double.eps^(1/3), minAbsPar = 0)
 }
 \arguments{
   \item{pars}{the numeric values of the parameters at which to evaluate the
@@ -26,18 +27,21 @@ fdHess(pars, fun, \dots, .relStep=(.Machine$double.eps)^(1/3), minAbsPar=0)
 }
 \details{
   This function uses a second-order response surface design known as a
-  Koschal design to determine the parameter values at which the function
-  is evaluated.
+  \dQuote{Koschal design} to determine the parameter values at which the
+  function is evaluated.
 }
 \value{
   A list with components
   \item{mean}{the value of function \code{fun} evaluated at the
     parameter values \code{pars}}
-  \item{gradient}{an approximate gradient}
+  \item{gradient}{an approximate gradient (of length \code{length(pars)}).}
   \item{Hessian}{a matrix whose upper triangle contains an approximate Hessian.}
 }
-\author{José Pinheiro and Douglas Bates \email{bates@stat.wisc.edu}} 
+\author{José Pinheiro and Douglas Bates \email{bates@stat.wisc.edu}}
 \examples{
-fdHess(c(12.3, 2.34), function(x) x[1]*(1-exp(-0.4*x[2])))
+(fdH <- fdHess(c(12.3, 2.34), function(x) x[1]*(1-exp(-0.4*x[2]))))
+stopifnot(length(fdH$ mean) == 1,
+          length(fdH$ gradient) == 2,
+          identical(dim(fdH$ Hessian), c(2L, 2L)))
 }
 \keyword{models}

@@ -144,11 +144,11 @@ lme.formula <-
     controlvals[names(control)] <- control
   }
   fixedSigma <- controlvals$sigma > 0
-  if(fixedSigma && controlvals$apVar) {
-    if("apVar" %in% names(control))
-      warning("for 'sigma' fixed, 'apVar' is set FALSE, as the cov approxmation is not yet available.")
-    controlvals$apVar <- FALSE
-  }
+  ## if(fixedSigma && controlvals$apVar) {
+  ##   if("apVar" %in% names(control))
+  ##     warning("for 'sigma' fixed, 'apVar' is set FALSE, as the cov approxmation is not yet available.")
+  ##   controlvals$apVar <- FALSE
+  ## }
 
   ##
   ## checking arguments
@@ -566,7 +566,7 @@ lmeApVar.fullLmeLogLik <- function(Pars, object, conLin, dims, N, settings) {
 
 lmeApVar <-
   function(lmeSt, sigma, conLin = attr(lmeSt, "conLin"),
-           .relStep = (.Machine$double.eps)^(1/3), minAbsPar = 0,
+           .relStep = .Machine$double.eps^(1/3), minAbsPar = 0,
            natural = TRUE)
 {
   fixedSigma <- attr(lmeSt,"fixedSigma")
@@ -601,18 +601,12 @@ lmeApVar <-
     coef(cSt) <- log((cStNatPar + 1)/(1 - cStNatPar))
     lmeSt[["corStruct"]] <- cSt
   }
-  Pars <- c(coef(lmeSt), lSigma = log(sigma))
+  Pars <- if(fixedSigma) coef(lmeSt) else c(coef(lmeSt), lSigma = log(sigma))
   val <- fdHess(Pars, lmeApVar.fullLmeLogLik, lmeSt, conLin, dims, N, sett,
                 .relStep = .relStep, minAbsPar = minAbsPar)[["Hessian"]]
   if (all(eigen(val, only.values=TRUE)$values < 0)) {
     ## negative definite - OK
     val <- solve(-val)
-    if (fixedSigma && !is.null(dim(val))) {
-      Pars <- c(coef(lmeSt), lSigma = log(sigma))
-      npars <- length(Pars)
-      val <- rbind(cbind(val, rep(0,npars-1)),
-                   rep(0,npars))
-    }
     nP <- names(Pars)
     dimnames(val) <- list(nP, nP)
     attr(val, "Pars") <- Pars
@@ -865,7 +859,7 @@ anova.lme <-
   ## returns the likelihood ratio statistics, the AIC, and the BIC
   Lmiss <- missing(L)
   dots <- list(...)
-  if ((rt <- (length(dots) + 1L)) == 1L) {    ## just one object
+  if ((rt <- length(dots) + 1L) == 1L) {    ## just one object
     if (!inherits(object,"lme")) {
       stop("object must inherit from class \"lme\" ")
     }
@@ -895,9 +889,9 @@ anova.lme <-
       ##
       ## fixed effects F-values, df, and p-values
       ##
-      aod <- data.frame(nDF, dDF, Fval, Pval)
-      dimnames(aod) <-
-        list(names(assign),c("numDF","denDF","F-value", "p-value"))
+      aod <- data.frame(numDF= nDF, denDF= dDF, "F-value"= Fval, "p-value"= Pval,
+			check.names = FALSE)
+      rownames(aod) <- names(assign)
       attr(aod,"rt") <- rt
     } else {
       nX <- length(unlist(assign))
@@ -955,12 +949,7 @@ anova.lme <-
         }
         L <- L0[noZeroRowL <- as.logical((L0 != 0) %*% rep(1, nX)), , drop = FALSE]
         nrowL <- nrow(L)
-        if (is.null(dmsL1)) {
-          dmsL1 <- 1:nrowL
-        } else {
-          dmsL1 <- dmsL1[noZeroRowL]
-        }
-        rownames(L) <- dmsL1
+        rownames(L) <- if(is.null(dmsL1)) 1:nrowL else dmsL1[noZeroRowL]
         dDF <-
           unique(object$fixDF$X[noZeroColL <-
                                   as.logical(c(rep(1,nrowL) %*% (L != 0)))])
@@ -969,17 +958,17 @@ anova.lme <-
         }
         lab <- "F-test for linear combination(s)\n"
       }
-      nDF <- sum(svd(L)$d > 0)
+      nDF <- sum(svd.d(L) > 0)
       c0 <- c(qr.qty(qr(vFix %*% t(L)), c0))[1:nDF]
       Fval <- sum(c0^2)/nDF
-      Pval <- 1 - pf(Fval, nDF, dDF)
-      aod <- data.frame(nDF, dDF, Fval, Pval)
-      names(aod) <- c("numDF", "denDF", "F-value", "p-value")
+      Pval <- pf(Fval, nDF, dDF, lower.tail=FALSE)
+      aod <- data.frame(numDF = nDF, denDF = dDF, "F-value" = Fval, "p-value" = Pval,
+                        check.names=FALSE)
       attr(aod, "rt") <- rt
       attr(aod, "label") <- lab
       if (!Lmiss) {
-        if (nrow(L) > 1) attr(aod, "L") <- L[, noZeroColL, drop = FALSE]
-        else attr(aod, "L") <- L[, noZeroColL]
+        attr(aod, "L") <-
+          if(nrow(L) > 1) L[, noZeroColL, drop = FALSE] else L[, noZeroColL]
       }
     }
   }
@@ -990,10 +979,10 @@ anova.lme <-
   ## nlme, nlsList, and nls
   ##
   else {
-    ancall <- sys.call()
-    ancall$verbose <- ancall$test <- NULL
+    ancall <- sys.call() # yuck.. hack
+    ancall$verbose <- ancall$test <- ancall$type <- NULL
     object <- list(object, ...)
-    termsClass <- unlist(lapply(object, data.class))
+    termsClass <- vapply(object, data.class, "")
     valid.cl <- c("gls", "gnls", "lm", "lmList", "lme","nlme","nlsList","nls")
     if(!all(match(termsClass, valid.cl, 0))) {
       valid.cl <- paste0('"', valid.cl, '"')
@@ -1001,8 +990,8 @@ anova.lme <-
                     paste(head(valid.cl, -1), collapse=", "), tail(valid.cl, 1)),
            domain=NA)
     }
-    resp <- unlist(lapply(object,
-                          function(el) deparse(getResponseFormula(el)[[2L]])))
+    resp <- vapply(object,
+                   function(el) deparse(getResponseFormula(el)[[2L]]), "")
     ## checking if responses are the same
     subs <- as.logical(match(resp, resp[1L], FALSE))
     if (!all(subs))
@@ -1012,10 +1001,8 @@ anova.lme <-
     object <- object[subs]
     rt <- length(object)
     termsModel <- lapply(object, function(el) formula(el)[-2])
-    estMeth <- unlist(lapply(object,
-                             function(el) {
-                               if (is.null(val <- el[["method"]])) NA else val
-                             }))
+    estMeth <- vapply(object, function(el)
+      if (is.null(val <- el[["method"]])) NA_character_ else val, "")
     ## checking consistency of estimation methods
     if(length(uEst <- unique(estMeth[!is.na(estMeth)])) > 1) {
       stop("all fitted objects must have the same estimation method")
@@ -1024,49 +1011,41 @@ anova.lme <-
     ## checking if all models have same fixed effects when estMeth = "REML"
     REML <- uEst == "REML"
     if(REML) {
-      aux <- unlist(lapply(termsModel,
-                           function(el) {
-                             aux <- terms(el)
-                             val <- paste(sort(attr(aux, "term.labels")),
-                                          collapse = "&")
-                             if (attr(aux, "intercept") == 1) {
-                               val <- paste(val, "(Intercept)", sep = "&")
-                             }
-                             val
-                           }))
+      aux <- vapply(termsModel,
+                    function(el) {
+                      tt <- terms(el)
+                      val <- paste(sort(attr(tt, "term.labels")), collapse = "&")
+                      if (attr(tt, "intercept") == 1)
+                        paste(val, "(Intercept)", sep = "&") else val
+                    }, ".")
       if(length(unique(aux)) > 1) {
         warning("fitted objects with different fixed effects. REML comparisons are not meaningful.")
       }
     }
     termsCall <-
       lapply(object, function(el) {
-        if (is.null(val <- el$call)) {
-          if (is.null(val <- attr(el, "call"))) {
+        if (is.null(val <- el$call) &&
+            is.null(val <- attr(el, "call")))
             stop("objects must have a \"call\" component or attribute")
-          }
-        }
         val
       })
-    termsCall <- unlist(lapply(termsCall,
-                               function(el) paste(deparse(el), collapse ="")))
-
+    termsCall <- vapply(termsCall,
+                        function(el) paste(deparse(el), collapse =""), "")
     aux <- lapply(object, logLik, REML)
-    if (length(unique(unlist(lapply(aux, function(el) attr(el, "nall"))))) > 1) {
+    if (length(unique(vapply(aux, attr, 1, "nall"))) > 1) {
       stop("all fitted objects must use the same number of observations")
     }
-    dfModel <- unlist(lapply(aux, function(el) attr(el, "df")))
-    logLik <- unlist(lapply(aux, function(el) c(el)))
-    AIC <- unlist(lapply(aux, AIC))
-    BIC <- unlist(lapply(aux, BIC))
+    dfModel <- vapply(aux, attr, 1, "df")
+    logLik  <- vapply(aux, c, 1.1)
     aod <- data.frame(call = termsCall,
-                      Model = (1:rt),
+                      Model = 1:rt,
                       df = dfModel,
-                      AIC = AIC,
-                      BIC = BIC,
+                      AIC = vapply(aux, AIC, 1.),
+                      BIC = vapply(aux, BIC, 1.),
                       logLik = logLik,
                       check.names = FALSE)
     if (test) {
-      ddf <-  diff(dfModel)
+      ddf <- diff(dfModel)
       if (sum(abs(ddf)) > 0) {
         effects <- rep("", rt)
         for(i in 2:rt) {
@@ -1078,7 +1057,7 @@ anova.lme <-
         ldf <- as.logical(ddf)
         lratio <- 2 * abs(diff(logLik))
         lratio[!ldf] <- NA
-        pval[ldf] <- 1 - pchisq(lratio[ldf],abs(ddf[ldf]))
+        pval[ldf] <- pchisq(lratio[ldf], abs(ddf[ldf]), lower.tail=FALSE)
         aod <- data.frame(aod,
                           Test = effects,
                           "L.Ratio" = c(NA, lratio),
@@ -1438,11 +1417,11 @@ logLik.lme <- function(object, REML, ...)
   val <- object[["logLik"]]
   if (REML && (estM == "ML")) {			# have to correct logLik
     val <- val + (p * (log(2 * pi) + 1L) + (N - p) * log(1 - p/N) +
-                  sum(log(abs(svd(object$varFix)$d)))) / 2
+                  sum(log(abs(svd.d(object$varFix))))) / 2
   }
   if (!REML && (estM == "REML")) {	# have to correct logLik
     val <- val - (p * (log(2*pi) + 1L) + N * log(1 - p/N) +
-                  sum(log(abs(svd(object$varFix)$d)))) / 2
+                  sum(log(abs(svd.d(object$varFix))))) / 2
   }
   structure(val, class = "logLik",
             nall = N,
@@ -2053,7 +2032,7 @@ predict.lme <-
 print.anova.lme <- function(x, verbose = attr(x, "verbose"), ...)
 {
   ox <- x
-  if ((rt <- attr(x,"rt")) == 1) {
+  if ((rt <- attr(x,"rt")) == 1) { ## one object
     if (!is.null(lab <- attr(x, "label"))) {
       cat(lab)
       if (!is.null(L <- attr(x, "L"))) {
@@ -2065,7 +2044,7 @@ print.anova.lme <- function(x, verbose = attr(x, "verbose"), ...)
     x[, "F-value"] <- format(zapsmall(x[, "F-value"]))
     x[, "p-value"] <- pval
     print(as.data.frame(x), ...)
-  } else {
+  } else { ## several objects
     if (verbose) {
       cat("Call:\n")
       objNams <- row.names(x)
@@ -2243,20 +2222,21 @@ print.summary.lme <- function(x, verbose = FALSE, ...)
   invisible(x)
 }
 
+## coef(summary( obj )) # should work for "gls" or "lme" similarly as for lm():
+getCTable <- function (object, ...) object$tTable
+
 qqnorm.lme <-
   function(y, form = ~ resid(., type = "p"), abline = NULL,
            id = NULL, idLabels = NULL, grid = FALSE, ...)
     ## normal probability plots for residuals and random effects
 {
-  object <- y
-  if (!inherits(form, "formula")) {
-    stop("'form' must be a formula")
-  }
+  if (!inherits(form, "formula")) stop("'form' must be a formula")
+  ## object <- y
   ## constructing data
   allV <- all.vars(asOneFormula(form, id, idLabels))
   allV <- allV[is.na(match(allV,c("T","F","TRUE","FALSE")))]
   if (length(allV) > 0) {
-    data <- getData(object)
+    data <- getData(y)
     if (is.null(data)) {		# try to construct data
       alist <- lapply(as.list(allV), as.name)
       names(alist) <- allV
@@ -2273,27 +2253,27 @@ qqnorm.lme <-
     }
   } else data <- NULL
   ## argument list
-  dots <- list(...)
-  args <- if (length(dots) > 0) dots else list()
+  args <- list(...) # may be empty list()
   ## appending object to data
-  data <- as.list(c(as.list(data), . = list(object)))
+  data <- as.list(c(as.list(data), . = list(y)))
 
   ## covariate - must always be present
   covF <- getCovariateFormula(form)
   .x <- eval(covF[[2L]], data)
   labs <- attr(.x, "label")
-  if (inherits(.x, "ranef.lme")) {      # random effects
-    type <- "reff"
-  } else if (!is.null(labs) && ((labs == "Standardized residuals") ||
-                                (labs == "Normalized residuals") ||
-                                (substring(labs, 1, 9) == "Residuals"))) {
-    type <- "res" # residuals
-  } else
-    stop("only residuals and random effects allowed")
+  type <-
+    if (inherits(.x, "ranef.lme"))
+      "reff" # random effects
+    else if (!is.null(labs) && (labs == "Standardized residuals" ||
+				labs == "Normalized residuals"   ||
+				substr(labs, 1, 9) == "Residuals"))
+      "res" # residuals
+    else
+      stop("only residuals and random effects allowed")
 
   if (is.null(args$xlab)) args$xlab <- labs
   if (is.null(args$ylab)) args$ylab <- "Quantiles of standard normal"
-  if(type == "res") { ## residuals ---------------------------
+  if(type == "res") { ## residuals ----------------------------------------
     fData <- qqnorm(.x, plot.it = FALSE)
     data[[".y"]] <- fData$x
     data[[".x"]] <- fData$y
@@ -2310,10 +2290,10 @@ qqnorm.lme <-
                    stop("'Id' must be between 0 and 1")
                  }
                  if (labs == "Normalized residuals") {
-                   as.logical(abs(resid(object, type="normalized"))
+                   as.logical(abs(resid(y, type="normalized"))
                               > -qnorm(id / 2))
                  } else {
-                   as.logical(abs(resid(object, type="pearson"))
+                   as.logical(abs(resid(y, type="pearson"))
                               > -qnorm(id / 2))
                  }
                },
@@ -2321,8 +2301,8 @@ qqnorm.lme <-
                stop("'id' can only be a formula or numeric")
                )
       if (is.null(idLabels)) {
-        idLabels <- getGroups(object)
-        if (length(idLabels) == 0) idLabels <- 1:object$dims$N
+        idLabels <- getGroups(y)
+        if (length(idLabels) == 0) idLabels <- seq_len(y$dims$N)
         idLabels <- as.character(idLabels)
       } else {
         if (mode(idLabels) == "call") {
@@ -2338,7 +2318,7 @@ qqnorm.lme <-
         }
       }
     }
-  } else { # type random.effects  ---------------------------------
+  } else { # type "ref" -- random.effects  --------------------------------
     level <- attr(.x, "level")
     std <- attr(.x, "standardized")
     if (!is.null(effNams <- attr(.x, "effectNames"))) {
@@ -2351,23 +2331,23 @@ qqnorm.lme <-
                         .y = unlist(lapply(fData, function(x) x[["x"]])),
                         .g = ordered(rep(names(fData),rep(nr, nc)),
                                      levels = names(fData)), check.names = FALSE)
-    dform <- ".y ~ .x | .g"
     if (!is.null(grp <- getGroupsFormula(form))) {
-      dform <- paste(dform, deparse(grp[[2L]]), sep = "*")
+      dform <- substitute(.y ~ .x | .g * GG, list(GG = deparse(grp[[2L]])))
       auxData <- data[is.na(match(names(data), "."))]
     } else {
+      dform <- .y ~ .x | .g
       auxData <- list()
     }
     ## id and idLabels - need not be present
     if (!is.null(id)) {			# identify points in plot
-      N <- object$dims$N
+      N <- y$dims$N
       id <-
         switch(mode(id),
                numeric = {
                  if ((id <= 0) || (id >= 1)) {
                    stop("'id' must be between 0 and 1")
                  }
-                 aux <- ranef(object, level = level, standard = TRUE)
+                 aux <- ranef(y, level = level, standard = TRUE)
                  as.logical(abs(c(unlist(aux))) > -qnorm(id / 2))
                },
                call = eval(asOneSidedFormula(id)[[2L]], data),
@@ -2398,7 +2378,7 @@ qqnorm.lme <-
     data <-
       if (length(auxData)) { # need collapsing
         auxData <- gsummary(as.data.frame(auxData),
-                            groups = getGroups(object, level = level))
+                            groups = getGroups(y, level = level))
         auxData <- auxData[row.names(.x), , drop = FALSE]
         if (!is.null(auxData[[".id"]]))
           id <- rep(auxData[[".id"]], nc)
@@ -2411,16 +2391,14 @@ qqnorm.lme <-
   id <- if (!is.null(id)) as.logical(as.character(id))
   idLabels <- as.character(idLabels)
   abl <- abline
-  if (is.null(args$strip)) {
+  if (is.null(args$strip))
     args$strip <- function(...) strip.default(..., style = 1)
-  }
   if (is.null(args$cex)) args$cex <- par("cex")
   if (is.null(args$adj)) args$adj <- par("adj")
 
-  args <- c(list(eval(parse(text = dform)),
-                 data = substitute(data)), args)
-  if (is.null(args$panel)) {
-    args <- c(list(panel = function(x, y, subscripts, ...) {
+  args <- c(list(dform, data = substitute(data)), args)
+  if (is.null(args$panel))
+    args$panel <- function(x, y, subscripts, ...) {
       x <- as.numeric(x)
       y <- as.numeric(y)
       dots <- list(...)
@@ -2433,10 +2411,11 @@ qqnorm.lme <-
       if (!is.null(abl)) {
 	if (length(abl) == 2)
 	  panel.abline(a = abl, ...)
-	else panel.abline(h = abl, ...)
+	else
+	  panel.abline(h = abl, ...)
       }
-    }), args)
-  }
+    }
+
   if(type == "reff" && !std) {
     args[["scales"]] <- list(x = list(relation = "free"))
   }
@@ -2594,12 +2573,10 @@ summary.lme <- function(object, adjustSigma = TRUE, verbose = FALSE, ...)
     sqrt(object$dims$N/(object$dims$N - length(stdFixed)))
   ## fixed effects coefficients, std. deviations and t-ratios
   ##
-  tTable <- data.frame(fixed, stdFixed, object$fixDF[["X"]],
-                       fixed/stdFixed, fixed)
-  dimnames(tTable)<-
-    list(names(fixed),c("Value", "Std.Error", "DF", "t-value", "p-value"))
-  tTable[, "p-value"] <- 2 * pt(-abs(tTable[,"t-value"]), tTable[,"DF"])
-  object$tTable <- as.matrix(tTable)
+  fDF <- object$fixDF[["X"]]
+  tVal <- fixed/stdFixed
+  object$tTable <- cbind(Value = fixed, Std.Error = stdFixed, DF = fDF,
+			 "t-value" = tVal, "p-value" = 2 * pt(-abs(tVal), fDF))
   ##
   ## residuals
   ##
@@ -2616,7 +2593,7 @@ summary.lme <- function(object, adjustSigma = TRUE, verbose = FALSE, ...)
   object$BIC <- BIC(aux)
   object$AIC <- AIC(aux)
   structure(object, verbose = verbose, oClass = class(object),
-            class = c("summary.lme", class(object)))
+	    class = c("summary.lme", class(object)))
 }
 
 ## based on R's update.default
@@ -2937,11 +2914,8 @@ lmeControl <-
 {
   if(is.null(sigma))
     sigma <- 0
-  else {
-    if(!is.finite(sigma) || length(sigma) != 1 || sigma <= 0)
-      stop("Within-group std. dev. must be a positive numeric value")
-    if(missing(apVar)) apVar <- FALSE # not yet implemented
-  }
+  else if(!is.finite(sigma) || length(sigma) != 1 || sigma < 0)
+    stop("Within-group std. dev. must be a positive numeric value")
   list(maxIter = maxIter, msMaxIter = msMaxIter, tolerance = tolerance,
        niterEM = niterEM, msMaxEval = msMaxEval, msTol = msTol,
        msVerbose = msVerbose, returnObject = returnObject,
