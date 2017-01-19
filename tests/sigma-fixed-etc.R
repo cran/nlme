@@ -11,6 +11,7 @@ doExtras <- function ()
         identical("true", unname(Sys.getenv("R_PKG_CHECKING_doExtras")))
 }
 doExtras()
+isSun <- Sys.info()[["sysname"]] == "SunOS"
 
 ##===   example 1 general linear model page 251  gls ML  and LME ================
 ##
@@ -29,7 +30,8 @@ t1.fix.ML.gls <- gls(distance ~ Sex *I(age-11), data = Orthodont,
 (a1Mm<-   anova(t1.fix.ML.gls, type = "marginal"))
 ## t_{n} ^2  ==  F_{1,n}:
 stopifnot(all.equal(as.vector(s1M$tTable[,"t-value"] ^ 2),
-                    a1Mm[,"F-value"], tolerance = 1e-14))
+                    a1Mm[,"F-value"], tolerance = 1e-14),
+          identical(2, sigma(t1.fix.ML.gls)))
 
 ##
 cat("\nFixed sigma= ",sigma,"  estimation method 'REML'\n")
@@ -63,7 +65,7 @@ t1.fix.ML.lme <- lme(distance ~ I(age-11), data = Orthodont,
  summary (t1.fix.ML.lme)
    anova (t1.fix.ML.lme)
 intervals(t1.fix.ML.lme)
-
+stopifnot(sigma(t1.fix.ML.lme) == 1)
 
 method <- "REML"
 cat("\nFixed sigma= ",sigma,"  estimation method ", method,"\n")
@@ -234,10 +236,12 @@ stopifnot(
     ,
     all.equal(aM6[,"F-value"], c(3162.47, 93.8969), tol = 5e-5)
     ,
-    all.equal(iM6$varStruct["Female",],
-	      c(lower = 0.51230063,
-		est.  = 0.65065925,
-		upper = 0.82638482), tol = 5e-5)
+    all.equal(iM6$varStruct["Female",],   ## Win 32
+	      c(lower = 0.51230063,       ## 0.51226722
+		est.  = 0.65065925,       ## 0.65065925
+		upper = 0.82638482),      ## 0.82643872
+              tol = if(isSun) 4e-4 else 5e-5)#= 4.39e-5
+    ## seen 5.35e-5 (Sparc Sol., no long double);  later, 6e-5 was not ok
 )
 
 ##-------------
@@ -261,10 +265,11 @@ stopifnot(
     ,
     all.equal(aR6[,"F-value"], c(3019.86, 89.046), tol = 5e-5)
     ,
-    all.equal(iR6$varStruct["Female",],
-	      c(lower = 0.51774671,
-		est.  = 0.66087796,
-		upper = 0.8435779), tol = 5e-5)
+    all.equal(iR6$varStruct["Female",],  ## Win 32
+	      c(lower = 0.51774671,      ## 0.51778038
+		est.  = 0.66087796,      ## 0.66087807
+		upper = 0.8435779),      ## 0.84352331
+              tol = if(isSun) 4e-4 else 5e-5)# 4.37e-5
 )
 cat("Time elapsed: ", (proc.time() - .pt)[1:3], "\n")
 

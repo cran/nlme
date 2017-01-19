@@ -1,7 +1,8 @@
 library(nlme)
 fm1 <- nlsList(SSasymp, Loblolly)
-
 fm1
+system.time(cnL1 <- confint(fm1)) # 0.48 sec
+
 stopifnot(
     all.equal(as.matrix(coef(fm1)),
               array(c(94.1282, 94.9406, 89.8849, 110.699, 111.003, 109.986, 101.056,
@@ -19,6 +20,11 @@ stopifnot(
     all.equal(pooledSD(fm1), structure(0.70039649, df = 42), tol = 1e-5)
     ,
     84 == sum(vapply(lapply(fm1, fitted), length, 1L)) # total deg.freedom
+   , ## confint() :
+    is.list(cnL1), identical(names(cnL1), names(fm1)),
+    sapply(cnL1, class) == "matrix",
+    identical(unname(sapply(cnL1, dim)), matrix(3:2, 2, length(fm1))),
+    sapply(cnL1, is.finite)
     )
 
 fm2 <- nlme(fm1, random = Asym ~ 1)
@@ -30,6 +36,8 @@ stopifnot(
     all.equal(logLik(fm2),
               structure(-114.743, class = "logLik", nall = 84, nobs = 84, df = 5),
               tol = 4e-6)
+    ,
+    all.equal(sigma(fm2), 0.71886244, tol = 1e-6)
     )
 
 pm2.0 <- predict(fm2, Loblolly, level=0)## failed in nlme 3.1-123

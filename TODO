@@ -15,7 +15,6 @@
 *** stats:::print.summary.lm (x, digits = max(3L, getOption("digits") - 3L),
                               symbolic.cor = x$symbolic.cor,
   			      signif.stars = getOption("show.signif.stars"), ...)
-
 *** 'nlme' should at least *allow* to not compute and print
     so people would use  summary(.)  much more often probably !
     MM thinks the default should even *change* not to print the correlation

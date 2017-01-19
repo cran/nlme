@@ -1713,25 +1713,22 @@ corSpatial <-
              "rational"),
 	   metric = c("euclidean", "maximum", "manhattan"), fixed = FALSE)
 {
-  type <- match.arg(type)
-  spClass <- switch(type,
-		    spherical = "corSpher",
-		    exponential = "corExp",
-		    gaussian = "corGaus",
-		    linear = "corLin",
-                    rational = "corRatio")
-  attr(value, "formula") <- form
-  attr(value, "nugget") <- nugget
-  attr(value, "metric") <- match.arg(metric)
-  attr(value, "fixed") <- fixed
-  class(value) <- c(spClass, "corSpatial", "corStruct")
-  value
+  spClass <- c(spherical = "corSpher",
+	       exponential = "corExp",
+	       gaussian = "corGaus",
+	       linear = "corLin",
+	       rational = "corRatio")[match.arg(type)]
+  structure(value,
+	    "formula" = form,
+	    "nugget" = nugget,
+	    "metric" = match.arg(metric),
+	    "fixed" = fixed,
+	    class = c(spClass, "corSpatial", "corStruct"))
 }
 
 ###*# Methods for local generics
 
-corFactor.corSpatial <-
-  function(object, ...)
+corFactor.corSpatial <- function(object, ...)
 {
   corD <- Dim(object)
   val <- .C(spatial_factList,
@@ -1742,10 +1739,7 @@ corFactor.corSpatial <-
 	    as.double(attr(object, "minD")),
 	    factor = double(corD[["sumLenSq"]]),
 	    logDet = double(1))[c("factor", "logDet")]
-  lD <- val[["logDet"]]
-  val <- val[["factor"]]
-  attr(val, "logDet") <- lD
-  val
+  structure(val[["factor"]], logDet = val[["logDet"]])
 }
 
 corMatrix.corSpatial <-

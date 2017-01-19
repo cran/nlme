@@ -75,7 +75,7 @@ stopifnot(
 
 
 ## wrong results from getData:
-load("ss2.rda")
+ss2 <- readRDS("ss2.rds")
 m1 <- lme(PV1MATH ~  ESCS + Age +time ,
           random = ~   time|SCHOOLID,
           data = ss2,
@@ -91,3 +91,17 @@ m2 <- lme(PV1MATH ~  ESCS + Age +time ,
           corr = corCompSymm(form=~1|SCHOOLID/StIDStd),
           na.action = na.omit)
 plot(m2, resid(.) ~ WEALTH)
+
+
+## Variogram() failing in the case of  1-observation groups (PR#17192):
+BW <- subset(BodyWeight, ! (Rat=="1" & Time > 1))
+if(interactive())
+    print( xtabs(~ Rat + Time, data = BW) )# Rat '1' only at Time == 1
+fm2 <- lme(fixed = weight ~ Time * Diet, random = ~ 1 | Rat, data = BW)
+Vfm2 <- Variogram(fm2, form = ~ Time | Rat)
+stopifnot(is.data.frame(Vfm2),
+	  identical(dim(Vfm2), c(19L, 3L)),
+	  all.equal(unlist(Vfm2[10,]), c(variog = 1.08575384191148,
+					 dist = 22, n.pairs = 15))
+	  )
+## failed in nlme from 3.1-122 till 3.1-128

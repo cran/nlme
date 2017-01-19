@@ -1,8 +1,8 @@
 ###           groupedData - data frame with a grouping structure
 ###
+### Copyright 2006-2017  The R Core team
 ### Copyright 1997-2003  Jose C. Pinheiro,
 ###                      Douglas M. Bates <bates@stat.wisc.edu>
-### Copyright 2006-2016  The R Core team
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -35,8 +35,9 @@ groupedData <-
     stop("right-hand side of first argument must be a conditional expression")
   }
   mCall <- match.call()
-  mCall[[1]] <- as.name(ifelse(length(grpForm) == 1, "nfGroupedData",
-                               "nmGroupedData"))
+  mCall[[1]] <- if(length(grpForm) == 1)
+		     quote(nlme::nfGroupedData)
+		else quote(nlme::nmGroupedData)
   eval(mCall, envir = parent.frame())
 }
 

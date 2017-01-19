@@ -3,7 +3,7 @@
 ###
 ### Copyright 1997-2003  Jose C. Pinheiro,
 ###                      Douglas M. Bates <bates@stat.wisc.edu>
-### Copyright 2007-2016  The R Core team
+### Copyright 2007-2017  The R Core team
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -661,7 +661,7 @@ getData.gnls <-
     subset <- eval(asOneSidedFormula(subset)[[2]], data)
     data <- data[subset, ]
   }
-  return(data)
+  data
 }
 
 
@@ -700,12 +700,13 @@ predict.gnls <-
   newdata <- data.frame(newdata, check.names = FALSE)
   mCall <- object$call
 
-  mfArgs <- list(formula = asOneFormula(formula(object),
-                   mCall$params, naPattern,
-                   omit = c(names(object$plist), "pi",
-                     deparse(getResponseFormula(object)[[2]]))),
-                 data = newdata, na.action = na.action)
-  mfArgs$drop.unused.levels <- TRUE
+  mfArgs <- list(formula =
+                   asOneFormula(formula(object),
+                                mCall$params, naPattern,
+                                omit = c(names(object$plist), "pi",
+                                         deparse(getResponseFormula(object)[[2]]))),
+                 data = newdata, na.action = na.action,
+                 drop.unused.levels = TRUE)
   dataMod <- do.call("model.frame", mfArgs)
 
   ## making sure factor levels are the same as in contrasts
@@ -745,8 +746,7 @@ predict.gnls <-
   plist <- object$plist
   pnames <- names(plist)
   if (is.null(params <- eval(object$call$params))) {
-    params <- eval(parse(text = paste(paste(pnames, collapse = "+"), "1",
-                           sep = "~")))
+    params <- eval(parse(text = paste0(paste(pnames, collapse = "+"), "~ 1")))
   }
   if (!is.list(params)) {
     params <- list(params)
@@ -774,7 +774,7 @@ predict.gnls <-
   }
   modForm <- getCovariateFormula(object)[[2]]
   val <- eval(modForm, data.frame(dataMod,
-              getParsGnls(plist, object$pmap, prs, N)))[naPat]
+		getParsGnls(plist, object$pmap, prs, N)))[naPat]
   names(val) <- row.names(newdata)
   lab <- "Predicted values"
   if (!is.null(aux <- attr(object, "units")$y)) {
@@ -798,10 +798,8 @@ update.gnls <-
 	existing <- !is.na(match(names(extras), names(call)))
 	## do these individually to allow NULL to remove entries.
 	for (a in names(extras)[existing]) call[[a]] <- extras[[a]]
-	if(any(!existing)) {
-	    call <- c(as.list(call), extras[!existing])
-	    call <- as.call(call)
-	}
+	if(any(!existing))
+	    call <- as.call(c(as.list(call), extras[!existing]))
     }
     if(evaluate) eval(call, parent.frame())
     else call

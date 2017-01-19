@@ -1,8 +1,8 @@
 ###              Classes of positive-definite matrices
 ###
+### Copyright 2006-2017  The R Core team
 ### Copyright 1997-2003  Jose C. Pinheiro,
 ###                      Douglas M. Bates <bates@stat.wisc.edu>
-### Copyright 2006-2016  The R Core team
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -2112,20 +2112,18 @@ summary.pdBlocked <-
     val <- eval(mCall)
     vNames <- colnames(val)
     auxNames <- lapply(Names(xx, TRUE),
-		       function(el, vN) {
-			 aux <- match(vN, el)
-			 if (any(aux1 <- !is.na(aux))) {
-			   el[aux[aux1]]
-			 }
-		       }, vN = vNames)
-    auxWhich <- !unlist(lapply(auxNames, is.null))
+		       function(el) {
+			 aux <- match(vNames, el)
+			 if(any(ok <- !is.na(aux))) el[aux[ok]] # else NULL
+		       })
+    auxWhich <- !vapply(auxNames, is.null, NA)
     if (sum(auxWhich) == 1) {
-      return(pdConstruct(as.list(xx)[auxWhich][[1]], val))
+	pdConstruct(as.list(xx)[auxWhich][[1]], val)
+    } else {
+	auxNames <- auxNames[auxWhich]
+	auxClass <- vapply(xx, function(el) class(el)[1L], "")[auxWhich]
+	pdConstruct(xx, val, nam = auxNames, form = NULL, pdClass = auxClass)
     }
-    auxNames <- auxNames[auxWhich]
-    auxClass <- unlist(lapply(xx, function(el) class(el)[1]))[auxWhich]
-    return(pdConstruct(xx, val, nam = auxNames, form = NULL,
-		       pdClass = auxClass))
   } else {
     eval(mCall)
   }

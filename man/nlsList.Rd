@@ -81,12 +81,10 @@ nlsList(model, data, start, control, level, subset,
   \code{silent=FALSE)} and hence all errors were printed to the console
   \emph{unless} the global option \code{show.error.messages} was set to true.
   This still works, but has been \emph{deprecated}.% For 3.1-127, April 14, 2016
-
-
 }
 \value{
   a list of \code{nls} objects with as many components as the number of
-  groups defined by the grouping factor. Generic functions such as
+  groups defined by the grouping factor.  Generic functions such as
   \code{coef}, \code{fixed.effects}, \code{lme}, \code{pairs},
   \code{plot}, \code{predict}, \code{random.effects}, \code{summary},
   and \code{update} have methods that can be applied to an \code{nlsList}
@@ -105,6 +103,11 @@ nlsList(model, data, start, control, level, subset,
 fm1 <- nlsList(uptake ~ SSasympOff(conc, Asym, lrc, c0),
    data = CO2, start = c(Asym = 30, lrc = -4.5, c0 = 52))
 summary(fm1)
+cfm1 <- confint(fm1) # via profiling each % FIXME: only *one* message instead of one *each*
+stopifnot((i.ok <- which(sapply(cfm1, class) == "matrix"))
+          \%in\% c(2:4,6:9, 12))
+## where as (some of) the others gave errors during profile re-fitting :
+str(cfm1[- i.ok])
 }
 \keyword{models}
 

@@ -5,15 +5,17 @@
 \name{lmeObject}
 \title{Fitted lme Object}
 \alias{lmeObject}
+\alias{sigma}% for R < 3.3.0
+\alias{sigma.lme}
 \description{
   An object returned by the \code{lme} function, inheriting from class
   \code{lme} and representing a fitted linear mixed-effects
-  model. Objects of this class have methods for the generic functions
+  model.  Objects of this class have methods for the generic functions
   \code{anova}, \code{coef}, \code{fitted}, \code{fixed.effects},
   \code{formula}, \code{getGroups}, \code{getResponse},
   \code{intervals}, \code{logLik}, \code{pairs}, \code{plot},
   \code{predict}, \code{print}, \code{random.effects}, \code{residuals},
-  \code{summary}, and \code{update}.
+  \code{sigma}, \code{summary}, \code{update}, and \code{vcov}.
 
 }
 \value{

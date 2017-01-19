@@ -2,7 +2,7 @@
 ###
 ### Copyright 1997-2003  Jose C. Pinheiro,
 ###                      Douglas M. Bates <bates@stat.wisc.edu>
-### Copyright 2006-2016 The R Core team
+### Copyright 2006-2017 The R Core team
 ###
 ###  This program is free software; you can redistribute it and/or modify
 ###  it under the terms of the GNU General Public License as published by
@@ -71,7 +71,7 @@ nlme.nlsList <-
   thisCall[names(last.call)] <- last.call
   thisModel <- last.call[["model"]]
   thisCall[["model"]] <-
-    eval(parse(text=paste(deparse(getResponseFormula(thisModel)[[2]]),
+    eval(parse(text=paste( deparse (getResponseFormula (thisModel)[[2]]),
                           c_deparse(getCovariateFormula(thisModel)[[2]]),sep="~")))
   ## create "fixed" and "start"
   cf <- na.omit(coef(model))
@@ -207,7 +207,7 @@ nlme.formula <-
       names(reSt) <- namGrp <- "1"
     }
   } else {
-    g.exp <- eval(parse(text = paste("~1", deparse(groups[[2]]),sep="|")))
+    g.exp <- eval(parse(text = paste0("~1 |", deparse(groups[[2]]))))
     namGrp <- rev(names(getGroupsFormula(g.exp, asList = TRUE)))
   }
   names(reSt) <- namGrp
@@ -250,10 +250,11 @@ nlme.formula <-
         list(fix.i)
       else
         ## multiple parameters on left hand side
-        eval(parse(text = paste0("list(", paste(paste(all.vars(fix.i[[2]]),
-                                                      deparse (fix.i[[3]]),
-                                                      sep = "~"),
-                                                collapse = ","), ")")))
+        eval(parse(text =
+		     paste0("list(",
+			    paste(paste(all.vars(fix.i[[2]]),
+					deparse (fix.i[[3]]), sep = "~"),
+				  collapse = ","), ")")))
   }))
   fnames <- lapply(fixed, function(fix.i) {
     this <- eval(fix.i)

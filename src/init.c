@@ -130,7 +130,6 @@ R_CMethodDef CEntries[] = {
     {NULL, NULL, 0}
 };
 
-#include <Rversion.h>
 void
 #ifdef HAVE_VISIBILITY_ATTRIBUTE
 __attribute__ ((visibility ("default")))
@@ -139,7 +138,5 @@ R_init_nlme(DllInfo *dll)
 {
     R_registerRoutines(dll, CEntries, NULL, NULL, NULL);
     R_useDynamicSymbols(dll, FALSE);
-#if defined(R_VERSION) && R_VERSION >= R_Version(2, 16, 0)
     R_forceSymbols(dll, TRUE);
-#endif
 }
