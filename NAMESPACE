@@ -2,12 +2,12 @@ useDynLib(nlme, .registration=TRUE)
 
 importFrom("graphics", pairs, par, plot)
 
-importFrom("stats",
+importFrom("stats", # many S3 generics for which we define methods
            AIC, BIC, anova, as.formula, asOneSidedFormula, coef, coefficients,
            confint,
            contr.SAS, contr.helmert, contr.poly, contr.sum, contr.treatment,
            contrasts, "contrasts<-",
-           delete.response, dist, fitted, formula, lm, logLik,
+           delete.response, dist, fitted, extractAIC, formula, lm, logLik,
            mad, median, model.frame, model.matrix,
            na.fail, na.omit, napredict, naresid,
            nlm, nlminb, nls, nls.control, nobs, optim,
@@ -171,6 +171,8 @@ S3method(Dim, pdIdent)
 S3method(Dim, pdMat)
 S3method(Dim, pdNatural)
 S3method(Dim, pdSymm)
+S3method(extractAIC, gls)
+S3method(extractAIC, lme)
 S3method(fitted, gls)
 S3method(fitted, glsStruct)
 S3method(fitted, gnls)
@@ -459,6 +461,7 @@ S3method(summary, varFixed)
 S3method(summary, varFunc)
 S3method(summary, varIdent)
 S3method(summary, varPower)
+S3method(terms, gls)
 S3method(update, corStruct)
 S3method(update, gls)
 S3method(update, gnls)

@@ -60,8 +60,29 @@ vcov.gls <- function (object, ...) object$varBeta
 
 vcov.lme <- function (object, ...) object$varFix
 
-deviance.gls <- deviance.lme <- function(object, ...)
-    stop("not yet implemented.  Contributions are welcome (should be compatible with lme4's)")
+deviance.gls <- deviance.lme <- function(object, ...) {
+    if(object$method == "ML")
+	-2 * logLik(object)
+    else {
+	warning("deviance undefined for REML fit")
+	NULL
+    }
+}
+
+## From MASS/R/stepAIC.R :
+extractAIC.gls <- extractAIC.lme <- function(fit, scale, k = 2, ...)
+{
+    if(fit$method != "ML") stop("AIC undefined for REML fit")
+    res <- logLik(fit)
+    edf <- attr(res, "df")
+    c(edf,  -2*res + k * edf)
+}
+
+terms.gls <- function(x, ...) terms(formula(x), ...)
+if(FALSE)## Not needed, because 'lme' object has "terms" attribute:
+    terms.lme <- function(x, ...) terms(formula(x), ...)
+## end{from MASS}
+
 
 if(getRversion() < "3.3") {
     sigma <- function(object, ...) UseMethod("sigma")

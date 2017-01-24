@@ -1,8 +1,8 @@
 227905154e25c002ac3a96ce5f391351 *ChangeLog
-ac666133a264c897648179336d147609 *DESCRIPTION
+6835b24439cbdf2e1ebd8afb0c79a6fa *DESCRIPTION
 c843826752e9f806f255d79801354abb *INDEX
 967bf0c65e5a3f8c94efb6186482ade1 *LICENCE
-12cf9f75c67edbf2b81cbc2885a423a6 *NAMESPACE
+01651020406a78619455db1299620c08 *NAMESPACE
 0f6146b2f409b32ba81640a1b04cfbca *R/VarCorr.R
 8c0101fd47a2547f20a599d587bde056 *R/VarCov.R
 248075dab1cb965a95060e4d44db57e0 *R/corStruct.R
@@ -21,9 +21,9 @@ dd9e751f505d41ba8d5f809c94490a19 *R/nlsList.R
 4bf749970498c8e4c0effbcdf4ef2142 *R/reStruct.R
 ffb63c70a819305b7662d9a2246f5b25 *R/simulate.R
 3607b3a7ddf941d5d6fc8eb2c561ed26 *R/varFunc.R
-a072a65bc13d480bac8f3ab0a415bf00 *R/zzMethods.R
+9875c5486969b2b6fb8617c3affe4b95 *R/zzMethods.R
 1b861e2fac2ad8b7cfde1dafa9722618 *README
-b23d637243be14b0a1bd115004b926c7 *TODO
+4e6044fc68ab0aaff2750b36b9a37f73 *TODO
 8f2e4f663d2e4beb1143c28187c6653d *data/Alfalfa.rda
 28e82e652a218134a9b880143f611516 *data/Assay.rda
 041ca0f6b3ae898f7b0f7a62f16be9fd *data/BodyWeight.rda
@@ -406,6 +406,7 @@ b9701ba1a2d534994af3ced1cfcf4f31 *tests/coef.Rout.save
 8ff37dbadc319edc1c2c0a737ab2f845 *tests/contrMat.R
 639e9b20186b1cef4c0adb6bf75b7bb0 *tests/data.frame.R
 288260d4e0f679d5d51eb982ad5be4f8 *tests/deparse.R
+2038d7eef374b9c7131d202c15e0a742 *tests/deviance.R
 dea84bf6c5e3f953ea2c523ef749bfae *tests/fitted.R
 2d06207872197b9abd28f869ff06f086 *tests/getData.R
 db2b6e128769fe949671803e3dff6737 *tests/gls.R
