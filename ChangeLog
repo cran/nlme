@@ -1,3 +1,9 @@
+2017-02-06  Martin Maechler  <maechler@stat.math.ethz.ch>
+
+	* DESCRIPTION (Version): 3.1-131, tweaked test tolerance to also
+	pass openblas 0.2.18, in
+	* tests/sigma-fixed-etc.R example 6
+
 2017-01-17  Martin Maechler
 
 	* R/groupedData.R (groupedData): must prepend 'nlme::' for call,

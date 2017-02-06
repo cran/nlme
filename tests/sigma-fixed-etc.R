@@ -240,8 +240,9 @@ stopifnot(
 	      c(lower = 0.51230063,       ## 0.51226722
 		est.  = 0.65065925,       ## 0.65065925
 		upper = 0.82638482),      ## 0.82643872
-              tol = if(isSun) 4e-4 else 5e-5)#= 4.39e-5
+	      tol = if(isSun) 4e-4 else 6e-5)#= 4.39e-5
     ## seen 5.35e-5 (Sparc Sol., no long double);  later, 6e-5 was not ok
+    ## Windows 64bit w/ openblas 0.2.18 gave 5.721e-05 (Avi A)
 )
 
 ##-------------

@@ -1,5 +1,5 @@
-227905154e25c002ac3a96ce5f391351 *ChangeLog
-6835b24439cbdf2e1ebd8afb0c79a6fa *DESCRIPTION
+619e9a9dc95cda0c3181e8e163949f9a *ChangeLog
+da35d5fd4963939743ed38366ad52112 *DESCRIPTION
 c843826752e9f806f255d79801354abb *INDEX
 967bf0c65e5a3f8c94efb6186482ade1 *LICENCE
 01651020406a78619455db1299620c08 *NAMESPACE
@@ -418,7 +418,7 @@ c9ee39d5e6278ffd5bd9620ba6f529cf *tests/missing.Rout.save
 fbc3578ce2cb6c7873734d6dc39f7e21 *tests/nlme.R
 bc6f196f951a2d26cc23f7cd789ef3c5 *tests/nlme2.R
 1dcb40c8ec95980cb02af27cd02a6c8b *tests/predict.lme.R
-2b641064929a96a1653df4078acd54c1 *tests/sigma-fixed-etc.R
+c924556ceeacda19874796b7c160794b *tests/sigma-fixed-etc.R
 52e8f5b5ecbec55ced361ee194ff972a *tests/ss2.rds
 4c68332d00c3e3f1818fcb8aa60e0d9b *tests/updateLme.R
 8bb1eb5670f185f8aaaa51b542866ee5 *tests/varIdent.R
