@@ -39,9 +39,10 @@ lmeControl(maxIter = 50, msMaxIter = 50, tolerance = 1e-6, niterEM = 25,
  \item{msVerbose}{a logical value passed as the \code{trace} argument to
    \code{\link{nlminb}} or \code{\link{optim}}.  Default is \code{FALSE}.}
  \item{returnObject}{a logical value indicating whether the fitted
-   object should be returned when the maximum number of iterations is
-   reached without convergence of the algorithm.  Default is
-   \code{FALSE}.}
+   object should be returned with a \code{\link{warning}} (instead of an
+   error via \code{\link{stop}()}) when the maximum number of
+   iterations is reached without convergence of the algorithm.  Default
+   is \code{FALSE}.}
  \item{gradHess}{a logical value indicating whether numerical gradient
    vectors and Hessian matrices of the log-likelihood function should
    be used in the internal optimization.  This option is only available

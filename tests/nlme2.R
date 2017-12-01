@@ -12,25 +12,65 @@ storage.mode(vc) <- "double" # -> (correct) NA warning
 cfO <- sO$tTable
 if(FALSE)
     dput(signif(cfO[,c("Std.Error", "t-value")], 8))
-cfO.T <- array(
-    if(is64bit)## R-devel 2016-01-11; [lynne]:
-        c(14.052671, 34.587947, 30.497593,
-          13.669776, 21.036087, 11.692943)
-    else ## R-devel 2016-01-11; [f32sfs-2]:
-        c(14.053663, 34.589821, 30.49412,
-          13.668653, 21.034544, 11.693889)
-   , dim = 3:2, dimnames = list(c("Asym", "xmid", "scal"),
-				c("Std.Error", "t-value")))
 if(FALSE)
-    dput(signif(as.vector(vc[,"StdDev"]), 8))
-vcSD <- setNames(if(is64bit)## R-devel 2016-01-11; [lynne]:
-		     c(27.051312, 24.258159, 36.597078, 7.321525)
-		 else ## R-devel 2016-01-11; [f32sfs-2]:
-		     c(27.053964, 24.275286, 36.58682, 7.321365),
+    dput(signif(as.numeric(vc[,"StdDev"]), 8))
+
+cfO.Ts <- list(
+    stdE.T = cbind(
+        b64nx = ## R-devel 2016-01-11, 2017-09-18; [lynne]:
+            c(14.052671, 34.587947, 30.497593,  13.669776, 21.036087, 11.692943)
+      , b32nx = ## R-devel 2016-01-11, 2017-09-18 [florence, Fedora 24 Linux]:
+            c(14.053663, 34.589821, 30.49412,   13.668653, 21.034544, 11.693889)
+      , b32Win1 = ## R-devel 2017-09-17, i386-w64-mingw32/i386,
+            ## Windows Server 2008 R2 x64 (build 7601) Service Pack 1
+            c(14.053047, 34.588589, 30.4963,    13.669349, 21.035542, 11.693282)
+      , b32Win = ## R-devel 2017-09-18, Tomas K (Win.10)
+            c(14.051902, 34.579819, 30.499807,  13.670797, 21.041722, 11.692694)
+    ),
+    stdDev = cbind(
+        b64nx = ## R-devel 2016-01-11; [lynne]:
+            c(27.051312, 24.258159, 36.597078, 7.321525)
+      , b32nx = ## R-devel 2017-09-18; [florence, Fedora 24 Linux]:
+            c(27.053964, 24.275286, 36.58682,  7.3213653)
+      , b32Win = ## R-devel 2017-09-17, i386-w64-mingw32/i386, W.Server 2008 R2..
+            c(27.05234,  24.264936, 36.593554, 7.3214448)
+        ## for now
+    )
+)
+## Average number of decimal digits agreement :
+lapply(cfO.Ts, function(cc) round(-log10(apply(cc - rowMeans(cc), 1, sd)), 2))
+## $ stdE.T: num [1:6] 3.13 2.34 2.62 3.05 2.49 3.29
+## $ stdDev: num [1:4] 2.87 2.06 2.28 4.1
+## Pairwise distances (formatted, easier to read off):
+round(dist(1000 * t(cfO.Ts[["stdE.T"]])), 1)
+##         b64nx b32nx b32Win1
+## b32nx     4.6
+## b32Win1   1.7   2.9
+## b32Win   10.2  13.9    11.5
+round(dist(1000 * t(cfO.Ts[["stdDev"]])), 1)
+##        b64nx b32nx
+## b32nx   20.1
+## b32Win   7.7  12.5
+
+cName <- (if(is64bit) "b64nx"
+          else if(.Platform$OS.type == "Windows") {
+              if(grepl("Server 2008 R2", win.version(), fixed=TRUE))
+                  "b32Win1"
+              else
+                  "b32Win"
+          }
+          else "b32nx" ## 32-bit, non-Windows
+)
+
+cfO.T <- array(cfO.Ts[["stdE.T"]][, cName], dim = 3:2,
+               dimnames = list(c("Asym", "xmid", "scal"),
+                               c("Std.Error", "t-value")))
+vcSD <- setNames(cfO.Ts[["stdDev"]][, switch(cName, b64nx=, b32nx=, b32Win=cName,
+                                             b32Win1 = "b32Win")],
 		 c("Asym", "xmid", "scal", "Residual"))
 stopifnot(
     identical(cfO[,"Value"], fixef(nfm)),
-    all.equal(cfO[,c("Std.Error", "t-value")], cfO.T, tol = 2e-4)# 8.7e-5 (R 3.0.3, 32b)
+    all.equal(cfO[,c("Std.Error", "t-value")], cfO.T, tol = 3e-4)
    ,
     cfO[,"DF"] == 28,
     all.equal(vc[,"Variance"], vc[,"StdDev"]^2, tol= 5e-7)

@@ -1,6 +1,6 @@
 Package: nlme
-Version: 3.1-131
-Date: 2017-02-06
+Version: 3.1-134
+Date: 2017-12-01
 Priority: recommended
 Title: Linear and Nonlinear Mixed Effects Models
 Authors@R: c(person("José", "Pinheiro", role = "aut", comment = "S version"),
@@ -13,7 +13,7 @@ Authors@R: c(person("José", "Pinheiro", role = "aut", comment = "S version"),
 	     person("R-core", email = "R-core@R-project.org",
                     role = c("aut", "cre")))
 Description: Fit and compare Gaussian linear and nonlinear mixed-effects models.
-Depends: R (>= 3.0.2)
+Depends: R (>= 3.5.0)
 Imports: graphics, stats, utils, lattice
 Suggests: Hmisc, MASS
 LazyData: yes
@@ -22,7 +22,7 @@ Encoding: UTF-8
 License: GPL (>= 2) | file LICENCE
 BugReports: https://bugs.r-project.org
 NeedsCompilation: yes
-Packaged: 2017-02-06 10:56:42 UTC; maechler
+Packaged: 2017-12-01 10:24:59 UTC; ripley
 Author: José Pinheiro [aut] (S version),
   Douglas Bates [aut] (up to 2007),
   Saikat DebRoy [ctb] (up to 2002),
@@ -33,4 +33,4 @@ Author: José Pinheiro [aut] (S version),
   R-core [aut, cre]
 Maintainer: R-core <R-core@R-project.org>
 Repository: CRAN
-Date/Publication: 2017-02-06 21:34:58
+Date/Publication: 2017-12-01 12:55:52 UTC
