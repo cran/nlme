@@ -1,5 +1,5 @@
-de5974ebff48cb535e2940a2619d8185 *ChangeLog
-a1a5e53224ed87f90597c4d76a9af991 *DESCRIPTION
+788d91ecb84569ee28a328a83333fc64 *ChangeLog
+d61657744bae34e15be69dc0dd915c0b *DESCRIPTION
 c843826752e9f806f255d79801354abb *INDEX
 967bf0c65e5a3f8c94efb6186482ade1 *LICENCE
 01651020406a78619455db1299620c08 *NAMESPACE
@@ -398,7 +398,7 @@ dabd3a6204f40bb1c94b3e6db54eb64a *src/nlmefit.c
 5225d615caa3ab1cd28d8859f2da6554 *src/pdMat.c
 87f59f283d5378beccb42f205be507cf *src/pdMat.h
 ef88a46d414dd7348296893300ffcb63 *src/rs.f
-743614ba47af2cfd64c7f15b06d8ede9 *tests/anova.gls.R
+677ca93ed4c318d7aeafb7ec35dbf241 *tests/anova.gls.R
 395bfa0ee325c0e8b45d76b851e56b23 *tests/augPred_lab.R
 cdced2c0665ee6e3f80188b92267e8c8 *tests/augPredmissing.R
 ab25428328f64b827b7ff267fc84ab5e *tests/coef.R

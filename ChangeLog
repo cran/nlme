@@ -1,3 +1,12 @@
+2018-01-01  Brian Ripley
+
+	* DESCRIPTION (Version): 3.1-135 (released for R-devel only)
+	* tests/anova.gls.R: increase tolerance.
+
+2017-12-24  Brian Ripley
+
+	* tests/anova.gls.R: increase tolerance.
+
 2017-12-01  Brian Ripley
 
 	* DESCRIPTION (Version): 3.1-134, R >= 3.5.0	
