@@ -1,7 +1,7 @@
 
-R version 3.3.2 Patched (2016-12-10 r71773) -- "Sincere Pumpkin Patch"
-Copyright (C) 2016 The R Foundation for Statistical Computing
-Platform: x86_64-pc-linux-gnu (64-bit)
+R version 3.4.3 Patched (2018-02-11 r74243) -- "Kite-Eating Tree"
+Copyright (C) 2018 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin17.4.0 (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -198,4 +198,4 @@ Number of Groups: 27
 > 
 > proc.time()
    user  system elapsed 
-  1.884   0.089   2.066 
+  2.627   0.110   2.787 

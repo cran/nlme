@@ -4,7 +4,7 @@
 
    Copyright (C) 1997-2005  Douglas M. Bates <bates@stat.wisc.edu>,
 		            Jose C. Pinheiro, Saikat DebRoy
-   Copyright (C) 2007-2017  The R Core Team
+   Copyright (C) 2007-2016  The R Core Team
 
    This file is part of the nlme package for R and related languages
    and is made available under the terms of the GNU General Public
@@ -245,7 +245,7 @@ plus_equals_mat(double *y, int ldy, double *x, int ldx, int nrow, int ncol)
 static int			/* backsolve and update */
 backsolve(double *mat, int ldmat, int nupdate, int ncol, int nrot, int ny)
 {
-    int i, j, ONE = 1, info;
+    int i, j, ONE = 1L, info;
     double *y = mat + (int) ((ncol + nrot - ny) * ldmat);
 
     mat = mat - (int) nupdate;
@@ -265,19 +265,19 @@ backsolve(double *mat, int ldmat, int nupdate, int ncol, int nrot, int ny)
 static int			/* invert an upper-triangular matrix in place*/
 invert_upper(double *mat, int ldmat, int ncol)
 {
-    int i, j, ONE = 1, info = 0;
+    int i, j, ONE = 1L, info = 0L;
     double *b = Calloc((size_t) ncol, double);
 
-    for (i = ncol; i > 1; i--) {
-	for (j = 0; j < (i - 1); j++) { b[j] = 0.0; }
+    for (i = ncol; i > 1L; i--) {
+	for (j = 0; j < (i - 1L); j++) { b[j] = 0.0; }
 	b[((int) i) - 1] = 1.0;
 	F77_CALL(dtrsl) (mat, &ldmat, &i, b, &ONE, &info);
 	if (info != 0) { Free(b); return info; }
 	Memcpy(mat + (i - 1) * ldmat, b, (int) i);
     }
-    if (*mat == 0.0) { Free(b); return 1; }
+    if (*mat == 0.0) { Free(b); return 1L; }
     *mat = 1.0 / (*mat);
-    Free(b); return 0;
+    Free(b); return 0L;
 }
 
 static int			/* invert a block in the virtual R array */
@@ -286,14 +286,14 @@ invert_block(double *mat, int ldmat, int nabove, int ncol, int nright)
     double * tpblk = mat - (int) nabove;
     int info = invert_upper(mat, ldmat, ncol);
 
-    if (info != 0) return info;
+    if (info != 0L) return info;
     if (nright > 0) {
 	double *ntri = Calloc((size_t) (ncol * ncol), double),
 	    *rtblk = mat + ncol * ldmat;
 	scale_mat(ntri, ncol, -1.0, mat, ldmat, ncol, ncol);
 	mult_mat(rtblk, ldmat, ntri, ncol, ncol, ncol, rtblk, ldmat, nright);
 	Free(ntri);
-	if (nabove > 0) {
+	if (nabove > 0L) {
 	    double *tmp = Calloc((size_t)(nabove * nright), double);
 	    plus_equals_mat(rtblk - (size_t)nabove, ldmat,
 			    mult_mat(tmp, nabove, tpblk, ldmat, nabove, ncol,
@@ -302,10 +302,10 @@ invert_block(double *mat, int ldmat, int nabove, int ncol, int nright)
 	    Free(tmp);
 	}
     }
-    if (nabove > 0) {
+    if (nabove > 0L) {
 	mult_mat(tpblk, ldmat, tpblk, ldmat, nabove, ncol, mat, ldmat, ncol);
     }
-    return 0;
+    return 0L;
 }
 
 
@@ -329,7 +329,7 @@ internal_decomp(dimPTR dd, double *ZXy)
     for (i = 0; i < Qp2; i++) {
 	for(j = 0; j < (dd->ngrp)[i]; j++) {
 	    QR_and_rotate(ZXy + (dd->ZXoff)[i][j], dd->ZXrows, (dd->ZXlen)[i][j],
-			  (dd->ncol)[i] + (dd->nrot)[i], DNULLP, 0,
+			  (dd->ncol)[i] + (dd->nrot)[i], DNULLP, 0L,
 			  (dd->ncol)[i], DNULLP, dc + (dd->SToff)[i][j],
 			  dd->Srows);
 	}
@@ -352,7 +352,7 @@ internal_loglik(dimPTR dd, double *ZXy, double *DmHalf, int *RML,
 		double *sigma)
 {				/* if dc is NULL, don't attempt storage */
     int i, j, Q = dd->Q,  Qp2 = Q + 2, qi,
-	ldstr = (dc != DNULLP) ? (dd->Srows) : 0;
+	ldstr = (dc != DNULLP) ? (dd->Srows) : 0L;
     double accum, *dmHlf, *lglk = Calloc( Qp2, double );
     QRptr dmQR;
 
@@ -366,7 +366,7 @@ internal_loglik(dimPTR dd, double *ZXy, double *DmHalf, int *RML,
 			      lglk + i, dc + (dd->SToff)[i][j], ldstr))
 	    {
 		warning("Singular precision matrix in level %ld, block %ld",
-			(long int) (i - (dd->Q)), j + 1);
+			(long int) (i - (dd->Q)), j + 1L);
 		return -DBL_MAX;
 	    }
 	}
@@ -401,7 +401,7 @@ internal_loglik(dimPTR dd, double *ZXy, double *DmHalf, int *RML,
 void
 internal_estimate(dimPTR dd, double *dc)
 {				/* solve for Beta and b_i estimates */
-    int i, j, Qp1 = (dd->Q) + 1;
+    int i, j, Qp1 = (dd->Q) + 1L;
 
     for (i = (dd->Q); i >= 0; i--) {
 	for (j = 0; j < (dd->ngrp)[i]; j++) {
@@ -410,7 +410,7 @@ internal_estimate(dimPTR dd, double *dc)
 			  (dd->ncol)[i], (dd->nrot)[i], (dd->ncol)[Qp1]) != 0)
 	    {
 		error(_("Singularity in backsolve at level %ld, block %ld"),
-		      (long int) (i - (dd->Q)), j + 1);
+		      (long int) (i - (dd->Q)), j + 1L);
 	    }
 	}
     }
@@ -424,7 +424,7 @@ internal_R_invert(dimPTR dd, double *dc)
 	for (j = 0; j < (dd->ngrp)[i]; j++) {
 	    invert_block(dc + (dd->SToff)[i][j], dd->Srows,
 			 (dd->SToff)[i][j] - (dd->DecOff)[i][j],
-			 (dd->ncol)[i], (dd->nrot)[i] - 1);
+			 (dd->ncol)[i], (dd->nrot)[i] - 1L);
 	}
     }
 }
@@ -497,7 +497,7 @@ finite_diff_Hess(double (*func)(double*,double*), double *pars, int npar,
     print_mat( "Xmat", Xmat, nTot, nTot, nTot );
 #endif /* Debug */
     xQR = QR( Xmat, (int) nTot, (int) nTot, (int) nTot );
-    QRsolve( xQR, vals, (int) nTot, 1, vals, (int) nTot );
+    QRsolve( xQR, vals, (int) nTot, 1L, vals, (int) nTot );
     pt_prod( vals, vals, div, nTot );
     /* re-arrange the Hessian terms */
     xpt = vals + npar + 1;
@@ -556,19 +556,19 @@ mixed_grad(int n, double *pars, double *g, void *state)
 	    sigmainv = 1.0/((sigmainv < 0.0) ? - sigmainv : sigmainv);
 	}
     }
-    offset = ((st->dd->ZXcols) - 1) * (st->dd->Srows);
-    for (i = 0; i < (st->dd->Q); i++) {
+    offset = ((st->dd->ZXcols) - 1L) * (st->dd->Srows);
+    for (i = 0L; i < (st->dd->Q); i++) {
 	int ncol = (st->dd->q)[i],
 	    nright = (st->dd->nrot)[i] - (st->dd->nrot)[(st->dd->Q) - ( (*(st->RML)) ? 0 : 1 )];
-	int nrow = (ncol + nright + 1) * (st->dd->ngrp)[i];
+	int nrow = (ncol + nright + 1L) * (st->dd->ngrp)[i];
 	QRptr qq;
 	pt = res = Calloc((size_t) (ncol * nrow), double);
-	for (j = 0; j < (st->dd->ngrp)[i]; j++) {
+	for (j = 0L; j < (st->dd->ngrp)[i]; j++) {
 	    copy_trans(pt, nrow, dc + (st->dd->SToff)[i][j], st->dd->Srows,
 		       ncol, ncol + nright);
 	    pt += ncol + nright;
 	    scale_mat(pt++, nrow, sigmainv, dc + offset + (st->dd->SToff)[i][j],
-		      1, 1, ncol);
+		      1L, 1L, ncol);
 	}
 	offset -= (st->dd->Srows) * ncol;
 	qq = QR(res, nrow, nrow, ncol);
@@ -582,14 +582,14 @@ mixed_grad(int n, double *pars, double *g, void *state)
 	case 1:			/* diagonal */
 	    for (j = 0; j < ncol; j++) {
 		double tmp = DmHalf[ (st->dd->DmOff)[i] + j * (ncol + 1)];
-		*g++ = st->dd->ngrp[i] - tmp*tmp*d_sum_sqr(res + j * ncol, j + 1);
+		*g++ = st->dd->ngrp[i] - tmp*tmp*d_sum_sqr(res + j * ncol, j + 1L);
 	    }
 	    break;
 	case 2:			/* multiple of identity */
 	{
 	    double tmp = 0.0;
 	    for(j = 0; j < ncol; j++) {
-		tmp += d_sum_sqr( res + j * nrow, j + 1 );
+		tmp += d_sum_sqr( res + j * nrow, j + 1L );
 	    }
 	    *g = tmp;
 	    tmp = DmHalf[ (st->dd->DmOff)[i] + j * (ncol + 1)];
@@ -736,19 +736,19 @@ internal_EM(dimPTR dd, double *ZXy, double *DmHalf, int nn, int *pdClass,
 		sigmainv = 1.0/((sigmainv < 0.0) ? - sigmainv : sigmainv);
 	    }
 	}
-	offset = ((dd->ZXcols) - 1) * (dd->Srows);
-	for (i = 0; i < (dd->Q); i++) {
+	offset = ((dd->ZXcols) - 1L) * (dd->Srows);
+	for (i = 0L; i < (dd->Q); i++) {
 	    int ncol = (dd->q)[i],
 		nright = (dd->nrot)[i] - (dd->nrot)[(dd->Q) - ( (*RML) ? 0 : 1 )];
-	    int nrow = (ncol + nright + 1) * (dd->ngrp)[i];
+	    int nrow = (ncol + nright + 1L) * (dd->ngrp)[i];
 	    QRptr qq;
 	    pt = res = Calloc((size_t) (ncol * nrow), double);
-	    for (j = 0; j < (dd->ngrp)[i]; j++) {
+	    for (j = 0L; j < (dd->ngrp)[i]; j++) {
 		copy_trans(pt, nrow, dc + (dd->SToff)[i][j], dd->Srows,
 			   ncol, ncol + nright);
 		pt += ncol + nright;
 		scale_mat(pt++, nrow, sigmainv, dc + offset + (dd->SToff)[i][j],
-			  1, 1, ncol);
+			  1L, 1L, ncol);
 	    }
 	    offset -= (dd->Srows) * ncol;
 	    qq = QR(res, nrow, nrow, ncol);
@@ -764,14 +764,14 @@ internal_EM(dimPTR dd, double *ZXy, double *DmHalf, int nn, int *pdClass,
 	    case 1:			/* diagonal */
 		for (j = 0; j < ncol; j++) {
 		    DmHalf[ (dd->DmOff)[i] + j * (ncol + 1)] =
-			1. / sqrt( d_sum_sqr( res + j * nrow, j + 1 ) );
+			1. / sqrt( d_sum_sqr( res + j * nrow, j + 1L ) );
 		}
 		break;
 	    case 2:			/* multiple of identity */
 	    {
 		double aux = 0.0;
 		for(j = 0; j < ncol; j++) {
-		    aux += d_sum_sqr( res + j * nrow, j + 1 );
+		    aux += d_sum_sqr( res + j * nrow, j + 1L );
 		}
 		aux = sqrt(ncol / aux);
 		for(j = 0; j < ncol; j++) {
@@ -864,10 +864,10 @@ crossprod_mat(double *y, int ldy, double *x, int ldx,
     int i, j;
 
     for( i = 0; i < ncol; i++ ) {
-	y[ i * ldy + i ] = d_dot_prod( x + i * ldx, 1, x + i * ldx, 1, nrow );
+	y[ i * ldy + i ] = d_dot_prod( x + i * ldx, 1L, x + i * ldx, 1L, nrow );
 	for( j = 0; j < i; j++) {
 	    y[ i * ldy + j ] = y[ j * ldy + i ] =
-		d_dot_prod( x + i * ldx, 1, x + j * ldx, 1, nrow );
+		d_dot_prod( x + i * ldx, 1L, x + j * ldx, 1L, nrow );
 	}
     }
     return y;
@@ -880,7 +880,7 @@ crossprod_mat(double *y, int ldy, double *x, int ldx,
 static void
 Delta2MatrixLog( double *theta, int *q, double *Delta )
 {
-    int i, j, qq = *q, one = 1, info = 0;
+    int i, j, qq = *q, one = 1L, info = 0L;
     if ( qq == 1 ) {
 	*theta = log(*Delta * *Delta)/2.;
     } else {
@@ -891,7 +891,7 @@ Delta2MatrixLog( double *theta, int *q, double *Delta )
 	    *values = Calloc((size_t) qq, double), *pt;
 	crossprod_mat(DtransD, qq, Delta, qq, qq, qq); /* form t(Delta) %*% Delta */
 	F77_CALL(rs) (q, q, DtransD, values, &one, vectors, workmat, work2, &info);
-	if (info != 0) {
+	if (info != 0L) {
 	    error(_("Unable to form eigenvalue-eigenvector decomposition"));
 	}
 	copy_mat(workmat, qq, vectors, qq, qq, qq);
@@ -915,7 +915,7 @@ Delta2MatrixLog( double *theta, int *q, double *Delta )
 static void
 Delta2LogCholesky(double *theta, int *q, double *Delta )
 {
-    int i, qq = *q, info = 0;
+    int i, qq = *q, info = 0L;
     if ( qq == 1 ) {
 	*theta = log(*Delta * *Delta)/2.;
     } else {
@@ -923,7 +923,7 @@ Delta2LogCholesky(double *theta, int *q, double *Delta )
 	    *DtransD = Calloc((size_t) qq * qq, double);
 	crossprod_mat(DtransD, qq, Delta, qq, qq, qq); /* form t(Delta) %*% Delta */
 	F77_CALL(chol) (DtransD, &qq, &qq, Delta, &info); /* re-writes Delta */
-	if (info != 0)
+	if (info != 0L)
 	    error(_("Unable to form Cholesky decomposition"));
 	*theta = log(Delta[0]);
 	for(i = 1; i < qq; i++) {
@@ -1198,7 +1198,7 @@ gls_estimate(double *Xy, int *pdims, double *beta, double *sigma,
     }
     copy_mat(varBeta, rkm1, R, rk, rkm1, rkm1);
     invert_upper(varBeta, rkm1, rkm1);
-    mult_mat(beta, rkm1, varBeta, rkm1, rkm1, rkm1, R + rkm1 * rk, rk,  1);
+    mult_mat(beta, rkm1, varBeta, rkm1, rkm1, rkm1, R + rkm1 * rk, rk,  1L);
     QRfree(dmQR);
     Free(R);
 }

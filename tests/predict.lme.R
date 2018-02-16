@@ -93,15 +93,16 @@ system.time(
 ## the same, starting from two fitted models :
 ort.S3 <- simulate(m3, m2 = m4, nsim = 3, seed = 47)
 attr(ort.S3, "call") <- attr(orthS3, "call")
-stopifnot(all.equal(orthS3, ort.S3, tolerance = 1e-15))
+## was 1e-15, larger tolerance needed with ATLAS
+stopifnot(all.equal(orthS3, ort.S3, tolerance = 1e-10))
 
 logL <- sapply(orthS3, function(E) sapply(E,
                        function(M) M[,"logLik"]), simplify="array")
 
 stopifnot(is.array(logL), length(d <- dim(logL)) == 3, d == c(3,2,2),
     sapply(orthS3, function(E) sapply(E, function(M) M[,"info"])) == 0
-   , # typically even identical():
-    all.equal(logL[1,,"null"], c(ML = loM, REML = loR), tol = 1e-15)
+   , # typically even identical(), but not with ATLAS
+    all.equal(logL[1,,"null"], c(ML = loM, REML = loR), tol = 1e-10)
    ,
     all.equal(c(logL) + 230,
               c(14.563 , 2.86712, 1.00026, 12.6749, 1.1615,-0.602989,

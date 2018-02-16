@@ -11,17 +11,14 @@
 \alias{print.VarCorr.lme}
 \usage{
 VarCorr(x, sigma = 1, \dots)
-\method{VarCorr}{lme}(x, sigma = x$sigma, rdig = 3, \dots)
-
-\method{VarCorr}{pdMat}(x, sigma = 1, rdig = 3, \dots)
-\method{VarCorr}{pdBlocked}(x, sigma = 1, rdig = 3, \dots)
+\method{VarCorr}{lme}(x, sigma = 1, rdig = 3, \dots)
+## and identical signature for classes 'pdMat' and 'pdBlocked'
 }
 \arguments{
   \item{x}{a fitted model object, usually an object inheriting from
     class \code{"\link{lme}"}.}
   \item{sigma}{an optional numeric value used as a multiplier for the
-    standard deviations.  The default is \code{x$sigma} or \code{1}
-    depending on \code{\link{class}(x)}.}
+    standard deviations.  Default is \code{1}.}
   \item{rdig}{an optional integer value specifying the number of digits
     used to represent correlation estimates.  Default is \code{3}.}
   \item{\dots}{further optional arguments passed to other methods (none

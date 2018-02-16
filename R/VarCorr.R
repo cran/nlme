@@ -1,6 +1,6 @@
 ###          Extract variance components of lme models.
 ###
-### Copyright 2007-2017 The R Core team
+### Copyright 2007-2016 The R Core team
 ### Copyright 1997-2003  Jose C. Pinheiro,
 ###                      Douglas M. Bates <bates@stat.wisc.edu>
 ###
@@ -25,9 +25,10 @@ if(getRversion() < "3.2.0") {
 
 VarCorr <- function(x, sigma = 1, ...) UseMethod("VarCorr")
 
-VarCorr.lme <- function(x, sigma = x$sigma, rdig = 3, ...)
+VarCorr.lme <- function( x, sigma = 1, rdig = 3, ...)
 {
-  m <- lapply(rev(x$modelStruct$reStruct), VarCorr,
+  sigma <- x$sigma
+  m <- lapply(X=rev( x$modelStruct$reStruct ), FUN=VarCorr,
               sigma = sigma, rdig = rdig, ...)
   Q <- length( m )
   if (Q <= 1) {
@@ -43,32 +44,31 @@ VarCorr.lme <- function(x, sigma = x$sigma, rdig = 3, ...)
     return(structure(v, title = paste(nm, "=", attr( m, "formStr" )),
                      class = "VarCorr.lme"))
   }
-  ## multiple nested levels case: Q >= 2
-  nrows <- vapply(m, nrow, 1L)
-  trows <- 1L + c(0L, cumsum(1L + nrows))[1:Q]
+  ## multiple nested levels case
+  nrows <- sapply( m, nrow )
+  trows <- 1 + c(0, cumsum(1 + nrows))[1:Q]
   bd <- rbind(do.call(rbind, m),
               c(Variance = sigma^2, StdDev = sigma) )
   corr <- lapply( m, attr, which = "corr")
   colnames <- colnames(bd)
-  maxCorr <- 0L
-  if (!all( Nulls <- vapply(corr, is.null, NA) )) {
-    maxCorr <- max(vapply(corr[!Nulls], ncol, 1L))
-    colnames <- c( colnames, "Corr", rep("", maxCorr - 1L) )
+  maxCorr <- 0
+  if ( !all( Nulls <- sapply( corr, is.null ) ) ) {
+    maxCorr <- max( sapply( corr[!Nulls], ncol ) )
+    colnames <- c( colnames, "Corr", rep("", maxCorr - 1 ) )
   }
-  v <- array("", c(sum(nrows) + Q + 1L, 2L + maxCorr), list(NULL, colnames))
+  v <- array("", c(sum(nrows) + Q + 1, 2 + maxCorr), list(NULL, colnames))
   v[-trows, 1] <- format(bd[, 1])
   v[-trows, 2] <- format(bd[, 2])
   v[trows, 1] <- sapply( m, attr, which = "formStr" )
   rownames <- rep("", sum(nrows) + Q)
   rownames[trows] <- paste( names( m ), "=" )
-  rr <- 1L
+  rr <- 1
   for (i in seq_along( m ) ) {
-    ri <- rr + seq_len(nrows[i])
-    rownames[ri] <- rownames(m[[i]])
-    if (!is.null(corr[[i]])) {
-      v[ri, 2L + (1:ncol(corr[[i]])) ] <- corr[[i]]
+    rownames[ rr + (1:nrows[i]) ] <- dimnames( m[[i]] )[[1]]
+    if (!is.null( corr[[i]] )) {
+      v[ rr + (1:nrows[i]), 2 + (1:ncol(corr[[i]])) ] <- corr[[i]]
     }
-    rr <- rr + nrows[i] + 1L
+    rr <- rr + nrows[i] + 1
   }
   rownames(v) <- c(rownames, "Residual")
   class(v) <- "VarCorr.lme"
@@ -77,13 +77,12 @@ VarCorr.lme <- function(x, sigma = x$sigma, rdig = 3, ...)
 
 print.VarCorr.lme <- function(x, ...)
 {
-  if(hasT <- !is.null(tit <- attr(x, "title"))) {
-    cat(tit, "\n")
-    xo <- x  ## print(x, *)  must return 'x' unchanged
+  if (!is.null(attr(x, "title"))) {
+    cat(attr( x, "title" ), "\n")
     attr(x, "title") <- NULL
   }
-  print(unclass(x), ..., quote = FALSE)
-  invisible(if(hasT) xo else x)
+  print(unclass(x), ..., quote = FALSE )
+  invisible(x)
 }
 
 
@@ -99,25 +98,25 @@ VarCorr.pdMat <- function( x, sigma = 1., rdig = 3, ...)
 # ## puts in an extra blank.  We'll do it the clunky way instead
   attr(v, "formStr") <-
     if ( inherits( attr(x, "formula"), "listForm" ) ) {# an nlme'ism
-      paste0(class(x)[[1]], "(list(",
-             paste( sapply(attr(x, "formula"),
-                           function(x) as.character(deparse(x))),
-                   collapse=","), "))")
+      paste(class(x)[[1]], "(list(",
+            paste( sapply( attr(x, "formula"),
+                          function(x) as.character(deparse(x))),
+                  collapse=","), "))", sep = "")
     } else {
-      paste0(class(x)[[1]], "(",
-             substring(deparse(attr(x, "formula")), 2), ")")
+      paste(class(x)[[1]], "(",
+            substring(deparse(attr(x, "formula")), 2), ")", sep = "")
     }
+  if (attr(sx, "noCorrelation") || p <= 1)
+    return(v)
 
-  if (p >= 2L && !attr(sx, "noCorrelation")) {
-    ll <- lower.tri(sx)
-    sx[ll] <- format(round(sx[ll], digits = rdig))
-    sx[!ll] <- ""
-    if (!is.null(colnames(sx))) {
-        sx[1,] <- abbreviate(colnames(sx), minlength = rdig + 3)
-    }
-    dimnames(sx) <- list(names(sd), c("Corr", rep("", p - 1L)))
-    attr(v, "corr") <- sx[, -p, drop = FALSE ]
+  ll <- lower.tri(sx)
+  sx[ll] <- format(round(sx[ll], digits = rdig))
+  sx[!ll] <- ""
+  if (!is.null(colnames(sx))) {
+    sx[1,] <- abbreviate(colnames(sx), minlength = rdig + 3)
   }
+  dimnames(sx) <- list(names(sd), c("Corr", rep("", p - 1)))
+  attr(v, "corr") <- sx[, -p, drop = FALSE ]
   v
 }
 

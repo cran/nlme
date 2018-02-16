@@ -1,61 +1,30 @@
+2018-02-16  Brian Ripley
+
+	* DESCRIPTION (Version): 3.1-131.1
+	Depend on R (>= 3.3.0) (up from 3.0.2).
+
+2018-01-23, 2018-02-16 Brian Ripley
+
+	* tests/predict.lme.R: increase tolerance.
+
 2018-01-01  Brian Ripley
 
-	* DESCRIPTION (Version): 3.1-135 (released for R-devel only)
 	* tests/anova.gls.R: increase tolerance.
 
 2017-12-24  Brian Ripley
 
 	* tests/anova.gls.R: increase tolerance.
 
-2017-12-01  Brian Ripley
-
-	* DESCRIPTION (Version): 3.1-134, R >= 3.5.0	
-	* R/VarCorr.R: correct breakage in r7326 (2017-03-07) 
-	  (broke packages joineR and lme4).
-
-2017-11-28  Brian Ripley
-
-	* DESCRIPTION (Version): 3.1-133 (released for R-devel but withdrawn)
-	* tests/coef.Rout.save: update for R-pre-3.5.0 chanages to str()
-
-2017-09-18  Martin Maechler
-
-	* tests/nlme2.R: 'tweak and investigate platform dependent results'
-
-2017-03-07  Martin Maechler
-
-	* nlme/R/VarCorr.R, nlme/man/VarCorr.Rd: see below.
-	* 'correct default for VarCorr.lme() to what it has really been.'
-	* 'Fix print.*()'.
-	* 'Cosmetic (not changing any results)'
-
-2017-02-27  Martin Maechler
-
-	* nlme/R/gnls.R, nlme/man/glsControl.Rd, nlme/man/gnlsControl.Rd,
-	  nlme/man/lmeControl.R:  'cosmetic'
-
-2017-02-22  Martin Maechler
-
-	* DESCRIPTION (Version): 3.1-132 (unreleased)
-	* R/gnls.R, src/gnls.c: 'small cosmetic related to getting closer
-	to the root cause of PR#17227' 
-
 2017-02-11 Brian Ripley
 
 	* src/nlmefit.c: gcc -Wconversion pointed out misuse of long
 	constants '0L' and  '1L'.
 
-2017-02-06  Martin Maechler
+2017-02-06  Martin Maechler  <maechler@stat.math.ethz.ch>
 
 	* DESCRIPTION (Version): 3.1-131, tweaked test tolerance to also
 	pass openblas 0.2.18, in
 	* tests/sigma-fixed-etc.R example 6
-
-2017-01-23  Martin Maechler
-
-	* DESCRIPTION (Version): 3.1-130
-	* NAMESPACE, R/zzmethods.R, tests/deviance.R: workaround design
-	error in 3.1-129 re deviance.
 
 2017-01-17  Martin Maechler
 
