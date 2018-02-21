@@ -12,7 +12,7 @@ fm1 <- gls(follicles ~ sin(2*pi*Time) + cos(2*pi*Time), Ovary,
 stopifnot(
     all.equal(int1$corStruct["Phi",],
 	      c(lower=0.66842829, est.=0.753207889, upper=0.81866619),
-	      tol = 1e-5)# 7e-6 needed for flang
+	      tol = 1e-5)# 7e-6 needed for flan
    ,
     all.equal(as.vector(int1$sigma),
 	      c(3.9747061, 4.61617157, 5.361161), tol = 1e-5)

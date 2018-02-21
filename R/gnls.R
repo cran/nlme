@@ -1,9 +1,9 @@
 ###  Fit a general nonlinear regression model with correlated and/or
 ###  heteroscedastic errors
 ###
+### Copyright 2007-2017  The R Core team
 ### Copyright 1997-2003  Jose C. Pinheiro,
 ###                      Douglas M. Bates <bates@stat.wisc.edu>
-### Copyright 2007-2017  The R Core team
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -172,7 +172,7 @@ gnls <-
   ## extract a data frame with enough information to evaluate
   ## form, params, random, groups, correlation, and weights
   mfArgs <- list(formula = asOneFormula(formula(gnlsSt), form, params,
-                   groups, omit = c(pnames, "pi")),
+                                        groups, omit = c(pnames, "pi")),
 		 data = data, na.action = na.action)
   if (!missing(subset)) {
     mfArgs[["subset"]] <- asOneSidedFormula(Call[["subset"]])[[2]]
@@ -223,14 +223,13 @@ gnls <-
   plist <- vector("list", length(pnames))
   names(plist) <- pnames
   for (nm in pnames) {
-    plist[[nm]] <- TRUE
     if (deparse(params[[nm]][[3]]) != "1") {
-      plist[[nm]] <-
-        model.matrix(asOneSidedFormula(params[[nm]][[3]]),
-                 model.frame(asOneSidedFormula(params[[nm]][[3]]), dataModShrunk))
+      form1s <- asOneSidedFormula(params[[nm]][[3]])
+      plist[[nm]] <- model.matrix(form1s, model.frame(form1s, dataModShrunk))
       auxContr <- attr(plist[[nm]], "contrasts")
       contr <- c(contr, auxContr[is.na(match(names(auxContr), names(contr)))])
-    }
+    } else
+      plist[[nm]] <- TRUE
   }
   ##
   ## Params effects names
@@ -327,9 +326,10 @@ gnls <-
   Dims <- list(p = pLen, N = NReal, REML = FALSE)
   attr(gnlsSt, "conLin") <-
     list(Xy = array(w, c(NReal, 1),
-           list(row.names(dataModShrunk), deparse(form[[2]]))), dims = Dims,
-         ## 17-11-2015; Fixed sigma patch; SH Heisterkamp; Quantitative Solutions
-         logLik = 0, sigma=controlvals$sigma, auxSigma=0, fixedSigma=fixedSigma)
+		    list(row.names(dataModShrunk), deparse(form[[2]]))),
+	 dims = Dims, logLik = 0,
+	 ## 17-11-2015; Fixed sigma patch; SH Heisterkamp; Quantitative Solutions
+	 sigma=controlvals$sigma, auxSigma=0, fixedSigma=fixedSigma)
 
   ## additional attributes of gnlsSt
   attr(gnlsSt, "resp") <- yShrunk
@@ -403,27 +403,26 @@ gnls <-
 	       as.integer(!is.null(correlation)),
 	       as.integer(!is.null(weights)),
                nlModel,
-	       NAOK = TRUE)
+	       NAOK = TRUE)[c("thetaNLS", "settings", "additional")]
     if (work$settings[4] == 1) {
 ##      convResult <- 2
+      msg <- "step halving factor reduced below minimum in NLS step"
       if (controlvals$returnObject) {
-        warning("step halving factor reduced below minimum in NLS step")
-      } else {
-        stop("step halving factor reduced below minimum in NLS step")
-      }
-      break
+        warning(msg)
+        break
+      } else stop(msg)
     }
     oldPars <- c(spar, oldPars)
     spar[] <- work$thetaNLS
-    if (length(coef(gnlsSt)) == 0 && work$set[5] < controlvals$nlsMaxIter) {
+    if (length(coef(gnlsSt)) == 0 && work$settings[5] < controlvals$nlsMaxIter) {
       break
     }
     attr(gnlsSt, "conLin")$Xy[] <- work$additional
     attr(gnlsSt, "conLin")$logLik <- 0
     if (verbose) {
-      cat("\nNLS step: RSS = ", format(work$set[6]), "\n model parameters:")
+      cat("\nNLS step: RSS = ", format(work$settings[6]), "\n model parameters:")
       for (i in 1:pLen) cat(format(signif(spar[i]))," ")
-      cat("\n iterations:",work$set[5],"\n")
+      cat("\n iterations:",work$settings[5],"\n")
     }
     aConv <- c(spar, aConv)
 
@@ -453,12 +452,11 @@ gnls <-
     }
     if (numIter >= controlvals$maxIter) {
       ##      convResult <- 1
+      msg <- "maximum number of iterations reached without convergence"
       if (controlvals$returnObject) {
-	warning("maximum number of iterations reached without convergence")
+	warning(msg)
 	break
-      } else {
-	stop("maximum number of iterations reached without convergence")
-      }
+      } else stop(msg)
     }
   } ## end{ repeat } --------------
 
@@ -470,10 +468,10 @@ gnls <-
   ## 17-11-2015; Fixed sigma patch; SH Heisterkamp; Quantitative Solutions
   if((sigma <- controlvals$sigma) == 0) {
     sigma <- sqrt(sum((c.L$Xy[, pLen + 1])^2)/(NReal - pLen))
-    lsig <- logb(sigma) + 0.5 * logb(1 - pLen/NReal)
-    loglik <- ( - NReal * (1 + logb(2 * pi) + 2 * lsig))/2 + c.L$logLik
+    lsig <- log(sigma) + 0.5 * log(1 - pLen/NReal)
+    loglik <- ( - NReal * (1 + log(2 * pi) + 2 * lsig))/2 + c.L$logLik
   } else {
-    loglik <- - (NReal * (logb(2 * pi)/2 + logb(sigma)) +
+    loglik <- - (NReal * (log(2 * pi)/2 + log(sigma)) +
                  sum((c.L$Xy[, pLen + 1])^2) / (2 * sigma^2)) + c.L$logLik
     lsig <- log(sigma)
   }
@@ -748,9 +746,8 @@ predict.gnls <-
   if (is.null(params <- eval(object$call$params))) {
     params <- eval(parse(text = paste0(paste(pnames, collapse = "+"), "~ 1")))
   }
-  if (!is.list(params)) {
-    params <- list(params)
-  }
+  if (!is.list(params)) params <- list(params)
+### FIXME: 2 x {very ugly}: 1) adding to val incrementally //  2) eval(parse(text = .))
   val <- NULL
   for(i in seq_along(params)) {
     if (is.name(params[[i]][[2]])) {
@@ -768,8 +765,8 @@ predict.gnls <-
 ##  pn <- names(prs)
   for(nm in pnames) {
     if (!is.logical(plist[[nm]])) {
-      plist[[nm]] <- model.matrix(asOneSidedFormula(params[[nm]][[3]]),
-                model.frame(asOneSidedFormula(params[[nm]][[3]]), dataMod))
+      form1s <- asOneSidedFormula(params[[nm]][[3]])
+      plist[[nm]] <- model.matrix(form1s, model.frame(form1s, dataMod))
     }
   }
   modForm <- getCovariateFormula(object)[[2]]
@@ -882,9 +879,9 @@ logLik.gnlsStruct <-
 	conLin <- recalc(object, conLin)
 	## 17-11-2015; Fixed sigma patch; SH Heisterkamp; Quantitative Solutions
 	if(conLin$sigma == 0) {
-            conLin[["logLik"]] - (conLin$dims$N * logb(sum(conLin$Xy^2)))/2
+            conLin[["logLik"]] - (conLin$dims$N * log(sum(conLin$Xy^2)))/2
 	} else {
-            conLin[["logLik"]] - conLin$dims$N * logb(conLin$sigma) -
+            conLin[["logLik"]] - conLin$dims$N * log(conLin$sigma) -
                 sum(conLin$Xy^2) / (2 * conLin$sigma^2)
 	}
 }

@@ -6,8 +6,8 @@
 \title{Control Values for gls Fit}
 \usage{
 glsControl(maxIter, msMaxIter, tolerance, msTol, msVerbose,
-           singular.ok, returnObject, apVar, .relStep,
-           opt=c("nlminb", "optim"), optimMethod,
+           singular.ok, returnObject = FALSE, apVar, .relStep,
+           opt = c("nlminb", "optim"), optimMethod,
            minAbsParApVar, natural, sigma = NULL)
 }
 \alias{glsControl}

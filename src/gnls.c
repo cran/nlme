@@ -46,27 +46,29 @@ gnls_init(double *ptheta, int *dims, double *corFactor, double *varWeights,
 	  int *corDims, double *settings, double *additional,
 	  int corOpt, int varOpt, SEXP model)
 {
-  int nResult;
+  int nResult,
+      npar = dims[0], // == p = pLen
+      N = dims[1]; // == NReal == length(additional)
   gnlsPtr gnls = Calloc(1, struct gnls_struct);
   gnls->theta = ptheta;
   gnls->corFactor = corFactor;
   gnls->varWeights = varWeights;
   gnls->corDims = corDims;
-  gnls->npar = dims[0];
-  gnls->N = dims[1];
-  gnls->nrdof = gnls->N - gnls->npar;
-  gnls->ncol = gnls->npar + 1;
+  gnls->npar = npar;
+  gnls->N = N;
+  gnls->nrdof = N - npar;
+  gnls->ncol = npar + 1;
   gnls->maxIter = (int) settings[0];
   gnls->minFactor = settings[1];
   gnls->tolerance = settings[2];
-  gnls->newtheta = Calloc(gnls->npar, double);
-  gnls->incr = Calloc(gnls->npar, double);
+  gnls->newtheta = Calloc(npar, double);
+  gnls->incr = Calloc(npar, double);
   gnls->varOpt = varOpt;
   gnls->corOpt = corOpt;
   gnls->add_ons = additional;
   gnls->model = model;
   gnls->result[0] = DNULLP;
-  nResult = evaluate(ptheta, gnls->npar , model, gnls->result);
+  nResult = evaluate(ptheta, npar, model, gnls->result);
   gnls->result[0] = Calloc(nResult, double);
   return gnls;
 }
@@ -102,16 +104,14 @@ gnls_objective(gnlsPtr gnls)
 static double
 gnls_increment(gnlsPtr gnls)
 {
-  double regSS = 0, *auxRes;
-  QRptr aQR;
-  int i;
   if (sqrt_eps == 0.0) sqrt_eps = sqrt(DOUBLE_EPS);
-  auxRes = Calloc(gnls->N, double);
+  double* auxRes = Calloc(gnls->N, double);
   Memcpy(auxRes, gnls->residuals, gnls->N);
-  aQR = QR(gnls->gradient, gnls->N, gnls->N, gnls->npar);
+  QRptr aQR = QR(gnls->gradient, gnls->N, gnls->N, gnls->npar);
   QRsolve(aQR, gnls->residuals, gnls->N, 1L, gnls->incr, gnls->npar);
   QRqty(aQR, auxRes, gnls->N, 1L);
-  for(i=0; i < gnls->npar; i++) {
+  double regSS = 0.;
+  for(int i=0; i < gnls->npar; i++) {
     regSS += auxRes[i] * auxRes[i];
   }
   QRfree(aQR);
@@ -169,9 +169,10 @@ gnls_wrapup(gnlsPtr gnls)
 }
 
 void
-fit_gnls(double *ptheta, int *pdims, double *pcorFactor, double
-	 *pvarWeights, int *pcorDims, double *settings,
-	 double *additional, int *pcorOpt, int *pvarOpt, SEXP model)
+fit_gnls(double *ptheta, int *pdims, // = Dims
+	 double *pcorFactor, double *pvarWeights, int *pcorDims,
+	 double *settings, double *additional,
+	 int *pcorOpt, int *pvarOpt, SEXP model)
 {
   gnlsPtr gnls;
 
