@@ -1,8 +1,8 @@
 ###                  Create a list of lm objects
 ###
+### Copyright 2005-2018  The R Core team
 ### Copyright 1997-2003  Jose C. Pinheiro,
 ###                      Douglas M. Bates <bates@stat.wisc.edu>
-### Copyright 2005-2016  The R Core team
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -23,13 +23,14 @@ lmList <-
   function(object, data, level, subset, na.action = na.fail, pool = TRUE, warn.lm = TRUE)
   UseMethod("lmList")
 
+if(getRversion() < "3.5.0") {
 ##' Utility for lmList() and nlsList(): Collect errors from a list \code{val},
 ##' produce a "summary warning" and keep that message as "warningMsg" attribute
 warnErrList <- function(val, warn = TRUE) {
   errs <- vapply(val, inherits, NA, what = "error")
   if (any(errs)) {
     v.err <- val[errs]
-    e.call <- deparse(conditionCall(v.err[[1]]))
+    e.call <- paste(deparse(conditionCall(v.err[[1]])), collapse = "\n")
     tt <- table(vapply(v.err, conditionMessage, ""))
     msg <-
       if(length(tt) == 1)
@@ -50,6 +51,7 @@ warnErrList <- function(val, warn = TRUE) {
   }
   val
 }
+}# R <= 3.4.x
 
 lmList.groupedData <-
   function(object, data, level, subset, na.action = na.fail, pool = TRUE, warn.lm = TRUE)

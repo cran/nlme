@@ -10,8 +10,8 @@ doExtras <- function ()
     interactive() || nzchar(Sys.getenv("R_nlme_check_extra")) ||
         identical("true", unname(Sys.getenv("R_PKG_CHECKING_doExtras")))
 }
-doExtras()
-isSun <- Sys.info()[["sysname"]] == "SunOS"
+doExtras()  ## used below {when activated by the tester, e.g., MM..r}
+## isSun <- Sys.info()[["sysname"]] == "SunOS"
 
 ##===   example 1 general linear model page 251  gls ML  and LME ================
 ##
@@ -240,9 +240,11 @@ stopifnot(
 	      c(lower = 0.51230063,       ## 0.51226722
 		est.  = 0.65065925,       ## 0.65065925
 		upper = 0.82638482),      ## 0.82643872
-	      tol = if(isSun) 4e-4 else 6e-5)#= 4.39e-5
+      ## was  tol = if(isSun) 4e-4 else 6e-5)#= 4.39e-5
+	      tol =  4e-4)
     ## seen 5.35e-5 (Sparc Sol., no long double);  later, 6e-5 was not ok
-    ## Windows 64bit w/ openblas 0.2.18 gave 5.721e-05 (Avi A)
+    ## Windows 64bit w/ OpenBLAS 0.2.18 gave 5.721e-05 (Avi A)
+    ## Win-builder (i386) gave 9.584157e-05
 )
 
 ##-------------
@@ -270,7 +272,8 @@ stopifnot(
 	      c(lower = 0.51774671,      ## 0.51778038
 		est.  = 0.66087796,      ## 0.66087807
 		upper = 0.8435779),      ## 0.84352331
-              tol = if(isSun) 4e-4 else 5e-5)# 4.37e-5
+## was              tol = if(isSun) 4e-4 else 5e-5)# 4.37e-5
+              tol = 4e-4) # was 5.63e-5 without long doubles.
 )
 cat("Time elapsed: ", (proc.time() - .pt)[1:3], "\n")
 
@@ -306,10 +309,12 @@ stopifnot(
 ##------------------------------------------------------ REML ---
 method <- "REML"
 cat("\nFixed sigma= ",sigma,"  estimation method ", method,"\n")
-t7.fix.REML.lme <- lme( current ~voltage + I(voltage^2), data = Wafer,
+## This had 'false convergence' on Solaris using nlminb, and
+## optim found a portable answer
+t7.fix.REML.lme <- lme( current ~ voltage + I(voltage^2), data = Wafer,
                        random = list(Wafer = pdDiag(~voltage + I(voltage^2)),
                                      Site  = pdDiag(~voltage + I(voltage^2)) ),
-                       control = lmeControl(sigma = 1),
+                       control = lmeControl(sigma = 1, opt = "optim"),
                        method = method)
 (sR7 <- summary(t7.fix.REML.lme))
 (aR7 <-   anova(t7.fix.REML.lme))
@@ -323,7 +328,7 @@ stopifnot(
                 "I(voltage^2)"= 0.186754), tol = 5e-5)
     ,
     all.equal(aR7[,"F-value"],
-              c(2575.3253, 8880.9144, 39.276122), tol = 1e-6)
+              c(2584.9515, 8885.0, 39.2760), tol = 1e-6)
           )
 cat("Time elapsed: ", (proc.time() - .pt)[1:3], "\n")
 

@@ -34,26 +34,39 @@ C
       EPSLON = EPS*DABS(X)
       RETURN
       END
+
+c Use a wrapper for C99 hypot, which is guaranteed to handle special values
+c such as NaN.
       DOUBLE PRECISION FUNCTION PYTHAG(A,B)
-      DOUBLE PRECISION A,B
-C
-C     FINDS DSQRT(A**2+B**2) WITHOUT OVERFLOW OR DESTRUCTIVE UNDERFLOW
-C
-      DOUBLE PRECISION P,R,S,T,U
-      P = DMAX1(DABS(A),DABS(B))
-      IF (P .EQ. 0.0D0) GO TO 20
-      R = (DMIN1(DABS(A),DABS(B))/P)**2
-   10 CONTINUE
-         T = 4.0D0 + R
-         IF (T .EQ. 4.0D0) GO TO 20
-         S = R/T
-         U = 1.0D0 + 2.0D0*S
-         P = U*P
-         R = (S/U)**2 * R
-      GO TO 10
-   20 PYTHAG = P
+      DOUBLE PRECISION A,B,P
+      CALL HYPOT(A,B,P)
+      PYTHAG = P
       RETURN
       END
+
+C$$$      DOUBLE PRECISION FUNCTION PYTHAG(A,B)
+C$$$      DOUBLE PRECISION A,B
+C$$$C
+C$$$C     FINDS DSQRT(A**2+B**2) WITHOUT OVERFLOW OR DESTRUCTIVE UNDERFLOW
+C$$$C
+C$$$      DOUBLE PRECISION P,R,S,T,U
+C$$$      P = DMAX1(DABS(A),DABS(B))
+C$$$c     'nan' did lead to infinite loop before 2018-02:
+C$$$      IF ((risfinite(P) .ne. 0) .and. (P .NE. 0.0D0)) THEN
+C$$$         R = (DMIN1(DABS(A),DABS(B))/P)**2
+C$$$ 10      CONTINUE
+C$$$         T = 4.0D0 + R
+C$$$         IF (T .EQ. 4.0D0) GO TO 20
+C$$$         S = R/T
+C$$$         U = 1.0D0 + 2.0D0*S
+C$$$         P = U*P
+C$$$         R = (S/U)**2 * R
+C$$$         GO TO 10
+C$$$      END IF
+C$$$   20 PYTHAG = P
+C$$$      RETURN
+C$$$      END
+
       SUBROUTINE RS(NM,N,A,W,MATZ,Z,FV1,FV2,IERR)
 C
       INTEGER N,NM,IERR,MATZ
@@ -111,6 +124,7 @@ C     .......... FIND BOTH EIGENVALUES AND EIGENVECTORS ..........
       CALL  TQL2(NM,N,W,FV1,Z,IERR)
    50 RETURN
       END
+
       SUBROUTINE TQL2(NM,N,D,E,Z,IERR)
 C
       INTEGER I,J,K,L,M,N,II,L1,L2,NM,MML,IERR

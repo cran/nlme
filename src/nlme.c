@@ -1,10 +1,10 @@
 /*
    Routines for fitting nlme models
 
+   Copyright 2007-2018  The R Core Team
    Copyright 1997-2001  Douglas M. Bates <bates@stat.wisc.edu>,
 			Jose C. Pinheiro,
 			Saikat DebRoy
-   Copyright 2007-2016  The R Core Team
 
    This file is part of the nlme package for R and related languages
    and is made available under the terms of the GNU General Public
@@ -66,7 +66,7 @@ make_sequential(int *dest, int *src, int n)
 
 static nlmePtr
 nlme_init(double *ptheta, double *pDmHalf, int *pgroups, int *pdims,
-	  int *pdClass, double *pcorFactor, double *pvarWeights, 
+	  int *pdClass, double *pcorFactor, double *pvarWeights,
 	  int *pcorDims, double *additional, int *pcorOpt, int *pvarOpt,
 	  // 17-11-2015; Fixed sigma patch; E van Willigen; Quantitative Solutions
 	  double *sigma, SEXP model)
@@ -204,7 +204,7 @@ static double
 nlme_increment(nlmePtr nlme)
 {
     double predObj, *dest, *src, logLik, lRSS,
-	*Ra = Calloc( nlme->dd->DmOff[nlme->dd->Q], double),
+	*Ra = Calloc(nlme->dd->DmOff[nlme->dd->Q], double),
 	*dc = Calloc(nlme->dd->Srows * nlme->dd->ZXcols, double)
 /*      , *auxGrad = Calloc(nlme->dd->N * (nlme->dd->ZXcols - 1), double) */
 	;
@@ -251,8 +251,9 @@ nlme_increment(nlmePtr nlme)
 /*	} */
 	iagflg = 0;		/* temporary modification */
 
-	optif9(ntheta, ntheta, theta, (fcn_p) mixed_fcn, (fcn_p)
-	       mixed_grad, (d2fcn_p) 0,
+	// Call the documented C API interface to R's nlm() :
+	optif9(ntheta, ntheta, theta, (fcn_p) mixed_fcn, (fcn_p) mixed_grad,
+	       /* no hessian: */ (d2fcn_p) 0,
 	       st, typsiz, 1.0 /*fscale*/, 1 /*method*/, 1 /*iexp*/, &msg,
 	       -1 /*ndigit*/, 20 /*itnlim*/, iagflg, 0 /*iahflg*/,
 	       -1. /*dlt*/, pow(epsm, 1.0/3.0) /*gradtl*/, 0. /*stepmx*/,
@@ -317,6 +318,7 @@ nlme_iterate(nlmePtr nlme, double *settings)
 	criterion = nlme_increment(nlme);
 	if (nlme->conv_failure) return(iteration); /* Unable to make increment  */
 	if (criterion < tolerance) return(iteration); /* successful completion */
+	int inner_it = 0;
 	do {			/* inner loop for acceptable step size */
 	    if (factor < minFactor) {
 		settings[3] = 1;
@@ -329,7 +331,10 @@ nlme_iterate(nlmePtr nlme, double *settings)
 	    nlme_wtCorrAdj(nlme);
 	    nlme_RSS(nlme);
 	    nlme->new_objective = nlme_objective(nlme);
-	    if (nlme->conv_failure) return(iteration); /* unable to evaluate objective */
+	    if (nlme->conv_failure)
+		return(iteration); /* unable to evaluate objective */
+	    if((inner_it++) % 1000 == 0)
+		R_CheckUserInterrupt();
 	    factor /= 2.0;
 	} while (nlme->new_objective >= nlme->objective);
 	factor *= 4.0;

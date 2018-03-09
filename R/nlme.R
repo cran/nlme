@@ -1,8 +1,8 @@
 ###            Fit a general nonlinear mixed effects model
 ###
+### Copyright 2006-2018 The R Core team
 ### Copyright 1997-2003  Jose C. Pinheiro,
 ###                      Douglas M. Bates <bates@stat.wisc.edu>
-### Copyright 2006-2017 The R Core team
 ###
 ###  This program is free software; you can redistribute it and/or modify
 ###  it under the terms of the GNU General Public License as published by
@@ -501,7 +501,7 @@ nlme.formula <-
     }
   }
   fLen <- length(fn)
-  if (length(sfix) != fLen)
+  if (fLen == 0L || length(sfix) != fLen)
     stop ("starting values for the 'fixed' component are not the correct length")
   names(sfix) <- fn
   ##
@@ -789,6 +789,7 @@ nlme.formula <-
   pnlsSettings <- c(controlvals$pnlsMaxIter, controlvals$minScale,
                     controlvals$pnlsTol, 0, 0, 0)
   nlModel <- nonlinModel(modelExpression, nlEnv)
+  ##----------------------------------------------------------------------------
   repeat {                              ## alternating algorithm
     numIter <- numIter + 1
     ## LME step
@@ -810,6 +811,12 @@ nlme.formula <-
                        control = control)
       aConv <- coef(nlmeSt) <- optRes$par
       convIter <- optRes$iterations
+      if(optRes$convergence && controlvals$msWarnNoConv)
+        warning(paste(sprintf(
+          "Iteration %d, LME step: nlminb() did not converge (code = %d).",
+          numIter, optRes$convergence),
+          if(convIter >= control$iter.max) "Do increase 'msMaxIter'!"
+          else if(!is.null(msg <- optRes$message)) paste("PORT message:", msg)))
     } else { ## nlm(.)
       aNlm <- nlm(f = function(nlmePars) -logLik(nlmeSt, nlmePars),
                   p = c(coef(nlmeSt)), hessian = TRUE,
@@ -820,6 +827,11 @@ nlme.formula <-
                   check.analyticals = FALSE)
       aConv <- coef(nlmeSt) <- aNlm$estimate
       convIter <- aNlm$iterations
+      if(aNlm$code > 2 && controlvals$msWarnNoConv)
+        warning(paste(sprintf(
+          "Iteration %d, LME step: nlm() did not converge (code = %d).",
+          numIter, aNlm$code),
+          if(aNlm$code == 4) "Do increase 'msMaxIter'!"))
     }
     nlmeFit <- attr(nlmeSt, "lmeFit") <- MEestimate(nlmeSt, grpShrunk)
     if (verbose) {
@@ -839,6 +851,7 @@ nlme.formula <-
     }
     vW <- if(is.null(weights)) 1.0 else varWeights(nlmeSt$varStruct)
 
+    if (verbose) cat(" Beginning PNLS step: .. ")
     work <- .C(fit_nlme,
 	       thetaPNLS = as.double(c(as.vector(unlist(sran)), sfix)),
                pdFactor = as.double(pdFactor(nlmeSt$reStruct)),
@@ -856,6 +869,7 @@ nlme.formula <-
 	       as.double(controlvals$sigma),
                nlModel,
 	       NAOK = TRUE)
+    if (verbose) cat(" completed fit_nlme() step.\n")
     if (work$settings[4] == 1) {
       ##      convResult <- 2
       msg <- "step halving factor reduced below minimum in PNLS step"
@@ -889,8 +903,9 @@ nlme.formula <-
     w <- w + as.vector(ZX[, rLen + (1:fLen), drop = FALSE] %*% sfix)
     startRan <- 0
     for(i in 1:Q) {
+      gr.i <- as.character(grpShrunk[, Q-i+1])
       w <- w + as.vector((ZX[, startRan + 1:ncols[i], drop = FALSE] *
-                          t(sran[[i]])[as.character(grpShrunk[, Q-i+1]),,drop = FALSE]) %*%
+                          t(sran[[i]])[gr.i,, drop = FALSE]) %*%
                          rep(1, ncols[i]))
       startRan <- startRan + ncols[i]
     }
@@ -930,13 +945,11 @@ nlme.formula <-
 	"maximum number of iterations (maxIter = %d) reached without convergence",
 	controlvals$maxIter)
       if (controlvals$returnObject) {
-	warning(msg, domain=NA)
-	break
-      } else {
+	warning(msg, domain=NA) ; break
+      } else
 	stop(msg, domain=NA)
-      }
     }
-  }
+  } ## end{ repeat } (nlme steps) ----------------------------------------------
 
   ## wrapping up
   nlmeFit <-
@@ -1428,9 +1441,9 @@ nlmeControl <-
   function(maxIter = 50, pnlsMaxIter = 7, msMaxIter = 50,
 	   minScale = 0.001, tolerance = 1e-5, niterEM = 25,
            pnlsTol = 0.001, msTol = 0.000001,
-           returnObject = FALSE, msVerbose = FALSE, gradHess = TRUE,
-           apVar = TRUE, .relStep = .Machine$double.eps^(1/3),
-           minAbsParApVar = 0.05,
+           returnObject = FALSE, msVerbose = FALSE, msWarnNoConv = TRUE,
+           gradHess = TRUE, apVar = TRUE,
+           .relStep = .Machine$double.eps^(1/3), minAbsParApVar = 0.05,
 	   opt = c("nlminb", "nlm"), natural = TRUE, sigma = NULL, ...)
 {
   if(is.null(sigma))
@@ -1441,6 +1454,7 @@ nlmeControl <-
        minScale = minScale, tolerance = tolerance, niterEM = niterEM,
        pnlsTol = pnlsTol, msTol = msTol,
        returnObject = returnObject, msVerbose = msVerbose,
+       msWarnNoConv = msWarnNoConv,
        gradHess = gradHess, apVar = apVar, .relStep = .relStep,
        minAbsParApVar = minAbsParApVar,
        opt = match.arg(opt), natural = natural, sigma=sigma, ...)

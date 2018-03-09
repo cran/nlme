@@ -1,6 +1,66 @@
+2018-03-09  Brian Ripley
+
+	* DESCRIPTION: Update Date, release for R-devel.
+
+	* tests/nlme-stall.R: Add comments.
+	
+2018-02-27  Martin Mächler  <maechler@stat.math.ethz.ch>
+
+	* R/nlme.R, man/nlmeControl.Rd: nlmeControl() gets new
+	`msWarnNoConv` option. When it is true, as by default, nlme() now
+	warns about non convergence in the LME step of the 'alternating
+	algorithm'.  Applies e.g. also to the nlme-stall.R example.
+
+2018-02-27  Brian Ripley
+
+	* DESCRIPTION: Update Date. (Still unreleased.)
+	Relax R (>= 3.5.0) to 3.4.0 so it can be released generally once
+	3.5.0 is out.
+
+	* src/init.c, src/nlmefit.h: Remove broken utilities added on
+	2018-01-31.
+
+	* src/pythag.c: New file, contents moved from init.c.
+
+	* tests/nlme-stall.R: New regression test, optional.
+
+	* tests/sigma-fixed-etc.R: Changed tolerance after win-builder
+	run, change t7.fix.REML.lme to use optim() (as done for LME, and
+	Solaris has false convergence with nlminb()).  Drop all uses of
+	platform-dependent tolerances.
+
+2018-02-26  Brian Ripley
+
+	* src/init.c, src/rs.f: The 2018-01-31 change is broken (passes
+	pointers as doubles).  Try a simpler approach, to replace PYTHAG
+	in rs.f by a wrapped call to the C99 function hypot().
+
 2018-02-16  Brian Ripley
 
-	* DESCRIPTION (Version): 3.1-135.1 (released for R-devel only)
+	* DESCRIPTION (Version): 3.1-131.1, for R 3.4.4.
+	(and 3.1-131) are available at
+	https://svn.r-project.org/R-packages/branches/R-3-4-branch/nlme
+
+	* tests/deparse.R: comment on failure with macOS's Accelerate.
+
+2018-01-31  Martin Maechler  <maechler@stat.math.ethz.ch>
+
+	* src/nlmefit.h, src/init.c (risnan, risfinite, ..): utilities to
+	check for NaN, NA, Inf etc from Fortran.  [Since removed.]
+
+	* src/rs.f (PYTHAG): prevent infinite loop checking for finite arg.
+	as reported in https://stat.ethz.ch/pipermail/r-devel/2018-January/075459.html .
+
+	* src/nlme.c (nlme_iterate): add R_CheckUserInterrupt()
+
+2018-01-02  Martin Maechler  <maechler@stat.math.ethz.ch>
+
+	* R/lmList.R (warnErrList): bug fix.
+	Added to the 'utils' package for R-devel, keep here for R <= 3.4.x.
+
+2018-02-16  Brian Ripley
+
+	* DESCRIPTION (Version): 3.1-135.5 (released for R-devel only)
 
 2018-01-23, 2018-02-16 Brian Ripley
 
@@ -17,8 +77,8 @@
 
 2017-12-01  Brian Ripley
 
-	* DESCRIPTION (Version): 3.1-134, R >= 3.5.0	
-	* R/VarCorr.R: correct breakage in r7326 (2017-03-07) 
+	* DESCRIPTION (Version): 3.1-134, R >= 3.5.0
+	* R/VarCorr.R: correct breakage in r7326 (2017-03-07)
 	  (broke packages joineR and lme4).
 
 2017-11-28  Brian Ripley
@@ -46,7 +106,7 @@
 
 	* DESCRIPTION (Version): 3.1-132 (unreleased)
 	* R/gnls.R, src/gnls.c: 'small cosmetic related to getting closer
-	to the root cause of PR#17227' 
+	to the root cause of PR#17227'
 
 2017-02-11 Brian Ripley
 

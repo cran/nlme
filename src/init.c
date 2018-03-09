@@ -1,5 +1,5 @@
 /*
-   Copyright 2005-2015  The R Core Team
+   Copyright 2005-2018  The R Core Team
 
    This file is part of the nlme package for R and related languages
    and is made available under the terms of the GNU General Public
@@ -72,7 +72,6 @@ extern void fit_nlme(double *, double *, longint *,
 	 longint *, longint *, double *,
 	 double *, longint *, double *,
 	 double *, longint *, longint *,
-         // 17-11-2015; Fixed sigma patch; E van Willigen; Quantitative Solutions
 	 double, SEXP model);
 extern void nlme_one_comp_first (longint *, double *, double *);
 extern void nlme_one_comp_open (longint *, double *, double *);

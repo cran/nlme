@@ -25,6 +25,8 @@ importFrom("lattice",
            panel.xyplot, splom, strip.default, trellis.par.get, xyplot)
 
 if(getRversion() >= "3.3.0") {
+    if(getRversion() >= "3.5.0")
+        importFrom("utils", warnErrList)
     importFrom("stats", sigma)
 } else {
     export(sigma)
