@@ -1,14 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the nlme package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: nlme 3.1-127\n"
+"Project-Id-Version: nlme 3.1-136\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-14 19:28+0200\n"
+"POT-Creation-Date: 2018-04-06 17:58+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,7 +29,7 @@ msgstr ""
 msgid "Unknown spatial correlation class"
 msgstr ""
 
-#: nlme.c:459
+#: nlme.c:464
 msgid "First observation on an individual must have a dose"
 msgstr ""
 
@@ -38,26 +38,30 @@ msgstr ""
 msgid "Singularity in backsolve at level %ld, block %ld"
 msgstr ""
 
-#: nlmefit.c:554 nlmefit.c:734
+#: nlmefit.c:556 nlmefit.c:736
 msgid "Overfitted model!"
 msgstr ""
 
-#: nlmefit.c:580
+#: nlmefit.c:582
 msgid "analytic gradient is not available with matrix logarithm"
 msgstr ""
 
-#: nlmefit.c:603
+#: nlmefit.c:605
 msgid "analytic gradient is not available with compound symmetry"
 msgstr ""
 
-#: nlmefit.c:895
-msgid "Unable to form eigenvalue-eigenvector decomposition"
+#: nlmefit.c:897
+#, c-format
+msgid "Unable to form eigenvalue-eigenvector decomposition [RS(.) ierr = %d]"
 msgstr ""
 
-#: nlmefit.c:927
-msgid "Unable to form Cholesky decomposition"
+#: nlmefit.c:929
+#, c-format
+msgid ""
+"Unable to form Cholesky decomposition: the leading minor of order %d is not "
+"pos.def."
 msgstr ""
 
-#: nlmefit.c:958
+#: nlmefit.c:961
 msgid "Haven't written the compound symmetry case for this yet"
 msgstr ""

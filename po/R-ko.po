@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: nlme 3.1-105\n"
-"POT-Creation-Date: 2016-04-14 19:17\n"
+"POT-Creation-Date: 2018-04-06 17:58\n"
 "PO-Revision-Date: 2013-08-16 18:52-0600\n"
 "Last-Translator: Chel Hee Lee <gnustats@gmail.com>\n"
 "Language-Team: R Development Translation Teams (Korean) <gnustats@korea.gnu."
@@ -44,6 +44,11 @@ msgstr "%s 객체의 파라미터들을 어떻게 얻어야 할지 알 수 없�
 
 msgid "cannot change the length of the parameter of a \"corStruct\" object"
 msgstr "\"corStruct\" 객체의 파라미터의 길이를 변경할 수 없습니다"
+
+msgid ""
+"'sumLenSq := sum(table(groups)^2)' = %g is too large.\n"
+" Too large or no groups in your correlation structure?"
+msgstr ""
 
 msgid "cannot change 'form'"
 msgstr "'form'를 변경할 수 없습니다"
@@ -97,6 +102,9 @@ msgid ""
 msgstr ""
 
 msgid "parameter in AR(1) structure must be between -1 and 1"
+msgstr ""
+
+msgid "'sumLenSq' = %g is too large (larger than maximal integer)"
 msgstr ""
 
 msgid "cannot change the length of the parameter of a \"corAR1\" object"
@@ -252,9 +260,6 @@ msgstr ""
 msgid "starting values for parameters are not of the correct length"
 msgstr "파라미터들에 대한 시작값들에 대한 길이가 올바르지 않습니다"
 
-msgid "step halving factor reduced below minimum in NLS step"
-msgstr ""
-
 msgid "cannot calculate REML log-likelihood for \"gnls\" objects"
 msgstr ""
 
@@ -372,11 +377,6 @@ msgid "'lme.lmList' will redefine 'data'"
 msgstr ""
 
 msgid "initial value for \"reStruct\" overwritten in 'lme.lmList'"
-msgstr ""
-
-msgid ""
-"for 'sigma' fixed, 'apVar' is set FALSE, as the cov approxmation is not yet "
-"available."
 msgstr ""
 
 msgid "fixed-effects model must be a formula of the form \"resp ~ pred\""
@@ -626,6 +626,18 @@ msgstr ""
 
 msgid ""
 "names mismatch in 'random' and starting values  for 'random' at level %s"
+msgstr ""
+
+msgid "Iteration %d, LME step: nlminb() did not converge (code = %d)."
+msgstr ""
+
+msgid "Do increase 'msMaxIter'!"
+msgstr ""
+
+msgid "PORT message:"
+msgstr ""
+
+msgid "Iteration %d, LME step: nlm() did not converge (code = %d)."
 msgstr ""
 
 #, fuzzy
@@ -1018,6 +1030,29 @@ msgid "all arguments to 'varComb' must be of class \"varFunc\"."
 msgstr ""
 
 msgid "cannot change parameter length of initialized \"varComb\" object"
+msgstr ""
+
+msgid "Package"
+msgstr ""
+
+msgid "installed with old R version"
+msgstr ""
+
+msgid "should not be used with R version"
+msgstr ""
+
+msgid "Rather re-install it with this version of R."
+msgstr ""
+
+msgid "deviance undefined for REML fit"
+msgstr ""
+
+msgid "AIC undefined for REML fit"
+msgstr ""
+
+msgid ""
+"not (yet) implemented.  Contributions are welcome; use intervals() instead "
+"(for now)"
 msgstr ""
 
 msgid "term %s not matched"

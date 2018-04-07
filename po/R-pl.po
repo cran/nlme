@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nlme 3.1-115\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
-"POT-Creation-Date: 2016-04-14 19:17\n"
+"POT-Creation-Date: 2018-04-06 17:58\n"
 "PO-Revision-Date: 2014-03-25 17:00+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -52,6 +52,11 @@ msgstr "nie wiadomo jak uzyskać parametry obiektu %s"
 
 msgid "cannot change the length of the parameter of a \"corStruct\" object"
 msgstr "nie można zmienić długości parametru obiektu klasy \"corStruct\""
+
+msgid ""
+"'sumLenSq := sum(table(groups)^2)' = %g is too large.\n"
+" Too large or no groups in your correlation structure?"
+msgstr ""
 
 # nlme/R/corStruct.R: 160
 # warning("cannot change 'form' argument")
@@ -133,6 +138,9 @@ msgstr ""
 
 msgid "parameter in AR(1) structure must be between -1 and 1"
 msgstr "parametr w strukturze AR(1) musi być pomiędzy -1 a 1"
+
+msgid "'sumLenSq' = %g is too large (larger than maximal integer)"
+msgstr ""
 
 msgid "cannot change the length of the parameter of a \"corAR1\" object"
 msgstr "nie można zmienić długości parametru obiektu klasy \"corCAR1\""
@@ -412,13 +420,6 @@ msgstr "formuły w argumencie 'param' muszą mieć formę \"parametr ~ wyrażeni
 msgid "starting values for parameters are not of the correct length"
 msgstr "wartości początkowe parametrów nie mają poprawnej długości"
 
-# nlme/R/gnls.R: 419
-# warning("step halving factor reduced below minimum in NLS step")
-# nlme/R/gnls.R: 421
-# stop("step halving factor reduced below minimum in NLS step")
-msgid "step halving factor reduced below minimum in NLS step"
-msgstr "czynnik skracający krok został zredukowany poniżej minimum w kroku NLS"
-
 # nlme/R/gnls.R: 654
 # stop("cannot calculate REML log-likelihood for \"gnls\" objects")
 msgid "cannot calculate REML log-likelihood for \"gnls\" objects"
@@ -640,11 +641,6 @@ msgid "initial value for \"reStruct\" overwritten in 'lme.lmList'"
 msgstr ""
 "początkowa wartość dla \"reStruct\" została nadpisana w funkcji 'lme."
 "lmList()'"
-
-msgid ""
-"for 'sigma' fixed, 'apVar' is set FALSE, as the cov approxmation is not yet "
-"available."
-msgstr ""
 
 # nlme/R/simulate.R: 26
 # stop("fixed-effects model must be a formula of the form \"resp ~ pred\"")
@@ -1072,6 +1068,18 @@ msgid ""
 msgstr ""
 "nazwy nie zgadzają się w 'random' oraz początkowych wartościach dla 'random' "
 "na poziomie %s"
+
+msgid "Iteration %d, LME step: nlminb() did not converge (code = %d)."
+msgstr ""
+
+msgid "Do increase 'msMaxIter'!"
+msgstr ""
+
+msgid "PORT message:"
+msgstr ""
+
+msgid "Iteration %d, LME step: nlm() did not converge (code = %d)."
+msgstr ""
 
 # nlme/R/lme.R: 368
 # gettext("maximum number of iterations (lmeControl(maxIter)) reached without convergence")
@@ -1779,6 +1787,29 @@ msgid "cannot change parameter length of initialized \"varComb\" object"
 msgstr ""
 "nie można zmienić długości parametru zainicjalizowanego obiektu \"varComb\""
 
+msgid "Package"
+msgstr ""
+
+msgid "installed with old R version"
+msgstr ""
+
+msgid "should not be used with R version"
+msgstr ""
+
+msgid "Rather re-install it with this version of R."
+msgstr ""
+
+msgid "deviance undefined for REML fit"
+msgstr ""
+
+msgid "AIC undefined for REML fit"
+msgstr ""
+
+msgid ""
+"not (yet) implemented.  Contributions are welcome; use intervals() instead "
+"(for now)"
+msgstr ""
+
 # nlme/R/gls.R: 459
 # stop(sprintf(ngettext(sum(noMatch),
 #                                                   "term %s was not matched",
@@ -1915,6 +1946,14 @@ msgstr[1] ""
 msgstr[2] ""
 "nazwy grup nie zgadzają się z początkowymi wartościami dla efektów losowych: "
 "%s"
+
+# nlme/R/gnls.R: 419
+# warning("step halving factor reduced below minimum in NLS step")
+# nlme/R/gnls.R: 421
+# stop("step halving factor reduced below minimum in NLS step")
+#~ msgid "step halving factor reduced below minimum in NLS step"
+#~ msgstr ""
+#~ "czynnik skracający krok został zredukowany poniżej minimum w kroku NLS"
 
 # nlme/R/lmList.R: 87
 # warning("An lm fit failed, probably because a factor only had one level")

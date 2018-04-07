@@ -5,10 +5,10 @@
 # Detlef Steuer <steuer@hsu-hh.de>, 2014-2015.
 msgid ""
 msgstr ""
-"Project-Id-Version: R 3.1.2/ nlme-3.1-119\n"
+"Project-Id-Version: R 3.4.4 / nlme-3.1-136\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
-"POT-Creation-Date: 2016-04-14 19:17\n"
-"PO-Revision-Date: 2016-04-14 13:01+0200\n"
+"POT-Creation-Date: 2018-04-06 17:58\n"
+"PO-Revision-Date: 2018-04-06 10:44+0200\n"
 "Last-Translator: Detlef Steuer <steuer@hsu-hh.de>\n"
 "Language-Team: German <debian-l10n-german@lists.debian.org>\n"
 "Language: de\n"
@@ -42,6 +42,11 @@ msgid "cannot change the length of the parameter of a \"corStruct\" object"
 msgstr ""
 "Die Länge des Parameters eines \"corStruct\"-Objekts kann nicht geändert "
 "werden."
+
+msgid ""
+"'sumLenSq := sum(table(groups)^2)' = %g is too large.\n"
+" Too large or no groups in your correlation structure?"
+msgstr ""
 
 msgid "cannot change 'form'"
 msgstr "'form' kann nicht geändert werden."
@@ -114,6 +119,9 @@ msgstr ""
 
 msgid "parameter in AR(1) structure must be between -1 and 1"
 msgstr "Parameter in AR(1)-Struktur muss zwischen -1 und 1 liegen"
+
+msgid "'sumLenSq' = %g is too large (larger than maximal integer)"
+msgstr ""
 
 msgid "cannot change the length of the parameter of a \"corAR1\" object"
 msgstr ""
@@ -293,9 +301,6 @@ msgstr "Formeln in 'params' müssen die Form \"parameter ~ expr\" haben."
 msgid "starting values for parameters are not of the correct length"
 msgstr "Startwerte für Parameter haben nicht die richtige Länge."
 
-msgid "step halving factor reduced below minimum in NLS step"
-msgstr "Schrittlängen-Halbierungsfaktor reduziert unter Minimum im NLS-Schritt"
-
 msgid "cannot calculate REML log-likelihood for \"gnls\" objects"
 msgstr "REML Log-likelihood für \"gnls\"-Objekte kann nicht berechnet werden"
 
@@ -354,6 +359,7 @@ msgstr ""
 
 msgid "%d errors caught in %s.  The error messages and their frequencies are"
 msgstr ""
+"%d Fehler abgefangen in %s. Die Fehlermeldungen und ihre Häufigkeiten sind"
 
 msgid "multiple levels not allowed"
 msgstr "mehrere Stufen nicht erlaubt"
@@ -420,11 +426,6 @@ msgstr "'lme.lmList' wird 'data' redefinieren"
 msgid "initial value for \"reStruct\" overwritten in 'lme.lmList'"
 msgstr "Anfangswert für \"reStruct\" in 'lme.lmList' überschrieben"
 
-msgid ""
-"for 'sigma' fixed, 'apVar' is set FALSE, as the cov approxmation is not yet "
-"available."
-msgstr ""
-
 msgid "fixed-effects model must be a formula of the form \"resp ~ pred\""
 msgstr "Feste-Effekte-Modell muss eine Formel der Form \"resp ~ pred\" sein."
 
@@ -468,9 +469,8 @@ msgstr "Terme müssen alle den gleichen Freiheitsgrad im Nenner haben"
 msgid "L may only involve fixed effects with the same denominator DF"
 msgstr "L kann nur feste Effekte mit dem gleichen Nenner DF einschließen"
 
-#, fuzzy
 msgid "objects must inherit from classes %s, or %s"
-msgstr "Objekt muss von der Klasse \"gls\" abgeleitet sein."
+msgstr "Objekte müssen von den Klassen %s oder %s erben"
 
 msgid ""
 "some fitted objects deleted because response differs from the first model"
@@ -500,12 +500,13 @@ msgstr ""
 msgid "only single level allowed"
 msgstr "nur einzelne Stufe erlaubt"
 
-#, fuzzy
 msgid ""
 "cannot get confidence intervals on var-cov components: %s\n"
 " Consider '%s'"
 msgstr ""
-"Konfidenzintervalle für var-cov-Komponenten können nicht bestimmt werden: %s"
+"Konfidenzintervalle für var-cov-Komponenten können nicht bestimmt werden: "
+"%s\n"
+" Evtl. '%s'"
 
 msgid "covariate must have a level attribute when groups are present"
 msgstr "Kovariate muss ein Stufenattribut haben, wenn Gruppen vorhanden sind"
@@ -707,6 +708,18 @@ msgid ""
 msgstr ""
 "Namen  in 'random' und in den Startwerten für 'random' auf Stufe %s passen "
 "nicht "
+
+msgid "Iteration %d, LME step: nlminb() did not converge (code = %d)."
+msgstr ""
+
+msgid "Do increase 'msMaxIter'!"
+msgstr ""
+
+msgid "PORT message:"
+msgstr ""
+
+msgid "Iteration %d, LME step: nlm() did not converge (code = %d)."
+msgstr ""
 
 msgid "maximum number of iterations (maxIter = %d) reached without convergence"
 msgstr ""
@@ -1181,6 +1194,29 @@ msgstr ""
 "Parameterlänge eines initialisierten \"varComb\"-Objekts kann nicht geändert "
 "werden"
 
+msgid "Package"
+msgstr ""
+
+msgid "installed with old R version"
+msgstr ""
+
+msgid "should not be used with R version"
+msgstr ""
+
+msgid "Rather re-install it with this version of R."
+msgstr ""
+
+msgid "deviance undefined for REML fit"
+msgstr ""
+
+msgid "AIC undefined for REML fit"
+msgstr ""
+
+msgid ""
+"not (yet) implemented.  Contributions are welcome; use intervals() instead "
+"(for now)"
+msgstr ""
+
 msgid "term %s not matched"
 msgid_plural "terms %s not matched"
 msgstr[0] "Term %s nicht übereinstimmend"
@@ -1203,8 +1239,8 @@ msgstr[1] "Stufen %s nicht für %s erlaubt"
 
 msgid "%d error caught in %s: %s"
 msgid_plural "%d times caught the same error in %s: %s"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d Fehler abgefangen in %s: %s"
+msgstr[1] "%d Mal denselben Fehler abgefangen in %s: %s"
 
 msgid "%s not found in data"
 msgid_plural "%s not found in data"
@@ -1231,6 +1267,17 @@ msgid_plural ""
 "group names not matched in starting values for random effects: %s"
 msgstr[0] "Gruppenname nicht zu Startwerten für Zufallseffekte passend: %s"
 msgstr[1] "Gruppennamen nicht zu Startwerten für Zufallseffekte passend: %s"
+
+#~ msgid "step halving factor reduced below minimum in NLS step"
+#~ msgstr ""
+#~ "Schrittlängen-Halbierungsfaktor reduziert unter Minimum im NLS-Schritt"
+
+#~ msgid ""
+#~ "for 'sigma' fixed, 'apVar' is set FALSE, as the cov approxmation is not "
+#~ "yet available."
+#~ msgstr ""
+#~ "für festes 'sigma' wird 'apVar' auf FALSE gesetzt, da die cov "
+#~ "Approximation noch nicht verfügbar ist."
 
 #~ msgid "An lm fit failed, probably because a factor only had one level"
 #~ msgstr ""

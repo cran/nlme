@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nlme 3.1-65\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
-"POT-Creation-Date: 2016-04-14 19:17\n"
+"POT-Creation-Date: 2018-04-06 17:58\n"
 "PO-Revision-Date: 2014-03-30 08:37+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -39,6 +39,11 @@ msgstr "incapable d'obtenir les paramètres de l'objet %s"
 msgid "cannot change the length of the parameter of a \"corStruct\" object"
 msgstr ""
 "impossible de changer la longueur des paramètres d'un objet \"corStruct\""
+
+msgid ""
+"'sumLenSq := sum(table(groups)^2)' = %g is too large.\n"
+" Too large or no groups in your correlation structure?"
+msgstr ""
 
 msgid "cannot change 'form'"
 msgstr "Impossible de changer 'form'"
@@ -114,6 +119,9 @@ msgstr ""
 
 msgid "parameter in AR(1) structure must be between -1 and 1"
 msgstr "Le paramètre dans la structure AR(1) doit se situer entre - 1 et 1"
+
+msgid "'sumLenSq' = %g is too large (larger than maximal integer)"
+msgstr ""
 
 msgid "cannot change the length of the parameter of a \"corAR1\" object"
 msgstr "Impossible de changer la longueur des paramètres d'un objet \"corAR1\""
@@ -300,11 +308,6 @@ msgstr ""
 msgid "starting values for parameters are not of the correct length"
 msgstr "les valeurs initiales pour les paramètres n'ont pas la taille correcte"
 
-msgid "step halving factor reduced below minimum in NLS step"
-msgstr ""
-"le facteur de division par deux du pas est réduit en dessous du minimum dans "
-"un pas NLS"
-
 msgid "cannot calculate REML log-likelihood for \"gnls\" objects"
 msgstr ""
 "impossible de calculer la log-vraissemblance REML pour les objets \"gnls\""
@@ -438,11 +441,6 @@ msgstr "'lme.lmList' va redéfinir 'data'"
 
 msgid "initial value for \"reStruct\" overwritten in 'lme.lmList'"
 msgstr "la valeur initiale de \"reStruct\" est remplacée dans 'lme.lmList'"
-
-msgid ""
-"for 'sigma' fixed, 'apVar' is set FALSE, as the cov approxmation is not yet "
-"available."
-msgstr ""
 
 msgid "fixed-effects model must be a formula of the form \"resp ~ pred\""
 msgstr ""
@@ -750,6 +748,18 @@ msgid ""
 msgstr ""
 "incohérence de noms entre 'random' et les valeurs de départ pour 'random' au "
 "niveau %s"
+
+msgid "Iteration %d, LME step: nlminb() did not converge (code = %d)."
+msgstr ""
+
+msgid "Do increase 'msMaxIter'!"
+msgstr ""
+
+msgid "PORT message:"
+msgstr ""
+
+msgid "Iteration %d, LME step: nlm() did not converge (code = %d)."
+msgstr ""
 
 #, fuzzy
 msgid "maximum number of iterations (maxIter = %d) reached without convergence"
@@ -1224,6 +1234,29 @@ msgstr ""
 "impossible de modifier la longueur du paramètre pour des objets \"varComb\" "
 "initialisés"
 
+msgid "Package"
+msgstr ""
+
+msgid "installed with old R version"
+msgstr ""
+
+msgid "should not be used with R version"
+msgstr ""
+
+msgid "Rather re-install it with this version of R."
+msgstr ""
+
+msgid "deviance undefined for REML fit"
+msgstr ""
+
+msgid "AIC undefined for REML fit"
+msgstr ""
+
+msgid ""
+"not (yet) implemented.  Contributions are welcome; use intervals() instead "
+"(for now)"
+msgstr ""
+
 msgid "term %s not matched"
 msgid_plural "terms %s not matched"
 msgstr[0] "le terme %s est incohérent"
@@ -1278,6 +1311,11 @@ msgstr[0] ""
 msgstr[1] ""
 "les noms des groupes ne correspondent pas aux valeurs de départ pour les "
 "effets aléatoires : %s"
+
+#~ msgid "step halving factor reduced below minimum in NLS step"
+#~ msgstr ""
+#~ "le facteur de division par deux du pas est réduit en dessous du minimum "
+#~ "dans un pas NLS"
 
 #~ msgid "An lm fit failed, probably because a factor only had one level"
 #~ msgstr ""

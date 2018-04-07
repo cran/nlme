@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nlme 3.1-65\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-14 19:28+0200\n"
+"POT-Creation-Date: 2018-04-06 17:58+0100\n"
 "PO-Revision-Date: 2005-12-08 01:00+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -29,7 +29,7 @@ msgstr "Matrice de coefficient non inversible"
 msgid "Unknown spatial correlation class"
 msgstr "Classes de corrélation spatiale inconnues"
 
-#: nlme.c:459
+#: nlme.c:464
 msgid "First observation on an individual must have a dose"
 msgstr "La première observation sur un individu doit avoir une dose"
 
@@ -38,28 +38,32 @@ msgstr "La première observation sur un individu doit avoir une dose"
 msgid "Singularity in backsolve at level %ld, block %ld"
 msgstr "Singularité rencontrée en résolution inverse au niveau %ld, bloc %ld"
 
-#: nlmefit.c:554 nlmefit.c:734
+#: nlmefit.c:556 nlmefit.c:736
 msgid "Overfitted model!"
 msgstr ""
 
-#: nlmefit.c:580
+#: nlmefit.c:582
 msgid "analytic gradient is not available with matrix logarithm"
 msgstr ""
 "un gradient analytique n'est pas disponible avec une matrice logarithmique"
 
-#: nlmefit.c:603
+#: nlmefit.c:605
 msgid "analytic gradient is not available with compound symmetry"
 msgstr "un gradient analytique n'est pas disponible avec une symétrie composée"
 
-#: nlmefit.c:895
-msgid "Unable to form eigenvalue-eigenvector decomposition"
+#: nlmefit.c:897
+#, c-format
+msgid "Unable to form eigenvalue-eigenvector decomposition [RS(.) ierr = %d]"
 msgstr ""
-"Incapable de former la décomposition valeurs propres - vecteurs propres"
+"Incapable de former la décomposition valeurs propres - vecteurs propres [RS(.) ierr = %d]"
 
-#: nlmefit.c:927
-msgid "Unable to form Cholesky decomposition"
+#: nlmefit.c:929
+#, fuzzy, c-format
+msgid ""
+"Unable to form Cholesky decomposition: the leading minor of order %d is not "
+"pos.def."
 msgstr "Incapable de former la décomposition de Cholesky"
 
-#: nlmefit.c:958
+#: nlmefit.c:961
 msgid "Haven't written the compound symmetry case for this yet"
 msgstr "Les cas de symétrie composée n'ont pas encore été écrits"

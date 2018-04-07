@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.2 / nlme 3.1-105\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-14 19:28+0200\n"
+"POT-Creation-Date: 2018-04-06 17:58+0100\n"
 "PO-Revision-Date: 2016-04-14 13:00+0200\n"
 "Last-Translator: Chris Leick <c.leick@vollbio.de>\n"
 "Language-Team: German <debian-l10n-german@lists.debian.org>\n"
@@ -29,7 +29,7 @@ msgstr "Koeffizientenmatrix nicht invertierbar"
 msgid "Unknown spatial correlation class"
 msgstr "Unbekannte räumliche Korrelations-Klasse"
 
-#: nlme.c:459
+#: nlme.c:464
 msgid "First observation on an individual must have a dose"
 msgstr "Erste Beobachtung eines Individuums muss eine Dosis haben"
 
@@ -38,28 +38,32 @@ msgstr "Erste Beobachtung eines Individuums muss eine Dosis haben"
 msgid "Singularity in backsolve at level %ld, block %ld"
 msgstr "Singularität in backsolve auf Stufe %ld, Block %ld"
 
-#: nlmefit.c:554 nlmefit.c:734
+#: nlmefit.c:556 nlmefit.c:736
 msgid "Overfitted model!"
 msgstr "Überangepasstes Modell!"
 
-#: nlmefit.c:580
+#: nlmefit.c:582
 msgid "analytic gradient is not available with matrix logarithm"
 msgstr "analytischer Gradient ist nicht mit Matrixlogarithmus verfügbar"
 
-#: nlmefit.c:603
+#: nlmefit.c:605
 msgid "analytic gradient is not available with compound symmetry"
 msgstr ""
 "analytischer Gradient ist nicht mit zusammengesetzter Symmetrie verfügbar"
 
-#: nlmefit.c:895
-msgid "Unable to form eigenvalue-eigenvector decomposition"
-msgstr "Unfähig eine Eigenwert-Eigenvektor-Zerlegung zu bilden"
+#: nlmefit.c:897
+#, c-format
+msgid "Unable to form eigenvalue-eigenvector decomposition [RS(.) ierr = %d]"
+msgstr "Unfähig eine Eigenwert-Eigenvektor-Zerlegung zu bilden [RS(.) ierr = %d]"
 
-#: nlmefit.c:927
-msgid "Unable to form Cholesky decomposition"
+#: nlmefit.c:929
+#, fuzzy, c-format
+msgid ""
+"Unable to form Cholesky decomposition: the leading minor of order %d is not "
+"pos.def."
 msgstr "Unfähig eine Cholesky-Zerlegung zu bilden"
 
-#: nlmefit.c:958
+#: nlmefit.c:961
 msgid "Haven't written the compound symmetry case for this yet"
 msgstr ""
 "Fall von zusammengesetzter Symmetrie wurde für dies noch nicht geschrieben"
