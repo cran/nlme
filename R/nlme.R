@@ -228,6 +228,7 @@ nlme.formula <-
       stop("'data' must be given explicitly to use 'nlsList'")
     }
     nlsLObj <- eval(nlsLCall)
+    nlsLObj # -NOTE(codetools)
     nlmeCall[["model"]] <- quote(nlsLObj)
     nlmeCall <- as.call(nlmeCall)
     val <- eval(nlmeCall)

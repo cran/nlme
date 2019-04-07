@@ -70,11 +70,11 @@
 }
 \examples{
 fm1 <- lme(distance ~ age, Orthodont, random = ~ age | Subject)
+
 # scatter plot of coefficients by gender, identifying unusual subjects
 pairs(fm1, ~coef(., augFrame = TRUE) | Sex, id = 0.1, adj = -0.5)    
-# scatter plot of estimated random effects
-\dontrun{
+
+# scatter plot of estimated random effects :
 pairs(fm1, ~ranef(.))
-}
 }
 \keyword{models}

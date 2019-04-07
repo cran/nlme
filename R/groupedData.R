@@ -1,6 +1,6 @@
 ###           groupedData - data frame with a grouping structure
 ###
-### Copyright 2006-2017  The R Core team
+### Copyright 2006-2018  The R Core team
 ### Copyright 1997-2003  Jose C. Pinheiro,
 ###                      Douglas M. Bates <bates@stat.wisc.edu>
 #
@@ -21,10 +21,10 @@
 groupedData <-
   ## Constructor for the groupedData class.  Takes a formula and a frame
   ## The formula must be of the form "response ~ primary | groups",
-  ## "respose ~ primary ~ groups1/groups2/.../groups_k",
+  ## "response ~ primary | groups1/groups2/.../groups_k",
   ## or "response ~ (primary1 | groups1) / ... / (primary|groups_k)"
   ## where groups_i evaluates to a factor in frame.
-  function(formula, data = sys.parent(1), order.groups = TRUE,
+  function(formula, data = NULL, order.groups = TRUE,
 	   FUN = function(x) max(x, na.rm = TRUE), outer = NULL,
            inner = NULL, labels = NULL, units = NULL)
 {
@@ -35,9 +35,9 @@ groupedData <-
     stop("right-hand side of first argument must be a conditional expression")
   }
   mCall <- match.call()
-  mCall[[1]] <- if(length(grpForm) == 1)
-		     quote(nlme::nfGroupedData)
-		else quote(nlme::nmGroupedData)
+  mCall[[1]] <- if(length(grpForm) == 1)## nlme::: needed if 'nlme' not attached
+		     quote(nlme:::nfGroupedData)
+		else quote(nlme:::nmGroupedData)
   eval(mCall, envir = parent.frame())
 }
 
@@ -45,10 +45,19 @@ nfGroupedData <-
   ## Constructor for the nfGroupedData class.  Takes a formula and a frame
   ## The formula must be of the form "response ~ primary | groups"
   ## where groups evaluates to a factor in frame.
-  function(formula, data = sys.parent(1), order.groups = TRUE,
+  function(formula, data = NULL, order.groups = TRUE,
 	   FUN = function(x) max(x, na.rm = TRUE), outer = NULL,
            inner = NULL, labels = NULL, units = NULL)
 {
+  ## want to stop exporting undocumented(!) nmGroupedData()
+  if(!local({ N <- -1L
+      while(identical(sys.call(N)[[1]], quote(eval))) N <- N-1L
+      identical(.sf <- sys.function(N), groupedData) ||
+          identical(environment(.sf), .ns) ||
+          identical(environment(sys.function(N-1L)), .ns) ||
+          identical(environment(sys.function(N-2L)), .ns)
+  }))
+    .Deprecated("groupedData", "nlme")
   if (!(inherits(formula, "formula") && length(formula) == 3)) {
     stop("first argument to 'nfGroupedData' must be a two-sided formula")
   }
@@ -60,16 +69,13 @@ nfGroupedData <-
     stop("only one level of grouping allowed")
   }
   ## create a data frame in which formula, inner, and outer can be evaluated
-  if (missing(data)) {
+  if (missing(data) || is.null(data)) {
     vnames <- all.vars(asOneFormula(formula, inner, outer))
     alist <- lapply(as.list(vnames), as.name)
     names(alist) <- vnames
     data <- do.call('data.frame', alist)
-  } else {
-    if (!inherits(data, "data.frame")) {
+  } else if (!inherits(data, "data.frame"))
       stop("second argument to 'groupedData' must inherit from data.frame")
-    }
-  }
   ## Although response and primary are not always used, they are
   ## evaluated here to verify that they can be evaluated.
   response <- getResponse(data, formula)
@@ -78,12 +84,10 @@ nfGroupedData <-
   groups <- getGroups(data, formula)
   data[[groupName]] <- groups
 
-  if (order.groups) {
-    if (!inherits(groups, "ordered")) {
+  if (order.groups && !inherits(groups, "ordered")) {
+    levs <-
       if (is.null(outer)) {
-        data[[groupName]] <-
-          ordered(groups,
-                  levels = names(sort(tapply(response, groups, FUN))))
+        names(sort(tapply(response, groups, FUN)))
       } else {
         ## split the data according to the 'outer' factors and
         ## obtain the order within each group
@@ -92,17 +96,15 @@ nfGroupedData <-
         ## unlikely to be in a name
         combined <-
           do.call("paste", c(data[, all.vars(outer), drop = FALSE], sep='\007'))
-        levs <-
-          as.vector(unlist(lapply(split(data.frame(response = response,
-                                                   groups = groups),
-                                        combined),
-                                  function(obj, func) {
+        as.vector(unlist(lapply(split(data.frame(response = response,
+                                                 groups = groups),
+                                      combined),
+                                function(obj, func) {
                                     names(sort(tapply(obj$response,
                                                       obj$groups, func)))
-                                  }, func = FUN)))
-        data[[groupName]] <- ordered(groups, levels = levs)
+                                }, func = FUN)))
       }
-    }
+    data[[groupName]] <- ordered(groups, levels = levs)
   }
   attr(data, "formula") <- formula
   attr(data, "labels") <- labels
@@ -111,15 +113,14 @@ nfGroupedData <-
   attr(data, "inner") <- inner
   attr( data, "FUN" ) <- FUN
   attr( data, "order.groups" ) <- order.groups
-  dClass <-  unique(c("nfGroupedData", "groupedData", class(data)))
-  if ((length(all.vars(getCovariateFormula(formula))) == 0) ||
-      (data.class(primary) != "numeric")) {
-    ## primary covariate is a factor or a "1"
-    class(data) <- unique(c("nffGroupedData", dClass))
-  } else {
-    ## primary covariate is numeric
-    class(data) <- unique(c("nfnGroupedData", dClass))
-  }
+  cl <-
+      if ((length(all.vars(getCovariateFormula(formula))) == 0) ||
+          (data.class(primary) != "numeric")) {
+          "nffGroupedData"  # primary covariate is a factor or a "1"
+      } else {
+          "nfnGroupedData"  # primary covariate is numeric
+      }
+  class(data) <- unique(c(cl, "nfGroupedData", "groupedData", class(data)))
   data
 }
 
@@ -128,37 +129,41 @@ nmGroupedData <-
   ## The formula must be of the form
   ## "respose ~ primary | groups1/groups2/.../groups_k",
   ## where groups_i evaluates to a factor in frame.
-  function(formula, data = sys.parent(1), order.groups = TRUE,
+  function(formula, data=NULL, order.groups = TRUE,
 	   FUN = function(x) max(x, na.rm = TRUE), outer = NULL,
            inner = NULL, labels = NULL, units = NULL)
 {
+  ## want to stop exporting undocumented(!) nmGroupedData()
+  if(!local({ N <- -1L
+      while(identical(sys.call(N)[[1]], quote(eval))) N <- N-1L
+      identical(.sf <- sys.function(N), groupedData) ||
+          identical(environment(.sf), .ns) ||
+          identical(environment(sys.function(N-1L)), .ns) ||
+          identical(environment(sys.function(N-2L)), .ns)
+  }))
+    .Deprecated("groupedData", "nlme")
+  if (!(inherits(formula, "formula") && length(formula) == 3))
+    stop("first argument to 'nmGroupedData' must be a two-sided formula")
+  grpForm <- getGroupsFormula(formula, asList = TRUE)
+  if (is.null(grpForm))
+    stop("right-hand side of first argument must be a conditional expression")
+  if (length(grpForm) == 1)
+    stop("single group not supported -- use groupedData()")
+
   checkForList <- function(object, nams, expand = FALSE) {
     if (is.null(object)) return(object)
     if (is.list(object)) {
       if (is.null(names(object))) {
         names(object) <- nams[seq_along(object)]
       }
-      return(object)
-    }
-    if (expand) {
+    } else if (expand) {
       object <- rep(list(object), length(nams))
       names(object) <- nams
-      return(object)
+    } else {
+      object <- list(object)
+      names(object) <- nams[length(nams)]
     }
-    object <- list(object)
-    names(object) <- nams[length(nams)]
     object
-  }
-  if (!(inherits(formula, "formula") && length(formula) == 3)) {
-    stop("first argument to 'nmGroupedData' must be a two-sided formula")
-  }
-  grpForm <- getGroupsFormula(formula, asList = TRUE)
-  if (is.null(grpForm)) {
-    stop("right-hand side of first argument must be a conditional expression")
-  }
-  if (length(grpForm) == 1) {           # single group
-    mCall <- match.call()[-1]
-    do.call("nfGroupedData", mCall)
   }
 
   grpNames <- names(grpForm)
@@ -169,21 +174,19 @@ nmGroupedData <-
   inner <- checkForList(inner, grpNames)
 
   ## create a data frame in which formula, outer, and inner can be evaluated
-  if (missing(data)) {
+  if (missing(data) || is.null(data)) {
     vnames <- all.vars(asOneFormula(formula, outer, inner))
     alist <- lapply(as.list(vnames), as.name)
     names(alist) <- vnames
     data <- do.call('data.frame', alist)
-  } else {
-    if (!inherits(data, "data.frame")) {
+  } else if (!inherits(data, "data.frame"))
       stop("second argument to 'groupedData' must inherit from data.frame")
-    }
-  }
   ## Although response and primary are not always used, they are
   ## evaluated here to verify that they can be evaluated.
   response <- getResponse(data, formula)
   primary <- getCovariate(data, formula)
   groups <- getGroups(data, formula)
+  rm(response, primary, groups)# -NOTE(codetools)
 
   attr(data, "formula") <- formula
   attr(data, "formulaList") <- grpForm
@@ -546,12 +549,9 @@ plot.nmGroupedData <-
 {
   args <- list(outer = outer, inner = inner, key = key, grid = grid, ...)
   Q <- length(getGroupsFormula(x, asList = TRUE))
-  if (is.null(preserve) && (collapseLevel < Q) && (!is.null(inner))) {
-    if (is.logical(inner)) {
-      preserve <- attr(x, "inner")[[displayLevel]]
-    } else {
-      preserve <- inner
-    }
+  if (is.null(preserve) && collapseLevel < Q && !is.null(inner)) {
+    preserve <-
+      if(is.logical(inner)) attr(x, "inner")[[displayLevel]] else inner
   }
   x <- collapse(x, collapseLevel, displayLevel, outer, inner,
 		preserve, FUN, subset)
@@ -647,8 +647,8 @@ balancedGrouped <-
     dn[[1]] <- as.numeric( dn[[1]] )
   }
   names(dn) <- c( as.character(getCovariateFormula(form)[[2]]),
-                  as.character(getGroupsFormula(form)[[2]]) )
-  frm <- do.call("expand.grid", dn)
-  frm[[ as.character(getResponseFormula(form)[[2]]) ]] <- as.vector( data )
-  do.call("groupedData", list(form, data = frm, labels = labels, units = units ))
+                  as.character(getGroupsFormula   (form)[[2]]) )
+  df <- do.call("expand.grid", dn)
+  df[[ as.character(getResponseFormula(form)[[2]]) ]] <- as.vector(data)
+  groupedData(form, data = df, labels = labels, units = units)
 }

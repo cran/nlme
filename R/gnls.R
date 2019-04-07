@@ -1,7 +1,7 @@
 ###  Fit a general nonlinear regression model with correlated and/or
 ###  heteroscedastic errors
 ###
-### Copyright 2007-2017  The R Core team
+### Copyright 2007-2018  The R Core team
 ### Copyright 1997-2003  Jose C. Pinheiro,
 ###                      Douglas M. Bates <bates@stat.wisc.edu>
 #
@@ -93,29 +93,24 @@ gnls <-
   ##
   ## save writing list(...) when only one element
   ##
-
   if (missing(params)) {
     if (is.null(pNams <- names(start))) {
       stop("starting estimates must have names when 'params' is missing")
     }
-    params <- eval(parse(text = paste(paste(pNams, collapse = "+"), "1",
-                           sep = "~")))
+    params <- list(formula(paste(paste(pNams, collapse = "+"), "1", sep = "~")))
   }
-  if (!is.list(params)) {
-    params <- list(params)
-  }
-  val <- NULL
-  for(i in seq_along(params)) {
-    if (is.name(params[[i]][[2]])) {
-      val <- c(val, list(params[[i]]))
+  else if (!is.list(params)) params <- list(params)
+  params <- unlist(lapply(params, function(pp) {
+    if (is.name(pp[[2]])) {
+      list(pp)
     } else {
       ## multiple parameters on left hand side
-      val <- c(val, eval(parse(text = paste("list(",
-           paste(paste(all.vars(params[[i]][[2]]), deparse(params[[i]][[3]]),
-                       sep = "~"), collapse=","),")"))))
+      eval(parse(text = paste("list(",
+           paste(paste(all.vars(pp[[2]]), deparse(pp[[3]]), sep = "~"),
+                 collapse = ","),
+           ")")))
     }
-  }
-  params <- as.list(val)
+  }), recursive=FALSE)
   pnames <- character(length(params))
   for (i in seq_along(params)) {
     this <- eval(params[[i]])
@@ -188,7 +183,7 @@ gnls <-
     ## sort the model.frame by groups and get the matrices and parameters
     ## used in the estimation procedures
     ## always use innermost level of grouping
-    groups <- eval(parse(text = paste("~1", deparse(groups[[2]]), sep = "|")))
+    groups <- eval(substitute( ~1 | GRP, list(GRP = groups[[2]])))
     grps <- getGroups(dataMod, groups,
                       level = length(getGroupsFormula(groups, asList = TRUE)))
     ## ordering data by groups
@@ -471,9 +466,9 @@ gnls <-
     lsig <- log(sigma) + 0.5 * log(1 - pLen/NReal)
     loglik <- ( - NReal * (1 + log(2 * pi) + 2 * lsig))/2 + c.L$logLik
   } else {
-    loglik <- - (NReal * (log(2 * pi)/2 + log(sigma)) +
-                 sum((c.L$Xy[, pLen + 1])^2) / (2 * sigma^2)) + c.L$logLik
     lsig <- log(sigma)
+    loglik <- - (NReal * (log(2 * pi)/2 + lsig) +
+                 sum((c.L$Xy[, pLen + 1])^2) / (2 * sigma^2)) + c.L$logLik
   }
   ## ####
   varBeta <- qr(c.L$Xy[ , 1:pLen, drop = FALSE])
@@ -734,9 +729,8 @@ predict.gnls <-
   ##
   ## evaluating the naPattern expression, if any
   ##
-  if (is.null(naPattern)) naPat <- rep(TRUE, N)
-  else naPat <- as.logical(eval(asOneSidedFormula(naPattern)[[2]], dataMod))
-
+  naPat <- if (is.null(naPattern)) rep(TRUE, N)
+           else as.logical(eval(asOneSidedFormula(naPattern)[[2]], dataMod))
   ##
   ## Getting  the plist for the new data frame
   ##
@@ -744,22 +738,20 @@ predict.gnls <-
   plist <- object$plist
   pnames <- names(plist)
   if (is.null(params <- eval(object$call$params))) {
-    params <- eval(parse(text = paste0(paste(pnames, collapse = "+"), "~ 1")))
+    params <- list(formula(paste0(paste(pnames, collapse = "+"), "~ 1")))
   }
-  if (!is.list(params)) params <- list(params)
-### FIXME: 2 x {very ugly}: 1) adding to val incrementally //  2) eval(parse(text = .))
-  val <- NULL
-  for(i in seq_along(params)) {
-    if (is.name(params[[i]][[2]])) {
-      val <- c(val, list(params[[i]]))
+  else if (!is.list(params)) params <- list(params)
+  params <- unlist(lapply(params, function(pp) {
+    if (is.name(pp[[2]])) {
+      list(pp)
     } else {
       ## multiple parameters on left hand side
-      val <- c(val, eval(parse(text = paste("list(",
-           paste(paste(all.vars(params[[i]][[2]]), deparse(params[[i]][[3]]),
-                       sep = "~"), collapse=","),")"))))
+      eval(parse(text = paste("list(",
+           paste(paste(all.vars(pp[[2]]), deparse(pp[[3]]), sep = "~"),
+                 collapse = ","),
+           ")")))
     }
-  }
-  params <- val
+  }), recursive=FALSE)
   names(params) <- pnames
   prs <- coef(object)
 ##  pn <- names(prs)

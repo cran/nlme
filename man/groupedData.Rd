@@ -6,13 +6,13 @@
 \title{Construct a groupedData Object}
 \usage{
 groupedData(formula, data, order.groups, FUN, outer, inner,
- labels, units)
+            labels, units)
 \method{update}{groupedData}(object, formula, data, order.groups, FUN,
-outer, inner, labels, units, \dots)
+       outer, inner, labels, units, \dots)
 }
 \alias{groupedData}
-\alias{nfGroupedData}
-\alias{nmGroupedData}
+\alias{nfGroupedData}% function UNdocumented, now (2018-08) deprecated
+\alias{nmGroupedData}% function UNdocumented, now (2018-08) deprecated
 \alias{[.groupedData}
 \alias{as.data.frame.groupedData}
 \alias{update.groupedData}
@@ -112,7 +112,7 @@ outer, inner, labels, units, \dots)
 
   Pinheiro, J.C. and Bates, D.M. (1997) "Future Directions in
   Mixed-Effects Software: Design of NLME 3.0" available at
-  http://nlme.stat.wisc.edu/
+  http://nlme.stat.wisc.edu/ %% << no longer existing FIXME
 
   Pinheiro, J.C., and Bates, D.M. (2000) "Mixed-Effects Models
   in S and S-PLUS", Springer.  
@@ -129,6 +129,7 @@ outer, inner, labels, units, \dots)
   \code{\link{reStruct}}
 }
 \examples{
+
 Orth.new <-  # create a new copy of the groupedData object
   groupedData( distance ~ age | Subject,
               data = as.data.frame( Orthodont ),
@@ -137,9 +138,7 @@ Orth.new <-  # create a new copy of the groupedData object
               labels = list( x = "Age",
                 y = "Distance from pituitary to pterygomaxillary fissure" ),
               units = list( x = "(yr)", y = "(mm)") )
-\dontrun{
 plot( Orth.new )         # trellis plot by Subject
-}
 formula( Orth.new )      # extractor for the formula
 gsummary( Orth.new )     # apply summary by Subject
 fm1 <- lme( Orth.new )   # fixed and groups formulae extracted from object

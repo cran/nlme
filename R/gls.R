@@ -1,8 +1,8 @@
 ###  Fit a linear model with correlated errors and/or heteroscedasticity
 ###
+### Copyright 2005-2018  The R Core team
 ### Copyright 1997-2003  Jose C. Pinheiro,
 ###                      Douglas M. Bates <bates@stat.wisc.edu>
-### Copyright 2005-2016  The R Core team
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -883,7 +883,7 @@ plot.gls <-
              grid, ...)
     ## Diagnostic plots based on residuals and/or fitted values
 {
-    do.call(plot.lme, as.list(match.call()[-1]))
+    plot.lme(x, form=form, abline=abline, id=id, idLabels=idLabels, idResType=idResType, grid=grid, ...)
 }
 
 predict.gls <-
@@ -1288,7 +1288,7 @@ glsStruct <-
     function(corStruct = NULL, varStruct = NULL)
 {
     val <- list(corStruct = corStruct, varStruct = varStruct)
-    val <- val[!sapply(val, is.null)]	# removing NULL components
+    val <- val[!vapply(val, is.null, NA)] # removing NULL components
     class(val) <- c("glsStruct", "modelStruct")
     val
 }

@@ -1,8 +1,8 @@
 ###      Methods for the class of random-effects structures.
 ###
+### Copyright 2006-2019 The R Core team
 ### Copyright 1997-2003  Jose C. Pinheiro,
 ###                      Douglas M. Bates <bates@stat.wisc.edu>
-### Copyright 2006-2016 The R Core team
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -284,12 +284,13 @@ logLik.reStruct <- function(object, conLin, ...)
   if(any(!is.finite(conLin$Xy))) return(-Inf)
   ## 17-11-2015; Fixed sigma patch; SH Heisterkamp; Quantitative Solutions
   dims <- conLin$dims
-  REML <- as.integer(attr(object, "settings"))[1]
+  settings <- as.integer(attr(object, "settings"))
+  REML <- settings[1]
   val <- .C(mixed_loglik,
      as.double(conLin$Xy),
      as.integer(unlist(conLin$dims)),
      as.double(pdFactor(object)),
-     as.integer(attr(object, "settings")),
+     settings,
      loglik = double(1),
      lRSS = double(1),
      as.double(conLin$sigma))

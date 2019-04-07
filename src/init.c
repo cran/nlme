@@ -22,64 +22,63 @@
 #include <R.h>
 #include <Rinternals.h>
 #include <R_ext/Rdynload.h>
-#define longint int
 #include "nlmefit.h"
 #include "nlOptimizer.h"
 #include "pdMat.h"
 
-extern void corStruct_factList(double *, longint *, double *, double *);
-extern void corStruct_recalc(double *, longint *, longint *, double *);
-extern void symm_fullCorr(double *, longint *, double *);
-extern void symm_matList(double *, longint *, longint *, longint *, double *);
-extern void symm_factList(double *, longint *, longint *, longint *p,
+extern void corStruct_factList(double *, int *, double *, double *);
+extern void corStruct_recalc(double *, int *, int *, double *);
+extern void symm_fullCorr(double *, int *, double *);
+extern void symm_matList(double *, int *, int *, int *, double *);
+extern void symm_factList(double *, int *, int *, int *p,
 		  double *, double *);
-extern void symm_recalc(double *, longint *, longint *, double *,
-	    longint *, longint *, double *);
-extern void nat_fullCorr(double *, longint *, double *);
-extern void nat_matList(double *, longint *, longint *, longint *, double *);
-extern void nat_factList(double *, longint *, longint *, longint *,
+extern void symm_recalc(double *, int *, int *, double *,
+	    int *, int *, double *);
+extern void nat_fullCorr(double *, int *, double *);
+extern void nat_matList(double *, int *, int *, int *, double *);
+extern void nat_factList(double *, int *, int *, int *,
 	     double *, double *);
-extern void nat_recalc(double *, longint *, longint *l, double *,
-	   longint *, longint *, double *);
-extern void AR1_matList(double *, longint *, double *);
-extern void AR1_factList(double *, longint *, double *, double *);
-extern void AR1_recalc(double *, longint *, longint *, double *, double *);
-extern void CAR1_matList(double *, double *, longint *, double *);
-extern void CAR1_factList(double *, double *, longint *,  double *, double *);
-extern void CAR1_recalc(double *Xy, longint *pdims, longint *ZXcol,
+extern void nat_recalc(double *, int *, int *l, double *,
+	   int *, int *, double *);
+extern void AR1_matList(double *, int *, double *);
+extern void AR1_factList(double *, int *, double *, double *);
+extern void AR1_recalc(double *, int *, int *, double *, double *);
+extern void CAR1_matList(double *, double *, int *, double *);
+extern void CAR1_factList(double *, double *, int *,  double *, double *);
+extern void CAR1_recalc(double *Xy, int *pdims, int *ZXcol,
 	    double *par, double *time, double *logdet);
-extern void ARMA_constCoef(longint *, longint *, double *);
-extern void ARMA_unconstCoef(longint *, longint *, double *);
-extern void ARMA_matList(double *, longint *, longint *, longint *,
-	     longint *, longint *, double *);
-extern void ARMA_factList(double *, longint *, longint *, longint *,
-	      longint *, longint *, double *, double *);
-extern void ARMA_recalc(double *, longint *, longint *, double *,
-	    longint *, longint *, longint *, longint *, double *);
-extern void compSymm_matList(double *, double *, longint *, double *);
-extern void compSymm_factList(double *, double *, longint *,
+extern void ARMA_constCoef(int *, int *, double *);
+extern void ARMA_unconstCoef(int *, int *, double *);
+extern void ARMA_matList(double *, int *, int *, int *,
+	     int *, int *, double *);
+extern void ARMA_factList(double *, int *, int *, int *,
+	      int *, int *, double *, double *);
+extern void ARMA_recalc(double *, int *, int *, double *,
+	    int *, int *, int *, int *, double *);
+extern void compSymm_matList(double *, double *, int *, double *);
+extern void compSymm_factList(double *, double *, int *,
 		  double *, double *);
-extern void compSymm_recalc(double *, longint *, longint *, double *,
+extern void compSymm_recalc(double *, int *, int *, double *,
 		double *, double *);
-extern void spatial_matList(double *, longint *, double *, longint *,
+extern void spatial_matList(double *, int *, double *, int *,
 		double *, double *);
-extern void spatial_factList(double *, longint *, double *, longint *,
+extern void spatial_factList(double *, int *, double *, int *,
 		 double *, double *, double *);
-extern void spatial_recalc(double *, longint *, longint *, double *,
-	       double *, double *, longint *, double *);
+extern void spatial_recalc(double *, int *, int *, double *,
+	       double *, double *, int *, double *);
 
-extern void fit_nlme(double *, double *, longint *,
-	 longint *, longint *, double *,
-	 double *, longint *, double *,
-	 double *, longint *, longint *,
+extern void fit_nlme(double *, double *, int *,
+	 int *, int *, double *,
+	 double *, int *, double *,
+	 double *, int *, int *,
 	 double, SEXP model);
-extern void nlme_one_comp_first (longint *, double *, double *);
-extern void nlme_one_comp_open (longint *, double *, double *);
+extern void nlme_one_comp_first (int *, double *, double *);
+extern void nlme_one_comp_open (int *, double *, double *);
 
-extern void inner_perc_table(double *, longint *, longint *, longint *,
-		 longint *, double *);
+extern void inner_perc_table(double *, int *, int *, int *,
+		 int *, double *);
 
-extern void natural_pd(double *, longint *, double *);
+extern void natural_pd(double *, int *, double *);
 
 R_CMethodDef CEntries[] = {
     {"corStruct_factList", (DL_FUNC) &corStruct_factList, 4},

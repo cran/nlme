@@ -67,7 +67,7 @@
 \examples{
 fm1 <- lme(distance ~ age, Orthodont, random = ~ age | Subject)
 (s1 <- summary(fm1))
-\dontrun{coef(s1) # the (coef | Std.E | t | P-v ) matrix}
+\donttest{coef(s1) # the (coef | Std.E | t | P-v ) matrix}
 \dontshow{stopifnot(is.matrix(coef(s1)))}
 }
 \keyword{models}

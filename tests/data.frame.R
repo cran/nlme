@@ -5,6 +5,7 @@ subs <- rep(ll, rep(3,10))
 set.seed(101)# make reproducible
 resp <- rnorm(30)
 
+## 'nlme' not in search() :
 (gd <- nlme::groupedData(resp ~ 1|subs))
 ## failed in nlme < 3.1-129 (or previous to 2017-01-17)
 stopifnot(inherits(gd, "groupedData"),

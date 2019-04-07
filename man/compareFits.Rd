@@ -22,7 +22,7 @@ compareFits(object1, object2, which)
   The columns in \code{object1} and \code{object2} are put together in
   matrices which allow direct comparison of the individual elements for
   each object. Missing columns in either object are replaced by
-  \code{NA}s.  
+  \code{NA}s.
 }
 \value{
  a three-dimensional array, with the third dimension given by the number
@@ -30,7 +30,7 @@ compareFits(object1, object2, which)
  each column name there corresponds a matrix with as many rows as the
  rows in \code{object1} and two columns, corresponding to \code{object1}
  and \code{object2}. The returned object inherits from class
- \code{compareFits}. 
+ \code{compareFits}.
 }
 \author{José Pinheiro and Douglas Bates \email{bates@stat.wisc.edu}}
 \seealso{
@@ -40,9 +40,9 @@ compareFits(object1, object2, which)
   \code{\link{coef}},
   \code{\link{random.effects}}
 }
-\examples{
+\examples{% don't change lightly -- now called from other examples!
 fm1 <- lmList(Orthodont)
 fm2 <- lme(fm1)
-compareFits(coef(fm1), coef(fm2))
+(cF12 <- compareFits(coef(fm1), coef(fm2)))
 }
 \keyword{models}

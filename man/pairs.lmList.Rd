@@ -22,7 +22,7 @@
    the left of the \code{|} operator, must evaluate to a data frame with
    at least two columns. Default is \code{~ coef(.) }, corresponding to
    a pairs plot of the coefficients of \code{x}.
- }    
+ }
  \item{label}{an optional character vector of labels for the variables
    in the pairs plot.}
  \item{id}{an optional numeric value, or one-sided formula. If given as
@@ -40,7 +40,7 @@
    points identified according to \code{id}. If given as a
    one-sided formula, its right hand side must evaluate to a vector
    which is converted to character and used to label the identified
-   points. Default is the innermost grouping factor. 
+   points. Default is the innermost grouping factor.
  }
  \item{grid}{an optional logical value indicating whether a grid should
    be added to plot. Default is \code{FALSE}.}
@@ -60,24 +60,24 @@
   displayed (the Trellis  function \code{xyplot} is used). Otherwise, if
   more than two columns  are present, a scatter plot matrix with
   pairwise scatter plots of the  columns in the data frame is displayed
-  (the Trellis function  \code{splom} is used).   
+  (the Trellis function  \code{splom} is used).
 }
 \value{
   a diagnostic Trellis plot.
 }
 \author{José Pinheiro and Douglas Bates \email{bates@stat.wisc.edu}}
 \seealso{\code{\link{lmList}},
-  \code{\link{pairs.lme}}, 
-  \code{\link{pairs.compareFits}}, 
+  \code{\link{pairs.lme}},
+  \code{\link{pairs.compareFits}},
   \code{\link{xyplot}},
   \code{\link{splom}}}
 \examples{
 fm1 <- lmList(distance ~ age | Subject, Orthodont)
+
 # scatter plot of coefficients by gender, identifying unusual subjects
-pairs(fm1, ~coef(.) | Sex, id = 0.1, adj = -0.5)    
-# scatter plot of estimated random effects
-\dontrun{
+pairs(fm1, ~coef(.) | Sex, id = 0.1, adj = -0.5)
+
+# scatter plot of estimated random effects -- "bivariate Gaussian (?)"
 pairs(fm1, ~ranef(.))
-}
 }
 \keyword{models}

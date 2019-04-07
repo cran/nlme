@@ -45,8 +45,7 @@
   \code{\link{splom}}
 }
 \examples{
-fm1 <- lmList(Orthodont)
-fm2 <- lme(Orthodont)
-pairs(compareFits(coef(fm1), coef(fm2)))
+example(compareFits) # cF12 <- compareFits(coef(lmList(Orthodont)), .. lme(*))
+plot(cF12)
 }
 \keyword{models}

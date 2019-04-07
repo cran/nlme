@@ -63,11 +63,12 @@ lmList.groupedData <-
                                       list(Y  = form[[2]],
                                            RHS= form[[3]][[2]])))
   if (!missing(data)) {
+    message("'data' argument not used, but taken from groupedData object")
     args[["data"]] <- substitute(object)
   } else {
-    args <- as.list(c(args, list(data = substitute(object))))
+    args <- c(args, list(data = substitute(object)))
   }
-  do.call("lmList.formula", args)
+  do.call(lmList.formula, args)
 }
 
 lmList.formula <- function(object, data, level, subset, na.action = na.fail,
@@ -588,33 +589,22 @@ pairs.lmList <-
 		  }))
   }
   do.call(plotFun, args)
-}
+} ## {pairs.lmList}
 
 plot.intervals.lmList <-
-  function(x, ...)
+    function(x,
+             xlab = "", ylab = attr(x, "groupsName"),
+             strip = function(...) strip.default(..., style = 1),
+             ...)
 {
-  object <- x
-  dims <- dim(object)
-  dn <- dimnames(object)
+  dims <- dim(x)
+  dn <- dimnames(x)
   ## changed definition of what to ordered to preserve order of parameters
   tt <- data.frame(group = ordered(rep(dn[[1]], dims[2] * dims[3]),
                    levels = dn[[1]]),
-		   intervals = as.vector(object),
+		   intervals = as.vector(x),
 		   what = ordered(rep(dn[[3]],
                    rep(dims[1] * dims[2], dims[3])), levels = dn[[3]]))
-  strip <- list(...)[["strip"]]
-  if ( is.null( strip ) ) {
-    strip <- function(...) strip.default(..., style = 1)
-  }
-  xlab <- list(...)[["xlab"]]
-  if ( is.null( xlab ) ) {
-    xlab <- ""
-  }
-
-  ylab <- list(...)[["ylab"]]
-  if ( is.null( ylab ) ) {
-    ylab <- attr(object, "groupsName")
-  }
   dotplot(group ~ intervals | what,
 	  data = tt,
 	  scales = list(x="free"),
@@ -637,20 +627,14 @@ plot.intervals.lmList <-
 	    lower <- tapply(xx, yy, min)
 	    upper <- tapply(xx, yy, max)
 	    nams <- as.numeric(names(lower))
-	    lsegments(lower, nams, upper, nams, col = 1, lty = 1, lwd =
-                      if (dot.line$lwd) {
-                        dot.line$lwd
-                      } else {
-                        2
-                      })
+	    lsegments(lower, nams, upper, nams, col = 1, lty = 1,
+                      lwd = if (dot.line$lwd) dot.line$lwd else 2)
 	  }, ...)
-}
+} ## {plot.intervals.lmList}
 
-plot.ranef.lmList <-
-  function(x, form = NULL, grid = TRUE, control, ...)
+plot.ranef.lmList <- function(x, form = NULL, grid = TRUE, control, ...)
 {
-  fArgs <- as.list(match.call())[-1]
-  do.call("plot.ranef.lme", fArgs)
+    plot.ranef.lme(x, form=form, grid=grid, control=control, ...)
 }
 
 plot.lmList <-
@@ -658,16 +642,13 @@ plot.lmList <-
 	   id = NULL, idLabels = NULL,  grid, ...)
   ## Diagnostic plots based on residuals and/or fitted values
 {
-  object <- x
-  if (!inherits(form, "formula")) {
-    stop("'form' must be a formula")
-  }
+  if(!inherits(form, "formula")) stop("'form' must be a formula")
 
   ## constructing data
   allV <- all.vars(asOneFormula(form, id, idLabels))
   allV <- allV[is.na(match(allV,c("T","F","TRUE","FALSE")))]
   if (length(allV) > 0) {
-    data <- getData(object)
+    data <- getData(x)
     if (is.null(data)) {		# try to construct data
       alist <- lapply(as.list(allV), as.name)
       names(alist) <- allV
@@ -698,10 +679,9 @@ plot.lmList <-
 
   ## argument list
   dots <- list(...)
-  if (length(dots) > 0) args <- dots
-  else args <- list()
+  args <- if(length(dots) > 0) dots else list()
   ## appending object to data
-  data <- as.list(c(as.list(data), . = list(object)))
+  data <- as.list(c(as.list(data), . = list(x)))
 
   ## covariate - must always be present
   covF <- getCovariateFormula(form)
@@ -724,7 +704,7 @@ plot.lmList <-
     .y <- eval(respF[[2]], data)
     if (is.null(ylab <- attr(.y, "label"))) {
       ylab <- deparse(respF[[2]])
-      if (!is.null(cF) && (ylab == cF)) ylab <- cL
+      if      (!is.null(cF) && (ylab == cF)) ylab <- cL
       else if (!is.null(rF) && (ylab == rF)) ylab <- rL
     }
     argForm <- .y ~ .x
@@ -757,14 +737,14 @@ plot.lmList <-
 	       if ((id <= 0) || (id >= 1)) {
 		 stop("'id' must be between 0 and 1")
 	       }
-	       as.logical(abs(resid(object, type = "pooled")) > -qnorm(id / 2))
+	       as.logical(abs(resid(x, type = "pooled")) > -qnorm(id / 2))
 	     },
 	     call = eval(asOneSidedFormula(id)[[2]], data),
 	     stop("'id' can only be a formula or numeric")
 	     )
     if (is.null(idLabels)) {
-      idLabels <- getGroups(object)
-      if (length(idLabels) == 0) idLabels <- 1:object$dims$N
+      idLabels <- getGroups(x)
+      if (length(idLabels) == 0) idLabels <- 1:x$dims$N
       idLabels <- as.character(idLabels)
     } else {
       if (mode(idLabels) == "call") {
@@ -782,24 +762,13 @@ plot.lmList <-
   }
 
   ## defining abline, if needed
-  if (missing(abline)) {
-    if (missing(form)) {		# r ~ f
-      abline <- c(0, 0)
-    } else {
-      abline <- NULL
-    }
-  }
-
-  assign("id", id )
-  assign("idLabels", idLabels)
-  assign("abl", abline)
+  if(missing(abline)) abline <- if(missing(form)) c(0, 0) # else NULL
 
   ## defining the type of plot
   if (length(argForm) == 3) {
     if (is.numeric(.y)) {		# xyplot
       plotFun <- "xyplot"
-      args <- c(args,
-		panel = list(function(x, y, subscripts, ...)
+      args$panel <- function(x, y, subscripts, ...)
 		    {
                       x <- as.numeric(x)
                       y <- as.numeric(y)
@@ -810,43 +779,38 @@ plot.lmList <-
                           ltext(x[ids], y[ids], idLabels[subscripts][ids],
                                 cex = dots$cex, adj = dots$adj)
                       }
-		      if (!is.null(abl)) {
-			if (length(abl) == 2) panel.abline(a = abl, ...) else panel.abline(h = abl, ...)
+		      if (!is.null(abline)) {
+                          if (length(abline) == 2)
+                               panel.abline(a = abline, ...)
+                          else panel.abline(h = abline, ...)
 		      }
-		    }))
+		    }
     } else {				# assume factor or character
       plotFun <- "bwplot"
-      args <- c(args,
-		panel = list(function(x, y, ...)
+      args$panel <- function(x, y, ...)
 		    {
 		      if (grid) panel.grid()
 		      panel.bwplot(x, y)
-		      if (!is.null(abl)) {
-			panel.abline(v = abl[1], ...)
+		      if (!is.null(abline)) {
+			panel.abline(v = abline[1], ...)
 		      }
-		    }))
+		    }
     }
-  } else {
+  } else { ## '~ x'
     plotFun <- "histogram"
-    args <- c(args,
-	      panel = list(function(x, y, ...)
+    args$panel <- function(x, y, ...)
 		  {
 		    if (grid) panel.grid()
 		    panel.histogram(x, y)
-		    if (!is.null(abl)) {
-		      panel.abline(v = abl[1], ...)
+		    if (!is.null(abline)) {
+		      panel.abline(v = abline[1], ...)
 		    }
-		  }))
+		  }
   }
-  ## defining grid
-  if (missing(grid)) {
-    if (plotFun == "xyplot") grid <- TRUE
-    else grid <- FALSE
-  }
-  assign("grid", grid)
-
+  ## defining grid (seen from panel()s defined here):
+  if (missing(grid)) grid <- (plotFun == "xyplot") # T/F
   do.call(plotFun, args)
-}
+} ## {plot.lmList}
 
 predict.lmList <-
   function(object, newdata, subset = NULL, pool = attr(object, "pool"),
@@ -1084,7 +1048,7 @@ qqnorm.lmList <-
       stop("only residuals and random effects allowed")
   if (is.null(args$xlab)) args$xlab <- labs
   if (is.null(args$ylab)) args$ylab <- "Quantiles of standard normal"
-  if(type == "res") {			# residuals
+  if(type == "res") { # case 1: -------- residuals ------------------------
     fData <- qqnorm(.x, plot.it = FALSE)
     data[[".y"]] <- fData$x
     data[[".x"]] <- fData$y
@@ -1107,7 +1071,7 @@ qqnorm.lmList <-
                )
       if (is.null(idLabels)) {
         idLabels <- getGroups(object)
-        if (length(idLabels) == 0) idLabels <- 1:object$dims$N
+        if (length(idLabels) == 0) idLabels <- seq_len(object$dims$N)
         idLabels <- as.character(idLabels)
       } else {
         if (mode(idLabels) == "call") {
@@ -1123,7 +1087,7 @@ qqnorm.lmList <-
         }
       }
     }
-  } else {				# random.effects
+  } else { # case 2: ------- random.effects -------------------------------
     level <- attr(.x, "level")
     std <- attr(.x, "standardized")
     if (!is.null(effNams <- attr(.x, "effectNames"))) {
@@ -1135,14 +1099,14 @@ qqnorm.lmList <-
     fData <- data.frame(.x = unlist(lapply(fData, function(x) x[["y"]])),
 			.y = unlist(lapply(fData, function(x) x[["x"]])),
 			.g = ordered(rep(names(fData),rep(nr, nc)),
-                          levels = names(fData)))
+				     levels = names(fData)))
     dform <- ".y ~ .x | .g"
-    if (!is.null(grp <- getGroupsFormula(form))) {
-      dform <- paste(dform, deparse(grp[[2]]), sep = "*")
-      auxData <- data[is.na(match(names(data), "."))]
-    } else {
-      auxData <- list()
-    }
+    auxData <-
+	if (!is.null(grp <- getGroupsFormula(form))) {
+	    dform <- paste(dform, deparse(grp[[2]]), sep = "*")
+	    data[is.na(match(names(data), "."))]
+	} else
+	    list()
     ## id and idLabels - need not be present
     if (!is.null(id)) {			# identify points in plot
       N <- object$dims$N
@@ -1183,28 +1147,25 @@ qqnorm.lmList <-
         auxData[[".Lid"]] <- idLabels
       }
     }
-
-    if (length(auxData)) {		# need collapsing
-      auxData <- gsummary(data.frame(auxData),
-                          groups = getGroups(object, level = level))
-      auxData <- auxData[row.names(.x), , drop = FALSE]
-
-      if (!is.null(auxData[[".id"]])) {
-        id <- rep(auxData[[".id"]], nc)
-      }
-
-      if (!is.null(auxData[[".Lid"]])) {
-        idLabels <- rep(auxData[[".Lid"]], nc)
-      }
-      data <- cbind(fData, do.call("rbind", rep(list(auxData), nc)))
-    } else {
-      data <- fData
-    }
+    data <-
+        if (length(auxData)) {		# need collapsing
+            auxData <- gsummary(data.frame(auxData),
+                                groups = getGroups(object, level = level))
+            auxData <- auxData[row.names(.x), , drop = FALSE]
+            if (!is.null(auxData[[".id"]])) {
+                id <- rep(auxData[[".id"]], nc)
+            }
+            if (!is.null(auxData[[".Lid"]])) {
+                idLabels <- rep(auxData[[".Lid"]], nc)
+            }
+            cbind(fData, do.call("rbind", rep(list(auxData), nc)))
+        } else {
+            fData
+        }
   }
-  assign("id", if (is.null(id)) NULL else as.logical(as.character(id)))
-  assign("idLabels", as.character(idLabels))
-  assign("grid", grid)
-  assign("abl", abline)
+
+  if(is.null(id)) id <- as.logical(as.character(id))
+  idLabels <- as.character(idLabels)
   if (is.null(args$strip)) {
     args$strip <- function(...) strip.default(..., style = 1)
   }
@@ -1223,13 +1184,13 @@ qqnorm.lmList <-
                        ltext(x[ids], y[ids], idLabels[subscripts][ids],
                              cex = dots$cex, adj = dots$adj)
                    }
-                   if (!is.null(abl)) panel.abline(abl, ...)
+                   if (!is.null(abline)) panel.abline(abline, ...)
                  }), args)
   if(type == "reff" && !std) {
     args[["scales"]] <- list(x = list(relation = "free"))
   }
-  do.call("xyplot", args)
-}
+  do.call(xyplot, args)
+} ## {qqnorm.lmList}
 
 ranef.lmList <-
   ##  Extracts the random effects from an lmList object.

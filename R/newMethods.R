@@ -1,8 +1,8 @@
 ###      Methods for generics from newGenerics.q for some standard classes
 ###
+### Copyright 2006-2018  The R Core team
 ### Copyright 1997-2003  Jose C. Pinheiro,
 ###                      Douglas M. Bates <bates@stat.wisc.edu>
-### Copyright 2006-2016  The R Core team
 
 ##*## Methods for some of the generics in newGenerics.q for standard classes
 
@@ -301,8 +301,7 @@ plot.nls <-
 
   ## argument list
   dots <- list(...)
-  if (length(dots) > 0) args <- dots
-  else args <- list()
+  args <- if (length(dots) > 0) dots else list()
   ## appending object to data
   data <- as.list(c(as.list(data), . = list(object)))
   ## covariate - must always be present
@@ -421,7 +420,9 @@ plot.nls <-
                                 cex = dots$cex, adj = dots$adj)
                       }
 		      if (!is.null(abl)) {
-			if (length(abl) == 2) panel.abline(a = abl, ...) else panel.abline(h = abl, ...)
+			  if (length(abl) == 2)
+			       panel.abline(a = abl, ...)
+			  else panel.abline(h = abl, ...)
 		      }
 		    }))
       }
@@ -453,13 +454,8 @@ plot.nls <-
 		  }))
     }
   }
-
-  ## defining grid
-  if (missing(grid)) {
-    if (plotFun == "xyplot") grid <- TRUE
-    else grid <- FALSE
-  }
-  # assign("grid", grid, where = 1)
+  ## needed in panel():
+  if (missing(grid)) grid <- (plotFun == "xyplot") ## T / F
   do.call(plotFun, as.list(args))
 }
 

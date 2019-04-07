@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nlme 3.1-115\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
-"POT-Creation-Date: 2018-04-06 17:58\n"
+"POT-Creation-Date: 2019-04-02 18:40\n"
 "PO-Revision-Date: 2014-03-25 17:00+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -465,6 +465,9 @@ msgstr ""
 "pierwszy argument przekazywany do funkcji 'nmGroupedData()' musi być "
 "dwustronną formułą"
 
+msgid "single group not supported -- use groupedData()"
+msgstr ""
+
 # nlme/R/groupedData.R: 219
 # warning("'subset' ignored with single grouping factor")
 msgid "'subset' ignored with single grouping factor"
@@ -520,6 +523,12 @@ msgstr ""
 
 msgid "%d errors caught in %s.  The error messages and their frequencies are"
 msgstr ""
+
+# nlme/R/nlsList.R: 31
+# stop("second argument must be a groupedData object")
+#, fuzzy
+msgid "'data' argument not used, but taken from groupedData object"
+msgstr "drugi argument musi być obiektem \"groupedData\""
 
 # nlme/R/lmList.R: 56
 # stop("multiple levels not allowed")

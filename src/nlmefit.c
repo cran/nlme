@@ -2,7 +2,7 @@
    Routines for calculation of the log-likelihood or restricted
    log-likelihood with mixed-effects models.
 
-   Copyright (C) 2007-2018  The R Core Team
+   Copyright (C) 2007-2019  The R Core Team
    Copyright (C) 1997-2005  Douglas M. Bates <bates@stat.wisc.edu>,
 		            Jose C. Pinheiro, Saikat DebRoy
 
@@ -23,6 +23,7 @@
 
 */
 
+#include <stdint.h>
 #include "nlmefit.h"
 #include "matrix.h"
 #include "pdMat.h"
@@ -447,34 +448,41 @@ finite_diff_Hess(double (*func)(double*,double*), double *pars, int npar,
 		 // 17-11-2015; Fixed sigma patch; E van Willigen; Quantitative Sol.
 		 double *sigma)
 {				/* use Koshal design for finite-differences */
-    int i, j, nTot = 1 + npar + ( npar * ( npar + 1 ) ) / 2;
-    double *incr = Calloc( npar, double), *ppt, *xpt, *dpt,
-	*parray = Calloc( nTot * npar, double ), /* array of parameters */
-	*div = Calloc( nTot, double ), /* divisors */
-	*Xmat = Calloc( nTot * nTot, double ); /* regressor matrix */
+    double nT = 1 + npar + (npar * ((double) npar + 1)) / 2;// against integer overflow
+    if((nT * nT) > SIZE_MAX)
+	error(_("Too many parameters for finite-difference Hessian; npar = %d, nTot = %g."),
+	      npar, nT);
+    size_t nTot = (size_t) nT;
+    double *ppt, *xpt, *dpt,
+	*incr   = Calloc( npar,        double),
+	*parray = Calloc( nTot * npar, double), /* array of parameters */
+	*div    = Calloc( nTot,        double), /* divisors */
+	*Xmat   = Calloc( nTot * nTot, double); /* regressor matrix */
     QRptr xQR;
 
     if (cube_root_eps == 0.0) cube_root_eps = exp( log( DOUBLE_EPS ) / 3.);
     div[ 0 ] = 1.0;
     ppt = parray + npar * ( 2 * npar + 1 ); /* location of first cross term */
-    xpt = Xmat + nTot * ( 2 * npar + 1 );	/* location of first cross column */
+    xpt = Xmat   + nTot * ( 2 * npar + 1 ); /* location of first cross column */
     dpt = div + 2 * npar + 1;
-    for (i = 0; i < npar; i++) {
+    size_t np_i = npar;
+    for (int i = 0; i < npar; i++, np_i++) { // np_i === npar + i
+	size_t np1 = (size_t) npar + 1;
 	incr[i] = (pars[ i ] != 0.0) ? cube_root_eps * pars[ i ] : cube_root_eps;
 	div[ i + 1 ] = 1.0 / incr[ i ];
-	div[ npar + i + 1 ] = 2.0 / ( incr[ i ] * incr[ i ] );
-	parray[ npar + i * (npar + 1) ] = 1.0;
-	parray[ (npar + i) * (npar + 1) ] = -1.0;
-	for (j = i + 1; j < npar; j++) {
+	div[ np_i + 1 ] = 2.0 / ( incr[ i ] * incr[ i ] );
+	parray[ npar + i * np1 ] =  1.;
+	parray[   np_i   * np1 ] = -1.;
+	for (int j = i + 1; j < npar; j++) {
 	    ppt[ i ] = ppt[ j ] = 1;
 	    ppt += npar;
 	}
-	for (j = 0; j < nTot; j++) {
+	for (size_t j = 0; j < nTot; j++) {
 	    Xmat[ j + (i + 1) * nTot ] = parray[ i + j * npar ];
 	}
-	pt_prod( Xmat + (npar + i + 1) * nTot, Xmat + (i + 1) * nTot,
+	pt_prod( Xmat + (np_i + 1) * nTot, Xmat + (i + 1) * nTot,
 		 Xmat + (i + 1) * nTot, nTot );
-	for (j = 0; j < i; j++) {
+	for (int j = 0; j < i; j++) {
 	    pt_prod( xpt, Xmat + (i + 1) * nTot, Xmat + (j + 1) * nTot, nTot );
 	    xpt += nTot;
 	    *dpt++ = 1.0 / ( incr[ i ] * incr[ j ] );
@@ -485,10 +493,10 @@ finite_diff_Hess(double (*func)(double*,double*), double *pars, int npar,
 #endif /* Debug */
     vals[ 0 ] = (*func)( pars, sigma ); // 17-11-2015; Fixed sigma patch ...
     Xmat[ 0 ] = 1.0;
-    for (i = 1; i < nTot; i++) {
+    for (size_t i = 1; i < nTot; i++) {
 	Xmat[i] = 1.0;		/* column of 1's for constant */
 	Memcpy( parray, pars, npar );
-	for (j = 0; j < npar; j++) {
+	for (int j = 0; j < npar; j++) {
 	    parray[ j ] += parray[ j + i * npar ] * incr[ j ];
 	}
 	vals[i] = (*func)( parray, sigma ); // 17-11-2015; Fixed sigma patch ...
@@ -503,9 +511,9 @@ finite_diff_Hess(double (*func)(double*,double*), double *pars, int npar,
     xpt = vals + npar + 1;
     Memcpy( div, vals + npar + 1, nTot - ( npar + 1 ) );
     dpt = div + npar;		/* first off-diagonal */
-    for (i = 0; i < npar; i++) {
+    for (int i = 0; i < npar; i++) {
 	xpt[ i * ( npar + 1 ) ] = div[ i ];	/* diagonals */
-	for (j = 0; j < i; j++) {
+	for (int j = 0; j < i; j++) {
 	    xpt[ i + j * npar ] = xpt[ j + i * npar ] = *dpt++;
 	}
     }
@@ -653,7 +661,7 @@ logLik_fun( double *pars, double *sigma) // 17-11-2015; Fixed sigma patch; E van
 {				/* defined for finite differences */
     Memcpy( zxcopy2, zxcopy, zxdim );
     return internal_loglik(dd, zxcopy2, generate_DmHalf( Delta, dd, pdC, pars ),
-			   setngs, DNULLP, DNULLP, sigma ); // 17-11-2015; Fixed sigma patch; E van Willigen; Quantitative Solutions
+			   setngs, DNULLP, DNULLP, sigma ); // 17-11-2015; Fixed sigma ...
 }
 
 static double
@@ -661,17 +669,18 @@ negLogLik_fun( double *pars, double *sigma) // 17-11-2015; Fixed sigma patch; E 
 {				/* defined for finite differences */
     Memcpy( zxcopy2, zxcopy, zxdim );
     return - internal_loglik(dd, zxcopy2, generate_DmHalf( Delta, dd, pdC, pars ),
-			     setngs, DNULLP, DNULLP, sigma ); // 17-11-2015; Fixed sigma patch; E van Willigen; Quantitative Solutions
+			     setngs, DNULLP, DNULLP, sigma ); // 17-11-2015; Fixed sigma ...
 }
 
 void
 mixed_loglik(double *ZXy, int *pdims, double *pars, int *settings,
-	     double *logLik, double *lRSS, double *sigma) // 17-11-2015; Fixed sigma patch; E van Willigen; Quantitative Solutions
+	     double *logLik, double *lRSS, double *sigma)
+// 17-11-2015; Fixed sigma patch; E van Willigen; Quantitative Solutions
 {				/* evaluate the log-likelihood */
     dd = dims(pdims);
     /* settings gives RML, asDelta, gradHess, and pdClass in that order */
     if (settings[ 1 ]) {		/* gradHess not used and pdClass ignored */
-	*logLik = internal_loglik( dd, ZXy, pars, settings, DNULLP, lRSS, sigma); // 17-11-2015; Fixed sigma patch; E van Willigen; Quantitative Solutions
+	*logLik = internal_loglik( dd, ZXy, pars, settings, DNULLP, lRSS, sigma); // 17-11-2015; ...
     } else {			/* generate the Delta arrays from pars */
 	setngs = settings;
 	pdC = setngs + 3;
@@ -680,7 +689,7 @@ mixed_loglik(double *ZXy, int *pdims, double *pars, int *settings,
 	if (settings[ 2 ] == 0) {	/* no gradient or Hessian */
 	    *logLik =
 		internal_loglik( dd, ZXy, generate_DmHalf( Delta, dd, pdC, pars ),
-				 settings, DNULLP, lRSS, sigma ); // 17-11-2015; Fixed sigma patch; E van Willigen; Quantitative Solutions
+				 settings, DNULLP, lRSS, sigma ); // 17-11-2015; ...
 	} else {
 	    int npar = count_DmHalf_pars( dd, pdC );
 	    zxdim = (dd->ZXrows) * (dd->ZXcols);
@@ -688,7 +697,7 @@ mixed_loglik(double *ZXy, int *pdims, double *pars, int *settings,
 	    zxcopy2 = ZXy;
 
 	    Memcpy( zxcopy, ZXy, zxdim );
-	    finite_diff_Hess( logLik_fun, pars, npar, logLik, sigma); // 17-11-2015; Fixed sigma patch; E van Willigen; Quantitative Solutions
+	    finite_diff_Hess( logLik_fun, pars, npar, logLik, sigma); // 17-11-2015; ...
 	    Free( zxcopy );
 	}
 	Free( Delta );

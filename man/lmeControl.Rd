@@ -19,7 +19,9 @@ lmeControl(maxIter = 50, msMaxIter = 50, tolerance = 1e-6, niterEM = 25,
 	   .relStep = .Machine$double.eps^(1/3), minAbsParApVar = 0.05,
            opt = c("nlminb", "optim"),
 	   optimMethod = "BFGS", natural = TRUE,
-	   sigma = NULL, \dots)
+	   sigma = NULL,
+           allow.n.lt.q = FALSE,
+           \dots)
 }
 \arguments{
  \item{maxIter}{maximum number of iterations for the \code{lme}
@@ -70,6 +72,12 @@ lmeControl(maxIter = 50, msMaxIter = 50, tolerance = 1e-6, niterEM = 25,
    matrix of the estimators is calculated.  Default is \code{TRUE}.}
  \item{sigma}{optionally a positive number to fix the residual error at.
    If \code{NULL}, as by default, or \code{0}, sigma is estimated.}
+ \item{allow.n.lt.q}{\code{\link{logical}} indicating if it is ok to have
+   less observations than random effects for each group.  The default,
+   \code{FALSE} signals an error; if \code{NA}, such a situation only gives
+   a warning, as in \pkg{nlme} versions prior to 2019; if true, no message
+   is given at all.}
+   %% msg: "fewer observations than random effects in all level <Q> groups"
  \item{\dots}{further named control arguments to be passed, depending on
    \code{opt}, to \code{\link{nlminb}} (those from \code{abs.tol} down)
    or \code{\link{optim}} (those except \code{trace} and \code{maxit};

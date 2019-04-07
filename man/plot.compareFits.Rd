@@ -37,12 +37,10 @@
 }
 \author{José Pinheiro and Douglas Bates \email{bates@stat.wisc.edu}}
 \seealso{\code{\link{compareFits}}, \code{\link{pairs.compareFits}},
-  \code{\link{dotplot}} }
-\examples{
-\dontrun{
-fm1 <- lmList(Orthodont)
-fm2 <- lme(Orthodont)
-plot(compareFits(coef(fm1), coef(fm2)))
+  \code{\link{dotplot}}
 }
+\examples{
+example(compareFits) # cF12 <- compareFits(coef(lmList(Orthodont)), .. lme(*))
+plot(cF12)
 }
 \keyword{models}

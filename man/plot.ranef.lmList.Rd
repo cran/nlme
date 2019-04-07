@@ -4,16 +4,16 @@
 
 \name{plot.ranef.lmList}
 \title{Plot a ranef.lmList Object}
+\alias{plot.ranef.lmList}
 \usage{
 \method{plot}{ranef.lmList}(x, form, grid, control, \dots)
 }
-\alias{plot.ranef.lmList}
 \arguments{
  \item{x}{an object inheriting from class
    \code{"\link{ranef.lmList}"}, representing the estimated coefficients or
    estimated random effects for the \code{lmList} object from which it was
    produced.
- } 
+ }
  \item{form}{an optional formula specifying the desired type of plot. If
      given as a one-sided formula, a \code{dotplot} of the estimated
      random effects (coefficients) grouped according to all combinations of
@@ -46,7 +46,7 @@
      margin parameters for the x-axis (default is \code{c(2, 0.5, 0)}).}
  \item{\dots}{optional arguments passed to the Trellis \code{dotplot}
    function.
- } 
+ }
 }
 \description{
   If \code{form} is missing, or is given as a one-sided formula, a
@@ -57,7 +57,7 @@
   specified in \code{form}, its levels determine the dot-plot rows
   (with possibly multiple dots per row); otherwise, if \code{form}
   specifies a crossing of factors, the dot-plot rows are determined by
-  all combinations of the levels of the individual factors in the 
+  all combinations of the levels of the individual factors in the
   formula. The Trellis function \code{dotplot} is used in this method
   function.
 
@@ -65,7 +65,7 @@
   with a different panel for each variable listed in the right hand side
   of \code{form}. Scatter plots are generated for numeric variables and
   boxplots are generated for categorical (\code{factor} or
-  \code{ordered}) variables. 
+  \code{ordered}) variables.
 }
 \value{
   a Trellis plot of the estimated random-effects (coefficients) versus
@@ -80,7 +80,7 @@ fm1 <- lmList(distance ~ age | Subject, Orthodont)
 plot(ranef(fm1))
 fm1RE <- ranef(fm1, aug = TRUE)
 plot(fm1RE, form = ~ Sex)
-\dontrun{plot(fm1RE, form = age ~ Sex)}
+plot(fm1RE, form = age ~ Sex)
 }
 \keyword{models}
 

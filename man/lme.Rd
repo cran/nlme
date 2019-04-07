@@ -117,8 +117,8 @@ lme(fixed, data, random, correlation, weights, subset, method,
   (1982).  The variance-covariance parametrizations are described in
   Pinheiro and Bates (1996).  The different correlation structures
   available for the \code{correlation} argument are described in Box,
-  Jenkins and Reinse (1994), Littel \emph{et al} (1996), and Venables and
-  Ripley, (2002). The use of variance functions for linear and nonlinear
+  Jenkins and Reinsel (1994), Littell \emph{et al} (1996), and Venables and
+  Ripley (2002). The use of variance functions for linear and nonlinear
   mixed effects models is presented in detail in Davidian and Giltinan
   (1995).
 
@@ -136,7 +136,7 @@ lme(fixed, data, random, correlation, weights, subset, method,
   Data", Journal of the American Statistical Association, 83,
   1014--1022. 
 
-  Littel, R.C., Milliken, G.A., Stroup, W.W., and Wolfinger, R.D. (1996)
+  Littell, R.C., Milliken, G.A., Stroup, W.W., and Wolfinger, R.D. (1996)
   "SAS Systems for Mixed Models", SAS Institute.
 
   Pinheiro, J.C. and Bates., D.M.  (1996) "Unconstrained

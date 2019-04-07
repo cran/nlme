@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: nlme 3.1-136\n"
-"POT-Creation-Date: 2018-04-06 17:58\n"
+"Project-Id-Version: nlme 3.1-138\n"
+"POT-Creation-Date: 2019-04-02 18:40\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -253,6 +253,9 @@ msgstr ""
 msgid "first argument to 'nmGroupedData' must be a two-sided formula"
 msgstr ""
 
+msgid "single group not supported -- use groupedData()"
+msgstr ""
+
 msgid "'subset' ignored with single grouping factor"
 msgstr ""
 
@@ -284,6 +287,9 @@ msgid "'asTable' can only be used with balanced 'groupedData' objects"
 msgstr ""
 
 msgid "%d errors caught in %s.  The error messages and their frequencies are"
+msgstr ""
+
+msgid "'data' argument not used, but taken from groupedData object"
 msgstr ""
 
 msgid "multiple levels not allowed"

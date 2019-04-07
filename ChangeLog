@@ -1,3 +1,39 @@
+2019-04-02  Brian Ripley
+
+	* Start preparing to release 3.1-138 for R 3.6.0
+
+2019-04-02  Martin Maechler  <maechler@stat.math.ethz.ch>
+
+	* po/{R-de,de}.po: updated
+
+2019-01-23  Martin Maechler  <maechler@stat.math.ethz.ch>
+
+	* R/lme.R (lme.formula, lmeControl): new option
+	'allow.n.lt.q=FALSE' by default now triggers error
+	"fewer observations than random effects in all level <Q> groups".
+
+	* src/nlmefit.c (finite_diff_Hess): prevent integer overflow (and
+	later seg.fault) for large 'nTot' (already for npar >= 305).
+
+2018-08-04  Martin Mächler  <maechler@stat.math.ethz.ch>
+
+	* DESCRIPTION (Version): 3.1-138 (unreleased)
+
+	* R/groupedData.R: deprecate the *undocumented* functions
+	nmGroupedData() and nfGroupedData() in favor of their wrapper
+	groupedData() (to allow subsequent code simplification.
+
+2018-08-03  Martin Maechler  <maechler@stat.math.ethz.ch>
+
+	* R/lmList.R (plot.intervals.lmList, ..), tests/lmList.R: make
+	'xlab', 'ylab', 'strip' regular arguments (instead of wrongly
+	trying to use them from `...`).
+	* R/lme.R (plot.ranef.lme, ..): (ditto)
+
+2018-05-08  Brian Ripley
+
+	* tests/sigma-fixed-etc.R: increase tolerance for ATLAS run.
+
 2018-04-07  Brian Ripley
 
 	* DESCRIPTION (Version): 3.1-137 for release with R 3.5.0
@@ -11,7 +47,7 @@
 	* DESCRIPTION: Update Date, release for R-devel.
 
 	* tests/nlme-stall.R: Add comments.
-	
+
 2018-02-27  Martin Mächler  <maechler@stat.math.ethz.ch>
 
 	* R/nlme.R, man/nlmeControl.Rd: nlmeControl() gets new

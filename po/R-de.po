@@ -1,14 +1,12 @@
 # Translation of R-nlme.pot to German
 # Copyright (C) 2007-2014 The R Foundation
 # This file is distributed under the same license as the nlme package.
-# Chris Leick <c.leick@vollbio.de>, 2009-2012.
-# Detlef Steuer <steuer@hsu-hh.de>, 2014-2015.
 msgid ""
 msgstr ""
-"Project-Id-Version: R 3.4.4 / nlme-3.1-136\n"
+"Project-Id-Version: R 3.6.0 / nlme-3.1-137\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
-"POT-Creation-Date: 2018-04-06 17:58\n"
-"PO-Revision-Date: 2018-04-06 10:44+0200\n"
+"POT-Creation-Date: 2019-04-02 18:40\n"
+"PO-Revision-Date: 2019-04-02 11:18+0200\n"
 "Last-Translator: Detlef Steuer <steuer@hsu-hh.de>\n"
 "Language-Team: German <debian-l10n-german@lists.debian.org>\n"
 "Language: de\n"
@@ -47,6 +45,8 @@ msgid ""
 "'sumLenSq := sum(table(groups)^2)' = %g is too large.\n"
 " Too large or no groups in your correlation structure?"
 msgstr ""
+"'sumLenSq := sum(table(groups)^2)' = %g ist zu groß.\n"
+" Zu große oder keine Gruppen in der Korrelationsstrujtur? "
 
 msgid "cannot change 'form'"
 msgstr "'form' kann nicht geändert werden."
@@ -121,7 +121,7 @@ msgid "parameter in AR(1) structure must be between -1 and 1"
 msgstr "Parameter in AR(1)-Struktur muss zwischen -1 und 1 liegen"
 
 msgid "'sumLenSq' = %g is too large (larger than maximal integer)"
-msgstr ""
+msgstr "'sumLenSq' = %g ist zu groß (größer als maximale Integerzahl)"
 
 msgid "cannot change the length of the parameter of a \"corAR1\" object"
 msgstr ""
@@ -322,6 +322,9 @@ msgstr "zweites Argument für 'groupedData' muss von data.frame erben"
 msgid "first argument to 'nmGroupedData' must be a two-sided formula"
 msgstr "erstes Argument für 'nmGroupedData' muss eine zweiseitige Formel sein"
 
+msgid "single group not supported -- use groupedData()"
+msgstr ""
+
 msgid "'subset' ignored with single grouping factor"
 msgstr "'subset' mit einzelnem Gruppierungsfaktor ignoriert"
 
@@ -360,6 +363,10 @@ msgstr ""
 msgid "%d errors caught in %s.  The error messages and their frequencies are"
 msgstr ""
 "%d Fehler abgefangen in %s. Die Fehlermeldungen und ihre Häufigkeiten sind"
+
+#, fuzzy
+msgid "'data' argument not used, but taken from groupedData object"
+msgstr "zweites Argument muss ein groupedData-Objekt sein"
 
 msgid "multiple levels not allowed"
 msgstr "mehrere Stufen nicht erlaubt"
@@ -710,16 +717,16 @@ msgstr ""
 "nicht "
 
 msgid "Iteration %d, LME step: nlminb() did not converge (code = %d)."
-msgstr ""
+msgstr "Iteration %d, LME Schritt: nlminb() hat nicht konvergiert (Kode = %d)."
 
 msgid "Do increase 'msMaxIter'!"
-msgstr ""
+msgstr "Bitte 'msMaxIter' erhöhen!"
 
 msgid "PORT message:"
-msgstr ""
+msgstr "PORT Nachricht:"
 
 msgid "Iteration %d, LME step: nlm() did not converge (code = %d)."
-msgstr ""
+msgstr "Iteration %d, LME Schritt: nlm() hat nicht konvergiert (Kode = %d)."
 
 msgid "maximum number of iterations (maxIter = %d) reached without convergence"
 msgstr ""
@@ -1195,27 +1202,29 @@ msgstr ""
 "werden"
 
 msgid "Package"
-msgstr ""
+msgstr "Paket"
 
 msgid "installed with old R version"
-msgstr ""
+msgstr "installiert mit alter R Version"
 
 msgid "should not be used with R version"
-msgstr ""
+msgstr "sollte nicht benutzt werden mit R Version"
 
 msgid "Rather re-install it with this version of R."
-msgstr ""
+msgstr "Besser mit dieser R Version erneut installieren."
 
 msgid "deviance undefined for REML fit"
-msgstr ""
+msgstr "Devianz für REML Anpassung nicht definiert"
 
 msgid "AIC undefined for REML fit"
-msgstr ""
+msgstr "AIC für REML Anpassung nicht definiert"
 
 msgid ""
 "not (yet) implemented.  Contributions are welcome; use intervals() instead "
 "(for now)"
 msgstr ""
+"(nocht) nicht implementiert.  Beiträge sind willkommen; Für den Moment "
+"stattdessen intervals() nutzen"
 
 msgid "term %s not matched"
 msgid_plural "terms %s not matched"

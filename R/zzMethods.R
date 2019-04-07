@@ -1,8 +1,8 @@
 ###   Miscellaneous methods that must be defined last in the library
 ###
+### Copyright 2007-2018 The R Core team
 ### Copyright 1997-2003  Jose C. Pinheiro,
 ###                      Douglas M. Bates <bates@stat.wisc.edu>
-# Copyright 2007-2016 The R Core team
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -39,6 +39,8 @@
 		    "\n  Rather re-install it with this version of R.")
     }
 }
+
+`%||%` <- function(x, y) if(is.null(x)) y else x
 
 ## Note that  require( stats )  has already happened ...
 
@@ -104,7 +106,8 @@ confint.nlsList <- function(object, ...) {
 	simplify=FALSE)
 }
 
+.ns <- environment() # == asNamespace("nlme")
+
 ##  at the very end : ---------------------------
 .onUnload <- function(libpath)
     library.dynam.unload("nlme", libpath)
-

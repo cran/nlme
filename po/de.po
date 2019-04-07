@@ -1,15 +1,13 @@
 # Translation of nlme.pot to German
 # Copyright (C) 2007-2009 The R Foundation
 # This file is distributed under the same license as the nlme package.
-# Chris Leick <c.leick@vollbio.de>, 2009-2012.
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: R 2.15.2 / nlme 3.1-105\n"
+"Project-Id-Version: R 3.6.0 / nlme 3.1-137\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-06 17:58+0100\n"
-"PO-Revision-Date: 2016-04-14 13:00+0200\n"
-"Last-Translator: Chris Leick <c.leick@vollbio.de>\n"
+"POT-Creation-Date: 2019-04-02 18:40+0200\n"
+"PO-Revision-Date: 2019-04-01 14:17+0200\n"
+"Last-Translator: Detlef Steuer <steuer@hsu-hh.de>\n"
 "Language-Team: German <debian-l10n-german@lists.debian.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -33,37 +31,47 @@ msgstr "Unbekannte räumliche Korrelations-Klasse"
 msgid "First observation on an individual must have a dose"
 msgstr "Erste Beobachtung eines Individuums muss eine Dosis haben"
 
-#: nlmefit.c:412
+#: nlmefit.c:413
 #, c-format
 msgid "Singularity in backsolve at level %ld, block %ld"
 msgstr "Singularität in backsolve auf Stufe %ld, Block %ld"
 
-#: nlmefit.c:556 nlmefit.c:736
+#: nlmefit.c:453
+#, c-format
+msgid ""
+"Too many parameters for finite-difference Hessian; npar = %d, nTot = %g."
+msgstr ""
+
+#: nlmefit.c:564 nlmefit.c:745
 msgid "Overfitted model!"
 msgstr "Überangepasstes Modell!"
 
-#: nlmefit.c:582
+#: nlmefit.c:590
 msgid "analytic gradient is not available with matrix logarithm"
 msgstr "analytischer Gradient ist nicht mit Matrixlogarithmus verfügbar"
 
-#: nlmefit.c:605
+#: nlmefit.c:613
 msgid "analytic gradient is not available with compound symmetry"
 msgstr ""
 "analytischer Gradient ist nicht mit zusammengesetzter Symmetrie verfügbar"
 
-#: nlmefit.c:897
+#: nlmefit.c:906
 #, c-format
 msgid "Unable to form eigenvalue-eigenvector decomposition [RS(.) ierr = %d]"
-msgstr "Unfähig eine Eigenwert-Eigenvektor-Zerlegung zu bilden [RS(.) ierr = %d]"
+msgstr ""
+"Unfähig eine Eigenwert-Eigenvektor-Zerlegung zu bilden [RS(.) ierr = %d]"
 
-#: nlmefit.c:929
-#, fuzzy, c-format
+#: nlmefit.c:938
+#, c-format
 msgid ""
 "Unable to form Cholesky decomposition: the leading minor of order %d is not "
 "pos.def."
-msgstr "Unfähig eine Cholesky-Zerlegung zu bilden"
+msgstr ""
+"Cholesky-Zerlegung kann nicht bestimmt werden: Führender Minor der Ordnung "
+"%d\n"
+"ist nicht positiv definit"
 
-#: nlmefit.c:961
+#: nlmefit.c:970
 msgid "Haven't written the compound symmetry case for this yet"
 msgstr ""
 "Fall von zusammengesetzter Symmetrie wurde für dies noch nicht geschrieben"

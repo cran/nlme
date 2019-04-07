@@ -61,7 +61,7 @@
 }
 \description{
   When only one fitted model object is present, a data frame with the
-  sums of squares, numerator degrees of freedom, denominator degrees of
+  numerator degrees of freedom, denominator degrees of
   freedom, F-values, and P-values for Wald tests for the terms in the
   model (when \code{Terms} and \code{L} are \code{NULL}), a combination
   of model terms (when \code{Terms} in not \code{NULL}), or linear
@@ -71,7 +71,7 @@
   log-likelihood, the Akaike Information Criterion (AIC), and the
   Bayesian Information Criterion (BIC) of each object is returned.  If
   \code{test=TRUE}, whenever two consecutive  objects have different
-  number of degrees of freedom, a likelihood ratio statistic, with the
+  number of degrees of freedom, a likelihood ratio statistic with the
   associated p-value is included in the returned data frame.
 }
 \value{
