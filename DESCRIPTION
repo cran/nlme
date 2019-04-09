@@ -1,6 +1,6 @@
 Package: nlme
-Version: 3.1-138
-Date: 2019-04-02
+Version: 3.1-139
+Date: 2019-04-09
 Priority: recommended
 Title: Linear and Nonlinear Mixed Effects Models
 Authors@R: c(person("José", "Pinheiro", role = "aut", comment = "S version"),
@@ -23,7 +23,7 @@ License: GPL (>= 2) | file LICENCE
 BugReports: https://bugs.r-project.org
 URL: https://svn.r-project.org/R-packages/trunk/nlme
 NeedsCompilation: yes
-Packaged: 2019-04-04 06:50:30 UTC; maechler
+Packaged: 2019-04-09 07:36:00 UTC; ripley
 Author: José Pinheiro [aut] (S version),
   Douglas Bates [aut] (up to 2007),
   Saikat DebRoy [ctb] (up to 2002),
@@ -34,4 +34,4 @@ Author: José Pinheiro [aut] (S version),
   R-core [aut, cre]
 Maintainer: R-core <R-core@R-project.org>
 Repository: CRAN
-Date/Publication: 2019-04-07 15:20:03 UTC
+Date/Publication: 2019-04-09 20:28:44 UTC

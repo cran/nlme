@@ -1,6 +1,6 @@
 ###           groupedData - data frame with a grouping structure
 ###
-### Copyright 2006-2018  The R Core team
+### Copyright 2006-2019  The R Core team
 ### Copyright 1997-2003  Jose C. Pinheiro,
 ###                      Douglas M. Bates <bates@stat.wisc.edu>
 #
@@ -35,9 +35,9 @@ groupedData <-
     stop("right-hand side of first argument must be a conditional expression")
   }
   mCall <- match.call()
-  mCall[[1]] <- if(length(grpForm) == 1)## nlme::: needed if 'nlme' not attached
-		     quote(nlme:::nfGroupedData)
-		else quote(nlme:::nmGroupedData)
+  mCall[[1]] <- if(length(grpForm) == 1)## nlme:: needed if 'nlme' not attached
+		     quote(nlme::nfGroupedData)
+		else quote(nlme::nmGroupedData)
   eval(mCall, envir = parent.frame())
 }
 

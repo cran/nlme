@@ -1,3 +1,15 @@
+2019-04-08  Brian Ripley
+
+	* DESCRIPTION (Version): 3.1-139 (released)
+
+2019-04-08  Brian Ripley
+
+	* R/groupedData.R: *GroupedData are exported, so use :: not :::
+
+2019-04-07  Martin Maechler  <maechler@stat.math.ethz.ch>
+
+	* Release 3.1-138.
+
 2019-04-02  Brian Ripley
 
 	* Start preparing to release 3.1-138 for R 3.6.0
