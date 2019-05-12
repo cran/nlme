@@ -71,7 +71,7 @@ extern void fit_nlme(double *, double *, int *,
 	 int *, int *, double *,
 	 double *, int *, double *,
 	 double *, int *, int *,
-	 double, SEXP model);
+	 double *, SEXP model);
 extern void nlme_one_comp_first (int *, double *, double *);
 extern void nlme_one_comp_open (int *, double *, double *);
 

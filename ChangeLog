@@ -1,3 +1,15 @@
+2019-05-12  Brian Ripley
+
+	* DESCRIPTION (Version): 3.1-140 (released)
+
+2019-05-01  Brian Ripley
+
+	* src/init.c: correct declaration of fit_nlme
+
+2019-04-10  Brian Ripley
+
+	* src/nlmefit.c: remove clang warning.
+
 2019-04-08  Brian Ripley
 
 	* DESCRIPTION (Version): 3.1-139 (released)

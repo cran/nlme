@@ -1,5 +1,5 @@
-0ee38bb9e35aacac94403db16d07d230 *ChangeLog
-3d18b5e05f6ff88dc6424a3aa20d0384 *DESCRIPTION
+cc29819d2dc4aee9eb4b7f8d41dcdcf3 *ChangeLog
+03af4b1b1f77b36b72610f17629c6aaf *DESCRIPTION
 c843826752e9f806f255d79801354abb *INDEX
 967bf0c65e5a3f8c94efb6186482ade1 *LICENCE
 607f47e45ab4c7e76698254e83a98e49 *NAMESPACE
@@ -387,13 +387,13 @@ ee6164dce6d28ba0da6e8ca325de2896 *po/nlme.pot
 50706c74629dbfa8b03d472135e7165f *src/chol.f
 c63109764f6bb64523ec70fc6aa29fd9 *src/corStruct.c
 79c2e3613dba3642f53110b97fd88580 *src/gnls.c
-8e8bdb86bdb919557b6415a1042bae2f *src/init.c
+ee1ee57435cd51e17eff7cfcb765d89b *src/init.c
 f5638d8da756049ecb729345adf88eb7 *src/matrix.c
 bdb2a20b9e6c1597229accc9a817d725 *src/matrix.h
 183fb67b22d772170ee934151870daa1 *src/nlOptimizer.c
 aee83096167846e585d243c9e7e93da7 *src/nlOptimizer.h
 d35c5058158b6d4b50a9817669b693b5 *src/nlme.c
-f3d5fae1c14531057cca5391fb6b8e12 *src/nlmefit.c
+024884ba0b38aa61e9acf5ca3ea4311e *src/nlmefit.c
 716000afd0baf90c06b6b4c209654ccc *src/nlmefit.h
 5225d615caa3ab1cd28d8859f2da6554 *src/pdMat.c
 87f59f283d5378beccb42f205be507cf *src/pdMat.h

@@ -433,7 +433,7 @@ internal_R_invert(dimPTR dd, double *dc)
 static double cube_root_eps = 0.;
 
 static double *
-pt_prod( double *prod, double *a, double *b, int len )
+pt_prod( double *prod, double *a, double *b, size_t len )
 {				/* prod <- a * b */
     int i; double *ret = prod;
     for (i = 0; i < len; i++) {
