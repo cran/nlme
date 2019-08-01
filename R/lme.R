@@ -1071,7 +1071,8 @@ anova.lme <-
                           Test = effects,
                           "L.Ratio" = c(NA, lratio),
                           "p-value" = c(NA, pval),
-                          check.names = FALSE)
+                          check.names = FALSE,
+                          stringsAsFactors = TRUE)
       }
     }
     row.names(aod) <- vapply(as.list(ancall[-1L]), c_deparse, "")
