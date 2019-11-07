@@ -449,7 +449,7 @@ finite_diff_Hess(double (*func)(double*,double*), double *pars, int npar,
 		 double *sigma)
 {				/* use Koshal design for finite-differences */
     double nT = 1 + npar + (npar * ((double) npar + 1)) / 2;// against integer overflow
-    if((nT * nT) > SIZE_MAX)
+    if((nT * nT) > (double) SIZE_MAX)
 	error(_("Too many parameters for finite-difference Hessian; npar = %d, nTot = %g."),
 	      npar, nT);
     size_t nTot = (size_t) nT;

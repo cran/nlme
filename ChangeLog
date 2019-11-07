@@ -1,3 +1,11 @@
+2019-11-07  Martin Maechler  <maechler@stat.math.ethz.ch>
+
+	* DESCRIPTION (Version): 3.1-142 (to be released)
+
+2019-09-26  Brian Ripley
+
+	* src/nlmefit.c: suppress warning from clang trunk.
+
 2019-08-01  Kurt Hornik  <Kurt.Hornik@wu.ac.at>
 
 	* DESCRIPTION (Version): 3.1-141 (released)

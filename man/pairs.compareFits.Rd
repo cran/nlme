@@ -46,6 +46,6 @@
 }
 \examples{
 example(compareFits) # cF12 <- compareFits(coef(lmList(Orthodont)), .. lme(*))
-plot(cF12)
+pairs(cF12)
 }
 \keyword{models}
