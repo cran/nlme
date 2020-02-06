@@ -69,8 +69,8 @@ gnls(model, data, params, start, correlation, weights, subset,
  \item{verbose}{an optional logical value. If \code{TRUE} information on
    the evolution of the iterative algorithm is printed. Default is
    \code{FALSE}.}
- \item{\dots}{some methods for this generic require additional
-    arguments.  None are used in this method.} 
+% \item{\dots}{some methods for this generic require additional
+%    arguments.  None are used in this method.} 
 }
 \description{
   This function fits a nonlinear model using generalized least
