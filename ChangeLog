@@ -1,5 +1,19 @@
 2019-12-10  Brian Ripley
 
+	* DESCRIPTION (Version): 3.1-145 (released)
+
+	* src/nlmefit.c: avoid clang-UBSAN warning.
+
+2020-02-06
+
+	* DESCRIPTION (Version): 3.1-144 (released)
+
+2020-02-02  Kurt Hornik  <Kurt.Hornik@wu.ac.at>
+
+	* man/gnls.Rd: Drop docs for argument not in usage.
+
+2019-12-10  Brian Ripley
+
 	* DESCRIPTION (Version): 3.1-143 (released)
 
 	* tests/augPred_lab.R: change yet another 'plucked from air' tolerance.

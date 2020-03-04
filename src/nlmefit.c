@@ -351,20 +351,27 @@ internal_loglik(dimPTR dd, double *ZXy, double *DmHalf, int *RML,
 		double *dc, double *lRSS,
 		// 17-11-2015; Fixed sigma patch; E van Willigen; Quantitative Sol.
 		double *sigma)
-{				/* if dc is NULL, don't attempt storage */
-    int i, j, Q = dd->Q,  Qp2 = Q + 2, qi,
-	ldstr = (dc != DNULLP) ? (dd->Srows) : 0;
-    double accum, *dmHlf, *lglk = Calloc( Qp2, double );
+{
+    int i, j, Q = dd->Q,  Qp2 = Q + 2, qi, ldstr;
+    double accum, *dmHlf, *lglk = Calloc( Qp2, double ), *store;
     QRptr dmQR;
 
     for (i = 0; i < Qp2; i++) {
 	qi = (dd->q)[i];
 	for (j = 0; j < (dd->ngrp)[i]; j++) {
+	    /* if dc is NULL, don't attempt storage */
+	    if (dc != DNULLP) {
+		ldstr = dd->Srows;
+		store = dc + (dd->SToff)[i][j];
+	    } else {
+		ldstr = 0;
+		store = DNULLP;
+	    }
 	    if (qi >
 		QR_and_rotate(ZXy + (dd->ZXoff)[i][j], dd->ZXrows,
 			      (dd->ZXlen)[i][j], (dd->ncol)[i] + (dd->nrot)[i],
 			      DmHalf + (dd->DmOff)[i], qi, (dd->ncol)[i],
-			      lglk + i, dc + (dd->SToff)[i][j], ldstr))
+			      lglk + i, store, ldstr))
 	    {
 		warning("Singular precision matrix in level %ld, block %ld",
 			(long int) (i - (dd->Q)), j + 1);
