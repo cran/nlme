@@ -3,10 +3,10 @@
 # This file is distributed under the same license as the nlme package.
 msgid ""
 msgstr ""
-"Project-Id-Version: R 3.6.0 / nlme-3.1-137\n"
+"Project-Id-Version: R 4.0.0 / nlme-3.1-145\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
 "POT-Creation-Date: 2019-04-02 18:40\n"
-"PO-Revision-Date: 2019-04-02 11:18+0200\n"
+"PO-Revision-Date: 2020-04-01 15:18+0200\n"
 "Last-Translator: Detlef Steuer <steuer@hsu-hh.de>\n"
 "Language-Team: German <debian-l10n-german@lists.debian.org>\n"
 "Language: de\n"
@@ -323,7 +323,7 @@ msgid "first argument to 'nmGroupedData' must be a two-sided formula"
 msgstr "erstes Argument für 'nmGroupedData' muss eine zweiseitige Formel sein"
 
 msgid "single group not supported -- use groupedData()"
-msgstr ""
+msgstr "einzelne Gruppe nicht unterstützt -- nutze groupedData()"
 
 msgid "'subset' ignored with single grouping factor"
 msgstr "'subset' mit einzelnem Gruppierungsfaktor ignoriert"
@@ -364,9 +364,8 @@ msgid "%d errors caught in %s.  The error messages and their frequencies are"
 msgstr ""
 "%d Fehler abgefangen in %s. Die Fehlermeldungen und ihre Häufigkeiten sind"
 
-#, fuzzy
 msgid "'data' argument not used, but taken from groupedData object"
-msgstr "zweites Argument muss ein groupedData-Objekt sein"
+msgstr "'data' Argument nicht benutzt, aber vom groupedData Objekt genommen"
 
 msgid "multiple levels not allowed"
 msgstr "mehrere Stufen nicht erlaubt"

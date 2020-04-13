@@ -352,13 +352,16 @@ internal_loglik(dimPTR dd, double *ZXy, double *DmHalf, int *RML,
 		// 17-11-2015; Fixed sigma patch; E van Willigen; Quantitative Sol.
 		double *sigma)
 {
-    int i, j, Q = dd->Q,  Qp2 = Q + 2, qi, ldstr;
-    double accum, *dmHlf, *lglk = Calloc( Qp2, double ), *store;
-    QRptr dmQR;
+    int Q = dd->Q,  Qp2 = Q + 2;
+    double *lglk = Calloc( Qp2, double );
 
-    for (i = 0; i < Qp2; i++) {
-	qi = (dd->q)[i];
-	for (j = 0; j < (dd->ngrp)[i]; j++) {
+    for (int i = 0; i < Qp2; i++) {
+	int qi = (dd->q)[i];
+	// we could pull things out of this loop, but assume
+	// optimizing compiler can do that for us.
+	for (int j = 0; j < (dd->ngrp)[i]; j++) {
+	    int ldstr;
+	    double *store;
 	    /* if dc is NULL, don't attempt storage */
 	    if (dc != DNULLP) {
 		ldstr = dd->Srows;
@@ -374,16 +377,17 @@ internal_loglik(dimPTR dd, double *ZXy, double *DmHalf, int *RML,
 			      lglk + i, store, ldstr))
 	    {
 		warning("Singular precision matrix in level %ld, block %ld",
-			(long int) (i - (dd->Q)), j + 1);
+			(long int) (i - Q), j + 1);
 		return -DBL_MAX;
 	    }
 	}
     }
-    for(i = 0, accum = 0; i < Q; i++) {
-	qi = (dd->q)[i];
-	dmHlf = Calloc( (size_t) qi * qi, double );
-	dmQR = QR( copy_mat( dmHlf, qi, DmHalf + (dd->DmOff)[i],
-			     qi, qi, qi ), qi, qi, qi);
+    double accum = 0;
+    for(int i = 0; i < Q; i++) {
+	int qi = (dd->q)[i];
+	double *dmHlf = Calloc( (size_t) qi * qi, double );
+	QRptr dmQR = QR( copy_mat( dmHlf, qi, DmHalf + (dd->DmOff)[i],
+				   qi, qi, qi ), qi, qi, qi);
 	accum += (dd->ngrp)[i] * QRlogAbsDet( dmQR ) - lglk[i];
 	QRfree( dmQR ); Free( dmHlf );
     }
