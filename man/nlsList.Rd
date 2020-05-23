@@ -104,8 +104,10 @@ fm1 <- nlsList(uptake ~ SSasympOff(conc, Asym, lrc, c0),
    data = CO2, start = c(Asym = 30, lrc = -4.5, c0 = 52))
 summary(fm1)
 cfm1 <- confint(fm1) # via profiling each % FIXME: only *one* message instead of one *each*
-stopifnot((i.ok <- which(sapply(cfm1, class) == "matrix"))
-          \%in\% c(2:4,6:9, 12))
+mat.class <- class(matrix(1)) # ("matrix", "array") for R >= 4.0.0;  ("matrix" in older R)
+i.ok <- which(vapply(cfm1,
+                function(r) identical(class(r), mat.class), NA))
+stopifnot(length(i.ok) > 0, !anyNA(match(c(2:4, 6:9, 12), i.ok)))
 ## where as (some of) the others gave errors during profile re-fitting :
 str(cfm1[- i.ok])
 }

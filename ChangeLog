@@ -1,10 +1,26 @@
+2020-05-13  Martin Maechler  <maechler@stat.math.ethz.ch>
+
+	* DESCRIPTION (Contact, MailingList): R-help (*not* R-core)
+
+2020-04-21  Martin Maechler  <maechler@stat.math.ethz.ch>
+
+	* DESCRIPTION (Version): 3.1-148 (not yet released)
+
+	* man/nlsList.Rd: fix stopifnot(.) check in examples.
+
 2020-03-03  Brian Ripley
 
-	* DESCRIPTION (Version): 3.1-146 (released)
+	* src/nlmefit.c: clean up code.
+
+2020-03-03  Brian Ripley
+
+	* DESCRIPTION (Version): 3.1-147 (released)
 
 	* po: update, including updated German translations from Detlef Steuer
 
 2020-03-11  Martin Maechler  <maechler@stat.math.ethz.ch>
+
+	* DESCRIPTION (Version): 3.1-146 (unreleased)
 
 	* man/Remifentanil.Rd: more information incl references.
 

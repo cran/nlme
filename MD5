@@ -1,5 +1,5 @@
-455987c53b031fc69546ed30c7d462ed *ChangeLog
-36a97d7118f195ffb0f37cf953551cfe *DESCRIPTION
+1be2bd8328fbacea0f1cc5e6da5bf1cc *ChangeLog
+71e730ba1692c8be38310602592c1053 *DESCRIPTION
 c843826752e9f806f255d79801354abb *INDEX
 967bf0c65e5a3f8c94efb6186482ade1 *LICENCE
 607f47e45ab4c7e76698254e83a98e49 *NAMESPACE
@@ -286,7 +286,7 @@ f3b113b8aedae437708a7fcd167d3d73 *man/logLik.varFunc.Rd
 f174be2af10e42c460d1483bea572edc *man/nlmeControl.Rd
 e829fde20237430d7eb7a11e0ce19305 *man/nlmeObject.Rd
 dd1fd42b2801e78eb9ba1fa11326ebe5 *man/nlmeStruct.Rd
-11d97a8fa6659a3fba7b261e0c93020c *man/nlsList.Rd
+57313b57ca65df920db36e1d6c12eb3c *man/nlsList.Rd
 ab97cb56b51d58e9905c8e6ee47da4b7 *man/nlsList.selfStart.Rd
 50ca37e37aef59eee15384b1f06aac24 *man/pairs.compareFits.Rd
 530dc14d9df00efe7bff45130f72ab23 *man/pairs.lmList.Rd
