@@ -8,7 +8,7 @@
 \method{corMatrix}{corStruct}(object, covariate, corr, \dots)
 }
 \alias{corMatrix.corStruct}
-\alias{corMatrix.compSymm}
+\alias{corMatrix.corCompSymm}
 \alias{corMatrix.corAR1}
 \alias{corMatrix.corARMA}
 \alias{corMatrix.corCAR1}

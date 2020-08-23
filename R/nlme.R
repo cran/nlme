@@ -1,6 +1,6 @@
 ###            Fit a general nonlinear mixed effects model
 ###
-### Copyright 2006-2018 The R Core team
+### Copyright 2006-2020 The R Core team
 ### Copyright 1997-2003  Jose C. Pinheiro,
 ###                      Douglas M. Bates <bates@stat.wisc.edu>
 ###
@@ -519,7 +519,7 @@ nlme.formula <-
       nm <- rnames[[i]][j]
       wchRnames[[i]][nm] <- wchRnames[[i]][nm] + 1
       r <- plist[[nm]]$random[[i]]
-      if (data.class(r) == "list") r <- r[[wchRnames[[i]][nm]]]
+      if(is.list(r)) r <- r[[wchRnames[[i]][nm]]]
       if (is.logical(r)) {
         if (r) {
           rn[[i]] <- c(rn[[i]],
@@ -656,9 +656,7 @@ nlme.formula <-
     for(nm in rnames[[i]]) {
       wchRnames[[i]][nm] <- wchRnames[[i]][nm] + 1
       r <- plist[[nm]]$random[[i]]
-      if (data.class(r) == "list") {
-        r <- r[[wchRnames[[i]][nm]]]
-      }
+      if(is.list(r)) r <- r[[wchRnames[[i]][nm]]]
       if (is.logical(r)) {
         val <- n1
         n1 <- n1 + 1
@@ -723,7 +721,7 @@ nlme.formula <-
             Z[, rmap[[i]][[nm]]] <- gradnm  # else r == FALSE =^= 0
         } else {
           rm.i <- rmap[[i]][[nm]]
-          if (data.class(rm.i) != "list") {
+          if (!is.list(rm.i)) {
             Z[, rm.i] <- gradnm * r
           } else {
             for(j in seq_along(rm.i)) {
@@ -1059,7 +1057,7 @@ getParsNlme <-
           if (r)
             pars[, nm] <- pars[, nm] + b.i[rm.i., gr.i]
           ## else r == FALSE =^= 0
-        } else if (data.class(r) != "list") {
+        } else if (!is.list(r)) {
           pars[, nm] <- pars[, nm] +
             (r * t(b.i)[gr.i, rm.i., drop=FALSE]) %*% rep(1, ncol(r))
         } else {

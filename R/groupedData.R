@@ -1,6 +1,6 @@
 ###           groupedData - data frame with a grouping structure
 ###
-### Copyright 2006-2019  The R Core team
+### Copyright 2006-2020  The R Core team
 ### Copyright 1997-2003  Jose C. Pinheiro,
 ###                      Douglas M. Bates <bates@stat.wisc.edu>
 #
@@ -115,7 +115,7 @@ nfGroupedData <-
   attr( data, "order.groups" ) <- order.groups
   cl <-
       if ((length(all.vars(getCovariateFormula(formula))) == 0) ||
-          (data.class(primary) != "numeric")) {
+          !is.numeric(primary)) {
           "nffGroupedData"  # primary covariate is a factor or a "1"
       } else {
           "nfnGroupedData"  # primary covariate is numeric

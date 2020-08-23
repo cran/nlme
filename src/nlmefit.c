@@ -2,7 +2,7 @@
    Routines for calculation of the log-likelihood or restricted
    log-likelihood with mixed-effects models.
 
-   Copyright (C) 2007-2019  The R Core Team
+   Copyright (C) 2007-2020  The R Core Team
    Copyright (C) 1997-2005  Douglas M. Bates <bates@stat.wisc.edu>,
 		            Jose C. Pinheiro, Saikat DebRoy
 
@@ -694,7 +694,7 @@ mixed_loglik(double *ZXy, int *pdims, double *pars, int *settings,
 	*logLik = internal_loglik( dd, ZXy, pars, settings, DNULLP, lRSS, sigma); // 17-11-2015; ...
     } else {			/* generate the Delta arrays from pars */
 	setngs = settings;
-	pdC = setngs + 3;
+	pdC = setngs + 3; // pointer to pdClass (integer code)
 	Delta = Calloc( (dd->DmOff)[ dd->Q ], double );
 
 	if (settings[ 2 ] == 0) {	/* no gradient or Hessian */

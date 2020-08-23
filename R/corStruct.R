@@ -1,8 +1,8 @@
 ###              Classes of correlation structures
 ###
+### Copyright 2005-2020  The R Core team
 ### Copyright 1997-2003  Jose C. Pinheiro,
 ###                      Douglas M. Bates <bates@stat.wisc.edu>
-### Copyright 2005-2016  The R Core team
 
 #
 #  This program is free software; you can redistribute it and/or modify
@@ -79,7 +79,7 @@ corMatrix.corStruct <-
   } else {
     ## transpose inverse square root
     corD <- Dim(object,
-		if (data.class(covariate) == "list") {
+		if(is.list(covariate)) {
 		  if (is.null(names(covariate)))
 		    names(covariate) <- seq_along(covariate)
 		  rep(names(covariate), lengths(covariate))
@@ -261,11 +261,8 @@ logDet.corStruct <-
   if (is.null(aux1 <- attr(aux, "logDet"))) {
     ## checking for logDet attribute; if not present, get corr matrix
     aux <- corMatrix(object, covariate)
-    if (data.class(aux) == "list") {    # by group
-      sum(log(abs(unlist(lapply(aux, svd.d)))))/2
-    } else {
-      sum(log(abs(svd.d(aux))))/2
-    }
+    sum(log(abs(if(is.list(aux)) unlist(lapply(aux, svd.d)) else svd.d(aux)
+                )))/2
   } else {
     -aux1
   }
@@ -364,7 +361,7 @@ corMatrix.corSymm <-
   function(object, covariate = getCovariate(object), corr = TRUE, ...)
 {
   corD <- Dim(object,
-	      if (data.class(covariate) == "list") {
+	      if(is.list(covariate)) {
 		if (is.null(names(covariate)))
 		  names(covariate) <- seq_along(covariate)
 		rep(names(covariate), lengths(covariate))
@@ -448,9 +445,7 @@ Initialize.corSymm <- function(object, data, ...)
   object <- NextMethod()
 
   covar <- attr(object, "covariate")
-  if (data.class(covar) != "list") {
-    covar <- list(covar)
-  }
+  if(!is.list(covar)) covar <- list(covar)
   if (any(unlist(lapply(covar, duplicated)))) {
     stop("covariate must have unique values within groups for \"corSymm\" objects")
   }
@@ -585,7 +580,7 @@ corMatrix.corNatural <-
   function(object, covariate = getCovariate(object), corr = TRUE, ...)
 {
   corD <- Dim(object,
-	      if (data.class(covariate) == "list") {
+	      if(is.list(covariate)) {
 		if (is.null(names(covariate)))
 		  names(covariate) <- seq_along(covariate)
 		rep(names(covariate), lengths(covariate))
@@ -673,9 +668,7 @@ Initialize.corNatural <- function(object, data, ...)
   object <- NextMethod()
 
   covar <- attr(object, "covariate")
-  if (data.class(covar) != "list") {
-    covar <- list(covar)
-  }
+  if(!is.list(covar)) covar <- list(covar)
   if (any(unlist(lapply(covar, duplicated)))) {
     stop("covariate must have unique values within groups for \"corNatural\" objects")
   }
@@ -798,7 +791,7 @@ corIdent <-
 corMatrix.corIdent <-
   function(object, covariate = getCovariate(object), corr, ...)
 {
-  if (data.class(covariate) == "list") {# by group
+  if(is.list(covariate)) {# by group
     as.list(lapply(covariate, function(el, object) corMatrix(object, el)))
   } else {
     diag(length(covariate))
@@ -870,7 +863,7 @@ corMatrix.corAR1 <-
   function(object, covariate = getCovariate(object), corr = TRUE, ...)
 {
   corD <- Dim(object,
-	      if (data.class(covariate) == "list") {
+	      if(is.list(covariate)) {
 		if (is.null(names(covariate)))
 		  names(covariate) <- seq_along(covariate)
 		rep(names(covariate), lengths(covariate))
@@ -948,9 +941,7 @@ Initialize.corAR1 <-
 {
   object <- NextMethod()
   covar <- attr(object, "covariate")
-  if (data.class(covar) != "list") {
-    covar <- list(covar)
-  }
+  if(!is.list(covar)) covar <- list(covar)
   if (any(unlist(lapply(covar, duplicated)))) {
     stop("covariate must have unique values within groups for \"corAR1\" objects")
   }
@@ -1031,7 +1022,7 @@ corMatrix.corCAR1 <-
   function(object, covariate = getCovariate(object), corr = TRUE, ...)
 {
   corD <- Dim(object,
-	      if (data.class(covariate) == "list") {
+	      if(is.list(covariate)) {
 		if (is.null(names(covariate)))
 		  names(covariate) <- seq_along(covariate)
 		rep(names(covariate), lengths(covariate))
@@ -1112,9 +1103,7 @@ Initialize.corCAR1 <-
 {
   object <- NextMethod()
   covar <- attr(object, "covariate")
-  if (data.class(covar) != "list") {
-    covar <- list(covar)
-  }
+  if(!is.list(covar)) covar <- list(covar)
 
   if (any(unlist(lapply(covar, duplicated)))) {
     stop("covariate must have unique values within groups for \"corCAR1\" objects")
@@ -1208,7 +1197,7 @@ corMatrix.corARMA <-
   function(object, covariate = getCovariate(object), corr = TRUE, ...)
 {
   corD <- Dim(object,
-	      if (data.class(covariate) == "list") {
+	      if(is.list(covariate)) {
 		if (is.null(names(covariate)))
 		  names(covariate) <- seq_along(covariate)
 		rep(names(covariate), lengths(covariate))
@@ -1315,9 +1304,7 @@ Initialize.corARMA <-
   ## Initializes corARMA objects
   object <- NextMethod()
   covar <- attr(object, "covariate")
-  if (data.class(covar) != "list") {
-    covar <- list(covar)
-  }
+  if(!is.list(covar)) covar <- list(covar)
   if (any(unlist(lapply(covar, duplicated)))) {
     stop("covariate must have unique values within groups for \"corARMA\" objects")
   }
@@ -1382,7 +1369,7 @@ corCompSymm <-
 
 ###*# Methods for local generics
 
-corFactor.compSymm <-
+corFactor.corCompSymm <-
   function(object, ...)
 {
   corD <- Dim(object)
@@ -1402,7 +1389,7 @@ corMatrix.corCompSymm <-
   function(object, covariate = getCovariate(object), corr = TRUE, ...)
 {
   corD <- Dim(object,
-	      if (data.class(covariate) == "list") {
+	      if(is.list(covariate)) {
 		if (is.null(names(covariate)))
 		  names(covariate) <- seq_along(covariate)
 		rep(names(covariate), lengths(covariate))
@@ -1553,7 +1540,7 @@ summary.corCompSymm <-
 #  function(object, covariate = getCovariate(object), corr = TRUE)
 #{
 #   corD <- Dim(object,
-# 	      if (data.class(covariate) == "list") {
+# 	      if(is.list(covariate)) {
 # 		if (is.null(names(covariate)))
 # 		  names(covariate) <- seq_along(covariate)
 # 		rep(names(covariate), lengths(covariate))
@@ -1633,7 +1620,7 @@ summary.corCompSymm <-
 #  }
 #  object <- NextMethod()
 #  covar <- attr(object, "covariate")
-#  if (data.class(covar) == "list") {
+#  if (is.list(covar)) {
 #    attr(object, "covariate") <- covar <-
 #      lapply(covar, function(el) el - 1)
 #  } else {
@@ -1747,7 +1734,7 @@ corMatrix.corSpatial <-
 {
   nRt <- function(vec) round((1 + sqrt(1 + 8 * length(vec))) / 2)
   corD <- Dim(object,
-	      if (data.class(covariate) == "list") {
+	      if(is.list(covariate)) {
 		if (is.null(names(covariate)))
 		  names(covariate) <- seq_along(covariate)
 		rep(names(covariate), vapply(covariate, nRt, numeric(1)))
@@ -1767,7 +1754,7 @@ corMatrix.corSpatial <-
     val <- .C(spatial_factList,
               as.double(as.vector(object)),
               as.integer(attr(object, "nugget")),
-              as.double(unlist(getCovariate(object))),
+              as.double(unlist(covariate)),
               as.integer(unlist(corD)),
               as.double(attr(object, "minD")),
               factor = double(corD[["sumLenSq"]]),

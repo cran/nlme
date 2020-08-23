@@ -1,3 +1,21 @@
+2020-08-21  Brian Ripley
+
+	* R/pdMat.R: use parent.frame not sys.parent for data= args
+	* DESCRIPTION (Version, Date): Prepare to release 3.1-149.
+
+2020-08-20 Peter Dalgaard
+
+	* NAMESPACE, R/corStruct.R, man/corFactor.corStruct.Rd,
+	  man/corMatrix.corStruct.Rd, tests/corFactor.R: Applied patch set
+	  from Sebastian Meyer to fix misnamed
+	  corFactor.compSymm -> corFactor.corCompSymm PR#16110
+
+2020-07-20 Deepayan Sarkar
+
+	* R/lme.R: Applied patch from Johannes Ranke to fix PR#17761
+
+	* DESCRIPTION: update version / date (unreleased)
+
 2020-05-13  Martin Maechler  <maechler@stat.math.ethz.ch>
 
 	* DESCRIPTION (Contact, MailingList): R-help (*not* R-core)

@@ -1,6 +1,6 @@
 ###      Methods for the class of random-effects structures.
 ###
-### Copyright 2006-2019 The R Core team
+### Copyright 2006-2020 The R Core team
 ### Copyright 1997-2003  Jose C. Pinheiro,
 ###                      Douglas M. Bates <bates@stat.wisc.edu>
 #
@@ -40,10 +40,7 @@ reStruct <-
 
   if (inherits(object, "reStruct")) {	# little to do, return object
     if (!missing(REML)) attr(object, "settings")[1] <- as.integer(REML)
-    object[] <- lapply(object,
-		       function(el, data) {
-			 pdMat(el, data = data)
-		       }, data = data)
+    object[] <- lapply(object, pdMat, data=data)
     return(object)
   }
   plen <- NULL
@@ -68,13 +65,13 @@ reStruct <-
     }
     object <- list(object)
   } else {
-    if (data.class(object) != "list") {
+    if(!is.list(object))
       stop("'object' must be a list or a formula")
-    }
     ## checking if nlme-type list - unnamed list of 2-sided formulas
     if (is.null(names(object)) &&
-        all(unlist(lapply(object, function(el) {
-          inherits(el, "formula") && length(el) == 3})))) {
+        all(vapply(object,
+                   function(el) inherits(el, "formula") && length(el) == 3,
+                   NA))) {
       object <- list(object)
     } else {
       ## checking if elements are valid
@@ -94,10 +91,10 @@ reStruct <-
                            }
                            return(el)
                          } else {
-                           if (data.class(el) == "list" &&
-                               all(unlist(lapply(el, function(el1) {
+                           if (is.list(el) &&
+                               all(vapply(el, function(el1) {
                                  inherits(el1, "formula") && length(el1) == 3
-                               })))) { return(el) }
+                               }, NA))) { return(el) }
                            else {
                  stop("elements in 'object' must be formulas or \"pdMat\" objects")
                            }
@@ -130,17 +127,17 @@ reStruct <-
 		   }, pdClass = pdClass, data = data)
 
   object <- rev(object)			# inner to outer groups
-  if (all(unlist(lapply(object, isInitialized)))) {
+  if (all(vapply(object, isInitialized, NA))) {
     plen <- unlist(lapply(object, function(el) length(coef(el))))
   }
-  pC <- unlist(lapply(object, data.class))
+  pC <- unlist(lapply(object, data.class)) ## FIXME! Wrong by design
   pC <- match(pC, c("pdSymm", "pdDiag", "pdIdent", "pdCompSymm",
-                    "pdLogChol"), 0) - 1
+                    "pdLogChol"), 0L) - 1L
 #  if (any(pC == -1)) {                 # multiple nesting
 #    pC <- -1
 #  }
   ## at this point, always require asDelta = TRUE and gradHess = 0
-  attr(object, "settings") <- c(as.integer(REML), 1, 0, pC)
+  attr(object, "settings") <- c(as.integer(REML), 1L, 0L, pC)
   attr(object, "plen") <- plen
   class(object) <- "reStruct"
   object
@@ -256,14 +253,14 @@ Initialize.reStruct <-
   attr(object, "plen") <- plen
 
   ## checking initialization
-  isIni <- unlist(lapply(object, isInitialized))
+  isIni <- vapply(object, isInitialized, NA)
   if (!all(isIni)) {			# needs initialization
     dims <- conLin$dims
     Q <- dims$Q
     qvec <- dims$qvec[1:Q]
     auxInit <-
-      lapply(split(0.375^2 * apply((conLin$Xy[, 1:sum(qvec), drop = FALSE])^2,
-	     2, sum)/ rep(dims$ngrps[1:Q], qvec), rep(1:Q, qvec)),
+      lapply(split(0.375^2 * colSums((conLin$Xy[, 1:sum(qvec), drop = FALSE])^2) /
+                   rep(dims$ngrps[1:Q], qvec), rep(1:Q, qvec)),
 	     function(x) diag(x, length(x)))
   }
   for(i in seqO) {
@@ -285,12 +282,12 @@ logLik.reStruct <- function(object, conLin, ...)
   ## 17-11-2015; Fixed sigma patch; SH Heisterkamp; Quantitative Solutions
   dims <- conLin$dims
   settings <- as.integer(attr(object, "settings"))
-  REML <- settings[1]
+  REML <- settings[[1L]]
   val <- .C(mixed_loglik,
      as.double(conLin$Xy),
      as.integer(unlist(conLin$dims)),
      as.double(pdFactor(object)),
-     settings,
+     settings, ## == c(REML, asDelta {= 1L}, gradHess {= 0L}, pdClass {= pC})
      loglik = double(1),
      lRSS = double(1),
      as.double(conLin$sigma))

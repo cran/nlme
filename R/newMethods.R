@@ -1,6 +1,6 @@
 ###      Methods for generics from newGenerics.q for some standard classes
 ###
-### Copyright 2006-2018  The R Core team
+### Copyright 2006-2020  The R Core team
 ### Copyright 1997-2003  Jose C. Pinheiro,
 ###                      Douglas M. Bates <bates@stat.wisc.edu>
 
@@ -64,7 +64,7 @@ getGroups.data.frame <-
       stop("invalid formula for groups")
 
     form <- grpForm
-  } else if (data.class(form) == "list") {
+  } else if(is.list(form)) {
     if (!all(vapply(form, function(el) inherits(el, "formula"), NA))) {
       stop("'form' must have all components as formulas")
     }

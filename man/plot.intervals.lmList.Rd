@@ -18,7 +18,7 @@
  }
  \item{xlab, ylab}{axis labels, each with a sensible default.}
  \item{strip}{a \code{\link{function}} or \code{FALSE}, see
-   \code{\link[lattice]{dotplot}()} from package \CRANpkg{lattice}.}
+   \code{\link[lattice:xyplot]{dotplot}()} from package \CRANpkg{lattice}.}
  \item{\dots}{optional arguments passed to the \code{dotplot} function
    (see above).}
 }
@@ -31,7 +31,7 @@
   a line segment and the estimated coefficients are marked with a
   \code{"+"}. 
 
-  This is based on function \code{\link[lattice]{dotplot}()} from
+  This is based on function \code{\link[lattice:xyplot]{dotplot}()} from
   package \CRANpkg{lattice}.
 }
 

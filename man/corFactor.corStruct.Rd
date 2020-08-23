@@ -7,7 +7,7 @@
 \usage{
 \method{corFactor}{corStruct}(object, \dots)
 }
-\alias{corFactor.compSymm}
+\alias{corFactor.corCompSymm}
 \alias{corFactor.corAR1}
 \alias{corFactor.corARMA}
 \alias{corFactor.corCAR1}

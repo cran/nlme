@@ -991,9 +991,8 @@ anova.lme <-
     ancall <- sys.call() # yuck.. hack
     ancall$verbose <- ancall$test <- ancall$type <- NULL
     object <- list(object, ...)
-    termsClass <- vapply(object, data.class, "")
     valid.cl <- c("gls", "gnls", "lm", "lmList", "lme","nlme","nlsList","nls")
-    if(!all(match(termsClass, valid.cl, 0))) {
+    if (!all(vapply(object, inherits, TRUE, what = valid.cl))) {
       valid.cl <- paste0('"', valid.cl, '"')
       stop(gettextf("objects must inherit from classes %s, or %s",
                     paste(head(valid.cl, -1), collapse=", "), tail(valid.cl, 1)),

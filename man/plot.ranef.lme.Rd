@@ -22,7 +22,7 @@
    produced.}
  \item{form}{an optional formula specifying the desired type of plot.
    \itemize{
-     \item If given as a one-sided formula, a \code{\link[lattice]{dotplot}()}
+     \item If given as a one-sided formula, a \code{\link[lattice:xyplot]{dotplot}()}
      of the estimated random effects (coefficients) grouped according to
      all combinations of the levels of the factors named in \code{form}
      is returned.
@@ -62,13 +62,13 @@
      margin parameters for the x-axis (default is \code{c(2, 0.5, 0)}).}
  \item{xlab, ylab}{axis labels, each with a sensible default.}
  \item{strip}{a \code{\link{function}} or \code{FALSE}, see
-   \code{\link[lattice]{dotplot}()} from package \CRANpkg{lattice}.}
+   \code{\link[lattice:xyplot]{dotplot}()} from package \CRANpkg{lattice}.}
  \item{\dots}{optional arguments passed to the Trellis \code{dotplot}
    function.}
 }
 \details{
   If \code{form} is missing, or is given as a one-sided formula, a
-  Trellis dot-plot (via \code{\link[lattice]{dotplot}()} from pkg
+  Trellis dot-plot (via \code{\link[lattice:xyplot]{dotplot}()} from pkg
   \CRANpkg{lattice}) of the random effects is generated, with a different
   panel for each random effect (coefficient).  Rows in the dot-plot are
   determined by the \code{form} argument (if not missing) or by the row
