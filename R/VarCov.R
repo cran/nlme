@@ -1,6 +1,6 @@
 ## Contributed by Mary Lindstrom <lindstro@biostat.wisc.edu>
 
-# Copyright 2007-2016 The R Core team
+# Copyright 2007-2020 The R Core team
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -44,22 +44,22 @@ getVarCov.lme <-
             individuals  <-  ugroups[individuals]
         for (individ in individuals)
         {
-            indx <- which(individ == ugroups)
-            if (!length(indx))
+            ind <- groups == individ
+            ni <- sum(ind, na.rm = TRUE)
+            if (ni == 0)
                 stop(gettextf("individual %s was not used in the fit",
                               sQuote(individ)), domain = NA)
-            if (is.na(indx))
-                 stop(gettextf("individual %s was not used in the fit",
-                              sQuote(individ)), domain = NA)
-            ind <- groups == individ
-            if(!is.null(obj$modelStruct$corStruct)) {
-                V <- corMatrix(obj$modelStruct$corStruct)[[as.character(individ)]]
+            if(!is.null(csT <- obj$modelStruct$corStruct)) {
+                V <- corMatrix(csT)[[individ]]
             }
-            else V <- diag(sum(ind))
-            if(!is.null(obj$modelStruct$varStruct))
-                sds <- 1/varWeights(obj$modelStruct$varStruct)[ind]
-            else
-                sds <- rep(1, sum(ind))
+            else V <- diag(ni)
+            if(!is.null(obj$modelStruct$varStruct)) {
+                ## CAVE: stored weights are based on internally reordered data,
+                ##       so cannot be indexed via obj$groups
+                grp <- if(!is.null(csT)) getGroups(csT) else groups[order(groups)]
+                sds <- 1/varWeights(obj$modelStruct$varStruct)[grp == individ]
+            } else
+                sds <- rep(1, ni)
             sds <- obj$sigma * sds
             cond.var <- t(V * sds) * sds
             dimnames(cond.var)  <-  list(1:nrow(cond.var),1:ncol(cond.var))
@@ -82,10 +82,16 @@ getVarCov.lme <-
 getVarCov.gls <-
     function(obj, individual = 1, ...)
 {
-    S <- corMatrix(obj$modelStruct$corStruct)[[individual]]
+    if (is.null(csT <- obj$modelStruct$corStruct))
+        stop("not implemented for uncorrelated errors")
+    if (is.null(grp <- getGroups(csT)))
+        stop("not implemented for correlation structures without a grouping factor")
+    S <- corMatrix(csT)[[individual]]
     if (!is.null( obj$modelStruct$varStruct))
     {
-        ind  <-  obj$groups==individual
+        ind <- if (is.numeric(individual)) {
+                   as.integer(grp) == individual
+               } else         grp  == individual
         vw  <-  1/varWeights(obj$modelStruct$varStruct)[ind]
     }
     else vw  <-  rep(1,nrow(S))

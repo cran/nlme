@@ -1,10 +1,9 @@
-e82e39b6feca2ee2203a7602c1825913 *ChangeLog
-23ce83687e28166fcbaf79e002cd311b *DESCRIPTION
-c843826752e9f806f255d79801354abb *INDEX
+9fe6c13fff236184220bc1fe82c97507 *ChangeLog
+ab7fd156f911f5b40fe1c97c1475a18c *DESCRIPTION
 967bf0c65e5a3f8c94efb6186482ade1 *LICENCE
 b0149b802b5f93f94b34ed9770591f7e *NAMESPACE
 8b9aa0ea177ecc993f14e231e4050278 *R/VarCorr.R
-8c0101fd47a2547f20a599d587bde056 *R/VarCov.R
+b19ccb321536b0528079f2b432e8eb9e *R/VarCov.R
 d2189e191ac8a4ca308b53e0a0cf46f0 *R/corStruct.R
 a353d52ec0ce409dddbb3e50a0d71203 *R/gls.R
 1402efef698293edd2ae18f7952b31c8 *R/gnls.R
@@ -405,11 +404,13 @@ cdced2c0665ee6e3f80188b92267e8c8 *tests/augPredmissing.R
 ab25428328f64b827b7ff267fc84ab5e *tests/coef.R
 17c621b1a1a464be81f962133e61ca9b *tests/coef.Rout.save
 8ff37dbadc319edc1c2c0a737ab2f845 *tests/contrMat.R
+83b8be09e437bbfcf4f5abe73c3d423e *tests/corFactor.R
 5d84af6fb453785dcb1d39674321dbaf *tests/data.frame.R
 f0a206bb1886e769376cd5b0f306e364 *tests/deparse.R
 2038d7eef374b9c7131d202c15e0a742 *tests/deviance.R
 dea84bf6c5e3f953ea2c523ef749bfae *tests/fitted.R
 2d06207872197b9abd28f869ff06f086 *tests/getData.R
+74119a92761f67ec52b62e6c9c448a23 *tests/getVarCov.R
 db2b6e128769fe949671803e3dff6737 *tests/gls.R
 8c6c3eb850ed8c354ba02b1cbbc560bf *tests/gnls-ch8.R
 acbc43cefb4e2ab33d47609e745d6311 *tests/lmList.R

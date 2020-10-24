@@ -1,3 +1,14 @@
+2020-10-02  Brian Ripley
+
+	* DESCRIPTION (Version, Date): Prepare to release 3.1-150.
+
+2020-09-24  Peter Dalgaard
+
+        * R/VarCov.R tests/getVarCov.R: Patch set from Sebastian Meyer
+          to fix group order issues PR#16744
+        * tests/corFactor.R: missed commit from patch for PR#16110
+        * INDEX: removed as it was out of date and autobuilt anyway
+
 2020-08-21  Brian Ripley
 
 	* R/pdMat.R: use parent.frame not sys.parent for data= args
