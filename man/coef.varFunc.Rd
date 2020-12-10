@@ -11,12 +11,14 @@
 \alias{coef.varFunc}
 \alias{coef.varComb}
 \alias{coef.varConstPower}
+\alias{coef.varConstProp}
 \alias{coef.varExp}
 \alias{coef.varFixed}
 \alias{coef.varIdent}
 \alias{coef.varPower}
 \alias{coef<-.varComb}
 \alias{coef<-.varConstPower}
+\alias{coef<-.varConstProp}
 \alias{coef<-.varExp}
 \alias{coef<-.varFixed}
 \alias{coef<-.varIdent}

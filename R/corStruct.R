@@ -504,7 +504,7 @@ print.corSymm <- function(x, ...)
     cat("Correlation structure of class corSymm representing\n")
     print(val, ...)
   }
-  else cat("Unitialized correlation structure of class corSymm\n")
+  else cat("Uninitialized correlation structure of class corSymm\n")
   invisible(x)
 }
 
@@ -519,7 +519,7 @@ print.summary.corSymm <- function(x, ...)
     val[lower.tri(val)] <- coef.corSymm(x, unconstrained = FALSE)
     class(val) <- "correlation"
     print(val, ...)
-  } else cat("Unitialized correlation structure of class corSymm\n")
+  } else cat("Uninitialized correlation structure of class corSymm\n")
   invisible(x)
 }
 
@@ -722,7 +722,7 @@ print.corNatural <- function(x, ...)
     cat("Correlation structure of class corNatural representing\n")
     print(val, ...)
   }
-  else cat("Unitialized correlation structure of class corNatural\n")
+  else cat("Uninitialized correlation structure of class corNatural\n")
   invisible(x)
 }
 
@@ -740,7 +740,7 @@ print.summary.corNatural <-
     val[lower.tri(val)] <- aux
     class(val) <- "correlation"
     print(val, ...)
-  } else cat("Unitialized correlation structure of class corNatural\n")
+  } else cat("Uninitialized correlation structure of class corNatural\n")
   invisible(x)
 }
 
@@ -1484,6 +1484,18 @@ Initialize.corCompSymm <-
   object
 }
 
+print.corCompSymm <- function(x, ...)
+{
+  if (length(as.vector(x)) > 0 && !is.null(attr(x, "inf"))) {
+    NextMethod()
+  } else {
+    cat("Uninitialized correlation structure of class corCompSymm\n")
+    invisible(x)
+  }
+}
+
+print.summary.corCompSymm <- print.corCompSymm
+
 recalc.corCompSymm <-
   function(object, conLin, ...)
 {
@@ -1503,7 +1515,9 @@ recalc.corCompSymm <-
 summary.corCompSymm <-
   function(object, structName = "Compound symmetry", ...)
 {
-  summary.corStruct(object, structName)
+  object <- summary.corStruct(object, structName)
+  class(object) <- c("summary.corCompSymm", class(object))
+  object
 }
 
 ####*# corHF - Huyn-Feldt structure
@@ -1663,7 +1677,7 @@ summary.corCompSymm <-
 #{
 #  if (length(as.vector(x)) > 0 && !is.null(attr(object, "maxCov")))
 #    NextMethod()
-#  else cat("Unitialized correlation structure of class corHF\n")
+#  else cat("Uninitialized correlation structure of class corHF\n")
 #}
 
 #recalc.corHF <-

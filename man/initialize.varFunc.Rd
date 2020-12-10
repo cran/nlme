@@ -10,6 +10,7 @@
 \alias{Initialize.varFunc}
 \alias{Initialize.varComb}
 \alias{Initialize.varConstPower}
+\alias{Initialize.varConstProp}
 \alias{Initialize.varExp}
 \alias{Initialize.varFixed}
 \alias{Initialize.varIdent}

@@ -11,6 +11,7 @@
 \alias{update.varFunc}
 \alias{update.varComb}
 \alias{update.varConstPower}
+\alias{update.varConstProp}
 \alias{update.varExpon}
 \alias{update.varPower}
 \arguments{

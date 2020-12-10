@@ -19,6 +19,7 @@
   \item{varExp}{exponential of a variance covariate.}
   \item{varPower}{power of a variance covariate.}
   \item{varConstPower}{constant plus power of a variance covariate.}
+  \item{varConstProp}{constant plus proportion of a variance covariate.}
   \item{varIdent}{constant variance(s), generally used to allow
     different variances according to the levels of a classification
     factor.} 
@@ -41,6 +42,7 @@
 \seealso{
   \code{\link{varComb}},
   \code{\link{varConstPower}},
+  \code{\link{varConstProp}},
   \code{\link{varExp}},
   \code{\link{varFixed}},
   \code{\link{varIdent}},

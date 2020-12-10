@@ -62,6 +62,9 @@ cs2CompSymm <- corCompSymm(value = 0.3, form = ~ age | Subject)
 cs1CompSymm <- Initialize(cs1CompSymm, data = Orthodont)
 corMatrix(cs1CompSymm)
 
+## Print/Summary methods for the empty case:
+(cCS <- corCompSymm()) # Uninitialized correlation struc..
+summary(cCS)           #    (ditto)
 }
 \keyword{models}
 

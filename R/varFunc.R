@@ -1,8 +1,8 @@
 ###              Classes of variance functions
 ###
+### Copyright 2007-2020  The R Core team
 ### Copyright 1997-2003  Jose C. Pinheiro,
 ###                      Douglas M. Bates <bates@stat.wisc.edu>
-# Copyright 2007-2012 The R Core team
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -118,13 +118,13 @@ Initialize.varFunc <-
 }
 
 ## NB no nobs
-logLik.varFunc <-
-  function(object, data, ...)
+
+logLik.varFunc <- function(object, data, ...)
 {
-    if (is.null(ll <- attr(object, "logLik"))) return(NULL)
-    attr(ll, "df") <- length(object)
-    class(ll) <- "logLik"
-    ll
+    if (is.null(ll <- attr(object, "logLik")))
+        ll
+    else
+        structure(ll, df = length(object), class = "logLik")
 }
 
 print.summary.varFunc <-
@@ -255,7 +255,7 @@ summary.varFixed <-
   object
 }
 
-###*# varFIdent - equal variances per stratum structure
+###*# varIdent - equal variances per stratum structure
 
 ####* Constructor
 
@@ -884,13 +884,15 @@ update.varExp <-
 ###*# varConstPower - Constant plus power of covariance function
 ###*#               variance structure
 
-####* Constructor
-
+####* Constructor for the varConstPower class
 varConstPower <-
-  ## Constructor for the varConstPower class
   function(const = numeric(0), power = numeric(0),
 	   form = ~ fitted(.), fixed = NULL)
 {
+  value <- list(const = const, power = power)
+  form <- asOneSidedFormula(form)
+  if (length(all.vars(getCovariateFormula(form))) == 0)
+    stop("'form' must have a covariate")
   CPconstr <- function(val, form, nam) {
     if ((lv <- length(val)) == 0) return(val)
     if (lv > 2) {
@@ -917,26 +919,17 @@ varConstPower <-
       grpNames <- NULL
     }
     if (!is.null(getGroupsFormula(form))) {
-      if (any(unlist(lapply(val, function(el) {
-	(length(el) > 1) && is.null(names(el))
-      })))) {
+      if (any(vapply(val, function(el) length(el) > 1 && is.null(names(el)), NA)))
         stop(gettextf("%s must have group names in 'varConstPower'", nam),
              domain = NA)
-      }
       attr(val, "groupNames") <- grpNames
     }
-    if (length(val$const) > 0) {
-      if (any(val$const <= 0)) {
-	stop("constant in \"varConstPower\" structure must be > 0")
-      }
-      val$const <- log(val$const)
+    if (length(const <- val$const) > 0) {
+      if (any(const <= 0))
+	stop("constant in \"varConstProp\" structure must be > 0")
+      const <- log(const)
     }
-    list(const = val$const, power = val$power)
-  }
-  value <- list(const = const, power = power)
-  form <- asOneSidedFormula(form)
-  if (length(all.vars(getCovariateFormula(form))) == 0) {
-    stop("'form' must have a covariate")
+    list(const = const, power = val$power)
   }
   ## initial value may be given as a vector or list. If groups are
   ## present and different initial values are given for each group, then
@@ -953,8 +946,7 @@ varConstPower <-
   }
   if (is.null(getGroupsFormula(form))) {   # no groups
     whichFix <- array(FALSE, c(2,1), list(c("const", "power"), NULL))
-    whichFix[,1] <- unlist(lapply(value,
-                                  function(el) !is.null(attr(el, "fixed"))))
+    whichFix[,1] <- vapply(value, function(el) !is.null(attr(el, "fixed")), NA)
     attr(value, "whichFix") <- whichFix
   }
   class(value) <- c("varConstPower", "varFunc")
@@ -985,17 +977,14 @@ coef.varConstPower <-
         val[1, ] <- exp(val[1, ])
     }
     if (!allCoef) {
-        val <- list(const = if (!all(wPar[1, ])) val[1, !wPar[1,
-                    ]] else NULL, power = if (!all(wPar[2, ])) val[2,
-                                  !wPar[2, ]] else NULL)
-        val <- lapply(val, function(el) if(length(el) == 1) as.vector(el)
-        else el)
-        val <- unlist(val[!unlist(lapply(val, is.null))])
+        val <- list(const = if (!all(wPar[1, ])) val[1, !wPar[1, ]], # else NULL
+                    power = if (!all(wPar[2, ])) val[2, !wPar[2, ]])
+        val <- lapply(val, function(el) if(length(el) == 1) as.vector(el) else el)
+        unlist(val[!vapply(val, is.null, NA)])
     }
     else {
-        val <- val[, 1:ncol(val)]
+        val[, 1:ncol(val)]
     }
-    val
 }
 
 "coef<-.varConstPower" <-
@@ -1156,16 +1145,280 @@ update.varConstPower <-
   val
 }
 
-###*# varFComb - combination of variance function structures
 
-####* Constructor
+## NB "varConstProp" was derived from "varConstPower" with minimal code changes.
 
+###*# varConstProp - constant plus proportional variance function structure
+
+####* Constructor  for the "varConstProp" class
+varConstProp <-
+  function(const = numeric(0), prop = numeric(0),
+	   form = ~ fitted(.), fixed = NULL)
+{
+  value <- list(const = const, prop = prop)
+  form <- asOneSidedFormula(form)
+  if (length(all.vars(getCovariateFormula(form))) == 0)
+    stop("'form' must have a covariate")
+  CPconstr <- function(val, form, nam) {
+    if ((lv <- length(val)) == 0) return(val)
+    if (lv > 2) {
+      stop(gettextf("%s can have at most two components", nam), domain = NA)
+    }
+    if (is.null(nv <- names(val))) {
+      names(val) <- c("const", "prop")[1:lv]
+    } else {
+      if (any(is.na(match(nv, c("const", "prop"))))) {
+        stop(gettextf("%s can only have names \"const\" and \"prop\"", nam),
+             domain = NA)
+      }
+    }
+    nv <- names(val)
+    if (data.class(val) == "list") {
+      val <- lapply(val, unlist)
+      grpNames <- unique(unlist(lapply(val, names)))
+    } else {				# must be a vector or a scalar
+      if (!is.numeric(val)) {
+        stop(gettextf("%s can only be a list or numeric", nam), domain = NA)
+     }
+      val <- as.list(val)
+      names(val) <- nv
+      grpNames <- NULL
+    }
+    if (!is.null(getGroupsFormula(form))) {
+      if (any(vapply(val, function(el) length(el) > 1 && is.null(names(el)), NA)))
+        stop(gettextf("%s must have group names in 'varConstProp'", nam),
+             domain = NA)
+      attr(val, "groupNames") <- grpNames
+    }
+    if (length(const <- val$const) > 0) {
+      if (any(const <= 0))
+	stop("constant in \"varConstProp\" structure must be > 0")
+      const <- log(const)
+    }
+    list(const = const, prop = val$prop)
+  }
+  ## initial value may be given as a vector or list. If groups are
+  ## present and different initial values are given for each group, then
+  ## it must be a list with components "const" and/or "prop"
+  value <- CPconstr(value, form, "Value")
+  fixed <- CPconstr(fixed, form, "Fixed")
+  attr(value, "formula") <- form
+  attr(value, "groupNames") <-
+    unique(c(attr(value, "groupNames"),
+	   attr(attr(value[["const"]], "fixed"), "groupNames"),
+	   attr(attr(value[["prop"]],  "fixed"), "groupNames")))
+  for (i in names(fixed)) {
+    attr(value[[i]], "fixed") <- c(fixed[[i]])
+  }
+  if (is.null(getGroupsFormula(form))) {   # no groups
+    whichFix <- array(FALSE, c(2,1), list(c("const", "prop"), NULL))
+    whichFix[,1] <- vapply(value, function(el) !is.null(attr(el, "fixed")), NA)
+    attr(value, "whichFix") <- whichFix
+  }
+  class(value) <- c("varConstProp", "varFunc")
+  value
+}
+
+###*# Methods for standard generics
+
+coef.varConstProp <-
+    function (object, unconstrained = TRUE, allCoef = FALSE, ...)
+{
+    wPar <- attr(object, "whichFix")
+    nonInit <- !lengths(object)
+    nonInit <- is.null(wPar) || (any(nonInit) && !all(c(wPar[nonInit, ])))
+    if (nonInit || (!allCoef && (length(unlist(object)) == 0))) {
+        return(numeric(0))
+    }
+    val <- array(0, dim(wPar), dimnames(wPar))
+    for (i in names(object)) {
+        if (any(wPar[i, ])) {
+            val[i, wPar[i, ]] <- attr(object[[i]], "fixed")
+        }
+        if (any(!wPar[i, ])) {
+            val[i, !wPar[i, ]] <- c(object[[i]])
+        }
+    }
+    if (!unconstrained) {
+        val[1, ] <- exp(val[1, ])
+    }
+    if (!allCoef) {
+        val <- list(const = if (!all(wPar[1, ])) val[1, !wPar[1, ]], # else NULL
+                    prop  = if (!all(wPar[2, ])) val[2, !wPar[2, ]])
+        val <- lapply(val, function(el) if(length(el) == 1L) as.vector(el) else el)
+        unlist(val[!vapply(val, is.null, NA)])
+    }
+    else {
+        val[, 1:ncol(val)]
+    }
+}
+
+"coef<-.varConstProp" <-
+  function(object, ..., value)
+{
+  if (length(unlist(object)) > 0) {	# varying parameters
+    value <- as.numeric(value)
+    if (length(value) != length(unlist(object))) {
+      stop("cannot change the length of the parameter after initialization")
+    }
+    start <- 0
+    for(i in names(object)) {
+      if (aux <- length(object[[i]])) {
+	object[[i]][] <- value[start + (1:aux)]
+	start <- start + aux
+      }
+    }
+    natPar <- as.matrix(coef(object, FALSE, allCoef = TRUE))
+    if (!is.null(grps <- getGroups(object))) {
+      natPar <- natPar[, grps]
+    }
+    attr(object, "logLik") <-
+      sum(log(attr(object, "weights") <-
+	      1/sqrt(natPar[1,]^2 + natPar[2, ]^2 * getCovariate(object)^2)))
+  } else {
+    stop("cannot change coefficients before initialization or when all parameters are fixed")
+  }
+  object
+}
+
+Initialize.varConstProp <-
+  function(object, data, ...)
+{
+  form <- formula(object)
+  if (all(!is.na(match(all.vars(getCovariateFormula(form)), names(data))))) {
+    ## can evaluate covariate on data
+    attr(object, "needUpdate") <- FALSE
+    attr(object, "covariate") <- getCovariate(data, form)
+  } else {
+    attr(object, "needUpdate") <- TRUE
+  }
+  dfltCoef <- c(const = 0.1, prop = 0.1)
+  if (!is.null(grpForm <- getGroupsFormula(form))) {
+    strat <- as.character(getGroups(data, form,
+                            level = length(splitFormula(grpForm, sep = "*")),
+                            sep = "*"))
+    uStrat <- unique(strat)
+    whichFix <- array(FALSE, c(2, length(uStrat)),
+		      list(c("const", "prop"), uStrat))
+    if (length(uStrat) > 1) {		# multi-groups
+      attr(object, "groups") <- strat
+      for(i in names(object)) {
+	if (!is.null(attr(object[[i]], "fixed"))) {
+	  fixNames <- names(attr(object[[i]], "fixed"))
+	  if (is.null(fixNames)) {
+	    stop("fixed parameters must have group names")
+	  }
+	  if (any(is.na(match(fixNames, uStrat)))) {
+	    stop("mismatch between group names and fixed values names")
+	  }
+	} else {
+	  fixNames <- NULL
+	}
+	uStratVar <- uStrat[is.na(match(uStrat, fixNames))]
+	nStratVar <- length(uStratVar)
+	whichFix[i,] <- !is.na(match(uStrat, fixNames))
+	if (nStratVar > 0) {
+	  if (length(object[[i]]) <= 1) {
+	    ## repeat for all groups
+	    names(object[[i]]) <- NULL
+	    oldAttr <- attributes(object[[i]])
+	    if (length(object[[i]]) > 0) {
+	      object[[i]] <- rep(as.vector(object[[i]]), nStratVar)
+	    } else {
+	      object[[i]] <- rep(dfltCoef[i], nStratVar)
+	    }
+	    attributes(object[[i]]) <- oldAttr
+	    names(object[[i]]) <- uStratVar
+	  } else {
+	    if (length(as.vector(object[[i]])) != nStratVar) {
+                stop(gettext("initial value should be of length %d",
+                             nStratVar), domain = NA)
+	    }
+	    stN <- names(object[[i]]) # must have names
+	    if ((length(stN) != length(uStratVar)) ||
+		any(sort(stN) != sort(uStratVar))) {
+	      stop("nonexistent group names for initial values")
+	    }
+	  }
+	}
+      }
+      if (all(whichFix) &&
+	  all(attr(object[["const"]], "fixed") == 0) &&
+	  all(attr(object[["prop"]], "fixed") == 0)) {
+	## equal variances structure
+	return(Initialize(varIdent(), data))
+      }
+      for(i in names(object)) {
+	if (all(whichFix[i,])) {
+	  oldAttr <- attributes(object[[i]])
+	  object[[i]] <- numeric(0)
+	  attributes(object[[i]]) <- oldAttr
+	}
+      }
+      attr(object, "whichFix") <- whichFix
+      attr(object, "groupNames") <- uStrat
+      return(NextMethod())
+    }
+  }
+  ## single stratum
+  whichFix <- attr(object, "whichFix")
+  if (all(whichFix) &&
+      !any(unlist(lapply(object, function(el) attr(el, "fixed"))))) {
+    ## equal variances structure
+    return(Initialize(varIdent(), data))
+  }
+  for(i in names(object)) {
+    if (all(whichFix[i,])) {
+      oldAttr <- attributes(object[[i]])
+      object[[i]] <- numeric(0)
+      attributes(object[[i]]) <- oldAttr
+    } else {
+      if (length(object[[i]]) == 0) {
+	object[[i]] <- dfltCoef[i]
+      }
+    }
+  }
+  aux <- 2 - sum(whichFix[,1])
+  if (length(as.vector(unlist(object))) != aux) {
+      stop(gettext("initial value should be of length %d", aux), domain = NA)
+  }
+  NextMethod()
+}
+
+summary.varConstProp <-
+  function(object, structName = "Constant plus proportion of variance covariate",
+           ...)
+{
+  if (!is.null(getGroupsFormula(object))) {
+    structName <- paste(structName, " different strata", sep = ",")
+  }
+  summary.varFunc(object, structName)
+}
+
+update.varConstProp <-
+  function(object, data, ...)
+{
+  val <- NextMethod()
+  if (length(unlist(val)) == 0) {	# chance to update weights
+    aux <- as.matrix(coef(val, FALSE, allCoef = TRUE))
+    if (!is.null(grps <- getGroups(val))) {
+      aux <- aux[, grps]
+    }
+    attr(val, "logLik") <-
+      sum(log(attr(val, "weights") <-
+	      1/sqrt((aux[1, ]^2 + aux[2, ]^2 * getCovariate(val)^2))))
+  }
+  val
+}
+
+###*# varComb - combination of variance function structures
+
+####* Constructor for the  "varComb" class
 varComb <-
-  ## constructor for the varComb class
   function(...)
 {
   val <- list(...)
-  if (!all(unlist(lapply(val, inherits, "varFunc")))) {
+  if (!all(vapply(val, inherits, NA, "varFunc"))) {
     stop("all arguments to 'varComb' must be of class \"varFunc\".")
   }
   if (is.null(names(val))) {
@@ -1214,27 +1467,23 @@ coef.varComb <-
 formula.varComb <-
   function(x, ...) lapply(x, formula)
 
-Initialize.varComb <-
-  function(object, data, ...)
+Initialize.varComb <- function(object, data, ...)
 {
-  val <- lapply(object, Initialize, data)
-  attr(val, "plen") <- unlist(lapply(val, function(el) length(coef(el))))
-  class(val) <- c("varComb", "varFunc")
-  val
+    val <- lapply(object, Initialize, data)
+    structure(val,
+              plen = vapply(val, function(el) length(coef(el)), 1L),
+              class = c("varComb", "varFunc"))
 }
 
-logLik.varComb <-
-  function(object, ...)
+logLik.varComb <- function(object, ...)
 {
     lls <- lapply(object, logLik)
-    val <- sum(unlist(lls))
-    attr(val, "df") <- sum(unlist(lapply(lls, attr, "df")))
-    class(val) <- "logLik"
-    val
+    structure(sum(unlist(lls)),
+              df = sum(vapply(lls, attr, 1, "df")),
+              class = "logLik")
 }
 
-needUpdate.varComb <-
-  function(object) any(unlist(lapply(object, needUpdate)))
+needUpdate.varComb <- function(object) any(vapply(object, needUpdate, NA))
 
 print.varComb <-
   function(x, ...)
