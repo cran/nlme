@@ -1,3 +1,11 @@
+2020-02-03  Brian Ripley
+
+	* DESCRIPTION (Version, Date): Prepare to release 3.1-152.
+
+2020-12-09  Martin Maechler  <maechler@stat.math.ethz.ch>
+
+	* nlme/man/Remifentanil.Rd: change 2 URLs to 'moved to' locations.
+
 2020-12-07  Martin Maechler  <maechler@stat.math.ethz.ch>
 
 	* R/corStruct.R (print.corCompSymm, print.summary.corCompSymm): new,

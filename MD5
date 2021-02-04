@@ -1,5 +1,5 @@
-8c3dfb39d06c34b19f3eaa29f03da39b *ChangeLog
-15535eece5a5f8ecbec903a950adcc21 *DESCRIPTION
+8c185969dccce98393e79c79392a7536 *ChangeLog
+71ed395ab8c0304c044bc72de7dd7664 *DESCRIPTION
 967bf0c65e5a3f8c94efb6186482ade1 *LICENCE
 5dbfd4ca66a403bb28805119321d91fe *NAMESPACE
 8b9aa0ea177ecc993f14e231e4050278 *R/VarCorr.R
@@ -23,7 +23,7 @@ da7217c812892c8c84ead39ce784cf21 *R/varFunc.R
 5b774147c3cb5e0549642ac34e0834bb *R/zzMethods.R
 1b861e2fac2ad8b7cfde1dafa9722618 *README
 4e6044fc68ab0aaff2750b36b9a37f73 *TODO
-0bd92dd94d33eb04c368580168e1b6a2 *build/partial.rdb
+efb4169fae62b6916bc16d65ff41d0f8 *build/partial.rdb
 8f2e4f663d2e4beb1143c28187c6653d *data/Alfalfa.rda
 28e82e652a218134a9b880143f611516 *data/Assay.rda
 041ca0f6b3ae898f7b0f7a62f16be9fd *data/BodyWeight.rda
@@ -145,7 +145,7 @@ e28be754a322c6c1fc993a93ad921e99 *man/Phenobarb.Rd
 989b9a8b115d3f44e60c0e0d7bce44d3 *man/Rail.Rd
 24e778152c340144b44e5f07cae17ba1 *man/RatPupWeight.Rd
 1ad997fd585e41017b58c925d417880d *man/Relaxin.Rd
-3590b07df9e38bb3c145d208011decab *man/Remifentanil.Rd
+b10fdf16ef5fac3b713b79a5aa04ecd7 *man/Remifentanil.Rd
 bf2c7d731d4422ee67bf86e134ce8ab2 *man/Soybean.Rd
 3dc4e57e32facf457b1608fe6a615d7c *man/Spruce.Rd
 9daa6d475775413dd4ea64c99cfe17d1 *man/Tetracycline1.Rd
