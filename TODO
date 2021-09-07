@@ -20,9 +20,9 @@
     MM thinks the default should even *change* not to print the correlation
 
 ** TODO Bug 16703 -- corFactor/corMatrix use O(n^2) storage - sparseMatrix would help
-*** https://bugs.r-project.org/bugzilla/show_bug.cgi?id=16703
+*** https://bugs.r-project.org/show_bug.cgi?id=16703
 ** TODO Bug 16806 - nlme getVarCov() fails for corSpatial fits for individuals with a single observation only
-*** https://bugs.r-project.org/bugzilla/show_bug.cgi?id=16806
+*** https://bugs.r-project.org/show_bug.cgi?id=16806
 
 ** TODO methods extractAIC.lme & extractAIC.gls should be here rather than in MASS,
  because extractAIC() and step() are in stats

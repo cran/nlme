@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: nlme 3.1-146\n"
+"Project-Id-Version: nlme 3.1-152\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-13 09:56+0100\n"
+"POT-Creation-Date: 2021-02-12 09:19+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,41 +33,41 @@ msgstr ""
 msgid "First observation on an individual must have a dose"
 msgstr ""
 
-#: nlmefit.c:420
+#: nlmefit.c:424
 #, c-format
 msgid "Singularity in backsolve at level %ld, block %ld"
 msgstr ""
 
-#: nlmefit.c:460
+#: nlmefit.c:464
 #, c-format
 msgid ""
 "Too many parameters for finite-difference Hessian; npar = %d, nTot = %g."
 msgstr ""
 
-#: nlmefit.c:571 nlmefit.c:752
+#: nlmefit.c:575 nlmefit.c:756
 msgid "Overfitted model!"
 msgstr ""
 
-#: nlmefit.c:597
+#: nlmefit.c:601
 msgid "analytic gradient is not available with matrix logarithm"
 msgstr ""
 
-#: nlmefit.c:620
+#: nlmefit.c:624
 msgid "analytic gradient is not available with compound symmetry"
 msgstr ""
 
-#: nlmefit.c:913
+#: nlmefit.c:917
 #, c-format
 msgid "Unable to form eigenvalue-eigenvector decomposition [RS(.) ierr = %d]"
 msgstr ""
 
-#: nlmefit.c:945
+#: nlmefit.c:949
 #, c-format
 msgid ""
 "Unable to form Cholesky decomposition: the leading minor of order %d is not "
 "pos.def."
 msgstr ""
 
-#: nlmefit.c:977
+#: nlmefit.c:981
 msgid "Haven't written the compound symmetry case for this yet"
 msgstr ""

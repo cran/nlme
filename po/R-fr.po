@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nlme 3.1-65\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
-"POT-Creation-Date: 2019-04-02 18:40\n"
+"POT-Creation-Date: 2021-02-12 09:19\n"
 "PO-Revision-Date: 2014-03-30 08:37+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -26,6 +26,13 @@ msgstr "Pas implémenté pour des niveaux multiples d'imbrication"
 
 msgid "individual %s was not used in the fit"
 msgstr "l'individu %s n'a pas été utilisé dans l'ajustement"
+
+#, fuzzy
+msgid "not implemented for uncorrelated errors"
+msgstr "Pas implémenté pour des objets \"nlme\""
+
+msgid "not implemented for correlation structures without a grouping factor"
+msgstr ""
 
 msgid "do not know how to calculate correlation matrix of %s object"
 msgstr "Incapable de calculer la matrice de corrélation de l'objet %s"
@@ -1224,7 +1231,8 @@ msgstr "%s ne peut qu'être une liste, ou un nombre"
 msgid "%s must have group names in 'varConstPower'"
 msgstr "%s doit avoir des noms de groupes dans 'varConstPower'"
 
-msgid "constant in \"varConstPower\" structure must be > 0"
+#, fuzzy
+msgid "constant in \"varConstProp\" structure must be > 0"
 msgstr "la constante dans la structure \"varConstPower\" doit être > O"
 
 msgid "initial value should be of length %d"
@@ -1232,6 +1240,14 @@ msgstr "la valeur initiale doit être de longueur %d"
 
 msgid "nonexistent group names for initial values"
 msgstr "noms de groupes inexistants pour les valeurs initiales"
+
+#, fuzzy
+msgid "%s can only have names \"const\" and \"prop\""
+msgstr "%s ne peut avoir que les noms \"const\" et \"power\""
+
+#, fuzzy
+msgid "%s must have group names in 'varConstProp'"
+msgstr "%s doit avoir des noms de groupes dans 'varConstPower'"
 
 msgid "all arguments to 'varComb' must be of class \"varFunc\"."
 msgstr "tous les arguments de 'varComb' doivent être de classe \"varFunc\"."

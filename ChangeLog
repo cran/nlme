@@ -1,6 +1,30 @@
+2021-09-07  Martin Maechler  <maechler@stat.math.ethz.ch>
+
+	* R/groupedData.R ("[.groupedData"): change the default of `drop` to
+	to FALSE for the case of `x[j]`, fixing PR#18177.
+
+	* R/lme.R (print.summary.lme): change partial match to
+	`x$coefficients`, PR#18184.
+
+2021-08-05  Martin Maechler  <maechler@stat.math.ethz.ch>
+
+	* R/zzMethods.R (.onLoad), R/VarCorr.R: remove code used only
+	if(getRversion() < "3.3"); from Sebastian Meyer.
+
+2021-03-09  Martin Maechler  <maechler@stat.math.ethz.ch>
+
+	* R/varFunc.R (print.varFunc): use full 'unconstrained' argument
+	name, fixing PR#17767, thanks to Sebastian Meyer.
+
+	* DESCRIPTION (Version, Date): 3.1-153 (*not* yet for release)
+
+2021-02-12 Brian Ripley
+
+	* po: update fr translations.
+
 2020-02-03  Brian Ripley
 
-	* DESCRIPTION (Version, Date): Prepare to release 3.1-152.
+	* DESCRIPTION (Version, Date): 3.1-152 for 4.0.4.
 
 2020-12-09  Martin Maechler  <maechler@stat.math.ethz.ch>
 

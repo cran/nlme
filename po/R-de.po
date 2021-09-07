@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.0.0 / nlme-3.1-145\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
-"POT-Creation-Date: 2019-04-02 18:40\n"
+"POT-Creation-Date: 2021-02-12 09:19\n"
 "PO-Revision-Date: 2020-04-01 15:18+0200\n"
 "Last-Translator: Detlef Steuer <steuer@hsu-hh.de>\n"
 "Language-Team: German <debian-l10n-german@lists.debian.org>\n"
@@ -23,6 +23,13 @@ msgstr "nicht für mehrstufige Schachtelung implementiert"
 
 msgid "individual %s was not used in the fit"
 msgstr "Individuum %s wurde in der Anpassung nicht benutzt."
+
+#, fuzzy
+msgid "not implemented for uncorrelated errors"
+msgstr "nicht für \"nlme\"-Objekte implementiert"
+
+msgid "not implemented for correlation structures without a grouping factor"
+msgstr ""
 
 # R/corStruct.R
 msgid "do not know how to calculate correlation matrix of %s object"
@@ -1183,7 +1190,8 @@ msgstr "%s kann nur eine Liste oder numerisch sein."
 msgid "%s must have group names in 'varConstPower'"
 msgstr "%s muss Gruppennamen in 'varConstPower' haben."
 
-msgid "constant in \"varConstPower\" structure must be > 0"
+#, fuzzy
+msgid "constant in \"varConstProp\" structure must be > 0"
 msgstr "Konstante in \"varConstPower\"-Struktur muss > 0 sein."
 
 msgid "initial value should be of length %d"
@@ -1191,6 +1199,14 @@ msgstr "Startwert sollte Länge %d haben."
 
 msgid "nonexistent group names for initial values"
 msgstr "Nicht existierende Gruppenamen für Startwerte"
+
+#, fuzzy
+msgid "%s can only have names \"const\" and \"prop\""
+msgstr "%s kann nur die Namen \"const\" und \"power\" haben."
+
+#, fuzzy
+msgid "%s must have group names in 'varConstProp'"
+msgstr "%s muss Gruppennamen in 'varConstPower' haben."
 
 msgid "all arguments to 'varComb' must be of class \"varFunc\"."
 msgstr "Alle Argumente für 'varComb' müssen von der Klasse \"varFunc\" sein."

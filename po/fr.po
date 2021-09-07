@@ -7,19 +7,20 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nlme 3.1-65\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-13 09:56+0100\n"
-"PO-Revision-Date: 2005-12-08 01:00+0100\n"
+"POT-Creation-Date: 2021-02-12 09:19+0000\n"
+"PO-Revision-Date: 2021-02-06 16:27+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 2.4.2\n"
 
 #: corStruct.c:423
 msgid "All parameters must be less than 1 in absolute value"
-msgstr "Tous les paramètres doivent être inférieurs à 1 en valeur absolue"
+msgstr "Tous les paramÃ¨tres doivent Ãªtre infÃ©rieurs Ã  1 en valeur absolue"
 
 #: corStruct.c:533
 msgid "Coefficient matrix not invertible"
@@ -27,50 +28,54 @@ msgstr "Matrice de coefficient non inversible"
 
 #: corStruct.c:870 corStruct.c:925 corStruct.c:985 corStruct.c:1027
 msgid "Unknown spatial correlation class"
-msgstr "Classes de corrélation spatiale inconnues"
+msgstr "Classes de corrÃ©lation spatiale inconnues"
 
 #: nlme.c:464
 msgid "First observation on an individual must have a dose"
-msgstr "La première observation sur un individu doit avoir une dose"
+msgstr "La premiÃ¨re observation sur un individu doit avoir une dose"
 
-#: nlmefit.c:420
+#: nlmefit.c:424
 #, c-format
 msgid "Singularity in backsolve at level %ld, block %ld"
-msgstr "Singularité rencontrée en résolution inverse au niveau %ld, bloc %ld"
+msgstr "SingularitÃ© rencontrÃ©e en rÃ©solution inverse au niveau %ld, bloc %ld"
 
-#: nlmefit.c:460
+#: nlmefit.c:464
 #, c-format
 msgid ""
 "Too many parameters for finite-difference Hessian; npar = %d, nTot = %g."
 msgstr ""
+"Trop de paramÃ¨tres pour un Hessien de diffÃ©rences finies : par = %d, not = "
+"%g."
 
-#: nlmefit.c:571 nlmefit.c:752
+#: nlmefit.c:575 nlmefit.c:756
 msgid "Overfitted model!"
-msgstr ""
+msgstr "ModÃ¨le surajustÃ© !"
 
-#: nlmefit.c:597
+#: nlmefit.c:601
 msgid "analytic gradient is not available with matrix logarithm"
 msgstr ""
 "un gradient analytique n'est pas disponible avec une matrice logarithmique"
 
-#: nlmefit.c:620
+#: nlmefit.c:624
 msgid "analytic gradient is not available with compound symmetry"
-msgstr "un gradient analytique n'est pas disponible avec une symétrie composée"
+msgstr "un gradient analytique n'est pas disponible avec une symÃ©trie composÃ©e"
 
-#: nlmefit.c:913
+#: nlmefit.c:917
 #, c-format
 msgid "Unable to form eigenvalue-eigenvector decomposition [RS(.) ierr = %d]"
 msgstr ""
-"Incapable de former la décomposition valeurs propres - vecteurs propres "
+"Incapable de former la dÃ©composition valeurs propres - vecteurs propres "
 "[RS(.) ierr = %d]"
 
-#: nlmefit.c:945
-#, fuzzy, c-format
+#: nlmefit.c:949
+#, c-format
 msgid ""
 "Unable to form Cholesky decomposition: the leading minor of order %d is not "
 "pos.def."
-msgstr "Incapable de former la décomposition de Cholesky"
+msgstr ""
+"Incapable de former la dÃ©composition de Cholesky : le premier mineur dâ€™ordre "
+"%d nâ€™est pas pos.def."
 
-#: nlmefit.c:977
+#: nlmefit.c:981
 msgid "Haven't written the compound symmetry case for this yet"
-msgstr "Les cas de symétrie composée n'ont pas encore été écrits"
+msgstr "Les cas de symÃ©trie composÃ©e n'ont pas encore Ã©tÃ© Ã©crits"

@@ -1,6 +1,6 @@
 ###           groupedData - data frame with a grouping structure
 ###
-### Copyright 2006-2020  The R Core team
+### Copyright 2006-2021  The R Core team
 ### Copyright 1997-2003  Jose C. Pinheiro,
 ###                      Douglas M. Bates <bates@stat.wisc.edu>
 #
@@ -584,7 +584,7 @@ update.groupedData <-
 }
 
 "[.groupedData" <-
-  function(x, i, j, drop = if (missing(i)) TRUE else length(cols) == 1)
+  function(x, i, j, drop = missing(i) || (nargs() >= 3L && length(cols) == 1))
 {
   oAttr <- attributes(x)
   x <- as.data.frame(x)
@@ -593,16 +593,16 @@ update.groupedData <-
   allV <- all.vars(asOneFormula(oAttr[["formula"]], oAttr[["inner"]],
                                 oAttr[["outer"]]))
   ## check if any columns used in formulas were deleted
-  if( any( is.na( match( allV, names(data) ) ) ) ) { # return data frame
+  if(anyNA(match(allV, names(data)))) { # return data frame
     cols <- ncol(data)
-    return( data[, seq(length=ncol(data)), drop = drop] )
+    return(data[, seq_len(cols), drop = drop])
   }
   args <- as.list(oAttr)
   args <- args[ is.na( match( names( args ), c( "names", "row.names" ) ) ) ]
   if (nrow(x) == nrow(data)) {		# only columns deleted
     attributes(data) <- c( attributes( data ), args )
     return( data )
-  }
+  } ## otherwise, return  "groupedData" :
   ## pruning the levels of factors
   whichFact <- unlist(lapply(data, is.factor))
   data[whichFact] <- lapply(data[whichFact], function(x) x[drop = TRUE])

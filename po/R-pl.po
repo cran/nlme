@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nlme 3.1-115\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
-"POT-Creation-Date: 2019-04-02 18:40\n"
+"POT-Creation-Date: 2021-02-12 09:19\n"
 "PO-Revision-Date: 2014-03-25 17:00+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -34,6 +34,16 @@ msgstr ""
 # stop(gettextf("individual %s was not used in the fit", sQuote(individ)), domain = "R-nlme")
 msgid "individual %s was not used in the fit"
 msgstr "jednostka %s nie została użyta w dopasowaniu"
+
+#, fuzzy
+msgid "not implemented for uncorrelated errors"
+msgstr ""
+"funkcja 'getVarCov.lme()'  nie jest zaimplementowana dla obiektów klasy "
+"\"nlme\""
+
+#, fuzzy
+msgid "not implemented for correlation structures without a grouping factor"
+msgstr "Niezainicjalizowana struktura korelacji klasy %s"
 
 # nlme/R/corStruct.R: 60
 # stop(gettextf("do not know how to calculate correlation matrix of %s object", dQuote(class(object)[1])), domain = "R-nlme")
@@ -1770,7 +1780,8 @@ msgstr "%s musi posiadać nazwy grup w 'varConstPower'"
 
 # nlme/R/varFunc.R: 920
 # stop("constant in \"varConstPower\" structure must be > 0")
-msgid "constant in \"varConstPower\" structure must be > 0"
+#, fuzzy
+msgid "constant in \"varConstProp\" structure must be > 0"
 msgstr "stała w strukturze \"varConstPower\" musi być > 0"
 
 # nlme/R/varFunc.R: 1070
@@ -1784,6 +1795,18 @@ msgstr "początkowa wartość powinna być długości %d"
 # stop("nonexistent group names for initial values")
 msgid "nonexistent group names for initial values"
 msgstr "nieistniejące nazwy grup dla początkowych wartości"
+
+# nlme/R/varFunc.R: 895
+# stop(gettextf("%s can only have names \"const\" and \"power\"", nam), domain = "R-nlme")
+#, fuzzy
+msgid "%s can only have names \"const\" and \"prop\""
+msgstr "%s może posiadać jedynie nazwy \"const\" oraz \"power\""
+
+# nlme/R/varFunc.R: 914
+# stop(gettextf("%s must have group names in 'varConstPower'", nam), domain = "R-nlme")
+#, fuzzy
+msgid "%s must have group names in 'varConstProp'"
+msgstr "%s musi posiadać nazwy grup w 'varConstPower'"
 
 # nlme/R/varFunc.R: 1159
 # stop("all arguments to 'varComb' must be of class \"varFunc\".")
@@ -3266,8 +3289,4 @@ msgstr[2] ""
 
 #, fuzzy
 #~ msgid "Unitialized correlation structure of class corSymm"
-#~ msgstr "Niezainicjalizowana struktura korelacji klasy %s"
-
-#, fuzzy
-#~ msgid "Unitialized correlation structure of class corNatural"
 #~ msgstr "Niezainicjalizowana struktura korelacji klasy %s"

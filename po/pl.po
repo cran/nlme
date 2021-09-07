@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nlme 3.1-115\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-13 09:56+0100\n"
+"POT-Creation-Date: 2021-02-12 09:19+0000\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -49,36 +49,36 @@ msgstr "Pierwsza obserwacja jednostki musi mieć zamknięcie"
 # nlme/src/nlmefit.c: 401
 # error(_("Singularity in backsolve at level %ld, block %ld"),
 # 		      (long int) (i - (dd->Q)), j + 1L)
-#: nlmefit.c:420
+#: nlmefit.c:424
 #, c-format
 msgid "Singularity in backsolve at level %ld, block %ld"
 msgstr "Osobliwość w 'backsolve' na poziomie %ld, blok %ld"
 
-#: nlmefit.c:460
+#: nlmefit.c:464
 #, c-format
 msgid ""
 "Too many parameters for finite-difference Hessian; npar = %d, nTot = %g."
 msgstr ""
 
-#: nlmefit.c:571 nlmefit.c:752
+#: nlmefit.c:575 nlmefit.c:756
 msgid "Overfitted model!"
 msgstr ""
 
 # nlme/src/nlmefit.c: 558
 # error(_("analytic gradient is not available with matrix logarithm"))
-#: nlmefit.c:597
+#: nlmefit.c:601
 msgid "analytic gradient is not available with matrix logarithm"
 msgstr "gradient analityczny nie jest dostępny z algorytmem macierzowym"
 
 # nlme/src/nlmefit.c: 581
 # error(_("analytic gradient is not available with compound symmetry"))
-#: nlmefit.c:620
+#: nlmefit.c:624
 msgid "analytic gradient is not available with compound symmetry"
 msgstr "gradient analityczny nie jest dostępny dla złożonej symetrii"
 
 # nlme/src/nlmefit.c: 861
 # error(_("Unable to form eigenvalue-eigenvector decomposition"))
-#: nlmefit.c:913
+#: nlmefit.c:917
 #, c-format
 msgid "Unable to form eigenvalue-eigenvector decomposition [RS(.) ierr = %d]"
 msgstr ""
@@ -87,7 +87,7 @@ msgstr ""
 
 # nlme/src/nlmefit.c: 893
 # error(_("Unable to form Cholesky decomposition"))
-#: nlmefit.c:945
+#: nlmefit.c:949
 #, fuzzy, c-format
 msgid ""
 "Unable to form Cholesky decomposition: the leading minor of order %d is not "
@@ -96,6 +96,6 @@ msgstr "Nie można uformować dekompozycji Cholesky'ego"
 
 # nlme/src/nlmefit.c: 924
 # error(_("Haven't written the compound symmetry case for this yet"))
-#: nlmefit.c:977
+#: nlmefit.c:981
 msgid "Haven't written the compound symmetry case for this yet"
 msgstr "Jak na razie nie została napisany przypadek dla tej złożonej symetrii"

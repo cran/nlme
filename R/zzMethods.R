@@ -18,28 +18,6 @@
 #  http://www.r-project.org/Licenses/
 #
 
-## Because of the conditional pre-/post 3.3.0 behavior with 'sigma' :
-.onLoad <- function(libname, pkgname) {
-    ## pInfo <- readRDS(attr(packageDescription(pkgname), "file"))
-    ## built.R.ver <- pInfo$Built$R
-    ## First case: does signal Error : object 'sigma' is not exported by 'namespace:stats'
-    ##             so we don't need the following:
-    ## if(getRversion() < "3.3") { ## check that nlme was not *installed* with R >= 3.3.x
-    ##     if(built.R.ver >= "3.3")
-    ##         warning("Package ", dQuote(pkgname), " installed with R version ", built.R.ver,
-    ##     	 " can not safely be used with old R version ", getRversion())
-    ##
-    ## second case:
-    if(getRversion() >= "3.3") {
-        pInfo <- readRDS(attr(packageDescription(pkgname), "file"))
-        built.R.ver <- pInfo$Built$R
-	if(built.R.ver < "3.3")## installed with R < 3.3.x :
-	    warning("Package ", dQuote(pkgname), " installed with old R version ",
-		    built.R.ver, " should not be used with R version ", getRversion(),
-		    "\n  Rather re-install it with this version of R.")
-    }
-}
-
 `%||%` <- function(x, y) if(is.null(x)) y else x
 
 ## Note that  require( stats )  has already happened ...
@@ -85,10 +63,6 @@ if(FALSE)## Not needed, because 'lme' object has "terms" attribute:
     terms.lme <- function(x, ...) terms(formula(x), ...)
 ## end{from MASS}
 
-
-if(getRversion() < "3.3") {
-    sigma <- function(object, ...) UseMethod("sigma")
-}
 
 sigma.gls <- sigma.lme <- function(object, ...) object$sigma
 

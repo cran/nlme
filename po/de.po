@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.0.0 / nlme 3.1-145\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-13 09:56+0100\n"
+"POT-Creation-Date: 2021-02-12 09:19+0000\n"
 "PO-Revision-Date: 2020-04-01 15:16+0200\n"
 "Last-Translator: Detlef Steuer <steuer@hsu-hh.de>\n"
 "Language-Team: German <debian-l10n-german@lists.debian.org>\n"
@@ -31,12 +31,12 @@ msgstr "Unbekannte räumliche Korrelations-Klasse"
 msgid "First observation on an individual must have a dose"
 msgstr "Erste Beobachtung eines Individuums muss eine Dosis haben"
 
-#: nlmefit.c:420
+#: nlmefit.c:424
 #, c-format
 msgid "Singularity in backsolve at level %ld, block %ld"
 msgstr "Singularität in backsolve auf Stufe %ld, Block %ld"
 
-#: nlmefit.c:460
+#: nlmefit.c:464
 #, c-format
 msgid ""
 "Too many parameters for finite-difference Hessian; npar = %d, nTot = %g."
@@ -44,26 +44,26 @@ msgstr ""
 "Zu viele Parameter für eine finite-differenzen Hesse-matrix; npar = %d, nTot "
 "= %g."
 
-#: nlmefit.c:571 nlmefit.c:752
+#: nlmefit.c:575 nlmefit.c:756
 msgid "Overfitted model!"
 msgstr "Überangepasstes Modell!"
 
-#: nlmefit.c:597
+#: nlmefit.c:601
 msgid "analytic gradient is not available with matrix logarithm"
 msgstr "analytischer Gradient ist nicht mit Matrixlogarithmus verfügbar"
 
-#: nlmefit.c:620
+#: nlmefit.c:624
 msgid "analytic gradient is not available with compound symmetry"
 msgstr ""
 "analytischer Gradient ist nicht mit zusammengesetzter Symmetrie verfügbar"
 
-#: nlmefit.c:913
+#: nlmefit.c:917
 #, c-format
 msgid "Unable to form eigenvalue-eigenvector decomposition [RS(.) ierr = %d]"
 msgstr ""
 "Unfähig eine Eigenwert-Eigenvektor-Zerlegung zu bilden [RS(.) ierr = %d]"
 
-#: nlmefit.c:945
+#: nlmefit.c:949
 #, c-format
 msgid ""
 "Unable to form Cholesky decomposition: the leading minor of order %d is not "
@@ -73,7 +73,7 @@ msgstr ""
 "%d\n"
 "ist nicht positiv definit"
 
-#: nlmefit.c:977
+#: nlmefit.c:981
 msgid "Haven't written the compound symmetry case for this yet"
 msgstr ""
 "Fall von zusammengesetzter Symmetrie wurde für dies noch nicht geschrieben"

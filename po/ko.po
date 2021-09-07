@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nlme 3.1-105\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-13 09:56+0100\n"
+"POT-Creation-Date: 2021-02-12 09:19+0000\n"
 "PO-Revision-Date: 2013-08-16 18:27-0600\n"
 "Last-Translator: Chel Hee Lee <gnustats@gmail.com>\n"
 "Language-Team: R Development Translation Teams (Korean) <gnustats@korea.gnu."
@@ -41,41 +41,41 @@ msgstr "알 수 없는 spatial correlation 클래스입니다"
 msgid "First observation on an individual must have a dose"
 msgstr "개인의 첫번째 관측값은 반드시 dose 이어야 합니다"
 
-#: nlmefit.c:420
+#: nlmefit.c:424
 #, c-format
 msgid "Singularity in backsolve at level %ld, block %ld"
 msgstr ""
 
-#: nlmefit.c:460
+#: nlmefit.c:464
 #, c-format
 msgid ""
 "Too many parameters for finite-difference Hessian; npar = %d, nTot = %g."
 msgstr ""
 
-#: nlmefit.c:571 nlmefit.c:752
+#: nlmefit.c:575 nlmefit.c:756
 msgid "Overfitted model!"
 msgstr ""
 
-#: nlmefit.c:597
+#: nlmefit.c:601
 msgid "analytic gradient is not available with matrix logarithm"
 msgstr "analytic gradient는 matrix logarithm과 함께 사용할 수 없습니다"
 
-#: nlmefit.c:620
+#: nlmefit.c:624
 msgid "analytic gradient is not available with compound symmetry"
 msgstr "analytic gradient는 compound symmetry와 함께 사용할 수 없습니다"
 
-#: nlmefit.c:913
+#: nlmefit.c:917
 #, fuzzy, c-format
 msgid "Unable to form eigenvalue-eigenvector decomposition [RS(.) ierr = %d]"
 msgstr "고유값-고유벡터 분해를 할 수 없습니다"
 
-#: nlmefit.c:945
+#: nlmefit.c:949
 #, fuzzy, c-format
 msgid ""
 "Unable to form Cholesky decomposition: the leading minor of order %d is not "
 "pos.def."
 msgstr "콜레스키 분해를 할 수 없습니다"
 
-#: nlmefit.c:977
+#: nlmefit.c:981
 msgid "Haven't written the compound symmetry case for this yet"
 msgstr "이것에 대하여 compound symmetry의 경우는 아직 작성되지 않았습니다"
