@@ -40,7 +40,7 @@ pdCompSymm(value, form, nam, data)
   representing a positive-definite matrix with compound symmetry
   structure (constant diagonal and constant off-diagonal elements). The
   underlying matrix is represented by 2 unrestricted parameters.
-  When \code{value} is \code{numeric(0)}, an unitialized \code{pdMat}
+  When \code{value} is \code{numeric(0)}, an uninitialized \code{pdMat}
   object, a one-sided formula, or a vector of character strings,
   \code{object} is returned  as an uninitialized \code{pdCompSymm}
   object (with just some of its  attributes and its class defined) and

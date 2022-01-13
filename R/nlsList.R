@@ -2,7 +2,7 @@
 ###
 ### Copyright 1997-2003  Jose C. Pinheiro,
 ###                      Douglas M. Bates <bates@stat.wisc.edu>
-### Copyright 2006-2016 The R Core team
+### Copyright 2006-2021  The R Core team
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -28,7 +28,7 @@ nlsList.selfStart <-
   function (model, data, start, control, level, subset, na.action = na.fail,
             pool = TRUE, warn.nls = NA) # Deprecation: will be 'TRUE'
 {
-  mCall <- as.list(match.call())[-1]
+  mCall <- match.call()
   if (!inherits(data, "groupedData")) {
     stop("second argument must be a groupedData object")
   }
@@ -36,7 +36,7 @@ nlsList.selfStart <-
   if (mode(marg) != "name") {
     stop("cannot use an anonymous function for the model")
   }
-					# Build up a call to the model function
+  ## Build up a call to the model function
   m <- call(as.character(marg))
   args <- lapply(names(formals(eval(marg))), as.name)
   args[[1]] <- getCovariateFormula(data)[[2]]
@@ -44,7 +44,8 @@ nlsList.selfStart <-
   form <- formula(data)
   form[[3]][[2]] <- m
   mCall$model <- form
-  do.call("nlsList.formula", mCall)
+  mCall[[1]] <- quote(nlme::nlsList.formula)
+  eval.parent(mCall)
 }
 
 nlsList.formula <-

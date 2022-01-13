@@ -2050,6 +2050,7 @@ print.intervals.lme <- function(x, ...)
   for(i in names(x)) {
     aux <- x[[i]]
     cat("\n ",attr(aux, "label"), "\n", sep = "")
+    attr(aux, "label") <- NULL
     if (i == "reStruct") {
       for(j in names(aux)) {
         cat("  Level:", j, "\n")

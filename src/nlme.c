@@ -1,7 +1,7 @@
 /*
    Routines for fitting nlme models
 
-   Copyright 2007-2018  The R Core Team
+   Copyright 2007-2022  The R Core Team
    Copyright 1997-2001  Douglas M. Bates <bates@stat.wisc.edu>,
 			Jose C. Pinheiro,
 			Saikat DebRoy
@@ -22,6 +22,8 @@
    http://www.r-project.org/Licenses/
 
 */
+
+#include <float.h> // for DBL_EPSILON
 
 #include "nlOptimizer.h"
 #include "matrix.h"
@@ -72,7 +74,7 @@ nlme_init(double *ptheta, double *pDmHalf, int *pgroups, int *pdims,
 	  double *sigma, SEXP model)
 {
     int i, *src, nResult;
-    nlmePtr nlme = Calloc(1, struct nlme_struct);
+    nlmePtr nlme = R_Calloc(1, struct nlme_struct);
     nlme->pdims = pdims;
     nlme->DmHalf = pDmHalf;
     nlme->pdClass = pdClass;
@@ -80,7 +82,7 @@ nlme_init(double *ptheta, double *pDmHalf, int *pgroups, int *pdims,
     nlme->varWeights = pvarWeights;
     nlme->corDims = pcorDims;
     nlme->dd = dims(pdims);
-    nlme->npar = Calloc(nlme->dd->Q + 1, int);
+    nlme->npar = R_Calloc(nlme->dd->Q + 1, int);
     nlme->sigma = sigma; // 17-11-2015; Fixed sigma patch; E van Willigen; Quantitative Solutions
     for(i = 0, nlme->nparTot = 0; i <= nlme->dd->Q; i++) {
 	nlme->npar[i] = (nlme->dd->ncol)[i] * (nlme->dd->ngrp)[i];
@@ -98,29 +100,29 @@ nlme_init(double *ptheta, double *pDmHalf, int *pgroups, int *pdims,
     nlme->add_ons = additional;
     nlme->ngrpTot = 0;
     for (i = 0; i < (nlme->dd->Q + 2); i++) { nlme->ngrpTot += nlme->dd->ngrp[i]; }
-    nlme->ZXoff = Calloc(nlme->ngrpTot, int);
+    nlme->ZXoff = R_Calloc(nlme->ngrpTot, int);
     Memcpy(nlme->ZXoff, nlme->dd->ZXoff[0], nlme->ngrpTot);
-    nlme->ZXlen = Calloc(nlme->ngrpTot, int);
+    nlme->ZXlen = R_Calloc(nlme->ngrpTot, int);
     Memcpy(nlme->ZXlen, nlme->dd->ZXlen[0], nlme->ngrpTot);
-    nlme->newtheta = Calloc(nlme->nparTot, double);
-    nlme->incr =  Calloc(nlme->nparTot, double);
+    nlme->newtheta = R_Calloc(nlme->nparTot, double);
+    nlme->incr =  R_Calloc(nlme->nparTot, double);
     nlme->model = model;
     nlme->result[0] = DNULLP;
     nResult = evaluate(ptheta, nlme->nparTot, model, nlme->result);
-    nlme->result[0] = Calloc(nResult, double);
+    nlme->result[0] = R_Calloc(nResult, double);
     return(nlme);
 }
 
 static void
 nlmeFree(nlmePtr nlme)
 {
-    Free(nlme->newtheta);
-    Free(nlme->incr);
-    Free(nlme->npar);
-    Free(nlme->ZXoff);
-    Free(nlme->ZXlen);
-    Free(nlme->result[0]);
-    Free(nlme);
+    R_Free(nlme->newtheta);
+    R_Free(nlme->incr);
+    R_Free(nlme->npar);
+    R_Free(nlme->ZXoff);
+    R_Free(nlme->ZXlen);
+    R_Free(nlme->result[0]);
+    R_Free(nlme);
 }
 
 static void			/* undo changes in dd from internal_decomp */
@@ -165,13 +167,13 @@ nlme_objective(nlmePtr nlme)
 
     RSS = nlme->RSS;
     for(i = 0, srcB = nlme->newtheta; i < nlme->dd->Q; i++) {
-	double *work = Calloc(nlme->npar[i], double);
+	double *work = R_Calloc(nlme->npar[i], double);
 	mult_mat(work, (nlme->dd->ncol)[i], nlme->DmHalf + (nlme->dd->DmOff)[i],
 		 (nlme->dd->ncol)[i], (nlme->dd->ncol)[i], (nlme->dd->ncol)[i],
 		 srcB, (nlme->dd->ncol)[i], (nlme->dd->ngrp)[i]);
 	RSS += d_sum_sqr(work, nlme->npar[i]);
 	srcB += nlme->npar[i];
-	Free(work);
+	R_Free(work);
     }
     return(RSS);
 }
@@ -204,15 +206,15 @@ static double
 nlme_increment(nlmePtr nlme)
 {
     double predObj, *dest, *src, logLik, lRSS,
-	*Ra = Calloc(nlme->dd->DmOff[nlme->dd->Q], double),
-	*dc = Calloc(nlme->dd->Srows * nlme->dd->ZXcols, double)
-/*      , *auxGrad = Calloc(nlme->dd->N * (nlme->dd->ZXcols - 1), double) */
+	*Ra = R_Calloc(nlme->dd->DmOff[nlme->dd->Q], double),
+	*dc = R_Calloc(nlme->dd->Srows * nlme->dd->ZXcols, double)
+/*      , *auxGrad = R_Calloc(nlme->dd->N * (nlme->dd->ZXcols - 1), double) */
 	;
     double *incr = nlme->incr;
     double *theta = nlme->theta;
     int i, j, start, RML = 0;
 
-    if (sqrt_eps == 0.0) sqrt_eps = sqrt(DOUBLE_EPS);
+    if (sqrt_eps == 0.0) sqrt_eps = sqrt(DBL_EPSILON);
 /*    Memcpy(auxGrad, nlme->gradient, (nlme->dd->ZXcols - 1) * nlme->dd->N); */
     internal_decomp(nlme->dd, nlme->gradient);
     nlme_workingRes(nlme);
@@ -220,16 +222,16 @@ nlme_increment(nlmePtr nlme)
 		// 17-11-2015; Fixed sigma patch; E van Willigen; Quantitative Solutions
 		nlme->pdClass, &RML, &logLik, Ra, &lRSS, nlme->sigma);
     {
-	statePTR st = Calloc(1, struct state_struct);
+	statePTR st = R_Calloc(1, struct state_struct);
 	int ntheta = count_DmHalf_pars( nlme->dd, nlme->pdClass ),
 	    itrmcd, itncnt, msg, iagflg;
 	double epsm,
-	    *theta = Calloc(ntheta, double),
-	    *typsiz = Calloc(ntheta, double),
-	    *grad = Calloc(ntheta, double),
-	    *newtheta = Calloc(ntheta, double),
-	    *a = Calloc(ntheta * ntheta, double),
-	    *work = Calloc(ntheta * 9, double);
+	    *theta = R_Calloc(ntheta, double),
+	    *typsiz = R_Calloc(ntheta, double),
+	    *grad = R_Calloc(ntheta, double),
+	    *newtheta = R_Calloc(ntheta, double),
+	    *a = R_Calloc(ntheta * ntheta, double),
+	    *work = R_Calloc(ntheta * 9, double);
 
 	st->dd = nlme->dd;
 	st->ZXy = nlme->gradient;
@@ -262,13 +264,13 @@ nlme_increment(nlmePtr nlme)
 	if (msg == 0) {
 	    generate_DmHalf(nlme->DmHalf, nlme->dd, nlme->pdClass, theta);
 	}
-	Free(work);
-	Free(a);
-	Free(newtheta);
-	Free(grad);
-	Free(typsiz);
-	Free(theta);
-	Free(st);
+	R_Free(work);
+	R_Free(a);
+	R_Free(newtheta);
+	R_Free(grad);
+	R_Free(typsiz);
+	R_Free(theta);
+	R_Free(st);
     }
     nlme->objective = nlme_objective(nlme);
     // 17-11-2015; Fixed sigma patch; E van Willigen; Quantitative Solutions
@@ -289,8 +291,8 @@ nlme_increment(nlmePtr nlme)
     predObj = dc[nlme->dd->ZXcols * nlme->dd->ZXrows - 1];
     predObj = predObj * predObj;
     /*    regSS = nlme_RegSS(nlme, auxGrad); */	/* Regression Sum of Squares */
-    Free(Ra); Free(dc);
-/*    Free(auxGrad); */
+    R_Free(Ra); R_Free(dc);
+/*    R_Free(auxGrad); */
     return(sqrt(((double) nlme->nrdof) * (nlme->objective - predObj) /
 		(((double) nlme->nparTot) * predObj)));
 }
@@ -354,7 +356,7 @@ nlme_wrapup(nlmePtr nlme)
     evaluate(nlme->theta, nlme->nparTot , model, nlme->result);
     Memcpy(nlme->add_ons, nlme->result[0], nlme->dd->N * nlme->dd->ZXcols);
     nlme->objective = nlme_objective(nlme);
-    Free(nlme->npar);
+    R_Free(nlme->npar);
     dimFree(nlme->dd);
 }
 
@@ -373,7 +375,7 @@ fit_nlme(double *ptheta, double *pDmHalf, int *pgroups,
 		     pcorFactor, pvarWeights, pcorDims,
 		     // 17-11-2015; Fixed sigma patch; E van Willigen; Quantitative Solutions
 		     additional, pcorOpt, pvarOpt, sigma , model);
-    if(sqrt_eps == 0.0) sqrt_eps = sqrt(DOUBLE_EPS);
+    if(sqrt_eps == 0.0) sqrt_eps = sqrt(DBL_EPSILON);
     settings[4] = (double) nlme_iterate(nlme, settings);
     nlme_wrapup(nlme);
     settings[5] = nlme->objective;
@@ -387,7 +389,7 @@ nlme_one_comp_open (int *nrow, double *Resp, double *inmat)
     int i, nn = *nrow;
     double ke, ka, tl = 0, delta, C = 0, Ca = 0, interval,
 	*Subject, *Time, *Conc, *Dose, *Interval, *V, *Ka, *Ke,
-	sl = DOUBLE_EPS;	/* sl is last subject number, usually */
+	sl = DBL_EPSILON;	/* sl is last subject number, usually */
 				/* an integer but passed as double. */
 				/* It is started at an unlikely value. */
     Subject = inmat;
@@ -446,9 +448,9 @@ void
 nlme_one_comp_first (int *nrow, double *Resp, double *inmat)
 {
     int i, j, nn = *nrow, mm = 0;
-    double v, cl, *tl = Calloc(nn, double), *ds = Calloc(nn, double),
+    double v, cl, *tl = R_Calloc(nn, double), *ds = R_Calloc(nn, double),
 	*Subject, *Time, *Dose, *V, *Cl,
-	sl = DOUBLE_EPS;	/* sl is last subject number, usually */
+	sl = DBL_EPSILON;	/* sl is last subject number, usually */
 				/* an integer but passed as double. */
 				/* It is started at an unlikely value. */
     Subject = inmat;
@@ -479,5 +481,5 @@ nlme_one_comp_first (int *nrow, double *Resp, double *inmat)
       }
 	}
     }
-    Free(ds); Free(tl);
+    R_Free(ds); R_Free(tl);
 }

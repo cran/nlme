@@ -71,7 +71,7 @@
     }
     \item{Creatinine}{
       an ordered factor with levels
-      \code{< 50} < \code{>= 50} indicating the creatine clearance (mg/min).
+      \code{< 50} < \code{>= 50} indicating the creatinine clearance (mg/min).
     }
     \item{glyco}{
       a numeric vector giving the alpha-1 acid glycoprotein
@@ -83,7 +83,7 @@
 \details{
   Verme et al. (1992) analyze routine clinical data on
   patients receiving the drug quinidine as a treatment for cardiac
-  arrythmia (atrial fibrillation of ventricular arrythmias).  All
+  arrhythmia (atrial fibrillation or ventricular arrhythmias).  All
   patients were receiving oral quinidine doses.  At irregular intervals
   blood samples were drawn and serum concentrations of quinidine were
   determined.  These data are

@@ -1,6 +1,6 @@
 ###  Fit a linear model with correlated errors and/or heteroscedasticity
 ###
-### Copyright 2005-2018  The R Core team
+### Copyright 2005-2021  The R Core team
 ### Copyright 1997-2003  Jose C. Pinheiro,
 ###                      Douglas M. Bates <bates@stat.wisc.edu>
 #
@@ -946,6 +946,7 @@ print.intervals.gls <-
     for(i in names(x)) {
         aux <- x[[i]]
         cat("\n ",attr(aux, "label"), "\n", sep = "")
+        attr(aux, "label") <- NULL
         print(if(i == "sigma") c(aux) else as.matrix(aux), ...)
     }
     invisible(x)

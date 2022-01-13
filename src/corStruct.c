@@ -4,7 +4,7 @@
    Copyright 1997-2005  Douglas M. Bates <bates@stat.wisc.edu>,
 			Jose C. Pinheiro,
 			Saikat DebRoy
-   Copyright 2007-2016  The R Core Team
+   Copyright 2007-2022  The R Core Team
 
    This file is part of the nlme package for R and related languages
    and is made available under the terms of the GNU General Public
@@ -25,6 +25,7 @@
 
 #include "matrix.h"
 #include <R_ext/Applic.h>
+#include <float.h> // for DBL_EPSILON
 
 
 /* Factor list and Recalc for general corStruct object */
@@ -37,8 +38,8 @@ corStruct_factList(double *mat, int *pdims, double *FactorL, double *logdet)
 
     for(i = 0; i < M; i++) {
 	int li = len[i], lisq = li * li, lip1 = li + 1;
-	work = Calloc(li, double);
-	work1 = Calloc(lisq, double);
+	work = R_Calloc(li, double);
+	work1 = R_Calloc(lisq, double);
 	F77_CALL(chol) (mat, &li, &li, mat, &info);
 	for(j = 0; j < li; j++) {
 	    work1[j * lip1] = 1;
@@ -46,7 +47,7 @@ corStruct_factList(double *mat, int *pdims, double *FactorL, double *logdet)
 	    *logdet -= log(fabs(mat[j * lip1]));
 	}
 	Memcpy(FactorL, work1, lisq);
-	Free(work); Free(work1);
+	R_Free(work); R_Free(work1);
 	FactorL += lisq;
 	mat += lisq;
     }
@@ -74,12 +75,12 @@ symm_fullCorr(double *par, int *maxC, double *crr)
     int i, j, n = *maxC;
 
     /* first get upper-triangular factor */
-    dest = work = Calloc(n * (n + 1) / 2, double);
+    dest = work = R_Calloc(n * (n + 1) / 2, double);
     for(i = 0; i < n; i++) {
 	aux = 1.0;
 	for(j = 0; j < i; j++) {
 	    aux1 = exp(*src);
-	    aux1 = PI * aux1/(1 + aux1); /* untransforming */
+	    aux1 = M_PI * aux1/(1 + aux1); /* untransforming */
 	    *dest = aux * cos(aux1);
 	    aux *= sin(aux1);
 	    dest++; src++;
@@ -98,7 +99,7 @@ symm_fullCorr(double *par, int *maxC, double *crr)
 	    dest++;
 	}
     }
-    Free(work);
+    R_Free(work);
 }
 
 static void
@@ -119,7 +120,7 @@ symm_mat(double *crr, int *time, int *n, int *maxC, double *mat)
 void
 symm_matList(double *pars, int *time, int *maxC, int *pdims, double *mat)
 {
-    double *crr = Calloc(*maxC * (*maxC - 1) / 2, double);
+    double *crr = R_Calloc(*maxC * (*maxC - 1) / 2, double);
     int i, M = pdims[1], *len = pdims + 4;
     /* parameters assumed in unconstrained form */
     symm_fullCorr(pars, maxC, crr);
@@ -128,7 +129,7 @@ symm_matList(double *pars, int *time, int *maxC, int *pdims, double *mat)
 	mat += len[i] * len[i];
 	time += len[i];
     }
-    Free(crr);
+    R_Free(crr);
 }
 
 static void
@@ -136,7 +137,7 @@ symm_fact(double *crr, int *time, int *n, int *maxC, double *mat,
 	  double *logdet)
 {
     int job = 11L, info, i, nsq = *n * (*n), np1 = *n + 1;
-    double *work = Calloc(*n, double), *work1 = Calloc(nsq, double);
+    double *work = R_Calloc(*n, double), *work1 = R_Calloc(nsq, double);
 
     symm_mat(crr, time, n, maxC, mat);
     F77_CALL(chol) (mat, n, n, mat, &info);
@@ -146,14 +147,14 @@ symm_fact(double *crr, int *time, int *n, int *maxC, double *mat,
 	*logdet -= log(fabs(mat[i * np1]));
     }
     Memcpy(mat, work1, nsq);
-    Free(work); Free(work1);
+    R_Free(work); R_Free(work1);
 }
 
 void
 symm_factList(double *pars, int *time, int *maxC, int *pdims,
 	      double *FactorL, double *logdet)
 {
-    double *crr = Calloc(*maxC * (*maxC - 1L) / 2L, double);
+    double *crr = R_Calloc(*maxC * (*maxC - 1L) / 2L, double);
     int i, M = pdims[1], *len = pdims + 4;
     /* parameters assumed in unconstrained form */
     symm_fullCorr(pars, maxC, crr);
@@ -162,7 +163,7 @@ symm_factList(double *pars, int *time, int *maxC, int *pdims,
 	FactorL += len[i] * len[i];
 	time += len[i];
     }
-    Free(crr);
+    R_Free(crr);
 }
 
 void
@@ -170,17 +171,17 @@ symm_recalc(double *Xy, int *pdims, int *ZXcol, double *pars,
 	    int *time, int *maxC, double *logdet)
 {
     int N = pdims[0], M = pdims[1], *len = pdims + 4, *start = len + M, i;
-    double *crr = Calloc(*maxC * (*maxC - 1) / 2, double);
+    double *crr = R_Calloc(*maxC * (*maxC - 1) / 2, double);
     /* parameters assumed in unconstrained form */
     symm_fullCorr(pars, maxC, crr);
     for(i = 0; i < M;  i++) {
-	double *Factor = Calloc((len[i] * len[i]), double);
+	double *Factor = R_Calloc((len[i] * len[i]), double);
 	symm_fact(crr, time + start[i], &len[i], maxC, Factor, logdet);
 	mult_mat(Xy + start[i], N, Factor, len[i], len[i], len[i],
 		 Xy + start[i], N, *ZXcol);
-	Free(Factor);
+	R_Free(Factor);
     }
-    Free(crr);
+    R_Free(crr);
 }
 
 /* nat class - unstructured correlation - natural parametrization */
@@ -201,7 +202,7 @@ nat_fullCorr(double *par, int *maxC, double *crr)
 void
 nat_matList(double *pars, int *time, int *maxC, int *pdims, double *mat)
 {
-    double *crr = Calloc(*maxC * (*maxC - 1) / 2, double);
+    double *crr = R_Calloc(*maxC * (*maxC - 1) / 2, double);
     int i, M = pdims[1], *len = pdims + 4;
     /* parameters assumed in unconstrained form */
     nat_fullCorr(pars, maxC, crr);
@@ -210,14 +211,14 @@ nat_matList(double *pars, int *time, int *maxC, int *pdims, double *mat)
 	mat += len[i] * len[i];
 	time += len[i];
     }
-    Free(crr);
+    R_Free(crr);
 }
 
 void
 nat_factList(double *pars, int *time, int *maxC, int *pdims,
 	     double *FactorL, double *logdet)
 {
-    double *crr = Calloc(*maxC * (*maxC - 1L) / 2L, double);
+    double *crr = R_Calloc(*maxC * (*maxC - 1L) / 2L, double);
     int i, M = pdims[1], *len = pdims + 4;
     /* parameters assumed in unconstrained form */
     nat_fullCorr(pars, maxC, crr);
@@ -226,7 +227,7 @@ nat_factList(double *pars, int *time, int *maxC, int *pdims,
 	FactorL += len[i] * len[i];
 	time += len[i];
     }
-    Free(crr);
+    R_Free(crr);
 }
 
 void
@@ -234,17 +235,17 @@ nat_recalc(double *Xy, int *pdims, int *ZXcol, double *pars,
 	   int *time, int *maxC, double *logdet)
 {
     int N = pdims[0], M = pdims[1], *len = pdims + 4, *start = len + M, i;
-    double *crr = Calloc(*maxC * (*maxC - 1) / 2, double);
+    double *crr = R_Calloc(*maxC * (*maxC - 1) / 2, double);
     /* parameters assumed in unconstrained form */
     nat_fullCorr(pars, maxC, crr);
     for(i = 0; i < M;  i++) {
-	double *Factor = Calloc((len[i] * len[i]), double);
+	double *Factor = R_Calloc((len[i] * len[i]), double);
 	symm_fact(crr, time + start[i], &len[i], maxC, Factor, logdet);
 	mult_mat(Xy + start[i], N, Factor, len[i], len[i], len[i],
 		 Xy + start[i], N, *ZXcol);
-	Free(Factor);
+	R_Free(Factor);
     }
-    Free(crr);
+    R_Free(crr);
 }
 
 /* AR1 class */
@@ -324,11 +325,11 @@ AR1_recalc(double *Xy, int *pdims, int *ZXcol, double *par, double *logdet)
     /* par assumed in unconstrained form */
     *par = safe_phi( *par );
     for(i = 0; i < M;  i++) {
-	Factor = Calloc(len[i] * len[i], double);
+	Factor = R_Calloc(len[i] * len[i], double);
 	AR1_fact(par, &len[i], Factor, logdet);
 	mult_mat(Xy + start[i], N, Factor, len[i], len[i], len[i],
 		 Xy + start[i], N, *ZXcol);
-	Free(Factor);
+	R_Free(Factor);
     }
 }
 
@@ -367,7 +368,7 @@ static void
 CAR1_fact(double *par, double *time, int *n, double *mat, double *logdet)
 {
     int job = 11L, info, i, nsq = *n * (*n), np1 = *n + 1;
-    double *work = Calloc(*n, double), *work1 = Calloc(nsq, double);
+    double *work = R_Calloc(*n, double), *work1 = R_Calloc(nsq, double);
     CAR1_mat(par, time, n, mat);
     F77_CALL(chol) (mat, n, n, mat, &info);
     for(i = 0; i < *n; i++) {
@@ -376,7 +377,7 @@ CAR1_fact(double *par, double *time, int *n, double *mat, double *logdet)
 	*logdet -= log(fabs(mat[i * np1]));
     }
     Memcpy(mat, work1, nsq);
-    Free(work); Free(work1);
+    R_Free(work); R_Free(work1);
 }
 
 void
@@ -403,11 +404,11 @@ CAR1_recalc(double *Xy, int *pdims, int *ZXcol,
     /* parameter assumed in unconstrained form */
     *par = aux / (1.0 + aux);
     for(i = 0; i < M;  i++) {
-	double *Factor = Calloc(len[i] * len[i], double);
+	double *Factor = R_Calloc(len[i] * len[i], double);
 	CAR1_fact(par, time + start[i], &len[i], Factor, logdet);
 	mult_mat(Xy + start[i], N, Factor, len[i], len[i], len[i],
 		 Xy + start[i], N, *ZXcol);
-	Free(Factor);
+	R_Free(Factor);
     }
 }
 
@@ -451,7 +452,7 @@ ARMA_untransPar(int N, double *pars, double sgn)
     int i, j;
     double *aux;
     if (N) {
-	aux = Calloc(N, double);
+	aux = R_Calloc(N, double);
 	for(i = 0; i < N; i++) {
 	    pars[i] = exp(-pars[i]);
 	    aux[i] = pars[i] = (1 - pars[i])/(1 + pars[i]);
@@ -462,7 +463,7 @@ ARMA_untransPar(int N, double *pars, double sgn)
 		Memcpy(aux, pars, i);
 	    }
 	}
-	Free(aux);
+	R_Free(aux);
     }
 }
 
@@ -488,15 +489,16 @@ ARMA_cross(int *p, int *q, double *pars, double *psi)
     }
 }
 
+
 static void
 ARMA_corr(int *p, int *q, int *maxlag, double *pars, double *psi, double *crr)
 {
     int P = *p + 1, Pp1 = P + 1, i, j, k, minPQ, Mlag, maxPQ,
-	*pivot = Calloc(P, int);
-    double *coef = Calloc(P * P, double), *src, *qraux = Calloc(P, double),
-	*work = Calloc(P * P, double), *work1;
+	*pivot = R_Calloc(P, int);
+    double *coef = R_Calloc(P * P, double), *src, *qraux = R_Calloc(P, double),
+	*work = R_Calloc(P * P, double), *work1;
 
-    if (sqrt_eps == 0.0) sqrt_eps = sqrt(DOUBLE_EPS);
+    if (sqrt_eps == 0.0) sqrt_eps = sqrt(DBL_EPSILON);
     if ((maxPQ = ((*p > *q) ? *p : *q))) {
 	for(i = 0, src = coef; i < P; i++, src += Pp1) {
 	    crr[i] = 0;
@@ -504,7 +506,7 @@ ARMA_corr(int *p, int *q, int *maxlag, double *pars, double *psi, double *crr)
 	}
 	Mlag = ((*maxlag > *q) ? *maxlag : *q);
 	Mlag = ((Mlag > *p) ? Mlag : *p) + 1;
-	work1 = Calloc(Mlag, double);
+	work1 = R_Calloc(Mlag, double);
 	for(i = P; i < Mlag; i++) {
 	    crr[i] = 0;
 	}
@@ -552,7 +554,7 @@ ARMA_corr(int *p, int *q, int *maxlag, double *pars, double *psi, double *crr)
 	for(i = 1; i < Mlag; i++) {
 	    crr[i] /= crr[0];
 	}
-	Free(qraux); Free(work); Free(coef); Free(pivot); Free(work1);
+	R_Free(qraux); R_Free(work); R_Free(coef); R_Free(pivot); R_Free(work1);
     }
     crr[0] = 1;
 }
@@ -563,10 +565,10 @@ ARMA_fullCorr(int *p, int *q, int *maxlag, double *pars, double *crr)
     int M = *q + 1;
     double *psi;
     M = ((M < *p) ? *p : M);
-    psi = Calloc(M, double);
+    psi = R_Calloc(M, double);
     ARMA_cross(p, q, pars, psi);
     ARMA_corr(p, q, maxlag, pars, psi, crr);
-    Free(psi);
+    R_Free(psi);
 }
 
 static void
@@ -586,7 +588,7 @@ void
 ARMA_matList(double *pars, int *p, int *q, int *time, int *maxlag,
 	     int *pdims, double *mat)
 {
-    double *crr = Calloc(*maxlag + 1L, double);
+    double *crr = R_Calloc(*maxlag + 1L, double);
     int i, M = pdims[1], *len = pdims + 4;
     /* parameters assumed in unconstrained form */
     ARMA_constCoef(p, q, pars);
@@ -596,14 +598,14 @@ ARMA_matList(double *pars, int *p, int *q, int *time, int *maxlag,
 	mat += len[i] * len[i];
 	time += len[i];
     }
-    Free(crr);
+    R_Free(crr);
 }
 
 static void
 ARMA_fact(double *crr, int *time, int *n, double *mat, double *logdet)
 {
     int job = 11L, info, i, nsq = *n * (*n), np1 = *n + 1;
-    double *work = Calloc(*n, double), *work1 = Calloc(nsq, double);
+    double *work = R_Calloc(*n, double), *work1 = R_Calloc(nsq, double);
     ARMA_mat(crr, time, n, mat);
     F77_CALL(chol) (mat, n, n, mat, &info);
     for(i = 0; i < *n; i++) {
@@ -612,7 +614,7 @@ ARMA_fact(double *crr, int *time, int *n, double *mat, double *logdet)
 	*logdet -= log(fabs(mat[i * np1]));
     }
     Memcpy(mat, work1, nsq);
-    Free(work); Free(work1);
+    R_Free(work); R_Free(work1);
 }
 
 void
@@ -620,7 +622,7 @@ ARMA_factList(double *pars, int *p, int *q, int *time,
 	      int *maxlag, int *pdims, double *FactorL,
 	      double *logdet)
 {
-    double *crr = Calloc(*maxlag + 1L, double);
+    double *crr = R_Calloc(*maxlag + 1L, double);
     int i, M = pdims[1], *len = pdims + 4;
     /* parameters assumed in unconstrained form */
     ARMA_constCoef(p, q, pars);
@@ -630,7 +632,7 @@ ARMA_factList(double *pars, int *p, int *q, int *time,
 	FactorL += len[i] * len[i];
 	time += len[i];
     }
-    Free(crr);
+    R_Free(crr);
 }
 
 void
@@ -639,16 +641,16 @@ ARMA_recalc(double *Xy, int *pdims, int *ZXcol, double *pars,
 	    double *logdet)
 {
     int N = pdims[0], M = pdims[1], *len = pdims + 4, *start = len + M, i;
-    double *crr = Calloc(*maxlag + 1L, double);
+    double *crr = R_Calloc(*maxlag + 1L, double);
     /* parameters assumed in unconstrained form */
     ARMA_constCoef(p, q, pars);
     ARMA_fullCorr(p, q, maxlag, pars, crr);
     for(i = 0; i < M;  i++) {
-	double *Factor = Calloc(len[i] * len[i], double);
+	double *Factor = R_Calloc(len[i] * len[i], double);
 	ARMA_fact(crr, time + start[i], &len[i], Factor, logdet);
 	mult_mat(Xy + start[i], N, Factor, len[i], len[i], len[i],
 		 Xy + start[i], N, *ZXcol);
-	Free(Factor);
+	R_Free(Factor);
     }
 }
 
@@ -683,7 +685,7 @@ static void
 compSymm_fact(double *par, int *n, double *mat, double *logdet)
 {
     int i, j, np1 = *n + 1, nsq = *n * (*n);
-    double aux, aux1, *work = Calloc(nsq, double);
+    double aux, aux1, *work = R_Calloc(nsq, double);
     aux = 1 + (*n - 1) * (*par);
     *logdet -= log(aux)/2;
     aux = 1/sqrt(aux * (*n));
@@ -700,7 +702,7 @@ compSymm_fact(double *par, int *n, double *mat, double *logdet)
 	work[i * np1] = -i * aux1;
     }
     Memcpy(mat, work, nsq);
-    Free(work);
+    R_Free(work);
 }
 
 void
@@ -726,11 +728,11 @@ compSymm_recalc(double *Xy, int *pdims, int *ZXcol, double *par,
     /* parameter assumed in unconstrained form */
     *par = (aux + *inf)/(aux + 1.0);
     for(i = 0; i < M;  i++) {
-	double *Factor = Calloc(len[i] * len[i], double);
+	double *Factor = R_Calloc(len[i] * len[i], double);
 	compSymm_fact(par, &len[i], Factor, logdet);
 	mult_mat(Xy + start[i], N, Factor, len[i], len[i], len[i],
 		 Xy + start[i], N, *ZXcol);
-	Free(Factor);
+	R_Free(Factor);
     }
 }
 
@@ -770,7 +772,7 @@ static void
 HF_fact(double *par, int *time, int *n, double *mat, double *logdet)
 {
     int job = 11L, info, i, nsq = *n * (*n), np1 = *n + 1;
-    double *work = Calloc(*n, double), *work1 = Calloc(nsq, double);
+    double *work = R_Calloc(*n, double), *work1 = R_Calloc(nsq, double);
     HF_mat(par, time, n, mat);
     F77_CALL(chol) (mat, n, n, mat, &info);
     for(i = 0; i < *n; i++) {
@@ -779,7 +781,7 @@ HF_fact(double *par, int *time, int *n, double *mat, double *logdet)
 	*logdet -= log(fabs(mat[i * np1]));
     }
     Memcpy(mat, work1, nsq);
-    Free(work); Free(work1);
+    R_Free(work); R_Free(work1);
 }
 
 void
@@ -810,11 +812,11 @@ HF_recalc(double *Xy, int *pdims, int *ZXcol, double *par,
 	par[i] = 2.0 * (exp(par[i]) + inf) + 1.0;
     }
     for(i = 0; i < M;  i++) {
-	double *Factor = Calloc(len[i] * len[i], double);
+	double *Factor = R_Calloc(len[i] * len[i], double);
 	HF_fact(par, time + start[i], &len[i], Factor, logdet);
 	mult_mat(Xy + start[i], N, Factor, len[i], len[i], len[i],
 		 Xy + start[i], N, *ZXcol);
-	Free(Factor);
+	R_Free(Factor);
     }
 }
 
@@ -937,7 +939,7 @@ spatial_fact(double *par, double *dist, int *n, int *nug,
 	     double *logdet)
 {
     int job = 11L, info, i, nsq = *n * (*n), np1 = *n + 1;
-    double *work = Calloc(*n, double), *work1 = Calloc(nsq, double);
+    double *work = R_Calloc(*n, double), *work1 = R_Calloc(nsq, double);
     spatial_mat(par, dist, n, nug, corr, mat);
     F77_CALL(chol) (mat, n, n, mat, &info);
     for(i = 0; i < *n; i++) {
@@ -946,7 +948,7 @@ spatial_fact(double *par, double *dist, int *n, int *nug,
 	*logdet -= log(fabs(mat[i * np1]));
     }
     Memcpy(mat, work1, nsq);
-    Free(work); Free(work1);
+    R_Free(work); R_Free(work1);
 }
 
 void
@@ -1029,10 +1031,10 @@ spatial_recalc(double *Xy, int *pdims, int *ZXcol, double *par,
     }
 
     for(i = 0, sXy = Xy; i < M;  i++) {
-	double *Factor = Calloc(len[i] * len[i], double);
+	double *Factor = R_Calloc(len[i] * len[i], double);
 	spatial_fact(par, dist + start[i], &len[i], nug, corr, Factor, logdet);
 	mult_mat(sXy, N, Factor, len[i], len[i], len[i], sXy, N, *ZXcol);
 	sXy += len[i];
-	Free(Factor);
+	R_Free(Factor);
     }
 }

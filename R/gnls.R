@@ -1,7 +1,7 @@
 ###  Fit a general nonlinear regression model with correlated and/or
 ###  heteroscedastic errors
 ###
-### Copyright 2007-2018  The R Core team
+### Copyright 2007-2021  The R Core team
 ### Copyright 1997-2003  Jose C. Pinheiro,
 ###                      Douglas M. Bates <bates@stat.wisc.edu>
 #
@@ -81,7 +81,7 @@ gnls <-
       if (is.null(dim(data))) {
           stop("'data' must be given explicitly to use 'nls' to get initial estimates")
       }
-      start <- coef(eval(nlsCall))
+      start <- coef(eval.parent(nlsCall))
     } else {
       stop("no initial values for model parameters")
     }

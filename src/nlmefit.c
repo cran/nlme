@@ -2,7 +2,7 @@
    Routines for calculation of the log-likelihood or restricted
    log-likelihood with mixed-effects models.
 
-   Copyright (C) 2007-2020  The R Core Team
+   Copyright (C) 2007-2022  The R Core Team
    Copyright (C) 1997-2005  Douglas M. Bates <bates@stat.wisc.edu>,
 		            Jose C. Pinheiro, Saikat DebRoy
 
@@ -23,6 +23,8 @@
 
 */
 
+#include <float.h> // for DBL_EPSILON
+
 #include <stdint.h>
 #include "nlmefit.h"
 #include "matrix.h"
@@ -35,7 +37,7 @@ extern void F77_NAME(msmnh)();
 static int **
 setOffsets(int ** base, int * ngrp, int Qp2)
 {
-    int i, **ptrVec = Calloc((size_t) Qp2, int *);
+    int i, **ptrVec = R_Calloc((size_t) Qp2, int *);
     for (i = 0; i < Qp2; i++) {
 	ptrVec[i] = *base;
 	*base += ngrp[i];
@@ -46,7 +48,7 @@ setOffsets(int ** base, int * ngrp, int Qp2)
 dimPTR
 dims(int *pdims)
 {				/* constructor for a dims object */
-    dimPTR value = Calloc((size_t) 1, struct dim_struct);
+    dimPTR value = R_Calloc((size_t) 1, struct dim_struct);
     int *base, Qp2, *ngrp;
 
     value->N = (int) pdims[0];
@@ -86,7 +88,7 @@ dimPTR				/* create a dimensions object directly */
 dimS(SEXP d)			/* from an SEXP */
 {
     int i, Qp2;  SEXP tmp;
-    dimPTR value = Calloc((size_t) 1, struct dim_struct);
+    dimPTR value = R_Calloc((size_t) 1, struct dim_struct);
     value->N = INTEGER(coerceVector(getListElement(d, "N"), INTSXP))[0];
     value->ZXrows =
 	INTEGER(coerceVector(getListElement(d, "ZXrows"), INTSXP))[0];
@@ -102,31 +104,31 @@ dimS(SEXP d)			/* from an SEXP */
     value->DmOff = INTEGER(coerceVector(getListElement(d, "DmOff"), INTSXP));
     value->ncol = INTEGER(coerceVector(getListElement(d, "ncol"), INTSXP));
     value->nrot = INTEGER(coerceVector(getListElement(d, "nrot"), INTSXP));
-    value->ZXoff = Calloc(Qp2, int *);
+    value->ZXoff = R_Calloc(Qp2, int *);
     PROTECT(tmp = coerceVector(getListElement(d, "ZXoff"), VECSXP));
     for (i = 0; i < Qp2; i++) {
 	(value->ZXoff)[i] = INTEGER(coerceVector(VECTOR_ELT(tmp, i), INTSXP));
     }
     UNPROTECT(1);
-    value->ZXlen = Calloc(Qp2, int *);
+    value->ZXlen = R_Calloc(Qp2, int *);
     PROTECT(tmp = coerceVector(getListElement(d, "ZXlen"), VECSXP));
     for (i = 0; i < Qp2; i++) {
 	(value->ZXlen)[i] = INTEGER(coerceVector(VECTOR_ELT(tmp, i), INTSXP));
     }
     UNPROTECT(1);
-    value->SToff = Calloc(Qp2, int *);
+    value->SToff = R_Calloc(Qp2, int *);
     PROTECT(tmp = coerceVector(getListElement(d, "SToff"), VECSXP));
     for (i = 0; i < Qp2; i++) {
 	(value->SToff)[i] = INTEGER(coerceVector(VECTOR_ELT(tmp, i), INTSXP));
     }
     UNPROTECT(1);
-    value->DecOff = Calloc(Qp2, int *);
+    value->DecOff = R_Calloc(Qp2, int *);
     PROTECT(tmp = coerceVector(getListElement(d, "DecOff"), VECSXP));
     for (i = 0; i < Qp2; i++) {
 	(value->DecOff)[i] = INTEGER(coerceVector(VECTOR_ELT(tmp, i), INTSXP));
     }
     UNPROTECT(1);
-    value->DecLen = Calloc(Qp2, int *);
+    value->DecLen = R_Calloc(Qp2, int *);
     PROTECT(tmp = coerceVector(getListElement(d, "DecLen"), VECSXP));
     for (i = 0; i < Qp2; i++) {
 	(value->DecLen)[i] = INTEGER(coerceVector(VECTOR_ELT(tmp, i), INTSXP));
@@ -137,12 +139,12 @@ dimS(SEXP d)			/* from an SEXP */
 void
 dimFree(dimPTR this)
 {
-    Free(this->DecOff);
-    Free(this->DecLen);
-    Free(this->SToff);
-    Free(this->ZXlen);
-    Free(this->ZXoff);
-    Free(this);
+    R_Free(this->DecOff);
+    R_Free(this->DecLen);
+    R_Free(this->SToff);
+    R_Free(this->ZXlen);
+    R_Free(this->ZXoff);
+    R_Free(this);
 }
 
 int
@@ -267,18 +269,18 @@ static int			/* invert an upper-triangular matrix in place*/
 invert_upper(double *mat, int ldmat, int ncol)
 {
     int i, j, ONE = 1, info = 0;
-    double *b = Calloc((size_t) ncol, double);
+    double *b = R_Calloc((size_t) ncol, double);
 
     for (i = ncol; i > 1; i--) {
 	for (j = 0; j < (i - 1); j++) { b[j] = 0.0; }
 	b[((int) i) - 1] = 1.0;
 	F77_CALL(dtrsl) (mat, &ldmat, &i, b, &ONE, &info);
-	if (info != 0) { Free(b); return info; }
+	if (info != 0) { R_Free(b); return info; }
 	Memcpy(mat + (i - 1) * ldmat, b, (int) i);
     }
-    if (*mat == 0.0) { Free(b); return 1; }
+    if (*mat == 0.0) { R_Free(b); return 1; }
     *mat = 1.0 / (*mat);
-    Free(b); return 0;
+    R_Free(b); return 0;
 }
 
 static int			/* invert a block in the virtual R array */
@@ -289,18 +291,18 @@ invert_block(double *mat, int ldmat, int nabove, int ncol, int nright)
 
     if (info != 0) return info;
     if (nright > 0) {
-	double *ntri = Calloc((size_t) (ncol * ncol), double),
+	double *ntri = R_Calloc((size_t) (ncol * ncol), double),
 	    *rtblk = mat + ncol * ldmat;
 	scale_mat(ntri, ncol, -1.0, mat, ldmat, ncol, ncol);
 	mult_mat(rtblk, ldmat, ntri, ncol, ncol, ncol, rtblk, ldmat, nright);
-	Free(ntri);
+	R_Free(ntri);
 	if (nabove > 0) {
-	    double *tmp = Calloc((size_t)(nabove * nright), double);
+	    double *tmp = R_Calloc((size_t)(nabove * nright), double);
 	    plus_equals_mat(rtblk - (size_t)nabove, ldmat,
 			    mult_mat(tmp, nabove, tpblk, ldmat, nabove, ncol,
 				     rtblk, ldmat, nright),
 			    nabove, nabove, nright);
-	    Free(tmp);
+	    R_Free(tmp);
 	}
     }
     if (nabove > 0) {
@@ -326,7 +328,7 @@ internal_decomp(dimPTR dd, double *ZXy)
 
     if ((dd->Srows) >= (dd->ZXrows)) /* decomposition is not worthwhile */
 	return;
-    dc = Calloc((size_t) ((dd->Srows) * (dd->ZXcols)), double);
+    dc = R_Calloc((size_t) ((dd->Srows) * (dd->ZXcols)), double);
     for (i = 0; i < Qp2; i++) {
 	for(j = 0; j < (dd->ngrp)[i]; j++) {
 	    QR_and_rotate(ZXy + (dd->ZXoff)[i][j], dd->ZXrows, (dd->ZXlen)[i][j],
@@ -343,7 +345,7 @@ internal_decomp(dimPTR dd, double *ZXy)
 	}
     }
     dd->ZXrows = dd->Srows;	/* and the total number of rows */
-    Free(dc);
+    R_Free(dc);
 }
 
 double			/* evaluate the log-likelihood pieces */
@@ -353,7 +355,7 @@ internal_loglik(dimPTR dd, double *ZXy, double *DmHalf, int *RML,
 		double *sigma)
 {
     int Q = dd->Q,  Qp2 = Q + 2;
-    double *lglk = Calloc( Qp2, double );
+    double *lglk = R_Calloc( Qp2, double );
 
     for (int i = 0; i < Qp2; i++) {
 	int qi = (dd->q)[i];
@@ -385,11 +387,11 @@ internal_loglik(dimPTR dd, double *ZXy, double *DmHalf, int *RML,
     double accum = 0;
     for(int i = 0; i < Q; i++) {
 	int qi = (dd->q)[i];
-	double *dmHlf = Calloc( (size_t) qi * qi, double );
+	double *dmHlf = R_Calloc( (size_t) qi * qi, double );
 	QRptr dmQR = QR( copy_mat( dmHlf, qi, DmHalf + (dd->DmOff)[i],
 				   qi, qi, qi ), qi, qi, qi);
 	accum += (dd->ngrp)[i] * QRlogAbsDet( dmQR ) - lglk[i];
-	QRfree( dmQR ); Free( dmHlf );
+	QRfree( dmQR ); R_Free( dmHlf );
     }
     // 17-11-2015; Fixed sigma patch; E van Willigen; Quantitative Solutions
     if (*sigma > 0) { // Fixed sigma
@@ -406,7 +408,7 @@ internal_loglik(dimPTR dd, double *ZXy, double *DmHalf, int *RML,
     if (lRSS != DNULLP) {
 	*lRSS = lglk[Q+1];
     }
-    Free(lglk);
+    R_Free(lglk);
     return accum;
 }
 
@@ -465,13 +467,13 @@ finite_diff_Hess(double (*func)(double*,double*), double *pars, int npar,
 	      npar, nT);
     size_t nTot = (size_t) nT;
     double *ppt, *xpt, *dpt,
-	*incr   = Calloc( npar,        double),
-	*parray = Calloc( nTot * npar, double), /* array of parameters */
-	*div    = Calloc( nTot,        double), /* divisors */
-	*Xmat   = Calloc( nTot * nTot, double); /* regressor matrix */
+	*incr   = R_Calloc( npar,        double),
+	*parray = R_Calloc( nTot * npar, double), /* array of parameters */
+	*div    = R_Calloc( nTot,        double), /* divisors */
+	*Xmat   = R_Calloc( nTot * nTot, double); /* regressor matrix */
     QRptr xQR;
 
-    if (cube_root_eps == 0.0) cube_root_eps = exp( log( DOUBLE_EPS ) / 3.);
+    if (cube_root_eps == 0.0) cube_root_eps = exp( log( DBL_EPSILON ) / 3.);
     div[ 0 ] = 1.0;
     ppt = parray + npar * ( 2 * npar + 1 ); /* location of first cross term */
     xpt = Xmat   + nTot * ( 2 * npar + 1 ); /* location of first cross column */
@@ -528,7 +530,7 @@ finite_diff_Hess(double (*func)(double*,double*), double *pars, int npar,
 	    xpt[ i + j * npar ] = xpt[ j + i * npar ] = *dpt++;
 	}
     }
-    QRfree( xQR ); Free( incr ); Free( parray ); Free( div ); Free( Xmat );
+    QRfree( xQR ); R_Free( incr ); R_Free( parray ); R_Free( div ); R_Free( Xmat );
     return;
 }
 
@@ -538,23 +540,23 @@ void
 mixed_fcn(int n, double *pars, double *g, void *state)
 {
     statePTR st = (statePTR) state;
-    double *zxcopy = Calloc(st->dd->ZXrows * st->dd->ZXcols, double),
-	*Delta = Calloc(st->dd->DmOff[st->dd->Q], double);
+    double *zxcopy = R_Calloc(st->dd->ZXrows * st->dd->ZXcols, double),
+	*Delta = R_Calloc(st->dd->DmOff[st->dd->Q], double);
 
     Memcpy(zxcopy, st->ZXy, st->dd->ZXrows * st->dd->ZXcols);
     *g = -internal_loglik(st->dd, zxcopy,
 			  generate_DmHalf(Delta, st->dd, st->pdClass, pars),
 			  st->RML, DNULLP, DNULLP, st->sigma);// 17-11-2015; Fixed sigma ..
-    Free(Delta); Free(zxcopy);
+    R_Free(Delta); R_Free(zxcopy);
 }
 
 void // gradient for optif9() of objective function mixed_fcn() see above
 mixed_grad(int n, double *pars, double *g, void *state)
 {
     statePTR st = (statePTR) state;
-    double *zxcopy = Calloc(st->dd->ZXrows * st->dd->ZXcols, double),
-	*Delta = Calloc(st->dd->DmOff[st->dd->Q], double),
-	*dc = Calloc((size_t) ((st->dd->Srows) * (st->dd->ZXcols)), double),
+    double *zxcopy = R_Calloc(st->dd->ZXrows * st->dd->ZXcols, double),
+	*Delta = R_Calloc(st->dd->DmOff[st->dd->Q], double),
+	*dc = R_Calloc((size_t) ((st->dd->Srows) * (st->dd->ZXcols)), double),
 	*DmHalf, sigmainv, *pt, *res;
     double  sqrtDF = sqrt((double) (st->dd->N -
 				    *(st->RML)*(st->dd->ncol[st->dd->Q])));
@@ -583,7 +585,7 @@ mixed_grad(int n, double *pars, double *g, void *state)
 	    nright = (st->dd->nrot)[i] - (st->dd->nrot)[(st->dd->Q) - ( (*(st->RML)) ? 0 : 1 )];
 	int nrow = (ncol + nright + 1) * (st->dd->ngrp)[i];
 	QRptr qq;
-	pt = res = Calloc((size_t) (ncol * nrow), double);
+	pt = res = R_Calloc((size_t) (ncol * nrow), double);
 	for (j = 0; j < (st->dd->ngrp)[i]; j++) {
 	    copy_trans(pt, nrow, dc + (st->dd->SToff)[i][j], st->dd->Srows,
 		       ncol, ncol + nright);
@@ -628,7 +630,7 @@ mixed_grad(int n, double *pars, double *g, void *state)
 				   parametrization */
 	{
 	    int j1;
-	    double *col_j = Calloc(ncol, double);
+	    double *col_j = R_Calloc(ncol, double);
 	    for (j1 = 0; j1 < ncol; j1++) {
 		int i1;
 		for(i1 = 0; i1 < j1; i1++)
@@ -655,9 +657,9 @@ mixed_grad(int n, double *pars, double *g, void *state)
 	    break;
 	}
 	}
-	Free(res);
+	R_Free(res);
     }
-    Free(dc); Free(Delta); Free(zxcopy);
+    R_Free(dc); R_Free(Delta); R_Free(zxcopy);
 }
 
 /* In gcc we can use nested function
@@ -695,7 +697,7 @@ mixed_loglik(double *ZXy, int *pdims, double *pars, int *settings,
     } else {			/* generate the Delta arrays from pars */
 	setngs = settings;
 	pdC = setngs + 3; // pointer to pdClass (integer code)
-	Delta = Calloc( (dd->DmOff)[ dd->Q ], double );
+	Delta = R_Calloc( (dd->DmOff)[ dd->Q ], double );
 
 	if (settings[ 2 ] == 0) {	/* no gradient or Hessian */
 	    *logLik =
@@ -704,14 +706,14 @@ mixed_loglik(double *ZXy, int *pdims, double *pars, int *settings,
 	} else {
 	    int npar = count_DmHalf_pars( dd, pdC );
 	    zxdim = (dd->ZXrows) * (dd->ZXcols);
-	    zxcopy = Calloc( zxdim, double );
+	    zxcopy = R_Calloc( zxdim, double );
 	    zxcopy2 = ZXy;
 
 	    Memcpy( zxcopy, ZXy, zxdim );
 	    finite_diff_Hess( logLik_fun, pars, npar, logLik, sigma); // 17-11-2015; ...
-	    Free( zxcopy );
+	    R_Free( zxcopy );
 	}
-	Free( Delta );
+	R_Free( Delta );
     }
     dimFree( dd );
 }
@@ -737,8 +739,8 @@ internal_EM(dimPTR dd, double *ZXy, double *DmHalf, int nn, int *pdClass,
 	    double *sigma)
 {
     double sigmainv, *res, *pt,
-	*dc = Calloc((size_t) ((dd->Srows) * (dd->ZXcols)), double),
-	*zxcopy = Calloc((size_t) ((dd->ZXrows) * (dd->ZXcols)), double);
+	*dc = R_Calloc((size_t) ((dd->Srows) * (dd->ZXcols)), double),
+	*zxcopy = R_Calloc((size_t) ((dd->ZXrows) * (dd->ZXcols)), double);
     double  sqrtDF = sqrt((double) (dd->N - *RML * (dd->ncol[dd->Q])));
     int i, j, k, offset;
 
@@ -764,7 +766,7 @@ internal_EM(dimPTR dd, double *ZXy, double *DmHalf, int nn, int *pdClass,
 		nright = (dd->nrot)[i] - (dd->nrot)[(dd->Q) - ( (*RML) ? 0 : 1 )];
 	    int nrow = (ncol + nright + 1) * (dd->ngrp)[i];
 	    QRptr qq;
-	    pt = res = Calloc((size_t) (ncol * nrow), double);
+	    pt = res = R_Calloc((size_t) (ncol * nrow), double);
 	    for (j = 0; j < (dd->ngrp)[i]; j++) {
 		copy_trans(pt, nrow, dc + (dd->SToff)[i][j], dd->Srows,
 			   ncol, ncol + nright);
@@ -828,14 +830,14 @@ internal_EM(dimPTR dd, double *ZXy, double *DmHalf, int nn, int *pdClass,
 	    }
 	    break;
 	    }
-	    Free(res);
+	    R_Free(res);
 	}
     }
     copy_mat(zxcopy, dd->ZXrows, ZXy, dd->ZXrows, dd->ZXrows, dd->ZXcols);
     *logLik = internal_loglik(dd, zxcopy, DmHalf, RML, dc, lRSS,
 			      // 17-11-2015; Fixed sigma patch :
 			      sigma);
-    Free(dc); Free(zxcopy);
+    R_Free(dc); R_Free(zxcopy);
 }
 
 void
@@ -906,11 +908,11 @@ Delta2MatrixLog( double *theta, int *q, double *Delta )
     if ( qq == 1 ) {
 	*theta = log(*Delta * *Delta)/2.;
     } else {
-	double *vectors = Calloc((size_t) qq * qq, double),
-	    *DtransD = Calloc((size_t) qq * qq, double),
-	    *workmat = Calloc((size_t) qq * qq, double),
-	    *work2 = Calloc((size_t) qq, double),
-	    *values = Calloc((size_t) qq, double), *pt;
+	double *vectors = R_Calloc((size_t) qq * qq, double),
+	    *DtransD = R_Calloc((size_t) qq * qq, double),
+	    *workmat = R_Calloc((size_t) qq * qq, double),
+	    *work2 = R_Calloc((size_t) qq, double),
+	    *values = R_Calloc((size_t) qq, double), *pt;
 	crossprod_mat(DtransD, qq, Delta, qq, qq, qq); /* form t(Delta) %*% Delta */
 	F77_CALL(rs) (q, q, DtransD, values, &one, vectors, workmat, work2, &info);
 	if (info != 0) {
@@ -930,7 +932,7 @@ Delta2MatrixLog( double *theta, int *q, double *Delta )
 		*pt++ = workmat[ i * qq + j ];
 	    }
 	}
-	Free(vectors); Free(DtransD); Free(workmat), Free(work2); Free(values);
+	R_Free(vectors); R_Free(DtransD); R_Free(workmat), R_Free(work2); R_Free(values);
     }
 }
 
@@ -942,7 +944,7 @@ Delta2LogCholesky(double *theta, int *q, double *Delta )
 	*theta = log(*Delta * *Delta)/2.;
     } else {
 	double *ll = theta + qq,
-	    *DtransD = Calloc((size_t) qq * qq, double);
+	    *DtransD = R_Calloc((size_t) qq * qq, double);
 	crossprod_mat(DtransD, qq, Delta, qq, qq, qq); /* form t(Delta) %*% Delta */
 	F77_CALL(chol) (DtransD, &qq, &qq, Delta, &info); /* re-writes Delta */
 	if (info != 0)
@@ -954,7 +956,7 @@ Delta2LogCholesky(double *theta, int *q, double *Delta )
 	    Memcpy(ll, Delta + i * qq, i);
 	    ll += i;
 	}
-	Free(DtransD);
+	R_Free(DtransD);
     }
 }
 
@@ -1005,9 +1007,9 @@ mixed_combined(double *ZXy, int *pdims, double *DmHalf, int *nIter,
     pdC = pdClass;
     setngs = RML;
 
-    dc = Calloc((size_t) ((dd->Srows) * (dd->ZXcols)), double);
+    dc = R_Calloc((size_t) ((dd->Srows) * (dd->ZXcols)), double);
 
-    Ra = Calloc( dd->DmOff[dd->Q], double);
+    Ra = R_Calloc( dd->DmOff[dd->Q], double);
     internal_decomp( dd, ZXy );	/* take decomp if useful */
 
 				/* check for non-zero entries in DmHalf */
@@ -1026,16 +1028,16 @@ mixed_combined(double *ZXy, int *pdims, double *DmHalf, int *nIter,
     internal_EM(dd, ZXy, DmHalf, *nIter, pdClass, RML, logLik, Ra, lRSS,
 		sigma); // 17-11-2015; Fixed sigma patch ...
     {
-	statePTR st = Calloc(1, struct state_struct);
+	statePTR st = R_Calloc(1, struct state_struct);
 	int ntheta = count_DmHalf_pars( dd, pdC ), itrmcd, itncnt,
 	    p = dd->ncol[dd->Q], iagflg;
 	double
-	    *theta = Calloc(ntheta, double),
-	    *typsiz = Calloc(ntheta, double),
-	    *grad = Calloc(ntheta, double),
-	    *newtheta = Calloc(ntheta, double),
-	    *a = Calloc(ntheta * ntheta, double),
-	    *work = Calloc(ntheta * 9, double);
+	    *theta = R_Calloc(ntheta, double),
+	    *typsiz = R_Calloc(ntheta, double),
+	    *grad = R_Calloc(ntheta, double),
+	    *newtheta = R_Calloc(ntheta, double),
+	    *a = R_Calloc(ntheta * ntheta, double),
+	    *work = R_Calloc(ntheta * 9, double);
 
 	st->dd = dd;
 	st->ZXy = ZXy;
@@ -1070,10 +1072,10 @@ mixed_combined(double *ZXy, int *pdims, double *DmHalf, int *nIter,
 				       sigma );
 	    copy_mat(R0, p, dc + (dd->SToff)[(dd->Q)][0], (dd->Srows), p, p + 1);
 	}
-	Free(work); Free(a); Free(newtheta); Free(grad); Free(typsiz); Free(theta);
-	Free(st);
+	R_Free(work); R_Free(a); R_Free(newtheta); R_Free(grad);
+	R_Free(typsiz); R_Free(theta); R_Free(st);
     }
-    dimFree( dd ); Free( dc ); Free( Ra );
+    dimFree( dd ); R_Free( dc ); R_Free( Ra );
 }
 
 /* functions for calculating df's for fixed effects tests */
@@ -1189,7 +1191,7 @@ gls_estimate(double *Xy, int *pdims, double *beta, double *sigma,
     int i, N = pdims[0], p = pdims[1], RML = pdims[2], pp1 = p + 1,
 	Nr = N - RML * p, rk, rkm1, rkp1;
     QRptr dmQR;
-    double *R = Calloc((size_t) (pp1 * pp1), double);
+    double *R = R_Calloc((size_t) (pp1 * pp1), double);
 
     dmQR = QR(Xy, N, N, pp1);
     *rank = rk = dmQR->rank;
@@ -1225,5 +1227,5 @@ gls_estimate(double *Xy, int *pdims, double *beta, double *sigma,
     invert_upper(varBeta, rkm1, rkm1);
     mult_mat(beta, rkm1, varBeta, rkm1, rkm1, rkm1, R + rkm1 * rk, rk,  1);
     QRfree(dmQR);
-    Free(R);
+    R_Free(R);
 }

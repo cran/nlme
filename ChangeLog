@@ -1,3 +1,30 @@
+2022-01-13  Brian Ripley
+
+	* DESCRIPTION (Version): 3.1-155 (released)
+	* src: Use R_Calloc, R_Free.
+
+2021-11-02  Sebastian Meyer  <Sebastian.Meyer@R-project.org>
+
+	* R/nlme.R (nlme.nlsList, nlme.formula): fix more scoping issues
+	with self-starting models by evaluating calls in the parent frame.
+	* R/nlsList.R (nlsList.selfStart): (ditto)
+	* tests/scoping.R: add corresponding regression tests.
+
+2021-10-21  Sebastian Meyer  <Sebastian.Meyer@R-project.org>
+
+	* R/gnls.R (gnls), tests/scoping.R: fix evaluation environment of
+	the internal `nls` call used for self-starting models (PR#18157).
+
+	* R/nlme.R (nlme.formula), tests/nlme.R: fix "unused argument" error
+	when explicitly specifying `groups` in a self-starting model.
+
+2021-09-23  Martin Maechler  <maechler@stat.math.ethz.ch>
+
+	* DESCRIPTION (Version): 3.1-154 (unreleased)
+
+	* R/gls.R (print.intervals.gls): do not print `attr(., "label")` twice;
+	ditto in R/lme.R, PR#18196, with thanks to Johannes Ranke.
+
 2021-09-07  Martin Maechler  <maechler@stat.math.ethz.ch>
 
 	* R/groupedData.R ("[.groupedData"): change the default of `drop` to
@@ -5,6 +32,8 @@
 
 	* R/lme.R (print.summary.lme): change partial match to
 	`x$coefficients`, PR#18184.
+
+	* DESCRIPTION: Release 3.1-154
 
 2021-08-05  Martin Maechler  <maechler@stat.math.ethz.ch>
 

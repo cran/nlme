@@ -4,7 +4,7 @@
    Copyright 1997-2005 Douglas M. Bates <bates@stat.wisc.edu>,
 		       Jose C. Pinheiro,
 		       Saikat DebRoy
-   Copyright 2007-2016  The R Core Team
+   Copyright 2007-2022  The R Core Team
 
    This file is part of the nlme package for R and related languages
    and is made available under the terms of the GNU General Public
@@ -58,9 +58,9 @@ matrixLog_pd(double *L, int *q, double *l)
   if ( qq == 1 ) {
     *L = exp( *l );
   } else {
-    double *vectors = Calloc((size_t) qq * qq, double),
-      *work1 = Calloc((size_t) qq, double), *work2 = Calloc((size_t) qq, double),
-      *values = Calloc((size_t) qq, double);
+    double *vectors = R_Calloc((size_t) qq * qq, double),
+      *work1 = R_Calloc((size_t) qq, double), *work2 = R_Calloc((size_t) qq, double),
+      *values = R_Calloc((size_t) qq, double);
     Chol_pd(L, q, l);
     for(i = 0; i < qq - 1; i++) {
       copy_mat(L + (i * (qq + 1) + 1), 1L, L + i * (qq + 1) + qq, qq, 1L,
@@ -74,7 +74,7 @@ matrixLog_pd(double *L, int *q, double *l)
       }
     }
     copy_trans(L, qq, vectors, qq, qq, qq);
-    Free(vectors); Free(work1); Free(work2); Free(values);
+    R_Free(vectors); R_Free(work1); R_Free(work2); R_Free(values);
   }
 }
 
@@ -83,7 +83,7 @@ void
 natural_pd(double *L, int *q, double *l) /* natural parametrization  */
 {
   int i, j, qp1 = *q + 1, info;
-  double *std = l, *corr = l + *q, *work = Calloc(*q, double);
+  double *std = l, *corr = l + *q, *work = R_Calloc(*q, double);
 
   for(i = 0; i < *q; i++) std[i] = exp(std[i]);
 
@@ -97,7 +97,7 @@ natural_pd(double *L, int *q, double *l) /* natural parametrization  */
     }
   }
   F77_CALL(chol) (L, q, q, L, &info);
-  Free(work);
+  R_Free(work);
 }
 
 void

@@ -4,7 +4,7 @@
    Copyright 1997-2005  Douglas M. Bates <bates@stat.wisc.edu>,
 			Jose C. Pinheiro,
 			Saikat DebRoy
-   Copyright 2007-2016  The R Core Team
+   Copyright 2007-2022  The R Core Team
 
    This file is part of the nlme package for R and related languages
    and is made available under the terms of the GNU General Public
@@ -22,6 +22,8 @@
    http://www.r-project.org/Licenses/
 
 */
+
+#include <float.h> // for DBL_EPSILON
 
 #include "matrix.h"
 /* find qr decomposition, dqrdc2() is basis of R's qr(), also used by nlme */
@@ -81,7 +83,7 @@ mult_mat(double *z, int ldz,
 	 double *x, int ldx, int xrows, int xcols,
 	 double *y, int ldy, int ycols)
 {				/* z <- x %*% y */
-  double *t, *tmp = Calloc((size_t)(xrows * ycols), double);
+  double *t, *tmp = R_Calloc((size_t)(xrows * ycols), double);
   int i, j;			/* use tmp so z can be either x or y */
 
   t = tmp;
@@ -93,7 +95,7 @@ mult_mat(double *z, int ldz,
     y += ldy;
   }
   copy_mat(z, ldz, tmp, xrows, xrows, ycols);
-  Free(tmp);
+  R_Free(tmp);
   return z;
 }
 
@@ -110,30 +112,30 @@ zero_mat(double *y, int ldy, int nrow, int ncol)
 QRptr
 QR(double *mat, int ldmat, int nrow, int ncol)
 {				/* Constructor for a QR object */
-  QRptr value = Calloc((size_t) 1, struct QR_struct);
+  QRptr value = R_Calloc((size_t) 1, struct QR_struct);
   int j;  double *work;
 
-  if (sqrt_eps == 0.) { sqrt_eps = sqrt(DOUBLE_EPS); }
+  if (sqrt_eps == 0.) { sqrt_eps = sqrt(DBL_EPSILON); }
   value->mat = mat;
   value->ldmat = ldmat;
   value->nrow = nrow;
   value->ncol = ncol;
-  value->qraux = Calloc((size_t) ncol, double);
-  value->pivot = Calloc((size_t) ncol, int);
+  value->qraux = R_Calloc((size_t) ncol, double);
+  value->pivot = R_Calloc((size_t) ncol, int);
   for (j = 0; j < ncol; j++) { (value->pivot)[j] = j; }
-  work = Calloc( 2 * ncol, double );
+  work = R_Calloc( 2 * ncol, double );
   F77_CALL(dqrdc2) (mat, &ldmat, &nrow, &ncol, &sqrt_eps, &(value->rank),
 		    value->qraux, value->pivot, work);
-  Free(work);
+  R_Free(work);
   return value;
 }
 
 void
 QRfree(QRptr this)
 {				/* destructor for a QR object*/
-  Free(this->pivot);
-  Free(this->qraux);
-  Free(this);
+  R_Free(this->pivot);
+  R_Free(this->qraux);
+  R_Free(this);
 }
 
 int
@@ -153,8 +155,8 @@ int
 QRsolve( QRptr this, double *ymat, int ldy, int ycol, double *beta, int ldbeta )
 {				/* beta <- qr.beta(this, ymat) */
   int j, info, task = 1100L;
-  double *qty = Calloc( this->nrow, double ),
-    *bb = Calloc( this->ncol, double );
+  double *qty = R_Calloc( this->nrow, double ),
+    *bb = R_Calloc( this->ncol, double );
 
   for (j = 0; j < ycol; j++) {
     Memcpy( qty, ymat, this->nrow );
@@ -165,7 +167,7 @@ QRsolve( QRptr this, double *ymat, int ldy, int ycol, double *beta, int ldbeta )
     ymat += ldy;
     beta += ldbeta;
   }
-  Free( qty ); Free( bb );
+  R_Free( qty ); R_Free( bb );
   return info;
 }
 
@@ -199,7 +201,7 @@ QR_and_rotate(double *mat, int ldmat, int nrow, int ncol,
 {
   int rank, arow = nrow + qi,  /* number of rows in augmented matrix */
     ndrow = ((arow > ndecomp) ? ndecomp : arow);
-  double *aug = Calloc((size_t) arow * ncol, double);
+  double *aug = R_Calloc((size_t) arow * ncol, double);
   QRptr aQR;
 
   copy_mat(aug, arow, mat, ldmat, nrow, ncol);
@@ -216,6 +218,6 @@ QR_and_rotate(double *mat, int ldmat, int nrow, int ncol,
   copy_mat(mat + ndecomp * ldmat, ldmat, aug + ndecomp * (arow + 1L),
 	   arow, arow - ndrow, ncol - ndecomp);
   rank = aQR->rank;
-  QRfree(aQR); Free(aug);
+  QRfree(aQR); R_Free(aug);
   return rank;
 }

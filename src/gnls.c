@@ -4,7 +4,7 @@
    Copyright 1997-2005 Douglas M. Bates <bates@stat.wisc.edu>,
 		       Jose C. Pinheiro,
 		       Saikat DebRoy
-   Copyright 2007-2016  The R Core Team
+   Copyright 2007-2022  The R Core Team
 
    This file is part of the nlme package for R and related languages
    and is made available under the terms of the GNU General Public
@@ -22,6 +22,8 @@
    http://www.r-project.org/Licenses/
 
 */
+
+#include <float.h> // for DBL_EPSILON
 
 #include "nlOptimizer.h"
 #include "matrix.h"
@@ -49,7 +51,7 @@ gnls_init(double *ptheta, int *dims, double *corFactor, double *varWeights,
   int nResult,
       npar = dims[0], // == p = pLen
       N = dims[1]; // == NReal == length(additional)
-  gnlsPtr gnls = Calloc(1, struct gnls_struct);
+  gnlsPtr gnls = R_Calloc(1, struct gnls_struct);
   gnls->theta = ptheta;
   gnls->corFactor = corFactor;
   gnls->varWeights = varWeights;
@@ -61,25 +63,25 @@ gnls_init(double *ptheta, int *dims, double *corFactor, double *varWeights,
   gnls->maxIter = (int) settings[0];
   gnls->minFactor = settings[1];
   gnls->tolerance = settings[2];
-  gnls->newtheta = Calloc(npar, double);
-  gnls->incr = Calloc(npar, double);
+  gnls->newtheta = R_Calloc(npar, double);
+  gnls->incr = R_Calloc(npar, double);
   gnls->varOpt = varOpt;
   gnls->corOpt = corOpt;
   gnls->add_ons = additional;
   gnls->model = model;
   gnls->result[0] = DNULLP;
   nResult = evaluate(ptheta, npar, model, gnls->result);
-  gnls->result[0] = Calloc(nResult, double);
+  gnls->result[0] = R_Calloc(nResult, double);
   return gnls;
 }
 
 static void
 gnlsFree( gnlsPtr gnls )
 {
-  Free(gnls->newtheta);
-  Free(gnls->incr);
-  Free(gnls->result[0]);
-  Free(gnls);
+  R_Free(gnls->newtheta);
+  R_Free(gnls->incr);
+  R_Free(gnls->result[0]);
+  R_Free(gnls);
 }
 
 static double
@@ -104,8 +106,8 @@ gnls_objective(gnlsPtr gnls)
 static double
 gnls_increment(gnlsPtr gnls)
 {
-  if (sqrt_eps == 0.0) sqrt_eps = sqrt(DOUBLE_EPS);
-  double* auxRes = Calloc(gnls->N, double);
+  if (sqrt_eps == 0.0) sqrt_eps = sqrt(DBL_EPSILON);
+  double* auxRes = R_Calloc(gnls->N, double);
   Memcpy(auxRes, gnls->residuals, gnls->N);
   QRptr aQR = QR(gnls->gradient, gnls->N, gnls->N, gnls->npar);
   QRsolve(aQR, gnls->residuals, gnls->N, 1L, gnls->incr, gnls->npar);
@@ -115,7 +117,7 @@ gnls_increment(gnlsPtr gnls)
     regSS += auxRes[i] * auxRes[i];
   }
   QRfree(aQR);
-  Free(auxRes);
+  R_Free(auxRes);
   return(sqrt(((double) gnls->nrdof) * regSS /
 	      ((double) gnls->npar) * (gnls->new_objective - regSS)));
 }
@@ -177,7 +179,7 @@ fit_gnls(double *ptheta, int *pdims, // = Dims
   gnlsPtr gnls;
 
   PROTECT(model);
-  if(sqrt_eps == 0.0) sqrt_eps = sqrt(DOUBLE_EPS);
+  if(sqrt_eps == 0.0) sqrt_eps = sqrt(DBL_EPSILON);
   gnls = gnls_init(ptheta, pdims, pcorFactor, pvarWeights, pcorDims,
 		   settings, additional, *pcorOpt, *pvarOpt, model);
   settings[4] = (double) gnls_iterate(gnls);
