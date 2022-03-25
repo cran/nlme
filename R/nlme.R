@@ -1,6 +1,6 @@
 ###            Fit a general nonlinear mixed effects model
 ###
-### Copyright 2006-2021  The R Core team
+### Copyright 2006-2022  The R Core team
 ### Copyright 1997-2003  Jose C. Pinheiro,
 ###                      Douglas M. Bates <bates@stat.wisc.edu>
 ###
@@ -178,6 +178,8 @@ nlme.formula <-
     stop("'model' must be a formula")
   if (length(model)!=3)
     stop("model formula must be of the form \"resp ~ pred\"")
+  ## if (length(attr(terms(model), "offset")))
+  ##   stop("offset() terms are not supported")
 
   method <- match.arg(method)
   REML <- method == "REML"
@@ -1111,26 +1113,29 @@ predict.nlme <-
     reSt <- NULL
   }
 
-  mfArgs <- list(formula = asOneFormula(
+  ## use xlev to make sure factor levels are the same as in contrasts
+  ## and to support character-type 'newdata' for factors
+  contr <- object$contrasts
+  dataMix <- model.frame(formula = asOneFormula(
                    formula(object),
                    object$call$fixed, formula(reSt), naPattern,
                    omit = c(names(object$plist), "pi",
                             deparse(getResponseFormula(object)[[2]]))),
                  data = newdata, na.action = na.action,
-                 drop.unused.levels = TRUE)
-  dataMix <- do.call(model.frame, mfArgs)
+                 drop.unused.levels = TRUE,
+                 xlev = lapply(contr, rownames))
   origOrder <- row.names(dataMix)	# preserve the original order
   whichRows <- match(origOrder, row.names(newdata))
 
   if (maxQ > 0) {
     ## sort the model.frame by groups and get the matrices and parameters
     ## used in the estimation procedures
-    grps <- getGroups(newdata,
+    grps <- getGroups(newdata,          # (unused levels are dropped here)
                       eval(substitute(~ 1 | GRPS,
                                       list(GRPS = groups[[2]]))))
     ## ordering data by groups
     if (inherits(grps, "factor")) {	# single level
-      grps <- grps[whichRows, drop = TRUE]
+      grps <- grps[whichRows]
       oGrps <- data.frame(grps)
       ## checking if there are missing groups
       if (any(naGrps <- is.na(grps))) {
@@ -1141,9 +1146,7 @@ predict.nlme <-
       row.names(grps) <- origOrder
       names(grps) <- names(oGrps) <- as.character(deparse((groups[[2L]])))
     } else {
-      grps <- oGrps <-
-	do.call(data.frame, ## FIXME?  better  lapply(*, drop)   ??
-                lapply(grps[whichRows, ], function(x) x[drop = TRUE]))
+      grps <- oGrps <- grps[whichRows, ]
       ## checking for missing groups
       if (any(naGrps <- is.na(grps))) {
 	## need to input missing groups
@@ -1154,7 +1157,6 @@ predict.nlme <-
       }
       ord <- do.call(order, grps)
       ## making group levels unique
-      grps[, 1] <- grps[, 1][drop = TRUE]
       for(i in 2:ncol(grps)) {
 	grps[, i] <-
           as.factor(paste(as.character(grps[, i-1]),
@@ -1170,28 +1172,10 @@ predict.nlme <-
     dataMix <- dataMix[ord, ,drop = FALSE]
     revOrder <- match(origOrder, row.names(dataMix)) # putting in orig. order
   }
-  ## making sure factor levels are the same as in contrasts
-  contr <- object$contrasts
-  for(i in names(dataMix)) {
-    if (inherits(dataMix[,i], "factor") && !is.null(contr[[i]])) {
-      levs <- levels(dataMix[,i])
-      levsC <- dimnames(contr[[i]])[[1L]]
-      if (any(wch <- is.na(match(levs, levsC)))) {
-        stop(sprintf(ngettext(sum(wch),
-                              "level %s not allowed for %s",
-                              "levels %s not allowed for %s"),
-                     paste(levs[wch], collapse = ",")),
-             domain = NA)
-      }
-      ## if (length(levs) < length(levsC)) {
-      ##   if (inherits(dataMix[,i], "ordered")) {
-      ##     dataMix[,i] <- ordered(as.character(dataMix[,i]), levels = levsC)
-      ##   } else {
-      ##     dataMix[,i] <- factor(as.character(dataMix[,i]), levels = levsC)
-      ##   }
-      ## }
-      attr(dataMix[,i], "contrasts") <- contr[[i]][levs, , drop = FALSE]
-    }
+  ## restore contrasts for the below model.matrix() calls (which may use
+  ## different factor variables, so we avoid passing the whole contr list)
+  for(i in intersect(names(dataMix), names(contr))) {
+    attr(dataMix[[i]], "contrasts") <- contr[[i]]
   }
 
   N <- nrow(dataMix)

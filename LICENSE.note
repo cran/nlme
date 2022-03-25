@@ -1,0 +1,47 @@
+Copyrights
+==========
+
+The bulk of this code is:
+
+  Copyright (C) 1997-2005 Jose C. Pinheiro and Douglas M. Bates
+  Copyright (C) 2005-2022 The R Core Team
+
+
+Some of the code contains different copyright statements.
+A not-necessarily-complete list is:
+
+src/chol.f
+
+  Copyright (C) 1996, 1997  Robert Gentleman and Ross Ihaka
+
+src/base.h
+src/matrix.h
+src/nlmefit.h
+
+  Copyright 1999-2001 Saikat DebRoy
+
+
+Authors of 'fixed sigma option' of Nov. 2015:
+
+  Siem Heisterkamp <sh.heisterkamp@icloud.com>
+  Bert van Willigen <info@vanwilligen-ict.com>
+  Paul Matthias Diderichsen <pmdiderichsen@wequantify.com>  (sponsor)
+  
+  Copyright (C) 2015 Quantitative Solutions, a Certara company
+
+
+License
+=======
+
+This software is distributed under the terms of the GNU General Public
+License as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+    
+A copy of the GNU General Public License version 2 is in file
+share/licenses/GPL-2 in the R (source or binary) distribution
+and is also available at https://www.R-project.org/Licenses/.

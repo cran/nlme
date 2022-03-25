@@ -137,6 +137,4 @@ plot(augPred(fm4Oats), aspect = 2.5, layout = c(6, 3),
 # cleanup
 
 summary(warnings())
-proc.time()
-
 

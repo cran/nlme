@@ -1,6 +1,6 @@
 ###            Fit a general linear mixed effects model
 ###
-### Copyright 2005-2021  The R Core team
+### Copyright 2005-2022  The R Core team
 ### Copyright 1997-2003  Jose C. Pinheiro,
 ###                      Douglas M. Bates <bates@stat.wisc.edu>
 ###
@@ -154,7 +154,7 @@ lme.formula <-
   ## checking arguments
   ##
   if (!inherits(fixed, "formula") || length(fixed) != 3) {
-    stop("\nfixed-effects model must be a formula of the form \"resp ~ pred\"")
+    stop("fixed-effects model must be a formula of the form \"resp ~ pred\"")
   }
   method <- match.arg(method)
   REML <- method == "REML"
@@ -262,13 +262,15 @@ lme.formula <-
 
   ## obtaining basic model matrices
   N <- nrow(grps)
-  Z <- model.matrix(reSt, dataMix)
+  Z <- model.matrix(reSt, dataMix)      # stores contrasts in matrix form
   ncols <- attr(Z, "ncols")
   Names(lmeSt$reStruct) <- attr(Z, "nams")
   ## keeping the contrasts for later use in predict
   contr <- attr(Z, "contr")
   X <- model.frame(fixed, dataMix)
   Terms <- attr(X, "terms")
+  if (length(attr(Terms, "offset")))
+    stop("offset() terms are not supported")
   auxContr <- lapply(X, function(el)
     if (inherits(el, "factor") &&
         length(levels(el)) > 1) contrasts(el))
@@ -1087,7 +1089,7 @@ augPred.lme <-
   function(object, primary = NULL, minimum = min(primary),
            maximum = max(primary), length.out = 51L, level = Q, ...)
 {
-  data <- eval(object$call$data)
+  data <- eval.parent(object$call$data)
   if (!inherits(data, "data.frame")) {
     stop(gettextf("data in %s call must evaluate to a data frame",
                   sQuote(substitute(object))), domain = NA)
@@ -1256,7 +1258,8 @@ fitted.lme <-
   } else napredict(object$na.action, val[, level])
 }
 
-formula.lme <- function(x, ...) eval(x$call$fixed)
+formula.lme <- function(x, ...) #formula(x$terms)  ## deferred
+  eval(x$call$fixed)
 
 fixef.lme <- function(object, ...) object$coefficients$fixed
 
@@ -1674,7 +1677,7 @@ plot.ranef.lme <-
     eLen <- length(eNames)
     argData <- data.frame(.pars = as.vector(unlist(x[, eNames])),
                           .enames = ordered(rep(eNames, rep(nrow(x), eLen)),
-                                            level = eNames), check.names = FALSE)
+                                            levels = eNames), check.names = FALSE)
     for(i in names(x)[is.na(match(names(x), eNames))]) {
       argData[[i]] <- rep(x[[i]], eLen)
     }
@@ -1851,22 +1854,25 @@ predict.lme <-
     reSt <- NULL
   }
 
-  mfArgs <- list(formula = asOneFormula(formula(reSt), fixed),
-                 data = newdata, na.action = na.action,
-                 drop.unused.levels = TRUE)
-  dataMix <- do.call(model.frame, mfArgs)
+  ## use xlev to make sure factor levels are the same as in contrasts
+  ## and to support character-type 'newdata' for factors
+  contr <- object$contrasts  # these are in matrix form
+  dataMix <- model.frame(formula = asOneFormula(formula(reSt), fixed),
+                         data = newdata, na.action = na.action,
+                         drop.unused.levels = TRUE,
+                         xlev = lapply(contr, rownames))
   origOrder <- row.names(dataMix)	# preserve the original order
   whichRows <- match(origOrder, row.names(newdata))
 
   if (maxQ > 0) {
     ## sort the model.frame by groups and get the matrices and parameters
     ## used in the estimation procedures
-    grps <- getGroups(newdata,
+    grps <- getGroups(newdata,          # (unused levels are dropped here)
                       eval(substitute(~ 1 | GRPS,
                                       list(GRPS = groups[[2]]))))
     ## ordering data by groups
     if (inherits(grps, "factor")) {	# single level
-      grps <- grps[whichRows, drop = TRUE]
+      grps <- grps[whichRows]
       oGrps <- data.frame(grps)
       ## checking if there are missing groups
       if (any(naGrps <- is.na(grps))) {
@@ -1877,9 +1883,7 @@ predict.lme <-
       row.names(grps) <- origOrder
       names(grps) <- names(oGrps) <- as.character(deparse((groups[[2L]])))
     } else {
-      grps <- oGrps <-
-        do.call(data.frame, ## FIXME?  better  lapply(*, drop)   ??
-                lapply(grps[whichRows, ], function(x) x[drop = TRUE]))
+      grps <- oGrps <- grps[whichRows, ]
       ## checking for missing groups
       if (any(naGrps <- is.na(grps))) {
         ## need to input missing groups
@@ -1890,7 +1894,6 @@ predict.lme <-
       }
       ord <- do.call(order, grps)
       ## making group levels unique
-      grps[, 1] <- grps[, 1][drop = TRUE]
       for(i in 2:ncol(grps)) {
         grps[, i] <-
           as.factor(paste(as.character(grps[, i-1]),
@@ -1901,28 +1904,10 @@ predict.lme <-
     grps <- grps[ord, , drop = FALSE]
     dataMix <- dataMix[ord, ,drop = FALSE]
   }
-  ## making sure factor levels are the same as in contrasts
-  contr <- object$contrasts
-  for(i in names(dataMix)) {
-    if (inherits(dataMix[,i], "factor") && !is.null(contr[[i]])) {
-      levs <- levels(dataMix[,i])
-      levsC <- dimnames(contr[[i]])[[1L]]
-      if (any(wch <- is.na(match(levs, levsC)))) {
-        stop(sprintf(ngettext(sum(wch),
-                              "level %s not allowed for %s",
-                              "levels %s not allowed for %s"),
-                     paste(levs[wch], collapse = ",")),
-             domain = NA)
-      }
-      ## if (length(levs) < length(levsC)) {
-      ##   if (inherits(dataMix[,i], "ordered")) {
-      ##     dataMix[,i] <- ordered(as.character(dataMix[,i]), levels = levsC)
-      ##   } else {
-      ##     dataMix[,i] <- factor(as.character(dataMix[,i]), levels = levsC)
-      ##   }
-      ## }
-      attr(dataMix[,i], "contrasts") <- contr[[i]][levs, , drop = FALSE]
-    }
+  ## restore contrasts for the below model.matrix() calls (which may use
+  ## different factor variables, so we avoid passing the whole contr list)
+  for(i in intersect(names(dataMix), names(contr))) {
+    attr(dataMix[[i]], "contrasts") <- contr[[i]]
   }
   if (maxQ > 0) {
     revOrder <- match(origOrder, row.names(dataMix)) # putting in orig. order

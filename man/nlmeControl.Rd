@@ -45,7 +45,7 @@ nlmeControl(maxIter, pnlsMaxIter, msMaxIter, minScale,
    as argument \code{print.level} to \code{\link{nlm}()}.  Default is
    \code{FALSE}.}
  \item{msWarnNoConv}{logical indicating if a \code{\link{warning}}
-   should be signalled whenever the minimization by (\code{opt}) in the
+   should be signalled whenever the minimization (by \code{opt}) in the
    LME step does not converge; defaults to \code{TRUE}.}
  \item{gradHess}{a logical value indicating whether numerical gradient
    vectors and Hessian matrices of the log-likelihood function should
@@ -89,8 +89,7 @@ nlmeControl(maxIter, pnlsMaxIter, msMaxIter, minScale,
 \seealso{\code{\link{nlme}}, \code{\link{nlm}}, \code{\link{optim}},
   \code{\link{nlmeStruct}}}
 \examples{
-# decrease the maximum number iterations in the ms call and
-# request that information on the evolution of the ms iterations be printed
+# decrease the maximum number of iterations and request tracing
 nlmeControl(msMaxIter = 20, msVerbose = TRUE)
 }
 \keyword{models}

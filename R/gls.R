@@ -1,6 +1,6 @@
 ###  Fit a linear model with correlated errors and/or heteroscedasticity
 ###
-### Copyright 2005-2021  The R Core team
+### Copyright 2005-2022  The R Core team
 ### Copyright 1997-2003  Jose C. Pinheiro,
 ###                      Douglas M. Bates <bates@stat.wisc.edu>
 #
@@ -40,7 +40,7 @@ gls <-
     ## checking arguments
     ##
     if (!inherits(model, "formula") || length(model) != 3L) {
-        stop("\nmodel must be a formula of the form \"resp ~ pred\"")
+        stop("model must be a formula of the form \"resp ~ pred\"")
     }
     method <- match.arg(method)
     REML <- method == "REML"
@@ -78,6 +78,9 @@ gls <-
 
     ## obtaining basic model matrices
     X <- model.frame(model, dataMod)
+    Terms <- attr(X, "terms")
+    if (length(attr(Terms, "offset")))
+        stop("offset() terms are not supported")
     ## keeping the contrasts for later use in predict
     contr <- lapply(X, function(el)
                     if (inherits(el, "factor")) contrasts(el))
@@ -88,9 +91,8 @@ gls <-
     N <- nrow(X)
     p <- ncol(X)				# number of coefficients
     parAssign <- attr(X, "assign")
-    fTerms <- terms(as.formula(model), data=data)
-    namTerms <- attr(fTerms, "term.labels")
-    if (attr(fTerms, "intercept") > 0) {
+    namTerms <- attr(Terms, "term.labels")
+    if (attr(Terms, "intercept") > 0) {
         namTerms <- c("(Intercept)", namTerms)
     }
     namTerms <- factor(parAssign, labels = namTerms)
@@ -226,6 +228,7 @@ gls <-
                    numIter = if (needUpdate(glsSt)) numIter else numIter0,
                    groups = grps,
                    call = Call,
+                   terms = Terms,
                    method = method,
                    fitted = Fitted,
                    residuals = Resid,
@@ -551,7 +554,7 @@ augPred.gls <-
     function(object, primary = NULL, minimum = min(primary),
              maximum = max(primary), length.out = 51L, ...)
 {
-    data <- eval(object$call$data)
+    data <- eval.parent(object$call$data)
     if (!inherits(data, "data.frame")) {
         stop(gettextf("data in %s call must evaluate to a data frame",
                       sQuote(substitute(object))), domain = NA)
@@ -722,7 +725,12 @@ fitted.gls <-
 }
 
 
-formula.gls <- function(x, ...) eval(x$call$model)
+formula.gls <- function(x, ...)
+{
+    if (is.null(x$terms)) { # gls objects from nlme <= 3.1-155
+        eval(x$call$model)
+    } else formula(x$terms)
+}
 
 getGroups.gls <- function(object, form, level, data, sep) object$groups
 
@@ -895,37 +903,16 @@ predict.gls <-
     if (missing(newdata)) {		# will return fitted values
         return(fitted(object))
     }
-    form <- getCovariateFormula(object)
-    mfArgs <- list(formula = form, data = newdata, na.action = na.action)
-    mfArgs$drop.unused.levels <- TRUE
-    dataMod <- do.call(model.frame, mfArgs)
+    form <- delete.response(object[["terms"]])
     ## making sure factor levels are the same as in contrasts
-    contr <- object$contrasts
-    for(i in names(dataMod)) {
-        if (inherits(dataMod[,i], "factor") && !is.null(contr[[i]])) {
-            levs <- levels(dataMod[,i])
-            levsC <- dimnames(contr[[i]])[[1]]
-            if (any(wch <- is.na(match(levs, levsC)))) {
-                stop(sprintf(ngettext(sum(wch),
-                                      "level %s not allowed for %s",
-                                      "levels %s not allowed for %s"),
-                             paste(levs[wch], collapse = ",")),
-                     domain = NA)
-            }
-            attr(dataMod[,i], "contrasts") <- contr[[i]][levs, , drop = FALSE]
-            ##      if (length(levs) < length(levsC)) {
-            ##        if (inherits(dataMod[,i], "ordered")) {
-            ##          dataMod[,i] <- ordered(as.character(dataMod[,i]), levels = levsC)
-            ##        } else {
-            ##          dataMod[,i] <- factor(as.character(dataMod[,i]), levels = levsC)
-            ##        }
-            ##      }
-        }
-    }
+    ## and supporting character-type 'newdata' for factors (all via xlev)
+    contr <- object$contrasts           # these are in matrix form
+    dataMod <- model.frame(formula = form, data = newdata,
+                           na.action = na.action, drop.unused.levels = TRUE,
+                           xlev = lapply(contr, rownames))
     N <- nrow(dataMod)
     if (length(all.vars(form)) > 0) {
-        ##    X <- model.matrix(form, dataMod, contr)
-        X <- model.matrix(form, dataMod)
+        X <- model.matrix(form, dataMod, contr)
     } else {
         X <- array(1, c(N, 1), list(row.names(dataMod), "(Intercept)"))
     }

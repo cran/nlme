@@ -20,7 +20,7 @@ gnlsControl(maxIter = 50, nlsMaxIter = 7, msMaxIter = 50, minScale = 0.001,
    for the \code{nls} optimization step \emph{inside} the \code{gnls}
    optimization.  Default is 7.}
  \item{msMaxIter}{maximum number of iterations
-   for the \code{ms} optimization step inside the \code{gnls}
+   for the \code{opt}imization step inside the \code{gnls}
    optimization.  Default is 50.}
  \item{minScale}{minimum factor by which to shrink the default step size
    in an attempt to decrease the sum of squares in the \code{nls} step.
@@ -68,8 +68,7 @@ gnlsControl(maxIter = 50, nlsMaxIter = 7, msMaxIter = 50, minScale = 0.001,
 \seealso{\code{\link{gnls}}}
 
 \examples{
-# decrease the maximum number iterations in the ms call and
-# request that information on the evolution of the ms iterations be printed
+# decrease the maximum number of iterations and request tracing
 gnlsControl(msMaxIter = 20, msVerbose = TRUE)
 }
 \keyword{models}

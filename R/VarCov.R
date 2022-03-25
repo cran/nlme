@@ -26,7 +26,7 @@ getVarCov.lme <-
     type  <-  match.arg(type)
     if(any("nlme" == class(obj)))
         stop("not implemented for \"nlme\" objects")
-    if(length(obj$group) > 1)
+    if(length(obj$groups) > 1)
         stop("not implemented for multiple levels of nesting")
     sigma <- obj$sigma
     D <- as.matrix(obj$modelStruct$reStruct[[1]]) * sigma^2
@@ -67,7 +67,7 @@ getVarCov.lme <-
                 result[[as.character(individ)]] <- cond.var
             else
             {
-                Z <- model.matrix(obj$modelStruct$reStruc,
+                Z <- model.matrix(obj$modelStruct$reStruct,
                                   getData(obj))[ind, , drop = FALSE]
                 result[[as.character(individ)]] <-
                     cond.var + Z %*% D %*% t(Z)

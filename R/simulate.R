@@ -2,7 +2,7 @@
 ###
 ### Copyright 1997-2003  Jose C. Pinheiro,
 ###                      Douglas M. Bates <bates@stat.wisc.edu>
-### Copyright 2006-2015  The R Core team
+### Copyright 2006-2022  The R Core team
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -129,7 +129,7 @@ simulate.lme <-
 		      logLik = double(1),
 		      R0 = double(pp1),
 		      lRSS = double(1),
-		      info = integer(1),
+		      info = integer(1), # msg from optif9: <0 = error, 0 = OK
 		      sigma = as.double(conLin$sigma))[c("info", "logLik")])
 	}
     getResults2 <-
@@ -143,7 +143,7 @@ simulate.lme <-
 			  control = list(iter.max = control$msMaxIter,
 					 eval.max = control$msMaxEval,
 					 trace = control$msVerbose))
-	    c(info = aMs$flags[1], logLik = -aMs$value)
+	    c(info = aMs$convergence, logLik = -aMs$objective)
 	}
 
     if(!exists(".Random.seed", envir = .GlobalEnv))
@@ -157,12 +157,12 @@ simulate.lme <-
         object <- as.list(object$call[-1])
     } else {
         object <- as.list(match.call(lme, substitute(object))[ -1 ])
-        fit1 <- do.call(lme, object)
+        fit1 <- do.call(lme, object, envir = parent.frame())
     }
     if (length(fit1$modelStruct) > 1)
         stop("models with \"corStruct\" and/or \"varFunc\" objects not allowed")
     reSt1 <- fit1$modelStruct$reStruct
-    condL1 <- do.call(createConLin, object)
+    condL1 <- do.call(createConLin, object, envir = parent.frame())
     pdClass1 <- vapply(reSt1, data.class, "")
     pdClass1 <- match(pdClass1, c("pdSymm", "pdDiag", "pdIdent",
                                   "pdCompSymm", "pdLogChol"), 0) - 1
@@ -210,12 +210,12 @@ simulate.lme <-
             aux <- object
             aux[names(m2)] <- m2
             m2 <- aux
-            fit2 <- do.call(lme, m2)
+            fit2 <- do.call(lme, m2, envir = parent.frame())
         }
         if (length(fit2$modelStruct) > 1) {
             stop("models with \"corStruct\" and/or \"varFunc\" objects not allowed")
         }
-        condL2 <- do.call(createConLin, m2)
+        condL2 <- do.call(createConLin, m2, envir = parent.frame())
         reSt2 <- fit2$modelStruct$reStruct
         control2 <- lmeControl()
         if (!is.null(m2$control)) {
@@ -342,13 +342,13 @@ plot.simulate.lme <-
     if(ML) {
         if (is.null(x$alt$ML))
             stop("plot method only implemented for comparing models")
-        okML <- x$null$ML[, "info"] < 8 & x$alt$ML[, "info"] < 8
+        okML <- x$null$ML[, "info"] == 0 & x$alt$ML[, "info"] == 0
     }
     REML <- !is.null(x$null$REML)
     if(REML) {
         if (is.null(x$alt$REML))
             stop("plot method only implemented for comparing models")
-        okREML <- x$null$REML[, "info"] < 8 & x$alt$REML[, "info"] < 8
+        okREML <- x$null$REML[, "info"] == 0 & x$alt$REML[, "info"] == 0
     }
 
     if ((ldf <- length(df)) > 1) {

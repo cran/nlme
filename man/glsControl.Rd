@@ -15,14 +15,14 @@ glsControl(maxIter, msMaxIter, tolerance, msTol, msVerbose,
  \item{maxIter}{maximum number of iterations for the \code{gls}
    optimization algorithm. Default is 50.}
  \item{msMaxIter}{maximum number of iterations
-   for the optimization step inside the \code{gls}
+   for the \code{opt}imization step inside the \code{gls}
    optimization. Default is 50.}
  \item{tolerance}{tolerance for the convergence criterion in the
    \code{gls} algorithm. Default is 1e-6.}
  \item{msTol}{tolerance for the convergence criterion of the first outer
    iteration when \code{optim} is used.  Default is 1e-7.}
- \item{msVerbose}{a logical value passed as the \code{trace} argument to
-   \code{ms} (see documentation on that function). Default is
+ \item{msVerbose}{a logical value passed as the \code{trace} control value to
+   the chosen \code{opt}imizer (see documentation on that function). Default is
    \code{FALSE}.}
  \item{singular.ok}{a logical value indicating whether non-estimable
    coefficients (resulting from linear dependencies among the columns of
@@ -63,8 +63,7 @@ glsControl(maxIter, msMaxIter, tolerance, msTol, msVerbose,
 \seealso{\code{\link{gls}}}
 
 \examples{
-# decrease the maximum number iterations in the optimization call and
-# request that information on the evolution of the ms iterations be printed
+# decrease the maximum number of iterations and request tracing
 glsControl(msMaxIter = 20, msVerbose = TRUE)
 }
 \keyword{models}

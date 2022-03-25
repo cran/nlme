@@ -13,24 +13,16 @@ importFrom("stats", # many S3 generics for which we define methods
            nlm, nlminb, nls, nls.control, nobs, optim,
            pchisq, pf, predict, pt,
            qchisq, qf, qnorm, qqnorm, qt, quantile,
-           resid, residuals, rnorm, runif, simulate, setNames, terms,
+           resid, residuals, rnorm, runif, setNames, sigma, simulate, terms,
            update, update.formula, var, vcov)
 
-importFrom("utils", head, tail, capture.output, packageDescription)
+importFrom("utils", head, tail, capture.output, packageDescription, warnErrList)
 
 importFrom("lattice",
            Rows, bwplot, dotplot, llines, lpoints, lsegments, ltext,
            panel.abline, panel.bwplot, panel.dotplot,  panel.grid,
            panel.histogram, panel.linejoin, panel.loess, panel.superpose,
            panel.xyplot, splom, strip.default, trellis.par.get, xyplot)
-
-if(getRversion() >= "3.3.0") {
-    if(getRversion() >= "3.5.0")
-        importFrom("utils", warnErrList)
-    importFrom("stats", sigma)
-} else {
-    export(sigma)
-}
 
 export(ACF, allCoef, asOneFormula, asTable, augPred, balancedGrouped,
        "coef<-", "coefficients<-", collapse, compareFits,
@@ -472,7 +464,6 @@ S3method(summary, varFixed)
 S3method(summary, varFunc)
 S3method(summary, varIdent)
 S3method(summary, varPower)
-S3method(terms, gls)
 S3method(update, corStruct)
 S3method(update, gls)
 S3method(update, gnls)

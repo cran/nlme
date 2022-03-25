@@ -5,11 +5,9 @@
 \name{lmeObject}
 \title{Fitted lme Object}
 \alias{lmeObject}
-\alias{sigma}% for R < 3.3.0
-\alias{sigma.lme}
 \description{
   An object returned by the \code{lme} function, inheriting from class
-  \code{lme} and representing a fitted linear mixed-effects
+  \code{"lme"} and representing a fitted linear mixed-effects
   model.  Objects of this class have methods for the generic functions
   \code{anova}, \code{coef}, \code{fitted}, \code{fixed.effects},
   \code{formula}, \code{getGroups}, \code{getResponse},
@@ -19,7 +17,7 @@
 
 }
 \value{
-  The following components must be included in a legitimate \code{lme}
+  The following components must be included in a legitimate \code{"lme"}
   object.
   \item{apVar}{an approximate covariance matrix for the
     variance-covariance coefficients.  If \code{apVar = FALSE} in the
@@ -33,7 +31,7 @@
     random effects for each level of grouping. For each matrix in the
     \code{random} list, the columns refer to the random effects and the
     rows to the groups.}
-  \item{contrasts}{a list with the contrasts used to represent factors
+  \item{contrasts}{a list of the contrast matrices used to represent factors
     in the fixed effects formula  and/or random effects formula. This
     information is important for making predictions from a new data
     frame in which not all levels of the original factors are

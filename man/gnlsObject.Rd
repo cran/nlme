@@ -7,7 +7,7 @@
 \alias{gnlsObject}
 \description{
   An object returned by the \code{gnls} function, inheriting from class
-  \code{gnls} and also from class \code{gls}, and representing a
+  \code{"gnls"} and also from class \code{"gls"}, and representing a
   generalized nonlinear least squares fitted model. Objects of this
   class have methods for the generic functions  \code{anova},
   \code{coef}, \code{fitted}, \code{formula}, \code{getGroups},
@@ -17,7 +17,7 @@
 
 }
 \value{
-  The following components must be included in a legitimate \code{gnls}
+  The following components must be included in a legitimate \code{"gnls"}
   object.
   \item{apVar}{an approximate covariance matrix for the
     variance-covariance coefficients.  If \code{apVar = FALSE} in the
@@ -27,7 +27,7 @@
     produced the object.}
   \item{coefficients}{a vector with the estimated nonlinear model
     coefficients.}
-  \item{contrasts}{a list with the contrasts used to represent factors
+  \item{contrasts}{a list of the contrast matrices used to represent factors
     in the model formula. This information is important for making
     predictions from a new data frame in which not all levels of the
     original factors are observed. If no factors are used in the model,

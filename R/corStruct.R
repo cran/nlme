@@ -1961,7 +1961,7 @@ Variogram.corSpatial <-
 {
   if (is.null(distance)) {
     rangeDist <- range(unlist(getCovariate(object)))
-    distance <- seq(rangeDist[1], rangeDist[2], length = length.out)
+    distance <- seq(rangeDist[1], rangeDist[2], length.out = length.out)
   }
   params <- coef(object, unconstrained = FALSE)
   if (length(params) == 1) {            # no nugget effect

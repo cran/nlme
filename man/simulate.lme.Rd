@@ -5,7 +5,7 @@
 \name{simulate.lme}
 \title{Simulate Results from \code{lme} Models}
 \alias{simulate.lme}
-\alias{plot.simulate.lme}
+\alias{plot.simulate.lme}   % currently undocumented (needs own help page)
 \alias{print.simulate.lme}
 \usage{
 \method{simulate}{lme}(object, nsim = 1, seed = , m2,
@@ -43,14 +43,13 @@
     and \code{m2} to each simulated set of data.  Defaults to \code{c(40,200)}.
   }
   \item{useGen}{
-    an optional logical value.  If \code{TRUE}, numerical derivatives are
-    used to obtain the gradient and the Hessian of the log-likelihood in
-    the optimization algorithm in the \code{ms} function.  If
-    \code{FALSE}, the default algorithm in \code{ms} for functions that
-    do not incorporate gradient and Hessian attributes is used.  Default
+    an optional logical value.  If \code{TRUE}, the \code{\link{nlminb}}
+    optimizer is used with numerical derivatives of the log-likelihood. If
+    \code{FALSE}, the \code{\link{nlm}} algorithm is used with an
+    analytic gradient.  The default
     depends on the \code{"\link{pdMat}"} classes used in \code{object} and \code{m2}:
     if both are standard classes (see \code{\link{pdClasses}}) then
-    defaults to \code{TRUE}, otherwise defaults to \code{FALSE}.
+    defaults to \code{FALSE}, otherwise defaults to \code{TRUE}.
   }
   \item{\dots}{optional additional arguments.  None are used.}
 }
@@ -64,7 +63,7 @@
 \value{
   an object of class \code{simulate.lme} with components \code{null} and
   \code{alt}.  Each of these has components \code{ML} and/or \code{REML}
-  which are matrices.  An attribute called \code{Random.seed} contains
+  which are matrices.  An attribute called \code{seed} contains
   the seed that was used for the random number generator.
 }
 \references{

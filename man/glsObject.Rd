@@ -26,7 +26,7 @@
     produced the object.}
   \item{coefficients}{a vector with the estimated linear model
     coefficients.} 
-  \item{contrasts}{a list with the contrasts used to represent factors
+  \item{contrasts}{a list of the contrast matrices used to represent factors
     in the model formula. This information is important for making
     predictions from a new data frame in which not all levels of the
     original factors are observed. If no factors are used in the model,

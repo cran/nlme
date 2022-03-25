@@ -1,3 +1,132 @@
+2022-03-25  Brian Ripley
+
+	* DESCRIPTION (Version): 3.1-157 (released)
+
+2022-03-24  Sebastian Meyer  <Sebastian.Meyer@R-project.org>
+
+	* R/nlme.R (nlme.formula):
+	* R/gnls.R (gnls): revert check for offset() terms in non-linear
+	models (avoid symbolic interpretation of arithmetic expressions).
+
+	* R/lme.R (formula.lme): defer fix for scoping issue to give more
+	time to update reverse dependencies
+
+2022-03-22  Brian Ripley
+
+	* DESCRIPTION (Version): 3.1-156 (unreleased)
+
+2022-03-18  Sebastian Meyer  <Sebastian.Meyer@R-project.org>
+
+	* R/gls.R: keep "terms" from gls() for use in predict.gls(),
+	fixing PR#18283.
+	* R/zzMethods.R, NAMESPACE: drop formula-based terms.gls().
+	* tests/gls.R: add corresponding regression test.
+
+	* R/gls.R (formula.gls):
+	* R/lme.R (formula.lme): get the formula from the terms instead of
+	re-evaluating the call (with the wrong scope), fixing PR#15892.
+	* tests/scoping.R: add corresponding regression test.
+
+2022-03-17  Sebastian Meyer  <Sebastian.Meyer@R-project.org>
+
+	* R/lme.R (lme.formula):
+	* R/nlme.R (nlme.formula):
+	* R/gls.R (gls):
+	* R/gnls.R (gnls): stop() at offset() terms, fixing PR#17880.
+
+2022-03-08  Sebastian Meyer  <Sebastian.Meyer@R-project.org>
+
+	Improve handling of factor variables in predict() methods.
+
+	* R/gls.R (predict.gls):
+	* R/gnls.R (predict.gnls):
+	* R/lme.R (predict.lme):
+	* R/nlme.R (predict.nlme):
+	call model.frame() with 'xlev' to make sure factor levels are
+	compatible with the employed contrasts (fixing PR#17226),
+	including to warn for numeric 'newdata' for factor variables,
+	and to support character input (cf. PR#18312).
+	* tests/gls.R:
+	* tests/nlme2.R:
+	* tests/predict.lme.R: add corresponding regression tests.
+
+	* R/gnls.R (gnls): always return contrast _matrices_ not just names
+	of contrast functions. Needed for the above fix and for
+	consistency with the other modelling functions in nlme.
+
+2022-03-05  Sebastian Meyer  <Sebastian.Meyer@R-project.org>
+
+	* inst/CITATION: use citation(auto=meta) and add NLME book.
+
+	* DESCRIPTION (Depends): finally require R >= 3.5.0.
+	* R/lmList.R: drop old warnErrList() code, part of utils >= 3.5.0.
+
+	* man/reStruct.Rd: late doc update for the pdClass default changed
+	2000-07-07 (PR#17740).
+
+2022-03-04  Sebastian Meyer  <Sebastian.Meyer@R-project.org>
+
+	* R/lme.R (predict.lme): fix predictions for character-type newdata.
+	The example in ch04.R produced wrong results with R >= 4.0.0 (PR#18312).
+	* tests/predict.lme: add corresponding regression test.
+
+	* R/newFunc.R (asOneFormula, getCovariateFormula, getResponseFormula):
+	* R/newMethods.R (getGroupsFormula.default):
+	fix environment of created formula (was local envir, now .GlobalEnv),
+	in line with stats::asOneSidedFormula() in R 4.2.0.
+
+	* inst/scripts/ch06.R: increase maxiter for nlsList() of Soybean data
+	to only fail for a single plot, consistent with the book (p. 289).
+
+2022-03-03  Sebastian Meyer  <Sebastian.Meyer@R-project.org>
+
+	Setup extra tests conditional on nlme:::doExtras()
+
+	* DESCRIPTION: add SASmixed to Suggests (used in code from NLME book)
+	* inst/scripts: arrange for cleaner Rdiff() (drop proc.time(), tag
+	platform-dependent output via ## IGNORE_RDIFF_*, reduce digits in tests)
+	* tests/extras: added, including test scripts to run the full code
+	from the installed book chapters (with reference output)
+	* tests/nlme-stall.R: moved to extras
+
+2022-03-02  Sebastian Meyer  <Sebastian.Meyer@R-project.org>
+
+	* R/lmList.R (coef.lmList, summary.lmList): fix finding unique
+	coefficient names when the set of estimated coefficients varies
+	between subgroups (PR#16542); based on a patch by Ben Bolker.
+	* tests/lmList.R: add corresponding regression test
+
+2022-02-28  Sebastian Meyer  <Sebastian.Meyer@R-project.org>
+
+	Clean up license information
+
+	* DESCRIPTION (Authors@R): "R Core Team" rather than "R-core"
+	* DESCRIPTION (License): dropped redundant "| file LICENCE"
+	* LICENCE: removed (copy of GPL-2)
+	* LICENSE.note: created from README
+	* README: removed
+
+2022-02-26  Sebastian Meyer  <Sebastian.Meyer@R-project.org>
+
+	* R/VarCov.R (getVarCov.lme):
+	* R/corStruct.R (Variogram.corSpatial):
+	* R/lmList.R (predict.lmList):
+	* R/lme.R (plot.ranef.lme): fix partial matching issues.
+
+2022-02-25  Sebastian Meyer  <Sebastian.Meyer@R-project.org>
+
+	Fix more scoping issues (detected by sourcing the installed
+	chapter scripts in a local environment)
+
+	* R/simulate.R (simulate.lme): evaluate constructed calls in the
+	parent frame.
+	* R/lme.R (augPred.lme): look for data in the parent frame.
+	* R/gls.R (augPred.gls): (ditto)
+
+2022-02-23  Sebastian Meyer  <Sebastian.Meyer@R-project.org>
+
+	* R/simulate.R (simulate.lme): fix `useGen = TRUE` branch.
+
 2022-01-13  Brian Ripley
 
 	* DESCRIPTION (Version): 3.1-155 (released)

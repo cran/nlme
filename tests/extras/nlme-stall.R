@@ -7,7 +7,6 @@
 ## gfortran with -fbounds-check detected a problem on one x86_64
 ## Fedora 26 system (but not another) and on one of winbuilder's
 ## subarchs.
-if(!nzchar(Sys.getenv("TEST_NLME_STALL"))) q('no')
 
 dat <- data.frame(
     x = rep(c(3.69, 3, 2.3, 1.61, 0.92, 0.22, -0.47, -1.86), each=12),

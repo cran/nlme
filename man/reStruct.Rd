@@ -32,8 +32,8 @@ reStruct(object, pdClass, REML, data)
    the order of the elements in the list; (v) an \code{reStruct} object.}
  \item{pdClass}{an optional character string with the name of the
    \code{pdMat} class to be used for the formulas in
-   \code{object}. Defaults to \code{"pdSymm"} which corresponds to a
-   general positive-definite matrix.}
+   \code{object}. Defaults to \code{"pdLogChol"} which corresponds to a
+   general positive-definite matrix (Log-Cholesky parametrization).}
  \item{REML}{an optional logical value. If \code{TRUE}, the associated
    mixed-effects model will be fitted using restricted maximum
    likelihood; else, if \code{FALSE}, maximum likelihood will be

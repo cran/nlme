@@ -31,7 +31,7 @@
     random effects for each level of grouping. For each matrix in the
     \code{random} list, the columns refer to the random effects and the
     rows to the groups.}
-  \item{contrasts}{a list with the contrasts used to represent factors
+  \item{contrasts}{a list of the contrast matrices used to represent factors
     in the fixed effects formula  and/or random effects formula. This
     information is important for making predictions from a new data
     frame in which not all levels of the original factors are

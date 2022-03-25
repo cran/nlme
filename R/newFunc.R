@@ -1,7 +1,7 @@
 ###       Functions that are used in several parts of the nlme library
 ###                 but do not belong to any specific part
 ###
-### Copyright 2006-2016  The R Core team
+### Copyright 2006-2022  The R Core team
 ### Copyright 1997-2003  Jose C. Pinheiro,
 ###                      Douglas M. Bates <bates@stat.wisc.edu>
 ###
@@ -60,8 +60,8 @@ asOneFormula <-
   names <- unique(allVarsRec(list(...)))
   names <- names[is.na(match(names, omit))]
   if (length(names))
-    eval(parse(text = paste("~", paste(names, collapse = "+")))[[1]])
-  else ~1
+    eval(parse(text = paste("~", paste(names, collapse = "+")))[[1]], .GlobalEnv)
+  else evalq(~1, .GlobalEnv)
 }
 
 compareFits <-
@@ -192,7 +192,7 @@ getCovariateFormula <-
   if (length(form) == 3 && form[[1]] == as.name("|")){ # conditional expression
     form <- form[[2]]
   }
-  eval(substitute(~form))
+  eval(call("~", form), .GlobalEnv)
 }
 
 getResponseFormula <-
@@ -203,7 +203,7 @@ getResponseFormula <-
   if (!(inherits(form, "formula") && (length(form) == 3))) {
     stop("'form' must be a two-sided formula")
   }
-  eval(parse(text = paste("~", deparse(form[[2]]))))
+  eval(call("~", form[[2]]), .GlobalEnv)
 }
 
 gsummary <-
