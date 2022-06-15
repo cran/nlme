@@ -1,5 +1,5 @@
-08e9ada011ae1b3e0cef18505c14c4cb *ChangeLog
-e29cebf55c02e1563721f522ebd24a3a *DESCRIPTION
+d54ebd1585b4b925071ad6d6a8282c7b *ChangeLog
+ba3c31b82f16e5e066fab80c5c1f9774 *DESCRIPTION
 398eb829c5b09bf5b661094916d897e4 *LICENSE.note
 89954b4aec562f40797f6a54d9ce94f3 *NAMESPACE
 af82a6b780b7157da96d3e996fa2b949 *R/VarCorr.R
@@ -9,13 +9,13 @@ e1d808e79cc72a575c59f56d5371d3e8 *R/gls.R
 c97b263e5b427681488912a603fdc4b1 *R/gnls.R
 25e6e6765f977844e01a12692bfc1e58 *R/groupedData.R
 1a6a465f3f064ebb8fa7516b3ebbc283 *R/lmList.R
-c1460544178a73c408a6faef5ae4b5e2 *R/lme.R
+0ff1dfec874fd6dd9105e02654562059 *R/lme.R
 cf9c471ec0e6f401d7deab5cd1bce8ca *R/modelStruct.R
 85cba6651be200b0edb3fe3d4b9dbbcc *R/newFunc.R
 1548e7a2392e75a6ee7e676ee1e2495d *R/newGenerics.R
 d8885be3c7d8de6072c9aa1b97a74342 *R/newMethods.R
 e291ed8acfeb4c0638d6a9badf85b910 *R/nlme.R
-50982be177feb2eff5141ff8e14800fd *R/nlsList.R
+36fb74b77cf607f7351d47f8fde7ab1f *R/nlsList.R
 ecb308e6c9ca44b65c8650655f996e8a *R/pdMat.R
 c0c6f681f27546bd890c243979498f2d *R/reStruct.R
 a6152e553e27c0e10a705050d11d45b5 *R/simulate.R
@@ -145,7 +145,7 @@ c3833cb2fd6fdbb86b0bfa760b1be201 *man/Quinidine.Rd
 24e778152c340144b44e5f07cae17ba1 *man/RatPupWeight.Rd
 1ad997fd585e41017b58c925d417880d *man/Relaxin.Rd
 b10fdf16ef5fac3b713b79a5aa04ecd7 *man/Remifentanil.Rd
-bf2c7d731d4422ee67bf86e134ce8ab2 *man/Soybean.Rd
+52abbbafe089df98d7215a4260584162 *man/Soybean.Rd
 3dc4e57e32facf457b1608fe6a615d7c *man/Spruce.Rd
 9daa6d475775413dd4ea64c99cfe17d1 *man/Tetracycline1.Rd
 e5180117cd260b6b0f55334d1fbfed27 *man/Tetracycline2.Rd
@@ -164,7 +164,7 @@ f0037b641609bbeb2e1cd6ee9ac35468 *man/Wafer.Rd
 68ac1efa524cb04bf1b5d3aedf83096c *man/Wheat.Rd
 6f1948aad833c32faecbc33dbe5797d9 *man/Wheat2.Rd
 be24f3ff3dd6be6e8a540aec4c11c353 *man/allCoef.Rd
-68e691cc064c25bcd929a3f0cac6e6ab *man/anova.gls.Rd
+b2eb52593944fda58fed100e12f18f20 *man/anova.gls.Rd
 8e0656b4d5fb2aba932cb39077ff7261 *man/anova.lme.Rd
 898315fc8ee0502e8c2f19700868a941 *man/as.matrix.corStruct.Rd
 222b482c4d6d320c4ff69edddb1c7a4d *man/as.matrix.pdMat.Rd
@@ -429,7 +429,7 @@ ab4666adda2d4f74b693b3a057c834cb *tests/lme.R
 eb3cbb2a3b3bc8a44823412ac00519a8 *tests/nlme.R
 90102927f576880c5bcbaead004b1537 *tests/nlme2.R
 b2a440592fcf4163014204464ffcd4e1 *tests/predict.lme.R
-3797d57bc8f4526ca963b5e33ea6a4b1 *tests/scoping.R
+65df5e0801b50f30bff9bbec519aa9fd *tests/scoping.R
 c57378a11650f4349dff4b3832a72b66 *tests/sigma-fixed-etc.R
 52e8f5b5ecbec55ced361ee194ff972a *tests/ss2.rds
 4c68332d00c3e3f1818fcb8aa60e0d9b *tests/updateLme.R

@@ -1,6 +1,6 @@
 % File nlme/man/anova.gls.Rd
 % Part of the nlme package for R
-% Distributed under GPL 2 or later: see nlme/LICENCE.note
+% Distributed under GPL 2 or later: see ../LICENCE.note
 
 \name{anova.gls}
 \title{Compare Likelihoods of Fitted Objects}
@@ -9,7 +9,7 @@
 }
 \alias{anova.gls}
 \arguments{
- \item{object}{a fitted model object inheriting from class \code{gls},
+ \item{object}{an object inheriting from class \code{"\link{gls}"},
    representing a generalized least squares fit.}
  \item{\dots}{other optional fitted model objects inheriting from
    classes \code{"gls"}, \code{"gnls"}, \code{"lm"}, \code{"lme"},
@@ -58,7 +58,7 @@
 }
 \description{
   When only one fitted model object is present, a data frame with the
-  sums of squares, numerator degrees of freedom, F-values, and P-values
+  numerator degrees of freedom, F-values, and P-values
   for Wald tests for the terms in the model (when \code{Terms} and
   \code{L} are \code{NULL}), a combination of model terms (when
   \code{Terms} in not \code{NULL}), or linear combinations of the model
@@ -68,8 +68,8 @@
   Akaike Information Criterion (AIC), and the Bayesian Information
   Criterion (BIC) of each object is returned. If \code{test=TRUE},
   whenever two consecutive  objects have different number of degrees of
-  freedom, a likelihood ratio statistic, with the associated p-value is
-  included in the returned data frame.   
+  freedom, a likelihood ratio statistic with the associated p-value is
+  included in the returned data frame.
 }
 \value{
   a data frame inheriting from class \code{"anova.lme"}.
@@ -85,7 +85,7 @@
   restricted maximum likelihood and with different fixed effects.
 }
 
-\seealso{\code{\link{gls}}, \code{\link{gnls}},
+\seealso{\code{\link{gls}}, \code{\link{gnls}}, \code{\link{nlme}},
   \code{\link{lme}}, \code{\link{logLik.gls}},
   \code{\link{AIC}}, \code{\link{BIC}},
   \code{\link{print.anova.lme}}

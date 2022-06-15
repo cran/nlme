@@ -1,3 +1,11 @@
+2022-06-13  Brian Ripley
+
+	* DESCRIPTION (Version): 3.1-158 (released)
+	* R/lme.R (formula.lme): get the formula from the terms instead of
+	re-evaluating the call (with the wrong scope), fixing PR#15892.
+	* tests/scoping.R: add corresponding regression test.
+	* R/nlsList.R: use inherits instead of comparing class to string.
+
 2022-03-25  Brian Ripley
 
 	* DESCRIPTION (Version): 3.1-157 (released)
@@ -7,7 +15,6 @@
 	* R/nlme.R (nlme.formula):
 	* R/gnls.R (gnls): revert check for offset() terms in non-linear
 	models (avoid symbolic interpretation of arithmetic expressions).
-
 	* R/lme.R (formula.lme): defer fix for scoping issue to give more
 	time to update reverse dependencies
 

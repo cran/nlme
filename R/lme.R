@@ -1258,8 +1258,7 @@ fitted.lme <-
   } else napredict(object$na.action, val[, level])
 }
 
-formula.lme <- function(x, ...) #formula(x$terms)  ## deferred
-  eval(x$call$fixed)
+formula.lme <- function(x, ...) formula(x$terms)
 
 fixef.lme <- function(object, ...) object$coefficients$fixed
 

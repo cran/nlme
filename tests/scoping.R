@@ -30,9 +30,8 @@ simulate(m3, m2 = list(random = ~ age | Subject), seed = 42, method = "ML")
 rm(groupedData)
 
 
-## PR#15892: formula.gls evaluated the call (in bad scope)
-## (formula.lme still does; the fix has been deferred)
-invisible(lapply(list(gls), function (FUN) {
+## PR#15892: formula.gls and formula.lme evaluated the call (in bad scope)
+invisible(lapply(list(gls, lme), function (FUN) {
     form <- follicles ~ 1
     stopifnot(identical(formula(FUN(form, Ovary)), form))
 }))
