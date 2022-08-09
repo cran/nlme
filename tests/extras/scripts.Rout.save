@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2022-02-28 r81832) -- "Unsuffered Consequences"
+R Under development (unstable) (2022-07-27 r82635) -- "Unsuffered Consequences"
 Copyright (C) 2022 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -848,7 +848,7 @@ Number of Groups:
 > # 1.6  A Split-Plot Experiment
 > 
 > fm1Oats <- lme( yield ~ ordered(nitro) * Variety, data = Oats,
-+   random = ~ 1 | Block/Variety )
++                random = ~ 1 | Block/Variety )
 
 > anova( fm1Oats )
                        numDF denDF F-value p-value

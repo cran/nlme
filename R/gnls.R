@@ -19,8 +19,7 @@
 #  http://www.r-project.org/Licenses/
 #
 
-gnls <-
-  function(model,
+gnls <- function(model,
 	   data = sys.frame(sys.parent()),
 	   params,
 	   start,
@@ -101,7 +100,9 @@ gnls <-
     }
     params <- list(formula(paste(paste(pNams, collapse = "+"), "1", sep = "~")))
   }
-  else if (!is.list(params)) params <- list(params)
+  else if (!is.list(params))
+    params <- list(params)
+
   params <- unlist(lapply(params, function(pp) {
     if (is.name(pp[[2]])) {
       list(pp)
@@ -113,6 +114,7 @@ gnls <-
            ")")))
     }
   }), recursive=FALSE)
+
   pnames <- character(length(params))
   for (i in seq_along(params)) {
     this <- eval(params[[i]])
@@ -125,18 +127,6 @@ gnls <-
     pnames[i] <- as.character(this[[2]])
   }
   names(params) <- pnames
-
-  ##
-  ##  If data is a pframe, copy the parameters in the frame to frame 1
-  ##  Doesn't exist in R
-##  if (inherits(data, "pframe")) {
-##    pp <- parameters(data)
-##    for (i in names(pp)) {
-##      assign(i, pp[[i]])
-##    }
-##    attr(data,"parameters") <- NULL
-##    class(data) <- "data.frame"
-##  }
 
   ## check if correlation is present and has groups
   groups <- if (!is.null(correlation)) getGroupsFormula(correlation) # else NULL
@@ -205,13 +195,12 @@ gnls <-
 
   dataModShrunk <- dataMod[naPat, , drop=FALSE]
   yShrunk <- eval(form[[2]], dataModShrunk)
-  if (!is.null(groups)) {
-##    ordShrunk <- ord[naPat]
-    grpShrunk <- grps[naPat]
-    revOrderShrunk <- match(origOrderShrunk, row.names(dataModShrunk))
-  } else {
-    grpShrunk <- NULL
-  }
+  grpShrunk <-
+    if (!is.null(groups)) {
+      ## ordShrunk <- ord[naPat]
+      revOrderShrunk <- match(origOrderShrunk, row.names(dataModShrunk))
+      grps[naPat]
+    } # else NULL
 
   ##
   ## defining list with parameter information
@@ -220,17 +209,21 @@ gnls <-
   plist <- vector("list", length(pnames))
   names(plist) <- pnames
   for (nm in pnames) {
-    if (deparse(params[[nm]][[3]]) != "1") {
-      form1s <- asOneSidedFormula(params[[nm]][[3]])
+   rhs <- params[[nm]][[3]]
+   plist[[nm]] <-
+    if(identical(rhs, 1) || identical(rhs, 1L)) ## constant RHS
+      TRUE
+    else {
+      form1s <- asOneSidedFormula(rhs)
       .X <- model.frame(form1s, dataModShrunk)
-      plist[[nm]] <- model.matrix(form1s, .X)
       ## keeping the contrast matrices for later use in predict
       auxContr <- lapply(.X, function(el) if (is.factor(el)) contrasts(el))
       contr <- c(contr, auxContr[!vapply(auxContr, is.null, NA) &
                                  is.na(match(names(auxContr), names(contr)))])
-    } else
-      plist[[nm]] <- TRUE
+      model.matrix(form1s, .X)
+    }
   }
+  
   ##
   ## Params effects names
   ##
@@ -546,7 +539,8 @@ gnls <-
 	    ## saving labels and units for plots
 	    units = if(grpDta) attr(data, "units"),
 	    labels= if(grpDta) attr(data, "labels"))
-}
+} ## end{gnls}
+      
 
 ### Auxiliary functions used internally in gls and its methods
 

@@ -447,18 +447,20 @@ nlme_one_comp_open (int *nrow, double *Resp, double *inmat)
 void
 nlme_one_comp_first (int *nrow, double *Resp, double *inmat)
 {
-    int i, j, nn = *nrow, mm = 0;
-    double v, cl, *tl = R_Calloc(nn, double), *ds = R_Calloc(nn, double),
-	*Subject, *Time, *Dose, *V, *Cl,
+    int nn = *nrow, mm = 0;
+    double v, cl,
+	*tl = R_Calloc(nn, double),
+	*ds = R_Calloc(nn, double),
 	sl = DBL_EPSILON;	/* sl is last subject number, usually */
 				/* an integer but passed as double. */
 				/* It is started at an unlikely value. */
-    Subject = inmat;
-    Time = inmat + nn;
-    Dose = inmat + 2 * nn;
-    V = inmat + 3 * nn;
-    Cl = inmat + 4 * nn;
-    for(i = nn; i--; Resp++, Subject++, Time++, Dose++, V++, Cl++) {
+    double
+	*Subject = inmat,
+	*Time    = inmat + nn,
+	*Dose    = inmat + 2 * nn,
+	*V       = inmat + 3 * nn,
+	*Cl      = inmat + 4 * nn;
+    for(int i = nn; i--; Resp++, Subject++, Time++, Dose++, V++, Cl++) {
 	v = *V; cl = *Cl;
 	*Resp = 0;
 	if (*Subject != sl) {	/* new Subject */
@@ -475,10 +477,10 @@ nlme_one_comp_first (int *nrow, double *Resp, double *inmat)
 		tl[mm] = *Time;
 		ds[mm] = *Dose;
 	    } else {		/* Concentration measurement */
-		for(j = 0; j <= mm; j++) {
+		for(int j = 0; j <= mm; j++) {
 		    *Resp += ds[j] * exp(-cl * (*Time - tl[j]) / v) / v;
 		}
-      }
+	    }
 	}
     }
     R_Free(ds); R_Free(tl);

@@ -1,10 +1,22 @@
+2022-07-28  Martin Maechler  <maechler@stat.math.ethz.ch>
+
+	* DESCRIPTION (Version): 3.1-159
+
+	* R/gnls.R (gnls): 'if (deparse(params[[nm]][[3]]) != "1")' fails
+	for long formulas (R-help list, thanks to Bill Dunlap, Jul 24)
+
+2022-07-05  Brian Ripley
+
+	* man/{gls,lme}: document the prohibition (rather than ignoring)
+	on offset() terms.
+
 2022-06-13  Brian Ripley
 
 	* DESCRIPTION (Version): 3.1-158 (released)
 	* R/lme.R (formula.lme): get the formula from the terms instead of
 	re-evaluating the call (with the wrong scope), fixing PR#15892.
 	* tests/scoping.R: add corresponding regression test.
-	* R/nlsList.R: use inherits instead of comparing class to string.
+	* R/nlsList.R: use inherits() instead of comparing class to string.
 
 2022-03-25  Brian Ripley
 
@@ -40,6 +52,7 @@
 	* R/nlme.R (nlme.formula):
 	* R/gls.R (gls):
 	* R/gnls.R (gnls): stop() at offset() terms, fixing PR#17880.
+	(They were previously ignored.)
 
 2022-03-08  Sebastian Meyer  <Sebastian.Meyer@R-project.org>
 

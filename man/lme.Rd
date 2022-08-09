@@ -96,6 +96,10 @@ lme(fixed, data, random, correlation, weights, subset, method,
   The methods \code{\link{lme.lmList}} and \code{\link{lme.groupedData}}
   are documented separately.
 }
+\details{
+  \code{\link{offset}} terms in \code{fixed} are an error since 3.1-157
+  (2022-03): previously they were silently ignored.
+}
 \value{
   An object of class \code{"lme"} representing the linear mixed-effects
   model fit. Generic functions such as \code{print}, \code{plot} and

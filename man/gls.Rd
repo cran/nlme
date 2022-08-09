@@ -64,6 +64,10 @@ gls(model, data, correlation, weights, subset, method, na.action,
   squares. The errors are allowed to be correlated and/or have unequal
   variances.  
 }
+\details{
+  \code{\link{offset}} terms in \code{model} are an error since 3.1-157
+  (2022-03): previously they were silently ignored.
+}
 \value{
   an object of class \code{"gls"} representing the linear model
   fit. Generic functions such as \code{print}, \code{plot}, and 
