@@ -27,7 +27,7 @@
   \item{\dots}{additional optional arguments passed to methods, mainly
     for the \code{\link{print}} method.}
   \item{x}{a \code{"summary.lme"} object.}
-!}
+}
 \description{
   Additional information about the linear mixed-effects fit represented
   by \code{object} is extracted and included as components of

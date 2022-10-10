@@ -32,7 +32,7 @@
 
 // 17-11-2015; Fixed sigma patch; E van Willigen; Quantitative Solutions
 static double *_sigma_; /* This to provide msmnh out-of-band the sigma. */
-extern void F77_NAME(msmnh)();
+extern void F77_NAME(msmnh)(void);
 
 static int **
 setOffsets(int ** base, int * ngrp, int Qp2)

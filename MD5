@@ -1,5 +1,5 @@
-7fe7a44a483d6c075baefe684eee29d7 *ChangeLog
-73dea2e61a41b54bd8d473b56690e753 *DESCRIPTION
+5af49a7c2483bd3313b3c709cfbc2c95 *ChangeLog
+da8dab81e22d9cc8a1e7b9b1105f399c *DESCRIPTION
 398eb829c5b09bf5b661094916d897e4 *LICENSE.note
 89954b4aec562f40797f6a54d9ce94f3 *NAMESPACE
 af82a6b780b7157da96d3e996fa2b949 *R/VarCorr.R
@@ -353,7 +353,7 @@ cc881ea8a28d05fcd10559c690750d7a *man/simulate.lme.Rd
 30b751285525b491459043db8949309e *man/summary.corStruct.Rd
 e2677fd6b951febd9b689bac8bacc5cb *man/summary.gls.Rd
 6780ee835f6865026f484dfe3880de0b *man/summary.lmList.Rd
-c71e9718c0db94d80178e3949ed605e2 *man/summary.lme.Rd
+8edf919f251905ecf7d3d3d1f4dd651f *man/summary.lme.Rd
 6c686321938f6e4808b6efd371af7829 *man/summary.modelStruct.Rd
 77742610400af09eb172489893c8003d *man/summary.nlsList.Rd
 f36698a423ebeefc8ab08a40c82488e4 *man/summary.pdMat.Rd
@@ -393,7 +393,7 @@ bdb2a20b9e6c1597229accc9a817d725 *src/matrix.h
 183fb67b22d772170ee934151870daa1 *src/nlOptimizer.c
 aee83096167846e585d243c9e7e93da7 *src/nlOptimizer.h
 2720e2ee156e1e601d35052c06ed0b4c *src/nlme.c
-918af745edf09090de82a8cd3a34e5af *src/nlmefit.c
+e592847d6e70bb5b7a80668dda5477f6 *src/nlmefit.c
 716000afd0baf90c06b6b4c209654ccc *src/nlmefit.h
 b8c6d062880cbe572d90123ca2cb88f1 *src/pdMat.c
 87f59f283d5378beccb42f205be507cf *src/pdMat.h
