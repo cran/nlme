@@ -16,12 +16,12 @@ nlme(model, data, fixed, random, groups, start, correlation, weights,
     covariates on the right, or an \code{nlsList} object.  If
     \code{data} is given, all names used in the formula should be
     defined as parameters or variables in the data frame. The method
-    function \code{nlme.nlsList} is documented separately.} 
+    function \code{nlme.nlsList} is documented separately.}
  \item{data}{an optional data frame containing the variables named in
    \code{model}, \code{fixed}, \code{random}, \code{correlation},
    \code{weights}, \code{subset}, and \code{naPattern}.  By default the
    variables are taken from the environment from which \code{nlme} is
-   called.} 
+   called.}
  \item{fixed}{a two-sided linear formula of the form
    \code{f1+...+fn~x1+...+xm}, or a list of two-sided formulas of the form
    \code{f1~x1+...+xm}, with possibly different models for different
@@ -40,7 +40,7 @@ nlme(model, data, fixed, random, groups, start, correlation, weights,
    random-effects model for
    these parameters and \code{g1/.../gQ} the grouping structure
    (\code{Q} may be equal to 1, in which case no \code{/} is
-   required). The random effects formula will be repeated 
+   required). The random effects formula will be repeated
    for all levels of grouping, in the case of multiple levels of
    grouping; (ii) a two-sided formula of the form
    \code{r1+...+rn~x1+..+xm}, a list of two-sided formulas of the form
@@ -57,7 +57,7 @@ nlme(model, data, fixed, random, groups, start, correlation, weights,
    assumed the same as the order of the order of the elements in the
    list; (iv) an \code{reStruct} object. See the documentation on
    \code{pdClasses} for a description of the available \code{pdMat}
-   classes. Defaults to \code{fixed}, 
+   classes. Defaults to \code{fixed},
    resulting in all fixed effects having also random effects.}
  \item{groups}{an optional one-sided formula of the form \code{~g1}
    (single level of nesting) or \code{~g1/.../gQ} (multiple levels of
@@ -82,14 +82,14 @@ nlme(model, data, fixed, random, groups, start, correlation, weights,
    within-group correlation structure. See the documentation of
    \code{corClasses} for a description of the available \code{corStruct}
    classes. Defaults to \code{NULL}, corresponding to no within-group
-   correlations.} 
+   correlations.}
  \item{weights}{an optional \code{varFunc} object or one-sided formula
    describing the within-group heteroscedasticity structure. If given as
    a formula, it is used as the argument to \code{varFixed},
    corresponding to fixed variance weights. See the documentation on
    \code{varClasses} for a description of the available \code{varFunc}
    classes. Defaults to \code{NULL}, corresponding to homoscedastic
-   within-group errors.} 
+   within-group errors.}
  \item{subset}{an optional expression indicating the subset of the rows of
    \code{data} that should be used in the fit. This can be a logical
    vector, or a numeric vector indicating which observation numbers are
@@ -115,7 +115,7 @@ nlme(model, data, fixed, random, groups, start, correlation, weights,
   This generic function fits a nonlinear mixed-effects model in the
   formulation described in Lindstrom and Bates (1990) but allowing for nested
   random effects. The within-group errors are allowed to be correlated
-  and/or have unequal variances. 
+  and/or have unequal variances.
 }
 \value{
   an object of class \code{nlme} representing the nonlinear
@@ -133,26 +133,7 @@ nlme(model, data, fixed, random, groups, start, correlation, weights,
 \references{
  The model formulation and computational methods are described in
  Lindstrom, M.J. and Bates, D.M. (1990). The variance-covariance
- parametrizations are described in Pinheiro, J.C. and Bates., D.M.
- (1996).   The different correlation structures available for the
- \code{correlation} argument are described in Box, G.E.P., Jenkins,
- G.M., and Reinsel G.C. (1994), Littel, R.C., Milliken, G.A., Stroup,
- W.W., and Wolfinger, R.D. (1996), and Venables, W.N. and Ripley,
- B.D. (2002). The use of variance functions for linear and nonlinear
- mixed effects models is presented in detail in Davidian, M. and
- Giltinan, D.M. (1995).  
-
- Box, G.E.P., Jenkins, G.M., and Reinsel G.C. (1994) "Time Series
- Analysis: Forecasting and Control", 3rd Edition, Holden-Day. 
-
- Davidian, M. and Giltinan, D.M. (1995) "Nonlinear Mixed Effects Models
- for Repeated Measurement Data", Chapman and Hall.
-
- Laird, N.M. and Ware, J.H. (1982) "Random-Effects Models for
- Longitudinal Data", Biometrics, 38, 963-974.  
-
- Littel, R.C., Milliken, G.A., Stroup, W.W., and Wolfinger, R.D. (1996)
- "SAS Systems for Mixed Models", SAS Institute.
+ parametrizations are described in Pinheiro and Bates (1996).
 
  Lindstrom, M.J. and Bates, D.M. (1990) "Nonlinear Mixed Effects Models
  for Repeated Measures Data", Biometrics, 46, 673-687.
@@ -161,13 +142,9 @@ nlme(model, data, fixed, random, groups, start, correlation, weights,
  Parametrizations for Variance-Covariance Matrices", Statistics and
  Computing, 6, 289-296.
 
- Pinheiro, J.C., and Bates, D.M. (2000) "Mixed-Effects Models
- in S and S-PLUS", Springer.  
-
- Venables, W.N. and Ripley, B.D. (2002) "Modern Applied Statistics with
- S", 4th Edition, Springer-Verlag.
+ For the different correlation structures, variance functions and links,
+ see \sQuote{References} in \code{\link{lme}}.
 }
-
 \author{José Pinheiro and Douglas Bates \email{bates@stat.wisc.edu}}
 \seealso{
   \code{\link{nlmeControl}}, \code{\link{nlme.nlsList}},

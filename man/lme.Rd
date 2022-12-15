@@ -23,7 +23,7 @@ lme(fixed, data, random, correlation, weights, subset, method,
 
     There is limited support for formulae such as \code{resp ~ 1} and
     \code{resp ~ 0}, and less prior to version \samp{3.1-112}.
-}
+  }
  \item{fixed.}{Changes to the fixed-effects formula -- see
    \code{\link{update.formula}} for details.}
  \item{data}{an optional data frame containing the variables named in
@@ -51,7 +51,7 @@ lme(fixed, data, random, correlation, weights, subset, method,
    elements in the list; (v) an \code{\link{reStruct}} object. See the
    documentation on \code{pdClasses} for a description of the available
    \code{\link{pdMat}} classes. Defaults to a formula consisting of the right
-   hand side of \code{fixed}.}  
+   hand side of \code{fixed}.}
  \item{correlation}{an optional \code{\link{corStruct}} object describing the
    within-group correlation structure. See the documentation of
    \code{\link{corClasses}} for a description of the available \code{corStruct}
@@ -63,7 +63,7 @@ lme(fixed, data, random, correlation, weights, subset, method,
    corresponding to fixed variance weights. See the documentation on
    \code{\link{varClasses}} for a description of the available \code{\link{varFunc}}
    classes. Defaults to \code{NULL}, corresponding to homoscedastic
-   within-group errors.} 
+   within-group errors.}
  \item{subset}{an optional expression indicating the subset of the rows of
    \code{data} that should be used in the fit. This can be a logical
    vector, or a numeric vector indicating which observation numbers are
@@ -84,7 +84,7 @@ lme(fixed, data, random, correlation, weights, subset, method,
  \item{keep.data}{logical: should the \code{data} argument (if supplied
    and a data frame) be saved as part of the model object?}
  \item{\dots}{some methods for this generic require additional
-    arguments.  None are used in this method.} 
+    arguments.  None are used in this method.}
  \item{evaluate}{If \code{TRUE} evaluate the new call else return the call.}
 }
 \description{
@@ -115,7 +115,6 @@ lme(fixed, data, random, correlation, weights, subset, method,
   of one.
 }
 \references{
- 
   The computational methods follow the general framework of Lindstrom
   and Bates (1988). The model formulation is described in Laird and Ware
   (1982).  The variance-covariance parametrizations are described in
@@ -126,32 +125,39 @@ lme(fixed, data, random, correlation, weights, subset, method,
   mixed effects models is presented in detail in Davidian and Giltinan
   (1995).
 
-  Box, G.E.P., Jenkins, G.M., and Reinsel G.C. (1994) "Time Series
-  Analysis: Forecasting and Control", 3rd Edition, Holden--Day. 
+  Box, G.E.P., Jenkins, G.M., and Reinsel G.C. (1994).
+  \emph{Time Series Analysis: Forecasting and Control}, 3rd Edition, Holden--Day.
+  % FIXME? many book *reviews*, but not the book \doi{...}.
 
-  Davidian, M. and Giltinan, D.M. (1995) "Nonlinear Mixed Effects Models
-  for Repeated Measurement Data", Chapman and Hall.
+  Davidian, M. and Giltinan, D.M. (1995).
+  \emph{Nonlinear Mixed Effects Models for Repeated Measurement Data}, Chapman and Hall.
+  \doi{10.1201/9780203745502}.
 
-  Laird, N.M. and Ware, J.H. (1982) "Random-Effects Models for
-  Longitudinal Data", Biometrics, 38, 963--974.  
+  Laird, N.M. and Ware, J.H. (1982).
+  Random-Effects Models for Longitudinal Data.
+  \emph{Biometrics} \bold{38}, 963--974.
+  \doi{10.2307/2529876}.
 
-  Lindstrom, M.J. and Bates, D.M. (1988) "Newton-Raphson and EM
-  Algorithms for Linear Mixed-Effects Models for Repeated-Measures
-  Data", Journal of the American Statistical Association, 83,
-  1014--1022. 
+  Lindstrom, M.J. and Bates, D.M. (1988).
+  Newton-Raphson and {EM} Algorithms for Linear Mixed-Effects Models for Repeated-Measures Data.
+  \emph{Journal of the American Statistical Association} \bold{83}, 1014--1022.
+  \doi{10.2307/2290128}.
 
-  Littell, R.C., Milliken, G.A., Stroup, W.W., and Wolfinger, R.D. (1996)
-  "SAS Systems for Mixed Models", SAS Institute.
+  Littell, R.C., Milliken, G.A., Stroup, W.W., and Wolfinger, R.D. (1996).
+  \emph{SAS Systems for Mixed Models}, SAS Institute.
 
-  Pinheiro, J.C. and Bates., D.M.  (1996) "Unconstrained
-  Parametrizations for Variance-Covariance Matrices", Statistics and
-  Computing, 6, 289--296.
+  Pinheiro, J.C. and Bates., D.M. (1996).
+  Unconstrained Parametrizations for Variance-Covariance Matrices.
+  \emph{Statistics and Computing} \bold{6}, 289--296.
+  \doi{10.1007/BF00140873}.
 
-  Pinheiro, J.C., and Bates, D.M. (2000) "Mixed-Effects Models
-  in S and S-PLUS", Springer.  
+  Pinheiro, J.C., and Bates, D.M. (2000).
+  \emph{Mixed-Effects Models in S and S-PLUS}, Springer.
+  \doi{10.1007/b98882}.
 
-  Venables, W.N. and Ripley, B.D. (2002) "Modern Applied Statistics with
-  S", 4th Edition, Springer-Verlag.
+  Venables, W.N. and Ripley, B.D. (2002).
+  \emph{Modern Applied Statistics with S}, 4th Edition, Springer-Verlag.
+  \doi{10.1007/978-0-387-21706-2}.
 }
 \author{José Pinheiro and Douglas Bates \email{bates@stat.wisc.edu}}
 \seealso{
@@ -170,7 +176,7 @@ lme(fixed, data, random, correlation, weights, subset, method,
   \code{\link{reStruct}},
   \code{\link{simulate.lme}},
   \code{\link{summary.lme}},
-  \code{\link{varClasses}}, 
+  \code{\link{varClasses}},
   \code{\link{varFunc}}
 }
 \examples{

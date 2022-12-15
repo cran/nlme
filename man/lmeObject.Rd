@@ -70,6 +70,8 @@
     leftmost column corresponds to the population residuals
     and successive columns from left to right correspond to increasing
     levels of grouping.}
+  \item{terms}{the \code{\link{terms}}, including \code{\link{formula}},
+    see also \link{terms.object}.}
   \item{sigma}{the estimated within-group error standard deviation.}
   \item{varFix}{an approximate covariance matrix of the
     fixed effects estimates.}

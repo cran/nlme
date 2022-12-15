@@ -28,10 +28,10 @@ pdMatrix(object, factor)
   square-root factor of it is obtained. Letting \eqn{\Sigma}{S} denote a
   positive-definite matrix, a square-root factor of \eqn{\Sigma}{S} is
   any square matrix \eqn{L}{L} such that \eqn{\Sigma = L'L}{S =
-    L'L}. This function extracts \eqn{S} or \eqn{L}.
+    L'L}. This function extracts \eqn{\Sigma}{S} or \eqn{L}.
 }
 \value{
-  if \code{fact} is \code{FALSE} the positive-definite matrix
+  if \code{factor} is \code{FALSE} the positive-definite matrix
   represented by \code{object} is returned; else a square-root of the
   positive-definite matrix is returned.
 }

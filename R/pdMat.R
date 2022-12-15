@@ -1,6 +1,6 @@
 ###              Classes of positive-definite matrices
 ###
-### Copyright 2006-2020  The R Core team
+### Copyright 2006-2022  The R Core team
 ### Copyright 1997-2003  Jose C. Pinheiro,
 ###                      Douglas M. Bates <bates@stat.wisc.edu>
 #
@@ -433,6 +433,17 @@ print.pdMat <-
 	".\n", sep = "")
   }
   invisible(x)
+}
+
+str.pdMat <- function(object, ...) {
+  if (isInitialized(object)) {
+      cat(sQuote(class(object)[1], q=FALSE), "with matrix")
+      str(pdMatrix(object), ...)
+  } else {
+      cat('Uninitialized ',
+          paste(paste(sQuote(class(object), q=FALSE), collapse=", ")),
+          ": ", deparse(attr(object,"formula")), "\n", sep="")
+  }
 }
 
 print.summary.pdMat <-

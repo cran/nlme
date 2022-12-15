@@ -1,3 +1,10 @@
+2022-11-17  Martin Maechler <maechler@stat.math.ethz.ch>
+
+	* DESCRIPTION (Version): 3.1-161 {not yet released}
+
+	* R/pdMat.R (str.pdMat): new method, fixing error for
+	   un-initialized, and misleading e.g., in `pdDiag` case.
+
 2022-10-10  Brian Ripley
 
 	* DESCRIPTION (Version): 3.1-160 (released)

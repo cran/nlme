@@ -82,6 +82,7 @@ reStruct(object, pdClass, REML, data)
 
 \examples{
 rs1 <- reStruct(list(Dog = ~day, Side = ~1), data = Pixel)
-rs1
+rs1 # 2 entries "Uninitialized"
+str(rs1) # a bit more
 }
 \keyword{models}
