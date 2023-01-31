@@ -771,7 +771,7 @@ summary.corNatural <-
   object
 }
 
-###*# corIdent - independent structure
+###*# corIdent - independent structure === DEPRECATED
 
 ####* Constructor
 
@@ -779,6 +779,7 @@ corIdent <-
   ## Constructor for the corIdent class
   function(form = NULL)
 {
+  .Deprecated("corAR1(0, *)", "nlme")
   value <- numeric(0)
   attr(value, "formula") <- form
   attr(value, "fixed") <- TRUE
@@ -791,6 +792,7 @@ corIdent <-
 corMatrix.corIdent <-
   function(object, covariate = getCovariate(object), corr, ...)
 {
+  .Deprecated(package="nlme", old = "corMatrix.corIdent(): \"corIdent\" class")
   if(is.list(covariate)) {# by group
     as.list(lapply(covariate, function(el, object) corMatrix(object, el)))
   } else {
@@ -808,6 +810,7 @@ coef.corIdent <-
 Initialize.corIdent <-
   function(object, data, ...)
 {
+  .Deprecated(package="nlme", old = "Initialize.corIdent(): \"corIdent\" class")
   attr(object, "logDet") <- 0
   object
 }
@@ -819,6 +822,7 @@ recalc.corIdent <- function(object, conLin, ...) conLin
 summary.corIdent <-
   function(object, structName = "Independent", ...)
 {
+  .Deprecated(package="nlme", old = "summary.corIdent(): \"corIdent\" class")
   summary.corStruct(object, structName)
 }
 

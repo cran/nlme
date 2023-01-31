@@ -13,7 +13,6 @@
 \alias{Initialize.corCAR1}
 \alias{Initialize.corCompSymm}
 \alias{Initialize.corHF}
-\alias{Initialize.corIdent}
 \alias{Initialize.corLin}
 \alias{Initialize.corNatural}
 \alias{Initialize.corSpatial}

@@ -5,17 +5,19 @@
 \name{Coef}
 \title{Assign Values to Coefficients}
 \usage{
-coef(object, \dots) <-  value
+coef(object, ...) <- value
+
+coefficients(object, ...) <- value
 }
 \alias{coef<-}
 \alias{coefficients<-}
 \arguments{
  \item{object}{any object representing a fitted model, or, by default,
    any object with a \code{coef} component.}
- \item{\dots}{some methods for this generic function may require
+ \item{...}{some methods for this generic function may require
    additional arguments.}
  \item{value}{a value to be assigned to the coefficients associated with
- \code{object}.}
+   \code{object}.}
 }
 \description{
   This function is generic; method functions can be written to handle
@@ -23,6 +25,8 @@ coef(object, \dots) <-  value
   this function include all \code{"\link{pdMat}"},
   \code{"\link{corStruct}"} and \code{"\link{varFunc}"} classes,
   \code{"\link{reStruct}"}, and \code{"modelStruct"}.
+  
+  \code{coefficients<-} is an \emph{alias} for \code{coef<-}.
 }
 \value{
   will depend on the method function; see the appropriate documentation.
@@ -31,7 +35,4 @@ coef(object, \dots) <-  value
 
 \seealso{\code{\link{coef}}}
 
-\examples{
-## see the method function documentation
-}
 \keyword{models}

@@ -5,11 +5,10 @@
 \name{corClasses}
 \title{Correlation Structure Classes}
 \alias{corClasses}
-\alias{corIdent}
 \alias{corStruct}
 \description{
   Standard classes of correlation structures (\code{corStruct})
-  available in the \code{nlme} package. 
+  available in the \code{nlme} package.
 }
 \value{
   Available standard classes:
@@ -22,16 +21,17 @@
     constant correlation.}
   \item{corExp}{exponential spatial correlation.}
   \item{corGaus}{Gaussian spatial correlation.}
+% \item{corIdent}{Identity matrix (trivial zero) correlation. \bold{Deprecated}.}
   \item{corLin}{linear spatial correlation.}
   \item{corRatio}{Rational quadratics spatial correlation.}
   \item{corSpher}{spherical spatial correlation.}
   \item{corSymm}{general correlation matrix, with no additional
-    structure.} 
+    structure.}
 }
 
 \references{
   Pinheiro, J.C., and Bates, D.M. (2000) "Mixed-Effects Models
-  in S and S-PLUS", Springer.  
+  in S and S-PLUS", Springer.
 }
 \author{José Pinheiro and Douglas Bates \email{bates@stat.wisc.edu}}
 
@@ -40,7 +40,7 @@
   \code{constructor} function and, at a minimum, methods for the
   functions \code{corMatrix} and \code{coef}. For
   examples of these functions, see the methods for classes \code{corSymm}
-  and \code{corAR1}. 
+  and \code{corAR1}.
 }
 \seealso{
   \code{\link{corAR1}}, \code{\link{corARMA}},

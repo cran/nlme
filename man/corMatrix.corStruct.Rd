@@ -13,7 +13,6 @@
 \alias{corMatrix.corARMA}
 \alias{corMatrix.corCAR1}
 \alias{corMatrix.corCompSymm}
-\alias{corMatrix.corIdent}
 \alias{corMatrix.corNatural}
 \alias{corMatrix.corSpatial}
 \alias{corMatrix.corSymm}

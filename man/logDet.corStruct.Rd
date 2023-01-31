@@ -9,7 +9,6 @@
 \method{logDet}{corStruct}(object, covariate, \dots)
 }
 \alias{logDet.corStruct}
-\alias{logDet.corIdent}
 \arguments{
  \item{object}{an object inheriting from class \code{"\link{corStruct}"},
    representing a correlation structure.}

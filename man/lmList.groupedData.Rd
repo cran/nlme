@@ -35,7 +35,7 @@
   and the \code{groupedData} object are passed as the \code{object} and
   \code{data} arguments to \code{lmList.formula}, together with any other
   additional arguments in the function call. See the documentation on
-  \code{lmList.formula} for a description of that function.
+  \code{\link{lmList.formula}} for a description of that function.
 }
 \value{
   a list of \code{lm} objects with as many components as the number of

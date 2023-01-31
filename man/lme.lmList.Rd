@@ -21,14 +21,14 @@
    side of \code{formula(fixed)}.} 
  \item{correlation}{an optional \code{corStruct} object describing the
    within-group correlation structure. See the documentation of
-   \code{corClasses} for a description of the available \code{corStruct}
+   \code{\link{corClasses}} for a description of the available \code{corStruct}
    classes. Defaults to \code{NULL},
    corresponding to no within-group correlations.}
  \item{weights}{an optional \code{varFunc} object or one-sided formula
    describing the within-group heteroscedasticity structure. If given as
    a formula, it is used as the argument to \code{varFixed},
    corresponding to fixed variance weights. See the documentation on
-   \code{varClasses} for a description of the available \code{varFunc}
+   \code{\link{varClasses}} for a description of the available \code{varFunc}
    classes. Defaults to \code{NULL}, corresponding to homoscedastic
    within-group errors.} 
  \item{subset}{an optional expression indicating the subset of the rows of
@@ -59,7 +59,7 @@
   \code{data} argument in the calling sequence used to obtain
   \code{fixed} are passed as the \code{fixed} and \code{data} arguments
   to \code{lme.formula}, together with any other additional arguments in
-  the function call. See the documentation on \code{lme.formula} for a
+  the function call. See the documentation on \code{\link{lme.formula}} for a
   description of that function. 
 }
 \value{

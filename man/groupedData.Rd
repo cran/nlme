@@ -7,12 +7,11 @@
 \usage{
 groupedData(formula, data, order.groups, FUN, outer, inner,
             labels, units)
+
 \method{update}{groupedData}(object, formula, data, order.groups, FUN,
        outer, inner, labels, units, \dots)
 }
 \alias{groupedData}
-\alias{nfGroupedData}% function UNdocumented, now (2018-08) deprecated
-\alias{nmGroupedData}% function UNdocumented, now (2018-08) deprecated
 \alias{[.groupedData}
 \alias{as.data.frame.groupedData}
 \alias{update.groupedData}

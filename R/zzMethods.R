@@ -87,7 +87,6 @@ confint.nlsList <- function(object, ...) {
 	simplify=FALSE)
 }
 
-.ns <- environment() # == asNamespace("nlme")
 
 ##  at the very end : ---------------------------
 .onUnload <- function(libpath)

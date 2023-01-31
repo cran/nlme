@@ -14,7 +14,6 @@
 \alias{coef.corCAR1}   
 \alias{coef.corCompSymm}
 \alias{coef.corHF}
-\alias{coef.corIdent}  
 \alias{coef.corLin}
 \alias{coef.corNatural}
 \alias{coef.corSpatial}
@@ -27,7 +26,6 @@
 \alias{coef<-.corCompSymm}
 \alias{coef<-.corNatural}
 \alias{coef<-.corHF}
-\alias{coef<-.corIdent}  
 \alias{coef<-.corLin}
 \alias{coef<-.corSpatial}
 \alias{coef<-.corSpher}

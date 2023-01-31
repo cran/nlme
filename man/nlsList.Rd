@@ -10,6 +10,10 @@
 \usage{
 nlsList(model, data, start, control, level, subset,
         na.action = na.fail, pool = TRUE, warn.nls = NA)
+
+\method{nlsList}{formula}(model, data, start, control, level, subset,
+        na.action = na.fail, pool = TRUE, warn.nls = NA)
+
 \method{update}{nlsList}(object, model., \dots, evaluate = TRUE)
 }
 \arguments{

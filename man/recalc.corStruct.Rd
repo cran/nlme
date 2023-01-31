@@ -13,7 +13,6 @@
 \alias{recalc.corCAR1}
 \alias{recalc.corCompSymm}
 \alias{recalc.corHF}
-\alias{recalc.corIdent}
 \alias{recalc.corNatural}
 \alias{recalc.corSpatial}
 \alias{recalc.corSymm}

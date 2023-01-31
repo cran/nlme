@@ -7,6 +7,9 @@
 \usage{
 nlme(model, data, fixed, random, groups, start, correlation, weights,
      subset, method, na.action, naPattern, control, verbose)
+
+\method{nlme}{formula}(model, data, fixed, random, groups, start, correlation, weights,
+     subset, method, na.action, naPattern, control, verbose)
 }
 \alias{nlme}
 \alias{nlme.formula}
@@ -16,7 +19,7 @@ nlme(model, data, fixed, random, groups, start, correlation, weights,
     covariates on the right, or an \code{nlsList} object.  If
     \code{data} is given, all names used in the formula should be
     defined as parameters or variables in the data frame. The method
-    function \code{nlme.nlsList} is documented separately.}
+    function \code{\link{nlme.nlsList}} is documented separately.}
  \item{data}{an optional data frame containing the variables named in
    \code{model}, \code{fixed}, \code{random}, \code{correlation},
    \code{weights}, \code{subset}, and \code{naPattern}.  By default the
@@ -56,7 +59,7 @@ nlme(model, data, fixed, random, groups, start, correlation, weights,
    with the grouping factors as names. The order of nesting will be
    assumed the same as the order of the order of the elements in the
    list; (iv) an \code{reStruct} object. See the documentation on
-   \code{pdClasses} for a description of the available \code{pdMat}
+   \code{\link{pdClasses}} for a description of the available \code{pdMat}
    classes. Defaults to \code{fixed},
    resulting in all fixed effects having also random effects.}
  \item{groups}{an optional one-sided formula of the form \code{~g1}
@@ -80,14 +83,14 @@ nlme(model, data, fixed, random, groups, start, correlation, weights,
    random effects in that level.}
  \item{correlation}{an optional \code{corStruct} object describing the
    within-group correlation structure. See the documentation of
-   \code{corClasses} for a description of the available \code{corStruct}
+   \code{\link{corClasses}} for a description of the available \code{corStruct}
    classes. Defaults to \code{NULL}, corresponding to no within-group
    correlations.}
  \item{weights}{an optional \code{varFunc} object or one-sided formula
    describing the within-group heteroscedasticity structure. If given as
    a formula, it is used as the argument to \code{varFixed},
    corresponding to fixed variance weights. See the documentation on
-   \code{varClasses} for a description of the available \code{varFunc}
+   \code{\link{varClasses}} for a description of the available \code{varFunc}
    classes. Defaults to \code{NULL}, corresponding to homoscedastic
    within-group errors.}
  \item{subset}{an optional expression indicating the subset of the rows of

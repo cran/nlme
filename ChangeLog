@@ -1,6 +1,28 @@
+2023-01-28  Martin Maechler  <maechler@stat.math.ethz.ch>
+
+	* DESCRIPTION (Version): 3.1-162 (to be released)
+
+	* R/corStruct.R (corIdent, *.corIdent): deprecated corIdent() and
+	some of the "corIdent" methods.
+	* man/nlme-deprecated.Rd: deprecation
+
+2023-01-26  Sebastian Meyer  <Sebastian.Meyer@R-project.org>
+
+	* src/matrix.h: fix return value in C declaration of Fortran
+	subroutine 'RS'.  (PR#18438 by Lionel Henry.)
+
+2023-01-23  Sebastian Meyer  <Sebastian.Meyer@R-project.org>
+
+	* R/groupedData.R (nfGroupedData, nmGroupedData):
+	fix deprecation logic to give a warning when not called
+	internally.
+
+	* R/groupedData.R (balancedGrouped): suppress spurious warning
+	from testing for numeric row names.
+
 2022-11-17  Martin Maechler <maechler@stat.math.ethz.ch>
 
-	* DESCRIPTION (Version): 3.1-161 {not yet released}
+	* DESCRIPTION (Version): 3.1-161 (released)
 
 	* R/pdMat.R (str.pdMat): new method, fixing error for
 	   un-initialized, and misleading e.g., in `pdDiag` case.
@@ -378,7 +400,7 @@
 
 	* R/groupedData.R: deprecate the *undocumented* functions
 	nmGroupedData() and nfGroupedData() in favor of their wrapper
-	groupedData() (to allow subsequent code simplification.
+	groupedData() (to allow subsequent code simplification).
 
 2018-08-03  Martin Maechler  <maechler@stat.math.ethz.ch>
 

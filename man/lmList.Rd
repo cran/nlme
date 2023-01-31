@@ -7,6 +7,10 @@
 \usage{
 lmList(object, data, level, subset, na.action = na.fail,
        pool = TRUE, warn.lm = TRUE)
+
+\method{lmList}{formula}(object, data, level, subset, na.action = na.fail,
+       pool = TRUE, warn.lm = TRUE)
+
 \method{update}{lmList}(object, formula., \dots, evaluate = TRUE)
 \method{print}{lmList}(x, pool, \dots)
 }

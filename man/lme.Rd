@@ -7,6 +7,9 @@
 lme(fixed, data, random, correlation, weights, subset, method,
     na.action, control, contrasts = NULL, keep.data = TRUE)
 
+\method{lme}{formula}(fixed, data, random, correlation, weights, subset, method,
+    na.action, control, contrasts = NULL, keep.data = TRUE)
+
 \method{update}{lme}(object, fixed., \dots, evaluate = TRUE)
 }
 \alias{lme}
@@ -93,7 +96,8 @@ lme(fixed, data, random, correlation, weights, subset, method,
   random effects. The within-group errors are allowed to be correlated
   and/or have unequal variances.
 
-  The methods \code{\link{lme.lmList}} and \code{\link{lme.groupedData}}
+  This page describes the formula method;
+  the methods \code{\link{lme.lmList}} and \code{\link{lme.groupedData}}
   are documented separately.
 }
 \details{

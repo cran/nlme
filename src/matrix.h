@@ -25,8 +25,8 @@
 #define NLME_MATRIX_H
 #include "base.h"
 void F77_NAME(chol)(double *a, int *lda, int *n, double *v, int *info);
-int F77_NAME(rs)(int *nm, int *n, double *a, double *w,
-		 int *matz, double *z, double *fv1, double *fv2, int *ierr);
+void F77_NAME(rs)(int *nm, int *n, double *a, double *w,
+		  int *matz, double *z, double *fv1, double *fv2, int *ierr);
 #include <R_ext/Linpack.h>
 
 typedef struct QR_struct {

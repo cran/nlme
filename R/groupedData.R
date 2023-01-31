@@ -1,6 +1,6 @@
 ###           groupedData - data frame with a grouping structure
 ###
-### Copyright 2006-2021  The R Core team
+### Copyright 2006-2023  The R Core team
 ### Copyright 1997-2003  Jose C. Pinheiro,
 ###                      Douglas M. Bates <bates@stat.wisc.edu>
 #
@@ -49,14 +49,12 @@ nfGroupedData <-
 	   FUN = function(x) max(x, na.rm = TRUE), outer = NULL,
            inner = NULL, labels = NULL, units = NULL)
 {
-  ## want to stop exporting undocumented(!) nmGroupedData()
-  if(!local({ N <- -1L
-      while(identical(sys.call(N)[[1]], quote(eval))) N <- N-1L
-      identical(.sf <- sys.function(N), groupedData) ||
-          identical(environment(.sf), .ns) ||
-          identical(environment(sys.function(N-1L)), .ns) ||
-          identical(environment(sys.function(N-2L)), .ns)
-  }))
+  ## want to stop exporting nfGroupedData()
+  ## called internally from groupedData() via eval or from collapse.groupedData()
+  .internal <- any(unlist(lapply(tail(sys.frames()[-sys.nframe()],
+                                      3), # no need to look further up
+                                 utils::packageName)) == "nlme")
+  if(!.internal)
     .Deprecated("groupedData", "nlme")
   if (!(inherits(formula, "formula") && length(formula) == 3)) {
     stop("first argument to 'nfGroupedData' must be a two-sided formula")
@@ -133,14 +131,12 @@ nmGroupedData <-
 	   FUN = function(x) max(x, na.rm = TRUE), outer = NULL,
            inner = NULL, labels = NULL, units = NULL)
 {
-  ## want to stop exporting undocumented(!) nmGroupedData()
-  if(!local({ N <- -1L
-      while(identical(sys.call(N)[[1]], quote(eval))) N <- N-1L
-      identical(.sf <- sys.function(N), groupedData) ||
-          identical(environment(.sf), .ns) ||
-          identical(environment(sys.function(N-1L)), .ns) ||
-          identical(environment(sys.function(N-2L)), .ns)
-  }))
+  ## want to stop exporting nmGroupedData()
+  ## called internally from groupedData() via eval
+  .internal <- any(unlist(lapply(tail(sys.frames()[-sys.nframe()],
+                                      3), # no need to look further up
+                                 utils::packageName)) == "nlme")
+  if(!.internal)
     .Deprecated("groupedData", "nlme")
   if (!(inherits(formula, "formula") && length(formula) == 3))
     stop("first argument to 'nmGroupedData' must be a two-sided formula")
@@ -643,7 +639,7 @@ balancedGrouped <-
   form <- as.formula( form )
   data <- t( as.matrix( data ) )
   dn <- dimnames( data )
-  if ( all( !is.na( as.numeric( dn[[1]] ) ) ) ) {
+  if ( !anyNA( suppressWarnings( as.numeric( dn[[1]] ) ) ) ) {
     dn[[1]] <- as.numeric( dn[[1]] )
   }
   names(dn) <- c( as.character(getCovariateFormula(form)[[2]]),

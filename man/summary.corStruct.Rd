@@ -14,7 +14,6 @@
 \alias{summary.corCompSymm}
 \alias{summary.corExp}
 \alias{summary.corGaus}
-\alias{summary.corIdent}
 \alias{summary.corLin}
 \alias{summary.corNatural}
 \alias{summary.corRatio}
@@ -27,9 +26,9 @@
  \item{structName}{an optional character string defining the type of
    correlation structure associated with \code{object}, to be used in
    the \code{print.summary} method. Defaults to
-   \code{class(object)[1]}.} 
+   \code{class(object)[1]}.}
  \item{\dots}{some methods for this generic require additional
-    arguments.  None are used in this method.} 
+    arguments.  None are used in this method.}
 }
 \description{
   This method function prepares \code{object} to be printed using the
@@ -44,10 +43,10 @@
 }
 \author{José Pinheiro and Douglas Bates }
 \seealso{
-  \code{\link{corClasses}}, 
+  \code{\link{corClasses}},
   \code{\link{corNatural}},
-  \code{\link{Initialize.corStruct}}, 
-  \code{\link{summary}} 
+  \code{\link{Initialize.corStruct}},
+  \code{\link{summary}}
 }
 
 %\seealso{\code{\link{print.summary.corStruct}}}

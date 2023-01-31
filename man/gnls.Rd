@@ -7,8 +7,7 @@
 \usage{
 gnls(model, data, params, start, correlation, weights, subset,
      na.action, naPattern, control, verbose)
-%\method{update}{gnls}(object, model, data, params, start, correlation, 
-%       weights, subset, na.action, naPattern, control, verbose, \dots) 
+%\method{update}{gnls}(object, model., ..., evaluate = TRUE)
 }
 \alias{gnls}
 %\alias{update.gnls}
@@ -40,7 +39,7 @@ gnls(model, data, params, start, correlation, weights, subset,
    \code{nls} function.}
  \item{correlation}{an optional \code{corStruct} object describing the
    within-group correlation structure. See the documentation of
-   \code{corClasses} for a description of the available \code{corStruct}
+   \code{\link{corClasses}} for a description of the available \code{corStruct}
    classes. If a grouping variable is to be used, it must be specified
    in the \code{form} argument to the \code{corStruct}
    constructor. Defaults to \code{NULL}, corresponding to uncorrelated 
@@ -49,7 +48,7 @@ gnls(model, data, params, start, correlation, weights, subset,
    describing the within-group heteroscedasticity structure. If given as
    a formula, it is used as the argument to \code{varFixed},
    corresponding to fixed variance weights. See the documentation on
-   \code{varClasses} for a description of the available \code{varFunc}
+   \code{\link{varClasses}} for a description of the available \code{varFunc}
    classes. Defaults to \code{NULL}, corresponding to homoscedastic
    errors.} 
  \item{subset}{an optional expression indicating which subset of the rows of
