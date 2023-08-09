@@ -1,7 +1,7 @@
 ###  Fit a general nonlinear regression model with correlated and/or
 ###  heteroscedastic errors
 ###
-### Copyright 2007-2022  The R Core team
+### Copyright 2007-2023  The R Core team
 ### Copyright 1997-2003  Jose C. Pinheiro,
 ###                      Douglas M. Bates <bates@stat.wisc.edu>
 #
@@ -535,6 +535,7 @@ gnls <- function(model,
 		 plist = plist,
                  pmap = pmap,
                  parAssign = parAssign,
+                 formula = form,
                  na.action = attr(dataMod, "na.action")),
 	    ## saving labels and units for plots
 	    units = if(grpDta) attr(data, "units"),
@@ -635,7 +636,7 @@ getParsGnls <- function(plist, pmap, beta, N)
 
 coef.gnls <- function(object, ...) object$coefficients
 
-formula.gnls <- function(x, ...) eval(x$call[["model"]])
+formula.gnls <- function(x, ...) x$formula %||% eval(x$call[["model"]])
 
 getData.gnls <-
   function(object)

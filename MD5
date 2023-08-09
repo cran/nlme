@@ -1,12 +1,12 @@
-40a3cf4ad4b261bf50d4582ea6f120cc *ChangeLog
-033138c43fcfcf78da826138fb1333ce *DESCRIPTION
+73ee454acddcd14ac3b2c927ba3eedd9 *ChangeLog
+f4e7d0eab2f4c5359eb28d4f4b015a92 *DESCRIPTION
 398eb829c5b09bf5b661094916d897e4 *LICENSE.note
 5df894793407c151274dc06fb016c138 *NAMESPACE
 af82a6b780b7157da96d3e996fa2b949 *R/VarCorr.R
 fbc89f7c11109a83d6e3b8448b5a90a1 *R/VarCov.R
 888428e2434138860109779c6ef43500 *R/corStruct.R
 e1d808e79cc72a575c59f56d5371d3e8 *R/gls.R
-96022721726435020681bdad3c9a0c6a *R/gnls.R
+7593c9e9ff1daedbca452245f2f65d9a *R/gnls.R
 9638753499fffa011c1d1b75caffff49 *R/groupedData.R
 1a6a465f3f064ebb8fa7516b3ebbc283 *R/lmList.R
 0ff1dfec874fd6dd9105e02654562059 *R/lme.R
@@ -14,7 +14,7 @@ cf9c471ec0e6f401d7deab5cd1bce8ca *R/modelStruct.R
 85cba6651be200b0edb3fe3d4b9dbbcc *R/newFunc.R
 1548e7a2392e75a6ee7e676ee1e2495d *R/newGenerics.R
 d8885be3c7d8de6072c9aa1b97a74342 *R/newMethods.R
-e291ed8acfeb4c0638d6a9badf85b910 *R/nlme.R
+e67c0152ae446ba53d104795101a050e *R/nlme.R
 36fb74b77cf607f7351d47f8fde7ab1f *R/nlsList.R
 dfd252a1a24384dcba0b509e9893308a *R/pdMat.R
 c0c6f681f27546bd890c243979498f2d *R/reStruct.R
@@ -22,7 +22,7 @@ a6152e553e27c0e10a705050d11d45b5 *R/simulate.R
 5f291ac0307fe9f1006720147d365078 *R/varFunc.R
 bd672851ead92908320b328bdf5996b3 *R/zzMethods.R
 b2a9dc6b6cdb787d0486e80d3454833b *TODO
-ea124a494ad7922985532ad3b308e4d5 *build/partial.rdb
+7080893e02c49cd296d4424b9be55069 *build/partial.rdb
 8f2e4f663d2e4beb1143c28187c6653d *data/Alfalfa.rda
 28e82e652a218134a9b880143f611516 *data/Assay.rda
 041ca0f6b3ae898f7b0f7a62f16be9fd *data/BodyWeight.rda
@@ -258,7 +258,7 @@ a3a54a6f6ea3258ed61dbcb9caabb538 *man/isBalanced.Rd
 b399ad8ac30ebae148c2750863b9577b *man/isInitialized.Rd
 3289fa5f6d4f4e7cd614504c69538a09 *man/lmList.Rd
 8a6d79489fc6bbec424940f7daafdef8 *man/lmList.groupedData.Rd
-89c4fdc83cb60df4ae4aee7a9af66141 *man/lme.Rd
+2bad827b15465de8a394d2f6dcb47677 *man/lme.Rd
 7d0160a0c7656bb1a3632f4336454a39 *man/lme.groupedData.Rd
 7e78ec5d4fdcdae036d9cf4e70bbaee9 *man/lme.lmList.Rd
 fe7057cd4ca113498b2948a0af9dc16f *man/lmeControl.Rd
@@ -430,8 +430,8 @@ ab4666adda2d4f74b693b3a057c834cb *tests/lme.R
 eb3cbb2a3b3bc8a44823412ac00519a8 *tests/nlme.R
 90102927f576880c5bcbaead004b1537 *tests/nlme2.R
 b2a440592fcf4163014204464ffcd4e1 *tests/predict.lme.R
-65df5e0801b50f30bff9bbec519aa9fd *tests/scoping.R
-c57378a11650f4349dff4b3832a72b66 *tests/sigma-fixed-etc.R
+87328a18fe85669ef94565edc370c408 *tests/scoping.R
+ad9e8c74401a27ce836fe5f3253dd543 *tests/sigma-fixed-etc.R
 52e8f5b5ecbec55ced361ee194ff972a *tests/ss2.rds
 4c68332d00c3e3f1818fcb8aa60e0d9b *tests/updateLme.R
 ffe6a13d13fcfb77ba53f5d259b0aaf7 *tests/varConstProp.R

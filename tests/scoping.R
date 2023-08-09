@@ -36,3 +36,20 @@ invisible(lapply(list(gls, lme), function (FUN) {
     stopifnot(identical(formula(FUN(form, Ovary)), form))
 }))
 ## gave Error in eval(x$call$model) : object 'form' not found
+
+
+## Subject: [Bug 18559] New: nlme -> anova doesn't handle symbolic formulas nicely
+## Date: Sat, 08 Jul 2023 --- by Ben Bolker
+formula <- height ~ a*exp(-b*age)
+fm1 <- nlme(formula, data = Loblolly,
+            fixed  = a + b ~ 1,
+            random = a ~ 1,   start = c(a = 100, b = 1))
+## "same" for gnls:
+fmGnl <- gnls(formula, data = Loblolly, start = c(a = 100, b = 1))
+stopifnot(exprs = {
+    identical(formula(fm1), formula) ## was equal to stats::formula (!)
+    identical(getResponseFormula(fm1), ~height)
+    identical(formula(fmGnl), formula) # was stats::formula
+    identical(getResponseFormula(fmGnl), ~height)
+})
+

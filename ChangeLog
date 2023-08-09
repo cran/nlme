@@ -1,3 +1,14 @@
+2023-07-31  Martin Maechler  <maechler@stat.math.ethz.ch>
+
+	* R/nlme.R (nlme.formula, formula.nlme):
+	* R/gnls.R (gnls, formula.gnls): store 'model' argument as 'formula'
+	==> trivial formula() methods, fixing PR#18559 by Ben Bolker.
+
+2023-04-06  Martin Maechler  <maechler@stat.math.ethz.ch>
+
+	* tests/sigma-fixed-etc.R (nlme): loosen tol for sM4$tTable[,"Std.Error"]
+	* DESCRIPTION (Version): 3.1-163
+
 2023-01-28  Martin Maechler  <maechler@stat.math.ethz.ch>
 
 	* DESCRIPTION (Version): 3.1-162 (to be released)

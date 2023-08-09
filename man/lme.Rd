@@ -143,7 +143,7 @@ lme(fixed, data, random, correlation, weights, subset, method,
   \doi{10.2307/2529876}.
 
   Lindstrom, M.J. and Bates, D.M. (1988).
-  Newton-Raphson and {EM} Algorithms for Linear Mixed-Effects Models for Repeated-Measures Data.
+  Newton-Raphson and EM Algorithms for Linear Mixed-Effects Models for Repeated-Measures Data.
   \emph{Journal of the American Statistical Association} \bold{83}, 1014--1022.
   \doi{10.2307/2290128}.
 
