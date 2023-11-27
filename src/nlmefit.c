@@ -2,7 +2,7 @@
    Routines for calculation of the log-likelihood or restricted
    log-likelihood with mixed-effects models.
 
-   Copyright (C) 2007-2022  The R Core Team
+   Copyright (C) 2007-2023  The R Core Team
    Copyright (C) 1997-2005  Douglas M. Bates <bates@stat.wisc.edu>,
 		            Jose C. Pinheiro, Saikat DebRoy
 
@@ -379,7 +379,7 @@ internal_loglik(dimPTR dd, double *ZXy, double *DmHalf, int *RML,
 			      lglk + i, store, ldstr))
 	    {
 		warning("Singular precision matrix in level %ld, block %ld",
-			(long int) (i - Q), j + 1);
+			(long int) (i - Q), (long int) (j + 1));
 		return -DBL_MAX;
 	    }
 	}
@@ -424,7 +424,7 @@ internal_estimate(dimPTR dd, double *dc)
 			  (dd->ncol)[i], (dd->nrot)[i], (dd->ncol)[Qp1]) != 0)
 	    {
 		error(_("Singularity in backsolve at level %ld, block %ld"),
-		      (long int) (i - (dd->Q)), j + 1);
+		      (long int) (i - (dd->Q)), (long int) (j + 1));
 	    }
 	}
     }
