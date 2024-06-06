@@ -1,6 +1,6 @@
 ###              Classes of correlation structures
 ###
-### Copyright 2005-2020  The R Core team
+### Copyright 2005-2024  The R Core team
 ### Copyright 1997-2003  Jose C. Pinheiro,
 ###                      Douglas M. Bates <bates@stat.wisc.edu>
 
@@ -201,7 +201,7 @@ getCovariate.corStruct <-
       if (is.null(grps)) {
         covar <- 1:nrow(data)
       } else {
-	covar <- lapply(split(grps, grps), function(x) seq_along(x))
+	covar <- lapply(split(grps, grps), seq_along)
       }
     }
     if (!is.null(grps)) {
@@ -779,7 +779,12 @@ corIdent <-
   ## Constructor for the corIdent class
   function(form = NULL)
 {
-  .Deprecated("corAR1(0, *)", "nlme")
+  .Deprecated(
+    msg = paste0(
+      "The \"corIdent\" class is deprecated.\n",
+      "Use argument 'correlation = NULL' for uncorrelated errors in model functions."
+    ),
+    package = "nlme")
   value <- numeric(0)
   attr(value, "formula") <- form
   attr(value, "fixed") <- TRUE
@@ -1154,7 +1159,7 @@ corARMA <-
     stop("moving average order must be a non-negative integer")
   }
   if (0 == (p + q)) {
-    return(corIdent())
+    stop("at least one of 'p' and 'q' must be > 0")
   }
   if (length(value) != p + q) {
     stop("initial value for parameter of wrong length")
@@ -1750,6 +1755,7 @@ corFactor.corSpatial <- function(object, ...)
 corMatrix.corSpatial <-
   function(object, covariate = getCovariate(object), corr = TRUE, ...)
 {
+  ## the default 'covariate' excludes 1-obs groups (empty distance)
   nRt <- function(vec) round((1 + sqrt(1 + 8 * length(vec))) / 2)
   corD <- Dim(object,
 	      if(is.list(covariate)) {

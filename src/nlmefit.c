@@ -415,10 +415,10 @@ internal_loglik(dimPTR dd, double *ZXy, double *DmHalf, int *RML,
 void
 internal_estimate(dimPTR dd, double *dc)
 {				/* solve for Beta and b_i estimates */
-    int i, j, Qp1 = (dd->Q) + 1;
+    int Qp1 = (dd->Q) + 1;
 
-    for (i = (dd->Q); i >= 0; i--) {
-	for (j = 0; j < (dd->ngrp)[i]; j++) {
+    for (int i = (dd->Q); i >= 0; i--) {
+	for (int j = 0; j < (dd->ngrp)[i]; j++) {
 	    if (backsolve(dc + (dd->SToff)[i][j], dd->Srows,
 			  (dd->SToff)[i][j] - (dd->DecOff)[i][j],
 			  (dd->ncol)[i], (dd->nrot)[i], (dd->ncol)[Qp1]) != 0)
@@ -445,14 +445,12 @@ internal_R_invert(dimPTR dd, double *dc)
 
 static double cube_root_eps = 0.;
 
-static double *
+static void
 pt_prod( double *prod, double *a, double *b, size_t len )
 {				/* prod <- a * b */
-    int i; double *ret = prod;
-    for (i = 0; i < len; i++) {
+    for (int i = 0; i < len; i++) {
 	*prod++ = *a++ * *b++;
     }
-    return ret;
 }
 
 static void

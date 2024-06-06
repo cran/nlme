@@ -127,7 +127,7 @@ coef.summary.nlsList <-
   function(object, ...) object$parameters
 
 formula.nlsList <-
-  function(x, ...) eval(attr(x, "call")[["model"]])
+  function(x, ...) eval(attr(x, "call")[["model"]])   # flaky if model is a name
 
 summary.nlsList <-
   function(object, ...)

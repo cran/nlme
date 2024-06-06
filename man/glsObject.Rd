@@ -39,7 +39,7 @@
   \item{modelStruct}{an object inheriting from class \code{glsStruct},
    representing a list of linear model components, such as
    \code{corStruct} and \code{varFunc} objects.}
-  \item{groups}{a vector with the correlation structure grouping factor,
+  \item{groups}{the correlation structure grouping factor,
     if any is present.}
   \item{logLik}{the log-likelihood at convergence.}
   \item{method}{the estimation method: either \code{"ML"} for maximum

@@ -1,14 +1,15 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: nlme 3.1-152\n"
-"POT-Creation-Date: 2021-02-12 09:19\n"
+"Project-Id-Version: nlme 3.1-165\n"
+"POT-Creation-Date: 2024-06-06 11:06\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
-
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
 msgid "not implemented for \"nlme\" objects"
 msgstr ""
@@ -109,6 +110,9 @@ msgstr ""
 msgid "moving average order must be a non-negative integer"
 msgstr ""
 
+msgid "at least one of 'p' and 'q' must be > 0"
+msgstr ""
+
 msgid "initial value for parameter of wrong length"
 msgstr ""
 
@@ -169,6 +173,9 @@ msgstr ""
 msgid "model must be a formula of the form \"resp ~ pred\""
 msgstr ""
 
+msgid "offset() terms are not supported"
+msgstr ""
+
 msgid "no coefficients to fit"
 msgstr ""
 
@@ -178,7 +185,7 @@ msgstr ""
 msgid "computed \"gls\" fit is singular, rank %s"
 msgstr ""
 
-msgid "object must inherit from class \"gls\""
+msgid "object must inherit from class %s"
 msgstr ""
 
 msgid "'Terms' must be between 1 and %d"
@@ -235,7 +242,7 @@ msgstr ""
 msgid "formulae in 'params' must be of the form \"parameter ~ expr\""
 msgstr ""
 
-msgid "starting values for parameters are not of the correct length"
+msgid "step halving factor reduced below minimum in NLS step"
 msgstr ""
 
 msgid "cannot calculate REML log-likelihood for \"gnls\" objects"
@@ -290,9 +297,6 @@ msgid "'asTable' cannot be used with multilevel grouped data"
 msgstr ""
 
 msgid "'asTable' can only be used with balanced 'groupedData' objects"
-msgstr ""
-
-msgid "%d errors caught in %s.  The error messages and their frequencies are"
 msgstr ""
 
 msgid "'data' argument not used, but taken from groupedData object"
@@ -382,9 +386,6 @@ msgstr ""
 msgid "maximum number of iterations (lmeControl(maxIter)) reached without convergence"
 msgstr ""
 
-msgid "object must inherit from class \"lme\""
-msgstr ""
-
 msgid "terms must all have the same denominator DF"
 msgstr ""
 
@@ -457,9 +458,6 @@ msgstr ""
 msgid "objects must have coefficients with same row names"
 msgstr ""
 
-msgid "object must inherit from \"data.frame\""
-msgstr ""
-
 msgid "only one level allowed in 'gapply'"
 msgstr ""
 
@@ -482,9 +480,6 @@ msgid "'FUN' can only be a function or a list of functions"
 msgstr ""
 
 msgid "cannot omit grouping factor without 'form'"
-msgstr ""
-
-msgid "object must inherit from class \"lmList\""
 msgstr ""
 
 msgid "no degrees of freedom for estimating std. dev."
@@ -596,6 +591,9 @@ msgid "PORT message:"
 msgstr ""
 
 msgid "Iteration %d, LME step: nlm() did not converge (code = %d)."
+msgstr ""
+
+msgid "step halving factor reduced below minimum in PNLS step"
 msgstr ""
 
 msgid "maximum number of iterations (maxIter = %d) reached without convergence"
@@ -793,9 +791,6 @@ msgstr ""
 msgid "elements in 'object' must be formulas or \"pdMat\" objects"
 msgstr ""
 
-msgid "cannot change the parameter when ength of parameters is undefined"
-msgstr ""
-
 msgid "cannot change parameter length of initialized objects"
 msgstr ""
 
@@ -857,6 +852,9 @@ msgid "ignoring 'group' in \"varFixed\" formula"
 msgstr ""
 
 msgid "all variables used in 'formula' must be in 'data'"
+msgstr ""
+
+msgid "ignoring initial values (no grouping factor)"
 msgstr ""
 
 msgid "initial values must have group names in 'varIdent'"
@@ -964,18 +962,6 @@ msgstr ""
 msgid "cannot change parameter length of initialized \"varComb\" object"
 msgstr ""
 
-msgid "Package"
-msgstr ""
-
-msgid "installed with old R version"
-msgstr ""
-
-msgid "should not be used with R version"
-msgstr ""
-
-msgid "Rather re-install it with this version of R."
-msgstr ""
-
 msgid "deviance undefined for REML fit"
 msgstr ""
 
@@ -1000,13 +986,8 @@ msgid_plural "effects %s not matched"
 msgstr[0]    ""
 msgstr[1]    ""
 
-msgid        "level %s not allowed for %s"
-msgid_plural "levels %s not allowed for %s"
-msgstr[0]    ""
-msgstr[1]    ""
-
-msgid        "%d error caught in %s: %s"
-msgid_plural "%d times caught the same error in %s: %s"
+msgid        "supplied %d starting value, need %d"
+msgid_plural "supplied %d starting values, need %d"
 msgstr[0]    ""
 msgstr[1]    ""
 

@@ -27,8 +27,8 @@ varIdent(value, form, fixed)
     optionally, a grouping factor \code{g} for the coefficients. The
     variance covariate is ignored in this variance function. When a
     grouping factor is present in \code{form}, a different coefficient
-    value is used for each of its levels less one reference level (see
-    description section below). Several grouping variables may be
+    value is used for each of its levels less one reference level.
+    Several grouping variables may be
     simultaneously specified, separated by the \code{*} operator, like
     in \code{~ v | g1 * g2 * g3}. In this case, the levels of each
     grouping variable are pasted together and the resulting factor is

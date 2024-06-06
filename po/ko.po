@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nlme 3.1-105\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-12 09:19+0000\n"
+"POT-Creation-Date: 2024-06-06 12:49+0200\n"
 "PO-Revision-Date: 2013-08-16 18:27-0600\n"
 "Last-Translator: Chel Hee Lee <gnustats@gmail.com>\n"
 "Language-Team: R Development Translation Teams (Korean) <gnustats@korea.gnu."
@@ -25,23 +25,23 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Generator: Poedit 1.5.4\n"
 
-#: corStruct.c:423
+#: corStruct.c:424
 msgid "All parameters must be less than 1 in absolute value"
 msgstr "모든 파라미터들의 절대값이 반드시 1 보다 작아야 합니다"
 
-#: corStruct.c:533
+#: corStruct.c:535
 msgid "Coefficient matrix not invertible"
 msgstr "가역적이지 않은 계수행렬입니다"
 
-#: corStruct.c:870 corStruct.c:925 corStruct.c:985 corStruct.c:1027
+#: corStruct.c:872 corStruct.c:927 corStruct.c:987 corStruct.c:1029
 msgid "Unknown spatial correlation class"
 msgstr "알 수 없는 spatial correlation 클래스입니다"
 
-#: nlme.c:464
+#: nlme.c:468
 msgid "First observation on an individual must have a dose"
 msgstr "개인의 첫번째 관측값은 반드시 dose 이어야 합니다"
 
-#: nlmefit.c:424
+#: nlmefit.c:426
 #, c-format
 msgid "Singularity in backsolve at level %ld, block %ld"
 msgstr ""

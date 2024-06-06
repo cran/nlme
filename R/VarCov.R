@@ -1,6 +1,6 @@
 ## Contributed by Mary Lindstrom <lindstro@biostat.wisc.edu>
 
-# Copyright 2007-2020 The R Core team
+# Copyright 2007-2024 The R Core team
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -24,7 +24,7 @@ getVarCov.lme <-
              type= c("random.effects","conditional","marginal"), ...)
 {
     type  <-  match.arg(type)
-    if(any("nlme" == class(obj)))
+    if(inherits(obj, "nlme"))
         stop("not implemented for \"nlme\" objects")
     if(length(obj$groups) > 1)
         stop("not implemented for multiple levels of nesting")
@@ -39,20 +39,26 @@ getVarCov.lme <-
         result <- list()
         groups  <-  obj$groups[[1]]
         ugroups  <-  unique(groups)
-        if (missing(individuals)) individuals  <-  as.matrix(ugroups)[1,]
-        if (is.numeric(individuals))
+        ## CAVE: both default and numeric 'individuals' are undocumented,
+        ##       but unlike getVarCov.gls and perhaps unintentionally, these
+        ##       index the groups as they occur in the data, not the levels!
+        if (missing(individuals)) {
+            individuals  <-  ugroups[1]
+        } else if (is.numeric(individuals)) {
             individuals  <-  ugroups[individuals]
-        for (individ in individuals)
+        }
+        for (individ in as.character(individuals))
         {
             ind <- groups == individ
             ni <- sum(ind, na.rm = TRUE)
             if (ni == 0)
                 stop(gettextf("individual %s was not used in the fit",
                               sQuote(individ)), domain = NA)
-            if(!is.null(csT <- obj$modelStruct$corStruct)) {
+            if(!is.null(csT <- obj$modelStruct$corStruct)
+               && ni > 1) { # corMatrix.corSpatial() excludes 1-obs groups (PR#16806)
                 V <- corMatrix(csT)[[individ]]
-            }
-            else V <- diag(ni)
+            } else
+                V <- diag(ni)
             if(!is.null(obj$modelStruct$varStruct)) {
                 ## CAVE: stored weights are based on internally reordered data,
                 ##       so cannot be indexed via obj$groups
@@ -64,12 +70,12 @@ getVarCov.lme <-
             cond.var <- t(V * sds) * sds
             dimnames(cond.var)  <-  list(1:nrow(cond.var),1:ncol(cond.var))
             if (type=="conditional")
-                result[[as.character(individ)]] <- cond.var
+                result[[individ]] <- cond.var
             else
             {
                 Z <- model.matrix(obj$modelStruct$reStruct,
                                   getData(obj))[ind, , drop = FALSE]
-                result[[as.character(individ)]] <-
+                result[[individ]] <-
                     cond.var + Z %*% D %*% t(Z)
             }
         }
@@ -86,15 +92,19 @@ getVarCov.gls <-
         stop("not implemented for uncorrelated errors")
     if (is.null(grp <- getGroups(csT)))
         stop("not implemented for correlation structures without a grouping factor")
-    S <- corMatrix(csT)[[individual]]
+    ind <- if (is.numeric(individual)) {
+               as.integer(grp) == individual
+           } else         grp  == individual
+    ni <- sum(ind, na.rm = TRUE)
+    if (ni == 0)
+        stop(gettextf("individual %s was not used in the fit",
+                      sQuote(individual)), domain = NA)
+    S <- if (ni > 1) corMatrix(csT)[[individual]] else diag(1) # PR#16806
     if (!is.null( obj$modelStruct$varStruct))
     {
-        ind <- if (is.numeric(individual)) {
-                   as.integer(grp) == individual
-               } else         grp  == individual
         vw  <-  1/varWeights(obj$modelStruct$varStruct)[ind]
     }
-    else vw  <-  rep(1,nrow(S))
+    else vw  <-  rep(1, ni)
     vars  <-  (obj$sigma * vw)^2
     result  <-  t(S * sqrt(vars))*sqrt(vars)
     class(result)  <-  c("marginal","VarCov")

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nlme 3.1-65\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-12 09:19+0000\n"
+"POT-Creation-Date: 2024-06-06 12:49+0200\n"
 "PO-Revision-Date: 2021-02-06 16:27+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -18,23 +18,23 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 2.4.2\n"
 
-#: corStruct.c:423
+#: corStruct.c:424
 msgid "All parameters must be less than 1 in absolute value"
 msgstr "Tous les paramètres doivent être inférieurs à 1 en valeur absolue"
 
-#: corStruct.c:533
+#: corStruct.c:535
 msgid "Coefficient matrix not invertible"
 msgstr "Matrice de coefficient non inversible"
 
-#: corStruct.c:870 corStruct.c:925 corStruct.c:985 corStruct.c:1027
+#: corStruct.c:872 corStruct.c:927 corStruct.c:987 corStruct.c:1029
 msgid "Unknown spatial correlation class"
 msgstr "Classes de corrélation spatiale inconnues"
 
-#: nlme.c:464
+#: nlme.c:468
 msgid "First observation on an individual must have a dose"
 msgstr "La première observation sur un individu doit avoir une dose"
 
-#: nlmefit.c:424
+#: nlmefit.c:426
 #, c-format
 msgid "Singularity in backsolve at level %ld, block %ld"
 msgstr "Singularité rencontrée en résolution inverse au niveau %ld, bloc %ld"

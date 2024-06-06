@@ -35,7 +35,7 @@ lmeControl(maxIter = 50, msMaxIter = 50, tolerance = 1e-6, niterEM = 25,
    the initial estimates of the random effects variance-covariance
    coefficients.  Default is \code{25}.}
  \item{msMaxEval}{maximum number of evaluations of the objective
-   function permitted for nlminb.  Default is \code{200}.}
+   function permitted for \code{\link{nlminb}}.  Default is \code{200}.}
  \item{msTol}{tolerance for the convergence criterion on the first
    iteration when \code{optim} is used.  Default is \code{1e-7}.}
  \item{msVerbose}{a logical value passed as the \code{trace} argument to

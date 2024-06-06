@@ -12,7 +12,7 @@
  \item{x}{an object inheriting from class \code{"\link{reStruct}"},
    representing a random effects structure and consisting of a list of
    \code{pdMat} objects.}
- \item{asList}{logical.  Should the asList argument be applied to each
+ \item{asList}{logical.  Should the \code{asList} argument be applied to each
    of the components?}
  \item{\dots}{some methods for this generic require additional
     arguments.  None are used in this method.} 

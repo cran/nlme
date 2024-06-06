@@ -1,6 +1,6 @@
 ###            Fit a general nonlinear mixed effects model
 ###
-### Copyright 2006-2023  The R Core team
+### Copyright 2006-2024  The R Core team
 ### Copyright 1997-2003  Jose C. Pinheiro,
 ###                      Douglas M. Bates <bates@stat.wisc.edu>
 ###
@@ -69,10 +69,9 @@ nlme.nlsList <-
   last.call$control <- NULL
   last.call$pool <- NULL
   thisCall[names(last.call)] <- last.call
-  thisModel <- last.call[["model"]]
-  thisCall[["model"]] <-
-    eval(parse(text=paste( deparse (getResponseFormula (thisModel)[[2]]),
-                          c_deparse(getCovariateFormula(thisModel)[[2]]),sep="~")))
+  thisModel <- eval.parent(last.call[["model"]]) # formula.nlsList() still evals
+  thisCall[["model"]] <- eval.parent(call("~", getResponseFormula (thisModel)[[2]],
+                                          getCovariateFormula(thisModel)[[2]]))
   ## create "fixed" and "start"
   cf <- na.omit(coef(model))
   start <- list(fixed = unlist(lapply(cf, median, na.rm = TRUE)))
@@ -216,7 +215,8 @@ nlme.formula <-
   ##
   ## checking if self-starting formula is given
   ##
-  if (missing(start) && !is.null(attr(eval(model[[3]][[1]]), "initial"))) {
+  if (missing(start) && is.call(model[[3]]) &&
+      !is.null(attr(eval(model[[3]][[1]]), "initial"))) {
     nlmeCall <- Call
     nlsLCall <- nlmeCall[c("","model","data")]
     nlsLCall[[1]] <- quote(nlme::nlsList)
@@ -777,7 +777,7 @@ nlme.formula <-
                        control = controlvals)
   parMap <- attr(nlmeSt, "pmap")
 
-  decomp <- length(coef(nlmeSt)) == length(coef(nlmeSt$reStruct)) && !needUpdate(nlmeSt)
+  decomp <- length(nlmeSt) == 1 && !needUpdate(nlmeSt)
   if(decomp) { # can do one decomposition
     ## need to save conLin for calculating updating between steps
     oldConLin <- attr(nlmeSt, "conLin")
@@ -870,7 +870,7 @@ nlme.formula <-
     if (verbose) cat(" completed fit_nlme() step.\n")
     if (work$settings[4] == 1) {
       ##      convResult <- 2
-      msg <- "step halving factor reduced below minimum in PNLS step"
+      msg <- gettext("step halving factor reduced below minimum in PNLS step")
       if (controlvals$returnObject)
         warning(msg)
       else
@@ -1107,7 +1107,7 @@ predict.nlme <-
     reSt <- object$modelStruct$reStruct[whichQ]
     ##    nlmeSt <- nlmeStruct(reStruct = reSt)
     groups <- getGroupsFormula(reSt)
-    if (any(is.na(match(all.vars(groups), names(newdata))))) {
+    if (anyNA(match(all.vars(groups), names(newdata)))) {
       ## groups cannot be evaluated in newdata
       stop("cannot evaluate groups for desired levels on 'newdata'")
     }

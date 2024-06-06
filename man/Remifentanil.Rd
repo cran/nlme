@@ -80,8 +80,10 @@ LBMfn <- function(Wt, Ht, Sex) ifelse(Sex == "Female",
                                         1.07 * Wt - 148*(Wt/Ht)^2,
                                         1.1  * Wt - 128*(Wt/Ht)^2)
 with(Remi.1,
-    stopifnot(all.equal(BSA, Wt^{0.425} * Ht^{0.725} * 0.007184, tol = 1.5e-5),
-              all.equal(LBM, LBMfn(Wt, Ht, Sex),                 tol = 7e-7)
+     stopifnot(all.equal(BSA, Wt^{0.425} * Ht^{0.725} * 0.007184,
+                         tolerance = 1.5e-5),
+               all.equal(LBM, LBMfn(Wt, Ht, Sex),
+                         tolerance = 7e-7)
 ))
 
 ## Rate: typically  3 µg / kg body weight, but :

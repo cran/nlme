@@ -97,6 +97,7 @@
 
 \examples{
 # collapsing by Dog
-collapse(Pixel, collapse = 1)  # same as collapse(Pixel, collapse = "Dog")
+collapse(Pixel, collapseLevel = 1)
+# same as collapse(Pixel, collapseLevel = "Dog")
 }
 \keyword{models}

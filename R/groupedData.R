@@ -228,11 +228,11 @@ collapse.groupedData <-
     if (!is.list(subset)) {
       stop("'subset' must be a list")
     }
-    if (!any(is.na(match(names(subset), 1:Q)))) {
+    if (!anyNA(match(names(subset), 1:Q))) {
       ## subset names given as integers
       names(subset) <- grpNames[names(subset)]
     }
-    if (any(is.na(match(names(subset), grpNames)))) {
+    if (anyNA(match(names(subset), grpNames))) {
       stop("undefined group declared in 'subset'")
     }
     auxSubset <- rep(TRUE, dim(object)[1])

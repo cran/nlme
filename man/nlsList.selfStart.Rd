@@ -44,7 +44,7 @@
   The response variable and primary covariate in \code{formula(data)}
   are used together with \code{model} to construct the nonlinear model
   formula. This is used in the \code{nls} calls and, because a
-  selfStarting model function can calculate initial estimates for its
+  self-starting model function can calculate initial estimates for its
   parameters from the data, no starting estimates need to be provided.
 }
 \value{

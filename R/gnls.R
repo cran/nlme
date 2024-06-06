@@ -402,7 +402,7 @@ gnls <- function(model,
 	       NAOK = TRUE)[c("thetaNLS", "settings", "additional")]
     if (work$settings[4] == 1) {
 ##      convResult <- 2
-      msg <- "step halving factor reduced below minimum in NLS step"
+      msg <- gettext("step halving factor reduced below minimum in NLS step")
       if (controlvals$returnObject) {
         warning(msg)
         break

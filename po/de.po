@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.0.0 / nlme 3.1-145\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-12 09:19+0000\n"
+"POT-Creation-Date: 2024-06-06 12:49+0200\n"
 "PO-Revision-Date: 2020-04-01 15:16+0200\n"
 "Last-Translator: Detlef Steuer <steuer@hsu-hh.de>\n"
 "Language-Team: German <debian-l10n-german@lists.debian.org>\n"
@@ -15,23 +15,23 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: corStruct.c:423
+#: corStruct.c:424
 msgid "All parameters must be less than 1 in absolute value"
 msgstr "Der Betrag aller Parameter muss kleiner 1 sein."
 
-#: corStruct.c:533
+#: corStruct.c:535
 msgid "Coefficient matrix not invertible"
 msgstr "Koeffizientenmatrix nicht invertierbar"
 
-#: corStruct.c:870 corStruct.c:925 corStruct.c:985 corStruct.c:1027
+#: corStruct.c:872 corStruct.c:927 corStruct.c:987 corStruct.c:1029
 msgid "Unknown spatial correlation class"
 msgstr "Unbekannte räumliche Korrelations-Klasse"
 
-#: nlme.c:464
+#: nlme.c:468
 msgid "First observation on an individual must have a dose"
 msgstr "Erste Beobachtung eines Individuums muss eine Dosis haben"
 
-#: nlmefit.c:424
+#: nlmefit.c:426
 #, c-format
 msgid "Singularity in backsolve at level %ld, block %ld"
 msgstr "Singularität in backsolve auf Stufe %ld, Block %ld"

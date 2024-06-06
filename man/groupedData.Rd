@@ -55,7 +55,7 @@ groupedData(formula, data, order.groups, FUN, outer, inner,
    innermost grouping). An outer covariate is invariant within the sets
    of rows defined by the grouping factor.  Ordering of the groups is
    done in such a way as to preserve adjacency of groups with the same
-   value of the outer variables.  When plotting a  groupedData object,
+   value of the outer variables.  When plotting a \code{groupedData} object,
    the argument \code{outer = TRUE} causes the panels to be determined
    by the \code{outer} formula.  The points within the panels are 
    associated by level of the grouping factor. Defaults to \code{NULL},
@@ -68,7 +68,7 @@ groupedData(formula, data, order.groups, FUN, outer, inner,
    they are assumed in the same order as the group levels (outermost to
    innermost grouping). An inner covariate can change 
    within the sets of rows defined by the grouping factor.  An inner
-   formula can be used to associate points in a plot of a groupedData
+   formula can be used to associate points in a plot of a \code{groupedData}
    object.  Defaults to \code{NULL}, meaning that no inner covariates
    are present.} 
  \item{labels}{an optional list of character strings giving labels for
@@ -105,13 +105,14 @@ groupedData(formula, data, order.groups, FUN, outer, inner,
 }
 \references{
   Bates, D.M. and Pinheiro, J.C. (1997), "Software Design for Longitudinal
-  Data", in "Modelling Longitudinal and Spatially Correlated Data:
+  Data Analysis", in "Modelling Longitudinal and Spatially Correlated Data:
   Methods, Applications and Future Directions", T.G. Gregoire (ed.),
   Springer-Verlag, New York.
+  \doi{10.1007/978-1-4612-0699-6_4}
 
-  Pinheiro, J.C. and Bates, D.M. (1997) "Future Directions in
-  Mixed-Effects Software: Design of NLME 3.0" available at
-  http://nlme.stat.wisc.edu/ %% << no longer existing FIXME
+  %% Pinheiro, J.C. and Bates, D.M. (1997) "Future Directions in
+  %% Mixed-Effects Software: Design of NLME 3.0" (talk)
+  %% originally available at http://nlme.stat.wisc.edu/
 
   Pinheiro, J.C., and Bates, D.M. (2000) "Mixed-Effects Models
   in S and S-PLUS", Springer.  

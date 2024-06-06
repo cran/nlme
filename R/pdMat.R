@@ -111,7 +111,7 @@ pdConstruct.pdMat <-
         }
         dimnames(value) <- list(vnam, vnam)
         if (length(nam) > 0) {          # check consistency
-	  if (any(is.na(match(nam, vnam))) || any(is.na(match(vnam, nam)))) {
+	  if (anyNA(match(nam, vnam)) || anyNA(match(vnam, nam))) {
 	    stop("names of 'value' are not consistent with 'nam' argument")
 	  }
 	  value <- value[nam, nam, drop = FALSE]
@@ -196,7 +196,7 @@ pdConstruct.pdMat <-
               paste(namCopy[indNoMatch], "(Intercept)", sep = ".")
           }
           ## try matching modified value
-          if (!any(is.na(match(namCopy, namesForm)))) {
+          if (!anyNA(match(namCopy, namesForm))) {
             err <- FALSE
           }
           if (err) stop("'form' not consistent with 'nam'")
@@ -346,7 +346,7 @@ Names.pdMat <-
       }
       ## try matching modified value
       indMatch <- match(valueCopy, dn)
-      if (!any(is.na(indMatch))) {      # all match
+      if (!anyNA(indMatch)) {      # all match
         attr(object, "Dimnames") <- list(value, value)
         if ((length(indMatch)) > 1 && any(diff(indMatch) != 1) &&
             isInitialized(object)) { # permutation
@@ -1906,7 +1906,7 @@ pdConstruct.pdBlocked <-
     }
     attr(object, "namesList") <- namesList
     allNames <- unlist(namesList)
-    if (any(duplicated(allNames))) {
+    if (anyDuplicated(allNames)) {
       stop("cannot have duplicated column names in a \"pdMat\" object")
     }
     plen <- unlist(lapply(object, function(el)

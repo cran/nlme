@@ -425,10 +425,9 @@ anova.gls <-
     fixSig <- !is.null(fixSig) && fixSig
     Lmiss <- missing(L)
     ## returns the likelihood ratio statistics, the AIC, and the BIC
-    dots <- list(...)
-    if ((rt <- length(dots) + 1L) == 1L) {    ## just one object
+    if ((rt <- ...length() + 1L) == 1L) {    ## just one object
         if (!inherits(object,"gls"))
-            stop("object must inherit from class \"gls\"")
+            stop(gettextf("object must inherit from class %s", '"gls"'), domain = NA)
 	if(is.na(adjustSigma))
 	    ## REML correction already applied to gnls objects
 	    adjustSigma <- inherits(object, "gnls")
@@ -1141,7 +1140,7 @@ Variogram.gls <-
     wchRows <- NULL
     if (missing(distance)) {
         if (missing(form) && inherits(csT, "corSpatial")) {
-            distance <- getCovariate(csT)
+            distance <- getCovariate(csT)  # this excludes 1-obs groups
             grps <- getGroups(object)
         } else {
             metric <- match.arg(metric)

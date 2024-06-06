@@ -24,8 +24,8 @@ corARMA(value, form, p, q, fixed)
    \code{~ 1}, which corresponds to using the order of the observations
    in the data as a covariate, and no groups.}  
  \item{p, q}{non-negative integers specifying respectively the
-   autoregressive order and the moving average order of the \code{ARMA}
-   structure. Both default to 0.}
+   autoregressive order and the moving average order of the \acronym{ARMA}
+   structure. Both default to 0, but at least one should be > 0.}
  \item{fixed}{an optional logical value indicating whether the
    coefficients should be allowed to vary in the optimization, or kept
    fixed at their initial value. Defaults to \code{FALSE}, in which case
@@ -75,7 +75,7 @@ corMatrix(cs2ARMA)
 fm1Ovar.lme <- lme(follicles ~ sin(2*pi*Time) + cos(2*pi*Time),
                    data = Ovary, random = pdDiag(~sin(2*pi*Time)))
 fm5Ovar.lme <- update(fm1Ovar.lme,
-                corr = corARMA(p = 1, q = 1))
+                correlation = corARMA(p = 1, q = 1))
 # p. 396
 fm1Ovar.nlme <- nlme(follicles~
      A+B*sin(2*pi*w*Time)+C*cos(2*pi*w*Time),
@@ -84,6 +84,6 @@ fm1Ovar.nlme <- nlme(follicles~
    start=c(fixef(fm5Ovar.lme), 1) )
 # p. 397
 fm3Ovar.nlme <- update(fm1Ovar.nlme,
-         corr=corARMA(p=0, q=2) )
+         correlation=corARMA(p=0, q=2) )
 }
 \keyword{models}

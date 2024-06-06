@@ -215,12 +215,12 @@ fitted.lmList <-
 {
   if(!is.null(subset)) {
     if(is.character(subset)) {
-      if (any(is.na(match(subset, names(object))))) {
+      if (anyNA(match(subset, names(object)))) {
         stop("nonexistent groups requested in 'subset'")
       }
     } else {
       if (is.integer(subset)) {
-        if (any(is.na(match(subset, seq_along(object))))) {
+        if (anyNA(match(subset, seq_along(object)))) {
           stop("nonexistent groups requested in 'subset'")
         }
       } else {
@@ -263,7 +263,7 @@ fixef.lmList <- function(object, ...)
 }
 
 formula.lmList <-
-  function(x, ...) eval(attr(x, "call")[["object"]])
+  function(x, ...) eval(attr(x, "call")[["object"]]) # flaky if object is a name
 
 getData.lmList <-
   function(object)
@@ -795,7 +795,7 @@ predict.lmList <-
 			level = attr(object, "level"))
       grps <- grps[drop = TRUE]
       subset <- as.character(unique(grps))
-      if(any(is.na(match(subset, names(object))))) {
+      if(anyNA(match(subset, names(object)))) {
 	stop("nonexistent group in 'newdata'")
       }
       myData <- split(newdata, grps)
@@ -804,7 +804,7 @@ predict.lmList <-
     }
   }
   if(!is.null(subset)) {
-    if(any(is.na(match(subset, names(object)))))
+    if(anyNA(match(subset, names(object))))
       stop("nonexistent group requested in 'subset'")
     oclass <- class(object)
     ## fix for PR#13788
@@ -1192,10 +1192,10 @@ residuals.lmList <-
   }
   if(!is.null(subset)) {
     if(is.character(subset)) {
-      if (any(is.na(match(subset, names(object)))))
+      if (anyNA(match(subset, names(object))))
         stop("nonexistent groups requested in 'subset'")
     } else if (is.integer(subset)) {
-      if (any(is.na(match(subset, seq_along(object)))))
+      if (anyNA(match(subset, seq_along(object))))
         stop("nonexistent groups requested in 'subset'")
     } else
         stop("'subset' can only be character or integer")

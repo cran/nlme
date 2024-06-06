@@ -134,7 +134,7 @@ gapply <-
            groups = getGroups(object, form, level), ...)
 {
   if (!inherits(object, "data.frame")) {
-    stop("object must inherit from \"data.frame\"")
+    stop(gettextf("object must inherit from class %s", '"data.frame"'), domain = NA)
   }
   ## Apply a function to the subframes of a groupedData object
   if (missing(groups)) {                # formula and level are required
@@ -164,7 +164,7 @@ gapply <-
              }
            },
            numeric = {
-             if (any(is.na(match(which, 1:ncol(object))))) {
+             if (anyNA(match(which, 1:ncol(object)))) {
                  stop(gettextf("'which' must be between 1 and %d",
                                ncol(object)), domain = NA)
              }
@@ -216,7 +216,7 @@ gsummary <-
 	   invariantsOnly = FALSE, ...)
 {
   if (!inherits(object, "data.frame")) {
-    stop("object must inherit from \"data.frame\"")
+    stop(gettextf("object must inherit from class %s", '"data.frame"'), domain = NA)
   }
   if (missing(groups)) {                # formula and level are required
     if (!inherits(form, "formula")) {
@@ -299,7 +299,7 @@ pooledSD <-
   function(object)
 {
   if (!inherits(object, "lmList")) {
-    stop("object must inherit from class \"lmList\"")
+    stop(gettextf("object must inherit from class %s", '"lmList"'), domain = NA)
   }
   aux <- apply(sapply(object,
 		      function(el) {

@@ -184,7 +184,7 @@ coef.reStruct <-
   function(object, ..., value)
 {
   if (is.null(plen <- attr(object, "plen"))) {
-    stop("cannot change the parameter when ength of parameters is undefined")
+    stop("cannot change the parameter when length of parameters is undefined")
   }
   if (length(value) != sum(plen)) {
     stop("cannot change parameter length of initialized objects")

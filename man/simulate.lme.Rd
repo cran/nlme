@@ -73,11 +73,11 @@
 \author{José Pinheiro and Douglas Bates \email{bates@stat.wisc.edu}}
 \seealso{\code{\link{lme}}, \code{\link{set.seed}}}
 \examples{
-\donttest{% takes too long for routine R CMD check
 orthSim <-
    simulate.lme(list(fixed = distance ~ age, data = Orthodont,
-                     random = ~ 1 | Subject), nsim = 200,
+                     random = ~ 1 | Subject),
+                nsim = 3, # limited here for speed
                 m2 = list(random = ~ age | Subject))
-}% dont ==> check in ../tests/predict.lme.R
+% checked in ../tests/predict.lme.R
 }
 \keyword{models}

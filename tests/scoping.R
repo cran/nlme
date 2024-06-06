@@ -31,11 +31,16 @@ rm(groupedData)
 
 
 ## PR#15892: formula.gls and formula.lme evaluated the call (in bad scope)
+## same for predict.lme
 invisible(lapply(list(gls, lme), function (FUN) {
     form <- follicles ~ 1
-    stopifnot(identical(formula(FUN(form, Ovary)), form))
+    model <- FUN(form, Ovary)
+    stopifnot(identical(formula(model), form))
+    stopifnot(all.equal(predict(model, newdata = Ovary[1,]),
+                        fitted(model)[1], check.attributes = FALSE))
 }))
-## gave Error in eval(x$call$model) : object 'form' not found
+## first gave Error in eval(x$call$model) : object 'form' not found
+## second gave Error in eval(mCall$fixed) : object 'form' not found
 
 
 ## Subject: [Bug 18559] New: nlme -> anova doesn't handle symbolic formulas nicely
@@ -53,3 +58,9 @@ stopifnot(exprs = {
     identical(getResponseFormula(fmGnl), ~height)
 })
 
+## similarly for self-starting models:
+formula <- height ~ SSasymp(age, Asym, R0, lrc)
+fm2 <- nlme(formula, data = Loblolly, fixed = Asym + R0 + lrc ~ 1, random = Asym ~ 1)
+## nlme <= 3.1-164 failed with Error in x$formula :
+##   object of type 'symbol' is not subsettable
+stopifnot(identical(formula(fm2), formula))

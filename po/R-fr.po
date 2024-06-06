@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nlme 3.1-65\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
-"POT-Creation-Date: 2021-02-12 09:19\n"
+"POT-Creation-Date: 2024-06-06 11:06\n"
 "PO-Revision-Date: 2014-03-30 08:37+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -156,6 +156,10 @@ msgstr "l'ordre autorégressif doit être un entier positif ou nul"
 msgid "moving average order must be a non-negative integer"
 msgstr "l'ordre de la moyenne mobile doit être un entier positif ou nul"
 
+#, fuzzy
+msgid "at least one of 'p' and 'q' must be > 0"
+msgstr "les valeurs initiales pour 'varIdent' doivent être > 0"
+
 msgid "initial value for parameter of wrong length"
 msgstr "la valeur initiale du paramètre est de la mauvaise taille"
 
@@ -234,6 +238,9 @@ msgstr ""
 msgid "model must be a formula of the form \"resp ~ pred\""
 msgstr "le modèle doit être une formule de la forme \"resp ~ pred\""
 
+msgid "offset() terms are not supported"
+msgstr ""
+
 msgid "no coefficients to fit"
 msgstr "pas de coefficients à ajuster"
 
@@ -243,8 +250,8 @@ msgstr "le nombre maximum d'itérations est atteint, mais pas la convergence"
 msgid "computed \"gls\" fit is singular, rank %s"
 msgstr "l'ajustement \"gls\" calculé est singulier, de rang %s"
 
-msgid "object must inherit from class \"gls\""
-msgstr "l'objet doit hériter de la classe \"gls\""
+msgid "object must inherit from class %s"
+msgstr "l'objet doit hériter de la classe %s"
 
 msgid "'Terms' must be between 1 and %d"
 msgstr "'Terms' doivent être compris entre 1 et %d"
@@ -312,8 +319,10 @@ msgid "formulae in 'params' must be of the form \"parameter ~ expr\""
 msgstr ""
 "les formules dans 'params' doivent être de la forme \"parameter ~ expr\""
 
-msgid "starting values for parameters are not of the correct length"
-msgstr "les valeurs initiales pour les paramètres n'ont pas la taille correcte"
+msgid "step halving factor reduced below minimum in NLS step"
+msgstr ""
+"le facteur de division par deux du pas est réduit en dessous du minimum dans "
+"un pas NLS"
 
 msgid "cannot calculate REML log-likelihood for \"gnls\" objects"
 msgstr ""
@@ -381,9 +390,6 @@ msgstr ""
 msgid "'asTable' can only be used with balanced 'groupedData' objects"
 msgstr ""
 "'asTable' ne peut être utilisé qu'avec des objets 'groupedData' balancés"
-
-msgid "%d errors caught in %s.  The error messages and their frequencies are"
-msgstr ""
 
 #, fuzzy
 msgid "'data' argument not used, but taken from groupedData object"
@@ -493,9 +499,6 @@ msgstr ""
 "le nombre maximum d'itérations (lmeControl(maxIter)) est atteint, mais pas "
 "la convergence"
 
-msgid "object must inherit from class \"lme\""
-msgstr "l'objet doit hériter de la classe \"lme\""
-
 msgid "terms must all have the same denominator DF"
 msgstr ""
 "Les termes doivent tous avoir le même nombre de degrés de liberté au "
@@ -508,7 +511,7 @@ msgstr ""
 
 #, fuzzy
 msgid "objects must inherit from classes %s, or %s"
-msgstr "l'objet doit hériter de la classe \"gls\""
+msgstr "l'objet doit hériter de la classe %s ou %s"
 
 msgid ""
 "some fitted objects deleted because response differs from the first model"
@@ -593,9 +596,6 @@ msgstr "pas d'objet \"lme\" ajusté"
 msgid "objects must have coefficients with same row names"
 msgstr "les objets doivent avoir des coefficients qui ont mêmes noms de lignes"
 
-msgid "object must inherit from \"data.frame\""
-msgstr "l'objet doit hériter de la classe \"data.frame\""
-
 msgid "only one level allowed in 'gapply'"
 msgstr "seul un niveau est autorisé pour 'gapply'"
 
@@ -619,9 +619,6 @@ msgstr "'FUN' ne peut qu'être une fonction ou une liste de fonctions"
 
 msgid "cannot omit grouping factor without 'form'"
 msgstr "le facteur utilisé pour le regroupement ne peut être omis sans 'form'"
-
-msgid "object must inherit from class \"lmList\""
-msgstr "l'objet doit hériter de la classe \"lmList\""
 
 msgid "no degrees of freedom for estimating std. dev."
 msgstr "aucun nombre de degrés de liberté pour l'estimation de l'écart type"
@@ -692,16 +689,16 @@ msgstr "'random' doit être une formule ou une liste de formules"
 
 msgid "formulae in 'random' must be of the form \"parameter ~ expr\""
 msgstr ""
-"les formules dans 'random' doivent être de la forme \"paramètre ~ expression"
-"\""
+"les formules dans 'random' doivent être de la forme \"paramètre ~ "
+"expression\""
 
 msgid "incompatible formulas for groups in \"random\" and \"correlation\""
 msgstr ""
 "formules incompatibles entre les groupes dans \"random\" et \"correlation\""
 
 msgid ""
-"cannot use smaller level of grouping for \"correlation\" than for \"random"
-"\". Replacing the former with the latter."
+"cannot use smaller level of grouping for \"correlation\" than for "
+"\"random\". Replacing the former with the latter."
 msgstr ""
 "impossible d'utiliser un niveau plus petit pour le regroupement de "
 "\"correlation\" par rapport à \"random\". Replacement du premier par le "
@@ -775,11 +772,15 @@ msgstr ""
 msgid "Iteration %d, LME step: nlm() did not converge (code = %d)."
 msgstr ""
 
-#, fuzzy
+msgid "step halving factor reduced below minimum in PNLS step"
+msgstr ""
+"le facteur de réduction à chaque étape est abaissé en dessous du minimum à "
+"une étape PNLS"
+
 msgid "maximum number of iterations (maxIter = %d) reached without convergence"
 msgstr ""
-"le nombre maximum d'itérations (lmeControl(maxIter)) est atteint, mais pas "
-"la convergence"
+"le nombre maximum d'itérations (maxIter = %d) est atteint, mais pas la "
+"convergence"
 
 msgid "second argument must be a groupedData object"
 msgstr "le second argument doit être un objet 'groupedData'"
@@ -1041,11 +1042,6 @@ msgid "elements in 'object' must be formulas or \"pdMat\" objects"
 msgstr ""
 "les éléments dans 'object' doivent être des formules ou des objets \"pdMat\""
 
-msgid "cannot change the parameter when ength of parameters is undefined"
-msgstr ""
-"le paramètre ne peut être modifié lorsque la longueur des paramètres n'est "
-"pas définie"
-
 msgid "cannot change parameter length of initialized objects"
 msgstr ""
 "la longueur du paramètre ne peut être modifiée dans les objets initialisés"
@@ -1125,6 +1121,11 @@ msgid "all variables used in 'formula' must be in 'data'"
 msgstr ""
 "toutes les variables utilisées dans 'formula' doivent aussi se retrouver "
 "dans 'data'"
+
+#, fuzzy
+msgid "ignoring initial values (no grouping factor)"
+msgstr ""
+"'subset' ignoré lors de l'utilisation d'un seul facteur pour le regroupement"
 
 msgid "initial values must have group names in 'varIdent'"
 msgstr ""
@@ -1231,7 +1232,6 @@ msgstr "%s ne peut qu'être une liste, ou un nombre"
 msgid "%s must have group names in 'varConstPower'"
 msgstr "%s doit avoir des noms de groupes dans 'varConstPower'"
 
-#, fuzzy
 msgid "constant in \"varConstProp\" structure must be > 0"
 msgstr "la constante dans la structure \"varConstPower\" doit être > O"
 
@@ -1241,13 +1241,11 @@ msgstr "la valeur initiale doit être de longueur %d"
 msgid "nonexistent group names for initial values"
 msgstr "noms de groupes inexistants pour les valeurs initiales"
 
-#, fuzzy
 msgid "%s can only have names \"const\" and \"prop\""
-msgstr "%s ne peut avoir que les noms \"const\" et \"power\""
+msgstr "%s ne peut avoir que les noms \"const\" et \"prop\""
 
-#, fuzzy
 msgid "%s must have group names in 'varConstProp'"
-msgstr "%s doit avoir des noms de groupes dans 'varConstPower'"
+msgstr "%s doit avoir des noms de groupes dans 'varConstProp'"
 
 msgid "all arguments to 'varComb' must be of class \"varFunc\"."
 msgstr "tous les arguments de 'varComb' doivent être de classe \"varFunc\"."
@@ -1256,18 +1254,6 @@ msgid "cannot change parameter length of initialized \"varComb\" object"
 msgstr ""
 "impossible de modifier la longueur du paramètre pour des objets \"varComb\" "
 "initialisés"
-
-msgid "Package"
-msgstr ""
-
-msgid "installed with old R version"
-msgstr ""
-
-msgid "should not be used with R version"
-msgstr ""
-
-msgid "Rather re-install it with this version of R."
-msgstr ""
 
 msgid "deviance undefined for REML fit"
 msgstr ""
@@ -1295,13 +1281,8 @@ msgid_plural "effects %s not matched"
 msgstr[0] "effet %s incohérent"
 msgstr[1] "effets %s incohérent"
 
-msgid "level %s not allowed for %s"
-msgid_plural "levels %s not allowed for %s"
-msgstr[0] "le niveau %s non autorisés pour %s"
-msgstr[1] "les niveaux %s sont non autorisés pour %s"
-
-msgid "%d error caught in %s: %s"
-msgid_plural "%d times caught the same error in %s: %s"
+msgid "supplied %d starting value, need %d"
+msgid_plural "supplied %d starting values, need %d"
 msgstr[0] ""
 msgstr[1] ""
 
@@ -1335,30 +1316,8 @@ msgstr[1] ""
 "les noms des groupes ne correspondent pas aux valeurs de départ pour les "
 "effets aléatoires : %s"
 
-#~ msgid "step halving factor reduced below minimum in NLS step"
-#~ msgstr ""
-#~ "le facteur de division par deux du pas est réduit en dessous du minimum "
-#~ "dans un pas NLS"
-
-#~ msgid "An lm fit failed, probably because a factor only had one level"
-#~ msgstr ""
-#~ "Un ajustement à l'aide de lm a échoué, probablement parce qu'une variable "
-#~ "facteur n'a qu'un seul niveau"
-
-#~ msgid ""
-#~ "objects must inherit from classes \"gls\", \"gnls\",\"lm\",\"lmList\", "
-#~ "\"lme\",\"nlme\",\"nlsList\", or \"nls\""
-#~ msgstr ""
-#~ "les objets doivent hériter des classes \"gls\", \"gnls\", \"lm\",\"lmList"
-#~ "\", \"lme\",\"nlme\",\"nlsList\", ou \"nls\""
-
 #~ msgid ""
 #~ "approximate covariance matrix for parameter estimates not of full rank"
 #~ msgstr ""
 #~ "matrice de covariance approximative pour les estimateurs de paramètres "
 #~ "qui ne sont pas de rang complet"
-
-#~ msgid "step halving factor reduced below minimum in PNLS step"
-#~ msgstr ""
-#~ "le facteur de réduction à chaque étape est abaissé en dessous du minimum "
-#~ "à une étape PNLS"

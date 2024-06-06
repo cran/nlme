@@ -30,8 +30,7 @@ corIdent(form = NULL)
 
 \examples{
 assertDeprecation <- function(expr)
-  tools::assertCondition(expr, verbose = TRUE,
-    if(getRversion() >= "3.6.0") "deprecatedWarning" else "warning")
+  tools::assertCondition(expr, "deprecatedWarning", verbose = TRUE)
 
 assertDeprecation(
   nlme::nfGroupedData(height ~ age | Subject, as.data.frame(Oxboys))

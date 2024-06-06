@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: nlme 3.1-105\n"
-"POT-Creation-Date: 2021-02-12 09:19\n"
+"POT-Creation-Date: 2024-06-06 11:06\n"
 "PO-Revision-Date: 2013-08-16 18:52-0600\n"
 "Last-Translator: Chel Hee Lee <gnustats@gmail.com>\n"
 "Language-Team: R Development Translation Teams (Korean) <gnustats@korea.gnu."
@@ -135,6 +135,9 @@ msgstr ""
 msgid "moving average order must be a non-negative integer"
 msgstr ""
 
+msgid "at least one of 'p' and 'q' must be > 0"
+msgstr ""
+
 msgid "initial value for parameter of wrong length"
 msgstr ""
 
@@ -197,6 +200,9 @@ msgstr ""
 msgid "model must be a formula of the form \"resp ~ pred\""
 msgstr ""
 
+msgid "offset() terms are not supported"
+msgstr ""
+
 msgid "no coefficients to fit"
 msgstr "적합할 계수가 없습니다"
 
@@ -206,8 +212,9 @@ msgstr "수렴하지 않고 지정된 최대 반복수에 도달하였습니다"
 msgid "computed \"gls\" fit is singular, rank %s"
 msgstr ""
 
-msgid "object must inherit from class \"gls\""
-msgstr ""
+#, fuzzy
+msgid "object must inherit from class %s"
+msgstr "'object'는 반드시 formula이어야 합니다"
 
 msgid "'Terms' must be between 1 and %d"
 msgstr "'Terms'는 반드시 1과 %d 사이에 있어야 합니다"
@@ -264,8 +271,8 @@ msgstr ""
 msgid "formulae in 'params' must be of the form \"parameter ~ expr\""
 msgstr ""
 
-msgid "starting values for parameters are not of the correct length"
-msgstr "파라미터들에 대한 시작값들에 대한 길이가 올바르지 않습니다"
+msgid "step halving factor reduced below minimum in NLS step"
+msgstr ""
 
 msgid "cannot calculate REML log-likelihood for \"gnls\" objects"
 msgstr ""
@@ -321,9 +328,6 @@ msgid "'asTable' cannot be used with multilevel grouped data"
 msgstr ""
 
 msgid "'asTable' can only be used with balanced 'groupedData' objects"
-msgstr ""
-
-msgid "%d errors caught in %s.  The error messages and their frequencies are"
 msgstr ""
 
 msgid "'data' argument not used, but taken from groupedData object"
@@ -420,9 +424,6 @@ msgid ""
 "convergence"
 msgstr "수렴하지 않고 지정된 최대 반복수에 도달하였습니다"
 
-msgid "object must inherit from class \"lme\""
-msgstr ""
-
 msgid "terms must all have the same denominator DF"
 msgstr ""
 
@@ -500,9 +501,6 @@ msgstr "적합된 \"lme\" 객체가 없습니다"
 msgid "objects must have coefficients with same row names"
 msgstr ""
 
-msgid "object must inherit from \"data.frame\""
-msgstr ""
-
 msgid "only one level allowed in 'gapply'"
 msgstr ""
 
@@ -525,9 +523,6 @@ msgid "'FUN' can only be a function or a list of functions"
 msgstr ""
 
 msgid "cannot omit grouping factor without 'form'"
-msgstr ""
-
-msgid "object must inherit from class \"lmList\""
 msgstr ""
 
 msgid "no degrees of freedom for estimating std. dev."
@@ -598,8 +593,8 @@ msgid "incompatible formulas for groups in \"random\" and \"correlation\""
 msgstr ""
 
 msgid ""
-"cannot use smaller level of grouping for \"correlation\" than for \"random"
-"\". Replacing the former with the latter."
+"cannot use smaller level of grouping for \"correlation\" than for "
+"\"random\". Replacing the former with the latter."
 msgstr ""
 
 msgid "'start' must have a component called 'fixed'"
@@ -651,6 +646,9 @@ msgid "PORT message:"
 msgstr ""
 
 msgid "Iteration %d, LME step: nlm() did not converge (code = %d)."
+msgstr ""
+
+msgid "step halving factor reduced below minimum in PNLS step"
 msgstr ""
 
 #, fuzzy
@@ -869,9 +867,6 @@ msgstr ""
 msgid "elements in 'object' must be formulas or \"pdMat\" objects"
 msgstr ""
 
-msgid "cannot change the parameter when ength of parameters is undefined"
-msgstr ""
-
 msgid "cannot change parameter length of initialized objects"
 msgstr ""
 
@@ -937,6 +932,9 @@ msgid "ignoring 'group' in \"varFixed\" formula"
 msgstr ""
 
 msgid "all variables used in 'formula' must be in 'data'"
+msgstr ""
+
+msgid "ignoring initial values (no grouping factor)"
 msgstr ""
 
 msgid "initial values must have group names in 'varIdent'"
@@ -1051,18 +1049,6 @@ msgstr ""
 msgid "cannot change parameter length of initialized \"varComb\" object"
 msgstr ""
 
-msgid "Package"
-msgstr ""
-
-msgid "installed with old R version"
-msgstr ""
-
-msgid "should not be used with R version"
-msgstr ""
-
-msgid "Rather re-install it with this version of R."
-msgstr ""
-
 msgid "deviance undefined for REML fit"
 msgstr ""
 
@@ -1089,13 +1075,8 @@ msgid_plural "effects %s not matched"
 msgstr[0] ""
 msgstr[1] ""
 
-msgid "level %s not allowed for %s"
-msgid_plural "levels %s not allowed for %s"
-msgstr[0] ""
-msgstr[1] ""
-
-msgid "%d error caught in %s: %s"
-msgid_plural "%d times caught the same error in %s: %s"
+msgid "supplied %d starting value, need %d"
+msgid_plural "supplied %d starting values, need %d"
 msgstr[0] ""
 
 msgid "%s not found in data"
@@ -1122,3 +1103,6 @@ msgid_plural ""
 "group names not matched in starting values for random effects: %s"
 msgstr[0] ""
 msgstr[1] ""
+
+#~ msgid "starting values for parameters are not of the correct length"
+#~ msgstr "파라미터들에 대한 시작값들에 대한 길이가 올바르지 않습니다"

@@ -14,10 +14,10 @@ asTable(object)
 }
 \description{
   Create a tabular representation of the response in a balanced
-  groupedData object.
+  \code{groupedData} object.
 }
 \details{
-  A balanced groupedData object can be represented as a matrix or table
+  A balanced \code{groupedData} object can be represented as a matrix or table
   of response values corresponding to the values of a primary covariate
   for each level of a grouping factor.  This function creates such a
   matrix representation of the data in \code{object}.

@@ -1,3 +1,50 @@
+2024-06-05  Sebastian Meyer  <Sebastian.Meyer@R-project.org>
+
+	* DESCRIPTION (Depends): update to real minimum R version (R >= 3.6.0).
+
+	* po, inst/po: update (installed) translations
+
+	* man/simulate.lme.Rd, man/summary.lme.Rd: drop unneeded \donttest.
+
+2024-04-29  Sebastian Meyer  <Sebastian.Meyer@R-project.org>
+
+	* R/nlme.R (nlme.nlsList): fix scoping issue for nlsList() and
+	self-starting nlme() calls with a preconstructed formula.
+
+2024-04-28  Sebastian Meyer  <Sebastian.Meyer@R-project.org>
+
+	* R/corStruct.R (corARMA): corARMA() no longer returns the
+	dysfunctional/undocumented corIdent() structure, with a clear
+	error message when neither 'p' nor 'q' are set > 0 (PR#17988).
+
+2024-04-23  Sebastian Meyer  <Sebastian.Meyer@R-project.org>
+
+	* R/VarCov.R (getVarCov.lme, getVarCov.gls): support
+	'individual[s]' with only one observation (PR#16806).
+	* tests/getVarCov.R: add corresponding regression tests.
+
+2024-04-17  Sebastian Meyer  <Sebastian.Meyer@R-project.org>
+
+	* R/lme.R (predict.lme): use formula() instead of
+	re-evaluating the call (with the wrong scope), similar to PR#15892.
+
+	* R/nlme.R (nlme.formula): nlme() finally works with fixed
+	variance weights (PR#17712), thanks to the pointers by Bill
+	Denney, Benjamin Tyner, and Ben Bolker.
+	* tests/varFixed.R: added, based on BD's example.
+
+	* R/varFunc.R (varIdent): warn about misguided varIdent(~1|g)
+
+2023-12-08  Martin Maechler  <maechler@stat.math.ethz.ch>
+
+	* tests/augPred_lab.R: manually do Hmisc  label(.) <- ..
+	* DESCRIPTION (Version): 3.1-165; no longer suggesting 'Hmisc'.
+
+2023-11-27  Martin Maechler  <maechler@stat.math.ethz.ch>
+
+	* src/nlmefit.c: 2 x format 'int': s/%ld/%d/
+	* DESCRIPTION (Version): 3.1-164
+
 2023-07-31  Martin Maechler  <maechler@stat.math.ethz.ch>
 
 	* R/nlme.R (nlme.formula, formula.nlme):
@@ -518,7 +565,7 @@
 2017-11-28  Brian Ripley
 
 	* DESCRIPTION (Version): 3.1-133 (released for R-devel but withdrawn)
-	* tests/coef.Rout.save: update for R-pre-3.5.0 chanages to str()
+	* tests/coef.Rout.save: update for R-pre-3.5.0 changes to str()
 
 2017-09-18  Martin Maechler
 
@@ -716,7 +763,7 @@
 
 	* DESCRIPTION: version is 3.1-116
 
-	* R/{lme,newMethods,nlsList}.R: modify messsages.
+	* R/{lme,newMethods,nlsList}.R: modify messages.
 	* po/{R-pl,pl}.po: update.
 
 2014-03-19  Brian Ripley
@@ -1374,7 +1421,7 @@
 	* inst/scripts/ch01.R: Clean up and check these scripts
 
 	* src/nlmefit.c (gls_loglik): re-write contributed by ?? (I
-	accidently deleted the email message).
+	accidentally deleted the email message).
 
 	* R/lme.R (lme.formula): Use nlminb if available.
 

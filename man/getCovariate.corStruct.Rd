@@ -29,6 +29,8 @@
   associated with \code{object}. If a grouping factor is present, the
   returned value will be a list of vectors or matrices with the
   covariate(s) corresponding to each grouping level.
+  For spatial correlation structures, this extracts the \emph{distances}
+  implied by the covariates, and excludes 1-observation groups.
 }
 \references{
   Pinheiro, J.C., and Bates, D.M. (2000) "Mixed-Effects Models
