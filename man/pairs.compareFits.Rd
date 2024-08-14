@@ -41,8 +41,8 @@
   \code{\link{plot.compareFits}},
   \code{\link{pairs.lme}},
   \code{\link{pairs.lmList}},
-  \code{\link{xyplot}},
-  \code{\link{splom}}
+  \code{\link[lattice]{xyplot}},
+  \code{\link[lattice]{splom}}
 }
 \examples{
 example(compareFits) # cF12 <- compareFits(coef(lmList(Orthodont)), .. lme(*))

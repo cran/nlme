@@ -53,12 +53,12 @@ data("Remifentanil", package = "nlme")
   Influence of age and gender on the pharmacokinetics and pharmacodynamics
   of remifentanil: I. Model development.
   \emph{Anesthesiology} \bold{86} 1, 10--23.
-  \url{https://pubs.asahq.org/anesthesiology/article/86/1/10/35947/Influence-of-Age-and-Gender-on-the}
+  \doi{10.1097/00000542-199701000-00004}
 
   Charles F. Minto, Thomas W. Schnider and Steven L. Shafer (1997).
   Pharmacokinetics and Pharmacodynamics of Remifentanil: II. Model Application.
   \emph{Anesthesiology} \bold{86} 1, 24--33.
-  \url{https://pubs.asahq.org/anesthesiology/article/86/1/24/35925/Pharmacokinetics-and-Pharmacodynamics-of}
+  \doi{10.1097/00000542-199701000-00005}
 }
 \examples{
 plot(Remifentanil, type = "l", lwd = 2) # shows the 65 patients' remi profiles

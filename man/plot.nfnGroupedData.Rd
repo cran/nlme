@@ -86,7 +86,7 @@ Methods, Applications and Future Directions", T.G. Gregoire (ed.),
 Springer-Verlag, New York.
 }
 \author{José Pinheiro and Douglas Bates \email{bates@stat.wisc.edu}}
-\seealso{\code{\link{groupedData}}, \code{\link{xyplot}}}
+\seealso{\code{\link{groupedData}}, \code{\link[lattice]{xyplot}}}
 \examples{
 # different panels per Subject
 plot(Orthodont)

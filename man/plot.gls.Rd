@@ -75,8 +75,8 @@
   a diagnostic Trellis plot.
 }
 \author{José Pinheiro and Douglas Bates \email{bates@stat.wisc.edu}}
-\seealso{\code{\link{gls}}, \code{\link{xyplot}},
-  \code{\link{bwplot}}, \code{\link{histogram}}
+\seealso{\code{\link{gls}}, \code{\link[lattice]{xyplot}},
+  \code{\link[lattice]{bwplot}}, \code{\link[lattice]{histogram}}
 }
 \examples{
 fm1 <- gls(follicles ~ sin(2*pi*Time) + cos(2*pi*Time), Ovary,

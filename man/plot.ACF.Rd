@@ -38,7 +38,7 @@
   an \code{xyplot} Trellis plot.
 }
 \author{José Pinheiro and Douglas Bates \email{bates@stat.wisc.edu}}
-\seealso{\code{\link{ACF}}, \code{\link{xyplot}}}
+\seealso{\code{\link{ACF}}, \code{\link[lattice]{xyplot}}}
 \examples{
 fm1 <- lme(follicles ~ sin(2*pi*Time) + cos(2*pi*Time), Ovary)
 plot(ACF(fm1, maxLag = 10), alpha = 0.01)

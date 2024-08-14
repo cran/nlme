@@ -1,7 +1,6 @@
 library(nlme)
 fm1 <- nlsList(SSasymp, Loblolly)
 fm1
-system.time(cnL1 <- confint(fm1)) # 0.48 sec
 
 stopifnot(
     all.equal(as.matrix(coef(fm1)),
@@ -19,14 +18,22 @@ stopifnot(
     ,
     all.equal(pooledSD(fm1), structure(0.70039649, df = 42), tol = 1e-5)
     ,
-    84 == sum(vapply(lapply(fm1, fitted), length, 1L)) # total deg.freedom
-   , ## confint() :
-    is.list(cnL1), identical(names(cnL1), names(fm1)),
-    vapply(cnL1, is.matrix, NA),
-    vapply(cnL1, dim, c(NA,0L)) == 3:2,
-    identical(unname(sapply(cnL1, dim)), matrix(3:2, 2, length(fm1))),
-    sapply(cnL1, is.finite)
-    )
+    84 == sum(lengths(lapply(fm1, fitted))) # total deg.freedom
+)
+
+## confint():
+if (getRversion() >= "4.4.0" || # confint.nls() taken from MASS
+    (requireNamespace("MASS") && packageVersion("MASS") < "7.3-60.1")) {
+    system.time(cnL1 <- confint(fm1)) # 0.4 sec
+    stopifnot(exprs = {
+        is.list(cnL1)
+        identical(names(cnL1), names(fm1))
+        vapply(cnL1, is.matrix, NA)
+        vapply(cnL1, dim, c(NA,0L)) == 3:2
+        identical(unname(sapply(cnL1, dim)), matrix(3:2, 2, length(fm1)))
+        sapply(cnL1, is.finite)
+    })
+}
 
 fm2 <- nlme(fm1, random = Asym ~ 1)
 fm2

@@ -1,3 +1,32 @@
+2024-08-13  Kurt Hornik  <Kurt.Hornik@wu.ac.at>
+
+	* DESCRIPTION (Version): 3.1-166.
+
+2024-08-12  Sebastian Meyer  <Sebastian.Meyer@R-project.org>
+
+	* R/corStruct.R (Initialize.corARMA): catch unsupported values of
+	'p' and 'q' (PR#18777, thanks to Liming Li).
+	* tests/corStruct.R: added, with regression test.
+
+2024-06-18  Sebastian Meyer  <Sebastian.Meyer@R-project.org>
+
+	* tests/deviance.R, tests/nlme.R, tests/updateLme.R:
+	use 'MASS' conditionally.
+
+2024-06-16  Kurt Hornik  <Kurt.Hornik@wu.ac.at>
+
+	* man/pairs.compareFits.Rd:
+	* man/pairs.lmList.Rd:
+	* man/pairs.lme.Rd:
+	* man/plot.ACF.Rd:
+	* man/plot.Variogram.Rd:
+	* man/plot.augPred.Rd:
+	* man/plot.gls.Rd:
+	* man/plot.lmList.Rd:
+	* man/plot.lme.Rd:
+	* man/plot.nfnGroupedData.Rd:
+	Add package anchors for links to targets from package 'lattice'.
+
 2024-06-05  Sebastian Meyer  <Sebastian.Meyer@R-project.org>
 
 	* DESCRIPTION (Depends): update to real minimum R version (R >= 3.6.0).

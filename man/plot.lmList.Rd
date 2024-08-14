@@ -73,7 +73,7 @@
 }
 \author{José Pinheiro and Douglas Bates \email{bates@stat.wisc.edu}}
 \seealso{\code{\link{lmList}},\code{\link{predict.lm}},
-  \code{\link{xyplot}}, \code{\link{bwplot}}, \code{\link{histogram}}
+  \code{\link[lattice]{xyplot}}, \code{\link[lattice]{bwplot}}, \code{\link[lattice]{histogram}}
 }
 \examples{
 fm1 <- lmList(distance ~ age | Subject, Orthodont)

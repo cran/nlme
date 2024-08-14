@@ -35,7 +35,7 @@
 
 \author{José Pinheiro and Douglas Bates \email{bates@stat.wisc.edu}}
 
-\seealso{\code{\link{augPred}}, \code{\link{xyplot}}}
+\seealso{\code{\link{augPred}}, \code{\link[lattice]{xyplot}}}
 
 \examples{
 fm1 <- lme(Orthodont)
