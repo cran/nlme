@@ -12,7 +12,7 @@
 \alias{recalc.corARMA}
 \alias{recalc.corCAR1}
 \alias{recalc.corCompSymm}
-\alias{recalc.corHF}
+%\alias{recalc.corHF} % not implemented
 \alias{recalc.corNatural}
 \alias{recalc.corSpatial}
 \alias{recalc.corSymm}

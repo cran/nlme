@@ -37,7 +37,4 @@ ACF(object, maxLag, \dots)
   \code{\link{ACF.lme}},
   \code{\link{plot.ACF}}
 }
-\examples{
-## see the method function documentation
-}
 \keyword{models}

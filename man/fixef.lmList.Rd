@@ -31,6 +31,7 @@
 
 \examples{
 fm1 <- lmList(distance ~ age | Subject, Orthodont)
-fixed.effects(fm1)
+fixef(fm1)
+fixed.effects(fm1)  # the same, using the longer alias
 }
 \keyword{models}

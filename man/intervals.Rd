@@ -35,7 +35,4 @@ intervals(object, level, \dots)
   \code{\link{intervals.lmList}},
   \code{\link{intervals.gls}}
 }
-\examples{
-## see the method documentation
-}
 \keyword{models}

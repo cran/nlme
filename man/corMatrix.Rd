@@ -17,16 +17,17 @@ corMatrix(object, \dots)
 \description{
   This function is generic; method functions can be written to handle
   specific classes of objects. Classes which already have methods for
-  this function include all \code{corStruct} classes.
+  this function include all \code{"corStruct"} classes,
+  see \sQuote{\link{corClasses}}.
 }
 \value{
   will depend on the method function used; see the appropriate
   documentation. 
 }
 \author{José Pinheiro and Douglas Bates \email{bates@stat.wisc.edu}}
-\seealso{\code{\link{corMatrix.corStruct}},
-  \code{\link{corMatrix.pdMat}}}
-\examples{
-## see the method function documentation
+\seealso{
+  \code{\link{corMatrix.corStruct}},
+  \code{\link{corMatrix.pdMat}},
+  \code{\link{corMatrix.reStruct}}
 }
 \keyword{models}

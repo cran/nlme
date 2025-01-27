@@ -9,7 +9,7 @@ getData(object)
 }
 \alias{getData}
 \arguments{
- \item{object}{an object from which a data.frame can be extracted,
+ \item{object}{an object from which a data frame can be extracted,
    generally a fitted model object.}
 }
 \description{
@@ -29,7 +29,4 @@ getData(object)
     \code{\link{getData.lmList}}
 }
 
-\examples{
-## see the method function documentation
-}
 \keyword{models}

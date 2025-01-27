@@ -12,7 +12,7 @@
 \alias{Initialize.corARMA}
 \alias{Initialize.corCAR1}
 \alias{Initialize.corCompSymm}
-\alias{Initialize.corHF}
+%\alias{Initialize.corHF} % not implemented
 \alias{Initialize.corLin}
 \alias{Initialize.corNatural}
 \alias{Initialize.corSpatial}

@@ -4,7 +4,7 @@
    Copyright 1997-2005  Douglas M. Bates <bates@stat.wisc.edu>,
 			Jose C. Pinheiro,
 			Saikat DebRoy
-   Copyright 2007-2022  The R Core Team
+   Copyright 2007-2024  The R Core Team
 
    This file is part of the nlme package for R and related languages
    and is made available under the terms of the GNU General Public
@@ -56,10 +56,13 @@ corStruct_factList(double *mat, int *pdims, double *FactorL, double *logdet)
 void
 corStruct_recalc(double *Xy, int *pdims, int *ZXcol, double *Factor)
 {
-    int N = pdims[0], M = pdims[1], *len = pdims + 4, *start = len + M, i;
+    int N = pdims[0], M = pdims[1], *len = pdims + 4, i;
+    // cannot use 'start' to loop over Xy here:
+    // for spatial correlation structures 'start' indexes the distance vector
     for(i = 0; i < M;  i++) {
-	mult_mat(Xy + start[i], N, Factor, len[i], len[i], len[i],
-		 Xy + start[i], N, *ZXcol);
+	mult_mat(Xy, N, Factor, len[i], len[i], len[i],
+		 Xy, N, *ZXcol);
+	Xy += len[i];
 	Factor += (len[i] * len[i]);
     }
 }
@@ -736,6 +739,8 @@ compSymm_recalc(double *Xy, int *pdims, int *ZXcol, double *par,
     }
 }
 
+
+#if 0 // corHF() is not implemented
 /* Huyn-Feldt class */
 
 static void
@@ -819,6 +824,9 @@ HF_recalc(double *Xy, int *pdims, int *ZXcol, double *par,
 	R_Free(Factor);
     }
 }
+
+#endif // corHF()
+
 
 /* Spatial correlation structures */
 

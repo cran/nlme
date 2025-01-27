@@ -30,9 +30,7 @@ Dim(object, \dots)
   need for this generic function.
 }
 \seealso{
+  \code{\link{Dim.corSpatial}},
   \code{\link{Dim.pdMat}}, \code{\link{Dim.corStruct}}
-}
-\examples{
-## see the method function documentation
 }
 \keyword{models}

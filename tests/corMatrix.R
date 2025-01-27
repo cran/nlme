@@ -12,3 +12,19 @@ stopifnot(all.equal(unlist(Linvt, use.names = FALSE),
 ## misnamed corFactor.compSymm (a non-existent class), such that the
 ## general corFactor.corStruct method was called instead, which returned
 ## a different solution for the (transpose inverse) square-root factor
+
+
+## test corMatrix() with spatial correlation *and* groups
+coords <- cbind(x = (0:5)/10, y = (0:5)/10, z = (0:5)/10)
+dists <- dist(coords, method = "manhattan")
+spatDatGrouped <- data.frame(ID = factor(rep(c("A", "B"), each = nrow(coords))),
+                             coords)
+cs1Exp <- corExp(1, form = ~ x + y + z | ID, metric = "manhattan")
+cs1Exp <- Initialize(cs1Exp, spatDatGrouped)
+stopifnot(identical(getCovariate(cs1Exp),
+                    list(A = c(dists), B = c(dists))))
+cM <- corMatrix(cs1Exp)
+stopifnot(exprs = {
+    identical(cM[[1]], cM[[2]])
+    cM[[1]][lower.tri(cM[[1]])] == exp(-dists)
+})

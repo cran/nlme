@@ -18,7 +18,7 @@ Initialize(object, data, \dots)
 \description{
   This function is generic; method functions can be written to handle
   specific classes of objects. Classes which already have methods for
-  this function include: \code{corStruct}, \code{lmeStruct},
+  this function include: \code{corStruct}, \code{glsStruct}, \code{lmeStruct},
   \code{reStruct}, and \code{varFunc}.
 }
 \value{
@@ -32,12 +32,10 @@ Initialize(object, data, \dots)
 }
 \author{José Pinheiro and Douglas Bates \email{bates@stat.wisc.edu}}
 \seealso{\code{\link{Initialize.corStruct}},
+  \code{\link{Initialize.glsStruct}},
   \code{\link{Initialize.lmeStruct}},
-  \code{\link{Initialize.glsStruct}}, 
-  \code{\link{Initialize.varFunc}}, 
+  \code{\link{Initialize.reStruct}},
+  \code{\link{Initialize.varFunc}},
   \code{\link{isInitialized}}
-}
-\examples{
-## see the method function documentation
 }
 \keyword{models}

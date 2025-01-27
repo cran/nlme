@@ -8,7 +8,7 @@
 \alias{corStruct}
 \description{
   Standard classes of correlation structures (\code{corStruct})
-  available in the \code{nlme} package.
+  available in the \pkg{nlme} package.
 }
 \value{
   Available standard classes:
@@ -37,9 +37,9 @@
 
 \note{
   Users may define their own \code{corStruct} classes by specifying a
-  \code{constructor} function and, at a minimum, methods for the
-  functions \code{corMatrix} and \code{coef}. For
-  examples of these functions, see the methods for classes \code{corSymm}
+  constructor function and, at a minimum, methods for the
+  functions \code{\link{corMatrix}} and \code{\link{coef}}.
+  For examples of these functions, see the methods for classes \code{corSymm}
   and \code{corAR1}.
 }
 \seealso{
@@ -49,5 +49,6 @@
   \code{\link{corLin}},
   \code{\link{corRatio}}, \code{\link{corSpher}},
   \code{\link{corSymm}},
-  \code{\link{summary.corStruct}}}
+  \code{\link{summary.corStruct}}
+}
 \keyword{models}

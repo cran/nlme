@@ -8,7 +8,7 @@
 
 \description{
   Standard classes of variance function structures (\code{varFunc}) 
-  available in the \code{nlme} package. Covariates included in the
+  available in the \pkg{nlme} package. Covariates included in the
   variance function, denoted by variance covariates, may involve
   functions of the fitted model object, such as the fitted values and
   the residuals. Different coefficients may be assigned to the levels of
@@ -30,14 +30,12 @@
  Pinheiro, J.C., and Bates, D.M. (2000) "Mixed-Effects Models
  in S and S-PLUS", Springer.  
 }
-
 \author{José Pinheiro and Douglas Bates \email{bates@stat.wisc.edu}}
 \note{
   Users may define their own \code{varFunc} classes by specifying a
-  \code{constructor} function and, at a minimum, methods for the
-  functions \code{coef}, \code{coef<-}, and \code{initialize}. For
-  examples of these functions, see the methods for class
-  \code{varPower}. 
+  constructor function and, at a minimum, methods for the
+  functions \code{\link{coef}}, \code{coef<-}, and \code{\link{Initialize}}.
+  For examples of these functions, see the methods for class \code{varPower}.
 }
 \seealso{
   \code{\link{varComb}},

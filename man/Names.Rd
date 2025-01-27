@@ -19,7 +19,7 @@ Names(object, \dots) <- value
 \description{
   This function is generic; method functions can be written to handle
   specific classes of objects. Classes which already have methods for
-  this function include: \code{formula}, \code{modelStruct},
+  this function include: \code{formula},
   \code{pdBlocked}, \code{pdMat}, and \code{reStruct}.
 }
 \value{
@@ -30,13 +30,13 @@ Names(object, \dots) <- value
   On the left side of an assignment, sets the names associated with
   \code{object} to \code{value}, which must have an appropriate length. 
 }
-\note{
-  If \code{names} were generic, there would be no need for this generic
-  function. 
-}
-\seealso{\code{\link{Names.formula}},
-  \code{\link{Names.pdMat}}}
-\examples{
-## see the method function documentation
+%% \note{
+%%   If \code{names} were generic, there would be no need for this generic
+%%   function. 
+%% }
+\seealso{
+  \code{\link{Names.formula}},
+  \code{\link{Names.pdBlocked}}, \code{\link{Names.pdMat}},
+  \code{\link{Names.reStruct}}
 }
 \keyword{models}

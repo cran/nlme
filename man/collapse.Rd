@@ -25,7 +25,4 @@ collapse(object, \dots)
 
 \seealso{\code{\link{collapse.groupedData}}}
 
-\examples{
-## see the method function documentation
-}
 \keyword{models}

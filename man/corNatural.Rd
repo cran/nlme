@@ -48,5 +48,7 @@ corNatural(value, form, fixed)
 \examples{
 ## covariate is observation order and grouping factor is Subject
 cs1 <- corNatural(form = ~ 1 | Subject)
+cs1 # Uninitialized ...
+summary(Initialize(cs1, data = Orthodont))
 }
 \keyword{models}

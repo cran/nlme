@@ -23,7 +23,8 @@ Variogram(object, distance, \dots)
 \description{
   This function is generic; method functions can be written to handle
   specific classes of objects. Classes which already have methods for
-  this function include \code{default}, \code{gls} and \code{lme}. See
+  this function include \code{"gls"} and \code{"lme"}; there is also
+  a default method for arbitrary vectors (of residuals). See
   the appropriate method documentation for a description of the
   arguments. 
 }
@@ -50,8 +51,6 @@ Variogram(object, distance, \dots)
   \code{\link{Variogram.default}},
   \code{\link{Variogram.gls}},
   \code{\link{Variogram.lme}},
-  \code{\link{plot.Variogram}}}
-\examples{
-## see the method function documentation
+  \code{\link{plot.Variogram}}
 }
 \keyword{models}

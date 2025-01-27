@@ -10,7 +10,7 @@ ranef(object, \dots)
 }
 \alias{random.effects}
 \alias{ranef}
-\alias{print.ranef}
+%% \alias{print.ranef}
 \arguments{
  \item{object}{any fitted model object from which random effects
    estimates can be extracted.}
@@ -21,6 +21,9 @@ ranef(object, \dots)
   This function is generic; method functions can be written to handle
   specific classes of objects. Classes which already have methods for
   this function include \code{lmList} and \code{lme}.
+
+  \code{random.effects} is an alias for \code{ranef}; methods are
+  implemented for the latter.
 }
 \value{
   will depend on the method function used; see the appropriate documentation.
@@ -29,8 +32,5 @@ ranef(object, \dots)
  Pinheiro, J.C., and Bates, D.M. (2000) "Mixed-Effects Models
  in S and S-PLUS", Springer, esp. pp. 100, 461.  
 }
-\seealso{\code{\link{ranef.lmList}},\code{\link{ranef.lme}}} 
-\examples{
-## see the method function documentation
-}
+\seealso{\code{\link{ranef.lmList}}, \code{\link{ranef.lme}}}
 \keyword{models}

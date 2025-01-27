@@ -2,7 +2,7 @@
    Routines for calculation of the log-likelihood or restricted
    log-likelihood with mixed-effects models.
 
-   Copyright (C) 2007-2023  The R Core Team
+   Copyright (C) 2007-2024  The R Core Team
    Copyright (C) 1997-2005  Douglas M. Bates <bates@stat.wisc.edu>,
 		            Jose C. Pinheiro, Saikat DebRoy
 
@@ -545,6 +545,15 @@ mixed_fcn(int n, double *pars, double *g, void *state)
     *g = -internal_loglik(st->dd, zxcopy,
 			  generate_DmHalf(Delta, st->dd, st->pdClass, pars),
 			  st->RML, DNULLP, DNULLP, st->sigma);// 17-11-2015; Fixed sigma ..
+    if (!R_FINITE(g[0])) { // guard optif9 against NaN etc (PR#18433)
+#ifdef Debug
+        Rprintf("Parameters:"); for (int i = 0; i < n; i++) Rprintf(" %#8g", pars[i]);
+        Rprintf("\nFunction Value: %g\n", g[0]);
+#endif
+        warning("Non-finite log-likelihood replaced by maximally negative value");
+        *g = DBL_MAX;
+    }
+
     R_Free(Delta); R_Free(zxcopy);
 }
 

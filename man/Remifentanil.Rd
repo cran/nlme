@@ -14,7 +14,7 @@
   and 12 columns.
 }
 \usage{
-data("Remifentanil", package = "nlme")
+Remifentanil
 }
 \format{
   This data frame (of class \code{"\link{groupedData}"}, specifically

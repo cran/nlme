@@ -10,7 +10,7 @@ getResponse(object, form)
 \alias{getResponse}
 \alias{getResponse.data.frame}
 \arguments{
- \item{object}{any object}
+ \item{object}{any object.}
  \item{form}{an optional two-sided formula. Defaults to
    \code{formula(object)}.}
 }
@@ -21,7 +21,11 @@ getResponse(object, form)
   and \code{lmList}.
 }
 \value{
-  will depend on the method function used; see the appropriate documentation.
+  For the \code{data.frame} method, the result of evaluating the
+  left-hand side of \code{form} in \code{object}.
+  
+  For \code{gls}, \code{lme}, and \code{lmList}, the sum of the
+  \code{fitted} values and the \code{residuals}.
 }
 
 \author{José Pinheiro and Douglas Bates \email{bates@stat.wisc.edu}}

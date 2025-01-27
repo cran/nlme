@@ -1,6 +1,30 @@
+2024-08-22  Sebastian Meyer  <Sebastian.Meyer@R-project.org>
+
+	* R/corStruct.R (print.summary.corNatural):
+	failed from wrong coef() method.
+
+2024-08-21  Sebastian Meyer  <Sebastian.Meyer@R-project.org>
+
+	* src/nlmefit.c (mixed_fcn): guard against non-finite results
+	of 'internal_loglik', potentially causing infinite looping in
+	'optif9'; reported for simulate.lme() in PR#17955 and PR#18433.
+	* tests/predict.lme.R: add corresponding regression test.
+
+2024-08-16  Sebastian Meyer  <Sebastian.Meyer@R-project.org>
+
+	* tests/corFactor.R, tests/corMatrix.R:	rename and add test of
+	spatial correlation with groups.
+
+	* src/corStruct.c (corStruct_recalc): fix iterating over 'Xy' to
+	be compatible with spatial correlation structures, avoiding memory
+	errors from nlme() (PR#18192) and gnls() (PR#17227).
+	Thanks to Laurens Bogaardt for the useful reproducible example and to
+	Mikko Korpela, Benjamin Tyner, and Ivan Krylov for initial debugging.
+	* tests/nlme.R: add corresponding regression test.
+
 2024-08-13  Kurt Hornik  <Kurt.Hornik@wu.ac.at>
 
-	* DESCRIPTION (Version): 3.1-166.
+	* DESCRIPTION (Version): 3.1-166 (released)
 
 2024-08-12  Sebastian Meyer  <Sebastian.Meyer@R-project.org>
 

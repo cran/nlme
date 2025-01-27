@@ -114,3 +114,12 @@ tools::assertError(
 ## in nlme <= 3.1-164, corARMA() returned dysfunctional corIdent() which gave
 ## Error in getGroupsFormula.default(correlation) : 
 ##   'form' argument must be a formula
+
+
+## PR#17227 (example originally posted by Wolfgang Viechtbauer, R-sig-ME, 2008q3)
+gnls.exp <- gnls(circumference ~ Asym/(1 + exp(-(age-xmid)/scal)),
+                 data = Orange, correlation = corExp(form = ~1 | Tree),
+                 start = c(Asym=150, xmid=750, scal=300),
+                 control = gnlsControl(returnObject = TRUE)) # warn, not stop
+## using a spatial correlation structure would sometimes crash with varying
+## memory errors in nlme <= 3.1-166

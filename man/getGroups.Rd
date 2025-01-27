@@ -38,10 +38,11 @@ getGroups(object, form, level, data, sep)
 }
 \author{José Pinheiro and Douglas Bates \email{bates@stat.wisc.edu}}
 
-\seealso{\code{\link{getGroupsFormula}}, \code{\link{getGroups.data.frame}},
-\code{\link{getGroups.gls}}, \code{\link{getGroups.lmList}},
-\code{\link{getGroups.lme}}}
-\examples{
-## see the method function documentation
+\seealso{
+  \code{\link{getGroupsFormula}}
+
+  \code{\link{getGroups.corStruct}}, \code{\link{getGroups.data.frame}},
+  \code{\link{getGroups.gls}}, \code{\link{getGroups.lmList}},
+  \code{\link{getGroups.lme}}, \code{\link{getGroups.varFunc}}
 }
 \keyword{models}

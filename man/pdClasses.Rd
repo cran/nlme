@@ -7,7 +7,7 @@
 \alias{pdClasses}
 \description{
   Standard classes of positive-definite matrices (\code{pdMat})
-  structures  available in the \code{nlme} package. 
+  available in the \pkg{nlme} package.
 }
 \value{
   Available standard classes:
@@ -33,12 +33,13 @@
 \author{José Pinheiro and Douglas Bates \email{bates@stat.wisc.edu}}
 \note{
   Users may define their own \code{pdMat} classes by specifying a
-  \code{constructor} function and, at a minimum, methods for the
-  functions \code{pdConstruct}, \code{pdMatrix} and \code{coef}. For
-  examples of these functions, see the methods for classes \code{pdSymm}
+  constructor function and, at a minimum, methods for the
+  functions \code{\link{pdConstruct}}, \code{\link{pdMatrix}}, and \code{\link{coef}}.
+  For examples of these functions, see the methods for classes \code{pdSymm}
   and \code{pdDiag}. 
 }
-\seealso{\code{\link{pdBlocked}},
+\seealso{
+  \code{\link{pdBlocked}},
   \code{\link{pdCompSymm}},
   \code{\link{pdDiag}},
   \code{\link{pdFactor}}, 

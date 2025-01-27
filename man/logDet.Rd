@@ -30,7 +30,4 @@ logDet(object, \dots)
   \code{\link{logDet.pdMat}},
   \code{\link{logDet.reStruct}}
 }
-\examples{
-## see the method function documentation
-}
 \keyword{models}

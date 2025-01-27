@@ -13,7 +13,7 @@
 \alias{coef.corARMAd}   
 \alias{coef.corCAR1}   
 \alias{coef.corCompSymm}
-\alias{coef.corHF}
+%\alias{coef.corHF} % not implemented
 \alias{coef.corLin}
 \alias{coef.corNatural}
 \alias{coef.corSpatial}
@@ -25,7 +25,7 @@
 \alias{coef<-.corCAR1}   
 \alias{coef<-.corCompSymm}
 \alias{coef<-.corNatural}
-\alias{coef<-.corHF}
+%\alias{coef<-.corHF} % not implemented
 \alias{coef<-.corLin}
 \alias{coef<-.corSpatial}
 \alias{coef<-.corSpher}

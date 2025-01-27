@@ -37,7 +37,4 @@ recalc(object, conLin, \dots)
   \code{\link{recalc.modelStruct}},
   \code{\link{recalc.reStruct}},
   \code{\link{recalc.varFunc}}}
-\examples{
-## see the method function documentation
-}
 \keyword{models}

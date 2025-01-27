@@ -16,16 +16,14 @@ covariate(object) <- value
 \description{
   This function is generic; method functions can be written to handle
   specific classes of objects. Classes which already have methods for
-  this function include all \code{"\link{varFunc}"} classes.
+  this function include all \code{"\link{varFunc}"} classes,
+  see \sQuote{\link{varClasses}}.
 }
 \value{
   will depend on the method function; see the appropriate documentation.
 }
 \author{José Pinheiro and Douglas Bates \email{bates@stat.wisc.edu}}
 
-\seealso{\code{\link{getCovariate}}}
+\seealso{\code{\link{covariate<-.varFunc}}, \code{\link{getCovariate}}}
 
-\examples{
-## see the method function documentation
-}
 \keyword{models}

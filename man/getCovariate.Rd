@@ -37,7 +37,4 @@ getCovariate(object, form, data)
     \code{\link{getCovariate.varFunc}},
     \code{\link{getCovariateFormula}}
 }
-\examples{
-## see the method function documentation
-}
 \keyword{models}

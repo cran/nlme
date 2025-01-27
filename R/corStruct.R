@@ -132,6 +132,7 @@ coef.corStruct <-
   }
 }
 
+## not used in nlme but for custom classes (some are in ape, covBM)
 `coef<-.corStruct` <- function(object, ..., value)
 {
   ## Assignment of the unconstrained parameter of corStruct objects
@@ -153,6 +154,9 @@ Dim.corStruct <- function(object, groups, ...)
   if (missing(groups)) return(attr(object, "Dim"))
   ugrp <- unique(groups)
   groups <- factor(groups, levels = ugrp)
+  ## Note: The 'start' logic assumes the data to be ordered by 'groups',
+  ## but 'start' is only used for internal recalc() in model fitting
+  ## functions and these re-order the data as needed.
   len <- table(groups)
   suml2 <- sum(len^2)
   if(suml2 > .Machine$integer.max)
@@ -235,14 +239,15 @@ Initialize.corStruct <-
   ## Initializes some attributes of corStruct objects
   function(object, data, ...)
 {
+  ## might already be initialized, e.g., from ARMA(1,0) <-> AR1 methods
   form <- formula(object)
   ## obtaining the groups information, if any
-  if (!is.null(getGroupsFormula(form))) {
+  groups <- if (!is.null(getGroupsFormula(form))) {
     attr(object, "groups") <- getGroups(object, form, data = data)
-    attr(object, "Dim") <- Dim(object, attr(object, "groups"))
-  } else {                              # no groups
-    attr(object, "Dim") <- Dim(object, as.factor(rep(1, nrow(data))))
+  } else { # no groups
+    as.factor(rep(1L, nrow(data)))
   }
+  attr(object, "Dim") <- Dim(object, groups)
   ## obtaining the covariate(s)
   attr(object, "covariate") <- getCovariate(object, data = data)
   object
@@ -295,6 +300,7 @@ print.summary.corStruct <- function(x, ...)
 }
 
 
+## not used in nlme but for custom classes (some are in ape, covBM)
 recalc.corStruct <-
   function(object, conLin, ...)
 {
@@ -731,10 +737,10 @@ print.summary.corNatural <-
 {
   if (length(as.vector(x)) > 0 &&
       !is.null(mC <- attr(x, "maxCov"))) {
-    cat("Correlation Structure: General\n")
+    cat("Correlation Structure: General, with natural parametrization\n")
     cat(paste(" Formula:", deparse(formula(x)),"\n"))
     cat(" Parameter estimate(s):\n")
-    aux <- coef(x, FALSE)
+    aux <- coef.corNatural(x, FALSE)
     val <- diag(mC)
     dimnames(val) <- list(1:mC, 1:mC)
     val[lower.tri(val)] <- aux

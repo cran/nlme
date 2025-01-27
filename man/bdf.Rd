@@ -3,9 +3,10 @@
 % Distributed under GPL 2 or later: see nlme/LICENCE.note
 
 \name{bdf}
+\docType{data}
 \alias{bdf}
 \title{Language scores}
-\usage{data(bdf)}
+\usage{bdf}
 \description{
 The \code{bdf} data frame has 2287 rows and 25 columns of language
 scores from grade 8 pupils in elementary schools in The Netherlands.

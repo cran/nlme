@@ -20,6 +20,9 @@ fixef(object, \dots)
   This function is generic; method functions can be written to handle
   specific classes of objects. Classes which already have methods for
   this function include \code{lmList} and \code{lme}.
+
+  \code{fixed.effects} is an alias for \code{fixef}; methods are
+  implemented for the latter.
 }
 \value{
   will depend on the method function used; see the appropriate documentation.
@@ -29,7 +32,4 @@ fixef(object, \dots)
   in S and S-PLUS", Springer.  
 }
 \seealso{\code{\link{fixef.lmList}}} 
-\examples{
-## see the method function documentation
-}
 \keyword{models}
