@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: nlme 3.1-165\n"
-"POT-Creation-Date: 2024-06-06 11:06\n"
+"Project-Id-Version: nlme 3.1-167\n"
+"POT-Creation-Date: 2025-03-31 10:29\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -125,7 +125,10 @@ msgstr ""
 msgid "cannot change the length of the parameter of a \"corARMA\" object"
 msgstr ""
 
-msgid "covariate must have unique values within groups for \"corARMA\" objects"
+msgid "covariate must have unique integer values within groups for \"corARMA\" objects"
+msgstr ""
+
+msgid "\"corARMA\" order (%g, %g) exceeds maximum lag in data (%g)"
 msgstr ""
 
 msgid "parameter in \"corCompSymm\" structure must be < 1 in absolute value"

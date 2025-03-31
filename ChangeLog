@@ -1,3 +1,12 @@
+2025-03-31 Brian Ripley
+
+	* DESCRIPTION: Version is 3.1-168
+	* Update German translations
+
+2025-01-27  Kurt Hornik  <Kurt.Hornik@wu.ac.at>
+
+	* DESCRIPTION (Version): 3.1-167 (released)
+
 2024-08-22  Sebastian Meyer  <Sebastian.Meyer@R-project.org>
 
 	* R/corStruct.R (print.summary.corNatural):

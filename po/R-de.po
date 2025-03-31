@@ -1,12 +1,12 @@
 # Translation of R-nlme.pot to German
-# Copyright (C) 2007-2014 The R Foundation
+# Copyright (C) 2007-2025 The R Foundation
 # This file is distributed under the same license as the nlme package.
 msgid ""
 msgstr ""
-"Project-Id-Version: R 4.0.0 / nlme-3.1-145\n"
+"Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
-"POT-Creation-Date: 2024-06-06 11:06\n"
-"PO-Revision-Date: 2020-04-01 15:18+0200\n"
+"POT-Creation-Date: 2025-03-31 10:29\n"
+"PO-Revision-Date: 2025-03-18 11:20+0100\n"
 "Last-Translator: Detlef Steuer <steuer@hsu-hh.de>\n"
 "Language-Team: German <debian-l10n-german@lists.debian.org>\n"
 "Language: de\n"
@@ -24,12 +24,11 @@ msgstr "nicht für mehrstufige Schachtelung implementiert"
 msgid "individual %s was not used in the fit"
 msgstr "Individuum %s wurde in der Anpassung nicht benutzt."
 
-#, fuzzy
 msgid "not implemented for uncorrelated errors"
-msgstr "nicht für \"nlme\"-Objekte implementiert"
+msgstr "für unkorrelierte Fehler nicht implementiert"
 
 msgid "not implemented for correlation structures without a grouping factor"
-msgstr ""
+msgstr "für Korrelationsstruktur ohne Gruppierungsfaktor nicht implementiert"
 
 # R/corStruct.R
 msgid "do not know how to calculate correlation matrix of %s object"
@@ -179,10 +178,15 @@ msgstr ""
 "werden."
 
 # http://www.sozpsy.uni-hannover.de/marienthal/glossar/html/k37.htm
-msgid "covariate must have unique values within groups for \"corARMA\" objects"
+msgid ""
+"covariate must have unique integer values within groups for \"corARMA\" "
+"objects"
 msgstr ""
-"Kovariate muss eindeutige Werte innerhalb der Gruppen für \"corARMA-"
+"Kovariate muss eindeutige ganzzahlige Werte innerhalb der Gruppen für \"corARMA-"
 "Objekte\" haben."
+
+msgid "\"corARMA\" order (%g, %g) exceeds maximum lag in data (%g)"
+msgstr ""
 
 msgid "parameter in \"corCompSymm\" structure must be < 1 in absolute value"
 msgstr "Parameter in \"corCompSymm\"-Struktur muss vom Betrag < 1 sein."
@@ -237,7 +241,7 @@ msgid "model must be a formula of the form \"resp ~ pred\""
 msgstr "Modell muss eine Formel der Form \"resp ~ pred\" sein."
 
 msgid "offset() terms are not supported"
-msgstr ""
+msgstr "offset() Terme sind nicht unterstützt"
 
 msgid "no coefficients to fit"
 msgstr "keine Koeffizienten anzupassen"
@@ -1237,8 +1241,8 @@ msgstr[1] "Effekte %s nicht übereinstimmend"
 
 msgid "supplied %d starting value, need %d"
 msgid_plural "supplied %d starting values, need %d"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d Startwert angegeben, brauche %d"
+msgstr[1] "%d Startwerte angegeben, brauche %d"
 
 msgid "%s not found in data"
 msgid_plural "%s not found in data"
