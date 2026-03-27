@@ -8,6 +8,8 @@
 ## Fedora 26 system (but not another) and on one of winbuilder's
 ## subarchs.
 
+cat("LAPACK:", La_library(), "| version", La_version(), "\n")
+
 dat <- data.frame(
     x = rep(c(3.69, 3, 2.3, 1.61, 0.92, 0.22, -0.47, -1.86), each=12),
     y = c(0.35, 0.69,  0.57, 1.48,  6.08, -0.34,  0.53, 1.66,  0.02, 4.4, 8.42, 3.3,
@@ -34,7 +36,7 @@ INIT <- c(A.a1=1, A.a2=0, A.a3=0,
           C = 0,  C.a2=0, C.a3=0,
           D = 1,  D.a2=0, D.a3=0)
 
-## Typically this will fail with a singularity, but it should not hang.
+## Typically this will fail with a singularity, but it should not hang or crash.
 try(nlme(y ~ fpl.B.range(x,A,B,C,D), data = dd,
          fixed = list(A ~ id, B ~ id, C ~ id, D ~ id),
          random = list(f.block = pdSymm(A+B+C+D ~ 1)),
@@ -47,5 +49,16 @@ try(nlme(y ~ fpl.B.range(x,A,B,C,D), data = dd,
 ## --  [on lynne Fedora 26 (4.14.11-200.fc26.x86_64), Jan.2018]
 ## in R 3.4.3 and R 3.4.3 patched with nlme 3.1.131
 ##                    and R-devel with nlme 3.1.135
+## Resolved by nlme 3.1-136.
+
+## Still OK in nlme 3.1-168 using
+## * R 4.2.0 (LAPACK 3.10.0)
+## * R 4.3.0 (--without-lapack -> bundled 3.11.0)
+## * R 4.5.0 (--without-lapack -> bundled 3.12.1, or system LAPACK 3.12.1)
+## but now crashes (rather than stalls) at
+##     Beginning PNLS step: .. double free or corruption (!prev)
+## when using
+## * R 4.4.0 (--without-lapack -> bundled LAPACK 3.12.0)
+## * R >= 4.3.0 with system LAPACK 3.12.0 on x86_64 Ubuntu 24.04
 
 summary(warnings())# mostly  "Singular precision matrix in level -1, block *"

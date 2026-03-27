@@ -34,7 +34,7 @@ gnls(model, data, params, start, correlation, weights, subset,
    parameters are obtained from the names of \code{start}.} 
  \item{start}{an optional named list, or numeric vector, with the
    initial values for the parameters in \code{model}. It can be omitted
-   when a \code{selfStarting} function is used in \code{model}, in which
+   when a \code{"\link{selfStart}"} model is used, in which
    case the starting estimates will be obtained from a single call to the
    \code{nls} function.}
  \item{correlation}{an optional \code{corStruct} object describing the

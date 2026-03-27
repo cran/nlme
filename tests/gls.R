@@ -55,7 +55,7 @@ tools::assertError(predict(fm1, data.frame(Time = 71, Diet = 2)), verbose = TRUE
 
 ## PR#17226: same for predict.gnls(), also without intercept
 fm2 <- gnls(weight ~ f, data = BodyWeight, params = list(f ~ Diet - 1),
-            start = rep(coef(fm1)[1], 3))
+            start = rep(mean(BodyWeight$weight), 3))
 stopifnot(all.equal(predict(fm2, head(BodyWeight)), head(fitted(fm2)),
                     check.attributes = FALSE))
 ## in nlme <= 3.1-155, failed with

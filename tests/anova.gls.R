@@ -11,13 +11,18 @@ fm1 <- gls(follicles ~ sin(2*pi*Time) + cos(2*pi*Time), Ovary,
 int1 <- intervals(fm1)
 ## no longer print attr(,"label"), PR#18196 :
 writeLines(intOut <- capture.output(int1))
-stopifnot({
+stopifnot(exprs = {
     length(grep(',"label"', intOut, fixed=TRUE)) == 0
     all.equal(int1$corStruct["Phi",],
 	      c(lower=0.66842829, est.=0.753207889, upper=0.81866619),
-	      tol = 1e-5)# 7e-6 needed for flan
+	      tol = 5e-5)# 7e-6 needed for flang, 1.1e-5 for aarch64 OpenBLAS
     all.equal(as.vector(int1$sigma),
-	      c(3.9747061, 4.61617157, 5.361161), tol = 1e-5)
+              ## c(3.974722, 4.616172, 5.361140) # x86_64 Ubuntu, openblas-pthread
+              ## c(3.974710, 4.616172, 5.361156) # x86_64 Ubuntu, libRlapack 3.12.1
+              ## c(3.974731, 4.616172, 5.361127) # RPi 5 with liblapack 3.12.0
+              ## c(3.974642, 4.616172, 5.361248) # RPi 5 with openblas-pthread
+              c(3.9747061, 4.61617157, 5.361161),# MM 2015
+              tol = 5e-5)# 1.1e-5 needed for aarch64 OpenBLAS
 })
 
 # variance changes with a power of the absolute fitted values?

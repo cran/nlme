@@ -1,7 +1,7 @@
 ###  Fit a general nonlinear regression model with correlated and/or
 ###  heteroscedastic errors
 ###
-### Copyright 2007-2023  The R Core team
+### Copyright 2007-2026  The R Core team
 ### Copyright 1997-2003  Jose C. Pinheiro,
 ###                      Douglas M. Bates <bates@stat.wisc.edu>
 #
@@ -66,7 +66,7 @@ gnls <- function(model,
   if (!inherits(form, "formula"))
     stop("'object' must be a formula")
   if (length(form)!=3)
-    stop("object formula must be of the form \"resp ~ pred\"")
+    stop("model formula must be of the form \"resp ~ pred\"")
   ## if (length(attr(terms(form), "offset")))
   ##   stop("offset() terms are not supported")
 
@@ -74,7 +74,7 @@ gnls <- function(model,
   ## checking if self-starting formula is given
   ##
   if (missing(start)) {
-    if (!is.null(attr(eval(form[[3]][[1]]), "initial"))) {
+    if (is.call(form[[3]]) && !is.null(attr(eval(form[[3]][[1]]), "initial"))) {
       nlsCall <- Call[c("","model","data")]
       nlsCall[[1]] <- quote(stats::nls)
       names(nlsCall)[2] <- "formula"

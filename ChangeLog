@@ -1,3 +1,17 @@
+2026-03-27  Sebastian Meyer  <Sebastian.Meyer@R-project.org>
+
+	* DESCRIPTION (Version, Date): 3.1-169
+
+	* R/gnls.R: fix error message for missing start values
+	when no "selfStart" model is used.
+
+	* tests/gls.R: change gnls() start values for compatibility
+	with OpenBLAS on aarch64.
+
+2026-02-06  Sebastian Meyer  <Sebastian.Meyer@R-project.org>
+
+	* tests/anova.gls.R: increase tolerance.
+
 2025-03-31 Brian Ripley
 
 	* DESCRIPTION: Version is 3.1-168

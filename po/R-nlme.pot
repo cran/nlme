@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: nlme 3.1-167\n"
-"POT-Creation-Date: 2025-03-31 10:29\n"
+"Project-Id-Version: nlme 3.1-169\n"
+"POT-Creation-Date: 2026-03-27 15:43\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -227,7 +227,7 @@ msgstr ""
 msgid "'object' must be a formula"
 msgstr ""
 
-msgid "object formula must be of the form \"resp ~ pred\""
+msgid "model formula must be of the form \"resp ~ pred\""
 msgstr ""
 
 msgid "'data' must be given explicitly to use 'nls' to get initial estimates"
@@ -528,9 +528,6 @@ msgid "initial value for 'reStruct' overwritten in 'nlme.nlsList'"
 msgstr ""
 
 msgid "'model' must be a formula"
-msgstr ""
-
-msgid "model formula must be of the form \"resp ~ pred\""
 msgstr ""
 
 msgid "'data' must be given explicitly to use 'nlsList'"
